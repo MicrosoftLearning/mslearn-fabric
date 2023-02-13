@@ -424,7 +424,7 @@ While **matplotlib** enables you to create complex charts of multiple types, it 
     ```
 
 2. Run the code and observe that it displays a bar chart using the seaborn library.
-3. Add a new code cell to the notebook, and enter the following code in it:
+3. Modify the code as follows:
 
     ```Python
     import seaborn as sns
@@ -440,9 +440,9 @@ While **matplotlib** enables you to create complex charts of multiple types, it 
     plt.show()
     ```
 
-4. Run the code and note that seaborn enables you to set a consistent color theme for your plots.
+4. Run the modified code and note that seaborn enables you to set a consistent color theme for your plots.
 
-5. Add a new code cell to the notebook, and enter the following code in it:
+5. Modify the code again as follows:
 
     ```Python
     import seaborn as sns
@@ -455,7 +455,7 @@ While **matplotlib** enables you to create complex charts of multiple types, it 
     plt.show()
     ```
 
-6. Run the code to view the yearly revenue as a line chart.
+6. Run the modified code to view the yearly revenue as a line chart.
 
 > **Note**: To learn more about plotting with seaborn, see the [seaborn documentation](https://seaborn.pydata.org/index.html).
 
