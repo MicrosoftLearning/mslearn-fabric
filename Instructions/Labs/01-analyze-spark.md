@@ -157,7 +157,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
 
 11. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
 
-    **Note**: Only a subset of thr rows are displayed, so you may not be able to see examples from all years.
+    **Note**: Only a subset of the rows is displayed, so you may not be able to see examples from all years.
 
 ## Analyze data in a dataframe
 
