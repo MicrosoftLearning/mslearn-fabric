@@ -262,10 +262,10 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 
 5. In the **...** menu for the **salesorders** table, select **Load data** > **Spark**.
 
-    A new code cell containing the following code is added to the notebook:
+    A new code cell containing code similar to the following example is added to the notebook:
 
     ```Python
-    df = spark.sql("SELECT * FROM data_lake.salesorders LIMIT 1000")
+    df = spark.sql("SELECT * FROM [your_lakehouse].salesorders LIMIT 1000")
     display(df)
     ```
 
