@@ -465,4 +465,4 @@ Now that you've finished working with the data, you can save the notebook with a
 
 1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Analyze Orders**, and then close the settings pane.
-3. On the notebook menu, select **stop session** to end the Spark session.
+3. On the notebook menu, select **Stop session** to end the Spark session.
