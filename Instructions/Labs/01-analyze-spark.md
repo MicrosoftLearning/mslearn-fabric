@@ -288,7 +288,7 @@ While it's useful to be able to embed SQL statements into a cell containing PySp
 
 2. Run the cell and review the results. Observe that:
     - The `%%sql` line at the beginning of the cell (called a *magic*) indicates that the Spark SQL language runtime should be used to run the code in this cell instead of PySpark.
-    - The SQL code references the **salesorders* table that you created previously.
+    - The SQL code references the **salesorders** table that you created previously.
     - The output from the SQL query is automatically displayed as the result under the cell.
 
 > **Note**: For more information about Spark SQL and dataframes, see the [Spark SQL documentation](https://spark.apache.org/docs/2.2.0/sql-programming-guide.html).
