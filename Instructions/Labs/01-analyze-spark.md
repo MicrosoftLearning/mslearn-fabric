@@ -33,33 +33,49 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
 
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice (for example, *datalake*).
+2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer and then upload them to your lakehouse.
 
-3. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/trident-dev/raw/master/Allfiles/Labs/01/orders.zip](https://github.com/MicrosoftLearning/trident-dev/raw/master/Allfiles/Labs/01/orders.zip).
-
-    > For now, you'll need to sign into GitHub first. When released, the repo will be public!
+3. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
 
 4. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
-5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** collection, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
+5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
 6. After the files have been uploaded, expand **Files** and select the **orders** folder; and verify that the CSV files have been uploaded, as shown here:
 
     ![Screenshot of uploaded files in a lakehouse.](./Images/uploaded-files.png)
 
-## Create a notebook and load data into a dataframe
+## Create a notebook
 
-To work with data in Apache Spark, you can create a *notebook* and use it to run code that loads the data into a *dataframe*. Spark supports multiple programming languages, but in this exercise you'll use the most commonly used one for data analysis - *PySpark*. PySpark is a variant of Python that is optimized to run on Spark.
+To work with data in Apache Spark, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages), and add notes to document it.
 
 1. On the **Home** page while viewing the contents of the **orders** folder in your datalake, in the **Open notebook** menu, select **New notebook**.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
-2. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
+2. Select the first cell (which is currently a *code* cell), and then in the dynamic tool bar at its top-right, use the **M&#8595;** button to convert the cell to a *markdown* cell.
+
+    When the cell changes to a markdown cell, the text it contains is rendered.
+
+3. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then modify the markdown as follows:
+
+    ```
+    # Sales order data exploration
+
+    Use the code in this notebook to explore sales order data.
+    ```
+
+4. Select anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
+
+## Load data into a dataframe
+
+Now you're ready to run code that loads the data into a *dataframe*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
+
+1. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
-3. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
@@ -67,11 +83,13 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
     display(df)
     ```
 
-4. Use the **&#9655; Run cell** button on the left of the cell to run it.
+    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
+
+3. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a few minutes. Subsequent runs will be quicker.
 
-5. When the cell command has completed, review the output below the cell, which should look similar to this:
+4. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     | Index | SO43701 | 11 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 16 | 3399.99 | 271.9992 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -81,7 +99,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
 
     The output shows the rows and columns of data from the 2019.csv file. However, note that the column headers don't look right. The default code used to load the data into a dataframe assumes that the CSV file includes the column names in the first row, but in this case the CSV file just includes the data with no header information.
 
-6. Modify the code to set the **header** option to **false** as follows:
+5. Modify the code to set the **header** option to **false** as follows:
 
     ```python
     df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
@@ -89,7 +107,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
     display(df)
     ```
 
-7. Re-run the cell and review the output, which should look similar to this:
+6. Re-run the cell and review the output, which should look similar to this:
 
    | Index | _c0 | _c1 | _c2 | _c3 | _c4 | _c5 | _c6 | _c7 | _c8 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -100,7 +118,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
 
     Now the dataframe correctly includes first row as data values, but the column names are auto-generated and not very helpful. To make sense of the data, you need to explicitly define the correct schema for the data values in the file.
 
-8. Modify the code as follows to define a schema and apply it when loading the data:
+7. Modify the code as follows to define a schema and apply it when loading the data:
 
     ```python
     from pyspark.sql.types import *
@@ -122,7 +140,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
     display(df)
     ```
 
-9. Run the modified cell and review the output, which should look similar to this:
+8. Run the modified cell and review the output, which should look similar to this:
 
    | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -133,7 +151,7 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
 
     Now the dataframe includes the correct column names and data types as defined by the schema (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row).
 
-10. The dataframe includes only the data from the **2019.csv** file. Modify the code as follows to read the sales order data from all of the files in the **orders** folder:
+9. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
     from pyspark.sql.types import *
@@ -155,13 +173,13 @@ To work with data in Apache Spark, you can create a *notebook* and use it to run
     display(df)
     ```
 
-11. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
+10. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
 
     **Note**: Only a subset of the rows is displayed, so you may not be able to see examples from all years.
 
-## Analyze data in a dataframe
+## Explore data in a dataframe
 
-The **dataframe** object in Spark is similar to a Pandas dataframe in Python, and includes a wide range of functions that you can use to manipulate, filter, group, and otherwise analyze the data it contains.
+The dataframe object includes a wide range of functions that you can use to filter, group, and otherwise manipulate the data it contains.
 
 ### Filter a dataframe
 
@@ -210,27 +228,48 @@ The **dataframe** object in Spark is similar to a Pandas dataframe in Python, an
 
 4. Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the *OrderDate* field, and then an **alias** method is used to assign a columm name to the extracted year value. The data is then grouped by the derived *Year* column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
 
-## Query data using Spark SQL
+## Work with tables and SQL
 
-As you've seen, the native methods of the dataframe object enable you to query and analyze data quite effectively. However, many data analysts are more comfortable working with SQL syntax. Spark SQL is a SQL language API in Spark that you can use to run SQL statements, or even persist data in relational tables.
+As you've seen, the native methods of the dataframe object enable you to query and analyze data from a file quite effectively. However, many data analysts are more comfortable working with tables that they can query using SQL syntax. Spark provides a *metastore* in which you can define relational tables. The Spark SQL library that provides the dataframe object also supports the use of SQL statements to query tables in the metastore. By using these capabilities of Spark, you can combine the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse - hence the term "data lakehouse".
 
-### Use Spark SQL in PySpark code
+### Create a table
 
-The default language in Azure Synapse Studio notebooks is PySpark, which is a Spark-based Python runtime. Within this runtime, you can use the **spark.sql** library to embed Spark SQL syntax within your Python code, and work with SQL constructs such as tables and views.
+Tables in a Spark metastore are relational abstractions over files in the data lake. tables can be *managed* (in which case the files are managed by the metastore) or *external* (in which case the table references a file location in the data lake that you manage independently of the metastore).
 
-1. Add a new code cell to the notebook, and enter the following code in it:
+1. Add a new code cell to the notebook, and enter the following code, which saves the dataframe of sales order data as a table named **salesorders**:
 
     ```Python
-    df.createOrReplaceTempView("salesorders")
+    # Create a new table
+    df.write.format("delta").saveAsTable("salesorders")
 
-    spark_df = spark.sql("SELECT * FROM salesorders")
-    display(spark_df)
+    # Get the table description
+    spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
     ```
 
-2. Run the cell and review the results. Observe that:
-    - The code persists the data in the **df** dataframe as a temporary view named **salesorders**. Spark SQL supports the use of temporary views or persisted tables as sources for SQL queries.
-    - The **spark.sql** method is then used to run a SQL query against the **salesorders** view.
-    - The results of the query are stored in a dataframe.
+    > **Note**: It's worth noting a couple of things about this example. Firstly, no explicit path is provided, so the files for the table will be managed by the metastore. Secondly, the table is saved in **delta** format. You can create tables based on multiple file formats (including CSV, Parquet, Avro, and others) but *delta lake* is a Spark technology that adds relational database capabilities to tables; including support for transactions, row versioning, and other useful features. Creating tables in delta format is preferred for most data lakehouse implementations.
+
+2. Run the code cell and review the output, which describes the definition of the new table.
+
+3. In the **Lake view** pane, in the **...** menu for the **Tables** node, select **Refresh**. Then expand the **Tables** node and select the **salesorders** folder to view the files that have been created for the table data.
+
+    ![Screenshot of files for a salesorder table.](./Images/delta-files.png)
+
+    Note that the data is stored in multiple Parquet files named **part-000*xxxx*.parquet**, and that a folder named **_delta_log** has been created to store details of transactions that occur in the table.
+
+4. Select the **Table view** tab, and verify that the **salesorders** table is listed in the metastore.
+
+    ![Screenshot of the salesorder table in Table view.](./Images/table-view.png)
+
+5. In the **...** menu for the **salesorders** table, select **Load data** > **Spark**.
+
+    A new code cell containing the following code is added to the notebook:
+
+    ```Python
+    df = spark.sql("SELECT * FROM data_lake.salesorders LIMIT 1000")
+    display(df)
+    ```
+
+6. Run the new code, which uses the Spark SQL library to embed a SQL query against the **salesorder** table in Python code and load the results of the query into a dataframe.
 
 ### Run SQL code in a cell
 
@@ -249,7 +288,7 @@ While it's useful to be able to embed SQL statements into a cell containing PySp
 
 2. Run the cell and review the results. Observe that:
     - The `%%sql` line at the beginning of the cell (called a *magic*) indicates that the Spark SQL language runtime should be used to run the code in this cell instead of PySpark.
-    - The SQL code references the **salesorder** view that you created previously using PySpark.
+    - The SQL code references the **salesorders* table that you created previously.
     - The output from the SQL query is automatically displayed as the result under the cell.
 
 > **Note**: For more information about Spark SQL and dataframes, see the [Spark SQL documentation](https://spark.apache.org/docs/2.2.0/sql-programming-guide.html).
