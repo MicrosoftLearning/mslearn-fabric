@@ -71,6 +71,8 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
 
 Now you're ready to run code that loads the data into a *dataframe*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
 
+> **Note**: Spark supports multiple coding languages, including Scala, Java, and others. In this exercise, we'll use *PySpark*, which is a Spark-optimized variant of Python. PySpark is one of the most commonly used languages on Spark and is the default language in Trident notebooks.
+
 1. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
@@ -269,7 +271,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
     display(df)
     ```
 
-6. Run the new code, which uses the Spark SQL library to embed a SQL query against the **salesorder** table in Python code and load the results of the query into a dataframe.
+6. Run the new code, which uses the Spark SQL library to embed a SQL query against the **salesorder** table in PySpark code and load the results of the query into a dataframe.
 
 ### Run SQL code in a cell
 
