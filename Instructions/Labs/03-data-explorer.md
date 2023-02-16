@@ -6,7 +6,7 @@ lab:
 
 # Analyze data with Kusto
 
-*Trident* provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as realtime data from log files or IoT devices.
+*Trident* provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
 
 This lab will take approximately **30** minutes to complete.
 
@@ -133,4 +133,3 @@ You can use your KQL query set as the basis for a Power BI report.
 5. Use the **Workspaces** icon to switch to **My Workspace**.
 6. In your workspace, find the **Sales Revenue By Product** dataset.
 7. Create a report from the dataset, using the **Auto-create** option, and view the report.
-
