@@ -159,7 +159,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
 3. Select the **Delete data** activity, and in the pane below the design canvas, set the following properties:
     - **General**:
-        **Name**: Delete old files
+        - **Name**: Delete old files
     - **Settings**
         - **Data store type**: Workspace
         - **Workspace data store**: *Your lakehouse*
