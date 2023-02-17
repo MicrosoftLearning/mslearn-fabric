@@ -103,7 +103,7 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
     | 3 | SO43705 | 1 | 2019-07-01 | Curtis Lu | curtis9@adventure-works.com | Mountain-100 Silver, 38 | 1 | 3399.99 | 271.9992 |
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-5. Under the output, use the **+ Code** button to adda  new code cell to the notebook. Then add the following code to the new cell:
+5. Under the output, use the **+ Code** button to add a new code cell to the notebook. Then add the following code to the new cell:
 
     ```Python
     # Create a new table
