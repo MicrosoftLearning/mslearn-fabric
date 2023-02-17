@@ -59,7 +59,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
 
 3. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then modify the markdown as follows:
 
-    ```
+    ```text
     # Sales order data exploration
 
     Use the code in this notebook to explore sales order data.
@@ -89,7 +89,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
 3. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
-    > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a few minutes. Subsequent runs will be quicker.
+    > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
 4. When the cell command has completed, review the output below the cell, which should look similar to this:
 
@@ -124,7 +124,6 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     ```python
     from pyspark.sql.types import *
-    from pyspark.sql.functions import *
 
     orderSchema = StructType([
         StructField("SalesOrderNumber", StringType()),
@@ -151,13 +150,12 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     | 3 | SO43705 | 1 | 2019-07-01 | Curtis Lu | curtis9@adventure-works.com | Mountain-100 Silver, 38 | 1 | 3399.99 | 271.9992 |
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-    Now the dataframe includes the correct column names and data types as defined by the schema (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row).
+    Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
 9. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
     from pyspark.sql.types import *
-    from pyspark.sql.functions import *
 
     orderSchema = StructType([
         StructField("SalesOrderNumber", StringType()),
@@ -197,7 +195,7 @@ The dataframe object includes a wide range of functions that you can use to filt
 2. Run the new code cell, and review the results. Observe the following details:
     - When you perform an operation on a dataframe, the result is a new dataframe (in this case, a new **customers** dataframe is created by selecting a specific subset of columns from the **df** dataframe)
     - Dataframes provide functions such as **count** and **distinct** that can be used to summarize and filter the data they contain.
-    - The `dataframe['Field1', 'Field2', ...]` syntax is a shorthand way of defining a subset of column. You can also use **select** method, so the first line of the code above could be written as `customers = df.select("CustomerName", "Email")`
+    - The `dataframe['Field1', 'Field2', ...]` syntax is a shorthand way of defining a subset of columns. You can also use **select** method, so the first line of the code above could be written as `customers = df.select("CustomerName", "Email")`
 
 3. Modify the code as follows:
 
@@ -224,11 +222,96 @@ The dataframe object includes a wide range of functions that you can use to filt
 3. Add another new code cell to the notebook, and enter the following code in it:
 
     ```Python
+    from pyspark.sql.functions import *
+
     yearlySales = df.select(year("OrderDate").alias("Year")).groupBy("Year").count().orderBy("Year")
     display(yearlySales)
     ```
 
-4. Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the *OrderDate* field, and then an **alias** method is used to assign a columm name to the extracted year value. The data is then grouped by the derived *Year* column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
+4. Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the *OrderDate* field (which is why the code includes an **import** statement to import functions from the Spark SQL library). It then uses an **alias** method is used to assign a column name to the extracted year value. The data is then grouped by the derived *Year* column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
+
+## Use Spark to transform data files
+
+A common task for data engineers is to ingest data in a particular format or structure, and transform it for further downstream processing or analysis.
+
+### Use dataframe methods and functions to transform data
+
+1. Add another new code cell to the notebook, and enter the following code in it:
+
+    ```Python
+    from pyspark.sql.functions import *
+
+    ## Create Year and Month columns
+    transformed_df = df.withColumn("Year", year(col("OrderDate"))).withColumn("Month", month(col("OrderDate")))
+
+    # Create the new FirstName and LastName fields
+    transformed_df = transformed_df.withColumn("FirstName", split(col("CustomerName"), " ").getItem(0)).withColumn("LastName", split(col("CustomerName"), " ").getItem(1))
+
+    # Filter and reorder columns
+    transformed_df = transformed_df["SalesOrderNumber", "SalesOrderLineNumber", "OrderDate", "Year", "Month", "FirstName", "LastName", "Email", "Item", "Quantity", "UnitPrice", "Tax"]
+
+    # Display the first five orders
+    display(transformed_df.limit(5))
+    ```
+
+2. Run the code to create a new dataframe from the original order data with the following transformations:
+    - Add **Year** and **Month** columns based on the **OrderDate** column.
+    - Add **FirstName** and **LastName** columns based on the **CustomerName** column.
+    - Filter and reorder the columns, removing the **CustomerName** column.
+
+3. Review the output and verify that the transformations have been made to the data.
+
+    You can use the full power of the Spark SQL library to transform the data by filtering rows, deriving, removing, renaming columns, and any applying other required data modifications.
+
+    > **Tip**: See the [Spark dataframe documentation](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html) to learn more about the methods of the Dataframe object.
+
+### Save the transformed data
+
+1. Add a new cell with the following code to save the transformed dataframe in Parquet format (Overwriting the data if it already exists):
+
+    ```python
+    transformed_df.write.mode("overwrite").parquet('Files/transformed_data/orders.parquet')
+    print ("Transformed data saved!")
+    ```
+
+    > **Note**: Commonly, *Parquet* format is preferred for data files that you will use for further analysis or ingestion into an analytical store. Parquet is a very efficient format that is supported by most large scale data analytics systems. In fact, sometimes your data transformation requirement may simply be to convert data from another format (such as CSV) to Parquet!
+
+2. Run the cell and wait for the message that the data has been saved. Then, on the **Lake view** tab in the pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new file named **orders.parquet**.
+
+    ![Screenshot of a saved orders.parquet file.](./Images/saved-parquet.png)
+
+3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
+
+    ```python
+    orders_df = spark.read.format("parquet").load("Files/transformed_data/orders.parquet")
+    display(orders_df)
+    ```
+
+4. Run the cell and verify that the results show the order data that has been loaded from the parquet file.
+
+### Save data in partitioned files
+
+1. Add a new cell with the following code; which saves the dataframe, partitioning the data by **year** and **Month**:
+
+    ```python
+    orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
+    print ("Transformed data saved!")
+    ```
+
+2. Run the cell and wait for the message that the data has been saved. Then, on the **Lake view** tab in the pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
+
+    ![Screenshot of a hierarchy of partitioned data files.](./Images/partitioned-files.png)
+
+    Partitioning data files is a common way to optimize performance when dealing with large volumes of data. This technique can significant improve performance and make it easier to filter data.
+
+3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
+
+    ```python
+    orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
+    display(orders_2021_df)
+    ```
+
+4. Run the cell and verify that the results show the order data for sales in 2021. Note that the partitioning columns specified in the path (**Year** and **Month**) are not included in the dataframe.
 
 ## Work with tables and SQL
 
