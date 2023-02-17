@@ -189,7 +189,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
             | -- | -- | -- |
             | table_name | String | new_sales |
 
-    The **table_name** partameter will be passed to the notebook and override the default value assigned to the **table_name** variable in the parameters cell.
+    The **table_name** parameter will be passed to the notebook and override the default value assigned to the **table_name** variable in the parameters cell.
 
 7. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline as **Ingest Sales Data**.
 8. Use the **&#9655; Run** button to run the pipeline, and wait for it to complete.
