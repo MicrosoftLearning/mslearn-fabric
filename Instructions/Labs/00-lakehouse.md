@@ -181,6 +181,8 @@ When you need to regularly copy data from an external source into the lakehouse,
 In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files stored in a OneLake data store, some of which are used to store the data for managed tables.
 
 ---
-*Possibly extend this to include working with a dataset so students see the point of defining tables in a lakehouse to support Power BI reporting. There seem to be some issues at the moment though - the default dataset doesn't seem to include the latest table and there's no obvious way to force it to refresh, and creating a new dataset results in a server error*
+*Possibly extend this to include working with a dataset so students see the point of defining tables in a lakehouse to support Power BI reporting. There seem to be some issues at the moment though - the default dataset doesn't seem to include the latest table and there's no obvious way to force it to refresh, and creating a new dataset results in a server error.*
+
+*If so, we might want to normalize the CSV data so that there's a product key relationship between products and salesorders*
 
 ---
