@@ -80,7 +80,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Folder path name**: new_data
     - **File name**: sales.csv
     - **Copy behavior**: None
-10. Set the following file format option,s and then select **Next**:
+10. Set the following file format options and then select **Next**:
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
