@@ -1,22 +1,22 @@
 ---
 lab:
     title: 'Analyze data with Apache Spark'
-    module: 'Use Apache Spark in Trident'
+    module: 'Use Apache Spark in Microsoft Fabric'
 ---
 
 # Analyze data with Apache Spark
 
-Apache Spark is an open source engine for distributed data processing, and is widely used to explore, process, and analyze huge volumes of data in data lake storage. Spark is available as a processing option in many data platform products, including Azure HDInsight, Azure Databricks, Azure Synapse Analytics, and *Trident*. One of the benefits of Spark is support for a wide range of programming languages, including Java, Scala, Python, and SQL; making Spark a very flexible solution for data processing workloads including data cleansing and manipulation, statistical analysis and machine learning, and data analytics and visualization.
+Apache Spark is an open source engine for distributed data processing, and is widely used to explore, process, and analyze huge volumes of data in data lake storage. Spark is available as a processing option in many data platform products, including Azure HDInsight, Azure Databricks, Azure Synapse Analytics, and Microsoft Fabric. One of the benefits of Spark is support for a wide range of programming languages, including Java, Scala, Python, and SQL; making Spark a very flexible solution for data processing workloads including data cleansing and manipulation, statistical analysis and machine learning, and data analytics and visualization.
 
 This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Trident preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
 
 ## Create a workspace
 
-Before working with data in *Trident*, you should create a workspace with support for premium features.
+Before working with data in Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
@@ -71,7 +71,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
 
 Now you're ready to run code that loads the data into a *dataframe*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
 
-> **Note**: Spark supports multiple coding languages, including Scala, Java, and others. In this exercise, we'll use *PySpark*, which is a Spark-optimized variant of Python. PySpark is one of the most commonly used languages on Spark and is the default language in Trident notebooks.
+> **Note**: Spark supports multiple coding languages, including Scala, Java, and others. In this exercise, we'll use *PySpark*, which is a Spark-optimized variant of Python. PySpark is one of the most commonly used languages on Spark and is the default language in Fabric notebooks.
 
 1. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
 
@@ -331,7 +331,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
     spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
     ```
 
-    > **Note**: It's worth noting a couple of things about this example. Firstly, no explicit path is provided, so the files for the table will be managed by the metastore. Secondly, the table is saved in **delta** format. You can create tables based on multiple file formats (including CSV, Parquet, Avro, and others) but *delta lake* is a Spark technology that adds relational database capabilities to tables; including support for transactions, row versioning, and other useful features. Creating tables in delta format is preferred for data lakehouses in Trident.
+    > **Note**: It's worth noting a couple of things about this example. Firstly, no explicit path is provided, so the files for the table will be managed by the metastore. Secondly, the table is saved in **delta** format. You can create tables based on multiple file formats (including CSV, Parquet, Avro, and others) but *delta lake* is a Spark technology that adds relational database capabilities to tables; including support for transactions, row versioning, and other useful features. Creating tables in delta format is preferred for data lakehouses in Fabric.
 
 2. Run the code cell and review the output, which describes the definition of the new table.
 
@@ -380,7 +380,7 @@ While it's useful to be able to embed SQL statements into a cell containing PySp
 
 ## Visualize data with Spark
 
-A picture is proverbially worth a thousand words, and a chart is often better than a thousand rows of data. While notebooks in *Trident* include a built in chart view for data that is displayed from a dataframe or Spark SQL query, it is not designed for comprehensive charting. However, you can use Python graphics libraries like **matplotlib** and **seaborn** to create charts from data in dataframes.
+A picture is proverbially worth a thousand words, and a chart is often better than a thousand rows of data. While notebooks in Fabric include a built in chart view for data that is displayed from a dataframe or Spark SQL query, it is not designed for comprehensive charting. However, you can use Python graphics libraries like **matplotlib** and **seaborn** to create charts from data in dataframes.
 
 ### View results as a chart
 

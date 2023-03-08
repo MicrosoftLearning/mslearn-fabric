@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Use Delta Lake tables'
-    module: 'Use Apache Spark in Trident'
+    module: 'Use Apache Spark in Microsoft Fabric'
 ---
 
 # Use Delta Lake tables
@@ -12,11 +12,11 @@ This exercise should take approximately **40** minutes to complete
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Trident preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
 
 ## Create a workspace
 
-Before working with data in *Trident*, you should create a workspace with support for premium features.
+Before working with data in Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).

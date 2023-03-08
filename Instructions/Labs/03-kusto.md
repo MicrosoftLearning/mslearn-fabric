@@ -1,22 +1,22 @@
 ---
 lab:
     title: 'Analyze data with Kusto'
-    module: 'Use Kusto in Trident'
+    module: 'Use Kusto in Microsoft Fabric'
 ---
 
 # Analyze data with Kusto
 
-*Trident* provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
+Microsoft Fabric provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
 
 This lab will take approximately **30** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Trident preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
 
 ## Create a workspace
 
-Before working with data in *Trident*, you should create a workspace with support for premium features.
+Before working with data in Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
