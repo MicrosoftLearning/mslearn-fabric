@@ -1,24 +1,24 @@
 ---
 lab:
     title: 'Use a Spark notebook in a pipeline'
-    module: 'Use Apache Spark in Trident'
+    module: 'Use Apache Spark in Microsoft Fabric'
 ---
 
 # Use a Spark notebook in a pipeline
 
-A data lakehouse is a common analytical data store for cloud-scale analytics solutions. One of the core tasks of a data engineer is to implement and manage the ingestion of data from multiple operational data sources into the lakehouse. In *Trident*, you can implement *extract, transform, and load* (ETL) or *extract, load, and transform* (ELT) solutions for data ingestion through the creation of *pipelines*.
+A data lakehouse is a common analytical data store for cloud-scale analytics solutions. One of the core tasks of a data engineer is to implement and manage the ingestion of data from multiple operational data sources into the lakehouse. In Microsoft Fabric, you can implement *extract, transform, and load* (ETL) or *extract, load, and transform* (ELT) solutions for data ingestion through the creation of *pipelines*.
 
-*Trident* also supports Apache Spark, enabling you to write and run code to process data at scale. By combining the pipeline and Spark capabilities in *Trident*, you can implement complex data ingestion logic that copies data from external sources into the OneLake storage on which the lakehouse is based, and then uses Spark code to perform custom data transformations before loading it into tables for analysis.
+Fabric also supports Apache Spark, enabling you to write and run code to process data at scale. By combining the pipeline and Spark capabilities in Fabric, you can implement complex data ingestion logic that copies data from external sources into the OneLake storage on which the lakehouse is based, and then uses Spark code to perform custom data transformations before loading it into tables for analysis.
 
 This lab will take approximately **60** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Trident preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
 
 ## Create a workspace
 
-Before working with data in *Trident*, you should create a workspace with support for premium features.
+Before working with data in Microsoft Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
