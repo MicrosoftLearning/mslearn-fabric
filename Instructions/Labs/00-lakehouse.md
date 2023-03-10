@@ -4,13 +4,18 @@ lab:
     module: 'Get started with Lakehouses'
 ---
 
+---
+*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
+
+---
+
 # Create a lakehouse
 
 Large-scale data analytics solutions have traditionally been built around a *data warehouse*, in which data is stored in relational tables and queried using SQL. The growth in "big data" (characterized by high *volumes*, *variety*, and *velocity* of new data assets) together with the availability of low-cost storage and cloud-scale distributed compute technologies has led to an alternative approach to analytical data storage; the *data lake*. In a data lake, data is stored as files without imposing a fixed schema for storage. Increasingly, data engineers and analysts seek to benefit from the best features of both of these approaches by combining them in a *data lakehouse*; in which data is stored in files in a data lake and a relational schema is applied to them as a metadata layer so that they can be queried using traditional SQL semantics.
 
 In Microsoft Fabric, a lakehouse is an artifact in a workspace that provides highly scalable file storage in a *OneLake* storage service with a relational metastore based on Apache Spark *Delta Lake* technology. Delta Lake enables you to "overlay" file data with a relational schema of tables that support transactional semantics and other capabilities commonly found in a traditional relational data warehouse.
 
-This lab will take approximately **30** minutes to complete.
+This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
@@ -59,32 +64,32 @@ There are multiple ways to load data into the lakehouse.
 
 One of the simplest ways to ingest small amounts of data into the lakehouse is to upload files or folders from your local computer.
 
-1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer
-2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **sales.csv** file from your local computer to the lakehouse.
-3. After the file has been uploaded, select **Files** verify that the **sales.csv** file has been uploaded, as shown here:
+1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv), saving it as **orders.csv** on your local computer
+2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **orders.csv** file from your local computer to the lakehouse.
+3. After the file has been uploaded, select **Files** verify that the **orders.csv** file has been uploaded, as shown here:
 
     ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-file.png)
 
-4. Select the **sales.csv** file to see a preview of its contents.
+4. Select the **orders.csv** file to see a preview of its contents.
 
 ### Load file data into a table
 
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
-1. On the **Home** page while viewing the contents of the **sales.csv** file in your datalake, in the **Open notebook** menu, select **New notebook**.
+1. On the **Home** page while viewing the contents of the **orders.csv** file in your datalake, in the **Open notebook** menu, select **New notebook**.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the pane on the left, select the **Files** list to reveal a new pane showing the **sales.csv** file you uploaded previously:
+3. In the pane on the left, select the **Files** list to reveal a new pane showing the **orders.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-file.png)
 
-2. In the **...** menu for **sales.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+2. In the **...** menu for **orders.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
-    df = spark.read.format("csv").option("header","true").load("Files/sales.csv")
-    # df now is a Spark DataFrame containing CSV data from "Files/sales.csv".
+    df = spark.read.format("csv").option("header","true").load("Files/orders.csv")
+    # df now is a Spark DataFrame containing CSV data from "Files/orders.csv".
     display(df)
     ```
 
@@ -96,14 +101,16 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
 4. When the cell command has completed, review the output below the cell, which should look similar to this:
 
-    | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
-    | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-    | 1 | SO43701 | 11 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 16 | 3399.99 | 271.9992 |
-    | 2 | SO43704 | 1 | 2019-07-01 | Julio Ruiz | julio1@adventure-works.com | Mountain-100 Black, 48 | 1 | 3374.99 | 269.9992 |
-    | 3 | SO43705 | 1 | 2019-07-01 | Curtis Lu | curtis9@adventure-works.com | Mountain-100 Silver, 38 | 1 | 3399.99 | 271.9992 |
-    | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+    |SalesOrderID|OrderDate|CustomerID|LineItem|ProductID|OrderQty|LineItemTotal|
+    |---|---|---|---|---|---|---|
+    |71774|2022-06-01|29847|1|836|1|356.9|
+    |71774|2022-06-01|29847|2|822|1|356.9|
+    |71776|2022-06-01|30072|1|907|1|63.9|
+    |71780|2022-06-01|30113|1|905|4|873.82|
+    |71780|2022-06-01|30113|2|983|2|923.39|
+    |...|...|...|...|...|...|...|
 
-5. Under the output, use the **+ Code** button to add a new code cell to the notebook. Then add the following code to the new cell:
+5. Under the output, use the **+ Code** button to add a new code cell to the notebook if an empty one does not already exist. Then add the following code to the new cell:
 
     ```Python
     # Create a new table
@@ -122,7 +129,7 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
 When you need to regularly copy data from an external source into the lakehouse, you can create a pipeline that contains a **Copy Data** activity. Pipelines can be run on-demand or scheduled to run at specific intervals.
 
-1. On the **Home** page, in the **Get data** menu, select **New data pipeline**.
+1. On the **Home** page, in the **Get data** menu, select **New data pipeline**. When prompted, name the pipeline **Import Data**.
 
     The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
 
@@ -135,7 +142,9 @@ When you need to regularly copy data from an external source into the lakehouse,
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv`
     - **Connection**: Create new connection
     - **Connection name**: web_product_data
-    - **Authentication kind**: Anonymous
+    - **Authentication kind**: Basic
+    - **Username**: *Leave blank*
+    - **Password**: *Leave blank*
 
 5. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
@@ -161,7 +170,7 @@ When you need to regularly copy data from an external source into the lakehouse,
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-11. Use the **&#9655; Run** button to run the pipeline, saving the pipeline as **Copy Product Data** when prompted.
+11. Use the **&#9655; Run** button to run the pipeline, saving the pipeline when prompted.
 
     When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
 
@@ -174,15 +183,69 @@ When you need to regularly copy data from an external source into the lakehouse,
 
     ![Screenshot of the product table.](./Images/product-table.png)
 
-16. Select the **Lave view** tab and refresh the **Tables** section to see the folder for the **product** data files.
+16. Select the **Lake view** tab and refresh the **Tables** section to see the folder for the **product** data files.
 
     ![Screenshot of the files for the product table.](./Images/table-files.png)
 
-In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files stored in a OneLake data store, some of which are used to store the data for managed tables.
+## Explore the default warehouse
+
+When you create a lakehouse and define tables in it, a default warehouse is automatically created to provide a SQL endpoint through which the tables can be queried using SQL `SELECT` statements.
 
 ---
-*Possibly extend this to include working with a dataset so students see the point of defining tables in a lakehouse to support Power BI reporting. There seem to be some issues at the moment though - the default dataset doesn't seem to include the latest table and there's no obvious way to force it to refresh, and creating a new dataset results in a server error.*
-
-*If so, we might want to normalize the CSV data so that there's a product key relationship between products and salesorders*
+*Currently, the read-only SQL endpoint for the lakehouse is called the "default warehouse". However, this will change to "SQL Endpoint" to avoid confusion with the "Data Warehouse" artifact type, which will be a fully transactional relational data warehouse. At that point, we'll need to update this section.*
 
 ---
+
+1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains:
+
+    ![Screenshot of the workspace page.](./Images/workspace.png)
+
+2. Note that the workspace includes multiple assets with the name you assigned to the lakehouse. These include:
+    - The *lakehouse* itself
+    - A default *dataset* that can be used to build Power BI reports from the data in your lakehouse.
+    - A default *warehouse* that provides a SQL endpoint for the tables in your lakehouse.
+
+3. Select the default warehouse for your lakehouse. After a short time, it will open in a visual interface from which you can explore the tables in your lakehouse, as shown here:
+
+    ![Screenshot of the warehouse page.](./Images/warehouse.png)
+
+4. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
+
+    ```sql
+    SELECT p.ProductName, COUNT(s.SalesOrderID) AS OrderCount
+    FROM salesorders AS s
+    JOIN product AS p
+        ON s.ProductID = p.ProductID
+    GROUP BY  p.ProductName
+    ORDER BY p.ProductName
+    ```
+
+5. Use the **&#9655; Run** button to run the query and view the results, which should show the number of orders placed for each product.
+6. At the top right of the page, use the drop-down menu to switch from **Warehouse mode** to **Lake mode** and note that this reverts the view to the page for your lakehouse, where you can manage the files containing your data.
+
+## Explore the default dataset
+
+As you saw previously, creating and populating tables in a lakehouse automatically generated a default *dataset* that you can use as the basis for a Power BI data visualization.
+
+1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains.
+
+2. Select the default dataset for your lakehouse. This opens the dataset as shown here:
+
+    ![Screenshot of the dataset page.](./Images/dataset.png)
+
+3. In the **Create a report** drop-down list, select **Auto-create** to create a new report based on the dataset. Then wait for the report to be generated.
+
+---
+*Currently, the default dataset is only refreshed when the first table is created - the second table (in this case products) is not included, and there's no apparent way to force a refresh!*
+
+---
+
+## Clean up resources
+
+In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files stored in a OneLake data store, some of which are used to store the data for managed tables. The managed tables can be explored and manipulated using Spark, queried using SQL, and included in a dataset to support data visualizations.
+
+If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Delete this workspace**.
