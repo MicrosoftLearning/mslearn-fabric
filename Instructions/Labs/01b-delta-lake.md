@@ -19,9 +19,9 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 Before working with data in Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
-4. When your new workspace opens, it should be empty, as shown here:
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+1. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
@@ -33,16 +33,16 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
 
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+1. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer and then upload it to your lakehouse.
 
-3. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
+1. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
 
-4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **New subsfolder** and create a folder named **products**.
+1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **New subfolder** and create a folder named **products**.
 
-5. In the **...** menu for the **products** folder, select **Upload** and **Upload files**, and then upload the **products.csv** file from your local computer to the lakehouse.
-6. After the files have been uploaded, select the **products** folder; and verify that the **products.csv** file has been uploaded, as shown here:
+1. In the **...** menu for the **products** folder, select **Upload** and **Upload files**, and then upload the **products.csv** file from your local computer to the lakehouse.
+1. After the files have been uploaded, select the **products** folder; and verify that the **products.csv** file has been uploaded, as shown here:
 
     ![Screenshot of uploaded products.csv file in a lakehouse.](./Images/products-file.png)
 
@@ -52,12 +52,12 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
-2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
+1. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
+1. In the pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-products.png)
 
-4. In the **...** menu for **products.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+1. In the **...** menu for **products.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/products.csv")
@@ -67,11 +67,11 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
 
-5. Use the **&#9655;** (*Run cell*) button on the left of the cell to run it.
+1. Use the **&#9655;** (*Run cell*) button on the left of the cell to run it.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
-6. When the cell command has completed, review the output below the cell, which should look similar to this:
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     | Index | ProductID | ProductName | Category | ListPrice |
     | -- | -- | -- | -- | -- |
@@ -91,9 +91,9 @@ Delta lake uses the *delta* file format to save data. The delta format is based 
     df.write.format("delta").save(delta_table_path)
     ```
 
-2. In the pane on the left, in the **...** menu for **Files**, select **Refresh** and note that a new folder named **products-delta** has been created. Select this folder to see the parquet format file(s) containing the data and the **_delta_log** folder containing transactional metadata.
+1. In the pane on the left, in the **...** menu for **Files**, select **Refresh** and note that a new folder named **products-delta** has been created. Select this folder to see the parquet format file(s) containing the data and the **_delta_log** folder containing transactional metadata.
 
-3. In the notebook, add another new code cell. Then, in the new cell, add the following code and run it:
+1. In the notebook, add another new code cell. Then, in the new cell, add the following code and run it:
 
     ```Python
     from delta.tables import *
@@ -108,12 +108,12 @@ Delta lake uses the *delta* file format to save data. The delta format is based 
         set = { "ListPrice": "ListPrice * 0.9" })
 
     # View the updated data as a dataframe
-    display(deltaTable.toDF()
+    display(deltaTable.toDF())
     ```
 
     The data is loaded from the delta format files into a **DeltaTable** object and updated. You can see the update reflected in the query results.
 
-4. Add another new code cell with the following code and run it:
+1. Add another new code cell with the following code and run it:
 
     ```Python
     new_df = spark.read.format("delta").load(delta_table_path)
@@ -122,7 +122,7 @@ Delta lake uses the *delta* file format to save data. The delta format is based 
 
     The code loads the delta table data into a data frame from its location in the data lake, verifying that the change you made via a **DeltaTable** object has been persisted.
 
-5. Modify the code you just ran as follows, specifying the option to use the *time travel* feature of delta lake to view a previous version of the data.
+1. Modify the code you just ran as follows, specifying the option to use the *time travel* feature of delta lake to view a previous version of the data.
 
     ```Python
     new_df = spark.read.format("delta").option("versionAsOf", 0).load(delta_table_path)
@@ -131,7 +131,7 @@ Delta lake uses the *delta* file format to save data. The delta format is based 
 
     When you run the modified code, the results show the original version of the data.
 
-6. Add another new code cell with the following code and run it:
+1. Add another new code cell with the following code and run it:
 
     ```Python
     deltaTable.history(10).show(20, False, True)
@@ -157,7 +157,7 @@ So far you've worked with delta lake by loading data from the folder containing 
 
     This code creates an external tabled named **ProductsExternal** based on the path to the delta files you defined previously. It then displays a description of the table's properties. Note that the **Location** property is the path you specified.
 
-2. Add a new code cell, and then enter and run the following code:
+1. Add a new code cell, and then enter and run the following code:
 
     ```sql
     %%sql
@@ -178,9 +178,9 @@ So far you've worked with delta lake by loading data from the folder containing 
 
     This code creates a managed tabled named **ProductsManaged** based on the DataFrame you originally loaded from the **products.csv** file (before you updated the price of product 771). You do not specify a path for the parquet files used by the table - this is managed for you in the Hive metastore.
 
-2. In the pane on the left, on the **Lake view** tab, in the **...** menu for the **Tables** node, select **Refresh**. Then note that a folder named **productsmanaged** has been created for the data files on which the table is based.
+1. In the pane on the left, on the **Lake view** tab, in the **...** menu for the **Tables** node, select **Refresh**. Then note that a folder named **productsmanaged** has been created for the data files on which the table is based.
 
-3. Add a new code cell, and then enter and run the following code:
+1. Add a new code cell, and then enter and run the following code:
 
     ```sql
     %%sql
@@ -202,9 +202,9 @@ So far you've worked with delta lake by loading data from the folder containing 
 
     This code lists the tables in the lakehouse database.
 
-2. In the pane on the left, select the **Table view** tab and verify that both tables are listed there.
+1. In the pane on the left, select the **Table view** tab and verify that both tables are listed there.
 
-3. Add a new code cell to the notebook, add use it to run the following code:
+1. Add a new code cell to the notebook, add use it to run the following code:
 
     ```sql
     %%sql
@@ -215,9 +215,9 @@ So far you've worked with delta lake by loading data from the folder containing 
 
     This code drops the tables from the metastore.
 
-4. On the **Table view** tab, in the **...** menu for the **Tables** node, select **Refresh**; and verify that no tables are now listed.
-5. Return to the **Lake view** tab and refresh the **Tables** node. Note that the folder for the managed table has been deleted.
-6. Refresh the  **Files** node. Dropping the external table has removed the table from the metastore, but left the data files intact.
+1. On the **Table view** tab, in the **...** menu for the **Tables** node, select **Refresh**; and verify that no tables are now listed.
+1. Return to the **Lake view** tab and refresh the **Tables** node. Note that the folder for the managed table has been deleted.
+1. Refresh the  **Files** node. Dropping the external table has removed the table from the metastore, but left the data files intact.
 
 ### Create a table using SQL
 
@@ -231,7 +231,7 @@ So far you've worked with delta lake by loading data from the folder containing 
     LOCATION 'Files/products-delta';
     ```
 
-2. Add a new code cell, and then enter and run the following code:
+1. Add a new code cell, and then enter and run the following code:
 
     ```sql
     %%sql
@@ -279,7 +279,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     Ensure the message *Source stream created...* is printed. The code you just ran has created a streaming data source based on a folder to which some data has been saved, representing readings from hypothetical IoT devices.
 
-2. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```python
     # Write the stream to a delta table
@@ -291,7 +291,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code writes the streaming device data in delta format.
 
-3. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```python
     # Read the data in delta format into a dataframe
@@ -301,7 +301,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code reads the streamed data in delta format into a dataframe. Note that the code to load streaming data is no different to that used to load static data from a delta folder.
 
-4. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```python
     # create a catalog table based on the streaming sink
@@ -310,7 +310,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code creates a catalog table named **IotDeviceData** (in the **default** database) based on the delta folder. Again, this code is the same as would be used for non-streaming data.
 
-5. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```sql
     %%sql
@@ -320,7 +320,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table, which contains the device data from the streaming source.
 
-6. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```python
     # Add more data to the source stream
@@ -337,7 +337,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code writes more hypothetical device data to the streaming source.
 
-7. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```sql
     %%sql
@@ -347,7 +347,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table again, which should now include the additional data that was added to the streaming source.
 
-8. In a new code cell, add and run the following code:
+1. In a new code cell, add and run the following code:
 
     ```python
     deltastream.stop()

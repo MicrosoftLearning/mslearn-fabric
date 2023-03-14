@@ -21,9 +21,9 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 Before working with data in Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
-4. When your new workspace opens, it should be empty, as shown here:
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+1. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
@@ -39,13 +39,13 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     ![Screenshot of the Data Engineering home page.](./Images/data-engineering-home.png)
 
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+1. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new lakehouse will be created:
 
     ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-3. View the new lakehouse, and note that the pane on the left provides two tabs in which you can browse data assets in the lakehouse:
+1. View the new lakehouse, and note that the pane on the left provides two tabs in which you can browse data assets in the lakehouse:
     - The **Lake view** tab enables you to view files in the OneLake storage for the lakehouse. Files that are associated with managed tables are shown in the **Tables** section, while other data files are shown in the **Files** section.
     - The **Table view** tab shows the managed tables defined in the Delta Lake metastore for the lakehouse.
 
@@ -60,12 +60,12 @@ There are multiple ways to load data into the lakehouse.
 One of the simplest ways to ingest small amounts of data into the lakehouse is to upload files or folders from your local computer.
 
 1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer
-2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **sales.csv** file from your local computer to the lakehouse.
-3. After the file has been uploaded, select **Files** verify that the **sales.csv** file has been uploaded, as shown here:
+1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload files**, and then upload the **sales.csv** file from your local computer to the lakehouse.
+1. After the file has been uploaded, select **Files** verify that the **sales.csv** file has been uploaded, as shown here:
 
     ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-file.png)
 
-4. Select the **sales.csv** file to see a preview of its contents.
+1. Select the **sales.csv** file to see a preview of its contents.
 
 ### Load file data into a table
 
@@ -75,12 +75,12 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
-2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the pane on the left, select the **Files** list to reveal a new pane showing the **sales.csv** file you uploaded previously:
+1. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
+1. In the pane on the left, select the **Files** list to reveal a new pane showing the **sales.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-file.png)
 
-2. In the **...** menu for **sales.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+1. In the **...** menu for **sales.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/sales.csv")
@@ -90,11 +90,11 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
     > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
 
-3. Use the **&#9655; Run cell** button on the left of the cell to run it.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
-4. When the cell command has completed, review the output below the cell, which should look similar to this:
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -103,18 +103,18 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
     | 3 | SO43705 | 1 | 2019-07-01 | Curtis Lu | curtis9@adventure-works.com | Mountain-100 Silver, 38 | 1 | 3399.99 | 271.9992 |
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-5. Under the output, use the **+ Code** button to add a new code cell to the notebook. Then add the following code to the new cell:
+1. Under the output, use the **+ Code** button to add a new code cell to the notebook. Then add the following code to the new cell:
 
     ```Python
     # Create a new table
     df.write.format("delta").saveAsTable("salesorders")
     ```
 
-6. Run the new code cell and wait for it to complete.
-7. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-8. In the **Lake view** pane, in the **...** menu for the **Tables** node, select **Refresh**. Then expand the **Tables** node and select the **salesorders** folder to view the files that have been created for the table data.
-9. Select the **Table view** tab, and verify that the **salesorders** table is listed in the metastore.
-10. Select the **salesorders** table to see a preview of the data it contains.
+1. Run the new code cell and wait for it to complete.
+1. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
+1. In the **Lake view** pane, in the **...** menu for the **Tables** node, select **Refresh**. Then expand the **Tables** node and select the **salesorders** folder to view the files that have been created for the table data.
+1. Select the **Table view** tab, and verify that the **salesorders** table is listed in the metastore.
+11. Select the **salesorders** table to see a preview of the data it contains.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
 
@@ -126,55 +126,54 @@ When you need to regularly copy data from an external source into the lakehouse,
 
     The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
 
-2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **File** tab, select **HTTP**.
+1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
+1. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **File** tab, select **HTTP**.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
-4. Select **Next** and then select **Create new connection** and enter the following settings for the connection to your data source:
+1. Select **Next** and then select **Create new connection** and enter the following settings for the connection to your data source:
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv`
     - **Connection**: Create new connection
     - **Connection name**: web_product_data
     - **Authentication kind**: Anonymous
 
-5. Select **Next**. Then ensure the following settings are selected:
+1. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
     - **Request method**: GET
     - **Additional headers**: *Leave blank*
     - **Binary copy**: <u>Un</u>selected
     - **Request timeout**: *Leave blank*
     - **Max concurrent connections**: *Leave blank*
-6. Select **Next**, and then ensure that the following settings are selected:
+1. Select **Next**, and then ensure that the following settings are selected:
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: Selected
-    - **Compression type**: None
-7. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-8. On the **Choose data destination** page, select your existing lakehouse. Then select **Next**.
-9. Set the following data destination options (noting that you can copy the data to a file, or to a table - which creates the necessary files in the **Tables** storage area as well as the relational table metadata), and then select **Next**:
+1. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
+1. On the **Choose data destination** page, select your existing lakehouse. Then select **Next**.
+1. Set the following data destination options (noting that you can copy the data to a file, or to a table - which creates the necessary files in the **Tables** storage area as well as the relational table metadata), and then select **Next**:
     - **Root folder**: Tables
     - **Table name**: `product`
-10. On the **Copy summary** page, review the details of your copy operation and then select **OK**
+1. On the **Copy summary** page, review the details of your copy operation and then select **OK**
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-11. Use the **&#9655; Run** button to run the pipeline, saving the pipeline as **Copy Product Data** when prompted.
+1. Use the **&#9655; Run** button to run the pipeline, saving the pipeline as **Copy Product Data** when prompted.
 
     When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
 
     ![Screenshot of a completed pipeline.](./Images/pipeline-completed.png)
 
-12. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
-13. On the **Home** page, select the **Table view** tab; and in the **...** menu for **Tables**, select **Refresh**.
-14. Verify that the **product** table has been created.
-15. Select the **product** table to see a preview of its data.
+1. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
+1. On the **Home** page, select the **Table view** tab; and in the **...** menu for **Tables**, select **Refresh**.
+1. Verify that the **product** table has been created.
+1. Select the **product** table to see a preview of its data.
 
     ![Screenshot of the product table.](./Images/product-table.png)
 
-16. Select the **Lave view** tab and refresh the **Tables** section to see the folder for the **product** data files.
+1. Select the **Lake view** tab and refresh the **Tables** section to see the folder for the **product** data files.
 
     ![Screenshot of the files for the product table.](./Images/table-files.png)
 
