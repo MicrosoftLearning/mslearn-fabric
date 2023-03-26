@@ -46,7 +46,7 @@ Now that you have a workspace, it's time to switch to the *Data Warehouse* exper
 
     ![Screenshot of a new warehouse.](./Images/new-data-warehouse.png)
 
-## Create a table
+## Create tables and insert data
 
 A warehouse is a relational database in which you can define tables and other objects.
 
@@ -55,7 +55,8 @@ A warehouse is a relational database in which you can define tables and other ob
     ```sql
     CREATE TABLE dbo.DimProduct
     (
-        ProductID INTEGER NOT NULL,
+        ProductKey INTEGER NOT NULL,
+        ProductAltKey VARCHAR(25) NULL,
         ProductName VARCHAR(50) NOT NULL,
         Category VARCHAR(50) NULL,
         ListPrice DECIMAL(5,2) NULL
@@ -70,51 +71,124 @@ A warehouse is a relational database in which you can define tables and other ob
     ```sql
     INSERT INTO dbo.DimProduct
     VALUES
-    (1, 'Bicycle bell', 'Accssories', 5.99),
-    (2, 'Front light', 'Accessories', 15.49),
-    (3, 'Rear light', 'Accessories', 15.49);
+    (1, 'RING1', 'Bicycle bell', 'Accssories', 5.99),
+    (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
+    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
     GO
     ```
 
 5. Run the new query to insert three rows into the **DimProduct** table.
+6. When the query has finished, in the **Explorer** pane, select the **DimProduct** table and verify that the rows have been added to the table.
+7. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt) into the new query pane.
+8. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
+9. Use the **Sync data** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
+    - **DimCustomer**
+    - **DimDate**
+    - **DimProduct**
+    - **FactSalesOrder**
 
-## Load data from a lakehouse into a table
+    > **Tip**: If the schema takes a while to load, just refresh the browser page.
 
-As you've seen, you can use Transact-SQL INSERT statements to insert data into a warehouse table. However, in most real data warehousing scenarios you'll typically load data into the data warehouse from files in a data lake.
+## Define a data model
 
-1. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
-2. In the menu bar on the left, select **&#128320; Create**. Then, in the **Data Engineering** section, select **Lakehouse** and create a new lakehouse with a name of your choice.
-3. In your new lakehouse, in the **lake view** pane, in the **...** menu for the **Files** node, select **New subfolder** and create a folder named **products**.
-4. In the **...** menu for the **products** folder, select **Upload** > **Upload files** and then upload the **products.csv** file you downloaded to your computer previously.
-5. Select the **products** folder and verify that the **products.csv** file has been uploaded as shown here:
+A relational data warehouse typically consists of *dimension* and *fact* tables. The fact tables contain numeric measures you can aggregate to analyze business performance (for example, sales revenue), and the dimension tables contain attributes of the entities by which you can aggregate the data (for example, product, customer, or time). In a Microsoft Fabric data warehouse, you can use these keys to define a data model that encapsulates the relationships between the tables.
 
-    ![Screenshot of a lakehouse with a products.csv file](./Images/products-file.png)
+1. At the bottom of the page for your data warehouse, select the **Model** tab.
+2. In the model designer pane, rearrange the tables in your data warehouse so that the **FactSalesOrder** table is in the middle, like this:
 
-6. In the menu bar on the left, select the **Home** page, and then find and select your data warehouse to return to it.
-7. Create a new SQL query, and enter the following SQL code:
+    ![Screenshot of the data warehouse model page.](./Images/model-dw.png)
 
+3. Drag the **ProductKey** field from the **FactSalesOrrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
+    - **Table 1**: FactSalesOrder
+    - **Column**: ProductKey
+    - **Table 2**: DimProduct
+    - **Column**: ProductKey
+    - **Cardinality**: Many to one (*:1)
+    - **Cross filter direction**: Single
+    - **Make this relationship active**: Selected
+    - **Assume referential integrity**: Unselected
+
+4. Repeat the process to create many to one relationships between the following tables:
+    - **FactOrderSales.CustomerKey** &#8594; **DimCustomer.CustomerKey**
+    - **FactOrderSales.SalesOrderDateKey** &#8594; **DimDate.DateKey**
+
+    When all of the relationships have been defined, the model should look like this:
+
+    ![Screenshot of the model with relationships.](./Images/dw-relationships.png)
+
+## Query data warehouse tables
+
+Since the data warehouse is a relational database, you can use SQL to query its tables.
+
+### Query fact and dimension tables
+
+Most queries in a relational data warehouse involve aggregating and grouping data (using aggregate functions and GROUP BY clauses) across related tables (using JOIN clauses).
+
+1. Create a new SQL Query, and run the following code:
 
     ```sql
-    COPY INTO dbo.DimProduct
-        (ProductID, ProductName, ProductCategory, ListPrice)
-    FROM 'Files/products/products.csv'
-    WITH
-    (
-        FILE_TYPE = 'CSV',
-        MAXERRORS = 0,
-        FIRSTROW = 2 --Skip header row
-    );
+    SELECT  d.[Year] AS CalendarYear,
+            d.[Month] AS MonthOfYear,
+            d.MonthName AS MonthName,
+            SUM(so.SalesTotal) AS SalesRevenue
+    FROM FactSalesOrder AS so
+    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+    GROUP BY d.[Year], d.[Month], d.MonthName
+    ORDER BY CalendarYear, MonthOfYear;
     ```
 
-> Code fails with the following error:
->
-> ```
-> File 'Files/products/products.csv' cannot be opened because it does not exist or it is used by another process.
-> ```
->
-> If I try using the **abfs** or **URL** path (obtained from the file properties), I get the following error:
->
-> ```
-> Path 'https://msit-onelake.pbidedicated.windows.net/294a8b41-375e-4c72-9a7f-bdf373ef86f2/d825ea29-6f1b-47ca-b653-8871b18a75f5/Files/products/products.csv' has URL suffix which is not allowed.
-> ```
->
+    Note that the attributes in the time dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
+
+2. Modify the query as follows to add a second dimension to the aggregation.
+
+    ```sql
+    SELECT  d.[Year] AS CalendarYear,
+            d.[Month] AS MonthOfYear,
+            d.MonthName AS MonthName,
+            c.CountryRegion AS SalesRegion,
+            SUM(so.SalesTotal) AS SalesRevenue
+    FROM FactSalesOrder AS so
+    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+    JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+    GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion
+    ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+    ```
+
+3. Run the modified query and review the results, which now include sales revenue aggregated by year, month, and sales region.
+
+## Create a view
+
+A data warehouse in Microsoft Fabric has many of the same capabilities you may be used to in relational databases. For example, you can create database objects like *views* and *stored procedures* to encapsulate SQL logic.
+
+1. Modify the query you created previously as follows to create a view (note that you need to remove the ORDER BY clause to create a view).
+
+    ```sql
+    CREATE VIEW vSalesByRegion
+    AS
+    SELECT  d.[Year] AS CalendarYear,
+            d.[Month] AS MonthOfYear,
+            d.MonthName AS MonthName,
+            c.CountryRegion AS SalesRegion,
+            SUM(so.SalesTotal) AS SalesRevenue
+    FROM FactSalesOrder AS so
+    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+    JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+    GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion;
+    ```
+
+2. Run the query to create the view. Then refresh the data warehouse schema and verify that the new view is listed in the **Explorer** pane.
+3. Create a new SQL query and run the following SELECT statement:
+
+    ```SQL
+    SELECT CalendarYear, MonthName, SalesRegion, SalesRevenue
+    FROM vSalesByRegion
+    ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+    ```
+
+### Create a visual query
+
+Instead of writing SQL code, you can use the graphical query designer to query the tables in your data warehouse.
+
+1. On the **Home** menu tab, select **New visual query**.
+
+    *Need someone with Power Query skills to do something with this!*
