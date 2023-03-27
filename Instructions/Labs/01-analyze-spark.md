@@ -4,6 +4,11 @@ lab:
     module: 'Use Apache Spark in Microsoft Fabric'
 ---
 
+---
+*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
+
+---
+
 # Analyze data with Apache Spark
 
 Apache Spark is an open source engine for distributed data processing, and is widely used to explore, process, and analyze huge volumes of data in data lake storage. Spark is available as a processing option in many data platform products, including Azure HDInsight, Azure Databricks, Azure Synapse Analytics, and Microsoft Fabric. One of the benefits of Spark is support for a wide range of programming languages, including Java, Scala, Python, and SQL; making Spark a very flexible solution for data processing workloads including data cleansing and manipulation, statistical analysis and machine learning, and data analytics and visualization.

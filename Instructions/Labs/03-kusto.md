@@ -4,6 +4,11 @@ lab:
     module: 'Use Kusto in Microsoft Fabric'
 ---
 
+---
+*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
+
+---
+
 # Analyze data with Kusto
 
 Microsoft Fabric provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
