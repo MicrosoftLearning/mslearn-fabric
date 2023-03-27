@@ -192,6 +192,14 @@ A data warehouse in Microsoft Fabric has many of the same capabilities you may b
     ORDER BY CalendarYear, MonthOfYear, SalesRegion;
     ```
 
+### Visualize query results
+
+---
+
+    *Add steps to select a query and visualize the results a'la Power BI*
+
+---
+
 ### Create a visual query
 
 Instead of writing SQL code, you can use the graphical query designer to query the tables in your data warehouse.
@@ -199,7 +207,7 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 1. On the **Home** menu tab, select **New visual query**.
 
 ---
-    *Add steps to create a Visual Query with Power BI when things are more stable*
+    *Add steps to create a Visual Query with the Power Query interface*
 
 ---
 
