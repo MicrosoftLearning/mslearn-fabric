@@ -116,6 +116,13 @@ A relational data warehouse typically consists of *dimension* and *fact* tables.
 
     ![Screenshot of the model with relationships.](./Images/dw-relationships.png)
 
+
+---
+
+    *Should we add steps to create hierarchies as well?*
+
+---
+
 ## Query data warehouse tables
 
 Since the data warehouse is a relational database, you can use SQL to query its tables.
@@ -191,4 +198,17 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 
 1. On the **Home** menu tab, select **New visual query**.
 
-    *Need someone with Power Query skills to do something with this!*
+---
+    *Add steps to create a Visual Query with Power BI when things are more stable*
+
+---
+
+## Use the dataset for the warehouse
+
+When you create a warehouse, a dataset is automatically created for it.
+
+---
+
+    *Add steps to create an Auto-report from the dataset*
+
+---
