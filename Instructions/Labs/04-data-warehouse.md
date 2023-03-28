@@ -98,7 +98,7 @@ A relational data warehouse typically consists of *dimension* and *fact* tables.
 
     ![Screenshot of the data warehouse model page.](./Images/model-dw.png)
 
-3. Drag the **ProductKey** field from the **FactSalesOrrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
+3. Drag the **ProductKey** field from the **FactSalesOrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
     - **Table 1**: FactSalesOrder
     - **Column**: ProductKey
     - **Table 2**: DimProduct
