@@ -11,7 +11,7 @@ lab:
 
 # Analyze data in a data warehouse
 
-In Microsoft Fabric, a data warehouse is an artifact in a workspace that provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
+In Microsoft Fabric, a data warehouse is an item in a workspace that provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
 
 This lab will take approximately **30** minutes to complete.
 

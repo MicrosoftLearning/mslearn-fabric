@@ -157,7 +157,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 Now that you've implemented a notebook to transform data and load it into a table, you can incorporate the notebook into a pipeline to create a reusable ETL process.
 
-1. In the navigation bar on the left edge of the portal, select the icon for your workspace. Then, in the list of artifacts in your workspace, select the **Ingest Sales Data** pipeline you created previously.
+1. In the navigation bar on the left edge of the portal, select the icon for your workspace. Then, in the list of items in your workspace, select the **Ingest Sales Data** pipeline you created previously.
 2. On the **Activities** tab, in the **More activities** list, select **Delete data**. Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
 
     ![Screenshot of a pipeline with Delete data and Copy data activities.](./Images/delete-data-activity.png)
