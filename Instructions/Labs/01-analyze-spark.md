@@ -340,7 +340,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 
 2. Run the code cell and review the output, which describes the definition of the new table.
 
-3. In the **Eplorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
+3. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
     ---
     *If refreshing the Tables folder doesn't work, refresh the entire web page!*
