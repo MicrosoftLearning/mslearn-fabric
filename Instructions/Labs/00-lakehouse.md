@@ -50,11 +50,11 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-3. View the new lakehouse, and note that the pane on the left provides two tabs in which you can browse data assets in the lakehouse:
-    - The **Lake view** tab enables you to view files in the OneLake storage for the lakehouse. Files that are associated with managed tables are shown in the **Tables** section, while other data files are shown in the **Files** section.
-    - The **Table view** tab shows the managed tables defined in the Delta Lake metastore for the lakehouse.
+3. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
+    - The **Tables** folder contains relational abstractions over files that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta* file format, commonly used in Apache Spark.
+    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables.
 
-    Currently, there are no files or tables in the lakehouse.
+    Currently, there are no tables or files in the lakehouse.
 
 ## Load data into the lakehouse
 
@@ -64,11 +64,11 @@ There are multiple ways to load data into the lakehouse.
 
 One of the simplest ways to ingest small amounts of data into the lakehouse is to upload files or folders from your local computer.
 
-1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv), saving it as **orders.csv** on your local computer
-2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **orders.csv** file from your local computer to the lakehouse.
+1. Download the **orders.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv), saving it as **orders.csv** on your local computer
+2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **Upload** and **Upload file**, and then upload the **orders.csv** file from your local computer to the lakehouse.
 3. After the file has been uploaded, select **Files** verify that the **orders.csv** file has been uploaded, as shown here:
 
-    ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-file.png)
+    ![Screenshot of uploaded orders.csv file in a lakehouse.](./Images/uploaded-file.png)
 
 4. Select the **orders.csv** file to see a preview of its contents.
 
@@ -81,11 +81,11 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the pane on the left, select the **Files** list to reveal a new pane showing the **orders.csv** file you uploaded previously:
+3. In the pane on the left, select the **Files** list to reveal a new pane showing the **orders.csv** file you uploaded previously. Then, in the **...** menu for **orders.csv**, select **Load data** > **Spark**. 
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-file.png)
 
-2. In the **...** menu for **orders.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+4. A new code cell containing the following code should be added to the notebook:
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/orders.csv")
@@ -95,11 +95,11 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
     > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
 
-3. Use the **&#9655; Run cell** button on the left of the cell to run it.
+5. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
-    > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
+    > **Note**: Since this is the first time you've run any Spark code in this session, a Spark session must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
-4. When the cell command has completed, review the output below the cell, which should look similar to this:
+6. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     |SalesOrderID|OrderDate|CustomerID|LineItem|ProductID|OrderQty|LineItemTotal|
     |---|---|---|---|---|---|---|
@@ -110,20 +110,24 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
     |71780|2022-06-01|30113|2|983|2|923.39|
     |...|...|...|...|...|...|...|
 
-5. Under the output, use the **+ Code** button to add a new code cell to the notebook if an empty one does not already exist. Then add the following code to the new cell:
+7. Under the output, use the **+ Code** button to add a new code cell to the notebook if an empty one does not already exist. Then add the following code to the new cell:
 
     ```Python
     # Create a new table
     df.write.format("delta").saveAsTable("salesorders")
     ```
 
-6. Run the new code cell and wait for it to complete.
-7. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-8. In the **Lake view** pane, in the **...** menu for the **Tables** node, select **Refresh**. Then expand the **Tables** node and select the **salesorders** folder to view the files that have been created for the table data.
-9. Select the **Table view** tab, and verify that the **salesorders** table is listed in the metastore.
-10. Select the **salesorders** table to see a preview of the data it contains.
+8. Run the new code cell and wait for it to complete.
+9. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
+10. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** folder and select the **salesorders** table that has been created for the table data.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
+
+11. In the **...** menu for the **salesorders** table, select **View table files** to see the underlying files for this table
+
+    ![Screenshot of a table preview.](./Images/delta-table-files.png)
+
+    Files for a delta table are stored in *Parquet* format, and include a subfolder named **_delta_log** in which details of transactions applied to the table are logged.
 
 ### Copy data with a pipeline
 
@@ -177,39 +181,32 @@ When you need to regularly copy data from an external source into the lakehouse,
     ![Screenshot of a completed pipeline.](./Images/pipeline-completed.png)
 
 12. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
-13. On the **Home** page, select the **Table view** tab; and in the **...** menu for **Tables**, select **Refresh**.
-14. Verify that the **product** table has been created.
-15. Select the **product** table to see a preview of its data.
+13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** to see the **product** table created by the pipeline.
+
+    > **Tip**: If a folder named **Unrecognized** is shown, wait a few seconds and refresh again.
+
+14. Select the **product** table to see a preview of its data.
 
     ![Screenshot of the product table.](./Images/product-table.png)
 
-16. Select the **Lake view** tab and refresh the **Tables** section to see the folder for the **product** data files.
+## Use SQL to query tables
 
-    ![Screenshot of the files for the product table.](./Images/table-files.png)
-
-## Explore the default warehouse
-
-When you create a lakehouse and define tables in it, a default warehouse is automatically created to provide a SQL endpoint through which the tables can be queried using SQL `SELECT` statements.
+When you create a lakehouse and define tables in it, a SQL endpoint is automatically created through which the tables can be queried using SQL `SELECT` statements.
 
 ---
 *Currently, the read-only SQL endpoint for the lakehouse is called the "default warehouse". However, this will change to "SQL Endpoint" to avoid confusion with the "Data Warehouse" artifact type, which will be a fully transactional relational data warehouse. At that point, we'll need to update this section.*
 
 ---
 
-1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains:
+1. At the top-right of the Lakehouse page, switch from **Lake mode** to **Warehouse mode** as shown here:
 
     ![Screenshot of the workspace page.](./Images/workspace.png)
 
-2. Note that the workspace includes multiple assets with the name you assigned to the lakehouse. These include:
-    - The *lakehouse* itself
-    - A default *dataset* that can be used to build Power BI reports from the data in your lakehouse.
-    - A default *warehouse* that provides a SQL endpoint for the tables in your lakehouse.
-
-3. Select the default warehouse for your lakehouse. After a short time, it will open in a visual interface from which you can explore the tables in your lakehouse, as shown here:
+2. Wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
 
     ![Screenshot of the warehouse page.](./Images/warehouse.png)
 
-4. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
+3. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
     ```sql
     SELECT p.ProductName, COUNT(s.SalesOrderID) AS OrderCount
@@ -220,25 +217,36 @@ When you create a lakehouse and define tables in it, a default warehouse is auto
     ORDER BY p.ProductName
     ```
 
-5. Use the **&#9655; Run** button to run the query and view the results, which should show the number of orders placed for each product.
-6. At the top right of the page, use the drop-down menu to switch from **Warehouse mode** to **Lake mode** and note that this reverts the view to the page for your lakehouse, where you can manage the files containing your data.
+4. Use the **&#9655; Run** button to run the query and view the results, which should show the number of orders placed for each product.
 
-## Explore the default dataset
+## Create a report
 
-As you saw previously, creating and populating tables in a lakehouse automatically generated a default *dataset* that you can use as the basis for a Power BI data visualization.
+Creating and populating tables in a lakehouse automatically generated a default *dataset* that you can use as the basis for a Power BI data visualization.
 
-1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains.
+1. In the tabs at the bottom of the **Explorer** pane, select **Data**. Then at the top of the page, select the **Reporting** tab.
+2. In the **Reporting** menu, select **Manually update dataset**. Then select all of the tables in the lakehouse (**salesorders** and **product**) and confirm the update:
 
-2. Select the default dataset for your lakehouse. This opens the dataset as shown here:
+    ![Screenshot of the Update dataset page.](./Images/update-dataset.png)
 
-    ![Screenshot of the dataset page.](./Images/dataset.png)
+    ---
+    *This fails - for some reason it doesn't recognize the **product** table!*
 
-3. In the **Create a report** drop-down list, select **Auto-create** to create a new report based on the dataset. Then wait for the report to be generated.
+    ---
 
----
-*Currently, the default dataset is only refreshed when the first table is created - the second table (in this case products) is not included, and there's no apparent way to force a refresh!*
+3. In the tabs at the bottom of the **Explorer** pane, select **Model**.
 
----
+    ---
+    *When we get the model to refresh, we'll add steps here to create a relationship between the two tables.*
+
+    ---
+
+
+4. In the toolbar, select **New report**.
+
+    ---
+    *When the dataset refreshes, we'll add steps here to create a simple report.*
+
+    ---
 
 ## Clean up resources
 
