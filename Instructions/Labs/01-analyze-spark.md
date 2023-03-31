@@ -40,12 +40,12 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
-    After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer and then upload them to your lakehouse.
+    After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer and then upload them to your lakehouse.
 
 3. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
 
 4. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
-5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
+5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
 6. After the files have been uploaded, expand **Files** and select the **orders** folder; and verify that the CSV files have been uploaded, as shown here:
 
     ![Screenshot of uploaded files in a lakehouse.](./Images/uploaded-files.png)
@@ -70,7 +70,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     Use the code in this notebook to explore sales order data.
     ```
 
-4. Select anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
+4. Select the **Edit** button again and then click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
 
 ## Load data into a dataframe
 
@@ -94,7 +94,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
 3. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
-    > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
+    > **Note**: Since this is the first time you've run any Spark code, a Spark session must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
 4. When the cell command has completed, review the output below the cell, which should look similar to this:
 
@@ -275,24 +275,24 @@ A common task for data engineers is to ingest data in a particular format or str
 1. Add a new cell with the following code to save the transformed dataframe in Parquet format (Overwriting the data if it already exists):
 
     ```python
-    transformed_df.write.mode("overwrite").parquet('Files/transformed_data/orders.parquet')
+    transformed_df.write.mode("overwrite").parquet('Files/transformed_data/orders')
     print ("Transformed data saved!")
     ```
 
     > **Note**: Commonly, *Parquet* format is preferred for data files that you will use for further analysis or ingestion into an analytical store. Parquet is a very efficient format that is supported by most large scale data analytics systems. In fact, sometimes your data transformation requirement may simply be to convert data from another format (such as CSV) to Parquet!
 
-2. Run the cell and wait for the message that the data has been saved. Then, on the **Lake view** tab in the pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new file named **orders.parquet**.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new folder named **orders**, which in turn contains one or more Parquet files.
 
-    ![Screenshot of a saved orders.parquet file.](./Images/saved-parquet.png)
+    ![Screenshot of a folder containing parquet files.](./Images/saved-parquet.png)
 
-3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
+3. Add a new cell with the following code to load a new dataframe from the parquet files in the **transformed_orders/orders** folder:
 
     ```python
-    orders_df = spark.read.format("parquet").load("Files/transformed_data/orders.parquet")
+    orders_df = spark.read.format("parquet").load("Files/transformed_data/orders")
     display(orders_df)
     ```
 
-4. Run the cell and verify that the results show the order data that has been loaded from the parquet file.
+4. Run the cell and verify that the results show the order data that has been loaded from the parquet files.
 
 ### Save data in partitioned files
 
@@ -303,7 +303,7 @@ A common task for data engineers is to ingest data in a particular format or str
     print ("Transformed data saved!")
     ```
 
-2. Run the cell and wait for the message that the data has been saved. Then, on the **Lake view** tab in the pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
 
     ![Screenshot of a hierarchy of partitioned data files.](./Images/partitioned-files.png)
 
@@ -340,15 +340,14 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 
 2. Run the code cell and review the output, which describes the definition of the new table.
 
-3. In the **Lake view** pane, in the **...** menu for the **Tables** node, select **Refresh**. Then expand the **Tables** node and select the **salesorders** folder to view the files that have been created for the table data.
+3. In the **Eplorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
-    ![Screenshot of files for a salesorder table.](./Images/delta-files.png)
+    ---
+    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
 
-    Note that the data is stored in multiple Parquet files named **part-000*xxxx*.parquet**, and that a folder named **_delta_log** has been created to store details of transactions that occur in the table.
+    ---
 
-4. Select the **Table view** tab, and verify that the **salesorders** table is listed in the metastore.
-
-    ![Screenshot of the salesorder table in Table view.](./Images/table-view.png)
+    ![Screenshot of the salesorder table in Explorer.](./Images/table-view.png)
 
 5. In the **...** menu for the **salesorders** table, select **Load data** > **Spark**.
 
