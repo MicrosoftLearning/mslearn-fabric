@@ -231,12 +231,14 @@ Creating and populating tables in a lakehouse automatically generated a default 
     ---
     *This fails - for some reason it doesn't recognize the **product** table!*
 
+    *We can wait for this to be fixed, or just cut this section (it's nice to show the end-to-end; but at this point we've covered the core "lakehouse" stuff)*
+
     ---
 
 3. In the tabs at the bottom of the **Explorer** pane, select **Model**.
 
     ---
-    *When we get the model to refresh, we'll add steps here to create a relationship between the two tables.*
+    *If we get the model to refresh, we'll add steps here to create a relationship between the two tables.*
 
     ---
 
@@ -244,7 +246,7 @@ Creating and populating tables in a lakehouse automatically generated a default 
 4. In the toolbar, select **New report**.
 
     ---
-    *When the dataset refreshes, we'll add steps here to create a simple report.*
+    *If the dataset refreshes, we'll add steps here to create a simple report.*
 
     ---
 
