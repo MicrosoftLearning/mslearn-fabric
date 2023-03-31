@@ -101,7 +101,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
 13. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
-14. On the **Home** page, in the **Lake view** tab, select the **new_data** folder and verify that the **sales.csv** file has been copied.
+14. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
 
 ## Create a notebook
 
@@ -146,12 +146,17 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first cell can take a minute or so to complete.
 
-6. When the notebook run has completed, in the pane on the left, select the **Table view** tab and verify that a **sales** table has been created.
+6. When the notebook run has completed, in the **Explorer** pane on the left, in the **...** menu for **Tables** select **Refresh** and verify that a **sales** table has been created.
+
+    ---
+    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
+
+    ---
 
 7. Save the notebook as **Load Sales**.
 
 8. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-9. Select the **Table view** tab, and select the **sales** table to see a preview of the data it contains.
+9. In the **Lakehouse explorer** pane, refresh the view. Then expand **Tables**, and select the **sales** table to see a preview of the data it contains.
 
 ## Modify the pipeline
 
@@ -202,6 +207,6 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     ![Screenshot of a pipeline with a Dataflow activity.](./Images/pipeline-run.png)
 
 9. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-10. Select the **Table view** tab, and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
+10. Refresh the **Lakehouse explorer** pane, and then expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
 
 In this exercise, you implemented a data ingestion solution that uses a pipeline to copy data to your lakehouse from an external source, and then uses a Spark notebook to transform the data and load it into a table.
