@@ -13,7 +13,7 @@ lab:
 
 Large-scale data analytics solutions have traditionally been built around a *data warehouse*, in which data is stored in relational tables and queried using SQL. The growth in "big data" (characterized by high *volumes*, *variety*, and *velocity* of new data assets) together with the availability of low-cost storage and cloud-scale distributed compute technologies has led to an alternative approach to analytical data storage; the *data lake*. In a data lake, data is stored as files without imposing a fixed schema for storage. Increasingly, data engineers and analysts seek to benefit from the best features of both of these approaches by combining them in a *data lakehouse*; in which data is stored in files in a data lake and a relational schema is applied to them as a metadata layer so that they can be queried using traditional SQL semantics.
 
-In Microsoft Fabric, a lakehouse is an artifact in a workspace that provides highly scalable file storage in a *OneLake* storage service with a relational metastore based on Apache Spark *Delta Lake* technology. Delta Lake enables you to "overlay" file data with a relational schema of tables that support transactional semantics and other capabilities commonly found in a traditional relational data warehouse.
+In Microsoft Fabric, a lakehouse is an item in a workspace that provides highly scalable file storage in a *OneLake* storage service with a relational metastore based on Apache Spark *Delta Lake* technology. Delta Lake enables you to "overlay" file data with a relational schema of tables that support transactional semantics and other capabilities commonly found in a traditional relational data warehouse.
 
 This lab will take approximately **45** minutes to complete.
 
@@ -192,11 +192,11 @@ When you need to regularly copy data from an external source into the lakehouse,
 When you create a lakehouse and define tables in it, a default warehouse is automatically created to provide a SQL endpoint through which the tables can be queried using SQL `SELECT` statements.
 
 ---
-*Currently, the read-only SQL endpoint for the lakehouse is called the "default warehouse". However, this will change to "SQL Endpoint" to avoid confusion with the "Data Warehouse" artifact type, which will be a fully transactional relational data warehouse. At that point, we'll need to update this section.*
+*Currently, the read-only SQL endpoint for the lakehouse is called the "default warehouse". However, this will change to "SQL Endpoint" to avoid confusion with the "Data Warehouse" item type, which will be a fully transactional relational data warehouse. At that point, we'll need to update this section.*
 
 ---
 
-1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains:
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains:
 
     ![Screenshot of the workspace page.](./Images/workspace.png)
 
@@ -227,7 +227,7 @@ When you create a lakehouse and define tables in it, a default warehouse is auto
 
 As you saw previously, creating and populating tables in a lakehouse automatically generated a default *dataset* that you can use as the basis for a Power BI data visualization.
 
-1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains.
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 
 2. Select the default dataset for your lakehouse. This opens the dataset as shown here:
 
@@ -246,6 +246,6 @@ In this exercise, you have created a lakehouse and imported data into it. You've
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
-1. In the bar on the left, select the icon for your workspace to view all of the artifacts it contains.
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
 3. In the **Other** section, select **Delete this workspace**.
