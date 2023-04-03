@@ -76,54 +76,14 @@ One of the simplest ways to ingest small amounts of data into the lakehouse is t
 
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
-1. On the **Home** page while viewing the contents of the **orders.csv** file in your datalake, in the **Open notebook** menu, select **New notebook**.
-
-    After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
-
-2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the pane on the left, select the **Files** list to reveal a new pane showing the **orders.csv** file you uploaded previously. Then, in the **...** menu for **orders.csv**, select **Load data** > **Spark**. 
-
-    ![Screenshot of a notebook with a Files pane.](./Images/notebook-file.png)
-
-4. A new code cell containing the following code should be added to the notebook:
-
-    ```python
-    df = spark.read.format("csv").option("header","true").load("Files/orders.csv")
-    # df now is a Spark DataFrame containing CSV data from "Files/orders.csv".
-    display(df)
-    ```
-
-    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
-
-5. Use the **&#9655; Run cell** button on the left of the cell to run it.
-
-    > **Note**: Since this is the first time you've run any Spark code in this session, a Spark session must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
-
-6. When the cell command has completed, review the output below the cell, which should look similar to this:
-
-    |SalesOrderID|OrderDate|CustomerID|LineItem|ProductID|OrderQty|LineItemTotal|
-    |---|---|---|---|---|---|---|
-    |71774|2022-06-01|29847|1|836|1|356.9|
-    |71774|2022-06-01|29847|2|822|1|356.9|
-    |71776|2022-06-01|30072|1|907|1|63.9|
-    |71780|2022-06-01|30113|1|905|4|873.82|
-    |71780|2022-06-01|30113|2|983|2|923.39|
-    |...|...|...|...|...|...|...|
-
-7. Under the output, use the **+ Code** button to add a new code cell to the notebook if an empty one does not already exist. Then add the following code to the new cell:
-
-    ```Python
-    # Create a new table
-    df.write.format("delta").saveAsTable("salesorders")
-    ```
-
-8. Run the new code cell and wait for it to complete.
-9. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-10. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** folder and select the **salesorders** table that has been created for the table data.
+1. On the **Home** page, select the **Files** folder so you can see the **orders.csv** file it contains.
+2. In the **...** menu for the **orders.csv** file select **Load to Delta table**.
+3. In **Load to table** dialog box, set the table name to **salesorders** and confirm the load operation. Then wait for the table to be created and loaded.
+3. In the **Lakehouse explorer** pane, select the **salesorders** table that has been created for the table data.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
 
-11. In the **...** menu for the **salesorders** table, select **View table files** to see the underlying files for this table
+4. In the **...** menu for the **salesorders** table, select **View table files** to see the underlying files for this table
 
     ![Screenshot of a table preview.](./Images/delta-table-files.png)
 
@@ -182,9 +142,6 @@ When you need to regularly copy data from an external source into the lakehouse,
 
 12. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
 13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** to see the **product** table created by the pipeline.
-
-    > **Tip**: If a folder named **Unrecognized** is shown, wait a few seconds and refresh again.
-
 14. Select the **product** table to see a preview of its data.
 
     ![Screenshot of the product table.](./Images/product-table.png)
@@ -193,18 +150,13 @@ When you need to regularly copy data from an external source into the lakehouse,
 
 When you create a lakehouse and define tables in it, a SQL endpoint is automatically created through which the tables can be queried using SQL `SELECT` statements.
 
----
-*Currently, the read-only SQL endpoint for the lakehouse is called the "default warehouse". However, this will change to "SQL Endpoint" to avoid confusion with the "Data Warehouse" item type, which will be a fully transactional relational data warehouse. At that point, we'll need to update this section.*
+1. At the top-right of the Lakehouse page, switch from **Lake mode** to **SQL endpoint** as shown here:
 
----
-
-1. At the top-right of the Lakehouse page, switch from **Lake mode** to **Warehouse mode** as shown here:
-
-    ![Screenshot of the workspace page.](./Images/workspace.png)
+    ![Screenshot of the SQL endpoint option.](./Images/sql-endpoint.png)
 
 2. Wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
 
-    ![Screenshot of the warehouse page.](./Images/warehouse.png)
+    ![Screenshot of the SQL endpoint page.](./Images/warehouse.png)
 
 3. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
