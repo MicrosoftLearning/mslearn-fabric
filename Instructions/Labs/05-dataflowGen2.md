@@ -1,16 +1,17 @@
 ---
 lab:
-    title: 'Create a dataflow'
-    module: 'Prepare data for tabular models in Power BI'
+    title: 'Create and use Dataflows (Gen2) in Microsoft Fabric'
+    module: 'Use Dataflows (Gen2) in Microsoft Fabric'
 ---
 
-# Create a dataflow
 
-## Overview
+# Create a Dataflow (Gen2) in Microsoft Fabric
 
-**The estimated time to complete the lab is 45 minutes**
+In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines or Power BI report development to increase code structure and data consistency.
 
-In this lab, you will create a dataflow to deliver date dimension data sourced from the Azure Synapse Adventure Works data warehouse. The dataflow will provide a consistent definition of date-related data for use by the organization's business analysts.
+**The estimated time to complete the lab is 30 minutes**
+
+In this lab, you will create a Dataflow (Gen2) to connect to multiple data sources, transform the data, and curate a homogenized dataset for the business to consume.
 
 In this lab, you learn how to:
 
@@ -18,186 +19,33 @@ In this lab, you learn how to:
 
 - Use Power BI Desktop to consume a dataflow.
 
-## Get started
+## Before you start
 
-In this exercise, you will prepare your environment.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
 
-### Load data into Azure Synapse Analytics
+## Create a workspace
 
-   > **Note**: If you have already loaded data into Azure Synapse Analytics using a git clone, you can skip this task and proceed to **Set up Power BI.**
+Before working with data in Fabric, you will need a Premium capacity workspace.
 
-1. Sign into the [Azure portal](https://portal.azure.com) using the login information located on the Resources tab on the right side of the VM.
-2. Use the **[\>_]** button to the right of the search bar at the top of the page to create a new Cloud Shell in the Azure portal, selecting a ***PowerShell*** environment and creating storage if prompted. The cloud shell provides a command line interface in a pane at the bottom of the Azure portal, as shown here:
+1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+1. When your new workspace opens, it should be empty, as shown here:
 
-    ![Azure portal with a cloud shell pane](../images/cloud-shell.png)
+    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-    > **Note**: If you have previously created a cloud shell that uses a *Bash* environment, use the the drop-down menu at the top left of the cloud shell pane to change it to ***PowerShell***.
+### Download data
 
-3. Note that you can resize the cloud shell by dragging the separator bar at the top of the pane, or by using the **&#8212;**, **&#9723;**, and **X** icons at the top right of the pane to minimize, maximize, and close the pane. For more information about using the Azure Cloud Shell, see the [Azure Cloud Shell documentation](https://docs.microsoft.com/azure/cloud-shell/overview).
-
-4. In the PowerShell pane, enter the following command to clone this repo:
-
-    ```
-    rm -r dp500 -f
-    git clone https://github.com/MicrosoftLearning/DP-500-Azure-Data-Analyst dp500
-    ```
-
-5. After the repo has been cloned, enter the following commands to change to the **setup** folder and run the **setup.ps1** script it contains:
-
-    ```
-    cd dp500/Allfiles/04
-    ./setup.ps1
-    ```
-
-6. When prompted, enter a suitable password to be set for your Azure Synapse SQL pool.
-
-    > **Note**: Be sure to remember this password!
-
-7. Wait for the script to complete - this typically takes around 20 minutes; but in some cases may take longer.
-
-1. After creating the Synapse workspace and SQL Pool and loading the data, the script pauses the pool to prevent unnecessary Azure charges. When you're ready to work with your data in Azure Synapse Analytics, you'll need to resume the SQL Pool.
-
-### Clone the repository for this course
-
-1. On the start menu, open the Command Prompt
-
-    ![](../images/command-prompt.png)
-
-1. In the command prompt window, navigate to the D drive by typing:
-
-    `d:` 
-
-   Press enter.
-
-    ![](../images/command-prompt-2.png)
-
-
-1. In the command prompt window, enter the following command to download the course files and save them to a folder called DP500.
-    
-    `
-    git clone https://github.com/MicrosoftLearning/DP-500-Azure-Data-Analyst DP500
-    `
-   
-2. When the repository has been cloned, close the command prompt window. 
-   
-3. Open the D drive in the file explorer to ensure the files have been downloaded.
-
-### Set up Power BI Desktop
-
-In this task, you will set up Power BI Desktop.
-
-1. To open File Explorer, on the taskbar, select the **File Explorer** shortcut.
-
-	![](../images/dp500-create-a-dataflow-image1.png)
-
-1. Go to the **D:\DP500\Allfiles\05\Starter** folder.
-
-1. To open a pre-developed Power BI Desktop file, double-click the **Sales Analysis - Create a dataflow.pbix** file.
-
-1. If you're not already signed in, at the top-right corner of Power BI Desktop, select **Sign In**. Use the lab credentials to complete the sign in process.
-
-	![](../images/dp500-create-a-dataflow-image2.png)
-
-1. To save the file, on the **File** ribbon, select **Save as**.
-
-1. In the **Save As** window, go to the **D:\DP500\Allfiles\05\MySolution** folder.
-
-1. Go to Power BI Desktop and select **File** then **Options and settings** then **Options** then **Security** and under Authentication Browser check **Use my default web browser** and select **Save**.
-
-	*You will update the Power BI Desktop solution to use a dataflow to source date dimension data.*
-
-### Sign in to the Power BI service
-
-In this task, you will sign in to the Power BI service, start a trial license, and create a workspace.
-
-*Important: If you have already setup Power BI in your VM environment, continue to the next task.*
-
-1. In a web browser, go to [https://powerbi.com](https://powerbi.com/).
-
-1. Use the lab credentials to complete the sign in process.
-
-	*Important: You must use the same credentials used to sign in from Power BI Desktop.*
-
-1. At the top-right, select the profile icon, and then select **Start trial**.
-
-	![](../images/dp500-create-a-dataflow-image3.png)
-
-1. When prompted, select **Start trial**.
-
-	![](../images/dp500-create-a-dataflow-image4.png)
-
-1. Do any remaining tasks to complete the trial setup.
-
-	*Tip: The Power BI web browser experience is known as the **Power BI service**.*
-
-  
-
-### Create a workspace
-
-In this task, you will create a workspace.
-
-1. In the Power BI service, to create a workspace, in the **Navigation** pane (located at the left), select **Workspaces**, and then select **Create workspace**.
-
-	![](../images/dp500-create-a-dataflow-image5.png)
-
-
-1. In the **Create a workspace** pane (located at the right), in the **Workspace name** box, enter a name for the workspace.
-
-	*The workspace name must be unique within the tenant.*
-
-	![](../images/dp500-create-a-dataflow-image6.png)
-
-1. Select **Save**.
-
-	![](../images/dp500-create-a-dataflow-image7.png)
-
-	*Once created, the workspace is opened. In a later exercise, you will create a dataflow for this workspace.*
-
-### Start the SQL pool
-
-In this task, you will start the SQL pool.
-
-1. In a web browser, go to [https://portal.azure.com](https://portal.azure.com/).
-
-1. Use the lab credentials to complete the sign in process.
-
-1. Use the search bar to locate Azure Synapse Analytics. 
-
-1. Select the Azure Synapse Analytics instance.
-    ![](../images/synapse-instance.png)
-
-1. Locate and select the dedicated SQL pool.
-    ![](../images/dedicated-sql-pool.png)
-
-1. Resume the dedicated SQL pool.
-
-	![](../images/resume-sql-pool.png)
-
-	*Important: The SQL pool is a costly resource. Please limit the use of this resource when working on this lab. The final task in this lab will instruct you to pause the resource.*
+1. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
+1. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
 
 ## Develop a dataflow
 
 In this exercise, you will develop a dataflow to support Power BI model development. It will provide a consistent representation of the data warehouse date dimension table.
 
-### Review the data model
-
-In this task, you will review the data model developed in Power BI Desktop.
-
-1. Switch to the Power BI Desktop solution.
-
-1. At the left, switch to **Model** view.
-
-	![](../images/dp500-create-a-dataflow-image8.png)
-
-1. In the model diagram, notice the **Date** table.
-
-	![](../images/dp500-create-a-dataflow-image9.png)
-
-	*The **Date** table was created by the business analyst. It doesn't represent a consistent definition of date-related data, and it does not include helpful offset columns to support relative date filters. In a later exercise, you will replace this table with a new table sourced from a dataflow.*
-
 ### Create a dataflow
 
-In this task, you will create a dataflow that represents a consistent definition of date-related data.
+In this task, you will create a dataflow << finish thought >>.
 
 1. In the Power BI service, select **New**, **Dataflow**.
 
