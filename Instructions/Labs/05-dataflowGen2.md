@@ -72,7 +72,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 	![Screenshot of a data destination configuration page.](./Images/dataflow-connection.png)
 
-7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table names **sales**:
+7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **sales**:
 
 	![Screenshot of a data destination configuration page.](./Images/data-destination-target.png)
 
