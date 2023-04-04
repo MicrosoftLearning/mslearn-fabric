@@ -48,7 +48,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 2. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
 	- **Link to file**: *Selected*
-	- **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
+	- **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv`
 	- **Connection**: Create new connection
 	- **data gateway**: (none)
 	- **Authentication kind**: Anonymous
@@ -72,11 +72,11 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 	![Screenshot of a data destination configuration page.](./Images/dataflow-connection.png)
 
-7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **sales**:
+7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
 
 	![Screenshot of a data destination configuration page.](./Images/data-destination-target.png)
 
-8. on the **Destination settings** page, select **Replace**, and then save the settings.
+8. on the **Destination settings** page, select **Append**, and then save the settings.
 
 	![Screenshot of the data destination settings page.](./Images/destination-settings.png)
 
@@ -112,10 +112,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 6. In the menu bar on the left edge, select the page for your workspace. Then in the list of items in your workspace, select your lakehouse.
 7. In the **...** menu for **Tables**, select **refresh**. Then expand **Tables** and select the **sales** table, which has been created by your dataflow.
 
----
-*Aaaand, it fails to load! Seems like it corrupts the data somewhere along the way. Querying the table in Spark gives a decompression error, so it looks like the dataflow has generated invalid Parquet. It worked previously with a simpler dataset and no custom column transformation, so we should be able to simplify things to get a working exercise - but I don't see why this shouldn't work!*
-
----
+	![Screenshot of a table loaded by a dataflow.](./Images/loaded-table.png)
 
 ## Clean up resources
 
