@@ -296,7 +296,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 ### Save data in partitioned files
 
-1. Add a new cell with the following code; which saves the dataframe, partitioning the data by **year** and **Month**:
+1. Add a new cell with the following code; which saves the dataframe, partitioning the data by **Year** and **Month**:
 
     ```python
     orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
