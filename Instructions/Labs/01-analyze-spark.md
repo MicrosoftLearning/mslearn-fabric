@@ -594,3 +594,13 @@ Now that you've finished working with the data, you can save the notebook with a
 1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Explore Sales Orders**, and then close the settings pane.
 3. On the notebook menu, select **Stop session** to end the Spark session.
+
+## Clean up resources
+
+In this exercise, you've learned how to work with delta tables in Microsoft Fabric.
+
+If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Delete this workspace**.
