@@ -7,11 +7,11 @@ lab:
 
 # Create a Dataflow (Gen2) in Microsoft Fabric
 
-In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines or Power BI report development to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
+In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview. 
 
 ## Create a workspace
 
@@ -65,9 +65,31 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 	![Screenshot of a query with a custom column step.](./Images/custom-column-added.png)
 
-	You can use the Power Query editor to create additional data transformations until you have all the steps you need to generate the desired data structure. For this exercise, we'll assume we only need to add the **MonthNo** column, and go ahead and define a destination into which to load the transformed data.
+1. Now we will bring in another .csv file with disparate formatting. 
 
-5. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
+1. Repeat the same Get Data > Import from file/csv process to connect to the following URL:
+     `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders-2.csv`
+
+>[!NOTE] Once you load the data, you can see that there's an extra column **Warehouse ID** that isn't in the first file.
+>
+> Our goal is to combine these two files, but you can see when you load the data that there's an extra column **Warehouse ID** and the **MonthNo** column you created is missing.
+
+1. Make sure you are viewing the first **orders** query. Then from the Home ribbon, expand the **Combine** section, then choose **Append queries**. *Depending on your screen resolution, it may be in Combine or separate.*
+
+1. Leave the default **Two tables** selected, and select the **orders-2** table to append.
+
+1. Once appended, you will see both **MonthNo** and **Warehouse ID** columns have some *null* values. *In this scenario, we won't keep any null records to simulate data cleansing.*
+
+1. Select the down arrow next to **Warehouse ID** and filter out the (null) values. Uncheck the box, leaving all non-null values. *It's okay if your list is incomplete in this preview stage, since we only want to remove nulls.*
+
+1. We want to update **MonthNo** column to properly apply across all rows. An easy way to apply this column across all of the data in this combined query is to simply **move the custom column step at the end** in the Query Settings > Applied steps pane.
+
+1. Either drag and drop the **Added custom column** step or right-click and **Move after** until it's the last step.
+
+## Add data destination for Dataflow
+
+1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
+
 6. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow will use to access the lakehouse.
 
 	![Screenshot of a data destination configuration page.](./Images/dataflow-connection.png)
@@ -76,9 +98,19 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 	![Screenshot of a data destination configuration page.](./Images/data-destination-target.png)
 
-8. on the **Destination settings** page, select **Append**, and then save the settings.
+8. On the **Destination settings** page, notice how OrderDate and MonthNo are not selected in the Column mapping and there is an informational message: *Change to date/time*.
+
 
 	![Screenshot of the data destination settings page.](./Images/destination-settings.png)
+
+1. Cancel this action, then go back OrderDate and MonthNo columns. Right-click on the column header and Change Type. 
+
+        OrderDate = Date/Time
+        MonthNo = Whole number
+
+1. Now repeat the process outlined earlier to add a lakehouse destination.
+
+8. On the **Destination settings** page, select **Append**, and then save the settings.
 
 	The **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
 
@@ -114,10 +146,24 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
 	![Screenshot of a table loaded by a dataflow.](./Images/loaded-table.png)
 
+## Use Dataflow Gen2 with Power BI
+
+You've created a Dataflow Gen2 to load data into a lakehouse and include in a pipeline. The transformations happen upstream with the dataflow, so Power BI Data Analysts connecting to the dataflow as a dataset will spend less time on data preparation and will have consistent data integrity.
+
+1. Open Power BI Desktop.
+1. From the Home ribbon, select **Get Data** and choose **Dataflows** connector.
+1. Navigate to the workspace, then dataflow, and select the queries you'd like to load.
+1. **Load** will bring you back to the canvas view; **Transform Data** will open Power Query Editor.
+1. Now you're ready to extend your data model with DAX calculations and create visualizations.
+
+>[!TIP] If you wanted to customize this core dataset, you could make specialized transformations, and then publish this dataset, and distribute with intended audience.  
+
 ## Clean up resources
 
 If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
 
+1. Navigate to Microsoft Fabric in your browser.
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Delete this workspace**.
+1. In the **...** menu on the toolbar, select **Workspace settings**.
+1. In the **Other** section, select **Delete this workspace**.
+1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
