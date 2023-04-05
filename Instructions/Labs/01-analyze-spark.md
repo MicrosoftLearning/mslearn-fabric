@@ -597,7 +597,7 @@ Now that you've finished working with the data, you can save the notebook with a
 
 ## Clean up resources
 
-In this exercise, you've learned how to work with delta tables in Microsoft Fabric.
+In this exercise, you've learned how to use Spark to work with data in Microsoft Fabric.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 

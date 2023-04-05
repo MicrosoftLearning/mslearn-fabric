@@ -213,7 +213,7 @@ In this exercise, you implemented a data ingestion solution that uses a pipeline
 
 ## Clean up resources
 
-In this exercise, you've learned how to work with delta tables in Microsoft Fabric.
+In this exercise, you've learned how to implement a pipeline in Microsoft Fabric.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
