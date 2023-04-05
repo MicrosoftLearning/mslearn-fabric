@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Use Delta Lake tables'
+    title: 'Use delta tables in Apache Spark'
     module: 'Use Apache Spark in Microsoft Fabric'
 ---
 
@@ -9,9 +9,9 @@ lab:
 
 ---
 
-# Use Delta Lake tables
+# Use delta tables in Apache Spark
 
-Delta Lake is an open source project to build a transactional data storage layer on top of a data lake. Delta Lake adds support for relational semantics for both batch and streaming data operations, and enables the creation of a *Lakehouse* architecture in which Apache Spark can be used to process and query data in tables that are based on underlying files in the data lake.
+Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* technology for Apache Spark Delta Lake adds support for relational semantics for both batch and streaming data operations, and enables the creation of a Lakehouse architecture in which Apache Spark can be used to process and query data in tables that are based on underlying files in a data lake.
 
 This exercise should take approximately **40** minutes to complete
 
@@ -44,7 +44,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 3. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
 
-4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehise explorer** pane, select **New subfolder** and create a folder named **products**.
+4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **New subfolder** and create a folder named **products**.
 
 5. In the **...** menu for the **products** folder, select **Upload** and **Upload files**, and then upload the **products.csv** file from your local computer to the lakehouse.
 6. After the file has been uploaded, select the **products** folder; and verify that the **products.csv** file has been uploaded, as shown here:
@@ -85,197 +85,176 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
     | 3 | 773 | Mountain-100 Silver, 44 | Mountain Bikes | 3399.9900 |
     | ... | ... | ... | ... | ... |
 
-## Save the data in delta format
+## Create delta tables
 
-Delta lake uses the *delta* file format to save data. The delta format is based on *Parquet*, with additional files used to record transactional metadata.
+You can save the dataframe as a delta table by using the `saveAsTable` method. Delta Lake supports the creation of both *managed* and *external* tables.
 
-1. Under the results returned by the first code cell, use the **+ Code** button to add a new code cell. Then enter the following code in the new cell and run it:
+### Create a *managed* table
 
-    ```Python
-    delta_table_path = "Files/products-delta/"
-    df.write.format("delta").save(delta_table_path)
+1. Under the results returned by the first code cell, use the **+ Code** button to add a new code cell if one doesn't already exist. Then enter the following code in the new cell and run it:
+
+    ```python
+    df.write.format("delta").saveAsTable("managed_products")
     ```
 
-2. In the **Explorer** pane on the left, in the **...** menu for **Files**, select **Refresh** and note that a new folder named **products-delta** has been created. Select this folder to see the parquet format file(s) containing the data and the **_delta_log** folder containing transactional metadata.
-
-3. In the notebook, add another new code cell. Then, in the new cell, add the following code and run it:
-
-    ```Python
-    from delta.tables import *
-    from pyspark.sql.functions import *
-
-    # Create a deltaTable object
-    deltaTable = DeltaTable.forPath(spark, delta_table_path)
-
-    # Update the table (reduce price of product 771 by 10%)
-    deltaTable.update(
-        condition = "ProductID == 771",
-        set = { "ListPrice": "ListPrice * 0.9" })
-
-    # View the updated data as a dataframe
-    display(deltaTable.toDF())
-    ```
-
-    The data is loaded from the delta format files into a **DeltaTable** object and updated. You can see the update reflected in the query results.
-
-4. Add another new code cell with the following code and run it:
-
-    ```Python
-    new_df = spark.read.format("delta").load(delta_table_path)
-    display(new_df)
-    ```
-
-    The code loads the delta table data into a data frame from its location in the data lake, verifying that the change you made via a **DeltaTable** object has been persisted.
-
-5. Modify the code you just ran as follows, specifying the option to use the *time travel* feature of delta lake to view a previous version of the data.
-
-    ```Python
-    new_df = spark.read.format("delta").option("versionAsOf", 0).load(delta_table_path)
-    display(new_df)
-    ```
-
-    When you run the modified code, the results show the original version of the data.
-
-6. Add another new code cell with the following code and run it:
-
-    ```Python
-    deltaTable.history(10).show(20, False, True)
-    ```
-
-    The history of the last 20 changes to the table is shown - there should be two (the original creation, and the update you made.)
-
-## Create catalog tables
-
-So far you've worked with delta lake by loading data from the folder containing the delta format files on which the table is based. You can define *catalog tables* that encapsulate the data and provide a named table entity that you can reference in SQL code. Spark supports two kinds of catalog tables for delta lake:
-
-- *External* tables that store data in a file location that you specify. The metadata for the table is managed separately from the files (so dropping the table does not delete the files).
-- *Managed* tables that store data in the file location for the Hive metastore used by the Spark pool. The metadata for the table is tightly-coupled to the data files (so dropping the table deletes the files).
-
-### Create an external table
-
-1. In a new code cell, add and run the following code:
-
-    ```Python
-    spark.sql("CREATE TABLE ProductsExternal USING DELTA LOCATION '{0}'".format(delta_table_path))
-    spark.sql("DESCRIBE EXTENDED ProductsExternal").show(truncate=False)
-    ```
-
-    This code creates an external tabled named **ProductsExternal** based on the path to the delta files you defined previously. It then displays a description of the table's properties. Note that the **Location** property is the path you specified.
-
-2. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **ProductsExternal** table has been created.
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **managed_products** table has been created.
 
     ---
     *If refreshing the Tables folder doesn't work, refresh the entire web page!*
 
     ---
 
-3. Add a new code cell, and then enter and run the following code:
+### Create an *external* table
 
-    ```sql
-    %%sql
+1. Add another new code cell, and use it to run the following code:
 
-    SELECT * FROM ProductsExternal;
+    ```python
+    df.write.format("delta").saveAsTable("external_products", path="Files/external_products")
     ```
 
-    The code queries the **ProductsExternal** table, which returns a resultset containing the products data in the Delta Lake table.
-
-### Create a managed table
-
-1. In a new code cell, add and run the following code:
-
-    ```Python
-    df.write.format("delta").saveAsTable("ProductsManaged")
-    spark.sql("DESCRIBE EXTENDED ProductsManaged").show(truncate=False)
-    ```
-
-    This code creates a managed tabled named **ProductsManaged** based on the DataFrame you originally loaded from the **products.csv** file (before you updated the price of product 771). You do not specify a path for the parquet files used by the table - this is managed for you in the Hive metastore.
-
-2. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **ProductsManaged** table has been created.
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
 
     ---
     *If refreshing the Tables folder doesn't work, refresh the entire web page!*
 
     ---
 
-3. Add a new code cell, and then enter and run the following code:
+### Compare *managed* and *external* tables
+
+1. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that a folder named **external_products** has been created. Select this folder to view the Parquet data files and **_delta_log** folder for the **external_products** table.
+
+2. Add another code cell and run the following code:
 
     ```sql
     %%sql
 
-    SELECT * FROM ProductsManaged;
+    DESCRIBE FORMATTED extended_products;
     ```
 
-    The code uses SQL to query the **ProductsManaged** table.
+    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path). Note also in the **Table properties** that the table type is **EXTERNAL**.
 
-### Compare external and managed tables
-
-1. In a new code cell, add and run the following code:
+3. Modify the `DESCRIBE` command to show the details of the **managed_products** tables as shown here:
 
     ```sql
     %%sql
 
-    SHOW TABLES;
+    DESCRIBE FORMATTED managed_products;
     ```
 
-    This code lists the tables in the lakehouse database.
+    In the results, note that there is no **Location** property for the table. Note also in the **Table properties** that the table type is **MANAGED**.
 
-2. In the menu bar on the left edge, select **Browse**. Then select your lakehouse.
+    So where are the data files for the managed table?
 
-3. In the lakehouse page, in the **Lakehouse explorer** pane, expand **Files** and select the **product-delta** folder to view the files it contains.
+4. Add another code cell and run the following code:
 
-4. In the in the **Lakehouse explorer** pane, expand **Tables** and in the **...** menu for the **productsexternal** table, select **View data files**. These are the files in the  **Files/product-delta** folder.
+    ```python
+    from notebookutils import mssparkutils
 
-5. In the in the **Lakehouse explorer** pane, under **Tables**, in the **...** menu for the **productsmanaged** table, select **View data files**. These files are managed by the Spark metastore - they're not in the **Files** folder path.
+    objs = mssparkutils.fs.ls('Tables')
+    for obj in objs:
+        print(obj.name)
+    ```
 
-6. In the **Open notebook** menu, select **Existing notebook** and open the notebook you were previously working in (**Notebook 1**).
+    The files for managed table are stored in the **Tables** folder in the OneLake storage for the lakehouse. In this case, a folder named **managed_products** has been created to store the Parquet files and **delta_log** folder for the table you created.
 
-7. Add a new code cell to the notebook, add use it to run the following code:
+5. Add another code cell and run the following code:
 
     ```sql
     %%sql
 
-    DROP TABLE IF EXISTS ProductsExternal;
-    DROP TABLE IF EXISTS ProductsManaged;
+    DROP TABLE managed_products;
+    DROP TABLE external_products;
     ```
 
-    This code drops the tables from the metastore.
-
-8. In the **Explorer** pane, in the **...** menu for the **Tables** node, select **Refresh**; and verify that no tables are now listed.
+6. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
 
     ---
     *If refreshing the Tables folder doesn't work, refresh the entire web page!*
 
     ---
-9. Refresh the  **Files** node. Dropping the external table has removed the table from the metastore, but left the data files on which it was based intact.
 
-### Create a table using SQL
+7. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
 
-1. Add a new code cell, and then enter and run the following code:
+8. Re-run the cell that lists the contents of the **Tables** folder (shown below).
+
+    ```python
+    from notebookutils import mssparkutils
+
+    objs = mssparkutils.fs.ls('Tables')
+    for obj in objs:
+        print(obj.name)
+    ```
+
+    Verify that the **managed_products** folder is no longer listed - the folder for the managed table was deleted along with the table metadata.
+
+### Use SQL to create a table
+
+1. Add another code cell and run the following code:
 
     ```sql
     %%sql
 
-    CREATE TABLE Products
+    CREATE TABLE products
     USING DELTA
-    LOCATION 'Files/products-delta';
+    LOCATION 'Files/external_products';
     ```
 
-2. In the **Explorer** pane, in the **...** menu for the **Tables** node, select **Refresh**; and verify that the **Products** table is now listed.
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
 
     ---
     *If refreshing the Tables folder doesn't work, refresh the entire web page!*
 
     ---
 
-3. Add a new code cell, and then enter and run the following code:
+3. Add another code cell and run the following code:
 
     ```sql
     %%sql
 
-    SELECT * FROM Products;
+   SELECT * FROM products;
+   ```
+
+## Explore table versioning
+
+Transaction history for delta tables is stored in JSON files in the **delta_log** folder. You can use this transaction log to manage data versioning.
+
+1. Add a new code cell to the notebook and run the following code:
+
+    ```Python
+    %%sql
+
+    UPDATE products
+    SET ListPrice = ListPrice * 0.9
+    WHERE Category = 'Mountain Bikes';
     ```
 
-    Observe that the new catalog table was created for the existing Delta Lake table folder, which reflects the changes that were made previously.
+    This code implements a 10% reduction in the price for mountain bikes.
+
+2. Add another code cell and run the following code:
+
+    ```sql
+    %%sql
+
+    DESCRIBE HISTORY products;
+    ```
+
+    The results show the history of transactions recorded for the table.
+
+3. Add another code cell and run the following code:
+
+    ```python
+    delta_table_path = 'Files/external_products'
+
+    # Get the current data
+    current_data = spark.read.format("delta").load(delta_table_path)
+    display(current_data)
+
+    # Get the version 0 data
+    original_data = spark.read.format("delta").option("versionAsOf", 0).load(delta_table_path)
+    display(original_data)
+    ```
+
+    The results show two dataframes - one containing the data after the price reduction, and the other showing the original version of the data.
 
 ## Use delta tables for streaming data
 
@@ -391,4 +370,12 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code stops the stream.
 
-In this exercise, you've learned how to work with Delta Lake by creating delta format data files and catalog tables.
+## Clean up resources
+
+In this exercise, you've learned how to work with delta tables in Microsoft Fabric.
+
+If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Delete this workspace**.
