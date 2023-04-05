@@ -7,387 +7,163 @@ lab:
 
 # Create a Dataflow (Gen2) in Microsoft Fabric
 
-In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines or Power BI report development to increase code structure and data consistency.
-
-**The estimated time to complete the lab is 30 minutes**
-
-In this lab, you will create a Dataflow (Gen2) to connect to multiple data sources, transform the data, and curate a homogenized dataset for the business to consume.
-
-In this lab, you learn how to:
-
-- Use Power Query Online to develop a dataflow.
-
-- Use Power BI Desktop to consume a dataflow.
+In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview. 
 
 ## Create a workspace
 
-Before working with data in Fabric, you will need a Premium capacity workspace.
+Before working with data in Microsoft Fabric, you should create a workspace with support for premium features.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
-1. When your new workspace opens, it should be empty, as shown here:
+2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-### Download data
+## Create a lakehouse
 
-1. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
-1. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
+Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse into which you will ingest data.
 
-## Develop a dataflow
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
 
-In this exercise, you will develop a dataflow to support Power BI model development. It will provide a consistent representation of the data warehouse date dimension table.
+    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
 
-### Create a dataflow
+2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
-In this task, you will create a dataflow << finish thought >>.
+    After a minute or so, a new empty lakehouse will be created.
 
-1. In the Power BI service, select **New**, **Dataflow**.
+	![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-	![](../images/dp500-create-a-dataflow-image10.png)
+## Create a dataflow to ingest data
 
-1. To create a dataflow, select the **Dataflows** tile.
+Now that you have a lakehouse, you need to ingest some data into it. One way to do this is to define a dataflow that encapsulates an *extract, transform, and load* (ETL) process.
 
-	![](../images/dp500-create-a-dataflow-image11.png)
+1. In the home page for your lakehouse, select **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
 
-1. In the **Define new tables** tile, select **Add new tables**.
+	![Screenshot of a new dataflow.](./Images/new-dataflow.png)
 
-	![](../images/dp500-create-a-dataflow-image12.png)
+2. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
+	- **Link to file**: *Selected*
+	- **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv`
+	- **Connection**: Create new connection
+	- **data gateway**: (none)
+	- **Authentication kind**: Anonymous
 
-	*Adding new tables involves using Power Query Online to define queries.*
+3. Select **Next** to preview the file data, and then create the data source. The Power Query editor will show the data source and an initial set of query steps to format the data, as shown here:
 
-1. To choose a data source, select **Azure Synapse Analytics (SQL DW)**.
+	![Screenshot of a query in the Power Query editor.](./Images/power-query.png)
 
-	![](../images/dp500-create-a-dataflow-image13.png)
+4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a whole number based on the formula `Date.Month([OrderDate])` - as shown here:
 
-	*Tip: You can use the Search box (located at the top-right) to help find the data source.*
+	![Screenshot of a custom column in Power Query editor.](./Images/custom-column.png)
 
-1. Enter the Synapse Connection settings.
+	The step to add the custom column is added to the query and the resulting column is displayed in the data pane:
 
-     - Enter the Server name from the Azure Portal
-     
-     ![](../images/synapse-sql-pool-connection-string.png)
-     
-      The Server name should look similar to:
-      
-      synapsewsxxxxx.sql.azuresynapse.net
-      
-     - Ensure the Authentication kind is **Organizational account**. If you are prompted to sign in, use the lab provided credentials.
-     ![](../images/synapse-sql-pool-sign-in.png)
+	![Screenshot of a query with a custom column step.](./Images/custom-column-added.png)
 
-1. At the bottom-right, select **Next**.
+1. Now we will bring in another .csv file with disparate formatting. 
 
-	![](../images/dp500-create-a-dataflow-image14.png)
+1. Repeat the same Get Data > Import from file/csv process to connect to the following URL:
+     `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders-2.csv`
 
-1. In the Power Query navigation pane, expand the sqldw and select (do not check) the **DimDate** table.
+>[!NOTE] Once you load the data, you can see that there's an extra column **Warehouse ID** that isn't in the first file.
+>
+> Our goal is to combine these two files, but you can see when you load the data that there's an extra column **Warehouse ID** and the **MonthNo** column you created is missing.
 
-	![](../images/dp500-create-a-dataflow-image15.png)
+1. Make sure you are viewing the first **orders** query. Then from the Home ribbon, expand the **Combine** section, then choose **Append queries**. *Depending on your screen resolution, it may be in Combine or separate.*
 
-1. Notice the preview of table data.
+1. Leave the default **Two tables** selected, and select the **orders-2** table to append.
 
-1. To create a query, check the **DimDate** table.
+1. Once appended, you will see both **MonthNo** and **Warehouse ID** columns have some *null* values. *In this scenario, we won't keep any null records to simulate data cleansing.*
 
-	![](../images/dp500-create-a-dataflow-image16.png)
+1. Select the down arrow next to **Warehouse ID** and filter out the (null) values. Uncheck the box, leaving all non-null values. *It's okay if your list is incomplete in this preview stage, since we only want to remove nulls.*
 
-1. At the bottom-right, select **Transform data**.
+1. We want to update **MonthNo** column to properly apply across all rows. An easy way to apply this column across all of the data in this combined query is to simply **move the custom column step at the end** in the Query Settings > Applied steps pane.
 
-	![](../images/dp500-create-a-dataflow-image17.png)
+1. Either drag and drop the **Added custom column** step or right-click and **Move after** until it's the last step.
 
-	*Power Query Online will now be used to apply transformations to the table. It provides an almost-identical experience to the Power Query Editor in Power BI Desktop.*
+## Add data destination for Dataflow
 
-1. In the **Query Settings** pane (located at the right), to rename the query, in the **Name** box, replace the text with **Date**, and then press **Enter**.
+1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
 
-	![](../images/dp500-create-a-dataflow-image18.png)
+6. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow will use to access the lakehouse.
 
-1. To remove unnecessary columns, on the **Home** ribbon tab, from inside the **Manage Columns** group, select the **Choose Columns** icon.
+	![Screenshot of a data destination configuration page.](./Images/dataflow-connection.png)
 
-	![](../images/dp500-create-a-dataflow-image19.png)
+7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
 
-1. In the **Choose Columns** window, to uncheck all checkboxes, uncheck the first checkbox.
+	![Screenshot of a data destination configuration page.](./Images/data-destination-target.png)
 
-	![](../images/dp500-create-a-dataflow-image20.png)
+8. On the **Destination settings** page, notice how OrderDate and MonthNo are not selected in the Column mapping and there is an informational message: *Change to date/time*.
 
 
-1. Check the following five columns.
+	![Screenshot of the data destination settings page.](./Images/destination-settings.png)
 
-	- DateKey
+1. Cancel this action, then go back OrderDate and MonthNo columns. Right-click on the column header and Change Type. 
 
-	- FullDateAlternateKey
+        OrderDate = Date/Time
+        MonthNo = Whole number
 
-	- MonthNumberOfYear
+1. Now repeat the process outlined earlier to add a lakehouse destination.
 
-	- FiscalQuarter
+8. On the **Destination settings** page, select **Append**, and then save the settings.
 
-	- FiscalYear
+	The **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
 
-	![](../images/dp500-create-a-dataflow-image21.png)
+	![Screenshot of a query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
-1. Select **OK**.
+9. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
-	![](../images/dp500-create-a-dataflow-image22.png)
+## Add a dataflow to a pipeline
 
-  
-1. In the **Query Settings** pane, in the **Applied Steps** list, notice that a step was added to remove other columns.
+You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process.
 
-	![](../images/dp500-create-a-dataflow-image23.png)
+1. In the page for your workspace, on the **New** menu, select **Data pipeline**. Then, when prompted, create a new pipeline named **Load data**.
 
-	*Power Query defines steps to achieve the desired structure and data. Each transformation is a step in the query logic.*
+	The pipeline editor opens.
 
-1. To rename the **FullDateAlternateKey** column, double-click the **FullDateAlternateKey** column header.
+	![Screenshot of an empty data pipeline.](./Images/new-pipeline.png)
 
-1. Replace the text with **Date**, and then press **Enter**.
+	> **Tip**: If the Copy Data wizard opens automatically, close it!
 
-	![](../images/dp500-create-a-dataflow-image24.png)
+2. Select **Add pipeline activity**, and add a **Dataflow** activity to the pipeline.
 
-1. To add a calculated column, on the **Add Column** ribbon tab, from inside the **General** group, select **Custom Column**.
+3. With the new **Dataflow1** activity selected, on the **Settings** tab, in the **Dataflow** drop-down list, select **Dataflow 1** (the data flow you created previously)
 
-	![](../images/dp500-create-a-dataflow-image25.png)
+	![Screenshot of a pipeline with a dataflow activity.](./Images/dataflow-activity.png)
 
-   
+4. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline as **Ingest Sales Data**.
+5. Use the **&#9655; Run** button to run the pipeline, and wait for it to complete. It may take a few minutes.
 
-1. In the **Custom column** window, in the **New column name** box, replace the text with **Year**.
+	![Screenshot of a pipeline with a dataflow that has completed successfully.](./Images/dataflow-pipeline-succeeded.png)
 
-1. In the **Data type** dropdown list, select **Text**.
+6. In the menu bar on the left edge, select the page for your workspace. Then in the list of items in your workspace, select your lakehouse.
+7. In the **...** menu for **Tables**, select **refresh**. Then expand **Tables** and select the **sales** table, which has been created by your dataflow.
 
-	![](../images/dp500-create-a-dataflow-image26.png)
+	![Screenshot of a table loaded by a dataflow.](./Images/loaded-table.png)
 
-1. In the **Custom column formula** box, enter the following formula:
+## Use Dataflow Gen2 with Power BI
 
-	*Tip: All formulas are available to copy and paste from the **D:\DP500\Allfiles\05\Assets\Snippets.txt**.*
+You've created a Dataflow Gen2 to load data into a lakehouse and include in a pipeline. The transformations happen upstream with the dataflow, so Power BI Data Analysts connecting to the dataflow as a dataset will spend less time on data preparation and will have consistent data integrity.
 
+1. Open Power BI Desktop.
+1. From the Home ribbon, select **Get Data** and choose **Dataflows** connector.
+1. Navigate to the workspace, then dataflow, and select the queries you'd like to load.
+1. **Load** will bring you back to the canvas view; **Transform Data** will open Power Query Editor.
+1. Now you're ready to extend your data model with DAX calculations and create visualizations.
 
-	```
-	"FY" & Number.ToText([FiscalYear])
-	```
+>[!TIP] If you wanted to customize this core dataset, you could make specialized transformations, and then publish this dataset, and distribute with intended audience.  
 
+## Clean up resources
 
-1. Select **OK**.
+If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
 
-	*You will now add four more custom columns.*
-
-1. Add another custom column named **Quarter** with the **Text** data type, using the following formula:
-
-
-	```
-	[Year] & " Q" & Number.ToText([FiscalQuarter])
-	```
-
-
-1. Add another custom column named **Month** with the **Text** data type, using the following formula:
-
-
-	```
-	Date.ToText([Date], "yyyy-MM")
-	```
-
-1. Add another custom column named **Month Offset** (include a space between the words) with the **Whole number** data type, using the following formula:
-
-
-	```
-	((Date.Year([Date]) * 12) + Date.Month([Date])) - ((Date.Year(DateTime.LocalNow()) * 12) + Date.Month(DateTime.LocalNow()))
-	```
-
-
-	*This formula determines the number of months from the current month. The current month is zero, past months are negative, and future months are positive. For example, last month has a value of -1.*
-
-   
-
-1. Add another custom column named **Month Offset Filter** (include spaces between the words) with the **Text** data type, using the following formula:
-
-
-	```
-	if [Month Offset] > 0 then Number.ToText([Month Offset]) & " month(s) future"
-
-	else if [Month Offset] = 0 then "Current month"
-
-	else Number.ToText(-[Month Offset]) & " month(s) ago"
-	```
-
-
-	*This formula transposes the numeric offset to a friendly text format.*
-
-	*Tip: All formulas are available to copy and paste from the **D:\DP500\Allfiles\05\Assets\Snippets.txt**.*
-
-1. To remove unnecessary columns, on the **Home** ribbon tab, from inside the **Manage Columns** group, select the **Choose Columns** icon.
-
-	![](../images/dp500-create-a-dataflow-image27.png)
-
-1. In the **Choose Columns** window, to uncheck the following columns:
-
-	- MonthNumberOfYear
-
-	- FiscalQuarter
-
-	- FiscalYear
-
-	![](../images/dp500-create-a-dataflow-image28.png)
-
-1. Select **OK**.
-
-1. At the bottom-right, select **Save &amp; close**.
-
-	![](../images/dp500-create-a-dataflow-image29.png)
-
-1. In the **Save your dataflow** window, in the **Name** box, enter **Corporate Date**.
-
-1. In the **Description** box, enter: **Consistent date definition for use in all Adventure Works datasets**
-
-1. Tip: The description is available to copy and paste from the **D:\DP500\Allfiles\05\Assets\Snippets.txt**.
-
-	![](../images/dp500-create-a-dataflow-image30.png)
-
-1. Select **Save**.
-
-	![](../images/dp500-create-a-dataflow-image31.png)
-
-1. In the Power BI service, in the **Navigation** pane, select your workspace name.
-
-	*This action opens the landing page for the workspace.*
-
-1. To refresh the dataflow, hover the cursor over the **Corporate Date** dataflow, and then select the **Refresh now** icon.
-
-	![](../images/dp500-create-a-dataflow-image32.png)
-
-  
-
-1. To go to the dataflow settings, hover the cursor over the **Corporate Date** dataflow, select the ellipsis, and then select **Settings**.
-
-	![](../images/dp500-create-a-dataflow-image33.png)
-
-1. Notice the configuration options.
-
-	![](../images/dp500-create-a-dataflow-image34.png)
-
-	*There are two settings that should be configured. First, scheduled refresh should be configured to update the dataflow data every day. That way, the month offsets will be calculated using the current date. Second, the dataflow should be endorsed as certified (by an authorized reviewer). A certified dataflow declares to others that it meets quality standards and can be regarded as reliable and authoritative.*
-
-	*In addition to configuring settings, permission should be granted to all content creators to consume the dataflow.*
-
-## Consume a dataflow
-
-In this exercise, in the Power BI Desktop solution, you will replace the existing **Date** table with a new table that sources its data from the dataflow.
-
-### Remove the original Date table
-
-In this task, you will remove the original **Date** table.
-
-1. Switch to the Power BI Desktop solution.
-
-1. In the model diagram, right-click the **Date** table, and then select **Delete from model**.
-
-	![](../images/dp500-create-a-dataflow-image35.png)
-
-1. When prompted to delete the table, select **OK**.
-
-	![](../images/dp500-create-a-dataflow-image36.png)
-
-  
-
-
-### Add a new Date table
-
-In this task, you will add a new **Date** table that sources its data from the dataflow.
-
-1. On the **Home** ribbon, from inside the **Data** group, select the **Get data** icon.
-
-	![](../images/dp500-create-a-dataflow-image37.png)
-
-1. In the **Get Data** window, at the left, select **Power Platform**, and then select **Power BI dataflows**.
-
-	![](../images/dp500-create-a-dataflow-image38.png)
-
-1. Select **Connect**.
-
-	![](../images/dp500-create-a-dataflow-image39.png)
-
-  
-
-1. In the **Power BI dataflows** window, select **Sign in**.
-
-	![](../images/dp500-create-a-dataflow-image40.png)
-
-1. Use the lab credentials to complete the sign in process.
-
-	*Important: You must use the same credentials used to sign in to the Power BI service.*
-
-1. Select **Connect**.
-
-	![](../images/dp500-create-a-dataflow-image41.png)
-
-1. In the **Navigator** window, in the left pane, expand your workspace folder, and then expand the **Corporate Date** dataflow folder.
-
-	![](../images/dp500-create-a-dataflow-image42.png)
-
-
-1. Check the **Date** table.
-
-	![](../images/dp500-create-a-dataflow-image43.png)
-
-1. Select **Load**.
-
-	![](../images/dp500-create-a-dataflow-image44.png)
-
-	*It is possible to transform the data using the Power Query Editor.*
-
-1. When the new table is added to the model, create a relationship by dragging the **DateKey** column from the **Date** table to the **OrderDateKey** column of the **Sales** table.
-
-	![](../images/dp500-create-a-dataflow-image45.png)
-
-	*There are many other model configurations, like hiding columns or creating a hierarchy, that can be done.*
-
-### Validate the model
-
-In this task, you will test the model by creating a simple report layout.
-
-1. At the left, switch to **Report** view.
-
-	![](../images/dp500-create-a-dataflow-image46.png)
-
-1. To add a visual to the page, in the **Visualizations** pane, select the stack bar chart visual.
-
-	![](../images/dp500-create-a-dataflow-image47.png)
-
-1. Resize the visual to fill the report page.
-
-  
-
-1. In the **Fields** pane, expand the **Date** table, and then drag the **Month Offset Filter** field into the bar chart visual.
-
-	![](../images/dp500-create-a-dataflow-image48.png)
-
-1. In the **Fields** pane, expand the **Sales** table, and then drag the **Sales Amount** field into the bar chart visual.
-
-	![](../images/dp500-create-a-dataflow-image49.png)
-
-
-1. To sort the vertical axis, at the top-right of the visual, select the ellipsis, and then select **Sort axis** > **Month Offset Filter**.
-
-	![](../images/dp500-create-a-dataflow-image50.png)
-
-1. To ensure the month offset filter values sort chronologically, in the **Fields** pane, select the **Month Offset Filter** field.
-
-1. On the **Column Tools** ribbon tab, from inside the **Sort** group, select **Sort**, and then select **Month Offset**.
-
-	![](../images/dp500-create-a-dataflow-image51.png)
-
-1. Review the updated bar chart visual that now sorts chronologically.
-
-	*The main benefit of using date offset columns is that reports can filter by relative dates in a customized way. (Slicers and filters and also filter by relative date and time periods, but this behavior cannot be customized. They also don't allow filtering by quarters.)*
-
-1. Save the Power BI Desktop file.
-
-1. Close Power BI Desktop.
-
-### Pause the SQL pool
-
-In this task, you will stop the SQL pool.
-
-1. In a web browser, go to [https://portal.azure.com](https://portal.azure.com/).
-
-1. Locate the SQL pool.
-
-1. Pause the SQL pool.
+1. Navigate to Microsoft Fabric in your browser.
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+1. In the **...** menu on the toolbar, select **Workspace settings**.
+1. In the **Other** section, select **Delete this workspace**.
+1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
