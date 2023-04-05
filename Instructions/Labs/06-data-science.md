@@ -54,7 +54,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Data science** experience.
 
-1. In the **Data science** home page, create a new **Experiment** with a name of your choice.
+1. In the **Data science** home page, create a new **Experiment** and name it `experiment-churn`.
 1. When the experiment is created, select **Open notebook** to create a new notebook.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
@@ -192,7 +192,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 1. To retrieve a specific experiment, you can get it by its name:
 
     ```python
-    experiment_name = "mlflow-churn"
+    experiment_name = "experiment-churn"
     exp = mlflow.get_experiment_by_name(experiment_name)
     print(exp)
     ```
@@ -229,6 +229,21 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
     The output should resemble the following image:
 
     ![Screenshot of the plotted evaluation metrics.](./Images/plotted-metrics.png)
+
+## Explore your experiments
+
+Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
+
+1. Navigate to the **Data Science** home page.
+1. Select the `experiment-mlflow` experiment to open it.
+1. Select the **View** tab.
+1. Select **Run list**. 
+1. Select the two latest runs by checking each box.
+    As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the accuracy and estimator are plotted by run name. 
+1. Select the **&#128393;** (Edit) button of the graph visualizing the accuracy for each run. 
+1. Change the **visualization type** to `bar`. 
+1. Change the **X-axis** to `estimator`. 
+1. Select **Replace** and explore the new graph.
 
 ## Save the notebook and end the Spark session
 
