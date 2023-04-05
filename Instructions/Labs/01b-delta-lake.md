@@ -11,7 +11,7 @@ lab:
 
 # Use delta tables in Apache Spark
 
-Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* technology for Apache Spark Delta Lake adds support for relational semantics for both batch and streaming data operations, and enables the creation of a Lakehouse architecture in which Apache Spark can be used to process and query data in tables that are based on underlying files in a data lake.
+Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* format for Apache Spark. Delta Lake adds support for relational semantics for both batch and streaming data operations, and enables the creation of a Lakehouse architecture in which Apache Spark can be used to process and query data in tables that are based on underlying files in a data lake.
 
 This exercise should take approximately **40** minutes to complete
 
