@@ -79,6 +79,9 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 1. On the **Home** page, select the **Files** folder so you can see the **orders.csv** file it contains.
 2. In the **...** menu for the **orders.csv** file select **Load to Delta table**.
 3. In **Load to table** dialog box, set the table name to **salesorders** and confirm the load operation. Then wait for the table to be created and loaded.
+
+    > **Tip**: If the **salesorder** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
+
 3. In the **Lakehouse explorer** pane, select the **salesorders** table that has been created for the table data.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
