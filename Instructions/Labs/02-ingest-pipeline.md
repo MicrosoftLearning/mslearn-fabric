@@ -210,3 +210,13 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 10. Refresh the **Lakehouse explorer** pane, and then expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
 
 In this exercise, you implemented a data ingestion solution that uses a pipeline to copy data to your lakehouse from an external source, and then uses a Spark notebook to transform the data and load it into a table.
+
+## Clean up resources
+
+In this exercise, you've learned how to implement a pipeline in Microsoft Fabric.
+
+If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Delete this workspace**.
