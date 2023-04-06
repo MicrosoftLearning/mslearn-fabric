@@ -21,11 +21,11 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Fabric, you should create a workspace with support for premium features.
+Before working with data in Fabric, create a workspace with premium capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Premium per user** license mode in the workspace settings.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -40,6 +40,8 @@ Now that you have a workspace, it's time to switch to the *Data Warehouse* exper
 
     ![Screenshot of the Data Warehouse home page.](./Images/data-warehouse-home.png)
 
+    > **Note**: If you don't see the Power BI icon in the bottom left corner, Fabric isn't enabled for your tenant. Fabric is enabled in the admin portal for tenants that have a Power BI Premium subscription. 
+
 2. In the **Data Warehouse** home page, create a new **Warehouse** with a name of your choice. Don't specify a *sensitivity* level.
 
     After a minute or so, a new warehouse will be created:
@@ -50,7 +52,7 @@ Now that you have a workspace, it's time to switch to the *Data Warehouse* exper
 
 A warehouse is a relational database in which you can define tables and other objects.
 
-1. In your new warehouse, select the **Create table with T-SQL** tile, and replace the default SQL code with the following CREATE TABLE statement:
+1. In your new warehouse, select the **Create tables with T-SQL** tile, and replace the default SQL code with the following CREATE TABLE statement:
 
     ```sql
     CREATE TABLE dbo.DimProduct
@@ -66,20 +68,22 @@ A warehouse is a relational database in which you can define tables and other ob
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **DimProduct** in the **dbo** schema of the data warehouse.
 3. Use the **Sync data** button on the toolbar to refresh the view. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **DimProduct** table has been created.
-4. Use the **New SQL Query** button to create a new query, and enter the following INSERT statement:
+4. On the **Home** menu tab, use the **New SQL Query** button to create a new query, and enter the following INSERT statement:
 
     ```sql
     INSERT INTO dbo.DimProduct
     VALUES
-    (1, 'RING1', 'Bicycle bell', 'Accssories', 5.99),
+    (1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
     (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
     (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
     GO
     ```
+ <!-- test this again - I had to remove the GO command from each statement to make it work. It also ran multiple times and every query I ran errored out but actually seemed to work-->
 
 5. Run the new query to insert three rows into the **DimProduct** table.
 6. When the query has finished, in the **Explorer** pane, select the **DimProduct** table and verify that the rows have been added to the table.
 7. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt) into the new query pane.
+<!-- I had to remove the GO command in this query as well --> 
 8. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
 9. Use the **Sync data** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
     - **DimCustomer**
@@ -116,12 +120,12 @@ A relational data warehouse typically consists of *dimension* and *fact* tables.
 
     ![Screenshot of the model with relationships.](./Images/dw-relationships.png)
 
-
----
+<!---
 
     *Should we add steps to create hierarchies as well?*
+    SL: I don't think hierarchies are necessary. The data model is simple enough that the relationships are enough to create a useful report.
 
----
+--->
 
 ## Query data warehouse tables
 
@@ -191,14 +195,19 @@ A data warehouse in Microsoft Fabric has many of the same capabilities you may b
     FROM vSalesByRegion
     ORDER BY CalendarYear, MonthOfYear, SalesRegion;
     ```
+<!--    Should we have them rename the query? 
+        Note - this query wouldn't work with the ORDER BY clause in the view definition. I removed it so that we can visualize in the next step. (Error: The ORDER BY clause is invalid in views, inline functions, derived tables, subqueries, and common table expressions unless TOP, OFFFSET, or FOR XML is also specified.)
+-->
 
 ### Visualize query results
 
----
+You can easily visualize the data in your query using the Power BI service.
 
-    *Add steps to select a query and visualize the results a'la Power BI*
+1. In the query you created in the last step, select the **Visualize** button in the toolbar. This will open the query in a window that looks like the Power BI service.
+<!-- 2. Why would you want to visualize just one query? A sanity check of your data? the option is to save it as a report in the PBI service, which I don't really see the utility of.
 
----
+You can visualize *either* a query *or* create a new report with all of the data in the warehouse. I'd suggest we mention that you can visualize the data in your query for exploratory purposes, and then visualize all of the data at the end of the lab. Thoughts?
+-->
 
 ### Create a visual query
 
