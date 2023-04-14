@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Use a Spark notebook in a pipeline'
+    title: 'Ingest data with a pipeline in Microsoft Fabric'
     module: 'Use Data Factory pipelines in Microsoft Fabric'
 ---
 
@@ -8,8 +8,6 @@ lab:
 *The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
 
 ---
-
-# Use a Spark notebook in a pipeline
 
 A data lakehouse is a common analytical data store for cloud-scale analytics solutions. One of the core tasks of a data engineer is to implement and manage the ingestion of data from multiple operational data sources into the lakehouse. In Microsoft Fabric, you can implement *extract, transform, and load* (ETL) or *extract, load, and transform* (ELT) solutions for data ingestion through the creation of *pipelines*.
 
