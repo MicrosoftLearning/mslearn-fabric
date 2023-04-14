@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Analyze data in a data warehouse'
-    module: 'Data warehousing'
+    module: 'Get started with data warehouses in Microsoft Fabric'
 ---
 
 ---

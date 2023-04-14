@@ -1,7 +1,7 @@
 ---
 lab:
-    title: 'Ingest data with a pipeline'
-    module: 'Use Data Factory in Microsoft Fabric'
+    title: 'Use a Spark notebook in a pipeline'
+    module: 'Use Data Factory pipelines in Microsoft Fabric'
 ---
 
 ---
@@ -9,7 +9,7 @@ lab:
 
 ---
 
-# Ingest data with a pipeline
+# Use a Spark notebook in a pipeline
 
 A data lakehouse is a common analytical data store for cloud-scale analytics solutions. One of the core tasks of a data engineer is to implement and manage the ingestion of data from multiple operational data sources into the lakehouse. In Microsoft Fabric, you can implement *extract, transform, and load* (ETL) or *extract, load, and transform* (ELT) solutions for data ingestion through the creation of *pipelines*.
 
@@ -23,7 +23,7 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Microsoft Fabric, you should create a workspace with support for premium features.
+Before working with data in Fabric, create a workspace with premium capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
