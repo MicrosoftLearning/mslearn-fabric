@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Train a classification model to predict customer churn'
-    module: 'Use notebooks to train a model in Microsoft Fabric'
+    module: 'Get started with data science in Microsoft Fabric'
 ---
 
 ---
