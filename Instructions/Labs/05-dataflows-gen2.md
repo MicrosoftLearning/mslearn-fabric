@@ -76,11 +76,15 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
 
-6. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow will use to access the lakehouse.
+> [!Note] 
+> You can also add a data destination by selecting the **Add data destination** button in the query settings pane.
+
+
+2. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow will use to access the lakehouse.
 
 	![Data destination configuration page.](./Images/dataflow-connection.png)
 
-7. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
+3. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
 
 	![Data destination configuration page.](./Images/data-destination-target.png)
 
@@ -88,7 +92,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 	![Data destination settings page.](./Images/destination-settings.png)
 
-1. Cancel this action, then go back OrderDate and MonthNo columns. Right-click on the column header and **Change Type**.
+1. Cancel this action, then go back to OrderDate and MonthNo columns in Power Query online. Right-click on the column header and **Change Type**.
 
     - OrderDate = Date/Time
 
@@ -110,7 +114,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created in a few different workloads, including Data Factory workload.
 
-1. From your Fabric-enabled workspace, make sure you are still in the **Data Engineering** workload. Select **Data pipeline**, then, when prompted, create a new pipeline named **Load data**.
+1. From your Fabric-enabled workspace, make sure you are still in the **Data Engineering** workload. Select **New**, **Data pipeline**, then, when prompted, create a new pipeline named **Load data**.
 
 	The pipeline editor opens.
 
@@ -129,7 +133,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
 	![Pipeline with a dataflow that has completed successfully.](./Images/dataflow-pipeline-succeeded.png)
 
-6. In the menu bar on the left edge, select the page for your workspace. Then in the list of items in your workspace, select your lakehouse.
+6. In the menu bar on the left edge, select your lakehouse.
 7. In the **...** menu for **Tables**, select **refresh**. Then expand **Tables** and select the **sales** table, which has been created by your dataflow.
 
 	![Table loaded by a dataflow.](./Images/loaded-table.png)
@@ -157,3 +161,9 @@ If you've finished exploring dataflows in Microsoft Fabric, you can delete the w
 1. In the **...** menu on the toolbar, select **Workspace settings**.
 1. In the **Other** section, select **Delete this workspace**.
 1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
+
+<!-- 
+
+Is there a reason why we're recommending that folks add a column to a fact table instead of use a date table? I'd propose we have folks connect to a date table that includes cal year and add fiscal year columns (or something similar - the existing dataflows lab does this).
+
+-->
