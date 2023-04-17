@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Train a classification model to predict customer churn'
-    module: 'Use notebooks to train a model in Microsoft Fabric'
+    module: 'Get started with data science in Microsoft Fabric'
 ---
 
 ---
@@ -21,7 +21,7 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Fabric, you should create a workspace with support for premium features.
+Before working with data in Fabric, create a workspace with premium capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).

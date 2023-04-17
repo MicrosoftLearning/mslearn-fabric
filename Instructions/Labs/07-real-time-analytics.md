@@ -1,7 +1,7 @@
 ---
 lab:
-    title: 'Analyze data with Kusto'
-    module: 'Use Kusto in Microsoft Fabric'
+    title: 'Get started with Real-Time Analytics in Microsoft Fabric'
+    module: 'Get started with real-time analytics in Microsoft Fabric'
 ---
 
 ---
@@ -9,7 +9,7 @@ lab:
 
 ---
 
-# Analyze data with Kusto
+# Get started with Real-Time Analytics in Microsoft Fabric
 
 Microsoft Fabric provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
 
@@ -21,7 +21,7 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Fabric, you should create a workspace with support for premium features.
+Before working with data in Fabric, create a workspace with premium capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).

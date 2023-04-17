@@ -23,7 +23,7 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Fabric, you should create a workspace with support for premium features.
+Before working with data in Fabric, create a workspace with premium capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
@@ -36,7 +36,7 @@ Before working with data in Fabric, you should create a workspace with support f
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for your data files.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
 
     ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
 
@@ -97,6 +97,9 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 When you need to regularly copy data from an external source into the lakehouse, you can create a pipeline that contains a **Copy Data** activity. Pipelines can be run on-demand or scheduled to run at specific intervals.
 
 1. On the **Home** page, in the **Get data** menu, select **New data pipeline**. When prompted, name the pipeline **Import Data**.
+
+    The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
+
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
 3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **File** tab, select **HTTP**.
 
@@ -122,13 +125,12 @@ When you need to regularly copy data from an external source into the lakehouse,
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: Selected
+    - **Compression type**: None
 7. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
 8. On the **Choose data destination** page, select your existing lakehouse. Then select **Next**.
 9. Set the following data destination options (noting that you can copy the data to a file, or to a table - which creates the necessary files in the **Tables** storage area as well as the relational table metadata), and then select **Next**:
     - **Root folder**: Tables
     - **Table name**: `product`
-    - **Table action**: Overwrite
-    - **Enable partition**: *Unselected*
 10. On the **Copy summary** page, review the details of your copy operation and then select **OK**
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
@@ -141,8 +143,8 @@ When you need to regularly copy data from an external source into the lakehouse,
 
     ![Screenshot of a completed pipeline.](./Images/pipeline-completed.png)
 
-12. In the menu bar on the left, select your lakehouse to return to the lakehouse view showing tables and files.
-13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** if necessary to see the **product** table created by the pipeline.
+12. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
+13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** to see the **product** table created by the pipeline.
 14. Select the **product** table to see a preview of its data.
 
     ![Screenshot of the product table.](./Images/product-table.png)
