@@ -59,6 +59,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the first cell (which is currently a *code* cell), and then in the dynamic tool bar at its top-right, use the **M&#8595;** button to convert the cell to a *markdown* cell.
+<!-- this isn't the experience I have - I see it in code first, then I can change the language to HTML, or click the MD button (M with down arrow) to convert. -->
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
@@ -82,7 +83,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
-2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook: <!-- I had to read this more than once AND look at the image to figure out the "... menu for 2019.csv" meant. -->
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
@@ -188,7 +189,7 @@ The dataframe object includes a wide range of functions that you can use to filt
 
 ### Filter a dataframe
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it.
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it. <!-- should this happen before or after the other code cell? you have to hover over the existing cell to see + code or + markdown, so if order matters, we should tell them. -->
 
     ```Python
     customers = df['CustomerName', 'Email']
