@@ -75,10 +75,9 @@ A warehouse is a relational database in which you can define tables and other ob
     VALUES
     (1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
     (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
-    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
-    GO
+    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49)
     ```
- <!-- test this again - I had to remove the GO command from each statement to make it work. It also ran multiple times and every query I ran errored out but actually seemed to work-->
+
 
 5. Run the new query to insert three rows into the **DimProduct** table.
 6. When the query has finished, in the **Explorer** pane, select the **DimProduct** table and verify that the rows have been added to the table.
