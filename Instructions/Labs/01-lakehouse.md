@@ -80,7 +80,7 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 2. In the **...** menu for the **orders.csv** file select **Load to Delta table**.
 3. In **Load to table** dialog box, set the table name to **salesorders** and confirm the load operation. Then wait for the table to be created and loaded.
 
-    > **Tip**: If the **salesorder** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
+    > **Tip**: If the **salesorders** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
 
 3. In the **Lakehouse explorer** pane, select the **salesorders** table that has been created for the table data.
 
@@ -101,7 +101,7 @@ When you need to regularly copy data from an external source into the lakehouse,
     The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
 
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **File** tab, select **HTTP**.
+3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **Generic protocol** tab, select **HTTP**.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
@@ -131,6 +131,7 @@ When you need to regularly copy data from an external source into the lakehouse,
 9. Set the following data destination options (noting that you can copy the data to a file, or to a table - which creates the necessary files in the **Tables** storage area as well as the relational table metadata), and then select **Next**:
     - **Root folder**: Tables
     - **Table name**: `product`
+    - **Table action**: Append
 10. On the **Copy summary** page, review the details of your copy operation and then select **OK**
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
@@ -143,7 +144,7 @@ When you need to regularly copy data from an external source into the lakehouse,
 
     ![Screenshot of a completed pipeline.](./Images/pipeline-completed.png)
 
-12. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
+12. Go back to your workspace by selecting your workspace from the left navigation menu. Find and select your lakehouse.
 13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** to see the **product** table created by the pipeline.
 14. Select the **product** table to see a preview of its data.
 
@@ -153,7 +154,7 @@ When you need to regularly copy data from an external source into the lakehouse,
 
 When you create a lakehouse and define tables in it, a SQL endpoint is automatically created through which the tables can be queried using SQL `SELECT` statements.
 
-1. At the top-right of the Lakehouse page, switch from **Lake mode** to **SQL endpoint** as shown here:
+1. At the top-right of the Lakehouse page, switch from **Lakehouse** to **SQL endpoint** as shown here:
 
     ![Screenshot of the SQL endpoint option.](./Images/sql-endpoint.png)
 
