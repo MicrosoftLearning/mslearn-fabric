@@ -5,7 +5,7 @@ lab:
 ---
 
 ---
-*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
+*The UI is changing frequently -we'll update (or remove) screenshots prior to release.*
 
 ---
 
@@ -13,7 +13,7 @@ lab:
 
 Large-scale data analytics solutions have traditionally been built around a *data warehouse*, in which data is stored in relational tables and queried using SQL. The growth in "big data" (characterized by high *volumes*, *variety*, and *velocity* of new data assets) together with the availability of low-cost storage and cloud-scale distributed compute technologies has led to an alternative approach to analytical data storage; the *data lake*. In a data lake, data is stored as files without imposing a fixed schema for storage. Increasingly, data engineers and analysts seek to benefit from the best features of both of these approaches by combining them in a *data lakehouse*; in which data is stored in files in a data lake and a relational schema is applied to them as a metadata layer so that they can be queried using traditional SQL semantics.
 
-In Microsoft Fabric, a lakehouse provides highly scalable file storage in a *OneLake* storage service with a metastore for relational objects such as tables and views based on the Apache Spark *Delta Lake* table format. Delta Lake enables you to "overlay" file data with a schema of tables that support transactional semantics and other capabilities commonly found in a traditional relational data warehouse.
+In Microsoft Fabric, a lakehouse provides highly scalable file storage in a *OneLake* store (built on Azure Data Lake Store Gen2) with a metastore for relational objects such as tables and views based on the open source *Delta Lake* table format. Delta Lake enables you to define a schema of tables in your lakehouse that you can query using SQL.
 
 This lab will take approximately **45** minutes to complete.
 
@@ -36,11 +36,11 @@ Before working with data in Fabric, create a workspace with premium capacity ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for your data files.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, switch the workload to the **Data Engineering** experience, as shown here:
 
     ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
 
-    The data engineering home page provides shortcuts to create commonly used data engineering assets:
+    The data engineering home page includes tiles to create commonly used data engineering assets:
 
     ![Screenshot of the Data Engineering home page.](./Images/data-engineering-home.png)
 
@@ -51,104 +51,50 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
     ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
 3. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
-    - The **Tables** folder contains relational abstractions over files that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta* file format, commonly used in Apache Spark.
-    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables.
+    - The **Tables** folder contains tables that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* file format, commonly used in Apache Spark.
+    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables. You can also create *shortcuts* that reference data that is stored externally in this folder.
 
     Currently, there are no tables or files in the lakehouse.
 
-## Load data into the lakehouse
+## Upload a file
 
-There are multiple ways to load data into the lakehouse.
+There are multiple ways to load data into the lakehouse. One of the simplest ways to ingest small amounts of data is to upload files or folders from your local computer.
 
-### Upload a file
+1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer
+2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **New subfolder**, and create a subfolder named **data**.
+3. In the **...** menu for the new **data** folder, select **Upload** and **Upload file**, and then upload the **sales.csv** file from your local computer.
+4. After the file has been uploaded, select the **Files/data** folder and verify that the **sales.csv** file has been uploaded, as shown here:
 
-One of the simplest ways to ingest small amounts of data into the lakehouse is to upload files or folders from your local computer.
+    ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-sales-file.png)
 
-1. Download the **orders.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv), saving it as **orders.csv** on your local computer
-2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **Upload** and **Upload file**, and then upload the **orders.csv** file from your local computer to the lakehouse.
-3. After the file has been uploaded, select **Files** verify that the **orders.csv** file has been uploaded, as shown here:
+5. Select the **sales.csv** file to see a preview of its contents.
 
-    ![Screenshot of uploaded orders.csv file in a lakehouse.](./Images/uploaded-file.png)
+## Explore shortcuts
 
-4. Select the **orders.csv** file to see a preview of its contents.
+In many scenarios, the data you need to work with in your lakehouse may be stored in some other location. While there are many ways to ingest data into the OneLake storage for your lakehouse, another option is to instead create a *shortcut*. This enables you to include externally sourced data in your analytics solution without the overhead and risk of data inconsistency associated with copying it.
 
-### Load file data into a table
+1. In the **...** menu for the **Files** folder, select **New shortcut**.
+2. View the available data source types for shortcuts. Then close the **New shortcut** dialog box without creating a shortcut.
+
+## Load file data into a table
 
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
-1. On the **Home** page, select the **Files** folder so you can see the **orders.csv** file it contains.
-2. In the **...** menu for the **orders.csv** file select **Load to Delta table**.
-3. In **Load to table** dialog box, set the table name to **salesorders** and confirm the load operation. Then wait for the table to be created and loaded.
+1. On the **Home** page, select the **Files/Data** folder so you can see the **sales.csv** file it contains.
+2. In the **...** menu for the **sales.csv** file select **Load to Delta table**.
+3. In **Load to table** dialog box, set the table name to **sales** and confirm the load operation. Then wait for the table to be created and loaded.
 
-    > **Tip**: If the **salesorders** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
+    > **Tip**: If the **sales** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
 
-3. In the **Lakehouse explorer** pane, select the **salesorders** table that has been created for the table data.
+3. In the **Lakehouse explorer** pane, select the **sales** table that has been created to view the data.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
 
-4. In the **...** menu for the **salesorders** table, select **View table files** to see the underlying files for this table
+4. In the **...** menu for the **sales** table, select **View table files** to see the underlying files for this table
 
     ![Screenshot of a table preview.](./Images/delta-table-files.png)
 
     Files for a delta table are stored in *Parquet* format, and include a subfolder named **_delta_log** in which details of transactions applied to the table are logged.
-
-### Copy data with a pipeline
-
-When you need to regularly copy data from an external source into the lakehouse, you can create a pipeline that contains a **Copy Data** activity. Pipelines can be run on-demand or scheduled to run at specific intervals.
-
-1. On the **Home** page, in the **Get data** menu, select **New data pipeline**. When prompted, name the pipeline **Import Data**.
-
-    The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
-
-2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, review the list of available sources. Then on the **Generic protocol** tab, select **HTTP**.
-
-    ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
-
-4. Select **Next** and then select **Create new connection** and enter the following settings for the connection to your data source:
-    - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv`
-    - **Connection**: Create new connection
-    - **Connection name**: web_product_data
-    - **Authentication kind**: Basic
-    - **Username**: *Leave blank*
-    - **Password**: *Leave blank*
-
-5. Select **Next**. Then ensure the following settings are selected:
-    - **Relative URL**: *Leave blank*
-    - **Request method**: GET
-    - **Additional headers**: *Leave blank*
-    - **Binary copy**: <u>Un</u>selected
-    - **Request timeout**: *Leave blank*
-    - **Max concurrent connections**: *Leave blank*
-6. Select **Next**, and then ensure that the following settings are selected:
-    - **File format**: DelimitedText
-    - **Column delimiter**: Comma (,)
-    - **Row delimiter**: Line feed (\n)
-    - **First row as header**: Selected
-    - **Compression type**: None
-7. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-8. On the **Choose data destination** page, select your existing lakehouse. Then select **Next**.
-9. Set the following data destination options (noting that you can copy the data to a file, or to a table - which creates the necessary files in the **Tables** storage area as well as the relational table metadata), and then select **Next**:
-    - **Root folder**: Tables
-    - **Table name**: `product`
-    - **Table action**: Append
-10. On the **Copy summary** page, review the details of your copy operation and then select **OK**
-
-    A new pipeline containing a **Copy Data** activity is created, as shown here:
-
-    ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
-
-11. Use the **&#9655; Run** button to run the pipeline, saving the pipeline when prompted.
-
-    When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
-
-    ![Screenshot of a completed pipeline.](./Images/pipeline-completed.png)
-
-12. Go back to your workspace by selecting your workspace from the left navigation menu. Find and select your lakehouse.
-13. In the **Lakehouse explorer** pane, in the **...** menu for **Tables**, select **Refresh** to see the **product** table created by the pipeline.
-14. Select the **product** table to see a preview of its data.
-
-    ![Screenshot of the product table.](./Images/product-table.png)
 
 ## Use SQL to query tables
 
@@ -162,49 +108,36 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 
     ![Screenshot of the SQL endpoint page.](./Images/warehouse.png)
 
+    ---
+    Note the error in the screenshot - retake when working
+
+    ---
+
 3. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
     ```sql
-    SELECT p.ProductName, COUNT(s.SalesOrderID) AS OrderCount
-    FROM salesorders AS s
-    JOIN product AS p
-        ON s.ProductID = p.ProductID
-    GROUP BY  p.ProductName
-    ORDER BY p.ProductName
+    SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
+    FROM sales
+    GROUP BY Item
+    ORDER BY Revenue DESC;
     ```
 
-4. Use the **&#9655; Run** button to run the query and view the results, which should show the number of orders placed for each product.
+4. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
+
+---
+This doesn't work - continue when working, adding steps to visualize the results
+
+---
+
+## Create a visual query
+
+
+## Edit the data model
+
 
 ## Create a report
 
-Creating and populating tables in a lakehouse automatically generated a default *dataset* that you can use as the basis for a Power BI data visualization.
 
-1. In the tabs at the bottom of the **Explorer** pane, select **Data**. Then at the top of the page, select the **Reporting** tab.
-2. In the **Reporting** menu, select **Manually update dataset**. Then select all of the tables in the lakehouse (**salesorders** and **product**) and confirm the update:
-
-    ![Screenshot of the Update dataset page.](./Images/update-dataset.png)
-
-    ---
-    *This fails - for some reason it doesn't recognize the **product** table!*
-
-    *We can wait for this to be fixed, or just cut this section (it's nice to show the end-to-end; but at this point we've covered the core "lakehouse" stuff)*
-
-    ---
-
-3. In the tabs at the bottom of the **Explorer** pane, select **Model**.
-
-    ---
-    *If we get the model to refresh, we'll add steps here to create a relationship between the two tables.*
-
-    ---
-
-
-4. In the toolbar, select **New report**.
-
-    ---
-    *If the dataset refreshes, we'll add steps here to create a simple report.*
-
-    ---
 
 ## Clean up resources
 
