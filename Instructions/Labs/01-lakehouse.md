@@ -141,7 +141,7 @@ This doesn't work - continue when working, adding steps to visualize the results
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files stored in a OneLake data store, some of which are used to store the data for managed tables. The managed tables can be explored and manipulated using Spark, queried using SQL, and included in a dataset to support data visualizations.
+In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a dataset to support data visualizations.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
