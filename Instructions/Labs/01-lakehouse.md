@@ -19,7 +19,12 @@ This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Power BI Premium subscription with Microsoft Fabric enabled.
+
+---
+*Steps to sign up for a free trial go here*
+
+---
 
 ## Create a workspace
 
@@ -58,7 +63,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 ## Upload a file
 
-There are multiple ways to load data into the lakehouse. One of the simplest ways to ingest small amounts of data is to upload files or folders from your local computer.
+Fabric provides multiple ways to load data into the lakehouse, including built-in support for pipelines that copy data external sources and data flows (Gen 2) that you can define using visual tools based on Power Query. However one of the simplest ways to ingest small amounts of data is to upload files or folders from your local computer.
 
 1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer
 2. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **New subfolder**, and create a subfolder named **data**.
@@ -106,12 +111,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 
 2. Wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
 
-    ![Screenshot of the SQL endpoint page.](./Images/warehouse.png)
-
-    ---
-    Note the error in the screenshot - retake when working
-
-    ---
+    ![Screenshot of the SQL endpoint page.](./Images/lakehouse-sql-endpoint.png)
 
 3. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
@@ -124,18 +124,47 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 
 4. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
 
----
-This doesn't work - continue when working, adding steps to visualize the results
-
----
+    ![Screenshot of a SQL query with results.](./Images/sql-query.png)
 
 ## Create a visual query
 
+While many data professionals are familiar with SQL, data analysts with Power BI experience can leverage their Power Query skills to create visual queries.
 
-## Edit the data model
+1. On the toolbar, select **New visual query**.
+2. Drag the **sales** table to the new visual query editor pane that opens. This defines a Power Query with some initial steps to extract data from the table.
 
+    ![Screenshot of a Visual query.](./Images/visual-query.png)
+
+3. In the **Manage columns** menu, select **Choose columns**. Then select only the **SalesOrderNumber** and **SalesOrderLineNumber** columns.
+
+    ![Screenshot of a Choose columns dialog box.](./Images/choose-columns.png)
+
+4. in the **Transform** menu, select **Group by**. Then group the data by the **SalesOrderNumber** column, using **count distinct** function to aggregate the **SalesOrderLineNumber** column.
+
+    ![Screenshot of a Group by dialog box.](./Images/group-by.png)
+
+5. Select the new **Count** column. Then right-click its column header and select **Rename** to change the column name to **LineItems**. The results pane under the visual query now shows the number of line items for each sales order.
+
+    ![Screenshot of a Visual query with results.](./Images/visual-query-results.png)
 
 ## Create a report
+
+The tables in your lakehouse are automatically added to a default dataset that defines a data model for reporting with Power BI.
+
+1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the dataset is shown.
+
+    ![Screenshot of a data model.](./Images/data-model.png)
+
+    > **Note**: In this exercise, the data model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
+
+2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. If you are prompted to use all available data, select **Continue**.
+
+---
+*This fails with a 404 path not found error in the MSIT build*
+
+*Complete this section when the product is more stable*
+
+---
 
 
 
