@@ -252,7 +252,7 @@ You can easily visualize the data in either a single query, or in your data ware
 
     ![Screenshot of the Visualizations pane with the bar chart selected.](./Images/visualizations-pane.png)
 
-1. In the **Visualizations** pane, select the **Format your visual** tab and in the **General** sub-tab, in the **Title** section, change the **Text** to `Total Sales by Category`.
+1. In the **Visualizations** pane, select the **Format your visual** tab and in the **General** sub-tab, in the **Title** section, change the **Text** to **Total Sales by Category**.
 
 1. In the **File** menu, select **Save**. Then save the report as **Sales By Category** in the workspace you created previously.
 
