@@ -262,9 +262,9 @@ You can easily visualize the data in either a single query, or in your data ware
 
 ## Clean up resources
 
-In this exercise, you have created a data warehouse that contains multiple tables. You used SQL to insert data into the tables and query them. and also used the visual query tool. Finally, you enhanced the data model for the data warehouse's default dataset and used it as the source for a Power BI report.
+In this exercise, you have created a data warehouse that contains multiple tables. You used SQL to insert data into the tables and query them. and also used the visual query tool. Finally, you enhanced the data model for the data warehouse's default dataset and used it as the source for a report.
 
-If you've finished exploring your data watehouse, you can delete the workspace you created for this exercise.
+If you've finished exploring your data warehouse, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
