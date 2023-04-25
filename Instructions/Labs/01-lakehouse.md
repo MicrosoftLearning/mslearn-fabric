@@ -57,7 +57,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 3. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
     - The **Tables** folder contains tables that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* file format, commonly used in Apache Spark.
-    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables. You can also create *shortcuts* that reference data that is stored externally in this folder.
+    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables. You can also create *shortcuts* in this folder to reference data that is stored externally.
 
     Currently, there are no tables or files in the lakehouse.
 
