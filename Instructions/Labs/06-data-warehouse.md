@@ -11,13 +11,18 @@ lab:
 
 # Analyze data in a data warehouse
 
-In Microsoft Fabric, a data warehouse is an item in a workspace that provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
+In Microsoft Fabric, a data warehouse provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables.
 
 This lab will take approximately **30** minutes to complete.
 
 ## Before you start
 
 You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+
+---
+*Steps to sign up for a free trial go here*
+
+---
 
 ## Create a workspace
 
@@ -67,7 +72,7 @@ A warehouse is a relational database in which you can define tables and other ob
     ```
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **DimProduct** in the **dbo** schema of the data warehouse.
-3. Use the **Sync data** button on the toolbar to refresh the view. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **DimProduct** table has been created.
+3. Use the **SRefresh** button on the toolbar to refresh the view. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **DimProduct** table has been created.
 4. On the **Home** menu tab, use the **New SQL Query** button to create a new query, and enter the following INSERT statement:
 
     ```sql
@@ -75,7 +80,8 @@ A warehouse is a relational database in which you can define tables and other ob
     VALUES
     (1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
     (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
-    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49)
+    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
+    GO
     ```
 
 
@@ -84,7 +90,7 @@ A warehouse is a relational database in which you can define tables and other ob
 7. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt) into the new query pane.
 <!-- I had to remove the GO command in this query as well --> 
 8. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
-9. Use the **Sync data** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
+9. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
     - **DimCustomer**
     - **DimDate**
     - **DimProduct**
@@ -200,7 +206,7 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 
 1. Drag **DimProduct** onto the **canvas**. We now have two tables in our query.
 
-2. Use the **(+)** button on the FactSalesOrder table on the canvas to **Merge queries**.
+2. Use the **(+)** button on the **FactSalesOrder** table on the canvas to **Merge queries**.
 ![Screenshot of the canvas with the FactSalesOrder table selected.](./Images/visual-query-merge.png)
 
 1. In the **Merge queries** window, select **DimProduct** as the right table for merge. Select **ProductKey** in both queries, leave the default **Left outer** join type, and click **OK**.
@@ -221,7 +227,7 @@ You can easily visualize the data in either a single query, or in your data ware
 
 1. In the **Explorer** pane, select the **Model** view. 
 
-1. **Hide columns** in your Fact and Dimension tables that are not necessary to create a report. Note that this does not remove the columns from the model, it simply hides them from view on the report canvas. Hide the following columns:
+1. Hide the following columns in your Fact and Dimension tables that are not necessary to create a report. Note that this does not remove the columns from the model, it simply hides them from view on the report canvas.
    1. FactSalesOrder
       - **SalesOrderDateKey**
       - **CustomerKey**
@@ -238,31 +244,28 @@ You can easily visualize the data in either a single query, or in your data ware
    
 1. Now you're ready to build a report and make this dataset available to others. On the Home menu, select **New report**. This will open a new window, where you can create a Power BI report.
 
-1. In the **Data** pane, select **FactSalesOrder** to expand the table. Note that the columns you hid are no longer visible. 
+1. In the **Data** pane, expand **FactSalesOrder**. Note that the columns you hid are no longer visible. 
 
 1. Select **SalesTotal**. This will add the column to the **Report canvas**. Because the column is a numeric value, the default visual is a **column chart**.
-
-    ![Screenshot of SalesTotal column selected.](./Images/select-field.png)
-
-1. Select **Category** from the DimProduct table to add a category to your column chart. 
-   *Note: If selecting Category from the DimProduct table adds a second visual to the canvas, remove the new visual. Select the first column chart, ensuring there are gray handles around the visual. Then select **Category** from the DimProduct table.*
-1. Change the chart type from a column chart to a **clustered bar chart** in the **Visualizations** pane. This will ensure that the categories are readable.
+1. Ensure that the column chart on the canvas is active (with a gray border and handles), and then select **Category** from the **DimProduct** table to add a category to your column chart.
+1. In the **Visualizations** pane, change the chart type from a column chart to a **clustered bar chart**. Then resize the chart as necessary to ensure that the categories are readable.
 
     ![Screenshot of the Visualizations pane with the bar chart selected.](./Images/visualizations-pane.png)
 
-1. Give your visual a title by selecting the visual and then selecting **Title** from the **Format** pane. Enter a title, such as **Total Sales by Category**.
+1. In the **Visualizations** pane, select the **Format your visual** tab and in the **General** sub-tab, in the **Title** section, change the **Text** to `Total Sales by Category`.
 
-1. In the **File** menu, select **Save**. Enter a name for your report, select a destination workspace, and then select **Save**.
+1. In the **File** menu, select **Save**. Then save the report as **Sales By Category** in the workspace you created previously.
 
-1. Navigate back to the workspace you saved the report to. Notice that you now have three items saved in your workspace:
-   1. MyDataWarehouse: Dataset
-   2. MyDataWarehouse: Warehouse
-   3. Sales Report: Report
-   <br><br>
+1. In the menu hub on the left, navigate back to the workspace. Notice that you now have three items saved in your workspace: your data warehouse, its default dataset, and the report you created.
+
     ![Screenshot of the workspace with the three items listed.](./Images/workspace-items.png)
 
-    *Note: The dataset is automatically created when you create a data warehouse. You can share this dataset with report builders in your organization, and they can use it to create reports. The report is the report you just created.*
+## Clean up resources
 
+In this exercise, you have created a data warehouse that contains multiple tables. You used SQL to insert data into the tables and query them. and also used the visual query tool. Finally, you enhanced the data model for the data warehouse's default dataset and used it as the source for a Power BI report.
 
+If you've finished exploring your data watehouse, you can delete the workspace you created for this exercise.
 
-
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Delete this workspace**.
