@@ -254,7 +254,7 @@ You can easily visualize the data in either a single query, or in your data ware
 
 1. In the **Visualizations** pane, select the **Format your visual** tab and in the **General** sub-tab, in the **Title** section, change the **Text** to **Total Sales by Category**.
 
-1. In the **File** menu, select **Save**. Then save the report as **Sales By Category** in the workspace you created previously.
+1. In the **File** menu, select **Save**. Then save the report as **Sales Report** in the workspace you created previously.
 
 1. In the menu hub on the left, navigate back to the workspace. Notice that you now have three items saved in your workspace: your data warehouse, its default dataset, and the report you created.
 
