@@ -139,11 +139,14 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 
     ![Screenshot of a Choose columns dialog box.](./Images/choose-columns.png)
 
-4. in the **Transform** menu, select **Group by**. Then group the data by the **SalesOrderNumber** column, using **count distinct** function to aggregate the **SalesOrderLineNumber** column.
+4. in the **Transform** menu, select **Group by**. Then group the data by using the following **Basic** settings:
 
-    ![Screenshot of a Group by dialog box.](./Images/group-by.png)
+    - **Group by**: SalesOrderNumber
+    - **New column name**: LineItems
+    - **Operation**: Count distinct values
+    - **Column**: SalesOrderLineNumber
 
-5. Select the new **Count** column. Then right-click its column header and select **Rename** to change the column name to **LineItems**. The results pane under the visual query now shows the number of line items for each sales order.
+    When you're done, the results pane under the visual query shows the number of line items for each sales order.
 
     ![Screenshot of a Visual query with results.](./Images/visual-query-results.png)
 
@@ -157,20 +160,32 @@ The tables in your lakehouse are automatically added to a default dataset that d
 
     > **Note**: In this exercise, the data model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
 
-2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. If you are prompted to use all available data, select **Continue**.
+2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. A new browser tab opens in which you can design your report.
 
----
-*This fails with a 404 path not found error in the MSIT build*
+    ![Screenshot of the report designer.](./Images/report-designer.png)
 
-*Complete this section when the product is more stable*
+3. In the **Data** pane on the right, expand the **sales** table. Then select the following fields:
+    - **Item**
+    - **Quantity**
 
----
+    A table visualization is added to the report:
 
+    ![Screenshot of a report containing a table.](./Images/table-visualization.png)
 
+4. Hide the **Data** and **Filters** panes to create more space. Then ensure the table visualization is selected and in the **Visualizations** pane, change the visualization to a **Clustered bar chart** and resize it as shown here.
+
+    ![Screenshot of a report containing a clustered bar chart.](./Images/clustered-bar-chart.png)
+
+5. On the **File** menu, select **Save**. Then save the report as **Item Sales Report** in the workspace you created previously.
+6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your worspace to verify that it contains the following items:
+    - Your lakehouse.
+    - The SQL endpoint for your lakehouse.
+    - A default dataset for the tables in your lakehouse.
+    - The **Item Sales Report** report.
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a dataset to support data visualizations.
+In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a default dataset to support data visualizations.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
