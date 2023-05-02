@@ -4,11 +4,6 @@ lab:
     module: 'Work with Delta Lake tables in Microsoft Fabric'
 ---
 
----
-*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
-
----
-
 # Use delta tables in Apache Spark
 
 Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* format for Apache Spark. Delta Lake adds support for relational semantics for both batch and streaming data operations, and enables the creation of a Lakehouse architecture in which Apache Spark can be used to process and query data in tables that are based on underlying files in a data lake.
@@ -128,7 +123,7 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     ```sql
     %%sql
 
-    DESCRIBE FORMATTED extended_products;
+    DESCRIBE FORMATTED external_products;
     ```
 
     In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path). Note also in the **Table properties** that the table type is **EXTERNAL**.
@@ -167,11 +162,6 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     ```
 
 6. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
 
 7. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
 
@@ -255,6 +245,11 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
     ```
 
     The results show two dataframes - one containing the data after the price reduction, and the other showing the original version of the data.
+
+---
+*The latest update seems to have broken file paths to the default lakehouse storage. This no longer works!*
+
+---
 
 ## Use delta tables for streaming data
 

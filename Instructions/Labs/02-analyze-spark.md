@@ -4,11 +4,6 @@ lab:
     module: 'Use Apache Spark to work with files in a lakehouse'
 ---
 
----
-*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
-
----
-
 # Analyze data with Apache Spark
 
 Apache Spark is an open source engine for distributed data processing, and is widely used to explore, process, and analyze huge volumes of data in data lake storage. Spark is available as a processing option in many data platform products, including Azure HDInsight, Azure Databricks, Azure Synapse Analytics, and Microsoft Fabric. One of the benefits of Spark is support for a wide range of programming languages, including Java, Scala, Python, and SQL; making Spark a very flexible solution for data processing workloads including data cleansing and manipulation, statistical analysis and machine learning, and data analytics and visualization.
@@ -189,7 +184,7 @@ The dataframe object includes a wide range of functions that you can use to filt
 
 ### Filter a dataframe
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it. <!-- should this happen before or after the other code cell? you have to hover over the existing cell to see + code or + markdown, so if order matters, we should tell them. -->
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it.
 
     ```Python
     customers = df['CustomerName', 'Email']
