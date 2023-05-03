@@ -12,7 +12,7 @@ This exercise should take approximately **40** minutes to complete
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Power BI subscription with access to the Microsoft Fabric preview.
 
 ## Create a workspace
 
@@ -20,7 +20,7 @@ Before working with data in Fabric, create a workspace with premium capacity ena
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Fabric capacity** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -94,11 +94,6 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **managed_products** table has been created.
 
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
-
 ### Create an *external* table
 
 1. Add another new code cell, and use it to run the following code:
@@ -107,12 +102,9 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     df.write.format("delta").saveAsTable("external_products", path="Files/external_products")
     ```
 
+    <!-- May need to use full abfss path  -->
+
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
 
 ### Compare *managed* and *external* tables
 
@@ -137,6 +129,7 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     ```
 
     In the results, note that there is no **Location** property for the table. Note also in the **Table properties** that the table type is **MANAGED**.
+    <!-- when using the full abfss path, it shows up in the properties (so the following step may not be required) -->
 
     So where are the data files for the managed table?
 
@@ -191,11 +184,6 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
 
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
-
 3. Add another code cell and run the following code:
 
     ```sql
@@ -246,11 +234,6 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
 
     The results show two dataframes - one containing the data after the price reduction, and the other showing the original version of the data.
 
----
-*The latest update seems to have broken file paths to the default lakehouse storage. This no longer works!*
-
----
-
 ## Use delta tables for streaming data
 
 Delta lake supports streaming data. Delta tables can be a *sink* or a *source* for data streams created using the Spark Structured Streaming API. In this example, you'll use a delta table as a sink for some streaming data in a simulated internet of things (IoT) scenario.
@@ -293,34 +276,15 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     ```python
     # Write the stream to a delta table
-    delta_stream_table_path = 'Files/delta/iotdevicedata'
+    delta_stream_table_path = 'Tables/iotdevicedata'
     checkpointpath = 'Files/delta/checkpoint'
     deltastream = iotstream.writeStream.format("delta").option("checkpointLocation", checkpointpath).start(delta_stream_table_path)
     print("Streaming to delta sink...")
     ```
 
-    This code writes the streaming device data in delta format.
+    This code writes the streaming device data in delta format to a table named **iotdevicedata**. Because the path for the file location in the **Tables** folder, a catalog table will automatically be created for it.
 
 3. In a new code cell, add and run the following code:
-
-    ```python
-    # Read the data in delta format into a dataframe
-    df = spark.read.format("delta").load(delta_stream_table_path)
-    display(df)
-    ```
-
-    This code reads the streamed data in delta format into a dataframe. Note that the code to load streaming data is no different to that used to load static data from a delta folder.
-
-4. In a new code cell, add and run the following code:
-
-    ```python
-    # create a catalog table based on the streaming sink
-    spark.sql("CREATE TABLE IotDeviceData USING DELTA LOCATION '{0}'".format(delta_stream_table_path))
-    ```
-
-    This code creates a catalog table named **IotDeviceData** (in the **default** database) based on the delta folder. Again, this code is the same as would be used for non-streaming data.
-
-5. In a new code cell, add and run the following code:
 
     ```sql
     %%sql
@@ -330,7 +294,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table, which contains the device data from the streaming source.
 
-6. In a new code cell, add and run the following code:
+4. In a new code cell, add and run the following code:
 
     ```python
     # Add more data to the source stream
@@ -347,7 +311,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code writes more hypothetical device data to the streaming source.
 
-7. In a new code cell, add and run the following code:
+5. Re-run the cell containing the following code:
 
     ```sql
     %%sql
@@ -357,7 +321,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table again, which should now include the additional data that was added to the streaming source.
 
-8. In a new code cell, add and run the following code:
+6. In a new code cell, add and run the following code:
 
     ```python
     deltastream.stop()
