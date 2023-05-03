@@ -102,7 +102,7 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     df.write.format("delta").saveAsTable("external_products", path="Files/external_products")
     ```
 
-    <!-- May need to use full abfss path  -->
+    <!-- May need to use full abfss path and adjust subsequent steps  -->
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
 
