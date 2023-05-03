@@ -54,7 +54,6 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the first cell (which is currently a *code* cell), and then in the dynamic tool bar at its top-right, use the **M&#8595;** button to convert the cell to a *markdown* cell.
-<!-- this isn't the experience I have - I see it in code first, then I can change the language to HTML, or click the MD button (M with down arrow) to convert. -->
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
@@ -66,7 +65,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     Use the code in this notebook to explore sales order data.
     ```
 
-4. Select the **Edit** button again and then click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
+4. Click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
 
 ## Load data into a dataframe
 
@@ -337,11 +336,6 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 2. Run the code cell and review the output, which describes the definition of the new table.
 
 3. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
 
     ![Screenshot of the salesorder table in Explorer.](./Images/table-view.png)
 
