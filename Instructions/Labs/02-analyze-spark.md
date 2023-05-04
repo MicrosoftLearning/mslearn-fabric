@@ -16,7 +16,7 @@ You'll need a Power BI Premium subscription with access to the Microsoft Fabric 
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with premium capacity enabled.
+Before working with data in Fabric, create a workspace with Fabric capacity enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
