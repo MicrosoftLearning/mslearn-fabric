@@ -86,6 +86,8 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 ### Create a *managed* table
 
+*Managed* tables are tables for which both the schema metadata and the data files are managed by Fabric. The data files for the table are created in the **Tables** folder.
+
 1. Under the results returned by the first code cell, use the **+ Code** button to add a new code cell if one doesn't already exist. Then enter the following code in the new cell and run it:
 
     ```python
@@ -96,31 +98,33 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 ### Create an *external* table
 
-1. Add another new code cell, and use it to run the following code:
+You can also create *external* tables for which the schema metadata is defined in the metastore for the lakehouse, but the data files are stored in an external location.
+
+1. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Copy ABFS path**.
+
+    The ABFS path is the filly qualified path to the **Files** folder in the OneLake storage for your lakehouse - similar to this:
+
+    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files*
+
+2. Add another new code cell, and add the following code to it, replacing **<abfs_path>** with the path you copied to the clipboard:
 
     ```python
-    df.write.format("delta").saveAsTable("external_products", path="Files/external_products")
+    df.write.format("delta").saveAsTable("external_products", path="<abfs_path>/external_products")
     ```
 
-    <!-- May need to use full abfss path and adjust subsequent steps  -->
+    The code saves the dataframe as an external table with data files in a folder named **external_products** in your **Files** folder location. The full path should look similar to this:
 
-2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
+    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files/external_products*
+
+3. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
+
+4. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that the **external_products** folder has been created for the table's data files.
 
 ### Compare *managed* and *external* tables
 
-1. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that a folder named **external_products** has been created. Select this folder to view the Parquet data files and **_delta_log** folder for the **external_products** table.
+Let's explore the differences between managed and external tables.
 
-2. Add another code cell and run the following code:
-
-    ```sql
-    %%sql
-
-    DESCRIBE FORMATTED external_products;
-    ```
-
-    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path). Note also in the **Table properties** that the table type is **EXTERNAL**.
-
-3. Modify the `DESCRIBE` command to show the details of the **managed_products** tables as shown here:
+1. Add another code cell and run the following code:
 
     ```sql
     %%sql
@@ -128,24 +132,21 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     DESCRIBE FORMATTED managed_products;
     ```
 
-    In the results, note that there is no **Location** property for the table. Note also in the **Table properties** that the table type is **MANAGED**.
-    <!-- when using the full abfss path, it shows up in the properties (so the following step may not be required) -->
+    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Tables/managed_products** (you may need to widen the **Data type** column to see the full path).
 
-    So where are the data files for the managed table?
+2. Modify the `DESCRIBE` command to show the details of the **external_products** table as shown here:
 
-4. Add another code cell and run the following code:
+    ```sql
+    %%sql
 
-    ```python
-    from notebookutils import mssparkutils
-
-    objs = mssparkutils.fs.ls('Tables')
-    for obj in objs:
-        print(obj.name)
+    DESCRIBE FORMATTED external_products;
     ```
+
+    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path).
 
     The files for managed table are stored in the **Tables** folder in the OneLake storage for the lakehouse. In this case, a folder named **managed_products** has been created to store the Parquet files and **delta_log** folder for the table you created.
 
-5. Add another code cell and run the following code:
+3. Add another code cell and run the following code:
 
     ```sql
     %%sql
@@ -154,32 +155,20 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     DROP TABLE external_products;
     ```
 
-6. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
+4. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
 
-7. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
-
-8. Re-run the cell that lists the contents of the **Tables** folder (shown below).
-
-    ```python
-    from notebookutils import mssparkutils
-
-    objs = mssparkutils.fs.ls('Tables')
-    for obj in objs:
-        print(obj.name)
-    ```
-
-    Verify that the **managed_products** folder is no longer listed - the folder for the managed table was deleted along with the table metadata.
+5. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
 
 ### Use SQL to create a table
 
-1. Add another code cell and run the following code:
+1. Add another code cell and run the following code, replacing **<abfs_path>** with the ABFS path for your **Files** folder:
 
     ```sql
     %%sql
 
     CREATE TABLE products
     USING DELTA
-    LOCATION 'Files/external_products';
+    LOCATION '<abfs_path>/external_products';
     ```
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
@@ -218,10 +207,10 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
 
     The results show the history of transactions recorded for the table.
 
-3. Add another code cell and run the following code:
+3. Add another code cell and run the following code, replacing **<abfs_path>** with the ABFS path for your **Files** folder:
 
     ```python
-    delta_table_path = 'Files/external_products'
+    delta_table_path = '<abfs_path>/external_products'
 
     # Get the current data
     current_data = spark.read.format("delta").load(delta_table_path)
@@ -282,7 +271,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
     print("Streaming to delta sink...")
     ```
 
-    This code writes the streaming device data in delta format to a table named **iotdevicedata**. Because the path for the file location in the **Tables** folder, a catalog table will automatically be created for it.
+    This code writes the streaming device data in delta format to a folder named **iotdevicedata**. Because the path for the folder location in the **Tables** folder, a table will automatically be created for it.
 
 3. In a new code cell, add and run the following code:
 
