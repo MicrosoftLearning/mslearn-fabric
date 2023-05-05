@@ -29,17 +29,15 @@ Before working with data in Fabric, create a workspace with Fabric capacity enab
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
-
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new empty lakehouse. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer and then upload it to your lakehouse.
 
 3. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
 
-4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **New subfolder** and create a folder named **products**.
+4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **New subfolder** and create a folder named **products**.
 
 5. In the **...** menu for the **products** folder, select **Upload** and **Upload files**, and then upload the **products.csv** file from your local computer to the lakehouse.
 6. After the file has been uploaded, select the **products** folder; and verify that the **products.csv** file has been uploaded, as shown here:
@@ -53,7 +51,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the **Explorer** pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
+3. In the **Lakehouse explorer** pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-products.png)
 
@@ -100,25 +98,25 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 You can also create *external* tables for which the schema metadata is defined in the metastore for the lakehouse, but the data files are stored in an external location.
 
-1. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Copy ABFS path**.
-
-    The ABFS path is the filly qualified path to the **Files** folder in the OneLake storage for your lakehouse - similar to this:
-
-    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files*
-
-2. Add another new code cell, and add the following code to it, replacing **<abfs_path>** with the path you copied to the clipboard:
+1. Add another new code cell, and add the following code to it:
 
     ```python
     df.write.format("delta").saveAsTable("external_products", path="<abfs_path>/external_products")
     ```
 
-    The code saves the dataframe as an external table with data files in a folder named **external_products** in your **Files** folder location. The full path should look similar to this:
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Copy ABFS path**.
+
+    The ABFS path is the fully qualified path to the **Files** folder in the OneLake storage for your lakehouse - similar to this:
+
+    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files*
+
+3. In the code you entered into the code cell, replace **<abfs_path>** with the path you copied to the clipboard so that the code saves the dataframe as an external table with data files in a folder named **external_products** in your **Files** folder location. The full path should look similar to this:
 
     *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files/external_products*
 
-3. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
+4. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
 
-4. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that the **external_products** folder has been created for the table's data files.
+5. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that the **external_products** folder has been created for the table's data files.
 
 ### Compare *managed* and *external* tables
 
@@ -161,14 +159,14 @@ Let's explore the differences between managed and external tables.
 
 ### Use SQL to create a table
 
-1. Add another code cell and run the following code, replacing **<abfs_path>** with the ABFS path for your **Files** folder:
+1. Add another code cell and run the following code:
 
     ```sql
     %%sql
 
     CREATE TABLE products
     USING DELTA
-    LOCATION '<abfs_path>/external_products';
+    LOCATION 'Files/external_products';
     ```
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
@@ -207,10 +205,10 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
 
     The results show the history of transactions recorded for the table.
 
-3. Add another code cell and run the following code, replacing **<abfs_path>** with the ABFS path for your **Files** folder:
+3. Add another code cell and run the following code:
 
     ```python
-    delta_table_path = '<abfs_path>/external_products'
+    delta_table_path = 'Files/external_products'
 
     # Get the current data
     current_data = spark.read.format("delta").load(delta_table_path)
