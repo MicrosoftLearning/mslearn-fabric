@@ -29,18 +29,16 @@ Before working with data in Fabric, create a workspace with Fabric capacity enab
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data files you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
-
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer and then upload them to your lakehouse.
 
 3. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
 
 4. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
-5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
+5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
 6. After the files have been uploaded, expand **Files** and select the **orders** folder; and verify that the CSV files have been uploaded, as shown here:
 
     ![Screenshot of uploaded files in a lakehouse.](./Images/uploaded-files.png)
@@ -85,7 +83,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     display(df)
     ```
 
-    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
+    > **Tip**: You can hide the Lakehouse explorer panes on the left by using their **<<** icons. Doing so will help you focus on the notebook.
 
 3. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
