@@ -12,15 +12,17 @@ This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
+
+> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with Fabric capacity enabled.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Fabric capacity** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)

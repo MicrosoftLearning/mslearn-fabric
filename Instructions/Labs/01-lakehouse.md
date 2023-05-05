@@ -4,11 +4,6 @@ lab:
     module: 'Get started with Lakehouses'
 ---
 
----
-*The UI is changing frequently -we'll update (or remove) screenshots prior to release.*
-
----
-
 # Create a lakehouse
 
 Large-scale data analytics solutions have traditionally been built around a *data warehouse*, in which data is stored in relational tables and queried using SQL. The growth in "big data" (characterized by high *volumes*, *variety*, and *velocity* of new data assets) together with the availability of low-cost storage and cloud-scale distributed compute technologies has led to an alternative approach to analytical data storage; the *data lake*. In a data lake, data is stored as files without imposing a fixed schema for storage. Increasingly, data engineers and analysts seek to benefit from the best features of both of these approaches by combining them in a *data lakehouse*; in which data is stored in files in a data lake and a relational schema is applied to them as a metadata layer so that they can be queried using traditional SQL semantics.
@@ -19,20 +14,17 @@ This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with Microsoft Fabric enabled.
+You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
 
----
-*Steps to sign up for a free trial go here*
-
----
+> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with premium capacity enabled.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Fabric capacity** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
