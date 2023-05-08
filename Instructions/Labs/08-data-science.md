@@ -4,11 +4,6 @@ lab:
     module: 'Get started with data science in Microsoft Fabric'
 ---
 
----
-*The UI is changing frequently -we'll need to update (or remove) screenshots prior to release.*
-
----
-
 # Use notebooks to train a model in Microsoft Fabric
 
 In this lab, we will use Microsoft Fabric to create a notebook and train a machine learning model to predict customer churn. We will use Scikit-Learn to train the model and MLflow to track its performance. Customer churn is a critical business problem that many companies face, and predicting which customers are likely to churn can help companies retain their customers and increase revenue. By completing this lab, you will gain hands-on experience in machine learning and model tracking, and learn how to use Microsoft Fabric to create a notebook for your projects.
@@ -45,17 +40,16 @@ Now that you have a workspace, it's time to switch to the *Data science* experie
 1. Download and save the `churn.csv` CSV file for this exercise from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/churn.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/churn.csv).
 
 
-1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **churn.csv** file from your local computer to the lakehouse.
+1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload files**, and then upload the **churn.csv** file from your local computer to the lakehouse.
 6. After the files have been uploaded, expand **Files** and verify that the CSV file have been uploaded.
 
 ## Create a notebook
 
-To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages), and add notes to document it.
+To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
 
 1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Data science** experience.
 
-1. In the **Data science** home page, create a new **Experiment** and name it `experiment-churn`.
-1. When the experiment is created, select **Open notebook** to create a new notebook.
+1. In the **Data science** home page, create a new **Notebook**.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
@@ -63,7 +57,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
-1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then modify the markdown as follows:
+1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
     # Train a machine learning model and track with MLflow
@@ -73,17 +67,18 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 ## Load data into a dataframe
 
-Now you're ready to run code that loads the data into a *dataframe* and uses it to train a model. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
+Now you're ready to run code to prepare data and train a model. To work with data, you'll use *dataframes*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
 
 1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
 1. Select **Existing lakehouse** and select **Add**.
 1. Select the lakehouse you created in a previous section.
 1. Expand the **Files** folder so that the CSV file is listed next to the notebook editor.
-1. In the **...** menu for **churn.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+1. In the **...** menu for **churn.csv**, select **Load data** > **Pandas**. A new code cell containing the following code should be added to the notebook:
 
     ```python
-    df = spark.read.format("csv").option("header","true").load("Files/churn.csv")
-    # df now is a Spark DataFrame containing CSV data from "Files/churn.csv".
+    import pandas as pd
+    # Load data into pandas DataFrame from "/lakehouse/default/" + "Files/churn.csv"
+    df = pd.read_csv("/lakehouse/default/" + "Files/churn.csv")
     display(df)
     ```
 
@@ -112,14 +107,6 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    df = df.toPandas()
-    df.head()
-    ```
-
-1. Run the code cell you added, and note that you now have a Pandas dataframe that you'll use to train a model.
-1. Add another new code cell to the notebook, enter the following code in it, and run it:
-
-    ```python
     from sklearn.model_selection import train_test_split
 
     print("Splitting data...")
@@ -128,53 +115,46 @@ Now that you've loaded the data, you can use it to train a machine learning mode
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
-    The code omits the `CustomerID` column from training, and splits the data into a training and test dataset. 
-
+1. Run the code cell you added, and note you're omitting 'CustomerID' from the dataset, and splitting the data into a training and test dataset.
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
     
     ```python
     import mlflow
-    experiment_name = "mlflow-churn"
+    experiment_name = "experiment-churn"
     mlflow.set_experiment(experiment_name)
     ```
     
-    The code creates an MLflow experiment named `mlflow-churn`. Your models will be tracked in this experiment.
+    The code creates an MLflow experiment named `experiment-churn`. Your models will be tracked in this experiment.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
     from sklearn.linear_model import LogisticRegression
-    import numpy as np
     
     with mlflow.start_run():
+        mlflow.autolog()
+
         model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
-    
-        y_hat = model.predict(X_test)
-        acc = np.average(y_hat == y_test)
-    
-        mlflow.log_param("Estimator", "LogisticRegression")
-        mlflow.log_metric("Accuracy", acc)
+
+        mlflow.log_param("estimator", "LogisticRegression")
     ```
     
-    The code trains a classification model using Logistic Regression. The name of the estimator and the accuracy value is logged with MLflow.
+    The code trains a classification model using Logistic Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LogisticRegression`.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
     from sklearn.tree import DecisionTreeClassifier
-    import numpy as np
     
     with mlflow.start_run():
+        mlflow.autolog()
+
         model = DecisionTreeClassifier().fit(X_train, y_train)
     
-        y_hat = model.predict(X_test)
-        acc = np.average(y_hat == y_test)
-    
-        mlflow.log_param("Estimator", "DecisionTreeClassifier")
-        mlflow.log_metric("Accuracy", acc)
+        mlflow.log_param("estimator", "DecisionTreeClassifier")
     ```
     
-    The code trains a classification model using Decision Tree CLassifier. The name of the estimator and the accuracy value is logged with MLflow.
+    The code trains a classification model using Decision Tree Classifier. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeClassifier`.
 
 ## Use MLflow to search and view your experiments
 
@@ -184,7 +164,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 
     ```python
     import mlflow
-    experiments = mlflow.list_experiments()
+    experiments = mlflow.search_experiments()
     for exp in experiments:
         print(exp.name)
     ```
@@ -214,14 +194,14 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
     ```python
     import matplotlib.pyplot as plt
     
-    df_results = mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)[["metrics.Accuracy", "params.Estimator"]]
+    df_results = mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)[["metrics.training_accuracy_score", "params.estimator"]]
     
     fig, ax = plt.subplots()
-    ax.bar(df_results["params.Estimator"], df_results["metrics.Accuracy"])
+    ax.bar(df_results["params.estimator"], df_results["metrics.training_accuracy_score"])
     ax.set_xlabel("Estimator")
     ax.set_ylabel("Accuracy")
     ax.set_title("Accuracy by Estimator")
-    for i, v in enumerate(df_results["metrics.Accuracy"]):
+    for i, v in enumerate(df_results["metrics.training_accuracy_score"]):
         ax.text(i, v, str(round(v, 2)), ha='center', va='bottom', fontweight='bold')
     plt.show()
     ```
@@ -235,15 +215,35 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
 1. Navigate to the **Data Science** home page.
-1. Select the `experiment-mlflow` experiment to open it.
+1. Select the `experiment-churn` experiment to open it.
+
+    > **Tip:**
+    > If you don't see any logged experiment runs, refresh the page.
+
 1. Select the **View** tab.
 1. Select **Run list**. 
 1. Select the two latest runs by checking each box.
-    As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the accuracy and estimator are plotted by run name. 
+    As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the metrics are plotted by run name. 
 1. Select the **&#128393;** (Edit) button of the graph visualizing the accuracy for each run. 
 1. Change the **visualization type** to `bar`. 
 1. Change the **X-axis** to `estimator`. 
 1. Select **Replace** and explore the new graph.
+
+By plotting the accuracy per logged estimator, you can review which algorithm resulted in a better model.
+
+## Save the model
+
+After comparing machine learning models that you've trained across experiment runs, you can choose the best performing model. To use the best performing model, save the model and use it to generate predictions.
+
+1. In the experiment overview, ensure the **View** tab is selected.
+1. Select **Run details**.
+1. Select the run with the highest accuracy. 
+1. Select **Save** in the **Save as model** box.
+1. Select **Create a new model** in the newly opened pop-up window.
+1. Name the model `model-churn`, and select **Create**. 
+1. Select **View model** in the notification that appears at the top right of your screen when the model is created.
+    
+Note that the model, the experiment, and the experiment run are linked, allowing you to review how the model is trained. 
 
 ## Save the notebook and end the Spark session
 
