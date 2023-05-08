@@ -12,15 +12,17 @@ This lab will take approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
+
+> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with premium capacity enabled.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -29,18 +31,16 @@ Before working with data in Fabric, create a workspace with premium capacity ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data files you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
-
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer and then upload them to your lakehouse.
 
 3. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
 
 4. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
-5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
+5. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer to the lakehouse.
 6. After the files have been uploaded, expand **Files** and select the **orders** folder; and verify that the CSV files have been uploaded, as shown here:
 
     ![Screenshot of uploaded files in a lakehouse.](./Images/uploaded-files.png)
@@ -54,7 +54,6 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the first cell (which is currently a *code* cell), and then in the dynamic tool bar at its top-right, use the **M&#8595;** button to convert the cell to a *markdown* cell.
-<!-- this isn't the experience I have - I see it in code first, then I can change the language to HTML, or click the MD button (M with down arrow) to convert. -->
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
@@ -66,7 +65,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
     Use the code in this notebook to explore sales order data.
     ```
 
-4. Select the **Edit** button again and then click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
+4. Click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
 
 ## Load data into a dataframe
 
@@ -86,7 +85,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     display(df)
     ```
 
-    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
+    > **Tip**: You can hide the Lakehouse explorer panes on the left by using their **<<** icons. Doing so will help you focus on the notebook.
 
 3. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
@@ -337,11 +336,6 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 2. Run the code cell and review the output, which describes the definition of the new table.
 
 3. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
 
     ![Screenshot of the salesorder table in Explorer.](./Images/table-view.png)
 

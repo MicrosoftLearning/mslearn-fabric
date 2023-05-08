@@ -12,15 +12,17 @@ This exercise should take approximately **40** minutes to complete
 
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview.
+You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
+
+> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with premium capacity enabled.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -29,17 +31,15 @@ Before working with data in Fabric, create a workspace with premium capacity ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
-
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new empty lakehouse. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer and then upload it to your lakehouse.
 
 3. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer.
 
-4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Lakehouse explorer** pane, select **New subfolder** and create a folder named **products**.
+4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **New subfolder** and create a folder named **products**.
 
 5. In the **...** menu for the **products** folder, select **Upload** and **Upload files**, and then upload the **products.csv** file from your local computer to the lakehouse.
 6. After the file has been uploaded, select the **products** folder; and verify that the **products.csv** file has been uploaded, as shown here:
@@ -53,7 +53,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the **Explorer** pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
+3. In the **Lakehouse explorer** pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-products.png)
 
@@ -86,6 +86,8 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 ### Create a *managed* table
 
+*Managed* tables are tables for which both the schema metadata and the data files are managed by Fabric. The data files for the table are created in the **Tables** folder.
+
 1. Under the results returned by the first code cell, use the **+ Code** button to add a new code cell if one doesn't already exist. Then enter the following code in the new cell and run it:
 
     ```python
@@ -94,41 +96,35 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **managed_products** table has been created.
 
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
-
 ### Create an *external* table
 
-1. Add another new code cell, and use it to run the following code:
+You can also create *external* tables for which the schema metadata is defined in the metastore for the lakehouse, but the data files are stored in an external location.
+
+1. Add another new code cell, and add the following code to it:
 
     ```python
-    df.write.format("delta").saveAsTable("external_products", path="Files/external_products")
+    df.write.format("delta").saveAsTable("external_products", path="<abfs_path>/external_products")
     ```
 
-2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Copy ABFS path**.
 
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
+    The ABFS path is the fully qualified path to the **Files** folder in the OneLake storage for your lakehouse - similar to this:
 
-    ---
+    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files*
+
+3. In the code you entered into the code cell, replace **<abfs_path>** with the path you copied to the clipboard so that the code saves the dataframe as an external table with data files in a folder named **external_products** in your **Files** folder location. The full path should look similar to this:
+
+    *abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files/external_products*
+
+4. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **external_products** table has been created.
+
+5. In the **Lakehouse explorer** pane, in the **...** menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that the **external_products** folder has been created for the table's data files.
 
 ### Compare *managed* and *external* tables
 
-1. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that a folder named **external_products** has been created. Select this folder to view the Parquet data files and **_delta_log** folder for the **external_products** table.
+Let's explore the differences between managed and external tables.
 
-2. Add another code cell and run the following code:
-
-    ```sql
-    %%sql
-
-    DESCRIBE FORMATTED external_products;
-    ```
-
-    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path). Note also in the **Table properties** that the table type is **EXTERNAL**.
-
-3. Modify the `DESCRIBE` command to show the details of the **managed_products** tables as shown here:
+1. Add another code cell and run the following code:
 
     ```sql
     %%sql
@@ -136,23 +132,21 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     DESCRIBE FORMATTED managed_products;
     ```
 
-    In the results, note that there is no **Location** property for the table. Note also in the **Table properties** that the table type is **MANAGED**.
+    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Tables/managed_products** (you may need to widen the **Data type** column to see the full path).
 
-    So where are the data files for the managed table?
+2. Modify the `DESCRIBE` command to show the details of the **external_products** table as shown here:
 
-4. Add another code cell and run the following code:
+    ```sql
+    %%sql
 
-    ```python
-    from notebookutils import mssparkutils
-
-    objs = mssparkutils.fs.ls('Tables')
-    for obj in objs:
-        print(obj.name)
+    DESCRIBE FORMATTED external_products;
     ```
+
+    In the results, view the **Location** property for the table, which should be a path to the OneLake storage for the lakehouse ending with **/Files/external_products** (you may need to widen the **Data type** column to see the full path).
 
     The files for managed table are stored in the **Tables** folder in the OneLake storage for the lakehouse. In this case, a folder named **managed_products** has been created to store the Parquet files and **delta_log** folder for the table you created.
 
-5. Add another code cell and run the following code:
+3. Add another code cell and run the following code:
 
     ```sql
     %%sql
@@ -161,21 +155,9 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     DROP TABLE external_products;
     ```
 
-6. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
+4. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that no tables are listed.
 
-7. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
-
-8. Re-run the cell that lists the contents of the **Tables** folder (shown below).
-
-    ```python
-    from notebookutils import mssparkutils
-
-    objs = mssparkutils.fs.ls('Tables')
-    for obj in objs:
-        print(obj.name)
-    ```
-
-    Verify that the **managed_products** folder is no longer listed - the folder for the managed table was deleted along with the table metadata.
+5. In the **Lakehouse explorer** pane, expand the **Files** folder and verify that the **external_products** has not been deleted. Select this folder to view the Parquet data files and **_delta_log** folder for the data that was previously in the **external_products** table. The table metadata for the external table was deleted, but the files were not affected.
 
 ### Use SQL to create a table
 
@@ -190,11 +172,6 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
     ```
 
 2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
 
 3. Add another code cell and run the following code:
 
@@ -246,11 +223,6 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
 
     The results show two dataframes - one containing the data after the price reduction, and the other showing the original version of the data.
 
----
-*The latest update seems to have broken file paths to the default lakehouse storage. This no longer works!*
-
----
-
 ## Use delta tables for streaming data
 
 Delta lake supports streaming data. Delta tables can be a *sink* or a *source* for data streams created using the Spark Structured Streaming API. In this example, you'll use a delta table as a sink for some streaming data in a simulated internet of things (IoT) scenario.
@@ -293,34 +265,15 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     ```python
     # Write the stream to a delta table
-    delta_stream_table_path = 'Files/delta/iotdevicedata'
+    delta_stream_table_path = 'Tables/iotdevicedata'
     checkpointpath = 'Files/delta/checkpoint'
     deltastream = iotstream.writeStream.format("delta").option("checkpointLocation", checkpointpath).start(delta_stream_table_path)
     print("Streaming to delta sink...")
     ```
 
-    This code writes the streaming device data in delta format.
+    This code writes the streaming device data in delta format to a folder named **iotdevicedata**. Because the path for the folder location in the **Tables** folder, a table will automatically be created for it.
 
 3. In a new code cell, add and run the following code:
-
-    ```python
-    # Read the data in delta format into a dataframe
-    df = spark.read.format("delta").load(delta_stream_table_path)
-    display(df)
-    ```
-
-    This code reads the streamed data in delta format into a dataframe. Note that the code to load streaming data is no different to that used to load static data from a delta folder.
-
-4. In a new code cell, add and run the following code:
-
-    ```python
-    # create a catalog table based on the streaming sink
-    spark.sql("CREATE TABLE IotDeviceData USING DELTA LOCATION '{0}'".format(delta_stream_table_path))
-    ```
-
-    This code creates a catalog table named **IotDeviceData** (in the **default** database) based on the delta folder. Again, this code is the same as would be used for non-streaming data.
-
-5. In a new code cell, add and run the following code:
 
     ```sql
     %%sql
@@ -330,7 +283,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table, which contains the device data from the streaming source.
 
-6. In a new code cell, add and run the following code:
+4. In a new code cell, add and run the following code:
 
     ```python
     # Add more data to the source stream
@@ -347,7 +300,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code writes more hypothetical device data to the streaming source.
 
-7. In a new code cell, add and run the following code:
+5. Re-run the cell containing the following code:
 
     ```sql
     %%sql
@@ -357,7 +310,7 @@ Delta lake supports streaming data. Delta tables can be a *sink* or a *source* f
 
     This code queries the **IotDeviceData** table again, which should now include the additional data that was added to the streaming source.
 
-8. In a new code cell, add and run the following code:
+6. In a new code cell, add and run the following code:
 
     ```python
     deltastream.stop()

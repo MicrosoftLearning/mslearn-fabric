@@ -4,25 +4,28 @@ lab:
     module: 'Ingest Data with Dataflows Gen2 in Fabric'
 ---
 
-
 # Create a Dataflow (Gen2) in Microsoft Fabric
 
 In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
 
+his lab is designed to introduce the different elements of Dataflows (Gen2), and not create a complex solution that may exist in an enterprise. This lab will take **approximately 30 minutes** to complete.
+
 ## Before you start
 
-You'll need a Power BI Premium subscription with access to the Microsoft Fabric preview. This lab is designed to introduce the different elements of Dataflows (Gen2), and not create a complex solution that may exist in an enterprise. This lab will take **approximately 30 minutes** to complete.
+You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
+
+> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with premium capacity enabled.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Premium per user** licensing mode.
+3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty, as shown here:
 
-    ![Empty workspace in Power BI.](./Images/new-workspace.png)
+    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
