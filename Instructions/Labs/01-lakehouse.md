@@ -10,11 +10,11 @@ Large-scale data analytics solutions have traditionally been built around a *dat
 
 In Microsoft Fabric, a lakehouse provides highly scalable file storage in a *OneLake* store (built on Azure Data Lake Store Gen2) with a metastore for relational objects such as tables and views based on the open source *Delta Lake* table format. Delta Lake enables you to define a schema of tables in your lakehouse that you can query using SQL.
 
-This lab will take approximately **45** minutes to complete.
+This lab takes approximately **45** minutes to complete.
 
 ## Before you start
 
-You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
+You need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
 
 > **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
@@ -25,9 +25,9 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 1. Sign into your Power BI service at [https://app.powerbi.com](https://app.powerbi.com).
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
-4. When your new workspace opens, it should be empty, as shown here:
+4. When your new workspace opens, it should be empty.
 
-    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
+![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
@@ -35,11 +35,9 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 1. At the bottom left of the Power BI portal, switch the workload to the **Data Engineering** experience, as shown here:
 
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
-
-    The data engineering home page includes tiles to create commonly used data engineering assets:
-
     ![Screenshot of the Data Engineering home page.](./Images/data-engineering-home.png)
+
+    The data engineering home page includes tiles to create commonly used data engineering assets.
 
 2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
@@ -49,7 +47,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 3. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
     - The **Tables** folder contains tables that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* file format, commonly used in Apache Spark.
-    - The **Files** folder contains data files in the OneLake storage for the lakehouse that are not associated with managed delta tables. You can also create *shortcuts* in this folder to reference data that is stored externally.
+    - The **Files** folder contains data files in the OneLake storage for the lakehouse that aren't associated with managed delta tables. You can also create *shortcuts* in this folder to reference data that is stored externally.
 
     Currently, there are no tables or files in the lakehouse.
 
@@ -68,7 +66,7 @@ Fabric provides multiple ways to load data into the lakehouse, including built-i
 
 ## Explore shortcuts
 
-In many scenarios, the data you need to work with in your lakehouse may be stored in some other location. While there are many ways to ingest data into the OneLake storage for your lakehouse, another option is to instead create a *shortcut*. This enables you to include externally sourced data in your analytics solution without the overhead and risk of data inconsistency associated with copying it.
+In many scenarios, the data you need to work with in your lakehouse may be stored in some other location. While there are many ways to ingest data into the OneLake storage for your lakehouse, another option is to instead create a *shortcut*. Shortcuts enable you to include externally sourced data in your analytics solution without the overhead and risk of data inconsistency associated with copying it.
 
 1. In the **...** menu for the **Files** folder, select **New shortcut**.
 2. View the available data source types for shortcuts. Then close the **New shortcut** dialog box without creating a shortcut.
@@ -78,7 +76,7 @@ In many scenarios, the data you need to work with in your lakehouse may be store
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
 1. On the **Home** page, select the **Files/Data** folder so you can see the **sales.csv** file it contains.
-2. In the **...** menu for the **sales.csv** file select **Load to Delta table**.
+2. In the **...** menu for the **sales.csv** file, select **Load to Delta table**.
 3. In **Load to table** dialog box, set the table name to **sales** and confirm the load operation. Then wait for the table to be created and loaded.
 
     > **Tip**: If the **sales** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
@@ -87,7 +85,7 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
 
-4. In the **...** menu for the **sales** table, select **View table files** to see the underlying files for this table
+4. In the **...** menu for the **sales** table, select **View files** to see the underlying files for this table
 
     ![Screenshot of a table preview.](./Images/delta-table-files.png)
 
@@ -120,10 +118,10 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 
 ## Create a visual query
 
-While many data professionals are familiar with SQL, data analysts with Power BI experience can leverage their Power Query skills to create visual queries.
+While many data professionals are familiar with SQL, data analysts with Power BI experience can apply their Power Query skills to create visual queries.
 
 1. On the toolbar, select **New visual query**.
-2. Drag the **sales** table to the new visual query editor pane that opens. This defines a Power Query with some initial steps to extract data from the table.
+2. Drag the **sales** table to the new visual query editor pane that opens. Power Query Online is 
 
     ![Screenshot of a Visual query.](./Images/visual-query.png)
 
@@ -169,7 +167,7 @@ The tables in your lakehouse are automatically added to a default dataset that d
     ![Screenshot of a report containing a clustered bar chart.](./Images/clustered-bar-chart.png)
 
 5. On the **File** menu, select **Save**. Then save the report as **Item Sales Report** in the workspace you created previously.
-6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your worspace to verify that it contains the following items:
+6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your workspace to verify that it contains the following items:
     - Your lakehouse.
     - The SQL endpoint for your lakehouse.
     - A default dataset for the tables in your lakehouse.
