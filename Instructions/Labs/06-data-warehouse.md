@@ -14,7 +14,7 @@ This lab will take approximately **30** minutes to complete.
 
 You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
 
-> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
+> **Note**: See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
@@ -64,7 +64,7 @@ A warehouse is a relational database in which you can define tables and other ob
     ```
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **DimProduct** in the **dbo** schema of the data warehouse.
-3. Use the **SRefresh** button on the toolbar to refresh the view. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **DimProduct** table has been created.
+3. Use the **Refresh** button on the toolbar to refresh the view. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **DimProduct** table has been created.
 4. On the **Home** menu tab, use the **New SQL Query** button to create a new query, and enter the following INSERT statement:
 
     ```sql

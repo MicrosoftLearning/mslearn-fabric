@@ -16,7 +16,7 @@ This lab takes approximately **45** minutes to complete.
 
 You need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
 
-> **Note**: See [Getting started with Fabric](https://review.learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
+> **Note**: See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
 
 ## Create a workspace
 
