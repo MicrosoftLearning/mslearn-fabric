@@ -51,8 +51,8 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data you uploaded to your lakehouse, you must create a table in a KQL database and ingest the data from the file.
 
-1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Kusto** experience.
-2. On the **Home** page for the Kusto experience, select **KQL database** and create a new database with a name of your choice.
+1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Real-Time Analytics** experience.
+2. On the **Home** page for the Real-Time Analytics experience, select **KQL database** and create a new database with a name of your choice.
 3. When the new database has been created, select the option to get data from **OneLake**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
         - **Database**: *The database you just created is already selected*
@@ -73,35 +73,20 @@ Kusto query language (KQL) is used to query static or streaming data in a table 
 
 Now that you have a table of data in your database, you can use KQL code to query it.
 
-1. Select **Quick query** to open the query editor pane. The query editor contains some code comments as shown here:
+1. Make sure you have the **sales** table highlighted. From the menu bar, select the **Query table** drop-down, and from there select **Show any 100 records** .
 
-    ```sql
-    //***********************************************************************************************************
-    //Recommended reading:
-    //KQL reference guide - https://docs.microsoft.com/en-us/azure/data-explorer/kql-quick-reference
-    //SQL - KQL conversions - https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/sqlcheatsheet
-    //***********************************************************************************************************
-    ```
+2. A new pane will open with the query and its result. 
 
-2. Under the existing comments, add the following code:
-
-    ```kusto
-    sales
-    | take 1000
-    ```
-
-3. Use the **&#9655; Run** button to run the query and review the results, which contain the first 1000 rows of data from the **sales** table.
-
-4. Modify the query as follows:
+3. Modify the query as follows:
 
     ```kusto
     sales
     | where Item == 'Road-250 Black, 48'
     ```
 
-5. Run the query. Then review the results, which should contain only the rows for sales orders for the *Road-250 Black, 48* product.
+4. Run the query. Then review the results, which should contain only the rows for sales orders for the *Road-250 Black, 48* product.
 
-6. Modify the query as follows:
+5. Modify the query as follows:
 
     ```kusto
     sales
@@ -109,9 +94,9 @@ Now that you have a table of data in your database, you can use KQL code to quer
     | where datetime_part('year', OrderDate) > 2020
     ```
 
-7. Run the query and review the results, which should contain only sales orders for *Road-250 Black, 48* made after 2020.
+6. Run the query and review the results, which should contain only sales orders for *Road-250 Black, 48* made after 2020.
 
-8. Modify the query as follows:
+7. Modify the query as follows:
 
     ```kusto
     sales
@@ -120,9 +105,9 @@ Now that you have a table of data in your database, you can use KQL code to quer
     | sort by Item asc
     ```
 
-9. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
+8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
 
-10. Select **Save as query set** and save the query as **Revenue by Product**.
+9. Select **Save as QKL queryset** and save the query as **Revenue by Product**.
 
 ## Create a Power BI report from a KQL query set
 
@@ -134,4 +119,14 @@ You can use your KQL query set as the basis for a Power BI report.
 4. At the bottom left of the Power BI portal, select the **Kusto** icon and switch to the **Power BI** experience.
 5. Use the **Workspaces** icon to switch to **My Workspace**.
 6. In your workspace, find the **Sales Revenue By Product** dataset.
-7. Create a report from the dataset, using the **Auto-create** option, and view the report.
+7. In the **Visualize this data** panel, select the **+Create from scratch** item and then select **Auto-create**. This will generate and preview a report based on the selected dataset.
+
+## Clean up resources
+
+In this exercise, you have created a lakehouse, a KQL database to analize the data uploaded into the lakehouse. You used KQL to query the data and create a query set, which was then used to create a PowerBI report.
+
+If you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Remove this workspace**.
