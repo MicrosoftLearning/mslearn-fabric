@@ -33,9 +33,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse into which you will ingest data.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
-
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
 2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 
@@ -47,10 +45,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
-1. On the **Home** page for your lakehouse, select **New data pipeline**.
-
-    The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
-
+1. On the **Home** page for your lakehouse, select **New data pipeline**, and create a new data pipeline named **Ingest Sales Data**.
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
 3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, select the **Generic protocol** tab and then select **HTTP**.
 
@@ -59,9 +54,8 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 4. Select **Next** and then select **Create new connection** and enter the following settings for the connection to your data source:
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
     - **Connection**: Create new connection
-    - **Connection name**: web_sales_data
-    - **Authentication kind**: Anonymous
-
+    - **Connection name**: *Specify a unique name*
+    - **Authentication kind**: Basic (*Leave the username and password blank*)
 5. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
     - **Request method**: GET
@@ -69,7 +63,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Binary copy**: <u>Un</u>selected
     - **Request timeout**: *Leave blank*
     - **Max concurrent connections**: *Leave blank*
-6. Select **Next**, and then ensure that the following settings are selected:
+6. Select **Next**, and wait for the data to be sampled and then ensure that the following settings are selected:
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
@@ -87,22 +81,23 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **Add header to file**: Selected
+    - **Compression type**: None
 11. On the **Copy summary** page, review the details of your copy operation and then select **OK**
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-12. Use the *Save as* icon to save the pipeline as **Ingest Sales Data**.
-12. Use the **&#9655; Run** button to run the pipeline.
+12. Use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run it.
 
-    When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
-13. Close the browser tab containing the pipeline designer and return to the tab containing your lakehouse.
-14. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
+    When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
+
+14. In the hub menu bar on the left, select your lakehouse.
+15. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
 
 ## Create a notebook
 
-1. On the **Home** page, in the **Open notebook** menu, select **New notebook**.
+1. On the **Home** page for your lakehouse, in the **Open notebook** menu, select **New notebook**.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
@@ -143,23 +138,16 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first cell can take a minute or so to complete.
 
-6. When the notebook run has completed, in the **Explorer** pane on the left, in the **...** menu for **Tables** select **Refresh** and verify that a **sales** table has been created.
-
-    ---
-    *If refreshing the Tables folder doesn't work, refresh the entire web page!*
-
-    ---
-
-7. Save the notebook as **Load Sales**.
-
-8. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-9. In the **Lakehouse explorer** pane, refresh the view. Then expand **Tables**, and select the **sales** table to see a preview of the data it contains.
+6. When the notebook run has completed, in the **Lakehouse explorer** pane on the left, in the **...** menu for **Tables** select **Refresh** and verify that a **sales** table has been created.
+7. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings. Then set the **Name** of the notebook to **Load Sales** and close the settings pane.
+8. In the hub menu bar on the left, select your lakehouse.
+9. In the **Explorer** pane, refresh the view. Then expand **Tables**, and select the **sales** table to see a preview of the data it contains.
 
 ## Modify the pipeline
 
 Now that you've implemented a notebook to transform data and load it into a table, you can incorporate the notebook into a pipeline to create a reusable ETL process.
 
-1. In the navigation bar on the left edge of the portal, select the icon for your workspace. Then, in the list of items in your workspace, select the **Ingest Sales Data** pipeline you created previously.
+1. In the hub menu bar on the left select the **Ingest Sales Data** pipeline you created previously.
 2. On the **Activities** tab, in the **More activities** list, select **Delete data**. Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
 
     ![Screenshot of a pipeline with Delete data and Copy data activities.](./Images/delete-data-activity.png)
@@ -170,13 +158,12 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     - **Source**
         - **Data store type**: Workspace
         - **Workspace data store**: *Your lakehouse*
-        - **File path**: Files / **new_data** / **\*.csv**
         - **File path type**: Wildcard file path
+        - **Folder path**: Files / **new_data**
+        - **Wildcard file name**: *.csv        
         - **Recursively**: *Selected*
-        - **Max concurrent connections**: *Leave blank*
     - **Logging settings**:
-        - **Enable logging**: *Unselected*
-
+        - **Enable logging**: *<u>Un</u>selected*
 
     These settings will ensure that any existing .csv files are deleted before copying the **sales.csv** file.
 
@@ -198,13 +185,12 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
     The **table_name** parameter will be passed to the notebook and override the default value assigned to the **table_name** variable in the parameters cell.
 
-7. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline as **Ingest Sales Data**.
-8. Use the **&#9655; Run** button to run the pipeline, and wait for it to complete.
+7. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run the pipeline, and wait for all of the activities to complete.
 
     ![Screenshot of a pipeline with a Dataflow activity.](./Images/pipeline-run.png)
 
-9. In the navigation bar on the left edge of the portal, select **&#128447;** (*Browse*). Then, in the **Recent** category, select your lakehouse.
-10. Refresh the **Lakehouse explorer** pane, and then expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
+8. In the hub menu bar on the left edge of the portal, select your lakehouse.
+9. In the **Explorer** pane, expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
 
 In this exercise, you implemented a data ingestion solution that uses a pipeline to copy data to your lakehouse from an external source, and then uses a Spark notebook to transform the data and load it into a table.
 
