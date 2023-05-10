@@ -65,7 +65,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
     display(df)
     ```
 
-    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
+    > **Tip**: You can hide the pane containing the files on the left by using its **<<** icon. Doing so will help you focus on the notebook.
 
 5. Use the **&#9655;** (*Run cell*) button on the left of the cell to run it.
 
@@ -326,4 +326,4 @@ If you've finished exploring your lakehouse, you can delete the workspace you cr
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Delete this workspace**.
+3. In the **Other** section, select **Remove this workspace**.
