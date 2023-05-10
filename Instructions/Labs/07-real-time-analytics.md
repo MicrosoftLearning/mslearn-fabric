@@ -43,13 +43,13 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-file.png)
 
-6. In the **...** menu for the **sales.csv** file, select **Properties**. Then copy the **URL** for your file to the clipboard - you will use this later.
+6. In the **...** menu for the **sales.csv** file, select **Properties**. Then copy the **ABFS path** for your file to the clipboard - you will use this later.
 
 ## Create a KQL database
 
 Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data you uploaded to your lakehouse, you must create a table in a KQL database and ingest the data from the file.
 
-1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Real-Time Analytics** experience.
+1. At the bottom left of the Power BI portal, select the **Data Engineering** icon and switch to the **Real-Time Analytics** experience.
 2. On the **Home** page for the Real-Time Analytics experience, select **KQL database** and create a new database with a name of your choice.
 3. When the new database has been created, select the option to get data from **OneLake**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
@@ -57,11 +57,12 @@ Kusto query language (KQL) is used to query static or streaming data in a table 
         - **Table**: *Create a new table named* **sales**.
     - **Source**:
         - **Source type**: OneLake
-        - **Link to source**: *Paste the URL path to your sales.csv file, which you copied to the clipboard previously*
+        - **Link to source**: *Paste the ABFS path to your sales.csv file, which you copied to the clipboard previously*
     - **Schema**:
         - **Compression type**: Uncompressed
         - **Data format**: CSV
         - **Ignore the first record**: *Selected*
+        - **Mapping name**: sales_mapping
     - **Summary**:
         - *Review the preview of the table and close the wizard.*
 
@@ -104,7 +105,6 @@ Now that you have a table of data in your database, you can use KQL code to quer
     ```
 
 8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
-
 9. Select **Save as QKL queryset** and save the query as **Revenue by Product**.
 
 ## Create a Power BI report from a KQL query set
@@ -112,19 +112,20 @@ Now that you have a table of data in your database, you can use KQL code to quer
 You can use your KQL query set as the basis for a Power BI report.
 
 1. In the query workbench editor for your query set, run the query and wait for the results.
-2. Select **Build Power BI report** and wait for the report to be generated.
-3. Review the preview of the report, then save it as **Sales Revenue By Product.pbix** in your **My Workspace** workspace.
-4. At the bottom left of the Power BI portal, select the **Kusto** icon and switch to the **Power BI** experience.
-5. Use the **Workspaces** icon to switch to **My Workspace**.
-6. In your workspace, find the **Sales Revenue By Product** dataset.
-7. In the **Visualize this data** panel, select the **+Create from scratch** item and then select **Auto-create**. This will generate and preview a report based on the selected dataset.
+2. Select **Build Power BI report** and wait for the report editor to open.
+3. In the report editor, in the **Data** pane, expand **Justo Query Result** and select the **Item** and **TotalRevenue** fields.
+4. On the report design canvas, select the table visualization that has been added and then in the **Visualizations** pane, select **Clustered bar chart**.
+
+    ![Screenshot of a report from a KQL query.](./Images/kql-report.png)
+
+5. Close the report.
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse, a KQL database to analize the data uploaded into the lakehouse. You used KQL to query the data and create a query set, which was then used to create a PowerBI report.
+In this exercise, you have created a lakehouse, a KQL database to analyze the data uploaded into the lakehouse. You used KQL to query the data and create a query set, which was then used to create a PowerBI report.
 
 If you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
 
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains (*close the dialog box used to select a KQL database i it is open*).
 2. In the **...** menu on the toolbar, select **Workspace settings**.
 3. In the **Other** section, select **Remove this workspace**.
