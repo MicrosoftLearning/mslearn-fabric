@@ -27,15 +27,13 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
 4. When your new workspace opens, it should be empty.
 
-![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
+    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for your data files.
 
-1. At the bottom left of the Power BI portal, switch the workload to the **Data Engineering** experience, as shown here:
-
-    ![Screenshot of the Data Engineering home page.](./Images/data-engineering-home.png)
+1. At the bottom left of the Power BI portal, switch the workload to the **Data Engineering** experience.
 
     The data engineering home page includes tiles to create commonly used data engineering assets.
 

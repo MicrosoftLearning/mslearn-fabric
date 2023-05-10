@@ -31,9 +31,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data files you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data engineering** experience, as shown here:
-
-    ![Screenshot of the experience menu in Power BI.](./Images/data-engineering.png)
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
 2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
 

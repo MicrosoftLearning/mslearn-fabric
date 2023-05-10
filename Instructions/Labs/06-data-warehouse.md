@@ -35,11 +35,9 @@ Now that you have a workspace, it's time to switch to the *Data Warehouse* exper
 
     The Data Warehouse home page includes a shortcut to create a new warehouse:
 
-    ![Screenshot of the Data Warehouse home page.](./Images/data-warehouse-home.png)
-
     > **Note**: If you don't see the an icon in the bottom left corner, Fabric isn't enabled for your tenant. Fabric is enabled in the admin portal for tenants that have a Power BI Premium subscription. 
 
-2. In the **Data Warehouse** home page, create a new **Warehouse** with a name of your choice. Don't specify a *sensitivity* level.
+2. In the **Data Warehouse** home page, create a new **Warehouse** with a name of your choice and a *sensitivity* level of **Non-Business**.
 
     After a minute or so, a new warehouse will be created:
 
