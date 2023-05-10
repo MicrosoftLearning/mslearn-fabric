@@ -84,7 +84,7 @@ Now you're ready to run code to prepare data and train a model. To work with dat
     display(df)
     ```
 
-    > **Tip**: You can hide the pane containing the files on the left by using its **<** icon. Doing so will help you focus on the notebook.
+    > **Tip**: You can hide the pane containing the files on the left by using its **<<** icon. Doing so will help you focus on the notebook.
 
 1. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
@@ -254,3 +254,13 @@ Now that you've finished training and evaluating the models, you can save the no
 1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Train and compare models**, and then close the settings pane.
 3. On the notebook menu, select **Stop session** to end the Spark session.
+
+## Clean up resources
+
+In this exercise, you have created a notebook and trained a machine learning model. You used Scikit-Learn to train the model and MLflow to track it´s performance.
+
+If you've finished exploring your model and experiments, you can delete the workspace you created for this exercise.
+
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+2. In the **...** menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Remove this workspace**.
