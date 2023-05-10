@@ -31,7 +31,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to switch to the **Data Engineering** workload in the portal and create a data lakehouse into which you'll ingest data.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Factory** experience, as shown here:
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience, as shown here:
 
     ![Workload experience menu in Power BI.](./Images/data-engineering.png)
 
@@ -131,7 +131,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
    ![Pipeline with a dataflow that has completed successfully.](./Images/dataflow-pipeline-succeeded.png)
 
 6. In the menu bar on the left edge, select your lakehouse.
-7. In the **...** menu for **Tables**, select **refresh**. Then expand **Tables** and select the **sales** table, which has been created by your dataflow.
+7. In the **...** menu for **Tables**, select **refresh**. Then expand **Tables** and select the **orders** table, which has been created by your dataflow.
 
    ![Table loaded by a dataflow.](./Images/loaded-table.png)
 
@@ -156,5 +156,5 @@ If you've finished exploring dataflows in Microsoft Fabric, you can delete the w
 1. Navigate to Microsoft Fabric in your browser.
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 1. In the **...** menu on the toolbar, select **Workspace settings**.
-1. In the **Other** section, select **Delete this workspace**.
+1. In the **Other** section, select **Remove this workspace**.
 1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
