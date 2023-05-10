@@ -52,7 +52,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     The pipeline editor opens in a new browser tab (if you are prompted to allow pop-ups, do so).
 
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, select the **File** tab and then select **HTTP**.
+3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, select the **Generic protocol** tab and then select **HTTP**.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
@@ -93,7 +93,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-12. Use the **&#128427;** (*Save*) icon to save the pipeline as **Ingest Sales Data**.
+12. Use the *Save As* icon to save the pipeline as **Ingest Sales Data**.
 12. Use the **&#9655; Run** button to run the pipeline.
 
     When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Wait until it has succeeeded.
@@ -167,7 +167,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 3. Select the **Delete data** activity, and in the pane below the design canvas, set the following properties:
     - **General**:
         - **Name**: Delete old files
-    - **Settings**
+    - **Source**
         - **Data store type**: Workspace
         - **Workspace data store**: *Your lakehouse*
         - **File path**: Files / **new_data** / **\*.csv**
@@ -216,4 +216,4 @@ If you've finished exploring your lakehouse, you can delete the workspace you cr
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Delete this workspace**.
+3. In the **Other** section, select **Remove this workspace**.
