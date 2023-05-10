@@ -93,15 +93,11 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
 When you create a lakehouse and define tables in it, a SQL endpoint is automatically created through which the tables can be queried using SQL `SELECT` statements.
 
-1. At the top-right of the Lakehouse page, switch from **Lakehouse** to **SQL endpoint** as shown here:
-
-    ![Screenshot of the SQL endpoint option.](./Images/sql-endpoint.png)
-
-2. Wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
+1. At the top-right of the Lakehouse page, switch from **Lakehouse** to **SQL endpoint**. Then wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
 
     ![Screenshot of the SQL endpoint page.](./Images/lakehouse-sql-endpoint.png)
 
-3. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
+2. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
     ```sql
     SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
@@ -110,7 +106,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
     ORDER BY Revenue DESC;
     ```
 
-4. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
+3. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
 
     ![Screenshot of a SQL query with results.](./Images/sql-query.png)
 
