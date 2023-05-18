@@ -115,7 +115,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 While many data professionals are familiar with SQL, data analysts with Power BI experience can apply their Power Query skills to create visual queries.
 
 1. On the toolbar, select **New visual query**.
-2. Drag the **sales** table to the new visual query editor pane that opens. Power Query Online is 
+2. Drag the **sales** table to the new visual query editor pane that opens to create a Power Query as shown here: 
 
     ![Screenshot of a Visual query.](./Images/visual-query.png)
 
