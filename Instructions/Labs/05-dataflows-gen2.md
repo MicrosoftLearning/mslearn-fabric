@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Create and use Dataflows (Gen2) in Microsoft Fabric'
-    module: 'Ingest Data with Dataflows Gen2 in Fabric'
+    module: 'Ingest Data with Dataflows Gen2 in Microsoft Fabric'
 ---
 
 # Create a Dataflow (Gen2) in Microsoft Fabric
@@ -133,19 +133,11 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    ![Table loaded by a dataflow.](./Images/loaded-table.png)
 
-## Use Dataflow Gen2 with Power BI
-
-You've created a Dataflow Gen2 to load data into a lakehouse and include in a pipeline. The transformations happen upstream with the dataflow, so Power BI Data Analysts connecting to the dataflow as a dataset spend less time on data preparation and will have consistent data integrity.
-
-1. Open Power BI Desktop.
-1. From the Home ribbon, select **Get Data** and choose **Dataflows** connector.
-1. Navigate to the workspace, then dataflow, and select the queries you'd like to load.
-1. **Load** brings you back to the canvas view; **Transform Data** opens Power Query Editor.
-1. Now you're ready to extend your data model with DAX calculations and create visualizations.
-
-    > **Tip**: If you wanted to customize this core dataset, you could make specialized transformations, and then publish this dataset, and distribute with intended audience.
-
-  ![Power BI data source connectors](Images/pbid-dataflow-connectors.png)
+> **Tip**: Use the Power BI Desktop *Dataflows connector* to connect directly to the data transformations done with your dataflow.
+>
+> You can also make additional transformations, publish as a new dataset, and distribute with intended audience for specialized datasets.
+>
+>![Power BI data source connectors](Images/pbid-dataflow-connectors.png)
 
 ## Clean up resources
 
