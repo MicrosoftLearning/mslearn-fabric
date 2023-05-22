@@ -105,7 +105,7 @@ Now that you have a table of data in your database, you can use KQL code to quer
     ```
 
 8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
-9. Select **Save as QKL queryset** and save the query as **Revenue by Product**.
+9. Select **Save as KQL queryset** and save the query as **Revenue by Product**.
 
 ## Create a Power BI report from a KQL query set
 
