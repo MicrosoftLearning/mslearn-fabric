@@ -29,7 +29,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 ## Create a lakehouse
 
-Now that you have a workspace, it's time to switch to the **Data Engineering** workload in the portal and create a data lakehouse into which you'll ingest data.
+Now that you have a workspace, it's time to switch to the **Data Engineering** experience in the portal and create a data lakehouse into which you'll ingest data.
 
 1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
@@ -107,9 +107,9 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 ## Add a dataflow to a pipeline
 
-You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created in a few different workloads, including Data Factory workload.
+You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created in a few different experiences, including Data Factory experience.
 
-1. From your Fabric-enabled workspace, make sure you're still in the **Data Engineering** workload. Select **New**, **Data pipeline**, then when prompted, create a new pipeline named **Load data**.
+1. From your Fabric-enabled workspace, make sure you're still in the **Data Engineering** experience. Select **New**, **Data pipeline**, then when prompted, create a new pipeline named **Load data**.
 
    The pipeline editor opens.
 
