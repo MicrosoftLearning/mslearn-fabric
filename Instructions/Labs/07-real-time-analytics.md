@@ -119,7 +119,7 @@ You can use your KQL query set as the basis for a Power BI report.
     ![Screenshot of a report from a KQL query.](./Images/kql-report.png)
 
 5. In the **Power BI** window, in the **File** menu, select **Save**. Then save the report as **Revenue by Item.pbix** in the workspace where your lakehouse and KQL database are defined using a **Non-Business** sensitivity label.
-6. Close the **Power BI** window, and in the bar on the left, select the icon for your workspace (*close the dialog box used to select a KQL database if it is open*).
+6. Close the **Power BI** window, and in the bar on the left, select the icon for your workspace.
 
     Refresh the Workspace page if necessary to view all of the items it contains.
 
