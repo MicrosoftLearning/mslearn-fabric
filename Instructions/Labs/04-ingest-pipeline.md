@@ -16,7 +16,9 @@ This lab will take approximately **60** minutes to complete.
 
 You'll need a Microsoft Fabric trial license with the Fabric preview enabled in your tenant.
 
-> **Note**: See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) to enable your Fabric trial license.
+> **Note**: See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) foe details of how to enable a Fabric trial license. You will need a Microsoft *school* or *work* account to do this.
+>
+> After enabling the Fabric trial, when you sign into the Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com), you should see a Power BI logo at the bottom left that you can use to switch to the various workload experiences supported in Microsoft Fabric. If this logo is not visible, you may need to ask your organization's administrator to [enable Fabric trial functionality](https://learn.microsoft.com/fabric/get-started/fabric-trial#administer-user-access-to-a-fabric-preview-trial).
 
 ## Create a workspace
 
