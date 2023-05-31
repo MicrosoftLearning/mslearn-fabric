@@ -45,7 +45,7 @@ Now that you have a workspace, it's time to switch to the **Data Engineering** e
 
 Now that you have a lakehouse, you need to ingest some data into it. One way to do this is to define a dataflow that encapsulates an *extract, transform, and load* (ETL) process.
 
-1. In the home page for your lakehouse, select **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
+1. In the home page for your workspace, select **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
 
  ![New dataflow.](./Images/new-dataflow.png)
 
