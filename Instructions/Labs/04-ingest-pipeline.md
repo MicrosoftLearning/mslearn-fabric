@@ -114,22 +114,22 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 4. Under the parameters cell, use the **+ Code** button to add a new code cell. Then add the following code to it:
 
     ```python
-    from pyspark.sql.functions import *
+   from pyspark.sql.functions import *
 
-    # Read the new sales data
-    df = spark.read.format("csv").option("header","true").load("Files/new_data/*.csv")
+   # Read the new sales data
+   df = spark.read.format("csv").option("header","true").load("Files/new_data/*.csv")
 
-    ## Add month and year columns
-    df = df.withColumn("Year", year(col("OrderDate"))).withColumn("Month", month(col("OrderDate")))
+   ## Add month and year columns
+   df = df.withColumn("Year", year(col("OrderDate"))).withColumn("Month", month(col("OrderDate")))
 
-    # Derive FirstName and LastName columns
-    df = df.withColumn("FirstName", split(col("CustomerName"), " ").getItem(0)).withColumn("LastName", split(col("CustomerName"), " ").getItem(1))
+   # Derive FirstName and LastName columns
+   df = df.withColumn("FirstName", split(col("CustomerName"), " ").getItem(0)).withColumn("LastName", split(col("CustomerName"), " ").getItem(1))
 
-    # Filter and reorder columns
-    df = df["SalesOrderNumber", "SalesOrderLineNumber", "OrderDate", "Year", "Month", "FirstName", "LastName", "EmailAddress", "Item", "Quantity", "UnitPrice", "TaxAmount"]
+   # Filter and reorder columns
+   df = df["SalesOrderNumber", "SalesOrderLineNumber", "OrderDate", "Year", "Month", "FirstName", "LastName", "EmailAddress", "Item", "Quantity", "UnitPrice", "TaxAmount"]
 
-    # Load the data into a table
-    df.write.format("delta").mode("append").saveAsTable(table_name)
+   # Load the data into a table
+   df.write.format("delta").mode("append").saveAsTable(table_name)
     ```
 
     This code loads the data from the sales.csv file that was ingested by the **Copy Data** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
