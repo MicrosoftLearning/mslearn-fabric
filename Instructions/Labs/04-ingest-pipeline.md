@@ -106,7 +106,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 2. Select the existing cell in the notebook, which contains some simple code, and then replace the default code with the following variable declaration.
 
    ```python
-   table_name = "sales"
+  table_name = "sales"
    ```
 
 3. In the **...** menu for the cell (at its top-right) select **Toggle parameter cell**. This configures the cell so that the variables declared in it are treated as parameters when running the notebook from a pipeline.
