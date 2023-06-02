@@ -113,7 +113,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 4. Under the parameters cell, use the **+ Code** button to add a new code cell. Then add the following code to it:
 
-    ```python
+   ```python
    from pyspark.sql.functions import *
 
    # Read the new sales data
@@ -130,7 +130,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
    # Load the data into a table
    df.write.format("delta").mode("append").saveAsTable(table_name)
-    ```
+   ```
 
     This code loads the data from the sales.csv file that was ingested by the **Copy Data** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
 
