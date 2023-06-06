@@ -61,7 +61,7 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
 
 3. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then modify the markdown as follows:
 
-    ```text
+    ```markdown
     # Sales order data exploration
 
     Use the code in this notebook to explore sales order data.
@@ -79,7 +79,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
-2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook: <!-- I had to read this more than once AND look at the image to figure out the "... menu for 2019.csv" meant. -->
+2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
     df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
