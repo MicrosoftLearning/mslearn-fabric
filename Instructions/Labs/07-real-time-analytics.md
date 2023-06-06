@@ -44,7 +44,7 @@ Kusto query language (KQL) is used to query static or streaming data in a table 
 
 1. In the **Microsoft Fabric** experience portal, select the **Synapse Real-Time Analytics** experience image as shown here:
 
-    ![Screenshot of selected Fabric Experience home with RTA selected](./images/fabric-experience-home.png)
+    ![Screenshot of selected Fabric Experience home with RTA selected](./Images/fabric-experience-home.png)
 
 2. On the **Home** page for the **Real-Time Analytics** experience, select **KQL database** and create a new database with a name of your choice.
 3. When the new database has been created, select the option to get data from **Local File**. Then use the wizard to import the data into a new table by selecting the following options:
