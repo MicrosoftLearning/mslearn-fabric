@@ -62,9 +62,9 @@ To work with data in Apache Spark, you can create a *notebook*. Notebooks provid
 3. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then modify the markdown as follows:
 
     ```
-    # Sales order data exploration
+   # Sales order data exploration
 
-    Use the code in this notebook to explore sales order data.
+   Use the code in this notebook to explore sales order data.
     ```
 
 4. Click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
