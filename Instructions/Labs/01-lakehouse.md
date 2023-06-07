@@ -101,10 +101,10 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 2. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
     ```sql
-    SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
-    FROM sales
-    GROUP BY Item
-    ORDER BY Revenue DESC;
+   SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
+   FROM sales
+   GROUP BY Item
+   ORDER BY Revenue DESC;
     ```
 
 3. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.

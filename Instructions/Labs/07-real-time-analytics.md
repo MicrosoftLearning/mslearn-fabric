@@ -75,8 +75,8 @@ Now that you have a table of data in your database, you can use KQL code to quer
 3. Modify the query as follows:
 
     ```kusto
-    sales
-    | where Item == 'Road-250 Black, 48'
+   sales
+   | where Item == 'Road-250 Black, 48'
     ```
 
 4. Run the query. Then review the results, which should contain only the rows for sales orders for the *Road-250 Black, 48* product.
@@ -84,9 +84,9 @@ Now that you have a table of data in your database, you can use KQL code to quer
 5. Modify the query as follows:
 
     ```kusto
-    sales
-    | where Item == 'Road-250 Black, 48'
-    | where datetime_part('year', OrderDate) > 2020
+   sales
+   | where Item == 'Road-250 Black, 48'
+   | where datetime_part('year', OrderDate) > 2020
     ```
 
 6. Run the query and review the results, which should contain only sales orders for *Road-250 Black, 48* made after 2020.
@@ -94,10 +94,10 @@ Now that you have a table of data in your database, you can use KQL code to quer
 7. Modify the query as follows:
 
     ```kusto
-    sales
-    | where OrderDate between (datetime(2020-01-01 00:00:00) .. datetime(2020-12-31 23:59:59))
-    | summarize TotalNetRevenue = sum(UnitPrice) by Item
-    | sort by Item asc
+   sales
+   | where OrderDate between (datetime(2020-01-01 00:00:00) .. datetime(2020-12-31 23:59:59))
+   | summarize TotalNetRevenue = sum(UnitPrice) by Item
+   | sort by Item asc
     ```
 
 8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.

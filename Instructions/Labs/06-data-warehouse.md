@@ -52,15 +52,15 @@ A warehouse is a relational database in which you can define tables and other ob
 1. In your new warehouse, select the **Create tables with T-SQL** tile, and replace the default SQL code with the following CREATE TABLE statement:
 
     ```sql
-    CREATE TABLE dbo.DimProduct
-    (
-        ProductKey INTEGER NOT NULL,
-        ProductAltKey VARCHAR(25) NULL,
-        ProductName VARCHAR(50) NOT NULL,
-        Category VARCHAR(50) NULL,
-        ListPrice DECIMAL(5,2) NULL
-    );
-    GO
+   CREATE TABLE dbo.DimProduct
+   (
+       ProductKey INTEGER NOT NULL,
+       ProductAltKey VARCHAR(25) NULL,
+       ProductName VARCHAR(50) NOT NULL,
+       Category VARCHAR(50) NULL,
+       ListPrice DECIMAL(5,2) NULL
+   );
+   GO
     ```
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **DimProduct** in the **dbo** schema of the data warehouse.
@@ -68,12 +68,12 @@ A warehouse is a relational database in which you can define tables and other ob
 4. On the **Home** menu tab, use the **New SQL Query** button to create a new query, and enter the following INSERT statement:
 
     ```sql
-    INSERT INTO dbo.DimProduct
-    VALUES
-    (1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
-    (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
-    (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
-    GO
+   INSERT INTO dbo.DimProduct
+   VALUES
+   (1, 'RING1', 'Bicycle bell', 'Accessories', 5.99),
+   (2, 'BRITE1', 'Front light', 'Accessories', 15.49),
+   (3, 'BRITE2', 'Rear light', 'Accessories', 15.49);
+   GO
     ```
 
 
@@ -128,14 +128,14 @@ Most queries in a relational data warehouse involve aggregating and grouping dat
 1. Create a new SQL Query, and run the following code:
 
     ```sql
-    SELECT  d.[Year] AS CalendarYear,
+   SELECT  d.[Year] AS CalendarYear,
             d.[Month] AS MonthOfYear,
             d.MonthName AS MonthName,
-            SUM(so.SalesTotal) AS SalesRevenue
-    FROM FactSalesOrder AS so
-    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
-    GROUP BY d.[Year], d.[Month], d.MonthName
-    ORDER BY CalendarYear, MonthOfYear;
+           SUM(so.SalesTotal) AS SalesRevenue
+   FROM FactSalesOrder AS so
+   JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+   GROUP BY d.[Year], d.[Month], d.MonthName
+   ORDER BY CalendarYear, MonthOfYear;
     ```
 
     Note that the attributes in the time dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
@@ -143,16 +143,16 @@ Most queries in a relational data warehouse involve aggregating and grouping dat
 2. Modify the query as follows to add a second dimension to the aggregation.
 
     ```sql
-    SELECT  d.[Year] AS CalendarYear,
-            d.[Month] AS MonthOfYear,
-            d.MonthName AS MonthName,
-            c.CountryRegion AS SalesRegion,
-            SUM(so.SalesTotal) AS SalesRevenue
-    FROM FactSalesOrder AS so
-    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
-    JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
-    GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion
-    ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+   SELECT  d.[Year] AS CalendarYear,
+           d.[Month] AS MonthOfYear,
+           d.MonthName AS MonthName,
+           c.CountryRegion AS SalesRegion,
+          SUM(so.SalesTotal) AS SalesRevenue
+   FROM FactSalesOrder AS so
+   JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+   JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+   GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion
+   ORDER BY CalendarYear, MonthOfYear, SalesRegion;
     ```
 
 3. Run the modified query and review the results, which now include sales revenue aggregated by year, month, and sales region.
@@ -164,30 +164,28 @@ A data warehouse in Microsoft Fabric has many of the same capabilities you may b
 1. Modify the query you created previously as follows to create a view (note that you need to remove the ORDER BY clause to create a view).
 
     ```sql
-    CREATE VIEW vSalesByRegion
-    AS
-    SELECT  d.[Year] AS CalendarYear,
-            d.[Month] AS MonthOfYear,
-            d.MonthName AS MonthName,
-            c.CountryRegion AS SalesRegion,
-            SUM(so.SalesTotal) AS SalesRevenue
-    FROM FactSalesOrder AS so
-    JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
-    JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
-    GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion;
+   CREATE VIEW vSalesByRegion
+   AS
+   SELECT  d.[Year] AS CalendarYear,
+           d.[Month] AS MonthOfYear,
+           d.MonthName AS MonthName,
+           c.CountryRegion AS SalesRegion,
+          SUM(so.SalesTotal) AS SalesRevenue
+   FROM FactSalesOrder AS so
+   JOIN DimDate AS d ON so.SalesOrderDateKey = d.DateKey
+   JOIN DimCustomer AS c ON so.CustomerKey = c.CustomerKey
+   GROUP BY d.[Year], d.[Month], d.MonthName, c.CountryRegion;
     ```
 
 2. Run the query to create the view. Then refresh the data warehouse schema and verify that the new view is listed in the **Explorer** pane.
 3. Create a new SQL query and run the following SELECT statement:
 
     ```SQL
-    SELECT CalendarYear, MonthName, SalesRegion, SalesRevenue
-    FROM vSalesByRegion
-    ORDER BY CalendarYear, MonthOfYear, SalesRegion;
+   SELECT CalendarYear, MonthName, SalesRegion, SalesRevenue
+   FROM vSalesByRegion
+   ORDER BY CalendarYear, MonthOfYear, SalesRegion;
     ```
-<!--    Should we have them rename the query? 
-        Note - this query wouldn't work with the ORDER BY clause in the view definition. I removed it so that we can visualize in the next step. (Error: The ORDER BY clause is invalid in views, inline functions, derived tables, subqueries, and common table expressions unless TOP, OFFFSET, or FOR XML is also specified.)
--->
+
 ### Create a visual query
 
 Instead of writing SQL code, you can use the graphical query designer to query the tables in your data warehouse. This experience is similar to Power Query online, where you can create data transformation steps with no code. For more complex tasks, you can use Power Query's M (Mashup) language.
@@ -211,8 +209,6 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 
 1. From here, you can analyze the results of this single query by selecting **Visualize results** or **Open in Excel**. You can now see exactly what the manager was asking for, so we don't need to analyze the results further.
 
-<!-- I'd prefer to amend the date table in this step. Revise. -->
-
 ### Visualize your data
 
 You can easily visualize the data in either a single query, or in your data warehouse. Before you visualize, hide columns and/or tables that aren't friendly to report designers.
@@ -233,7 +229,7 @@ You can easily visualize the data in either a single query, or in your data ware
    1. DimProduct
       - **ProductKey**
       - **ProductAltKey** 
-   
+
 1. Now you're ready to build a report and make this dataset available to others. On the Home menu, select **New report**. This will open a new window, where you can create a Power BI report.
 
 1. In the **Data** pane, expand **FactSalesOrder**. Note that the columns you hid are no longer visible. 

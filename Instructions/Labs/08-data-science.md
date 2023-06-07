@@ -61,9 +61,9 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
-    # Train a machine learning model and track with MLflow
+   # Train a machine learning model and track with MLflow
 
-    Use the code in this notebook to train and track models.
+   Use the code in this notebook to train and track models.
     ``` 
 
 ## Load data into a dataframe
@@ -77,10 +77,10 @@ Now you're ready to run code to prepare data and train a model. To work with dat
 1. In the **...** menu for **churn.csv**, select **Load data** > **Pandas**. A new code cell containing the following code should be added to the notebook:
 
     ```python
-    import pandas as pd
-    # Load data into pandas DataFrame from "/lakehouse/default/" + "Files/churn.csv"
-    df = pd.read_csv("/lakehouse/default/" + "Files/churn.csv")
-    display(df)
+   import pandas as pd
+   # Load data into pandas DataFrame from "/lakehouse/default/" + "Files/churn.csv"
+   df = pd.read_csv("/lakehouse/default/" + "Files/churn.csv")
+   display(df)
     ```
 
     > **Tip**: You can hide the pane containing the files on the left by using its **<<** icon. Doing so will help you focus on the notebook.
@@ -108,21 +108,21 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    from sklearn.model_selection import train_test_split
+   from sklearn.model_selection import train_test_split
 
-    print("Splitting data...")
-    X, y = df[['years_with_company','total_day_calls','total_eve_calls','total_night_calls','total_intl_calls','average_call_minutes','total_customer_service_calls','age']].values, df['churn'].values
-    
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+   print("Splitting data...")
+   X, y = df[['years_with_company','total_day_calls','total_eve_calls','total_night_calls','total_intl_calls','average_call_minutes','total_customer_service_calls','age']].values, df['churn'].values
+   
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
 1. Run the code cell you added, and note you're omitting 'CustomerID' from the dataset, and splitting the data into a training and test dataset.
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
     
     ```python
-    import mlflow
-    experiment_name = "experiment-churn"
-    mlflow.set_experiment(experiment_name)
+   import mlflow
+   experiment_name = "experiment-churn"
+   mlflow.set_experiment(experiment_name)
     ```
     
     The code creates an MLflow experiment named `experiment-churn`. Your models will be tracked in this experiment.
@@ -130,14 +130,14 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.linear_model import LogisticRegression
-    
-    with mlflow.start_run():
-        mlflow.autolog()
+   from sklearn.linear_model import LogisticRegression
+   
+   with mlflow.start_run():
+       mlflow.autolog()
 
-        model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
+       model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
 
-        mlflow.log_param("estimator", "LogisticRegression")
+       mlflow.log_param("estimator", "LogisticRegression")
     ```
     
     The code trains a classification model using Logistic Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LogisticRegression`.
@@ -145,16 +145,16 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.tree import DecisionTreeClassifier
-    
-    with mlflow.start_run():
-        mlflow.autolog()
+   from sklearn.tree import DecisionTreeClassifier
+   
+   with mlflow.start_run():
+       mlflow.autolog()
 
-        model = DecisionTreeClassifier().fit(X_train, y_train)
-    
-        mlflow.log_param("estimator", "DecisionTreeClassifier")
+       model = DecisionTreeClassifier().fit(X_train, y_train)
+   
+       mlflow.log_param("estimator", "DecisionTreeClassifier")
     ```
-    
+
     The code trains a classification model using Decision Tree Classifier. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeClassifier`.
 
 ## Use MLflow to search and view your experiments
@@ -164,47 +164,47 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 1. To list all experiments, use the following code:
 
     ```python
-    import mlflow
-    experiments = mlflow.search_experiments()
-    for exp in experiments:
-        print(exp.name)
+   import mlflow
+   experiments = mlflow.search_experiments()
+   for exp in experiments:
+       print(exp.name)
     ```
 
 1. To retrieve a specific experiment, you can get it by its name:
 
     ```python
-    experiment_name = "experiment-churn"
-    exp = mlflow.get_experiment_by_name(experiment_name)
-    print(exp)
+   experiment_name = "experiment-churn"
+   exp = mlflow.get_experiment_by_name(experiment_name)
+   print(exp)
     ```
 
 1. Using an experiment name, you can retrieve all jobs of that experiment:
 
     ```python
-    mlflow.search_runs(exp.experiment_id)
+   mlflow.search_runs(exp.experiment_id)
     ```
 
 1. To more easily compare job runs and outputs, you can configure the search to order the results. For example, the following cell orders the results by `start_time`, and only shows a maximum of `2` results: 
 
     ```python
-    mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)
+   mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)
     ```
 
 1. Finally, you can plot the evaluation metrics of multiple models next to each other to easily compare models:
 
     ```python
-    import matplotlib.pyplot as plt
-    
-    df_results = mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)[["metrics.training_accuracy_score", "params.estimator"]]
-    
-    fig, ax = plt.subplots()
-    ax.bar(df_results["params.estimator"], df_results["metrics.training_accuracy_score"])
-    ax.set_xlabel("Estimator")
-    ax.set_ylabel("Accuracy")
-    ax.set_title("Accuracy by Estimator")
-    for i, v in enumerate(df_results["metrics.training_accuracy_score"]):
-        ax.text(i, v, str(round(v, 2)), ha='center', va='bottom', fontweight='bold')
-    plt.show()
+   import matplotlib.pyplot as plt
+   
+   df_results = mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)[["metrics.training_accuracy_score", "params.estimator"]]
+   
+   fig, ax = plt.subplots()
+   ax.bar(df_results["params.estimator"], df_results["metrics.training_accuracy_score"])
+   ax.set_xlabel("Estimator")
+   ax.set_ylabel("Accuracy")
+   ax.set_title("Accuracy by Estimator")
+   for i, v in enumerate(df_results["metrics.training_accuracy_score"]):
+       ax.text(i, v, str(round(v, 2)), ha='center', va='bottom', fontweight='bold')
+   plt.show()
     ```
 
     The output should resemble the following image:
