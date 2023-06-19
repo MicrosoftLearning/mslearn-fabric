@@ -117,7 +117,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    ![Pipeline with a dataflow activity.](./Images/dataflow-activity.png)
 
-4. On the **Home** tab, save the pipeline useing the **&#128427;** (*Save*) icon.
+4. On the **Home** tab, save the pipeline using the **&#128427;** (*Save*) icon.
 5. Use the **&#9655; Run** button to run the pipeline, and wait for it to complete. It may take a few minutes.
 
    ![Pipeline with a dataflow that has completed successfully.](./Images/dataflow-pipeline-succeeded.png)
