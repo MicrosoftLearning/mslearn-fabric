@@ -66,8 +66,6 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 >
 > Steps can be moved up or down, edited by selecting the gear icon, and you can select each step to see the transformations apply in the preview pane.
 
-![Applied steps pane with example steps.](Images/pq-applied-steps.png)
-
 ## Add data destination for Dataflow
 
 1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
