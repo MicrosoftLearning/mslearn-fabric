@@ -54,7 +54,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
  ![Query in the Power Query editor.](./Images/power-query.png)
 
-4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a whole number based on the formula `Date.Month([OrderDate])` - as shown here:
+4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a number based on the formula `Date.Month([OrderDate])` - as shown here:
 
  ![Custom column in Power Query editor.](./Images/custom-column.png)
 
