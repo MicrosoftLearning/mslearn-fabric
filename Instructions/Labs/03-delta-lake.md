@@ -56,8 +56,8 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 4. In the **...** menu for **products.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
-   df = spark.read.format("csv").option("header","true").load("Files/products.csv")
-   # df now is a Spark DataFrame containing CSV data from "Files/products.csv".
+   df = spark.read.format("csv").option("header","true").load("Files/products/products.csv")
+   # df now is a Spark DataFrame containing CSV data from "Files/products/products.csv".
    display(df)
     ```
 
