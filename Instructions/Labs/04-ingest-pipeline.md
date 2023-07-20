@@ -78,18 +78,16 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Row delimiter**: Line feed (\n)
     - **Add header to file**: Selected
     - **Compression type**: None
-11. On the **Copy summary** page, review the details of your copy operation and then select **OK**
+11. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-12. Use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run it.
+12. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
 
-    When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
-
-14. In the hub menu bar on the left, select your lakehouse.
-15. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
+13. In the menu bar on the left, select your lakehouse.
+14. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
 
 ## Create a notebook
 
