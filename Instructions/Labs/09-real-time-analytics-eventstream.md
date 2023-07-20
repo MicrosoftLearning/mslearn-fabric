@@ -57,11 +57,11 @@ In this tutorial, you learn how to:
 
 1. In the **Database details** panel, selec the pencil icon.
 
-![enable onlake](./images/enable-onelake-availability.png)
+![enable onlake](./Images/enable-onelake-availability.png)
 
 2. Make sure to toggle the button to **Active** and then select **Done**.
 
-![enable onelake toggle](./images/enable-onelake-toggle.png)
+![enable onelake toggle](./Images/enable-onelake-toggle.png)
 
 ## Create an Eventstream
 
@@ -115,14 +115,14 @@ In this tutorial, you learn how to:
 2. Click **Next: Source**.
 3. Confirm the **Data connection name**, the select **Next: Schema**.
 
-![data source name](./images/ingest-data.png)
+![data source name](./Images/ingest-data.png)
 
 ## Schema Mapping
 
 1. The incoming data is uncompressed for sample data, so keep the compression type as uncompressed.
 2. From the **Data Format** dropdown, select **JSON**.
 
-![Change to JSON](./images/injest-as-json.png)
+![Change to JSON](./Images/injest-as-json.png)
 
 
 ## Change data types
@@ -130,7 +130,7 @@ In this tutorial, you learn how to:
 1. It may be necessary to change some or all data types from your incoming stream to your destination(s) tables.
 2. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type: 
 
-![change data types](./images/change-data-type-in-es.png)
+![change data types](./Images/change-data-type-in-es.png)
 
 3. Select **Next: Summary**
 
@@ -147,15 +147,15 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 1. Browse to your newly created and hydrated KQL Database named ***MyStockData***.
 2. In the Data tree, select the More menu [...] on the MyStockData table. Then select Query table > Show any 100 records.
 
-![KQL Query set](./images/kql-query-sample.png)
+![KQL Query set](./Images/kql-query-sample.png)
 
 3. The sample query opens in the **Explore your data** pane with the table context already populated. This first query uses the take operator to return a sample number of records, and is useful to get a first look at the data structure and possible values. The autopopulated sample queries are automatically run. You can see the query results in the results pane.
 
-![KQL Query results](./images/kql-query-results.png)
+![KQL Query results](./Images/kql-query-results.png)
 
 4. Return to the data tree to paste the next query, which uses the where operator and between operator to return records ingested in the last 24 hours.
 
-![KQL Query Results last 24](./images/kql-query-results-last24.png)
+![KQL Query Results last 24](./Images/kql-query-results-last24.png)
 
 >!Note: Notice that the volumes of the streaming data exceed the query limits. This behavior may vary depending on the amount of data streamed into your database.
 You can continue to navigate using the built-in query functions to familiarize yourself with your data.
@@ -170,6 +170,6 @@ The query editor supports the use of T-SQL in addition to its primary query Kust
 
 2. Place your cursor somewhere within the query and select **Run** or press **Shift + Enter**.
 
-![sql query results](./images/sql-query-results.png)
+![sql query results](./Images/sql-query-results.png)
 
 You can continue to navigate using the build-in functions and familiarize yourself with the data using SQL or KQL. This ends the lesson.
