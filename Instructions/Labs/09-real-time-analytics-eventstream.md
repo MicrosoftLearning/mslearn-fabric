@@ -110,7 +110,7 @@ In this tutorial, you learn how to:
 
 1. Select the **New Table**, then enter the MyStockData.
 
-![insert stock data](./images/ingest-stream-data-to-kql.png)
+![insert stock data](./Images/ingest-stream-data-to-kql.png)
 
 2. Click **Next: Source**.
 3. Confirm the **Data connection name**, the select **Next: Schema**.
