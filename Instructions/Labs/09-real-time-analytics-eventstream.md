@@ -3,7 +3,7 @@ lab:
     title: 'Get started with Real-Time Analytics in Microsoft Fabric'
     module: 'Get started with real-time analytics in Microsoft Fabric'
 ---
-# Get started with EventStream in Real
+# Get started with EventStream in Real Time Analytics (RTA)
 
 Event streams is a feature in Microsoft Fabric that captures, transforms, and routes real-time events to various destinations with a no-code experience. When you create an Eventstream item in the portal, it is an instance of Fabric event streams (also called an eventstream). You can add event data sources, routing destinations, and the event processor when the transformation is needed, to the eventstream. Azure Service Fabric's EventStore is a monitoring option that maintains events from the cluster and provides a way to understand the state of your cluster or workloads at a given point in time. The EventStore service can be queried for events that are available for each entity and entity type in your cluster. This means you can query for events on different levels such as cluster, nodes, applications, services, partitions, and partition replicas. The EventStore service also has the ability to correlate events in your cluster. By looking at events that were written at the same time from different entities that may have impacted each other, the EventStore service is able to link these events to help with identifying causes for activities in your cluster. Another option for monitoring and diagnostics of Azure Service Fabric clusters is aggregating and collecting events using EventFlow[.
 
@@ -27,15 +27,15 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 With Microsoft Fabric event streams, you can easily manage your event data in one place. You can collect, transform, and send real-time event data to different destinations in the format you want. You can also connect your event streams with Azure Event Hubs, KQL database, and Lakehouse without any hassle.
 
-This lab is based on sample streaming data called Stock Market Data. The Stock Market sample data is a dataset of a stock exchange with a preset schema column such as time, symbol, price, volume and more. You will use this sample data to simulate real-time events of stock prices and analyze them with various destinations, such as the KQL database.
+This lab is based on sample streaming data called Stock Market Data. The Stock Market sample data is a dataset of a stock exchange with a preset schema column such as time, symbol, price, volume and more. You'll use this sample data to simulate real-time events of stock prices and analyze them with various destinations, such as the KQL database.
 
-You'll use the streaming and query capabilities of Real-Time Analytics to answer key questions about the stock statistics, and have the ability to use its results to build Power BI reports. In this scenario, we're going to take full advantage of the wizard instead of manually creating some components idependently, such as the KQL Database.
+You use the streaming and query capabilities of Real-Time Analytics to answer key questions about the stock statistics, and have the ability to use its results to build Power BI reports. In this scenario, we're going to take full advantage of the wizard instead of manually creating some components independently, such as the KQL Database.
 
 In this tutorial, you learn how to:
 
 - Create a KQL database
 - Enable data copy to OneLake
-- Create an eventstream
+- Create an Eventstream
 - Stream data from Eventstream to your KQL database
 - Explore data with KQL and SQL
 
@@ -47,7 +47,7 @@ In this tutorial, you learn how to:
 
 ![choose kqldatabase](./Images/select-kqldatabase.png)
 
-4. You will be prompted to **Name Eventstream**
+4. You'll be prompted to **Name Eventstream**
 
 ![name kqldatabase](./Images/name-kqldatabase.png)
 
@@ -71,15 +71,15 @@ In this tutorial, you learn how to:
 
 ![choose eventstream](./Images/select-eventstream.png)
 
-4. You will be prompted to **Name Eventstream**
+4. You'll be prompted to **Name Eventstream**
 
 ![name eventstream](./Images/name-eventstream.png)
 
-5. Give the EventStream a name that you'll remember, such as ***MyStockEV**, press **Create**
+5. Give the EventStream a name that you remember, such as ***MyStockEV**, press **Create**
 
 ## Source EventStream data
 
-1. In the Eventstream canvas, click on **New source.Sample Data**.
+1. In the Eventstream canvas, select on **New source.Sample Data**.
 
 ![EventStream canvas](./Images/real-time-analytics-canvas.png)
 
@@ -92,7 +92,7 @@ In this tutorial, you learn how to:
 
 ## Destination EventStream Data
 
-1. In the Eventstream canvas, click on the **New destination.KQL Database**
+1. In the Eventstream canvas, select on the **New destination.KQL Database**
 
 ![EventStream destination](./Images/new-kql-destination.png)
 
@@ -112,7 +112,7 @@ In this tutorial, you learn how to:
 
 ![insert stock data](./images/ingest-stream-data-to-kql.png)
 
-2. Click **Next: Source**.
+2. Select **Next: Source**.
 3. Confirm the **Data connection name**, the select **Next: Schema**.
 
 ![data source name](./images/ingest-data.png)
@@ -124,11 +124,10 @@ In this tutorial, you learn how to:
 
 ![Change to JSON](./images/injest-as-json.png)
 
-
 ## Change data types
 
 1. It may be necessary to change some or all data types from your incoming stream to your destination(s) tables.
-2. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type: 
+2. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type:
 
 ![change data types](./images/change-data-type-in-es.png)
 
@@ -136,13 +135,13 @@ In this tutorial, you learn how to:
 
 In the **Continuous ingestion from Eventstream established** window, all steps are marked with green check marks when the data connection is successfully created. The data from Eventstream begins streaming automatically into your table.
 
->!Note: It may be necessary to refresh the page to view your table after the Eventstream connection has been built and established
+> !Note: It may be necessary to refresh the page to view your table after the Eventstream connection has been built and established
 
 ## KQL Queries
 
 Kusto Query Language (KQL) is a read-only request to process data and return results. The request is stated in plain text, using a data-flow model that is easy to read, author, and automate. Queries always run in the context of a particular table or database. At a minimum, a query consists of a source data reference and one or more query operators applied in sequence, indicated visually by the use of a pipe character (|) to delimit operators. For more information on the Kusto Query Language, see [Kusto Query Language (KQL) Overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext)
 
->! Note: The KQL Editor comes with both syntax and Inellisense highlighting, which allows you to quickly gain knowledge of the Kusto Query Language (KQL).
+> ! Note: The KQL Editor comes with both syntax and Inellisense highlighting, which allows you to quickly gain knowledge of the Kusto Query Language (KQL).
 
 1. Browse to your newly created and hydrated KQL Database named ***MyStockData***.
 2. In the Data tree, select the More menu [...] on the MyStockData table. Then select Query table > Show any 100 records.
@@ -157,8 +156,8 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
 ![KQL Query Results last 24](./images/kql-query-results-last24.png)
 
->!Note: Notice that the volumes of the streaming data exceed the query limits. This behavior may vary depending on the amount of data streamed into your database.
-You can continue to navigate using the built-in query functions to familiarize yourself with your data.
+> !Note: Notice that the volumes of the streaming data exceed the query limits. This behavior may vary depending on the amount of data streamed into your database.
+> You can continue to navigate using the built-in query functions to familiarize yourself with your data.
 
 ## Sample SQL Queries
 
