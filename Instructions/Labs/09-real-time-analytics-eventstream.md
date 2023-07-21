@@ -21,7 +21,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 4. When your new workspace opens, it should be empty, as shown here:
 
    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
-5. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Microsoft Fabric** experience.
+5. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Real-Time Analytics** experience.
 
 ## Scenario
 
@@ -41,21 +41,19 @@ In this tutorial, you learn how to:
 
 ## Create a KQL Database
 
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
-2. In the menu bar, select **Real-Time Analytics** (the icon looks similar to ![rta logo](./Images/rta_logo.png))
-3. Under **New**, select **EventStream (Preview)**
+1. Within the **Real-Time Analytics**, select the **KQL Database** box.
 
 ![choose kqldatabase](./Images/select-kqldatabase.png)
 
-4. You'll be prompted to **Name Eventstream**
+2. You'll be prompted to **Name** the KQL Database
 
 ![name kqldatabase](./Images/name-kqldatabase.png)
 
-5. Give the KQL Database a name that you'll remember, such as **MyStockData**, press **Create**.
+3. Give the KQL Database a name that you'll remember, such as **MyStockData**, press **Create**.
 
-## Turn on availability in OneLake
+Next, we'll turn on availability in OneLake
 
-1. In the **Database details** panel, selec the pencil icon.
+1. In the **Database details** panel, select the pencil icon.
 
 ![enable onlake](./Images/enable-onelake-availability.png)
 
@@ -65,25 +63,24 @@ In this tutorial, you learn how to:
 
 ## Create an Eventstream
 
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
-2. In the menu bar, select **Real-Time Analytics** (the icon looks similar to ![rta logo](./Images/rta_logo.png))
-3. Under **New**, select **EventStream (Preview)**
+1. In the menu bar, select **Real-Time Analytics** (the icon looks similar to ![rta logo](./Images/rta_logo.png))
+2. Under **New**, select **EventStream (Preview)**
 
 ![choose eventstream](./Images/select-eventstream.png)
 
-4. You'll be prompted to **Name Eventstream**
+3. You'll be prompted to **Name Eventstream**
 
 ![name eventstream](./Images/name-eventstream.png)
 
-5. Give the EventStream a name that you remember, such as ***MyStockEV**, press **Create**
+4. Give the EventStream a name that you'll remember, such as ***MyStockES**, press the **Create** button.
 
 ## Source EventStream data
 
-1. In the Eventstream canvas, select on **New source.Sample Data**.
+1. In the Eventstream canvas, select **New source** from the drop-down list, then select **Sample Data**.
 
 ![EventStream canvas](./Images/real-time-analytics-canvas.png)
 
-2. Enter the values for your Sample Data as shown in the following table
+2. Enter the values for your Sample Data as shown in the following table and then select **Add and Configure**.
 
 | Field       | Recommended Value |
 | ----------- | ----------------- |
@@ -92,7 +89,7 @@ In this tutorial, you learn how to:
 
 ## Destination EventStream Data
 
-1. In the Eventstream canvas, select on the **New destination.KQL Database**
+1. In the Eventstream canvas, select on the **New destination** and then select **KQL Database**
 
 ![EventStream destination](./Images/new-kql-destination.png)
 
@@ -102,38 +99,34 @@ In this tutorial, you learn how to:
 | ---------------- | ---------------------------------------------- |
 | Destination Name | MyStockData                                    |
 | Workspace        | The workspace where you created a KQL database |
-| KQL Database     | StockDataDB                                    |
+| KQL Database     | MyStockData                                    |
 
 3. Select **Add and configure**.
 
-## Configure data loading to the KQL database
+## Configure data ingestion
 
-1. Select the **New Table**, then enter the MyStockData.
+1. In the **Ingest data** dialogue page, Select the **New Table**, enter MyStockData.
 
 ![insert stock data](./Images/ingest-stream-data-to-kql.png)
 
 2. Select **Next: Source**.
-3. Confirm the **Data connection name**, the select **Next: Schema**.
+3. In the **Source** page confirm the **Data connection name**, then select **Next: Schema**.
 
 ![data source name](./Images/ingest-data.png)
 
-## Schema Mapping
-
-1. The incoming data is uncompressed for sample data, so keep the compression type as uncompressed.
-2. From the **Data Format** dropdown, select **JSON**.
+4. The incoming data is uncompressed for sample data, so keep the compression type as uncompressed.
+5. From the **Data Format** dropdown, select **JSON**.
 
 ![Change to JSON](./Images/injest-as-json.png)
 
-## Change data types
-
-1. It may be necessary to change some or all data types from your incoming stream to your destination(s) tables.
-2. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type:
+6. After that, it may be necessary to change some or all data types from your incoming stream to your destination(s) tables.
+7. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type:
 
 ![change data types](./Images/change-data-type-in-es.png)
 
-3. Select **Next: Summary**
+8. When finished, select **Next: Summary**
 
-In the **Continuous ingestion from Eventstream established** window, all steps are marked with green check marks when the data connection is successfully created. The data from Eventstream begins streaming automatically into your table.
+Wait for all the steps to be marked with green check marks. You should see the page title **Continuous ingestion from Eventsream established.** After that, select **Close** to return to your Eventstream page.
 
 > !Note: It may be necessary to refresh the page to view your table after the Eventstream connection has been built and established
 
@@ -148,11 +141,11 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
 ![KQL Query set](./Images/kql-query-sample.png)
 
-3. The sample query opens in the **Explore your data** pane with the table context already populated. This first query uses the take operator to return a sample number of records, and is useful to get a first look at the data structure and possible values. The autopopulated sample queries are automatically run. You can see the query results in the results pane.
+3. The sample query opens in the **Explore your data** pane with the table context already populated. This first query uses the take operator to return a sample number of records, and is useful to get a first look at the data structure and possible values. The auto populated sample queries are automatically run. You can see the query results in the results pane.
 
 ![KQL Query results](./Images/kql-query-results.png)
 
-4. Return to the data tree to paste the next query, which uses the where operator and between operator to return records ingested in the last 24 hours.
+4. Return to the data tree to select the next query, which uses the where operator and between operator to return records ingested in the last 24 hours.
 
 ![KQL Query Results last 24](./Images/kql-query-results-last24.png)
 
@@ -172,3 +165,11 @@ The query editor supports the use of T-SQL in addition to its primary query Kust
 ![sql query results](./Images/sql-query-results.png)
 
 You can continue to navigate using the build-in functions and familiarize yourself with the data using SQL or KQL. This ends the lesson.
+
+## Clean up resources
+
+1. In this exercise, you have created a KQL database and set up continuous streaming with EventStream. After that you queried the data using KQL and SQL.
+2. If you've finished exploring your KQL database, you can delete the workspace you created for this exercise. 
+3. In the bar on the left, select the icon for your workspace.
+4. In the ... menu on the toolbar, select Workspace settings.
+5. In the Other section, select Remove this workspace.
