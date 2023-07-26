@@ -33,7 +33,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
     After a minute or so, a new empty lakehouse. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
-3. Download the data file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv), saving it as **products.csv** on your local computer (or lab VM if applicable).
+3. Download the data file for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv`, saving it as **products.csv** on your local computer (or lab VM if applicable).
 
 4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **New subfolder** and create a folder named **products**.
 
@@ -167,7 +167,7 @@ Let's explore the differences between managed and external tables.
    LOCATION 'Files/external_products';
     ```
 
-2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that it's schema matches the original dataframe that was saved in the **external_products** folder.
+2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that a new table named **products** is listed. Then expand the table to verify that its schema matches the original dataframe that was saved in the **external_products** folder.
 
 3. Add another code cell and run the following code:
 
@@ -183,7 +183,7 @@ Transaction history for delta tables is stored in JSON files in the **delta_log*
 
 1. Add a new code cell to the notebook and run the following code:
 
-    ```Python
+    ```sql
    %%sql
 
    UPDATE products
