@@ -12,7 +12,7 @@ This exercise should take approximately **40** minutes to complete
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Create a workspace
+## Create a workspace and enable data model editing
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
@@ -22,7 +22,11 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace-medallion.png)
+5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse.
 
+    ![Screenshot of the workspace settings page in Power BI.](./Images/workspace-settings.png)
+
+    > **Note**: You may need to refresh the browser tab after enabling the preview feature.
 ## Create a lakehouse and upload data to bronze layer
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the Fabric portal and create a data lakehouse for the data you're going to analyze.
@@ -491,12 +495,23 @@ Now that you have your dimensions built out, the final step is to create the fac
 
 You now have a curated, modeled gold layer that can be used for reporting and analysis.
 
-## Explore the dataset and create relationships
+## Create a dataset
 
 In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the dataset directly in your workspace to create relationships and measures for reporting.
 
-1. In your workspace, navigate to the **Datasets** section and select the **Sales** dataset.
-2. Select **Open data model** to see where you can create relationships between your fact and dimension tables, using the **CustomerID** and **ItemID** columns.
+Note that you cannot use the default dataset that is automatically created when you create a lakehouse. You must create a new dataset that includes the gold tables you created in this exercise, from the lakehouse explorer.
+
+1. In your workspace, navigate to your **Sales** lakehouse.
+2. Select **New Power BI dataset** from the ribbon of the lakehouse explorer view.
+3. Select your transformed gold tables to include in your dataset and select **Confirm**.
+   - dimdate_gold
+   - dimcustomer_gold
+   - dimproduct_gold
+   - factsales_gold
+
+    This will open the dataset in Fabric where you can create relationships and measures.
+
+4. Rename your dataset so that it's easier to identify. Select the dataset name in the top left corner of the window. Rename the dataset to **Sales_Gold**.
 
 From here, you or other members of your data team can create reports and dashboards based on the data in your lakehouse. These reports will be connected directly to the gold layer of your lakehouse, so they'll always reflect the latest data.
 
