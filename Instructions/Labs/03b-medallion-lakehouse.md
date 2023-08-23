@@ -22,11 +22,12 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace-medallion.png)
-5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse.
+5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI dataset.
 
     ![Screenshot of the workspace settings page in Power BI.](./Images/workspace-settings.png)
 
     > **Note**: You may need to refresh the browser tab after enabling the preview feature.
+
 ## Create a lakehouse and upload data to bronze layer
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the Fabric portal and create a data lakehouse for the data you're going to analyze.
@@ -100,7 +101,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     | 2 |  SO49173 | 1 | 2021-01-01 | Linda Alvarez | Mountain-200 Silver, 38 | 1 | 2071.4197 | 165.7136 |
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-    The code you ran has loaded the data from the CSV files in the **bronze** folder into a Spark dataframe, and then displayed the first few rows of the dataframe.
+    The code you ran loaded the data from the CSV files in the **bronze** folder into a Spark dataframe, and then displayed the first few rows of the dataframe.
 
     > **Note**: You can clear, hide, and auto-resize the contents of the cell output by selecting the **...** menu at the top left of the output pane.
 
@@ -128,7 +129,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
 7. Run the cell to execute the code using the **&#9655;** (*Run cell*) button.
 
-8. Next, you'll use SQL magic to create your cleaned-up dataframe as a new table called sales_silver in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
+8. Next, you'll use SparkSQL to create your cleaned-up dataframe as a new table called sales_silver in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
 
     ```python
      %%sql
