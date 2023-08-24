@@ -1,3 +1,9 @@
+---
+lab:
+    title: 'Ingest data with Spark and Microsoft Fabric notebooks'
+    module: 'Ingest data with Spark and Microsoft Fabric notebooks'
+---
+
 # Ingest data with Spark and Microsoft Fabric notebooks
 
 In this lab, you'll create a Microsoft Fabric notebook and use PySpark to connect to an Azure Blob Storage path, then load the data into a lakehouse using write optimizations.
