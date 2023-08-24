@@ -50,7 +50,7 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 ## Transform data and load to silver Delta table
 
-Now that you have some data in the bronze layer of your lakehouse, you can use a notebook to transform the data and load it to a delta table in the silver layer. 
+Now that you have some data in the bronze layer of your lakehouse, you can use a notebook to transform the data and load it to a delta table in the silver layer.
 
 1. On the **Home** page while viewing the contents of the **bronze** folder in your data lake, in the **Open notebook** menu, select **New notebook**.
 
@@ -81,7 +81,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
         StructField("UnitPrice", FloatType()),
         StructField("Tax", FloatType())
         ])
-
+    
     # Import all files from bronze folder of lakehouse
     df = spark.read.format("csv").option("header", "true").schema(orderSchema).load("Files/bronze/*.csv")
     
@@ -110,12 +110,10 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     ```python
     from pyspark.sql.functions import when, lit, col, current_timestamp, input_file_name
     
-    # Add columns FileName, IsFlagged, CreatedTS and ModifiedTS for data validation and tracking
-    df = df.withColumn("FileName", input_file_name())
-    df = df.withColumn("IsFlagged", when(col("OrderDate") < '2019-08-01',True).otherwise(False))
-    df = df.withColumn("CreatedTS", current_timestamp()).withColumn("ModifiedTS", current_timestamp())
-    df = df.withColumn("CustomerID", lit(None).cast("BigInt"))
-    df = df.withColumn("ItemID", lit(None).cast("BigInt"))
+    # Add columns IsFlagged, CreatedTS and ModifiedTS
+    df = df.withColumn("FileName", input_file_name()) \
+        .withColumn("IsFlagged", when(col("OrderDate") < '2019-08-01',True).otherwise(False)) \
+        .withColumn("CreatedTS", current_timestamp()).withColumn("ModifiedTS", current_timestamp())
     
     # Update CustomerName to "Unknown" if CustomerName null or empty
     df = df.withColumn("CustomerName", when((col("CustomerName").isNull() | (col("CustomerName")=="")),lit("Unknown")).otherwise(col("CustomerName")))
@@ -129,33 +127,31 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
 7. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
-8. Next, you'll use SparkSQL to create your cleaned-up dataframe as a new table called **sales_silver** in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
+8. Next, you'll define the schema for the **sales_silver** table in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
 
     ```python
-     %%sql
+    # Define the schema for the sales_silver table
     
-    -- Create sales_silver table 
-    CREATE TABLE sales.sales_silver (
-        SalesOrderNumber string
-        , SalesOrderLineNumber int
-        , OrderDate date
-        , CustomerName string
-        , Email string
-        , Item string
-        , Quantity int
-        , UnitPrice float
-        , Tax float
-        , FileName string
-        , IsFlagged boolean
-        , CustomerID bigint
-        , ItemID bigint
-        , CreatedTS date
-        , ModifiedTS date
-    ) USING delta;
-    ```
-
-    This code uses `%sql` magic to run SQL statements. The first statement creates a new database called **sales**. The second statement creates a new table called **sales_silver** in the **sales** database, using the Delta Lake format and the dataframe you created in the previous code block.
-
+    from pyspark.sql.types import *
+    from delta.tables import *
+    
+    DeltaTable.createIfNotExists(spark) \
+        .tableName("sales.sales_silver") \
+        .addColumn("SalesOrderNumber", StringType()) \
+        .addColumn("SalesOrderLineNumber", IntegerType()) \
+        .addColumn("OrderDate", DateType()) \
+        .addColumn("CustomerName", StringType()) \
+        .addColumn("Email", StringType()) \
+        .addColumn("Item", StringType()) \
+        .addColumn("Quantity", IntegerType()) \
+        .addColumn("UnitPrice", FloatType()) \
+        .addColumn("Tax", FloatType()) \
+        .addColumn("FileName", StringType()) \
+        .addColumn("IsFlagged", BooleanType()) \
+        .addColumn("CreatedTS", DateType()) \
+        .addColumn("ModifiedTS", DateType()) \
+        .execute()
+        ```
 9. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
 10. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The **&#9650;** (triangle icon) indicates that it's a Delta table.
@@ -198,15 +194,13 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
           "Tax": "updates.Tax",
           "FileName": "updates.FileName",
           "IsFlagged": "updates.IsFlagged",
-          "CustomerID": "updates.CustomerID",
-          "ItemID": "updates.ItemID",
           "CreatedTS": "updates.CreatedTS",
           "ModifiedTS": "updates.ModifiedTS"
         }
       ) \
       .execute()
     ```
-    This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found. This is a common requirement when you're loading data from a source system that may contain updates to existing records and new records.
+    This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found. This is a common requirement when you're loading data from a source system that may contain updates to existing and new records.
 
 You now have data in your silver delta table that is ready for further transformation and modeling.
 
