@@ -167,7 +167,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     from delta.tables import *
     
-    deltaTable = DeltaTable.forPath(spark, 'abfss://1daff8bf-a15d-4063-97c2-fd6381bd00b4@onelake.dfs.fabric.microsoft.com/065c411a-27de-4dec-b4fb-e1df9737f0a0/Tables/sales_silver')
+    deltaTable = DeltaTable.forPath(spark, 'Tables/sales_silver')
     
     dfUpdates = df
     
