@@ -259,14 +259,14 @@ Note that you could have done all of this in a single notebook, but for the purp
 
 2. In the lakehouse explorer pane, add your **Sales** lakehouse by selecting **Add** and then selecting the **Sales** lakehouse you created earlier. You should see the **sales_silver** table listed in the **Tables** section of the explorer pane.
 
-3. In the existing code block, remove the boilerplate text and add the following code to load data to your dataframe and start building out your star schema:
+3. In the existing code block, remove the boilerplate text and **add the following code** to load data to your dataframe and start building out your star schema:
 
     ```python
     # Load data to the dataframe as a starting point to create the gold layer
     df = spark.read.table("Sales.sales_silver")
     ```
 
-4. Add a new code block and paste the following code to create your date dimension table:
+4. **Add a new code block** and paste the following code to create your date dimension table:
 
     ```python
         %%sql
@@ -283,7 +283,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     ```
     > **Note**: You can run the `display(df)` command at any time to check the progress of your work. In this case, you'd run 'display(dfdimDate_gold)' to see the contents of the dimDate_gold dataframe.
 
-5. In a new code block, add the following code to update the date dimension as new data comes in:
+5. In a new code block, **add the following code** to update the date dimension as new data comes in:
 
     ```python
     from delta.tables import *
@@ -314,7 +314,7 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
-5. Now we'll build out our Customer dimension table. Add a new code block and paste the following code:
+5. Now we'll build out our Customer dimension table. **Add a new code block** and paste the following code:
 
     ```python
    %%sql
@@ -328,7 +328,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     ) USING DELTA;
     ```
     
-6. In a new code block, add the following code to update the customer dimension as new data comes in:
+6. In a new code block, **add the following code** to update the customer dimension as new data comes in:
 
     ```python
     from pyspark.sql.functions import col, split
@@ -342,7 +342,7 @@ Note that you could have done all of this in a single notebook, but for the purp
 
      Here you have created a new DataFrame dfdimCustomer_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the "CustomerName" column to create "First" and "Last" name columns. The result is a DataFrame with cleaned and structured customer data, including separate "First" and "Last" name columns extracted from the "CustomerName" column.
 
-7. Next we'll create the ID column for our customers. In a new code block, paste the following:
+7. Next we'll **create the ID column for our customers**. In a new code block, paste the following:
 
     ```python
     from pyspark.sql.functions import monotonically_increasing_id, col, when
@@ -358,7 +358,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     ```
     Here you're cleaning and transforming customer data (dfdimCustomer_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer_gold table, and then generating unique CustomerID values using the monotonically_increasing_id() function.
 
-8. Now you'll ensure that your customer table remains up-to-date as new data comes in. In a new code block, paste the following:
+8. Now you'll ensure that your customer table remains up-to-date as new data comes in. **In a new code block**, paste the following:
 
     ```python
     from delta.tables import *
@@ -388,7 +388,7 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
-9. Now you'll repeat those steps to create your product dimension. In a new code block, paste the following:
+9. Now you'll **repeat those steps to create your product dimension**. In a new code block, paste the following:
 
     ```python
     %%sql
@@ -398,7 +398,7 @@ Note that you could have done all of this in a single notebook, but for the purp
         , ItemID BIGINT
     ) USING DELTA;
     ```    
-10. Add another code block to create the customer_gold dataframe. You'll use this later on the Sales join.
+10. **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
     
     ```python
     from pyspark.sql.functions import col, split, lit
@@ -412,7 +412,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     # display(dfdimProduct_gold)
             ```
 
-11. Now you'll prepare to add new products to the dimProduct_gold table. Add the following syntax to a new code block:
+11. Now you'll prepare to **add new products to the dimProduct_gold table**. Add the following syntax to a new code block:
 
     ```python
     from pyspark.sql.functions import monotonically_increasing_id, col
@@ -426,7 +426,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     #display(dfdimProduct_gold)
 
-12.  Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. In a new code block, paste the following:
+12.  Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste the following:
     
     ```python
     from delta.tables import *
@@ -457,9 +457,9 @@ Note that you could have done all of this in a single notebook, but for the purp
 
     This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
-Now that you have your dimensions built out, the final step is to create the fact table.
+**Now that you have your dimensions built out, the final step is to create the fact table.**
 
-13. In a new code block, paste the following code to create the fact table:
+13. **In a new code block**, paste the following code to create the **fact table**:
 
     ```python
        %%sql
@@ -473,7 +473,7 @@ Now that you have your dimensions built out, the final step is to create the fac
         , Tax float
     ) USING DELTA;
     ```
-14. In a new code block, paste the following code to create a new dataframe to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
+14. **In a new code block**, paste the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
 
     ```python
     from pyspark.sql.functions import col
@@ -500,7 +500,7 @@ Now that you have your dimensions built out, the final step is to create the fac
     display(dffactSales_gold)
     ```
 
-15. Now you'll ensure that sales data remains up-to-date by running the following code in a new code block:
+15. Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
     ```python
     from delta.tables import *
 
@@ -538,7 +538,7 @@ You now have a curated, modeled gold layer that can be used for reporting and an
 
 In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the dataset directly in your workspace to create relationships and measures for reporting.
 
-Note that you cannot use the default dataset that is automatically created when you create a lakehouse. You must create a new dataset that includes the gold tables you created in this exercise, from the lakehouse explorer.
+Note that you can't use the **default dataset** that is automatically created when you create a lakehouse. You must create a new dataset that includes the gold tables you created in this exercise, from the lakehouse explorer.
 
 1. In your workspace, navigate to your **Sales** lakehouse.
 2. Select **New Power BI dataset** from the ribbon of the lakehouse explorer view.
@@ -549,6 +549,8 @@ Note that you cannot use the default dataset that is automatically created when 
    - factsales_gold
 
     This will open the dataset in Fabric where you can create relationships and measures.
+
+    ![Screenshot of a dataset in Fabric.](./Images/dataset-relationships.png)
 
 4. Rename your dataset so that it's easier to identify. Select the dataset name in the top left corner of the window. Rename the dataset to **Sales_Gold**.
 
