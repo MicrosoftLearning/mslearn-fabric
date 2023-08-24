@@ -238,14 +238,13 @@ Now that you have data in your silver layer, you can use the SQL endpoint to exp
 
   1. Now we'll take a look at which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
 
-    ```sql
-    SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
-    FROM sales_silver
-    GROUP BY CustomerName
-    ORDER BY TotalQuantity DESC
-    ```
-
-    This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
+        ```sql
+        SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+        FROM sales_silver
+        GROUP BY CustomerName
+        ORDER BY TotalQuantity DESC
+        ```
+        This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
 
 Data exploration at the silver layer is useful for basic analysis, but you'll need to transform the data further and model it into a star schema to enable more advanced analysis and reporting. You'll do that in the next section.
 
@@ -427,39 +426,38 @@ Note that you could have done all of this in a single notebook, but for the purp
     #display(dfdimProduct_gold)
 
 12.  Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste the following:
-    
-    ```python
-    from delta.tables import *
-    
-    deltaTable = DeltaTable.forPath(spark, 'abfss://Learn@onelake.dfs.fabric.microsoft.com/Sales.Lakehouse/Tables/dimproduct_gold')
-    
-    dfUpdates = dfdimProduct_gold
-    
-    deltaTable.alias('silver') \
-      .merge(
-        dfUpdates.alias('updates'),
-        'silver.ItemName = updates.ItemName AND silver.ItemInfo = updates.ItemInfo'
-      ) \
-       .whenMatchedUpdate(set =
-        {
-          
-        }
-      ) \
-     .whenNotMatchedInsert(values =
-        {
-          "ItemName": "updates.ItemName",
-          "ItemInfo": "updates.ItemInfo",
-          "ItemID": "updates.ItemID"
-        }
-      ) \
-      .execute()
-    ```
+        ```python
+        from delta.tables import *
+        
+        deltaTable = DeltaTable.forPath(spark, 'abfss://Learn@onelake.dfs.fabric.microsoft.com/Sales.Lakehouse/Tables/dimproduct_gold')
+        
+        dfUpdates = dfdimProduct_gold
+        
+        deltaTable.alias('silver') \
+          .merge(
+            dfUpdates.alias('updates'),
+            'silver.ItemName = updates.ItemName AND silver.ItemInfo = updates.ItemInfo'
+          ) \
+           .whenMatchedUpdate(set =
+            {
+              
+            }
+          ) \
+         .whenNotMatchedInsert(values =
+            {
+              "ItemName": "updates.ItemName",
+              "ItemInfo": "updates.ItemInfo",
+              "ItemID": "updates.ItemID"
+            }
+          ) \
+          .execute()
+        ```
 
-    This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
+        This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
 **Now that you have your dimensions built out, the final step is to create the fact table.**
 
-13. **In a new code block**, paste the following code to create the **fact table**:
+1.  **In a new code block**, paste the following code to create the **fact table**:
 
     ```python
        %%sql
@@ -473,7 +471,7 @@ Note that you could have done all of this in a single notebook, but for the purp
         , Tax float
     ) USING DELTA;
     ```
-14. **In a new code block**, paste the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
+2.  **In a new code block**, paste the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
 
     ```python
     from pyspark.sql.functions import col
@@ -500,7 +498,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     display(dffactSales_gold)
     ```
 
-15. Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
+3.  Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
     ```python
     from delta.tables import *
 
