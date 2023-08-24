@@ -58,13 +58,13 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
 2. When the notebook opens, rename it to **Transform data for Silver** by selecting the **Notebook xxxx** text at the top left of the notebook and entering the new name.
 
-    ![Screenshot of a new notebook named Sales.](./Images/sales-notebook-rename.png)
+    ![Screenshot of a new notebook named Transform data for silver.](./Images/sales-notebook-rename.png)
 
 2. Select the existing cell in the notebook, which contains some simple commented-out code. Highlight and delete these two lines - you will not need this code.
    
    > **Note**: Notebooks enable you to run code in a variety of languages, including Python, Scala, and SQL. In this exercise, you'll use PySpark and SQL. You can also add markdown cells to provide formatted text and images to document your code.
 
-3. Paste the following code into the cell:
+3. **Paste** the following code into the cell:
 
     ```python
     from pyspark.sql.types import *
@@ -89,11 +89,11 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     display(df.head(10))
     ```
 
-4. Use the **&#9655;** (*Run cell*) button on the left of the cell to run the code.
+4. Use the ****&#9655;** (*Run cell*)** button on the left of the cell to run the code.
 
     > **Note**: Since this is the first time you've run any Spark code in this notebook, a Spark session must be started. This means that the first run can take a minute or so to complete. Subsequent runs will be quicker.
 
-5. When the cell command has completed, review the output below the cell, which should look similar to this:
+5. When the cell command has completed, **review the output** below the cell, which should look similar to this:
 
     | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -105,7 +105,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     > **Note**: You can clear, hide, and auto-resize the contents of the cell output by selecting the **...** menu at the top left of the output pane.
 
-6. Now you'll add columns for data validation and cleanup, using a PySpark dataframe to add columns and update the values of some of the existing columns. Use the + button to add a new code block and add the following code to the cell:
+6. Now you'll **add columns for data validation and cleanup**, using a PySpark dataframe to add columns and update the values of some of the existing columns. Use the + button to **add a new code block** and add the following code to the cell:
 
     ```python
     from pyspark.sql.functions import when, lit, col, current_timestamp, input_file_name
@@ -121,15 +121,15 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     df = df.withColumn("CustomerName", when((col("CustomerName").isNull() | (col("CustomerName")=="")),lit("Unknown")).otherwise(col("CustomerName")))
     ```
 
-    The first line of the code you ran imports the necessary functions from PySpark. You're then adding new columns to the dataframe so you can track the source file name, whether the order was flagged as being a before the fiscal year of interest, and when the row was created and modified. 
+    The first line of the code imports the necessary functions from PySpark. You're then adding new columns to the dataframe so you can track the source file name, whether the order was flagged as being a before the fiscal year of interest, and when the row was created and modified.
     
     You're also adding columns for the CustomerID and ItemID, which will be populated later.
     
     Finally, you're updating the CustomerName column to "Unknown" if it's null or empty.
 
-7. Run the cell to execute the code using the **&#9655;** (*Run cell*) button.
+7. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
-8. Next, you'll use SparkSQL to create your cleaned-up dataframe as a new table called sales_silver in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
+8. Next, you'll use SparkSQL to create your cleaned-up dataframe as a new table called **sales_silver** in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
 
     ```python
      %%sql
@@ -154,17 +154,17 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     ) USING delta;
     ```
 
-    This code uses the `%sql` magic command to run SQL statements. The first statement creates a new database called **sales**. The second statement creates a new table called **sales_silver** in the **sales** database, using the Delta Lake format and the dataframe you created in the previous code block.
+    This code uses `%sql` magic to run SQL statements. The first statement creates a new database called **sales**. The second statement creates a new table called **sales_silver** in the **sales** database, using the Delta Lake format and the dataframe you created in the previous code block.
 
-9. Run the cell to execute the code using the **&#9655;** (*Run cell*) button.
+9. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
-10. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The triangle icon indicates that it's a Delta table.
+10. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The **&#9650;** (triangle icon) indicates that it's a Delta table.
 
     ![Screenshot of the sales_silver table in a lakehouse.](./Images/sales-silver-table.png)
 
-    > **Note**: If you don't see the new table, wait a few seconds and then select **Refresh** again, or refresh the entire browser tab
+    > **Note**: If you don't see the new table, wait a few seconds and then select **Refresh** again, or refresh the entire browser tab.
 
-11. Now you're going to perform an upsert operation on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found. Add a new code block and paste the following code:
+11. Now you're going to perform an **upsert operation** on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found. Add a new code block and paste the following code:
 
     ```python
     # Update existing records and insert new ones based on a condition defined by the columns SalesOrderNumber, OrderDate, CustomerName, and Item.
@@ -209,7 +209,45 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found. This is a common requirement when you're loading data from a source system that may contain updates to existing records and new records.
 
 You now have data in your silver delta table that is ready for further transformation and modeling.
-    
+
+## Explore data in the silver layer using the SQL endpoint
+
+Now that you have data in your silver layer, you can use the SQL endpoint to explore the data and perform some basic analysis. This is a nice option for you if you're familiar with SQL and want to do some basic exploration of your data. In this exercise we're using the SQL endpoint view in Fabric, but note that you can also use other tools like SQL Server Management Studio (SSMS) and Azure Data Explorer.
+
+1. Navigate back to your workspace and notice that you now have a few assets listed. Select **SQL endpoint** to open your lakehouse in the SQL endpoint view.
+
+    ![Screenshot of the SQL endpoint in a lakehouse.](./Images/sql-endpoint-item.png)
+
+1. Select **New SQL query** from the ribbon, which will open a SQL query editor. Note that you can rename your query using the **...** menu item next to the existing query name in the lakehouse explorer pane.
+
+   We're going to run two sql queries to explore our data.
+
+1. Paste the following query into the query editor and select **Run**:
+
+    ```sql
+    SELECT YEAR(OrderDate) AS Year
+        , CAST (SUM(Quantity * (UnitPrice + Tax)) AS DECIMAL(12, 2)) AS TotalSales
+    FROM sales_silver
+    GROUP BY YEAR(OrderDate) 
+    ORDER BY YEAR(OrderDate)
+    ```
+
+    This query calculates the total sales for each year in the sales_silver table. Your results should look like this:
+
+    ![Screenshot of the results of a SQL query in a lakehouse.](./Images/total-sales-sql.png)
+
+  1. Now we'll take a look at which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
+
+    ```sql
+    SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+    FROM sales_silver
+    GROUP BY CustomerName
+    ORDER BY TotalQuantity DESC
+    ```
+
+    This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
+
+Data exploration at the silver layer is useful for basic analysis, but you'll need to transform the data further and model it into a star schema to enable more advanced analysis and reporting. You'll do that in the next section.
 
 ## Transform data for gold layer
 
