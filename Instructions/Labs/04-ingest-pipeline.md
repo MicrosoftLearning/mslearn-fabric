@@ -12,13 +12,7 @@ Fabric also supports Apache Spark, enabling you to write and run code to process
 
 This lab will take approximately **60** minutes to complete.
 
-## Before you start
-
-You'll need a Microsoft Fabric license to complete this exercise.
-
-See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
-
-After enabling the Fabric trial, when you sign into the Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com), you should see a Power BI logo at the bottom left that you can use to switch to the various workload experiences supported in Microsoft Fabric. If this logo is not visible, you may need to ask your organization's administrator to [enable Fabric trial functionality](https://learn.microsoft.com/fabric/get-started/fabric-trial#administer-user-access-to-a-fabric-preview-trial).
+> **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
 ## Create a workspace
 
@@ -26,7 +20,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
+3. Create a new workspace with a name of your choice, sselecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -84,18 +78,16 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Row delimiter**: Line feed (\n)
     - **Add header to file**: Selected
     - **Compression type**: None
-11. On the **Copy summary** page, review the details of your copy operation and then select **OK**
+11. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-12. Use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run it.
+12. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
 
-    When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
-
-14. In the hub menu bar on the left, select your lakehouse.
-15. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
+13. In the menu bar on the left, select your lakehouse.
+14. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
 
 ## Create a notebook
 
@@ -106,7 +98,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 2. Select the existing cell in the notebook, which contains some simple code, and then replace the default code with the following variable declaration.
 
     ```python
-    table_name = "sales"
+   table_name = "sales"
     ```
 
 3. In the **...** menu for the cell (at its top-right) select **Toggle parameter cell**. This configures the cell so that the variables declared in it are treated as parameters when running the notebook from a pipeline.

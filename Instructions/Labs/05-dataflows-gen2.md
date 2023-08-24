@@ -10,13 +10,7 @@ In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perfor
 
 This lab is designed to introduce the different elements of Dataflows (Gen2), and not create a complex solution that may exist in an enterprise. This lab takes **approximately 30 minutes** to complete.
 
-## Before you start
-
-You'll need a Microsoft Fabric license to complete this exercise.
-
-See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
-
-After enabling the Fabric trial, when you sign into the Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com), you should see a Power BI logo at the bottom left that you can use to switch to the various workload experiences supported in Microsoft Fabric. If this logo is not visible, you may need to ask your organization's administrator to [enable Fabric trial functionality](https://learn.microsoft.com/fabric/get-started/fabric-trial#administer-user-access-to-a-fabric-preview-trial).
+> **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
 ## Create a workspace
 
@@ -24,7 +18,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
+3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
@@ -60,7 +54,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
  ![Query in the Power Query editor.](./Images/power-query.png)
 
-4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a whole number based on the formula `Date.Month([OrderDate])` - as shown here:
+4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a number based on the formula `Date.Month([OrderDate])` - as shown here:
 
  ![Custom column in Power Query editor.](./Images/custom-column.png)
 
@@ -72,13 +66,11 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 >
 > Steps can be moved up or down, edited by selecting the gear icon, and you can select each step to see the transformations apply in the preview pane.
 
-![Applied steps pane with example steps.](Images/pq-applied-steps.png)
-
 ## Add data destination for Dataflow
 
 1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
 
-   > **Note:** You can also add a data destination by selecting the **Add data destination** button in the query settings pane.
+   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
 
 2. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
@@ -125,7 +117,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    ![Pipeline with a dataflow activity.](./Images/dataflow-activity.png)
 
-4. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline as **Ingest Sales Data**.
+4. On the **Home** tab, save the pipeline using the **&#128427;** (*Save*) icon.
 5. Use the **&#9655; Run** button to run the pipeline, and wait for it to complete. It may take a few minutes.
 
    ![Pipeline with a dataflow that has completed successfully.](./Images/dataflow-pipeline-succeeded.png)

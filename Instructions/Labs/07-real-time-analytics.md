@@ -8,15 +8,9 @@ lab:
 
 Microsoft Fabric provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
 
-This lab will take approximately **30** minutes to complete.
+This lab takes approximately **30** minutes to complete.
 
-## Before you start
-
-You'll need a Microsoft Fabric license to complete this exercise.
-
-See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
-
-After enabling the Fabric trial, when you sign into the Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com), you should see a Power BI logo at the bottom left that you can use to switch to the various workload experiences supported in Microsoft Fabric. If this logo is not visible, you may need to ask your organization's administrator to [enable Fabric trial functionality](https://learn.microsoft.com/fabric/get-started/fabric-trial#administer-user-access-to-a-fabric-preview-trial).
+> **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
 ## Create a workspace
 
@@ -24,42 +18,36 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting the **Trial** licensing mode.
+3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty, as shown here:
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-## Create a lakehouse and upload files
+5. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Microsoft Fabric** experience.
 
-Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for the data files you're going to analyze.
+## Download file for KQL database
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
+Now that you have a workspace, it's time to switch to the *Synapse Real-Time Analytics* experience in the portal and download the data file you're going to analyze.
 
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
-
-    After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer and then upload it to your lakehouse.
-
-3. Download the data file for this exercise from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer
-4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload file**, and then upload the **sales.csv** file from your local computer to the lakehouse.
-5. After the file has been uploaded, select **Files** verify that the **sales.csv** file has been uploaded, as shown here:
-
-    ![Screenshot of uploaded sales.csv file in a lakehouse.](./Images/uploaded-file.png)
-
-6. In the **...** menu for the **sales.csv** file, select **Properties**. Then copy the **ABFS path** for your file to the clipboard - you will use this later.
+1. Download the data file for this exercise from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer (or lab VM if applicable)
+2. Return to browser window with **Microsoft Fabric** Experience.
 
 ## Create a KQL database
 
-Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data you uploaded to your lakehouse, you must create a table in a KQL database and ingest the data from the file.
+Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data, you must create a table in a KQL database and ingest the data from the file.
 
-1. At the bottom left of the Power BI portal, select the **Data Engineering** icon and switch to the **Real-Time Analytics** experience.
-2. On the **Home** page for the Real-Time Analytics experience, select **KQL database** and create a new database with a name of your choice.
-3. When the new database has been created, select the option to get data from **OneLake**. Then use the wizard to import the data into a new table by selecting the following options:
+1. In the **Microsoft Fabric** experience portal, select the **Synapse Real-Time Analytics** experience image as shown here:
+
+    ![Screenshot of selected Fabric Experience home with RTA selected](./Images/fabric-experience-home.png)
+
+2. On the **Home** page for the **Real-Time Analytics** experience, select **KQL database** and create a new database with a name of your choice.
+3. When the new database has been created, select the option to get data from **Local File**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
-        - **Database**: *The database you just created is already selected*
+        - **Database**: *The database you created is already selected*
         - **Table**: *Create a new table named* **sales**.
     - **Source**:
-        - **Source type**: OneLake
-        - **Link to source**: *Paste the ABFS path to your sales.csv file, which you copied to the clipboard previously*
+        - **Source type**: File
+        - **Upload files**: *Drag or Browse for the file you downloaded earlier*
     - **Schema**:
         - **Compression type**: Uncompressed
         - **Data format**: CSV
@@ -81,8 +69,8 @@ Now that you have a table of data in your database, you can use KQL code to quer
 3. Modify the query as follows:
 
     ```kusto
-    sales
-    | where Item == 'Road-250 Black, 48'
+   sales
+   | where Item == 'Road-250 Black, 48'
     ```
 
 4. Run the query. Then review the results, which should contain only the rows for sales orders for the *Road-250 Black, 48* product.
@@ -90,9 +78,9 @@ Now that you have a table of data in your database, you can use KQL code to quer
 5. Modify the query as follows:
 
     ```kusto
-    sales
-    | where Item == 'Road-250 Black, 48'
-    | where datetime_part('year', OrderDate) > 2020
+   sales
+   | where Item == 'Road-250 Black, 48'
+   | where datetime_part('year', OrderDate) > 2020
     ```
 
 6. Run the query and review the results, which should contain only sales orders for *Road-250 Black, 48* made after 2020.
@@ -100,18 +88,18 @@ Now that you have a table of data in your database, you can use KQL code to quer
 7. Modify the query as follows:
 
     ```kusto
-    sales
-    | where OrderDate between (datetime(2020-01-01 00:00:00) .. datetime(2020-12-31 23:59:59))
-    | summarize TotalNetRevenue = sum(UnitPrice) by Item
-    | sort by Item asc
+   sales
+   | where OrderDate between (datetime(2020-01-01 00:00:00) .. datetime(2020-12-31 23:59:59))
+   | summarize TotalNetRevenue = sum(UnitPrice) by Item
+   | sort by Item asc
     ```
 
 8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
 9. Select **Save as KQL queryset** and save the query as **Revenue by Product**.
 
-## Create a Power BI report from a KQL query set
+## Create a Power BI report from a KQL Queryset
 
-You can use your KQL query set as the basis for a Power BI report.
+You can use your KQL Queryset as the basis for a Power BI report.
 
 1. In the query workbench editor for your query set, run the query and wait for the results.
 2. Select **Build Power BI report** and wait for the report editor to open.
@@ -129,7 +117,7 @@ You can use your KQL query set as the basis for a Power BI report.
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse, a KQL database to analyze the data uploaded into the lakehouse. You used KQL to query the data and create a query set, which was then used to create a PowerBI report.
+In this exercise, you have created a lakehouse, a KQL database to analyze the data uploaded into the lakehouse. You used KQL to query the data and create a query set, which was then used to create a Power BI report.
 
 If you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
 

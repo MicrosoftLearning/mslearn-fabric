@@ -5,3 +5,5 @@ This repo contains the instructions and assets required to complete the exercise
 ### Reporting issues
 
 If you encounter any problems in the exercises, please report them as **issues** in this repo.
+
+> **Note**: While we welcome feedback on both the exercise content and the Fabric service itself, we can only support issues relating to the exercise content in this repo. Please report any technical issue or feedback relating to the Microsoft Fabric service itself at [https://support.fabric.microsoft.com/support/](https://support.fabric.microsoft.com/support/).
