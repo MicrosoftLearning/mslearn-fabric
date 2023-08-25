@@ -8,10 +8,11 @@ lab:
 
 In this lab, you'll create a Microsoft Fabric notebook and use PySpark to connect to an Azure Blob Storage path, then load the data into a lakehouse using write optimizations.
 
-This lab will take approximately **20** minutes to complete.
-<!-- Mihai, et all - please confirm how long it takes, this is a wild guess! -->
+This lab will take approximately **30** minutes to complete.
 
 For this experience, we'll build the code across multiple notebook code cells, which may not reflect how you will do it in your environment; however, it can be useful for debugging.
+
+Because we're also working with a sample dataset, the optimization doesn't reflect what you may see in production at scale; however, you can still see improvement and when every millisecond counts, optimization is key.
 
 > **Note**: You'll need a **Microsoft Fabric license** to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license.
 >
@@ -180,12 +181,7 @@ You're probably using big data in your organization and that's why you chose Fab
 
 1. Confirm you have the same results as before the optimization code.
 
-Now, take note of the run times for both code blocks. In our testing, we saw:
-
-* Non-optimized code run time: **3 sec 572 ms**
-* Optimized code run time: **2 sec 450 ms**
-
-Your times will vary, but you can see a clear performance boost with the optimized code.
+Now, take note of the run times for both code blocks. Your times will vary, but you can see a clear performance boost with the optimized code.
 
 ## Analyze Delta table data with SQL queries
 
