@@ -262,26 +262,44 @@ Note that you could have done all of this in a single notebook, but for the purp
 4. **Add a new code block** and paste the following code to create your date dimension table:
 
     ```python
-        %%sql
-    -- Create Date_gold dimension table
-    CREATE TABLE IF NOT EXISTS sales.dimdate_gold (
-        OrderDate date
-        , Day int
-        , Month int
-        , Year int
-        , `mmmyyyy` string
-        , yyyymm string
-    ) USING DELTA;
+    from pyspark.sql.types import *
+    from delta.tables import*
     
+    # Define the schema for the dimdate_gold table
+    DeltaTable.createIfNotExists(spark) \
+        .tableName("sales.dimdate_gold") \
+        .addColumn("OrderDate", DateType()) \
+        .addColumn("Day", IntegerType()) \
+        .addColumn("Month", IntegerType()) \
+        .addColumn("Year", IntegerType()) \
+        .addColumn("mmmyyyy", StringType()) \
+        .addColumn("yyyymm", StringType()) \
+        .execute()
     ```
     > **Note**: You can run the `display(df)` command at any time to check the progress of your work. In this case, you'd run 'display(dfdimDate_gold)' to see the contents of the dimDate_gold dataframe.
 
-5. In a new code block, **add the following code** to update the date dimension as new data comes in:
+1. In a new code block, **add the following code** to create a dataframe for your date dimension, **dimdate_gold**:
+
+    ```python
+    from pyspark.sql.functions import col, dayofmonth, month, year, date_format
+    
+    # Create dataframe for dimDate_gold
+    
+    dfdimDate_gold = df.dropDuplicates(["OrderDate"]).select(col("OrderDate"), \
+            dayofmonth("OrderDate").alias("Day"), \
+            month("OrderDate").alias("Month"), \
+            year("OrderDate").alias("Year"), \
+            date_format(col("OrderDate"), "MMM-yyyy").alias("mmmyyyy"), \
+            date_format(col("OrderDate"), "yyyyMM").alias("yyyymm"), \
+        ).orderBy("OrderDate")
+
+
+2. You're separating the code out into new code blocks so that you can understand and watch what's happening in the notebook as you transform the data. In another new code block, **add the following code** to update the date dimension as new data comes in:
 
     ```python
     from delta.tables import *
-
-    deltaTable = DeltaTable.forPath(spark, 'abfss://1daff8bf-a15d-4063-97c2-fd6381bd00b4@onelake.dfs.fabric.microsoft.com/065c411a-27de-4dec-b4fb-e1df9737f0a0/Tables/dimdate_gold')
+    
+    deltaTable = DeltaTable.forPath(spark, 'Tables/dimdate_gold')
     
     dfUpdates = dfdimDate_gold
     
@@ -307,27 +325,30 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
-5. Now we'll build out our Customer dimension table. **Add a new code block** and paste the following code:
+    Congrats! Your date dimension is all set up. Now you'll create your customer dimension.
+3. To build out the customer dimension table, **add a new code block** and paste the following code:
 
     ```python
-   %%sql
-    -- Create Customer dimension table
-    CREATE TABLE sales.dimCustomer_gold (
-        CustomerName string
-        , Email string
-        , First string
-        , Last string
-        , CustomerID BIGINT
-    ) USING DELTA;
-    ```
+    from pyspark.sql.types import *
+    from delta.tables import *
     
-6. In a new code block, **add the following code** to update the customer dimension as new data comes in:
+    # Create customer_gold dimension delta table
+    DeltaTable.createIfNotExists(spark) \
+        .tableName("sales.dimcustomer_gold") \
+        .addColumn("CustomerName", StringType()) \
+        .addColumn("Email",  StringType()) \
+        .addColumn("First", StringType()) \
+        .addColumn("Last", StringType()) \
+        .addColumn("CustomerID", LongType()) \
+        .execute()
+    ```
+1. In a new code block, **add the following code** to drop duplicate customers, select specific columns, and split the "CustomerName" column to create "First" and "Last" name columns:
 
     ```python
     from pyspark.sql.functions import col, split
-
-    # Create Customer_gold dataframe
-
+    
+    # Create customer_gold dataframe
+    
     dfdimCustomer_silver = df.dropDuplicates(["CustomerName","Email"]).select(col("CustomerName"),col("Email")) \
         .withColumn("First",split(col("CustomerName"), " ").getItem(0)) \
         .withColumn("Last",split(col("CustomerName"), " ").getItem(1)) \
@@ -335,28 +356,27 @@ Note that you could have done all of this in a single notebook, but for the purp
 
      Here you have created a new DataFrame dfdimCustomer_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the "CustomerName" column to create "First" and "Last" name columns. The result is a DataFrame with cleaned and structured customer data, including separate "First" and "Last" name columns extracted from the "CustomerName" column.
 
-7. Next we'll **create the ID column for our customers**. In a new code block, paste the following:
+2. Next we'll **create the ID column for our customers**. In a new code block, paste the following:
 
     ```python
-    from pyspark.sql.functions import monotonically_increasing_id, col, when
-
-    dfdimCustomer_temp = spark.sql("SELECT * FROM dimCustomer_gold")
-    CustomerIDCounters = spark.sql("SELECT COUNT(*) AS ROWCOUNT, MAX(CustomerID) AS MAXCustomerID FROM dimCustomer_gold")
-    MAXCustomerID = CustomerIDCounters.select((when(col("ROWCOUNT")>0,col("MAXCustomerID"))).otherwise(0)).first()[0]
+    from pyspark.sql.functions import monotonically_increasing_id, col, when, coalesce, max, lit
+    
+    dfdimCustomer_temp = spark.read.table("Sales.dimCustomer_gold")
+    
+    MAXCustomerID = dfdimCustomer_temp.select(coalesce(max(col("CustomerID")),lit(0)).alias("MAXCustomerID")).first()[0]
     
     dfdimCustomer_gold = dfdimCustomer_silver.join(dfdimCustomer_temp,(dfdimCustomer_silver.CustomerName == dfdimCustomer_temp.CustomerName) & (dfdimCustomer_silver.Email == dfdimCustomer_temp.Email), "left_anti")
     
-    dfdimCustomer_gold = dfdimCustomer_gold.withColumn("CustomerID",monotonically_increasing_id() + MAXCustomerID)
-    
+    dfdimCustomer_gold = dfdimCustomer_gold.withColumn("CustomerID",monotonically_increasing_id() + MAXCustomerID + 1)
     ```
     Here you're cleaning and transforming customer data (dfdimCustomer_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer_gold table, and then generating unique CustomerID values using the monotonically_increasing_id() function.
 
-8. Now you'll ensure that your customer table remains up-to-date as new data comes in. **In a new code block**, paste the following:
+1. Now you'll ensure that your customer table remains up-to-date as new data comes in. **In a new code block**, paste the following:
 
     ```python
     from delta.tables import *
 
-    deltaTable = DeltaTable.forPath(spark, 'abfss://1daff8bf-a15d-4063-97c2-fd6381bd00b4@onelake.dfs.fabric.microsoft.com/065c411a-27de-4dec-b4fb-e1df9737f0a0/Tables/dimcustomer_gold')
+    deltaTable = DeltaTable.forPath(spark, 'Tables/dimcustomer_gold')
     
     dfUpdates = dfdimCustomer_gold
     
@@ -381,49 +401,50 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
-9. Now you'll **repeat those steps to create your product dimension**. In a new code block, paste the following:
+2. Now you'll **repeat those steps to create your product dimension**. In a new code block, paste the following:
 
     ```python
-    %%sql
-    -- Create Product dimension table
-    CREATE TABLE sales.dimProduct_gold (
-        Item string
-        , ItemID BIGINT
-    ) USING DELTA;
+    from pyspark.sql.types import *
+    from delta.tables import *
+    
+    DeltaTable.createIfNotExists(spark) \
+        .tableName("sales.dimproduct_gold") \
+        .addColumn("ItemName", StringType()) \
+        .addColumn("ItemID", LongType()) \
+        .addColumn("ItemInfo", StringType()) \
+        .execute()
     ```    
-10. **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
+3.  **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
     
     ```python
     from pyspark.sql.functions import col, split, lit
-
+    
     # Create Customer_gold dataframe, this dataframe will be used later on on the Sales join
     
     dfdimProduct_silver = df.dropDuplicates(["Item"]).select(col("Item")) \
         .withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
         .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) \
-    
-    # display(dfdimProduct_gold)
-            ```
+       ```
 
-11. Now you'll prepare to **add new products to the dimProduct_gold table**. Add the following syntax to a new code block:
+4.  Now you'll create IDs for your **dimProduct_gold table**. Add the following syntax to a new code block:
 
     ```python
-    from pyspark.sql.functions import monotonically_increasing_id, col
-
-    dfdimProduct_temp = spark.sql("SELECT * FROM dimProduct_gold")
-    Product_IDCounters = spark.sql("SELECT COUNT(*) AS ROWCOUNT, MAX(ItemID) AS MAXProductID FROM dimProduct_gold")
-    MAXProduct_ID = Product_IDCounters.select((when(col("ROWCOUNT")>0,col("MAXProductID"))).otherwise(0)).first()[0]
+    from pyspark.sql.functions import monotonically_increasing_id, col, lit, max, coalesce
     
+    #dfdimProduct_temp = dfdimProduct_silver
+    dfdimProduct_temp = spark.read.table("Sales.dimProduct_gold")
     
-    dfdimProduct_gold = dfdimProduct_gold.withColumn("ItemID",monotonically_increasing_id() + MAXProduct_ID)
+    MAXProductID = dfdimProduct_temp.select(coalesce(max(col("ItemID")),lit(0)).alias("MAXItemID")).first()[0]
     
-    #display(dfdimProduct_gold)
-
-12.  Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste the following:
+    dfdimProduct_gold = dfdimProduct_silver.join(dfdimProduct_temp,(dfdimProduct_silver.ItemName == dfdimProduct_temp.ItemName) & (dfdimProduct_silver.ItemInfo == dfdimProduct_temp.ItemInfo), "left_anti")
+    
+    dfdimProduct_gold = dfdimProduct_gold.withColumn("ItemID",monotonically_increasing_id() + MAXProductID + 1)
+    ```
+5.   Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste the following:
         ```python
         from delta.tables import *
-        
-        deltaTable = DeltaTable.forPath(spark, 'abfss://Learn@onelake.dfs.fabric.microsoft.com/Sales.Lakehouse/Tables/dimproduct_gold')
+
+        deltaTable = DeltaTable.forPath(spark, 'Tables/dimproduct_gold')
         
         dfUpdates = dfdimProduct_gold
         
@@ -449,32 +470,35 @@ Note that you could have done all of this in a single notebook, but for the purp
 
         This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
-**Now that you have your dimensions built out, the final step is to create the fact table.**
+        **Now that you have your dimensions built out, the final step is to create the fact table.**
 
 1.  **In a new code block**, paste the following code to create the **fact table**:
 
     ```python
-       %%sql
-    -- Create Date_gold dimension table if not exist
-    CREATE TABLE IF NOT EXISTS sales.factsales_gold (
-        CustomerID BIGINT
-        , ItemID BIGINT
-        , OrderDate date
-        , Quantity INT
-        , UnitPrice float
-        , Tax float
-    ) USING DELTA;
+    from pyspark.sql.types import *
+    from delta.tables import *
+    
+    DeltaTable.createIfNotExists(spark) \
+        .tableName("sales.factsales_gold") \
+        .addColumn("CustomerID", LongType()) \
+        .addColumn("ItemID", LongType()) \
+        .addColumn("OrderDate", DateType()) \
+        .addColumn("Quantity", IntegerType()) \
+        .addColumn("UnitPrice", FloatType()) \
+        .addColumn("Tax", FloatType()) \
+        .execute()
     ```
 2.  **In a new code block**, paste the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
 
     ```python
     from pyspark.sql.functions import col
-
-    dfdimCustomer_temp = spark.sql("SELECT * FROM dimCustomer_gold")
-    dfdimProduct_temp = spark.sql("SELECT * FROM dimProduct_gold")
+    
+    dfdimCustomer_temp = spark.read.table("Sales.dimCustomer_gold")
+    dfdimProduct_temp = spark.read.table("Sales.dimProduct_gold")
     
     df = df.withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
         .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) \
+    
     
     # Create Sales_gold dataframe
     
@@ -487,16 +511,13 @@ Note that you could have done all of this in a single notebook, but for the purp
             , col("df1.UnitPrice") \
             , col("df1.Tax") \
         ).orderBy(col("df1.OrderDate"), col("df2.CustomerID"), col("df3.ItemID"))
-    
-    
-    display(dffactSales_gold)
     ```
 
 3.  Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
     ```python
     from delta.tables import *
-
-    deltaTable = DeltaTable.forPath(spark, 'abfss://Learn@onelake.dfs.fabric.microsoft.com/Sales.Lakehouse/Tables/factsales_gold')
+    
+    deltaTable = DeltaTable.forPath(spark, 'Tables/factsales_gold')
     
     dfUpdates = dffactSales_gold
     
@@ -524,7 +545,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     ```
      Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
 
-You now have a curated, modeled gold layer that can be used for reporting and analysis.
+**You now have a curated, modeled gold layer that can be used for reporting and analysis.**
 
 ## Create a dataset
 
