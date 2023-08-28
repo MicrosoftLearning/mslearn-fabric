@@ -21,7 +21,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty, as shown here:
 
-    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace-medallion.png)
+   ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace-medallion.png)
 5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI dataset.
 
     ![Screenshot of the workspace settings page in Power BI.](./Images/workspace-settings.png)
@@ -34,16 +34,16 @@ Now that you have a workspace, it's time to switch to the *Data engineering* exp
 
 1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
 
-2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
+2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** named **Sales**.
 
-    After a minute or so, a new empty lakehouse. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
+    After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
 3. Download the data file for this exercise from `https://github.com/MicrosoftLearning/dp-data/blob/main/orders.zip`. Extract the files and save them with their original names on your local computer (or lab VM if applicable). There should be 3 files containing sales data for 3 years: 2019.csv, 2020.csv, and 2021.csv.
 
 4. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **New subfolder** and create a folder named **bronze**.
 
 5. In the **...** menu for the **bronze** folder, select **Upload** and **Upload files**, and then upload the 3 files (2019.csv, 2020.csv, and 2021.csv) from your local computer (or lab VM if applicable) to the lakehouse. Use the shift key to upload all 3 files at once.
-   
+
 6. After the files have been uploaded, select the **bronze** folder; and verify that the files have been uploaded, as shown here:
 
     ![Screenshot of uploaded products.csv file in a lakehouse.](./Images/bronze-files.png)
@@ -60,11 +60,11 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     ![Screenshot of a new notebook named Transform data for silver.](./Images/sales-notebook-rename.png)
 
-2. Select the existing cell in the notebook, which contains some simple commented-out code. Highlight and delete these two lines - you will not need this code.
-   
+3. Select the existing cell in the notebook, which contains some simple commented-out code. Highlight and delete these two lines - you will not need this code.
+
    > **Note**: Notebooks enable you to run code in a variety of languages, including Python, Scala, and SQL. In this exercise, you'll use PySpark and SQL. You can also add markdown cells to provide formatted text and images to document your code.
 
-3. **Paste** the following code into the cell:
+4. **Paste** the following code into the cell:
 
     ```python
     from pyspark.sql.types import *
@@ -89,23 +89,23 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     display(df.head(10))
     ```
 
-4. Use the ****&#9655;** (*Run cell*)** button on the left of the cell to run the code.
+5. Use the ****&#9655;** (*Run cell*)** button on the left of the cell to run the code.
 
     > **Note**: Since this is the first time you've run any Spark code in this notebook, a Spark session must be started. This means that the first run can take a minute or so to complete. Subsequent runs will be quicker.
 
-5. When the cell command has completed, **review the output** below the cell, which should look similar to this:
+6. When the cell command has completed, **review the output** below the cell, which should look similar to this:
 
     | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
     | 1 | SO49172 | 1 | 2021-01-01 | Brian Howard | brian23@adventure-works.com | Road-250 Red, 52 | 1 | 2443.35 | 195.468 |
-    | 2 |  SO49173 | 1 | 2021-01-01 | Linda Alvarez | Mountain-200 Silver, 38 | 1 | 2071.4197 | 165.7136 |
+    | 2 |  SO49173 | 1 | 2021-01-01 | Linda Alvarez | linda19@adventure-works.com | Mountain-200 Silver, 38 | 1 | 2071.4197 | 165.7136 |
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
     The code you ran loaded the data from the CSV files in the **bronze** folder into a Spark dataframe, and then displayed the first few rows of the dataframe.
 
     > **Note**: You can clear, hide, and auto-resize the contents of the cell output by selecting the **...** menu at the top left of the output pane.
 
-6. Now you'll **add columns for data validation and cleanup**, using a PySpark dataframe to add columns and update the values of some of the existing columns. Use the + button to **add a new code block** and add the following code to the cell:
+7. Now you'll **add columns for data validation and cleanup**, using a PySpark dataframe to add columns and update the values of some of the existing columns. Use the + button to **add a new code block** and add the following code to the cell:
 
     ```python
     from pyspark.sql.functions import when, lit, col, current_timestamp, input_file_name
@@ -120,14 +120,14 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
     ```
 
     The first line of the code imports the necessary functions from PySpark. You're then adding new columns to the dataframe so you can track the source file name, whether the order was flagged as being a before the fiscal year of interest, and when the row was created and modified.
-    
+
     You're also adding columns for the CustomerID and ItemID, which will be populated later.
-    
+
     Finally, you're updating the CustomerName column to "Unknown" if it's null or empty.
 
-7. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
+8. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
-8. Next, you'll define the schema for the **sales_silver** table in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
+9. Next, you'll define the schema for the **sales_silver** table in the sales database using Delta Lake format. Create a new code block and add the following code to the cell:
 
     ```python
     # Define the schema for the sales_silver table
@@ -151,16 +151,17 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
         .addColumn("CreatedTS", DateType()) \
         .addColumn("ModifiedTS", DateType()) \
         .execute()
-        ```
-9. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
+    ```
 
-10. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The **&#9650;** (triangle icon) indicates that it's a Delta table.
+10. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
+
+11. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The **&#9650;** (triangle icon) indicates that it's a Delta table.
 
     ![Screenshot of the sales_silver table in a lakehouse.](./Images/sales-silver-table.png)
 
     > **Note**: If you don't see the new table, wait a few seconds and then select **Refresh** again, or refresh the entire browser tab.
 
-11. Now you're going to perform an **upsert operation** on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found. Add a new code block and paste the following code:
+12. Now you're going to perform an **upsert operation** on a Delta table, updating existing records based on specific conditions and inserting new records when no match is found. Add a new code block and paste the following code:
 
     ```python
     # Update existing records and insert new ones based on a condition defined by the columns SalesOrderNumber, OrderDate, CustomerName, and Item.
@@ -200,6 +201,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
       ) \
       .execute()
     ```
+
     This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found. This is a common requirement when you're loading data from a source system that may contain updates to existing and new records.
 
 You now have data in your silver delta table that is ready for further transformation and modeling.
@@ -212,11 +214,11 @@ Now that you have data in your silver layer, you can use the SQL endpoint to exp
 
     ![Screenshot of the SQL endpoint in a lakehouse.](./Images/sql-endpoint-item.png)
 
-1. Select **New SQL query** from the ribbon, which will open a SQL query editor. Note that you can rename your query using the **...** menu item next to the existing query name in the lakehouse explorer pane.
+2. Select **New SQL query** from the ribbon, which will open a SQL query editor. Note that you can rename your query using the **...** menu item next to the existing query name in the lakehouse explorer pane.
 
    We're going to run two sql queries to explore our data.
 
-1. Paste the following query into the query editor and select **Run**:
+3. Paste the following query into the query editor and select **Run**:
 
     ```sql
     SELECT YEAR(OrderDate) AS Year
@@ -230,15 +232,16 @@ Now that you have data in your silver layer, you can use the SQL endpoint to exp
 
     ![Screenshot of the results of a SQL query in a lakehouse.](./Images/total-sales-sql.png)
 
-  1. Now we'll take a look at which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
+4. Now we'll take a look at which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
 
-        ```sql
-        SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
-        FROM sales_silver
-        GROUP BY CustomerName
-        ORDER BY TotalQuantity DESC
-        ```
-        This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
+    ```sql
+    SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+    FROM sales_silver
+    GROUP BY CustomerName
+    ORDER BY TotalQuantity DESC
+    ```
+
+      This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
 
 Data exploration at the silver layer is useful for basic analysis, but you'll need to transform the data further and model it into a star schema to enable more advanced analysis and reporting. You'll do that in the next section.
 
@@ -252,14 +255,14 @@ Note that you could have done all of this in a single notebook, but for the purp
 
 2. In the lakehouse explorer pane, add your **Sales** lakehouse by selecting **Add** and then selecting the **Sales** lakehouse you created earlier. You should see the **sales_silver** table listed in the **Tables** section of the explorer pane.
 
-3. In the existing code block, remove the boilerplate text and **add the following code** to load data to your dataframe and start building out your star schema:
+3. In the existing code block, remove the boilerplate text and **add the following code** to load data to your dataframe and start building out your star schema, then run it:
 
-    ```python
+   ```python
     # Load data to the dataframe as a starting point to create the gold layer
     df = spark.read.table("Sales.sales_silver")
     ```
 
-4. **Add a new code block** and paste the following code to create your date dimension table:
+4. **Add a new code block** and paste the following code to create your date dimension table and run it:
 
     ```python
     from pyspark.sql.types import *
@@ -276,9 +279,10 @@ Note that you could have done all of this in a single notebook, but for the purp
         .addColumn("yyyymm", StringType()) \
         .execute()
     ```
+
     > **Note**: You can run the `display(df)` command at any time to check the progress of your work. In this case, you'd run 'display(dfdimDate_gold)' to see the contents of the dimDate_gold dataframe.
 
-1. In a new code block, **add the following code** to create a dataframe for your date dimension, **dimdate_gold**:
+5. In a new code block, **add and run the following code** to create a dataframe for your date dimension, **dimdate_gold**:
 
     ```python
     from pyspark.sql.functions import col, dayofmonth, month, year, date_format
@@ -293,8 +297,12 @@ Note that you could have done all of this in a single notebook, but for the purp
             date_format(col("OrderDate"), "yyyyMM").alias("yyyymm"), \
         ).orderBy("OrderDate")
 
+    # Display the first 10 rows of the dataframe to preview your data
 
-2. You're separating the code out into new code blocks so that you can understand and watch what's happening in the notebook as you transform the data. In another new code block, **add the following code** to update the date dimension as new data comes in:
+    display(dfdimDate_gold.head(10))
+    ```
+
+6. You're separating the code out into new code blocks so that you can understand and watch what's happening in the notebook as you transform the data. In another new code block, **add and run the following code** to update the date dimension as new data comes in:
 
     ```python
     from delta.tables import *
@@ -325,8 +333,9 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
+
     Congrats! Your date dimension is all set up. Now you'll create your customer dimension.
-3. To build out the customer dimension table, **add a new code block** and paste the following code:
+7. To build out the customer dimension table, **add a new code block**, paste and run the following code:
 
     ```python
     from pyspark.sql.types import *
@@ -342,7 +351,8 @@ Note that you could have done all of this in a single notebook, but for the purp
         .addColumn("CustomerID", LongType()) \
         .execute()
     ```
-1. In a new code block, **add the following code** to drop duplicate customers, select specific columns, and split the "CustomerName" column to create "First" and "Last" name columns:
+
+8. In a new code block, **add and run the following code** to drop duplicate customers, select specific columns, and split the "CustomerName" column to create "First" and "Last" name columns:
 
     ```python
     from pyspark.sql.functions import col, split
@@ -351,12 +361,16 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     dfdimCustomer_silver = df.dropDuplicates(["CustomerName","Email"]).select(col("CustomerName"),col("Email")) \
         .withColumn("First",split(col("CustomerName"), " ").getItem(0)) \
-        .withColumn("Last",split(col("CustomerName"), " ").getItem(1)) \
+        .withColumn("Last",split(col("CustomerName"), " ").getItem(1)) 
+    
+    # Display the first 10 rows of the dataframe to preview your data
+
+    display(dfdimDate_gold.head(10))
     ```
 
      Here you have created a new DataFrame dfdimCustomer_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the "CustomerName" column to create "First" and "Last" name columns. The result is a DataFrame with cleaned and structured customer data, including separate "First" and "Last" name columns extracted from the "CustomerName" column.
 
-2. Next we'll **create the ID column for our customers**. In a new code block, paste the following:
+9. Next we'll **create the ID column for our customers**. In a new code block, paste and run the following:
 
     ```python
     from pyspark.sql.functions import monotonically_increasing_id, col, when, coalesce, max, lit
@@ -368,10 +382,15 @@ Note that you could have done all of this in a single notebook, but for the purp
     dfdimCustomer_gold = dfdimCustomer_silver.join(dfdimCustomer_temp,(dfdimCustomer_silver.CustomerName == dfdimCustomer_temp.CustomerName) & (dfdimCustomer_silver.Email == dfdimCustomer_temp.Email), "left_anti")
     
     dfdimCustomer_gold = dfdimCustomer_gold.withColumn("CustomerID",monotonically_increasing_id() + MAXCustomerID + 1)
+
+    # Display the first 10 rows of the dataframe to preview your data
+
+    display(dfdimDate_gold.head(10))
     ```
+
     Here you're cleaning and transforming customer data (dfdimCustomer_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer_gold table, and then generating unique CustomerID values using the monotonically_increasing_id() function.
 
-1. Now you'll ensure that your customer table remains up-to-date as new data comes in. **In a new code block**, paste the following:
+10. Now you'll ensure that your customer table remains up-to-date as new data comes in. **In a new code block**, paste and run the following:
 
     ```python
     from delta.tables import *
@@ -401,7 +420,8 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
-2. Now you'll **repeat those steps to create your product dimension**. In a new code block, paste the following:
+
+11. Now you'll **repeat those steps to create your product dimension**. In a new code block, paste and run the following:
 
     ```python
     from pyspark.sql.types import *
@@ -413,9 +433,10 @@ Note that you could have done all of this in a single notebook, but for the purp
         .addColumn("ItemID", LongType()) \
         .addColumn("ItemInfo", StringType()) \
         .execute()
-    ```    
-3.  **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
-    
+    ```
+
+12. **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
+  
     ```python
     from pyspark.sql.functions import col, split, lit
     
@@ -423,10 +444,14 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     dfdimProduct_silver = df.dropDuplicates(["Item"]).select(col("Item")) \
         .withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
-        .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) \
+        .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) 
+    
+    # Display the first 10 rows of the dataframe to preview your data
+
+    display(dfdimProduct_silver.head(10))
        ```
 
-4.  Now you'll create IDs for your **dimProduct_gold table**. Add the following syntax to a new code block:
+13. Now you'll create IDs for your **dimProduct_gold table**. Add the following syntax to a new code block and run it:
 
     ```python
     from pyspark.sql.functions import monotonically_increasing_id, col, lit, max, coalesce
@@ -439,40 +464,46 @@ Note that you could have done all of this in a single notebook, but for the purp
     dfdimProduct_gold = dfdimProduct_silver.join(dfdimProduct_temp,(dfdimProduct_silver.ItemName == dfdimProduct_temp.ItemName) & (dfdimProduct_silver.ItemInfo == dfdimProduct_temp.ItemInfo), "left_anti")
     
     dfdimProduct_gold = dfdimProduct_gold.withColumn("ItemID",monotonically_increasing_id() + MAXProductID + 1)
-    ```
-5.   Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste the following:
-        ```python
-        from delta.tables import *
+    
+    # Display the first 10 rows of the dataframe to preview your data
 
-        deltaTable = DeltaTable.forPath(spark, 'Tables/dimproduct_gold')
-        
-        dfUpdates = dfdimProduct_gold
-        
-        deltaTable.alias('silver') \
-          .merge(
+    display(dfdimProduct_gold.head(10))
+    ```
+
+14. Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste and run the following:
+
+    ```python
+       from delta.tables import *
+    
+       deltaTable = DeltaTable.forPath(spark, 'Tables/dimproduct_gold')
+            
+      dfUpdates = dfdimProduct_gold
+            
+      deltaTable.alias('silver') \
+      .merge(
             dfUpdates.alias('updates'),
             'silver.ItemName = updates.ItemName AND silver.ItemInfo = updates.ItemInfo'
-          ) \
-           .whenMatchedUpdate(set =
+            ) \
+            .whenMatchedUpdate(set =
             {
-              
+               
             }
-          ) \
-         .whenNotMatchedInsert(values =
-            {
+            ) \
+            .whenNotMatchedInsert(values =
+             {
               "ItemName": "updates.ItemName",
               "ItemInfo": "updates.ItemInfo",
               "ItemID": "updates.ItemID"
-            }
-          ) \
-          .execute()
-        ```
+              }
+              ) \
+              .execute()
+      ```
 
-        This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
+      This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
-        **Now that you have your dimensions built out, the final step is to create the fact table.**
+      **Now that you have your dimensions built out, the final step is to create the fact table.**
 
-1.  **In a new code block**, paste the following code to create the **fact table**:
+15. **In a new code block**, paste and run the following code to create the **fact table**:
 
     ```python
     from pyspark.sql.types import *
@@ -488,7 +519,8 @@ Note that you could have done all of this in a single notebook, but for the purp
         .addColumn("Tax", FloatType()) \
         .execute()
     ```
-2.  **In a new code block**, paste the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
+
+16. **In a new code block**, paste and run the following code to create a **new dataframe** to combine sales data with customer and product information include customer ID, item ID, order date, quantity, unit price, and tax:
 
     ```python
     from pyspark.sql.functions import col
@@ -511,9 +543,14 @@ Note that you could have done all of this in a single notebook, but for the purp
             , col("df1.UnitPrice") \
             , col("df1.Tax") \
         ).orderBy(col("df1.OrderDate"), col("df2.CustomerID"), col("df3.ItemID"))
+    
+    # Display the first 10 rows of the dataframe to preview your data
+    
+    display(dffactSales_gold.head(10))
     ```
 
-3.  Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
+17. Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
+
     ```python
     from delta.tables import *
     
@@ -543,9 +580,10 @@ Note that you could have done all of this in a single notebook, but for the purp
       ) \
       .execute()
     ```
+
      Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
 
-**You now have a curated, modeled gold layer that can be used for reporting and analysis.**
+You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
 
 ## Create a dataset
 
@@ -561,7 +599,7 @@ Note that you can't use the **default dataset** that is automatically created wh
    - dimproduct_gold
    - factsales_gold
 
-    This will open the dataset in Fabric where you can create relationships and measures.
+    This will open the dataset in Fabric where you can create relationships and measures, as show here:
 
     ![Screenshot of a dataset in Fabric.](./Images/dataset-relationships.png)
 
