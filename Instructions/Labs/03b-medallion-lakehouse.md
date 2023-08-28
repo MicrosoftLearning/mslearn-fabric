@@ -8,7 +8,7 @@ lab:
 
 In this exercise you will build out a medallion architecture in a Fabric lakehouse using notebooks. You will create a workspace, create a lakehouse, upload data to the bronze layer, transform the data and load it to the silver Delta table, transform the data further and load it to the gold Delta tables, and then explore the dataset and create relationships.
 
-This exercise should take approximately **40** minutes to complete
+This exercise should take approximately **45** minutes to complete
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -32,7 +32,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to switch to the *Data engineering* experience in the Fabric portal and create a data lakehouse for the data you're going to analyze.
 
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
+1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience. If you do not see the data engineering experience, contact your Fabric administrator with a request to [enable Fabric](https://learn.microsoft.com/fabric/admin/fabric-switch).
 
 2. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
