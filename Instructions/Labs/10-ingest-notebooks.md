@@ -10,9 +10,9 @@ In this lab, you'll create a Microsoft Fabric notebook and use PySpark to connec
 
 This lab will take approximately **30** minutes to complete.
 
-For this experience, we'll build the code across multiple notebook code cells, which may not reflect how you will do it in your environment; however, it can be useful for debugging.
+For this experience, you'll build the code across multiple notebook code cells, which may not reflect how you will do it in your environment; however, it can be useful for debugging.
 
-Because we're also working with a sample dataset, the optimization doesn't reflect what you may see in production at scale; however, you can still see improvement and when every millisecond counts, optimization is key.
+Because you're also working with a sample dataset, the optimization doesn't reflect what you may see in production at scale; however, you can still see improvement and when every millisecond counts, optimization is key.
 
 > **Note**: You'll need a **Microsoft Fabric license** to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license.
 >
@@ -22,7 +22,7 @@ Because we're also working with a sample dataset, the optimization doesn't refle
 
 Start by creating a workspace with the Fabric trial enabled, a new lakehouse, and a destination folder in the lakehouse.
 
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select the **Synapse Data Engineering** experience.
+1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select the **Data Engineering** experience.
 
     ![Screenshot of Synapse Data Engineering experience](Images/data-engineering-home.png)
 
@@ -36,7 +36,7 @@ Start by creating a workspace with the Fabric trial enabled, a new lakehouse, an
 
 1. From your workspace, select **+ New > Lakehouse**, supply a name, and **Create**.
 
-    > :memo: **Note:** It may take a few minutes to create a new lakehouse with no **Tables** or **Files**.
+    > **Note:** It may take a few minutes to create a new lakehouse with no **Tables** or **Files**.
 
     ![Screenshot of a new lakehouse](Images/new-lakehouse.png)
 
@@ -55,14 +55,14 @@ Create a new Fabric notebook and connect to external data source with PySpark.
 
 1. From the top menu in the lakehouse, select **Open notebook > New notebook**, which will open once created.
 
-    > :bulb: **Tip:** You have access to the Lakehouse explorer from within this notebook, and can refresh to see progress as you complete this exercise.
+    >  **Tip:** You have access to the Lakehouse explorer from within this notebook, and can refresh to see progress as you complete this exercise.
 
 1. In the default cell, notice that the code is set to **PySpark (Python)**.
 
 1. Insert the following code into the code cell, which will:
-    1. Declare parameters for connection string
-    1. Build the connection string
-    1. Read data into a DataFrame
+    - Declare parameters for connection string
+    - Build the connection string
+    - Read data into a DataFrame
 
     ```Python
     # Azure Blob Storage access info
@@ -82,7 +82,7 @@ Create a new Fabric notebook and connect to external data source with PySpark.
 
     **Expected outcome:** Your command should succeed and print `wasbs://nyctlc@azureopendatastorage.blob.core.windows.net/yellow`
 
-    > :memo: **Note:** A Spark session starts on the first code run, so it may take longer to complete.
+    > **Note:** A Spark session starts on the first code run, so it may take longer to complete.
 
 1. To write the data to a file, you now need that **ABFS Path** for your **RawData** folder.
 
@@ -100,10 +100,10 @@ Create a new Fabric notebook and connect to external data source with PySpark.
         blob_df.limit(1000).write.mode("overwrite").parquet(output_parquet_path)
     ```
 
+1. Add your **RawData** ABFS path and select **&#9655; Run Cell** to write 1000 rows to a yellow_taxi.parquet file.
+
 1. Your **output_parquet_path** should look similar to:
     `abfss://Spark@onelake.dfs.fabric.microsoft.com/DPDemo.Lakehouse/Files/RawData/yellow_taxi`
-
-1. Select **&#9655; Run Cell** next to the code cell to write 1000 rows to a yellow_taxi.parquet file.
 
 1. To confirm data load from the Lakehouse Explorer, select **Files > ... > Refresh**.
 
@@ -117,6 +117,9 @@ Likely, your data ingestion task doesn't end with only loading a file. Delta tab
 
     ```python
     from pyspark.sql.functions import col, to_timestamp, current_timestamp, year, month
+    
+    # Read the parquet data from the specified path
+    raw_df = spark.read.parquet(output_parquet_path)   
     
     # Add dataload_datetime column with current timestamp
     filtered_df = raw_df.withColumn("dataload_datetime", current_timestamp())
@@ -134,10 +137,10 @@ Likely, your data ingestion task doesn't end with only loading a file. Delta tab
 
 1. Select **&#9655; Run Cell** next to the code cell.
 
-    * This will add a timestamp column **dataload_datetime** to log when the data was loaded to a Delta table
-    * Filter NULL values in **storeAndFwdFlag**
-    * Load filtered data into a Delta table
-    * Display a single row for validation
+    - This will add a timestamp column **dataload_datetime** to log when the data was loaded to a Delta table
+    - Filter NULL values in **storeAndFwdFlag**
+    - Load filtered data into a Delta table
+    - Display a single row for validation
 
 1. Review and confirm the displayed results, something similar to the following image:
 
@@ -153,10 +156,10 @@ You're probably using big data in your organization and that's why you chose Fab
 
     ```python
     from pyspark.sql.functions import col, to_timestamp, current_timestamp, year, month
-    
+ 
     # Read the parquet data from the specified path
-    raw_df = spark.read.parquet("**InsertYourABFSPathHere**")
-    
+    raw_df = spark.read.parquet(output_parquet_path)    
+
     # Add dataload_datetime column with current timestamp
     opt_df = raw_df.withColumn("dataload_datetime", current_timestamp())
     
@@ -176,8 +179,6 @@ You're probably using big data in your organization and that's why you chose Fab
     # Display results
     display(opt_df.limit(1))
     ```
-
-1. Get your **ABFS Path** again, and update the code in the block **before** running the cell.
 
 1. Confirm you have the same results as before the optimization code.
 
@@ -218,29 +219,16 @@ This lab is focused on data ingestion, which really explains the *extract, trans
     opttable_df = spark.sql('SELECT * FROM yellow_taxi_opt')
     
     # Display results
-    display(opttable_df.limit(3))
+    display(opttable_df.limit(10))
     ```
 
-1. Now, select **Run All** in the top menu bar.
+1. Now, select the &#9660; arrow next to the **Run Cell** button for the first of these two queries, and from the drop-down select **Run this cell and below**.
 
-This will run all of the code cells, and let you see what the full process is from start to finish. You will be able to see the execution times between optimized and non code blocks.
+    This will run the last two code cells. Notice the execution time difference between querying the table with non optimized data and a table with optimized data.
 
 ## Clean up resources
 
-In this exercise, you've learned how to create:
-
-* Workspaces
-* Lakehouses
-* Fabric notebooks
-* PySpark code to:
-  * Connect to external data sources
-  * Read data into a DataFrame
-  * Write DataFrame data to a Parquet file
-  * Read data from a Parquet file
-  * Transform data in a DataFrame
-  * Load DataFrame data to a Delta table
-  * Optimize Delta table writes
-  * Query Delta table data with SQL
+In this exercise, you have used notebooks with PySpark in Fabric to load data and save it to Parquet. You then used that Parquet file to further transform the data, and optimized Delta table writes. Finally you used SQL to query the Delta tables.
 
 When you're finished exploring, you can delete the workspace you created for this exercise.
 
