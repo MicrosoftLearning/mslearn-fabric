@@ -365,7 +365,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     # Display the first 10 rows of the dataframe to preview your data
 
-    display(dfdimDate_gold.head(10))
+    display(dfdimCustomer_silver.head(10))
     ```
 
      Here you have created a new DataFrame dfdimCustomer_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the "CustomerName" column to create "First" and "Last" name columns. The result is a DataFrame with cleaned and structured customer data, including separate "First" and "Last" name columns extracted from the "CustomerName" column.
@@ -385,7 +385,7 @@ Note that you could have done all of this in a single notebook, but for the purp
 
     # Display the first 10 rows of the dataframe to preview your data
 
-    display(dfdimDate_gold.head(10))
+    display(dfdimCustomer_gold.head(10))
     ```
 
     Here you're cleaning and transforming customer data (dfdimCustomer_silver) by performing a left anti join to exclude duplicates that already exist in the dimCustomer_gold table, and then generating unique CustomerID values using the monotonically_increasing_id() function.
