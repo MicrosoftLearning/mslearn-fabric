@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
 
-1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Power BI portal, select the **PowerBI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -43,13 +43,13 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
    # Perform data exploration for data science
 
    Use the code in this notebook to perform data exploration for data science.
-    ``` 
+    ```
 
 ## Load data into a dataframe
 
 Now you're ready to run code to get data. You'll work with the [**diabetes dataset**](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe:
 
     ```python
     # Azure storage access info for open dataset diabetes
@@ -93,8 +93,8 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
 1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
 
     ```python
-    df = df.toPandas()
-    df.head()
+    df_pnd = df.toPandas()
+    df_pnd.head()
     ```
 
 ## Check the shape of the data
@@ -105,12 +105,12 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
 
     ```python
     # Display the number of rows and columns in the dataset
-    print("Number of rows:", df.shape[0])
-    print("Number of columns:", df.shape[1])
+    print("Number of rows:", df_pnd.shape[0])
+    print("Number of columns:", df_pnd.shape[1])
 
     # Display the data types of each column
     print("\nData types of columns:")
-    print(df.dtypes)
+    print(df_pnd.dtypes)
     ```
 
     The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The `SEX` variable likely contains categorical or string data.
@@ -120,7 +120,7 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    missing_values = df.isnull().sum()
+    missing_values = df_pnd.isnull().sum()
     print("\nMissing values per column:")
     print(missing_values)
     ```
@@ -134,7 +134,7 @@ Now, let's generate descriptive statistics to understand the distribution of num
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    desc_stats = df.describe()
+    desc_stats = df_pnd.describe()
     print(desc_stats)
     ```
 
@@ -185,13 +185,13 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
 
     # Scatter plot of Quantity vs. Price
     plt.figure(figsize=(8, 6))
-    sns.scatterplot(x='BMI', y='Y', data=df)
+    sns.scatterplot(x='BMI', y='Y', data=df_pnd)
     plt.title('BMI vs. Target variable')
     plt.xlabel('BMI')
     plt.ylabel('Target')
     plt.show()
     ```
-    
+
     We can see that as the `BMI` increases, the target variable also increases, indicating a positive linear relationship between these two variables.
 
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
@@ -205,7 +205,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
     # Replace numeric values with labels
     df_pnd['SEX'] = df_pnd['SEX'].replace({1: 'Male', 2: 'Female'})
     
-    sns.boxplot(x='SEX', y='BP', data=df, ax=ax)
+    sns.boxplot(x='SEX', y='BP', data=df_pnd, ax=ax)
     ax.set_title('Blood pressure across Gender')
     plt.tight_layout()
     plt.show()
@@ -220,7 +220,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
     import seaborn as sns
     
     # Calculate average BP and BMI by SEX
-    avg_values = df.groupby('SEX')[['BP', 'BMI']].mean()
+    avg_values = df_pnd.groupby('SEX')[['BP', 'BMI']].mean()
     
     # Bar chart of the average BP and BMI by SEX
     ax = avg_values.plot(kind='bar', figsize=(15, 6), edgecolor='black')
@@ -250,7 +250,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
     import seaborn as sns
     
     plt.figure(figsize=(10, 6))
-    sns.lineplot(x='AGE', y='BMI', data=df, ci=None)
+    sns.lineplot(x='AGE', y='BMI', data=df_pnd, ci=None)
     plt.title('BMI over Age')
     plt.xlabel('Age')
     plt.ylabel('BMI')
@@ -266,14 +266,14 @@ Let's calculate correlations between different features to understand their rela
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    df.corr(numeric_only=True)
+    df_pnd.corr(numeric_only=True)
     ```
 
 1. A heatmap is a useful tool for quickly visualizing the strength and direction of relationships between variable pairs. It can highlight strong positive or negative correlations, as well as identify pairs that lack any correlation. To create a heatmap, add another code cell to the notebook, and enter the following code.
 
     ```python
     plt.figure(figsize=(15, 7))
-    sns.heatmap(df.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
+    sns.heatmap(df_pnd.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
     ```
 
     `S1` and `S2` variables have a high positive correlation of **0.89**, indicating that they move in the same direction. When `S1` increases, `S2` also tends to increase, and vice versa. Additionally, `S3` and `S4` have a strong negative correlation of **-0.73**. This means that as `S3` increases, `S4` tends to decrease.
