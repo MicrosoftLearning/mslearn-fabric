@@ -23,21 +23,6 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-## Create a lakehouse and upload files
-
-Now that you have a workspace, it's time to switch to the *Data science* experience in the portal and create a data lakehouse for the data files you're going to analyze.
-
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
-1. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
-
-    After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer (or lab VM if applicable) and then upload them to your lakehouse.
-
-1. TODO: Download and save the `dominicks_OJ.csv` CSV file for this exercise from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/XXXXX.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/XXXXX.csv).
-
-
-1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload files**, and then upload the **dominicks_OJ.csv** file from your local computer (or lab VM if applicable) to the lakehouse.
-6. After the files have been uploaded, expand **Files** and verify that the CSV file have been uploaded.
-
 ## Create a notebook
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
@@ -55,53 +40,70 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
-   # Train a machine learning model and track with MLflow
+   # Perform data exploration for data science
 
-   Use the code in this notebook to train and track models.
+   Use the code in this notebook to perform data exploration for data science.
     ``` 
 
 ## Load data into a dataframe
 
-Now you're ready to run code to prepare data and train a model. To work with data, you'll use *dataframes*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
+Now you're ready to run code to get data. You'll work with the [**diabetes dataset**](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is a common structure for working with data in rows and columns.
 
-1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
-1. Select **Existing lakehouse** and select **Add**.
-1. Select the lakehouse you created in a previous section.
-1. Expand the **Files** folder so that the CSV file is listed next to the notebook editor.
-1. In the **...** menu for **churn.csv**, select **Load data** > **Pandas**. A new code cell containing the following code should be added to the notebook:
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code in it:
 
     ```python
-    import pandas as pd
-    df = pd.read_csv("/lakehouse/default/" + "Files/dominicks_OJ.csv") 
-    display(df.head(5))
+    # Azure storage access info for open dataset diabetes
+    blob_account_name = "azureopendatastorage"
+    blob_container_name = "mlsamples"
+    blob_relative_path = "diabetes"
+    blob_sas_token = r"" # Blank since container is Anonymous access
+    
+    # Set Spark config to access  blob storage
+    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+    print("Remote blob path: " + wasbs_path)
+    
+    # Spark read parquet, note that it won't load any data yet by now
+    df = spark.read.parquet(wasbs_path)
     ```
 
-    ```python
-    import os
-    df = spark.read.format('csv').options(header="true", inferSchema="true").load("file:///lakehouse/default/Files/dominicks_OJ.csv")
-    df.show(5)
-    ```
-
-    > **Tip**: You can hide the pane containing the files on the left by using its **<<** icon. Doing so will help you focus on the notebook.
-
-1. Use the **&#9655; Run cell** button on the left of the cell to run it.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
-
-    The output shows the rows and columns of customer data from the `dominicks_OJ.csv` file.
-
-## Check the shape of the data
-
-Now that you've loaded the data, you can use it to check the structure of the dataset, such as the number of rows and columns, data types, and missing values.
 
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    import pandas as pd
+    display(df)
+    ```
 
-    # Load the Dominicks OJ dataset (assuming it's in a CSV file named 'dominicks_oj_dataset.csv')
-    df = pd.read_csv('dominicks_oj_dataset.csv')
-    
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
+
+    |AGE|SEX|BMI|BP|S1|S2|S3|S4|S5|S6|Y|
+    |---|---|---|--|--|--|--|--|--|--|--|
+    |59|2|32.1|101.0|157|93.2|38.0|4.0|4.8598|87|151|
+    |48|1|21.6|87.0|183|103.2|70.0|3.0|3.8918|69|75|
+    |72|2|30.5|93.0|156|93.6|41.0|4.0|4.6728|85|141|
+    |24|1|25.3|84.0|198|131.4|40.0|5.0|4.8903|89|206|
+    |50|1|23.0|101.0|192|125.4|52.0|4.0|4.2905|80|135|
+    | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+
+    The output shows the rows and columns of the diabetes dataset.
+
+1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
+
+    ```python
+    df = df.toPandas()
+    df.head()
+    ```
+
+## Check the shape of the data
+
+Now that you've loaded the data, you can check the structure of the dataset, such as the number of rows and columns, data types, and missing values.
+
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
+
+    ```python
     # Display the number of rows and columns in the dataset
     print("Number of rows:", df.shape[0])
     print("Number of columns:", df.shape[1])
@@ -111,112 +113,53 @@ Now that you've loaded the data, you can use it to check the structure of the da
     print(df.dtypes)
     ```
 
-    ```python
-    # Display the number of rows and columns in the dataset
-    print("Number of rows:", df.count())
-    print("Number of columns:", len(df.columns))
-
-    # Display the data types of each column
-    print("\nData types of columns:")
-    df.printSchema()
-    ```
-
-    The code uses pandas to load the dataset into a dataframe, displays the number of rows and columns in the dataset, and then displays the data types of each feature.
+    The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The `SEX` variable likely contains categorical or string data.
 
 ## Check for missing data
 
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    # Check for missing values in the dataset
     missing_values = df.isnull().sum()
     print("\nMissing values per column:")
     print(missing_values)
     ```
 
-    ```python 
-    from pyspark.sql.functions import col, sum
-
-    # Check for missing values in the dataset
-    missing_values = df.select([col(c).isNull().cast("int").alias(c) for c in df.columns])
-    missing_values_count = missing_values.agg(*[sum(col(c)).alias(c) for c in missing_values.columns])
-    print("\nMissing values per column:")
-    missing_values_count.show()
-    ```
-
-    The code checks for missing values in the dataframe. We can observe there's no missing data in the dataset.
-
-1. TODO: Consider adding a date gap analysis for date column.
+    The code checks for missing values. Observe that there's no missing data in the dataset.
 
 ## Generate descriptive statistics for numerical variables
 
 Now, let's generate descriptive statistics to understand the distribution of numerical variables.
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
     desc_stats = df.describe()
     print(desc_stats)
     ```
 
-    ```python
-    import pandas as pd
-
-    desc_stats = df.describe()
-    desc_stats_pd = desc_stats.toPandas()
-    # Used the set_index and transpose methods to transpose the resulting DataFrame, so that the summary statistics are displayed as columns instead of rows to improve readability.
-    desc_stats_pd = desc_stats_pd.set_index('summary').transpose()
-    print(desc_stats_pd)
-    ```
-
-    The average price is 2.28, with a standard deviation of 0.648. This indicates that there is some variation in the price across different observations. Also, the minimum and maximum values for the quantity column are 64 and 716416, respectively, indicating a large range of values.
+    The average `age` is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.
 
 ## Plot the data distribution
 
-Analyze the individual features of the dataset to identify trends and outliers that may affect the analysis.
+Let's verify the `BMI` feature, and plot its distribution to get a better understanding of its characteristics.
 
-1. Add another new code cell to the notebook, enter the following code in it, and run it:
+1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
     import matplotlib.pyplot as plt
     import seaborn as sns
     import numpy as np
     
-    # Histogram of the Price variable
-    # Calculate the mean, median of the Price variable
-    mean = df['Price'].mean()
-    median = df['Price'].median()
+    # Calculate the mean, median of the BMI variable
+    mean = df_pnd['BMI'].mean()
+    median = df_pnd['BMI'].median()
     
-    # Histogram of the Price variable
+    # Histogram of the BMI variable
     plt.figure(figsize=(8, 6))
-    plt.hist(df['Price'], bins=20, color='skyblue', edgecolor='black')
-    plt.title('Price Distribution')
-    plt.xlabel('Price')
-    plt.ylabel('Frequency')
-    
-    # Add lines for the mean, median, and mode
-    plt.axvline(mean, color='red', linestyle='dashed', linewidth=2, label='Mean')
-    plt.axvline(median, color='green', linestyle='dashed', linewidth=2, label='Median')
-    
-    # Add a legend
-    plt.legend()
-    plt.show()
-    ```
-
-    ```python
-    from pyspark.sql.functions import mean, approx_count_distinct
-    from matplotlib import pyplot as plt
-    
-    # Calculate the mean and median of the Price variable
-    mean = df.select(mean('Price')).collect()[0][0]
-    median = df.approxQuantile('Price', [0.5], 0.25)[0]
-    
-    # Convert the 'Price' column to a Pandas series and plot the histogram
-    price_pd = df.select('Price').toPandas()['Price']
-    plt.figure(figsize=(8, 6))
-    plt.hist(price_pd, bins=20, color='skyblue', edgecolor='black')
-    plt.title('Price Distribution')
-    plt.xlabel('Price')
+    plt.hist(df_pnd['BMI'], bins=20, color='skyblue', edgecolor='black')
+    plt.title('BMI Distribution')
+    plt.xlabel('BMI')
     plt.ylabel('Frequency')
     
     # Add lines for the mean and median
@@ -226,16 +169,15 @@ Analyze the individual features of the dataset to identify trends and outliers t
     # Add a legend
     plt.legend()
     plt.show()
-
     ```
 
-    From this graph, you're able to observe the range and distribution of prices in the dataset. For example, you can see that most prices fall within 1.79 and 2.73, and that this data is right skewed.
+    From this graph, you're able to observe the range and distribution of `BMI` in the dataset. For example, most of `BMI` fall within 23.2 and 29.2, and the data is right skewed.
 
-## Run multivariate analysis
+## Perform multivariate analysis
 
-Create various visualizations such as scatter plots, box plots, etc., to gain insights into the data's patterns and relationships. By visualizing the relationships between multiple variables, you can gain insights into the data and generate hypotheses for further analysis.
+Let's generate visualizations such as scatter plots and box plots to uncover patterns and relationships within the data.
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
     import matplotlib.pyplot as plt
@@ -243,165 +185,98 @@ Create various visualizations such as scatter plots, box plots, etc., to gain in
 
     # Scatter plot of Quantity vs. Price
     plt.figure(figsize=(8, 6))
-    sns.scatterplot(x='Price', y='Quantity', data=df)
-    plt.title('Quantity vs. Price')
-    plt.xlabel('Price')
-    plt.ylabel('Quantity')
+    sns.scatterplot(x='BMI', y='Y', data=df)
+    plt.title('BMI vs. Target variable')
+    plt.xlabel('BMI')
+    plt.ylabel('Target')
     plt.show()
     ```
+    
+    We can see that as the `BMI` increases, the target variable also increases, indicating a positive linear relationship between these two variables.
+
+1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
-    from matplotlib import pyplot as plt
     import seaborn as sns
+    import matplotlib.pyplot as plt
     
-    # Convert the 'Price' and 'Quantity' columns to a Pandas DataFrame and plot the scatter plot
-    df_pd = df.select('Price', 'Quantity').toPandas()
-    plt.figure(figsize=(8, 6))
-    sns.scatterplot(x='Price', y='Quantity', data=df_pd)
-    plt.title('Quantity vs. Price')
-    plt.xlabel('Price')
-    plt.ylabel('Quantity')
+    fig, ax = plt.subplots(figsize=(7, 5))
+    
+    # Replace numeric values with labels
+    df_pnd['SEX'] = df_pnd['SEX'].replace({1: 'Male', 2: 'Female'})
+    
+    sns.boxplot(x='SEX', y='BP', data=df, ax=ax)
+    ax.set_title('Blood pressure across Gender')
+    plt.tight_layout()
     plt.show()
     ```
-    
-    This code uses the `matplotlib` and `seaborn` libraries to create the graphs. You can further customize these graphs by changing the plot settings and adding additional features such as titles, axis labels, and legends. From this graph, you're able to observe the relationship between the quantity sold and the price of the product. For example, we can see that as the price increases, the quantity sold decreases, indicating a negative relationship between these two variables.
 
-1. Add another new code cell to the notebook, enter the following code in it, and run it:
+    These observations suggest that there are differences in the blood pressure profiles of male and female patients. On average, female patients have a higher blood pressure than male patients.
+
+1. Aggregating the data can make it more manageable for visualization and analysis. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
     import matplotlib.pyplot as plt
     import seaborn as sns
-
-    # Box plot of Quantity by Brand
-    plt.figure(figsize=(15, 5))
-    sns.boxplot(x='Quantity', y='Brand', data=df, palette='pastel')
-    plt.title('Quantity distribution by Brand')
-    plt.xlabel('Brand')
-    plt.ylabel('Quantity')
-    plt.show()
-    ```
-
-    ```python
-    from matplotlib import pyplot as plt
-    import seaborn as sns
     
-    # Convert the 'Brand' and 'Quantity' columns to a Pandas DataFrame and plot the box plot
-    df_pd = df.select('Brand', 'Quantity').toPandas()
-    plt.figure(figsize=(15, 5))
-    sns.boxplot(x='Quantity', y='Brand', data=df_pd, palette='pastel')
-    plt.title('Quantity distribution by Brand')
-    plt.xlabel('Brand')
-    plt.ylabel('Quantity')
-    plt.show()
-    ```
-
-    From this graph, you're able to compare the quantities sold by brand. For example, you can see that the **dominicks** brand has a higher median quantity sold than the other brands, suggesting that it is more popular among customers.
-
-1. Aggregating the data can help to reduce the dimensionality of the data, making it easier to visualize and analyze. Add another new code cell to the notebook, enter the following code in it, and run it:
-
-    ```python
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
-    # 4. Bar chart of the average Quantity by Store
-    plt.figure(figsize=(15, 6))
-    df.groupby('Store')['Quantity'].mean().plot(kind='bar', color='skyblue', edgecolor='black')
-    plt.title('Average Quantity by Store')
-    plt.xlabel('Store')
-    plt.ylabel('Average Quantity')
-    plt.show()
-    ```
-
-    ```python
-    from matplotlib import pyplot as plt
-    from pyspark.sql.functions import mean
+    # Calculate average BP and BMI by SEX
+    avg_values = df.groupby('SEX')[['BP', 'BMI']].mean()
     
-    # Calculate the average Quantity by Store
-    store_quantity = df.groupBy('Store').agg(mean('Quantity').alias('AverageQuantity'))
+    # Bar chart of the average BP and BMI by SEX
+    ax = avg_values.plot(kind='bar', figsize=(15, 6), edgecolor='black')
     
-    # Convert the result to a Pandas DataFrame and plot the bar chart
-    store_quantity_pd = store_quantity.toPandas().set_index('Store')
-    plt.figure(figsize=(15, 6))
-    store_quantity_pd['AverageQuantity'].plot(kind='bar', color='skyblue', edgecolor='black')
-    plt.title('Average Quantity by Store')
-    plt.xlabel('Store')
-    plt.ylabel('Average Quantity')
+    # Add title and labels
+    plt.title('Avg. Blood Pressure and BMI by Gender')
+    plt.xlabel('Gender')
+    plt.ylabel('Average')
+    
+    # Display actual numbers on the bar chart
+    for p in ax.patches:
+        ax.annotate(format(p.get_height(), '.2f'), 
+                    (p.get_x() + p.get_width() / 2., p.get_height()), 
+                    ha = 'center', va = 'center', 
+                    xytext = (0, 10), 
+                    textcoords = 'offset points')
+    
     plt.show()
-
     ```
 
-    From this graph, you're able to compare the average quantities sold by store. For example, you can see that the **111** store has a higher average quantity sold than all the other stores, indicating that it is more successful at selling products.
+    This graph shows that the average blood pressure is higher in female patients compared to male patients. Additionally, it shows that the average Body Mass Index (BMI) is slightly higher in females than in males.
 
-1. Add another new code cell to the notebook, enter the following code in it, and run it:
+1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
     import matplotlib.pyplot as plt
+    import seaborn as sns
     
-    # Convert the WeekStarting column to a datetime data type
-    df['WeekStarting'] = pd.to_datetime(df['WeekStarting'])
-    
-    # Line chart of the average Quantity by WeekStarting
-    plt.figure(figsize=(8, 6))
-    df.groupby('WeekStarting')['Quantity'].mean().plot(kind='line', color='blue')
-    plt.title('Average Quantity by WeekStarting')
-    plt.xlabel('WeekStarting')
-    plt.ylabel('Average Quantity')
+    plt.figure(figsize=(10, 6))
+    sns.lineplot(x='AGE', y='BMI', data=df, ci=None)
+    plt.title('BMI over Age')
+    plt.xlabel('Age')
+    plt.ylabel('BMI')
     plt.show()
     ```
 
-    From this graph, you're able to observe how the average quantity sold changes over time. For example, you can see that the average quantity sold increases during certain months and decreases during others, suggesting seasonal trends or changes in customer demand.
+    The age group of 19 to 30 years has the lowest average BMI values, while the highest average BMI is found in the age group of 65 to 79 years. Additionally, observe that the average BMI for most age groups falls within the overweight range.
 
 ## Correlation analysis
 
 Let's calculate correlations between different features to understand their relationships and dependencies.
 
->[IMPORTANT]
-> Correlation doesn't imply causation. 
-
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
     df.corr(numeric_only=True)
     ```
 
-    ```python
-    import pandas as pd
-    from pyspark.ml.feature import VectorAssembler
-    from pyspark.ml.stat import Correlation
-    
-    # Filter out only numeric variables
-    numeric_cols = [col for col, dtype in df.dtypes if dtype in ('int', 'double', 'float')]
-    assembler = VectorAssembler(inputCols=numeric_cols, outputCol="features")
-    df_vector = assembler.transform(df).select("features")
-    
-    pearsonCorr = Correlation.corr(df_vector, 'features').collect()[0][0]
-    
-    # Convert the correlation matrix to a Pandas DataFrame
-    corr_df = pd.DataFrame(pearsonCorr.toArray())
-    
-    # Set the column and index names to the names of the numeric columns
-    corr_df.columns = numeric_cols
-    corr_df.index = numeric_cols
-    
-    corr_df
-
-    ```
-
-1. Alternatively, a heatmap can help you quickly identify which pairs of variables have strong positive or negative relationships, and which pairs have no relationship. Add another new code cell to the notebook, enter the following code in it, and run it:
+1. A heatmap is a useful tool for quickly visualizing the strength and direction of relationships between variable pairs. It can highlight strong positive or negative correlations, as well as identify pairs that lack any correlation. To create a heatmap, add another code cell to the notebook, and enter the following code.
 
     ```python
-    # Plotting correlation of all numeric variables
     plt.figure(figsize=(15, 7))
     sns.heatmap(df.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
     ```
 
-    ```python
-    # Plotting correlation of all numeric variables
-    plt.figure(figsize=(15, 7))
-    sns.heatmap(corr_df, annot=True, vmin=-1, vmax=1, cmap="Blues")
-    ```
-
-    From this graph, you can see a value close to 1 or -1, this suggests that there is a positive or negative strong linear relationship between the corresponding pair of variables. For example, the correlation value between **Hincome150** and **COLLEGE** suggests there's a strong positive linear relationship between these variables. However, **Age60** and **WorkingWoman** indicates there's a strong negative linear relationship between these variables.
+    `S1` and `S2` variables have a high positive correlation of **0.89**, indicating that they move in the same direction. When `S1` increases, `S2` also tends to increase, and vice versa. Additionally, `S3` and `S4` have a strong negative correlation of **-0.73**. This means that as `S3` increases, `S4` tends to decrease.
 
 ## Save the notebook and end the Spark session
 
