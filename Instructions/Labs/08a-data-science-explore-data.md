@@ -6,9 +6,9 @@ lab:
 
 # Use notebooks to explore data in Microsoft Fabric
 
-In this lab, we will use notebooks for data exploration. Notebooks are a powerful tool for interactively exploring and analyzing data. During this exercise, we will learn how to create and use notebooks to explore a dataset, generate summary statistics, and create visualizations to better understand the data. By the end of this lab, you will have a solid understanding of how to use notebooks for data exploration and analysis.
+In this lab, we'll use notebooks for data exploration. Notebooks are a powerful tool for interactively exploring and analyzing data. During this exercise, we'll learn how to create and use notebooks to explore a dataset, generate summary statistics, and create visualizations to better understand the data. By the end of this lab, you'll have a solid understanding of how to use notebooks for data exploration and analysis.
 
-This lab will take approximately **45** minutes to complete.
+This lab takes approximately **30** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -138,7 +138,7 @@ Now, let's generate descriptive statistics to understand the distribution of num
     print(desc_stats)
     ```
 
-    The average `age` is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.
+    The average age is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.
 
 ## Plot the data distribution
 
@@ -269,7 +269,7 @@ Let's calculate correlations between different features to understand their rela
     df.corr(numeric_only=True)
     ```
 
-1. A heatmap is a useful tool for quickly visualizing the strength and direction of relationships between variable pairs. It can highlight strong positive or negative correlations, as well as identify pairs that lack any correlation. To create a heatmap, add another code cell to the notebook, and enter the following code.
+1. A heatmap is a useful tool for quickly visualizing the strength and direction of relationships between variable pairs. It can highlight strong positive or negative correlations, and identify pairs that lack any correlation. To create a heatmap, add another code cell to the notebook, and enter the following code.
 
     ```python
     plt.figure(figsize=(15, 7))
