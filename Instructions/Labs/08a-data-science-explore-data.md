@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
 
-1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Power BI portal, select the **PowerBI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -49,7 +49,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 Now you're ready to run code to get data. You'll work with the [**diabetes dataset**](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe.
 
     ```python
     # Azure storage access info for open dataset diabetes
@@ -152,12 +152,12 @@ Let's verify the `BMI` feature, and plot its distribution to get a better unders
     import numpy as np
     
     # Calculate the mean, median of the BMI variable
-    mean = df_pnd['BMI'].mean()
-    median = df_pnd['BMI'].median()
+    mean = df['BMI'].mean()
+    median = df['BMI'].median()
     
     # Histogram of the BMI variable
     plt.figure(figsize=(8, 6))
-    plt.hist(df_pnd['BMI'], bins=20, color='skyblue', edgecolor='black')
+    plt.hist(df['BMI'], bins=20, color='skyblue', edgecolor='black')
     plt.title('BMI Distribution')
     plt.xlabel('BMI')
     plt.ylabel('Frequency')
@@ -203,7 +203,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
     fig, ax = plt.subplots(figsize=(7, 5))
     
     # Replace numeric values with labels
-    df_pnd['SEX'] = df_pnd['SEX'].replace({1: 'Male', 2: 'Female'})
+    df['SEX'] = df['SEX'].replace({1: 'Male', 2: 'Female'})
     
     sns.boxplot(x='SEX', y='BP', data=df, ax=ax)
     ax.set_title('Blood pressure across Gender')
