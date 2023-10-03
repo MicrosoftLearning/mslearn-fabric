@@ -146,7 +146,7 @@ Let's review what you want your trigger to do: *You want to create a Reflex that
     - **Headline**: *Temperature too high or too low*
     - **Additional information**: Select the *Temperature* property from the checkbox list.
 
-    ![Screenshot of the Data Activator Reflex Design start trigger.](./Images/data-activator-trigger-start.png)
+    ![Screenshot of the Data Activator define action.](./Images/data-activator-trigger-define-action.png)
 
 1. Select **Save** and then **Start** from the top menu.
 
