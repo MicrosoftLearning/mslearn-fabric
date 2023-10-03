@@ -23,9 +23,9 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-In this lab, you use the Data Activator in Fabric to create a *Reflex*. Data Activator conveniently provides a sample data set that you can use to explore Data Activator's capabilities. You use this sample data to create a *Reflex* that analysis some real-time data and create a trigger to send an email out when a condition is met.
+In this lab, you´ll use the Data Activator in Fabric to create a *Reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *Reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
 
-> **Note**: The Data Activator sample process is generating some random data in the background.  The more more complex your conditions and filters you create, the more likely that no events have yet meet the trigger conditions and filters. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
+> **Note**: The Data Activator sample process generates some random data in the background. The more more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
 
 ## Scenario
 
@@ -45,7 +45,7 @@ In this scenario, you're a data analyst for a company that sells and ships a ran
 
     ![Screenshot of the Data Activator Get Data screen.](./Images/data-activator-get-started.png)
 
-1. By default, Data Activator creates your reflex with the name *Reflex YYYY-MM-DD hh:mm:ss*. Since you may have multiple reflexes in your workspace, you should change the default Reflex's name to a more descriptive name. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Reflex*** for our example.
+1. By default, Data Activator creates your reflex with the name *Reflex YYYY-MM-DD hh:mm:ss*. Since you may have multiple reflexes in your workspace, you should change the default Reflex's name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Reflex*** for our example.
 
     ![Screenshot of the Data Activator Reflex home screen.](./Images/data-activator-reflex-home-screen.png)
 
@@ -65,11 +65,11 @@ To get familiar with the *Design* mode, select the different sections of the scr
 
 ### Data mode
 
-1. If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you use the sample data provided by Data Activator. The sample data provided by Data Activator is already set up with three EventStreams that are monitoring the package delivery status.
+If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. Thia sample is already set up with three EventStreams that are monitoring the package delivery status.
 
 ![Screenshot of the Data Activator Reflex Data mode.](./Images/data-activator-data-tab.png)
 
-1. Select each of the different events to see the data that the event processes.
+Select each of the different events and observe the data being used in the stream.
 
 ![Screenshot of the Data Activator Reflex Data mode events.](./Images/data-activator-get-data-tab-event-2.png)
 
@@ -81,7 +81,7 @@ In a real world scenario, there might not be a need to create a new object for t
 
 1. If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen.
 
-1. Select the ***Package In Transit*** event. Pay close attention to the values in the *PackageId*, *Temperature*, *ColdChainType*, *City*, and *SpecialCare* columns. You use these columns to create your trigger.
+1. Select the ***Package In Transit*** event. Pay close attention to the values in the *PackageId*, *Temperature*, *ColdChainType*, *City*, and *SpecialCare* columns. You´ll use these columns to create your trigger.
 
 1. If the *Assign your Data* dialog isn't already open on the right-hand side, select the **Assign your data** button on the right of the screen.
 
@@ -105,15 +105,17 @@ Time to create your trigger.
 
 ## Create a trigger
 
-Let's review what you want your trigger to do: *You want to create a Reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the Reflex events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond*.
+Let's review what you want your trigger to do: *You want to create a Reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the Reflex events already contain a similar trigger, you´ll create one specifically for the packages shipped to the city of Redmond*.
 
-1. Select the **New Trigger** button on the top menu. A new trigger is created with the default name of *Untitled*, change the name to ***Medicine temp out of range*** to better define your trigger.
+1. Within the *Package In Transit* event from the **Redmond Packages** object select the **New Trigger** button on the top menu. A new trigger is created with the default name of *Untitled*, change the name to ***Medicine temp out of range*** to better define your trigger.
 
     ![Screenshot of the Data Activator Reflex Design create new trigger.](./Images/data-activator-trigger-new.png)
 
-1. Time to select the property or event column that triggers your Reflex. Since you created several properties when you created your object, select the **Existing property** button and select the ***Temperature*** property. Selecting this property should return a graph with a sample historic temperature values.
+1. Time to select the property or event column that triggers your Reflex. Since you created several properties when you created your object, select the **Existing property** button and select the ***Temperature*** property. 
 
     ![Screenshot of the Data Activator Reflex Design select a property.](./Images/data-activator-trigger-select-property.png)
+
+    Selecting this property should return a graph with a sample historic temperature values.
 
     ![Screenshot of the Data Activator property graph of historic values.](./Images/data-activator-trigger-property-sample-graph.png)
 
@@ -125,11 +127,11 @@ Let's review what you want your trigger to do: *You want to create a Reflex that
 
     ![Screenshot of the Data Activator Reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
 
-1. So far you define the property and condition you want the trigger to fire on, but that still doesn't include all the parameters you needed. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  Select the **Add filter** button and select the ***City*** property. Enter ***Redmond*** as the value. Then, select the **Add filter** button again and select the ***SpecialCare*** property. Enter ***Medicine*** as the value.
+1. So far you´ve defined the property and condition you want the trigger to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  Select the **Add filter** button, set the property to ***City*** , set the relationship to ***Equal***, and enter ***Redmond*** as the value. Then, add a new filter with the ***SpecialCare*** property, set it to ***Equal*** and enter ***Medicine*** as the value.
 
     ![Screenshot of the Data Activator Reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter.png)
 
-1. Let's add one more filter just to make sure that the medicine is refrigerated. Select the **Add filter** button and select the ***ColdChainType*** property. Enter ***Refrigerated*** as the value.
+1. Let's add one more filter just to make sure that the medicine is refrigerated. Select the **Add filter** button, set the ***ColdChainType*** property, set it to ***Equal*** and enter ***Refrigerated*** as the value.
 
     ![Screenshot of the Data Activator Reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter-additional.png)
 
@@ -141,7 +143,7 @@ Let's review what you want your trigger to do: *You want to create a Reflex that
 
     - **Send to**: Your current user account should be selected by default, which should be fine for this lab.
     - **Subject**: *Redmond Medical Package outside acceptable temperature range*
-    - **Headline**: *Temperature too hot or too cold*
+    - **Headline**: *Temperature too high or too low*
     - **Additional information**: Select the *Temperature* property from the checkbox list.
 
     ![Screenshot of the Data Activator Reflex Design start trigger.](./Images/data-activator-trigger-start.png)
@@ -150,7 +152,7 @@ Let's review what you want your trigger to do: *You want to create a Reflex that
 
 You have now created and started a trigger in Data Activator.
 
-## Update a trigger
+## Update and stop a trigger
 
 The only problem with this trigger is that while the trigger sent an email with the temperature, the trigger didn't send the *PackageId* of the package. Let's go ahead and update the trigger to include the *PackageId*.
 
@@ -172,11 +174,7 @@ The only problem with this trigger is that while the trigger sent an email with 
 
     ![Screenshot of the Data Activator update trigger.](./Images/data-activator-trigger-updated.png)
 
-Your trigger is now updated.
-
-## Stop a trigger
-
-To stop the trigger, select the **Stop** button from the top menu.
+1. Stop the trigger by selecting the **Stop** button from the top menu.
 
 ## Clean up resources
 
