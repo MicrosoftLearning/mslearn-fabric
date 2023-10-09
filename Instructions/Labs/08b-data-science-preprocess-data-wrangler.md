@@ -4,7 +4,7 @@ lab:
     module: 'Preprocess data with Data Wrangler in Microsoft Fabric'
 ---
 
-# Use notebooks to train a model in Microsoft Fabric
+# Preprocess data with Data Wrangler in Microsoft Fabric
 
 In this lab, you'll learn how to use Data Wrangler in Microsoft Fabric to preprocess data, and generate code using a library of common data science operations.
 
