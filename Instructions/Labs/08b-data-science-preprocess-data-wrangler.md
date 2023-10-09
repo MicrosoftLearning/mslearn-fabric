@@ -23,26 +23,11 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-## Create a lakehouse and upload files
-
-Now that you have a workspace, it's time to switch to the *Data science* experience in the portal and create a data lakehouse for the data files you're going to analyze.
-
-1. At the bottom left of the Power BI portal, select the **Power BI** icon and switch to the **Data Engineering** experience.
-1. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
-
-    After a minute or so, a new lakehouse with no **Tables** or **Files** will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer (or lab VM if applicable) and then upload them to your lakehouse.
-
-1. TODO: Download and save the `dominicks_OJ.csv` CSV file for this exercise from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/XXXXX.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/XXXXX.csv).
-
-
-1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** node in the **Lake view** pane, select **Upload** and **Upload files**, and then upload the **dominicks_OJ.csv** file from your local computer (or lab VM if applicable) to the lakehouse.
-6. After the files have been uploaded, expand **Files** and verify that the CSV file have been uploaded.
-
 ## Create a notebook
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
 
-1. At the bottom left of the Power BI portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Power BI portal, select the **PowerBI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -55,67 +40,95 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
-   # Train a machine learning model and track with MLflow
+   # Perform data exploration for data science
 
-   Use the code in this notebook to train and track models.
+   Use the code in this notebook to perform data exploration for data science.
     ``` 
 
 ## Load data into a dataframe
 
-Now you're ready to run code to prepare data and train a model. To work with data, you'll use *dataframes*. Dataframes in Spark are similar to Pandas dataframes in Python, and provide a common structure for working with data in rows and columns.
+Now you're ready to run code to get data. You'll work with the [**OJ Sales dataset**](https://learn.microsoft.com/en-us/azure/open-datasets/dataset-oj-sales-simulated?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is the structure supported by Data Wrangler.
 
-1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
-1. Select **Existing lakehouse** and select **Add**.
-1. Select the lakehouse you created in a previous section.
-1. Expand the **Files** folder so that the CSV file is listed next to the notebook editor.
-1. In the **...** menu for **churn.csv**, select **Load data** > **Pandas**. A new code cell containing the following code should be added to the notebook:
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe.
 
     ```python
-    import pandas as pd
-    df = pd.read_csv("/lakehouse/default/" + "Files/dominicks_OJ.csv") 
-    display(df.head(5))
+    # Azure storage access info for open dataset diabetes
+    blob_account_name = "azureopendatastorage"
+    blob_container_name = "ojsales-simulatedcontainer"
+    blob_relative_path = "oj_sales_data"
+    blob_sas_token = r"" # Blank since container is Anonymous access
+    
+    # Set Spark config to access  blob storage
+    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+    print("Remote blob path: " + wasbs_path)
+    
+    # Spark reads csv
+    df = spark.read.csv(wasbs_path, header=True)
     ```
 
-    > **Tip**: You can hide the pane containing the files on the left by using its **<<** icon. Doing so will help you focus on the notebook.
-
-1. Use the **&#9655; Run cell** button on the left of the cell to run it.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
+1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
+
+    ```python
+    import pandas as pd
+
+    df = df.toPandas()
+    df = df.sample(n=500, random_state=1)
+    
+    df['WeekStarting'] = pd.to_datetime(df['WeekStarting'])
+    df['Quantity'] = df['Quantity'].astype('int')
+    df['Advert'] = df['Advert'].astype('int')
+    df['Price'] = df['Price'].astype('float')
+    df['Revenue'] = df['Revenue'].astype('float')
+    
+    df = df.reset_index(drop=True)
+    df.head(4)
+    ```
+
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
+
+    ```
+        WeekStarting	Store	Brand	    Quantity	Advert	Price	Revenue
+    0	1991-10-17	    947	    minute.maid	13306	    1	    2.42	32200.52
+    1	1992-03-26	    1293	dominicks	18596	    1	    1.94	36076.24
+    2	1991-08-15	    2278	dominicks	17457	    1	    2.14	37357.98
+    3	1992-09-03	    2175	tropicana	9652	    1	    2.07	19979.64
+    ```
+
+    The output shows the first four rows of the OJ Sales dataset.
+
 ## View summary statistics
 
-When Data Wrangler launches, it generates a descriptive overview of the dataframe in the Summary panel. 
+Now that we have loaded the data, the next step is to preprocess it using Data Wrangler. Preprocessing is a crucial step in any machine learning workflow. It involves cleaning the data and transforming it into a format that can be fed into a machine learning model.
 
-1. Select **Data** at the top menu, then **Data Wrangler** dropdown to browse the `df` dataset.
+1. Select **Data** in the notebook ribbon, and then select **Launch Data Wrangler** dropdown.
 
-    ![Screenshot of the launch Data Wrangler option.](./Images/launch-data-wrangler.png)
+1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel. 
 
-1. Select the **Large HH** column and observe how easily you can determine the data distribution of this feature.
+1. Select the **Revenue** feature, and observe the data distribution of this feature.
 
-    ![Screenshot of the Data Wrangler page showing the data distribution for a particular column.](./Images/data-wrangler-distribution.png)
-
-    Notice that this feature follows a normal distribution.
-
-1. Check the Summary side panel, and observe the percentile ranges. 
+1. Review the **Summary** side panel details, and observe the statistics values.
 
     ![Screenshot of the Data Wrangler page showing the summary panel details.](./Images/data-wrangler-summary.png)
 
-    You can see that most of the data lies between **0.098** and **0.132**, and that 50% of the data values fall within that range.
+    What are some of the insights you can draw from it? The mean revenue is approximately **$33,459.54**, with a standard deviation of **$8,032.23**. This suggests that the revenue values are spread out over a range of about **$8,032.23** around the mean.
 
 ## Format text data
 
 Now let's apply a few transformations to the **Brand** feature.
 
-1. On the **Data Wrangler** page, select the `Brand` feature.
+1. On the **Data Wrangler** dashboard, select the `Brand` feature on the grid.
 
-1. Navigate to the **Operations** panel, expand **Find and replace**, then select **Find and replace**.
+1. Navigate to the **Operations** panel, expand **Find and replace**, and then select **Find and replace**.
 
 1. On the **Find and replace** panel, change the following properties:
     
     - **Old value:** "."
     - **New value:** " " (space character)
-
-    ![Screenshot of the Data Wrangler page showing the find and replace panel.](./Images/data-wrangler-find.png)
 
     You can see the results of the operation automatically previewed in the display grid.
 
@@ -123,41 +136,56 @@ Now let's apply a few transformations to the **Brand** feature.
 
 1. Back to the **Operations** panel, expand **Format**.
 
-1. Select **Convert text to capital case**.
-
-1. On the **Convert text to capital case** panel, select **Apply**.
+1. Select **Convert text to capital case**. Switch the **Capitalize all words** toggle, and then select **Apply**.
 
 1. Select **Add code to notebook**. Additionally, you can also save the transformed dataset as a .csv file.
 
-    Note that the code is automatically copied to the notebook cell, and is ready for use.
+    >**Note:** The code is automatically copied to the notebook cell, and is ready for use. 
 
-1. Run the code.
+1. Replace the lines 10 and 11 with the code `df = clean_data(df)`, as the code generated in Data Wrangler doesn't overwrite the original dataframe. The final code block should look like this:
+ 
+    ```python
+    def clean_data(df):
+        # Replace all instances of "." with " " in column: 'Brand'
+        df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)
+        # Convert text to capital case in column: 'Brand'
+        df['Brand'] = df['Brand'].str.title()
+        return df
+    
+    df = clean_data(df)
+    ```
 
-> **Important:** The code generated doesn't overwrite the original dataframe. 
+1. Run the code cell, and check the `Brand` variable.
 
-You've learned how to easily generate code, and manipulate text data using Data Wrangler operations. 
+    ```python
+    df['Brand'].unique()
+    ```
 
-## Apply one-hot encoder transformation
+    The result shows *Minute Maid*, *Dominicks*, and *Tropicana*.
 
-Now, let's generate the code to apply one-hot encoder transformation as a preprocessing step.
+You've learned how to graphically manipulate text data, and easily generate code using Data Wrangler.
 
-1. Select **Data** at the top menu, then **Data Wrangler** dropdown to browse the `df` dataset.
+## Apply one-hot encoding transformation
 
-1. On the **Operations** panel, expand **Formulas**.
+Now, let's generate the code to apply the one-hot encoding transformation to our data as part of our preprocessing steps. To make our scenario more practical, we begin by generating some sample data. This allows us to simulate a real-world situation and provides us with a workable feature.
 
-1. Select **One-hot encode**.
+1. Launch Data Wrangler at the top menu for the `df` dataframe.
+
+1. Select the `Brand` feature on the grid. 
+
+1. On the **Operations** panel, expand **Formulas**, and then select **One-hot encode**.
 
 1. On the **One-hot encode** panel, select **Apply**.
 
-    Navigate to the end of the Data Wrangler display grid. Notice that it added three new features, and removed the `Brand` feature.
+    Navigate to the end of the Data Wrangler display grid. Notice that it added three new features (`Brand_Dominicks`, `Brand_Minute Maid`, and `Brand_Tropicana`), and removed the `Brand` feature.
 
-1. Select **Add code to notebook**.
-
-1. Run the code.
+1. Close Data Wrangler without generating the code.
 
 ## Sort and filter operations
 
-1. Select **Data** at the top menu, then **Data Wrangler** dropdown to browse the `df` dataset.
+Imagine we need to review the revenue data for a specific store, and then sort the product prices. In the following steps, we use Data Wrangler to filter and analyze the `df` dataframe. 
+
+1. Launch Data Wrangler for the `df` dataframe.
 
 1. On the **Operations** panel, expand **Sort and filter**.
 
@@ -167,48 +195,34 @@ Now, let's generate the code to apply one-hot encoder transformation as a prepro
     
     - **Target colunm:** Store
     - **Operation:** Equal to
-    - **Value:** 2
+    - **Value:** 1227
 
-1. Select **Apply**.
+1. Select **Apply**, and notice the changes in the Data Wrangler display grid.
 
-    Notice that the changes in the Data Wrangler display grid.
+1. Select the **Revenue** feature, and then review the **Summary** side panel details.
+
+    What are some of the insights you can draw from it? The skewness is **-0.751**, indicating a slight left skew (negative skew). This means that the left tail of the distribution is slightly longer than the right tail. In other words, there are a number of periods with revenues significantly below the mean.
 
 1. Back to the **Operations** panel, expand **Sort and filter**.
 
-1. Select **Sort values**
+1. Select **Sort values**.
 
-1. On the **Price** panel, add the following condition:
+1. On the **Sort values** panel, select the following properties:
     
     - **Column name:** Price
     - **Sort order:** Descending
 
 1. Select **Apply**.
 
-    Notice that the changes in the Data Wrangler display grid.
-
-## Aggregate data
-
-1. Back to the **Operations** panel, select **Group by and aggregate**.
-
-1. On the **Columns to group by:** property, select the `Store` feature.
-
-1. Select **Add aggregation**.
-
-1. On the **Column to aggregate** property, select the `Quantity` feature.
-
-1. Select **Count** for the **Aggregation type** property.
-
-1. Select **Apply**. 
-
-    Notice that the changes in the Data Wrangler display grid.
+    The highest product price for store **1227** is **$2.68**. With only a few records it's easier to identify the highest product price, but consider the complexity when dealing with thousands of results.
 
 ## Browse and remove steps
 
-Suppose you made a mistake and need to remove the aggregation you created in the previous step. Follow these steps to remove it:
+Suppose you made a mistake and need to remove the sort you created in the previous step. Follow these steps to remove it:
 
-1. Expand the **Cleaning steps** panel.
+1. Navigate to the **Cleaning steps** panel.
 
-1. Select the **Group by and aggregate** step.
+1. Select the **Sort values** step.
 
 1. Select the delete icon to have it removed.
 
@@ -216,11 +230,62 @@ Suppose you made a mistake and need to remove the aggregation you created in the
 
     > **Important:** the grid view and summary are limited to the current step.
 
-    Notice that the changes are reverted to the previous step, which is the **Sort values** step.
+    Notice that the changes are reverted to the previous step, which is the **Filter** step.
 
-1. Select **Add code to notebook**.
+1. Close Data Wrangler without generating the code.
 
-1. Run the code.
+## Aggregate data
+
+Suppose we need to understand the average revenue generated by each brand. In the following steps, we use Data Wrangler to perform a group by operation on the `df` dataframe.
+
+1. Launch Data Wrangler for the `df` dataframe.
+
+1. Back to the **Operations** panel, select **Group by and aggregate**.
+
+1. On the **Columns to group by:** property, select the `Brand` feature.
+
+1. Select **Add aggregation**.
+
+1. On the **Column to aggregate** property, select the `Revenue` feature.
+
+1. Select **Mean** for the **Aggregation type** property.
+
+1. Select **Apply**. 
+
+1. Select **Add code to notebook**. 
+
+1. Combine the code from the `Brand` variable transformation with the code generated by the aggregation step in the `clean_data(df)` function. The final code block should look like this:
+ 
+    ```python
+    def clean_data(df):
+        # Replace all instances of "." with " " in column: 'Brand'
+        df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)
+        # Convert text to capital case in column: 'Brand'
+        df['Brand'] = df['Brand'].str.title()
+
+        # Performed 1 aggregation grouped on column: 'Brand'
+        df = df.groupby(['Brand']).agg(Revenue_mean=('Revenue', 'mean')).reset_index()
+
+        return df
+    
+    df = clean_data(df)
+    ```
+
+1. Run the cell code.
+
+1. Check the data in dataframe.
+
+    ```python
+    print(df)
+    ``` 
+
+    Results:
+    ```
+             Brand  Revenue_mean
+    0    Dominicks  33206.330958
+    1  Minute Maid  33532.999632
+    2    Tropicana  33637.863412
+    ```
 
 You generated the code for some of the preprocess operations, and saved back to the notebook as a function, which you can then reuse or modify as needed.
 
