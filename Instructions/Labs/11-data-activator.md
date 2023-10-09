@@ -23,43 +23,43 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-In this lab, you´ll use the Data Activator in Fabric to create a *Reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *Reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
+In this lab, you´ll use the Data Activator in Fabric to create a *reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
 
 > **Note**: The Data Activator sample process generates some random data in the background. The more more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
 
 ## Scenario
 
-In this scenario, you're a data analyst for a company that sells and ships a range of products.  You're responsible for the data of all shipments and sales to the city of Redmond. You want to create a Reflex that monitors the packages that are out for delivery. One category of products you ship is medical prescriptions that need to be refrigerated at a particular temperature during transit. You want to create a Reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be between 33 degrees and 41 degrees. Since the Reflex events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond. Let's get started!
+In this scenario, you're a data analyst for a company that sells and ships a range of products.  You're responsible for the data of all shipments and sales to the city of Redmond. You want to create a reflex that monitors the packages that are out for delivery. One category of products you ship is medical prescriptions that need to be refrigerated at a particular temperature during transit. You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond. Let's get started!
 
-## Create a Reflex
+## Create a reflex
 
 1. In the **Microsoft Fabric** experience portal, select the **Data Activator** experience by first selecting the current Fabric experience icon in the lower left hand corner of the screen and then selecting the **Data Activator** from the menu. For example, in the following screenshot, the current Fabric experience is **Power BI**.
 
     ![Screenshot of selecting the Data Activator Experience.](./Images/data-activator-select-experience.png)
 
-1. You should now be in the Data Activator Home screen. The Fabric Experience icon on the lower right also changed to the Data Activator one. Let's create a new Reflex by selecting the **Reflex (Preview)** button.
+1. You should now be in the Data Activator Home screen. The Fabric Experience icon on the lower right also changed to the Data Activator one. Let's create a new reflex by selecting the **reflex (Preview)** button.
 
     ![Screenshot of the Data Activator Home screen.](./Images/data-activator-home-screen.png)
 
-1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Data Activator. Select the **Use Sample Data** button to finish creating your Reflex.
+1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Data Activator. Select the **Use Sample Data** button to finish creating your reflex.
 
     ![Screenshot of the Data Activator Get Data screen.](./Images/data-activator-get-started.png)
 
-1. By default, Data Activator creates your reflex with the name *Reflex YYYY-MM-DD hh:mm:ss*. Since you may have multiple reflexes in your workspace, you should change the default Reflex's name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Reflex*** for our example.
+1. By default, Data Activator creates your reflex with the name *Reflex YYYY-MM-DD hh:mm:ss*. Since you may have multiple reflexes in your workspace, you should change the default reflex's name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Reflex*** for our example.
 
-    ![Screenshot of the Data Activator Reflex home screen.](./Images/data-activator-reflex-home-screen.png)
+    ![Screenshot of the Data Activator reflex home screen.](./Images/data-activator-reflex-home-screen.png)
 
-Our Reflex is now created and we can start adding triggers and actions to it.
+Our reflex is now created and we can start adding triggers and actions to it.
 
-## Get familiar with the Reflex home screen
+## Get familiar with the reflex home screen
 
-The Reflex's home screen is divided into two sections, the *Design* mode the *Data* mode. You can select the mode by selecting the respective tab on the bottom left of the screen.  The *Design* mode tab is where you define your objects with your triggers, properties and events. The *Data* mode tab is where you can add your data sources and view the data that your Reflex processes. Let's take a look at the *Design* mode tab, which should be opened by default when you create your Reflex.
+The reflex's home screen is divided into two sections, the *Design* mode the *Data* mode. You can select the mode by selecting the respective tab on the bottom left of the screen.  The *Design* mode tab is where you define your objects with your triggers, properties and events. The *Data* mode tab is where you can add your data sources and view the data that your reflex processes. Let's take a look at the *Design* mode tab, which should be opened by default when you create your reflex.
 
 ### Design mode
 
 If you're not currently in *Design* mode, select the **Design** tab on the bottom left of the screen.
 
-![Screenshot of the Data Activator Reflex Design mode.](./Images/data-activator-design-tab.png)
+![Screenshot of the Data Activator reflex Design mode.](./Images/data-activator-design-tab.png)
 
 To get familiar with the *Design* mode, select the different sections of the screen, triggers, properties and events. We cover each section in more detail in the following sections.
 
@@ -67,17 +67,17 @@ To get familiar with the *Design* mode, select the different sections of the scr
 
 If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. Thia sample is already set up with three EventStreams that are monitoring the package delivery status.
 
-![Screenshot of the Data Activator Reflex Data mode.](./Images/data-activator-data-tab.png)
+![Screenshot of the Data Activator reflex Data mode.](./Images/data-activator-data-tab.png)
 
 Select each of the different events and observe the data being used in the stream.
 
-![Screenshot of the Data Activator Reflex Data mode events.](./Images/data-activator-get-data-tab-event-2.png)
+![Screenshot of the Data Activator reflex Data mode events.](./Images/data-activator-get-data-tab-event-2.png)
 
-It's time to add a trigger to our Reflex, but first, let's create a new object.
+It's time to add a trigger to our reflex, but first, let's create a new object.
 
 ## Create an object
 
-In a real world scenario, there might not be a need to create a new object for this Reflex since the Data Activator sample already includes an object called *Package*. But for this lab, we create a new object to demonstrate how to create one. Let's create a new object called *Redmond Packages*.
+In a real world scenario, there might not be a need to create a new object for this reflex since the Data Activator sample already includes an object called *Package*. But for this lab, we create a new object to demonstrate how to create one. Let's create a new object called *Redmond Packages*.
 
 1. If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen.
 
@@ -85,7 +85,7 @@ In a real world scenario, there might not be a need to create a new object for t
 
 1. If the *Assign your Data* dialog isn't already open on the right-hand side, select the **Assign your data** button on the right of the screen.
 
-    ![Screenshot of the Data Activator Reflex Data mode assign your data button.](./Images/data-activator-data-tab-assign-data-button.png)
+    ![Screenshot of the Data Activator reflex Data mode assign your data button.](./Images/data-activator-data-tab-assign-data-button.png)
 
 1. On the *Assign your data* dialog, select the ***Assign to new object*** tab and enter the following values:
 
@@ -93,47 +93,47 @@ In a real world scenario, there might not be a need to create a new object for t
     - **Assign key column**: *PackageId*
     - **Assign properties**: *City, ColdChainType, SpecialCare, Temperature*
 
-    ![Screenshot of the Data Activator Reflex Data mode assign your data dialog.](./Images/data-activator-data-tab-assign-data.png)
+    ![Screenshot of the Data Activator reflex Data mode assign your data dialog.](./Images/data-activator-data-tab-assign-data.png)
 
 1. Select **Save** and then select **Save and go to design mode**.
 
 1. You should now be back in the *Design* mode. A new object called ***Redmond Packages*** has been added. Select this new object, expand its *Events* and select the **Package in Transit** event.
 
-    ![Screenshot of the Data Activator Reflex Design mode with new object.](./Images/data-activator-design-tab-new-object.png)
+    ![Screenshot of the Data Activator reflex Design mode with new object.](./Images/data-activator-design-tab-new-object.png)
 
 Time to create your trigger.
 
 ## Create a trigger
 
-Let's review what you want your trigger to do: *You want to create a Reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the Reflex events already contain a similar trigger, you´ll create one specifically for the packages shipped to the city of Redmond*.
+Let's review what you want your trigger to do: *You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you´ll create one specifically for the packages shipped to the city of Redmond*.
 
 1. Within the *Package In Transit* event from the **Redmond Packages** object select the **New Trigger** button on the top menu. A new trigger is created with the default name of *Untitled*, change the name to ***Medicine temp out of range*** to better define your trigger.
 
-    ![Screenshot of the Data Activator Reflex Design create new trigger.](./Images/data-activator-trigger-new.png)
+    ![Screenshot of the Data Activator reflex Design create new trigger.](./Images/data-activator-trigger-new.png)
 
-1. Time to select the property or event column that triggers your Reflex. Since you created several properties when you created your object, select the **Existing property** button and select the ***Temperature*** property. 
+1. Time to select the property or event column that triggers your reflex. Since you created several properties when you created your object, select the **Existing property** button and select the ***Temperature*** property. 
 
-    ![Screenshot of the Data Activator Reflex Design select a property.](./Images/data-activator-trigger-select-property.png)
+    ![Screenshot of the Data Activator reflex Design select a property.](./Images/data-activator-trigger-select-property.png)
 
     Selecting this property should return a graph with a sample historic temperature values.
 
     ![Screenshot of the Data Activator property graph of historic values.](./Images/data-activator-trigger-property-sample-graph.png)
 
-1. Now you need to decide what type of condition you want to trigger from this property. In this case, you want to trigger your Reflex when the temperature is above 41 or below 33 degrees. Since we're looking for a numeric range, select the **Numeric** button and select the **Exits range** condition.
+1. Now you need to decide what type of condition you want to trigger from this property. In this case, you want to trigger your reflex when the temperature is above 41 or below 33 degrees. Since we're looking for a numeric range, select the **Numeric** button and select the **Exits range** condition.
 
-    ![Screenshot of the Data Activator Reflex Design choose condition type.](./Images/data-activator-trigger-select-condition-type.png)
+    ![Screenshot of the Data Activator reflex Design choose condition type.](./Images/data-activator-trigger-select-condition-type.png)
 
 1. Now you need to enter the values for your condition. Enter ***33*** and ***44*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *44* degrees.
 
-    ![Screenshot of the Data Activator Reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
+    ![Screenshot of the Data Activator reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
 
 1. So far you´ve defined the property and condition you want the trigger to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  Select the **Add filter** button, set the property to ***City*** , set the relationship to ***Equal***, and enter ***Redmond*** as the value. Then, add a new filter with the ***SpecialCare*** property, set it to ***Equal*** and enter ***Medicine*** as the value.
 
-    ![Screenshot of the Data Activator Reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter.png)
+    ![Screenshot of the Data Activator reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter.png)
 
 1. Let's add one more filter just to make sure that the medicine is refrigerated. Select the **Add filter** button, set the ***ColdChainType*** property, set it to ***Equal*** and enter ***Refrigerated*** as the value.
 
-    ![Screenshot of the Data Activator Reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter-additional.png)
+    ![Screenshot of the Data Activator reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter-additional.png)
 
 1. You're almost there! You just need to define what action you want to take when the trigger fires. In this case, you want to send an email to the shipping department. Select the **Email** button.
 
@@ -178,9 +178,9 @@ The only problem with this trigger is that while the trigger sent an email with 
 
 ## Clean up resources
 
-In this exercise, you have created a Reflex with a trigger in Data Activator. You should now be familiar with the Data Activator interface and how to create a Reflex and it objects, trigger and properties.
+In this exercise, you have created a reflex with a trigger in Data Activator. You should now be familiar with the Data Activator interface and how to create a reflex and it objects, trigger and properties.
 
-If you've finished exploring your Data Activator Reflex, you can delete the workspace you created for this exercise.
+If you've finished exploring your Data Activator reflex, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
