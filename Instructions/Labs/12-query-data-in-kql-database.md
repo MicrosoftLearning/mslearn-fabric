@@ -19,11 +19,13 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
 
-In this lab, you´ll use the Data Activator in Fabric to create a *reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
+In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL database from a sample eventstream. Real-Time Analytics  conveniently provides a sample dataset that you can use to explore RTA's capabilities. You´ll use this sample data to create KQL | SQL queryes and querysets that analyzes some real-time data and allow for additional use in downstream processes.
 
 
 ## Scenario
-In this scenario, you're an analyst that's tasked with querying a
+In this scenario, you're an analyst that's tasked with querying a sample dataset that you will implement from the Fabric environment.
+
+
 
 A Kusto query is a way to read data, process it, and show the results. The query is written in plain text that is easy to work with. A Kusto query can have one or more statements that show data as a table or a graph.
 
