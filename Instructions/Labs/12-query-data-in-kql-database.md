@@ -21,6 +21,25 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL database from a sample eventstream. Real-Time Analytics  conveniently provides a sample dataset that you can use to explore RTA's capabilities. You´ll use this sample data to create KQL | SQL queryes and querysets that analyzes some real-time data and allow for additional use in downstream processes.
 
+## Create a KQL Database
+
+1. Within the **Real-Time Analytics**, select the **KQL Database** box.
+
+   ![Image of choose kqldatabase](./Images/select-kqldatabase.png)
+
+2. You'll be prompted to **Name** the KQL Database
+
+   ![Image of name kqldatabase](./Images/name-kqldatabase.png)
+
+3. Give the KQL Database a name that you'll remember, such as **MyStockData**, press **Create**.
+
+1. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
+
+   ![Image of enable onlake](./Images/enable-onelake-availability.png)
+
+2. Make sure to toggle the button to **Active** and then select **Done**.
+
+   ![Image of enable onelake toggle](./Images/enable-onelake-toggle.png)
 
 ## Scenario
 In this scenario, you're an analyst that's tasked with querying a sample dataset that you will implement from the Fabric environment.
