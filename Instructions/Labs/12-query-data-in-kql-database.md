@@ -8,6 +8,8 @@ A KQL Queryset is a tool that allows you to execute queries, modify, and display
 
 The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. To learn more about the [kusto query (KQL)language](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext), 
 
+This lab will take approximately **25** minutes to complete.
+
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
@@ -33,13 +35,23 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
 
 3. Give the KQL Database a name that you'll remember, such as **MyStockData**, press **Create**.
 
-1. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
+4. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
-   ![Image of enable onlake](./Images/enable-onelake-availability.png)
+   ![Image of enable onelake](./Images/enable-onelake-availability.png)
 
-2. Make sure to toggle the button to **Active** and then select **Done**.
+5. Select **sample data** box from the options of ***Start by getting data***.
+ 
+   ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
-   ![Image of enable onelake toggle](./Images/enable-onelake-toggle.png)
+6. choose the **Metrics analytics** box from the options for sample data.
+
+   ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
+
+7. Once the data is loaded, verfiy the data is loaded into the KQL database. You can accomplish this by selecting the elipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
+
+    <div><video controls src="./Images/check-kql-sample-dataset.mp4" muted="false" autoplay loop></video></div>
+
+> **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
 ## Scenario
 In this scenario, you're an analyst that's tasked with querying a sample dataset that you will implement from the Fabric environment.
