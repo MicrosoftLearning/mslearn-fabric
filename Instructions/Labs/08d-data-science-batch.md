@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Train and track a model in Microsoft Fabric'
-    module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
+    title: 'Generate and save batch predictions'
+    module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
 ---
 
-# Use notebooks to train a model in Microsoft Fabric
+# Generate and save batch predictions
 
 In this lab, you'll train a machine learning model to predict a quantitative measure of diabetes. You'll train a regression model with scikit-learn, and track and compare your models with MLflow.
 
@@ -212,29 +212,181 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 
     ![Screenshot of the plotted evaluation metrics.](./Images/plotted-metrics.png)
 
-## Explore your experiments
 
-Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
-1. Navigate to the **Data Science** home page.
-1. Select the `experiment-diabetes` experiment to open it.
 
-    > **Tip:**
-    > If you don't see any logged experiment runs, refresh the page.
 
-1. Select the **View** tab.
-1. Select **Run list**.
-1. Select the two latest runs by checking each box.
-    As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the metrics are plotted by run name.
-1. Select the **&#128393;** (Edit) button of the graph visualizing the mean absolute error for each run.
-1. Change the **visualization type** to `bar`.
-1. Change the **X-axis** to `estimator`.
-1. Select **Replace** and explore the new graph.
-1. Optionally, you can repeat these steps for the other graphs in the **Metric comparison** pane.
 
-By plotting the performance metrics per logged estimator, you can review which algorithm resulted in a better model.
+
+## Load the test dataset and create a report
+
+### Create the test dataset
+
+1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
+1. Select **New lakehouse** and select **Add**.
+1. Create a new **Lakehouse** with a name of your choice.
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+
+    ```python
+    from pyspark.sql import SparkSession
+    from pyspark.sql.types import StructType, StructField, IntegerType, DoubleType
+    
+    # Initialize a Spark session
+    spark = SparkSession.builder.appName("CreateDataFrame").getOrCreate()
+    
+    # Define the schema without the "Y" variable
+    schema = StructType([
+        StructField("AGE", IntegerType(), True),
+        StructField("SEX", IntegerType(), True),
+        StructField("BMI", DoubleType(), True),
+        StructField("BP", DoubleType(), True),
+        StructField("S1", IntegerType(), True),
+        StructField("S2", DoubleType(), True),
+        StructField("S3", DoubleType(), True),
+        StructField("S4", DoubleType(), True),
+        StructField("S5", DoubleType(), True),
+        StructField("S6", IntegerType(), True)
+    ])
+    
+    
+    data = [
+        (62, 2, 33.7, 101.0, 157, 93.2, 38.0, 4.0, 4.8598, 87),
+        (50, 1, 22.7, 87.0, 183, 103.2, 70.0, 3.0, 3.8918, 69),
+        (76, 2, 32.0, 93.0, 156, 93.6, 41.0, 4.0, 4.6728, 85),
+        (25, 1, 26.6, 84.0, 198, 131.4, 40.0, 5.0, 4.8903, 89),
+        (53, 1, 23.0, 101.0, 192, 125.4, 52.0, 4.0, 4.2905, 80),
+        (24, 1, 23.7, 89.0, 139, 64.8, 61.0, 2.0, 4.1897, 68),
+        (38, 2, 22.0, 90.0, 160, 99.6, 50.0, 3.0, 3.9512, 82),
+        (69, 2, 27.5, 114.0, 255, 185.0, 56.0, 5.0, 4.2485, 92),
+        (63, 2, 33.7, 83.0, 179, 119.4, 42.0, 4.0, 4.4773, 94),
+        (30, 1, 30.0, 85.0, 180, 93.4, 43.0, 4.0, 5.3845, 88)
+    ]
+    
+    # Create the dataframe
+    df = spark.createDataFrame(data, schema=schema)
+    
+    # Show the dataframe
+    df.show()
+    ```
+
+1. Run the cell to create a new Spark dataframe with ten rows of data.
+1. To save the dataframe as a delta table in the lakehouse, add another new code cell to the notebook, enter the following code in it, and run it:
+
+    ```python
+    table_name = "diabetes_test"
+    df.write.mode("overwrite").format("delta").save(f"Tables/{table_name}")
+    print(f"Spark dataframe saved to delta table: {table_name}")
+    ```
+
+1. To view the delta table, select the *...* next to the **Tables** in the **Lakehouse explorer** pane, and select **Refresh**. The `diabetes_test` table should appear.
+1. Optionally, you can drag and drop the `diabetes_test` table to a cell in the notebook. You can run the generated code to view the data from the delta table, which should be the same as the DataFrame you created.
+
+### Create a Power BI report
+
+Now that you have a dataset, you can create a Power BI report.
+
+1. Select **OneLake data hub**, from the left menu.
+1. Select the lakehouse that you created in the previous section.
+1. Select **Open** in the **Open this Lakehouse** pane on the top right.
+1. Select **New Power BI dataset** on the top ribbon.
+1. Select the delta table `diabetes_test`, and select **Confirm** to create a new Power BI dataset linked to the test dataset.
+1. Wait for the new window to load, which shows the new Power BI dataset.
+1. Rename the dataset to `diabetes_predictions` by selecting the dropdown at the top left corner of the dataset page.
+1. When the page for the new dataset loads, rename the dataset by selecting the name at top left corner of the dataset page.
+1. Select the `BMI` field from the **Data** pane on the right.
+1. Select **Decimal number** in the drop-down menu under **Format** in the **Properties** pane.
+1. Select **New report** from the top ribbon to open the Power BI report authoring page.
+
+### Add a visualization to the report
+
+By creating a Power BI dataset linked to a delta table, you can create a Power BI report.
+
+1. Select a **Line chart** from the **Visualizations** pane.
+1. Drag and drop `Age` to the **X-axis** field.
+1. Drag and drop `BMI` to the **Y-axis** field.
+1. Select the drop-down menu for `BMI` in the **Y-axis** field.
+1. Select **Average** to change the value of BMI from the sum to the average.
+
+As as result, you should now have the following:
+
+![Screenshot of Power BI report with line chart.](./Images/pbi-report.png)
+
+Instead of visualizing the BMI by age, you want to show the quantitative prediction of diabetes by age, to understand how the risk of diabetes differs per age. Let's use a model to generate predictions and add it to the delta table. The results will then automatically show up in your Power BI dataset.
+
+## Train a model
+
+
+### Load the training dataset
+
+
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+    ```python
+    # Azure storage access info for open dataset diabetes
+    blob_account_name = "azureopendatastorage"
+    blob_container_name = "mlsamples"
+    blob_relative_path = "diabetes"
+    blob_sas_token = r"" # Blank since container is Anonymous access
+    
+    # Set Spark config to access  blob storage
+    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+    print("Remote blob path: " + wasbs_path)
+    
+    # Spark read parquet, note that it won't load any data yet by now
+    df = spark.read.parquet(wasbs_path)
+    ```
+
+    ```python
+    from sklearn.model_selection import train_test_split
+    
+    print("Splitting data...")
+    X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
+    
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+    ```
+
 
 ## Save the model
+
+1. Navigate to the experiment `diabetes-experiment`.
+1. Select the latest experiment run.
+1. Select **Save** from the **Save run as model** pane at the top right.
+1. Select **Create a new model**.
+1. Select `model` as the **folder**.
+1. Select `diabetes-model` as the **model name**.
+1. Select **View model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **Model versions**.
+
+## Apply the model
+
+1. After navigating to the `diabetes-model`, select **Apply this version** from the **Apply this version** pane on the top right.
+1. Select **Copy code to apply**.
+1. Navigate back to the notebook that is attached to the lakehouse.
+
+## Load data into a dataframe
+
+Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns. First, you'll need to ad
+
+1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
+1. Select **New lakehouse** and select **Add**.
+1. Create a new **Lakehouse** with a name of your choice.
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+
+    ```python
+    # Azure storage access info for open dataset diabetes
+    blob_account_name = "azureopendatastorage"
+    blob_container_name = "mlsamples"
+    blob_relative_path = "diabetes"
+    blob_sas_token = r"" # Blank since container is Anonymous access
+    
+    # Set Spark config to access  blob storage
+    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+    print("Remote blob path: " + wasbs_path)
+    
+    # Spark read parquet, note that it won't load any data yet by now
+    df = spark.read.parquet(wasbs_path)
+
+### Save the model
 
 After comparing machine learning models that you've trained across experiment runs, you can choose the best performing model. To use the best performing model, save the model and use it to generate predictions.
 
@@ -249,13 +401,20 @@ After comparing machine learning models that you've trained across experiment ru
 
 Note that the model, the experiment, and the experiment run are linked, allowing you to review how the model is trained.
 
-## Save the notebook and end the Spark session
+## Generate batch predictions
+
+
+
+### Save the notebook and end the Spark session
 
 Now that you've finished training and evaluating the models, you can save the notebook with a meaningful name and end the Spark session.
 
 1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Train and compare models**, and then close the settings pane.
 3. On the notebook menu, select **Stop session** to end the Spark session.
+
+
+## Refresh the report
 
 ## Clean up resources
 
