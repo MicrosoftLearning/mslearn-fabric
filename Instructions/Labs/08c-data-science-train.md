@@ -4,7 +4,7 @@ lab:
     module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
 ---
 
-# Use notebooks to train a model in Microsoft Fabric
+# Train and track machine learning models with MLflow in Microsoft Fabric
 
 In this lab, you'll train a machine learning model to predict a quantitative measure of diabetes. You'll train a regression model with scikit-learn, and track and compare your models with MLflow.
 
