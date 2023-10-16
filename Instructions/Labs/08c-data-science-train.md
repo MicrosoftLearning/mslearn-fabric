@@ -47,11 +47,8 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 ## Load data into a dataframe
 
-Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns. First, you'll need to ad
+Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
-1. Select **New lakehouse** and select **Add**.
-1. Create a new **Lakehouse** with a name of your choice.
 1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
@@ -140,7 +137,7 @@ Now that you've loaded the data, you can use it to train a machine learning mode
        mlflow.log_param("estimator", "LinearRegression")
     ```
 
-    The code trains a classification model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
+    The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
@@ -156,7 +153,7 @@ Now that you've loaded the data, you can use it to train a machine learning mode
        mlflow.log_param("estimator", "DecisionTreeRegressor")
     ```
 
-    The code trains a classification model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
+    The code trains a regression model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
 
 ## Use MLflow to search and view your experiments
 
