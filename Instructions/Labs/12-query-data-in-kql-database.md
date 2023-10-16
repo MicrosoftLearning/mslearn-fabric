@@ -49,19 +49,10 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
 
 7. Once the data is loaded, verfiy the data is loaded into the KQL database. You can accomplish this by selecting the elipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
 
-    <div><video controls src="./Images/check-kql-sample-dataset.mp4" muted="false" autoplay loop></video></div>
+    ![Image of selecting the top 100 files from the RawServerMetrics table](./Images/rawservermetrics-top-100.png)
 
 > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
 ## Scenario
-In this scenario, you're an analyst that's tasked with querying a sample dataset that you will implement from the Fabric environment.
+In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics from a hypothetical SQL Serverthat you will implement from the Fabric environment. You use KQL and T-SQL to query this data and gather information in order to gain informational insights about the data.
 
-
-
-A Kusto query is a way to read data, process it, and show the results. The query is written in plain text that is easy to work with. A Kusto query can have one or more statements that show data as a table or a graph.
-
-A table statement has some operators that work on table data. Each operator takes a table as input and gives a table as output. Operators are joined by a pipe (|). Data moves from one operator to another. Each operator changes the data in some way and passes it on.
-
-You can imagine it like a funnel, where you start with a whole table of data. Each operator filters, sorts, or summarizes the data. The order of the operators matters because they work one after another. At the end of the funnel, you get a final output.
-
-These operators are specific to KQL, but they may be similar to SQL or other languages.
