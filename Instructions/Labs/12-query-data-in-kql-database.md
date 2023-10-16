@@ -54,5 +54,5 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
 > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
 ## Scenario
-In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics from a hypothetical SQL Serverthat you will implement from the Fabric environment. You use KQL and T-SQL to query this data and gather information in order to gain informational insights about the data.
+In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics from a hypothetical SQL Server that you will implement from the Fabric environment. You use KQL and T-SQL to query this data and gather information in order to gain informational insights about the data.
 
