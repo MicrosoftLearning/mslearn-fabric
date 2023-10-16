@@ -433,12 +433,12 @@ Note that you could have done all of this in a single notebook, but for the purp
         .execute()
     ```
 
-12. **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
+12. **Add another code block** to create the **product_silver** dataframe.
   
     ```python
     from pyspark.sql.functions import col, split, lit
     
-    # Create Customer_gold dataframe, this dataframe will be used later on on the Sales join
+    # Create product_silver dataframe
     
     dfdimProduct_silver = df.dropDuplicates(["Item"]).select(col("Item")) \
         .withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
