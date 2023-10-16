@@ -468,6 +468,8 @@ Note that you could have done all of this in a single notebook, but for the purp
     display(dfdimProduct_gold.head(10))
     ```
 
+      This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information.
+
 14. Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste and run the following:
 
     ```python
@@ -496,8 +498,6 @@ Note that you could have done all of this in a single notebook, but for the purp
               ) \
               .execute()
       ```
-
-      This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
       **Now that you have your dimensions built out, the final step is to create the fact table.**
 
