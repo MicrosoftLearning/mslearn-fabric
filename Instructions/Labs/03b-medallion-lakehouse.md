@@ -121,8 +121,6 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     The first line of the code imports the necessary functions from PySpark. You're then adding new columns to the dataframe so you can track the source file name, whether the order was flagged as being a before the fiscal year of interest, and when the row was created and modified.
 
-    You're also adding columns for the CustomerID and ItemID, which will be populated later.
-
     Finally, you're updating the CustomerName column to "Unknown" if it's null or empty.
 
 8. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
