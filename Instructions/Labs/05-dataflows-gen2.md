@@ -54,17 +54,21 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
  ![Query in the Power Query editor.](./Images/power-query.png)
 
-4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column named **MonthNo** that contains a number based on the formula `Date.Month([OrderDate])` - as shown here:
+4. On the toolbar ribbon, select the **Add column** tab. Then select **Custom column** and create a new column.
+
+5. Set the *New column name* to  `MonthNo` , set the *Data type* to **Whole Number** and then add the following formula: `Date.Month([OrderDate])` - as shown here:
 
  ![Custom column in Power Query editor.](./Images/custom-column.png)
 
- The step to add the custom column is added to the query and the resulting column is displayed in the data pane:
+6. Select **OK** to create the column and notice how the step to add the custom column is added to the query. The resulting column is displayed in the data pane:
 
  ![Query with a custom column step.](./Images/custom-column-added.png)
 
 > **Tip:** In the Query Settings pane on the right side, notice the **Applied Steps** include each transformation step. At the bottom, you can also toggle the **Diagram flow** button to turn on the Visual Diagram of the steps.
 >
 > Steps can be moved up or down, edited by selecting the gear icon, and you can select each step to see the transformations apply in the preview pane.
+
+7. Check and confirm that the data type for the **OrderDate** column is set to **Date** and the data type for the  newly created column **MonthNo** is set to **Whole Number**.
 
 ## Add data destination for Dataflow
 
@@ -80,24 +84,18 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
    ![Data destination configuration page.](./Images/data-destination-target.png)
 
-   > **Note:** On the **Destination settings** page, notice how OrderDate and MonthNo are not selected in the Column mapping and there is an informational message: *Change to date/time*.
+4. On the **Choose destination settings** page, select **Append** and then **Save settings**.
+    > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
-   ![Data destination settings page.](./Images/destination-settings.png)
+    ![Data destination settings page.](./Images/destination-settings.png)
 
-1. Cancel this action, then go back to OrderDate and MonthNo columns in Power Query online. Right-click on the column header and **Change Type**.
-
-    - OrderDate = Date/Time
-    - MonthNo = Whole number
-
-1. Now repeat the process outlined earlier to add a lakehouse destination.
-
-8. On the **Destination settings** page, select **Append**, and then save the settings.  The **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
+5. On the Menu bar, open **View** and select **Diagram view**. Notice the **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
 
    ![Query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
-9. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
+6. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
-1. Once published, you can right-click on the dataflow in your workspace, select **Properties**, and rename your dataflow.
+7. Once published, you can right-click on the dataflow in your workspace, select **Properties**, and rename your dataflow.
 
 ## Add a dataflow to a pipeline
 
