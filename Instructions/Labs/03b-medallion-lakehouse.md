@@ -549,6 +549,8 @@ Note that you could have done all of this in a single notebook, but for the purp
     display(dffactSales_gold.head(10))
     ```
 
+    Here you're cleaning and transforming the updated data contained in sales_silver (df) and joining it with the existing gold Customer (dfdimCustomer_temp) and Product (dfdimProduct_temp) tables.
+
 17. Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
 
     ```python
