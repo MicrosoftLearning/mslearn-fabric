@@ -10,7 +10,7 @@ In this lab, you'll train a machine learning model to predict a quantitative mea
 
 By completing this lab, you'll gain hands-on experience in machine learning and model tracking, and learn how to work with *notebooks*, *experiments*, and *models* in Microsoft Fabric.
 
-This lab will take approximately **45** minutes to complete.
+This lab will take approximately **25** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -29,7 +29,7 @@ Before working with models in Fabric, create a workspace with the Fabric trial e
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages).
 
-1. At the bottom left of the Fabric portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -213,7 +213,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
-1. Navigate to the **Data Science** home page.
+1. Navigate to your workspace from the hub menu bar on the left.
 1. Select the `experiment-diabetes` experiment to open it.
 
     > **Tip:**
@@ -238,7 +238,7 @@ After comparing machine learning models that you've trained across experiment ru
 1. In the experiment overview, ensure the **View** tab is selected.
 1. Select **Run details**.
 1. Select the run with the highest R2 score.
-1. Select **Save** in the **Save as model** box.
+1. Select **Save** in the **Save run as model** box.
 1. Select **Create a new model** in the newly opened pop-up window.
 1. Select the `model` folder.
 1. Name the model `model-diabetes`, and select **Save**.
@@ -250,7 +250,7 @@ Note that the model, the experiment, and the experiment run are linked, allowing
 
 Now that you've finished training and evaluating the models, you can save the notebook with a meaningful name and end the Spark session.
 
-1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
+1. Return to your notebook, and, in the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Train and compare models**, and then close the settings pane.
 3. On the notebook menu, select **Stop session** to end the Spark session.
 
