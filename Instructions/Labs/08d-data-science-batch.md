@@ -29,13 +29,13 @@ Before working with models in Fabric, create a workspace with the Fabric trial e
 
 To ingest data, train, and register a model, you'll run the cells in a notebook. You can upload the notebook to your workspace.
 
-1. At the bottom left of the Fabric portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. In a new browser tab navigate to and download the [Generate-Predictions](https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/08/Generate-Predictions.ipynb) notebook to a folder of your choice.
+1. Return to the Fabric browser tab and, at the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
 1. In the **Data science** home page, select **Import notebook**.
 
     You'll get a notification when the notebook is imported successfully.
 
 1. Navigate to the imported notebook named `Generate-Predictions`.
-
 1. Read the instructions in the notebook carefully and run each cell individually.
 
 ## Clean up resources
