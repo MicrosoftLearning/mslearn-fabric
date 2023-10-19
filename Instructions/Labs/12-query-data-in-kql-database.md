@@ -55,9 +55,9 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
 
     ![Image of selecting the top 100 files from the RawServerMetrics table](./Images/rawservermetrics-top-100.png)
 
-> **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
+   > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
-   ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
+    ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
 
 
 ## Scenario
