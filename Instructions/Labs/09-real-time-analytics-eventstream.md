@@ -7,14 +7,6 @@ lab:
 
 Eventstream is a feature in Microsoft Fabric that captures, transforms, and routes real-time events to various destinations with a no-code experience. You can add event data sources, routing destinations, and the event processor, when the transformation is needed, to the eventstream. Microsoft Fabric's EventStore is a monitoring option that maintains events from the cluster and provides a way to understand the state of your cluster or workload at a given point in time. The EventStore service can be queried for events that are available for each entity and entity type in your cluster. This means you can query for events on different levels, such as clusters, nodes, applications, services, partitions, and partition replicas. The EventStore service also has the ability to correlate events in your cluster. By looking at events that were written at the same time from different entities that may have impacted each other, the EventStore service can link these events to help with identifying causes for activities in your cluster. Another option for monitoring and diagnostics of Microsoft Fabric clusters is aggregating and collecting events using EventFlow.
 
-<!--
-
-SL comments - I can't find anything in the documentation about **EventStore** or **EventFlow**. Is this a feature that isn't released yet? Here's the doc I referred to for monitoring event streams: https://learn.microsoft.com/fabric/real-time-analytics/event-streams/monitor
-
-Does that fit here?
-
--->
-
 This lab takes approximately **30** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
@@ -39,12 +31,6 @@ This lab is based on sample streaming data called Stock Market Data. The Stock M
 
 Use Real-Time Analytics streaming and query capabilities to answer key questions about the stock statistics. In this scenario, we're going to take full advantage of the wizard instead of manually creating some components independently, such as the KQL Database.
 
-<!--
-
-I removed the piece on Power BI reports because we don't have them do that in this lab.
-
--->
-
 In this tutorial, you'll learn how to:
 
 - Create a KQL database
@@ -52,12 +38,6 @@ In this tutorial, you'll learn how to:
 - Create an eventstream
 - Stream data from an eventstream to your KQL database
 - Explore data with KQL and SQL
-
-<!--
-
-For "enable data copy to OneLake" - are you adding a lakehouse as a destination? The word copy confuses me.
-
--->
 
 ## Create a KQL Database
 
@@ -187,11 +167,3 @@ In this exercise, you have created a KQL database and set up continuous streamin
 1. In the bar on the left, select the icon for your workspace.
 2. In the ... menu on the toolbar, select Workspace settings.
 3. In the Other section, select Remove this workspace.
-
-<!--
-
-Overall notes: 
-- screenshot alt text needs to be more descriptive and start with the words "screenshot of"
-- 
-
--->

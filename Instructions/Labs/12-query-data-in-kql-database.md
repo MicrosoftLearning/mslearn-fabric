@@ -43,9 +43,13 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
  
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
-6. choose the **Metrics analytics** box from the options for sample data.
+6. choose the **Automotive Metrics analytics** box from the options for sample data.
 
    ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
+
+7. Once the data is finished loading, we can verify the KQL database is populated.
+
+   ![Data being loaded into the KQL Database](./Images/choose-automotive-operations-analytics.png)
 
 7. Once the data is loaded, verfiy the data is loaded into the KQL database. You can accomplish this by selecting the elipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
 
@@ -53,6 +57,125 @@ In this lab, you´ll use the Real-Time Analytics (RTA) in Fabric to create a KQL
 
 > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
-## Scenario
-In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics from a hypothetical SQL Server that you will implement from the Fabric environment. You use KQL and T-SQL to query this data and gather information in order to gain informational insights about the data.
+   ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
 
+
+## Scenario
+In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics NYC taxicab rides that you will pull summary statistics (profiling) the data from the Fabric environment. You use KQLto query this data and gather information in order to gain informational insights about the data.
+
+## Introduction to Kusto Query Language (KQL) and its syntax
+
+Kusto Query Language (KQL) is a query language used to analyze data in Microsoft Azure Data Explorer, which is a part of the Azure Fabric. KQL is designed to be simple and intuitive, making it easy for beginners to learn and use. At the same time, it is also highly flexible and customizable, allowing advanced users to perform complex queries and analysis.
+
+KQL is based on a syntax similar to SQL, but with some key differences. For example, KQL uses a pipe operator (|) instead of a semicolon (;) to separate commands, and it uses a different set of functions and operators for filtering and manipulating data.
+
+One of the key features of KQL is its ability to handle large volumes of data quickly and efficiently. This makes it ideal for analyzing logs, telemetry data, and other types of big data. KQL also supports a wide range of data sources, including structured and unstructured data, making it a versatile tool for data analysis.
+
+In the context of Microsoft Fabric, KQL can be used to query and analyze data from various sources, such as application logs, performance metrics, and system events. This can help you gain insights into the health and performance of your applications and infrastructure, and identify issues and opportunities for optimization.
+
+Overall, KQL is a powerful and flexible query language that can help you gain insights into your data quickly and easily, whether you're working with Microsoft Fabric or other data sources. With its intuitive syntax and powerful capabilities, KQL is definitely worth exploring further.
+
+In this module, we'll focus on the basics of queries against KQL Database You'll see quickly that in KQL, there is no ```SELECT``` we can simply use the table name and press run. We'll cover the steps of a simple analysis using KQL first and then SQL both against the same KQL Database which is based on Azure Data Explorer.
+
+**SELECT** queries, which are used to retrieve data from one or more tables. For example, you can use a SELECT query to get the names and salaries of all employees in a company.
+
+**WHERE** queries, which are used to filter the data based on certain conditions. For example, you can use a WHERE query to get the names of employees who work in a specific department or who have a salary above a certain amount.
+
+**GROUP BY** queries, which are used to group the data by one or more columns and perform aggregate functions on them. For example, you can use a GROUP BY query to get the average salary of employees by department or by country.
+
+**ORDER BY** queries, which are used to sort the data by one or more columns in ascending or descending order. For example, you can use an ORDER BY query to get the names of employees sorted by their salaries or by their last names.
+
+## ```SELECT``` data from our sample dataset using KQL
+
+1. In this query, we will pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
+
+```kql
+Trips
+| take 100
+```
+  > **NOTE:**
+  > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
+    
+2. We can be more precise by simply adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
+
+> **NOTE:** the use of ```// denotes comments within KQL queries```
+
+```
+// Use 'project' and 'take' to view a sample number of records in the table and check the data.
+Trips 
+| project vendor_id, trip_distance
+| take 10
+```
+
+3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
+
+```
+Trips 
+| project vendor_id, ["Trip Distance"] = trip_distance
+| take 10
+```
+
+4. We may also want to summarize the trips to see how many miles were traveled:
+
+```
+Trips
+| summarize ["Total Trip Distance"] = sum(trip_distance)
+```
+## ```GROUP BY``` data from our sample dataset using KQL
+
+1. Then we may want to ***group by*** the pickup location which we do with the ```summarize``` operator. We're also able to use the ```project``` operator which allows us to select and rename the columns you want to include in your output. In this case we group by borough within the NY Taxi system to provide our users with the total distance from traveled from each borough.
+
+```
+Trips
+| summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
+| project Borough = pickup_boroname, ["Total Trip Distance"]
+```
+
+2. You'll note that we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize these in our 
+```
+Trips
+| summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
+| project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
+```
+
+## ```ORDER BY``` data from our sample dataset using KQL
+
+1. To make more sense of our data, we will typically order it by a column, and this is done in KQL with either a ```sort by``` or ```order by``` operator and they act the same way.
+ 
+```
+// using the sort by operators
+Trips
+| summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
+| project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
+| sort by Borough asc 
+
+// order by operator has the same result as sort by
+Trips
+| summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
+| project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
+| sort by Borough asc 
+```
+
+## ```WHERE``` clause to filter data in our sample KQL Query
+
+1. Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` as well as the ```or``` logical operators within your where clause and it will evaluate to true or false against the table and can be simple or a complex expression which might involve multiple columns, operators, and functions.
+
+```
+// let's filter our dataset immediately from the source by applying a filter directly after the table.
+Trips
+| where pickup_boroname == "Manhattan"
+| summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
+| project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
+| sort by Borough asc
+
+```
+
+## Use SQL to query summary information
+
+
+## Clean up resources
+
+In this exercise, you have created a KQL database and set up a sample dataset for querying. After that you queried the data using KQL and SQL. When you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
+1. In the bar on the left, select the icon for your workspace.
+2. In the ... menu on the toolbar, select Workspace settings.
+3. In the Other section, select Remove this workspace.
