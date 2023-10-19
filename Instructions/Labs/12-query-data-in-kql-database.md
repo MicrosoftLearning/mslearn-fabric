@@ -98,7 +98,7 @@ Trips
     
 2. We can be more precise by simply adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
 
-> **NOTE:** the use of ```// denotes comments within KQL queries```
+> **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
 
 ```
 // Use 'project' and 'take' to view a sample number of records in the table and check the data.
@@ -170,8 +170,34 @@ Trips
 
 ```
 
-## Use SQL to query summary information
+## Use T-SQL to query summary information
 
+KQL Database does not support T-SQL natively, but it provides a T-SQL endpoint that emulates Microsoft SQL Server and allows you to run T-SQL queries on your data. However, the T-SQL endpoint has some limitations and differences from the native SQL Server. For example, it does not support creating, altering, or dropping tables, or inserting, updating, or deleting data. It also does not support some T-SQL functions and syntax that are not compatible with KQL. It was created to allow systems that didn't support KQL to use T-SQL to query the data within a KQL Database. So, it is recommended to use KQL as the primary query language for KQL Database, as it offers more capabilities and performance than T-SQL. You can also use some SQL functions that are supported by KQL, such as count, sum, avg, min, max, etc. 
+
+## ```SELECT``` data from our sample dataset using T-SQL
+1.
+
+```
+SELECT * FROM Trips
+
+// We can also use the TOP keyword to limit the number of records returned
+
+SELECT TOP 10 * from Trips
+```
+
+2. If you use the ```//``` which is a comment in the ***Explore your data** tool within the KQL database, you cannot highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
+
+```
+-- instead of using the 'project' and 'take' keywords we simply use a standard SQL Query
+SELECT TOP 10 vendor_id, trip_distance
+FROM Trips
+```
+
+3. Again, you can see that standard T-SQL features work fine with the query where we rename trip_distance to a more user friendly name.
+
+-- No need to use the 'project' or 'take' operators as standard T-SQL Works
+SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
+from Trips
 
 ## Clean up resources
 
