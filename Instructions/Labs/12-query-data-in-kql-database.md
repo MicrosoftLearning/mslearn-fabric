@@ -125,7 +125,7 @@ Trips
 ```
 ## ```GROUP BY``` data from our sample dataset using KQL
 
-1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance from traveled from each borough.
+1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
 ```
 Trips
@@ -133,7 +133,7 @@ Trips
 | project Borough = pickup_boroname, ["Total Trip Distance"]
 ```
 
-2. Note that we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
+2. In this case we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
 ```
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
@@ -160,7 +160,7 @@ Trips
 
 ## ```WHERE``` clause to filter data in our sample KQL Query
 
-1. Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within your where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
+1. Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within the where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
 
 ```
 // let's filter our dataset immediately from the source by applying a filter directly after the table.
@@ -200,6 +200,80 @@ FROM Trips
 -- No need to use the 'project' or 'take' operators as standard T-SQL Works
 SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
 from Trips
+
+4. We may also want to summarize the trips to see how many miles were traveled:
+
+```
+Select sum(trip_distance) as [Total Trip Distance]
+from Trips
+```
+ >**NOTE:** The use of the quotations is not necessary in the T-SQL compared to the KQL query, also the lakc of the summarize command isn't necessary in T-SQL.
+
+## ```GROUP BY``` data from our sample dataset using T-SQL
+
+1. Then we may want to ***group by*** the pickup location that we do with the ```GROUP BY``` operator. We're also able to use the ```AS``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
+
+```
+SELECT pickup_boroname AS Borough, Sum(trip_distance) AS [Total Trip Distance]
+FROM Trips
+GROUP BY pickup_boroname
+```
+
+2. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
+```
+SELECT CASE
+         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
+         ELSE pickup_boroname
+       END AS Borough,
+       SUM(trip_distance) AS [Total Trip Distance]
+FROM Trips
+GROUP BY CASE
+           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
+           ELSE pickup_boroname
+         END;
+```
+
+## ```ORDER BY``` data from our sample dataset using T-SQL
+
+1. To make more sense of our data, we typically order it by a column, and this process is done in T-SQL with an ```ORDER BY``` operator. There's no ***ORDER BY*** operator in T-SQL
+ 
+```
+-- Group by pickup_boroname and calculate the summary statistics of trip_distance
+SELECT CASE
+         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+         ELSE pickup_boroname
+       END AS Borough,
+       SUM(trip_distance) AS [Total Trip Distance]
+FROM Trips
+GROUP BY CASE
+           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+           ELSE pickup_boroname
+         END
+-- Add an ORDER BY clause to sort by Borough in ascending order
+ORDER BY Borough ASC;
+```
+## ```WHERE``` clause to filter data in our sample T-SQL Query
+
+1. Unlike KQL, our ```WHERE``` clause would go at end of the T-SQL Statement; however, in this case we have a ```GROUP BY``` clause, which requires us to use the ```HAVING``` statement and we use the new name of the column, in this case **Borough** as the column name to filter from.
+
+```
+-- Group by pickup_boroname and calculate the summary statistics of trip_distance
+SELECT CASE
+         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+         ELSE pickup_boroname
+       END AS Borough,
+       SUM(trip_distance) AS [Total Trip Distance]
+FROM Trips
+GROUP BY CASE
+           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+           ELSE pickup_boroname
+         END
+-- Add a having clause due to the GROUP BY statement
+HAVING Borough = 'Manhattan'
+-- Add an ORDER BY clause to sort by Borough in ascending order
+ORDER BY Borough ASC;
+
+```
 
 ## Clean up resources
 
