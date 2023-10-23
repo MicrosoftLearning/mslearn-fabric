@@ -87,6 +87,10 @@ In this module, we focus on the basics of queries against KQL Database You see q
 
    > **WARNING:** You cannot create Power BI Reports from querysets with **T-SQL** because Power BI does not support T-SQL as a data source. **Power BI only supports KQL as the native query language for querysets**. If you want to use T-SQL to query your data in Microsoft Fabric, you need to use the T-SQL endpoint that emulates Microsoft SQL Server and allows you to run T-SQL queries on your data. However, the T-SQL endpoint has some limitations and differences from the native SQL Server, and it does not support creating or publishing reports to Power BI.
 
+> **NOTE**: Besides the approach to pull up a query window within shown earlier, you can always press the **Explore your data** button in the main KQL Database panel..
+
+   ![Image of the Explore your data button](./Images/explore-your-data.png)
+
 ## ```SELECT``` data from our sample dataset using KQL
 
 1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
