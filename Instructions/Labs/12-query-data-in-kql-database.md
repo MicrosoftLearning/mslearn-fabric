@@ -106,7 +106,7 @@ Trips
 
 > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
 
-```
+```kql
 // Use 'project' and 'take' to view a sample number of records in the table and check the data.
 Trips 
 | project vendor_id, trip_distance
@@ -115,7 +115,7 @@ Trips
 
 3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
-```
+```kql
 Trips 
 | project vendor_id, ["Trip Distance"] = trip_distance
 | take 10
@@ -123,7 +123,7 @@ Trips
 
 4. We may also want to summarize the trips to see how many miles were traveled:
 
-```
+```kql
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance)
 ```
@@ -131,14 +131,15 @@ Trips
 
 1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
-```
+```kql
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
 | project Borough = pickup_boroname, ["Total Trip Distance"]
 ```
 
 2. In this case we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
-```
+
+```kql
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
 | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
@@ -148,7 +149,7 @@ Trips
 
 1. To make more sense of our data, we typically order it by a column, and this process is done in KQL with either a ```sort by``` or ```order by``` operator and they act the same way.
  
-```
+```kql
 // using the sort by operators
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
@@ -166,7 +167,7 @@ Trips
 
 1. Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within the where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
 
-```
+```kql
 // let's filter our dataset immediately from the source by applying a filter directly after the table.
 Trips
 | where pickup_boroname == "Manhattan"
@@ -184,7 +185,7 @@ KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint th
 
 1. In this query, we pull the first 100 records from the **Trips** table using the ```TOP``` clause. 
 
-```
+```sql
 // We can use the TOP clause to limit the number of records returned
 
 SELECT TOP 100 * from Trips
@@ -192,7 +193,7 @@ SELECT TOP 100 * from Trips
 
 2. If you use the ```//```, which is a comment in the ***Explore your data** tool within the KQL database, you can't highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this double-hypen will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
 
-```
+```sql
 -- instead of using the 'project' and 'take' keywords we simply use a standard SQL Query
 SELECT TOP 10 vendor_id, trip_distance
 FROM Trips
@@ -200,13 +201,16 @@ FROM Trips
 
 3. Again, you can see that standard T-SQL features work fine with the query where we rename trip_distance to a more user friendly name.
 
+```sql
+
 -- No need to use the 'project' or 'take' operators as standard T-SQL Works
 SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
 from Trips
+```
 
 4. We may also want to summarize the trips to see how many miles were traveled:
 
-```
+```sql
 Select sum(trip_distance) as [Total Trip Distance]
 from Trips
 ```
@@ -216,14 +220,15 @@ from Trips
 
 1. Then we may want to ***group by*** the pickup location that we do with the ```GROUP BY``` operator. We're also able to use the ```AS``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
-```
+```sql
 SELECT pickup_boroname AS Borough, Sum(trip_distance) AS [Total Trip Distance]
 FROM Trips
 GROUP BY pickup_boroname
 ```
 
 2. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
-```
+
+```sql
 SELECT CASE
          WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
          ELSE pickup_boroname
@@ -240,7 +245,7 @@ GROUP BY CASE
 
 1. To make more sense of our data, we typically order it by a column, and this process is done in T-SQL with an ```ORDER BY``` operator. There's no ***ORDER BY*** operator in T-SQL
  
-```
+```sql
 -- Group by pickup_boroname and calculate the summary statistics of trip_distance
 SELECT CASE
          WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
@@ -259,7 +264,7 @@ ORDER BY Borough ASC;
 
 1. Unlike KQL, our ```WHERE``` clause would go at end of the T-SQL Statement; however, in this case we have a ```GROUP BY``` clause, which requires us to use the ```HAVING``` statement and we use the new name of the column, in this case **Borough** as the column name to filter from.
 
-```
+```sql
 -- Group by pickup_boroname and calculate the summary statistics of trip_distance
 SELECT CASE
          WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
