@@ -177,14 +177,13 @@ Trips
 KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint that emulates Microsoft SQL Server and allows you to run T-SQL queries on your data. However, the T-SQL endpoint has some limitations and differences from the native SQL Server. For example, it doesn't support creating, altering, or dropping tables, or inserting, updating, or deleting data. It also doesn't support some T-SQL functions and syntax that aren't compatible with KQL. It was created to allow systems that didn't support KQL to use T-SQL to query the data within a KQL Database. So, it's recommended to use KQL as the primary query language for KQL Database, as it offers more capabilities and performance than T-SQL. You can also use some SQL functions that are supported by KQL, such as count, sum, avg, min, max, etc. 
 
 ## ```SELECT``` data from our sample dataset using T-SQL
-1.
+
+1. In this query, we pull the first 100 records from the **Trips** table using the ```TOP``` clause. 
 
 ```
-SELECT * FROM Trips
+// We can use the TOP clause to limit the number of records returned
 
-// We can also use the TOP keyword to limit the number of records returned
-
-SELECT TOP 10 * from Trips
+SELECT TOP 100 * from Trips
 ```
 
 2. If you use the ```//```, which is a comment in the ***Explore your data** tool within the KQL database, you can't highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this double-hypen will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
