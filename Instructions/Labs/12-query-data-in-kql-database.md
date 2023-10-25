@@ -243,7 +243,7 @@ GROUP BY CASE
 
 ## ```ORDER BY``` data from our sample dataset using T-SQL
 
-1. To make more sense of our data, we typically order it by a column, and this process is done in T-SQL with an ```ORDER BY``` operator. There's no ***ORDER BY*** operator in T-SQL
+1. To make more sense of our data, we typically order it by a column, and this process is done in T-SQL with an ```ORDER BY``` operator. There's no ***SORT BY*** operator in T-SQL
  
 ```sql
 -- Group by pickup_boroname and calculate the summary statistics of trip_distance
