@@ -10,7 +10,7 @@ In this lab, you'll ingest data, explore the data in a notebook, process the dat
 
 By completing this lab, you'll gain hands-on experience in machine learning and model tracking, and learn how to work with *notebooks*, *Data Wrangler*, *experiments*, and *models* in Microsoft Fabric.
 
-This lab will take approximately **45** minutes to complete.
+This lab will take approximately **20** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -29,7 +29,7 @@ Before working with models in Fabric, create a workspace with the Fabric trial e
 
 To run code, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages).
 
-1. At the bottom left of the Fabric portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -208,7 +208,7 @@ Now that you've prepared the data, you can use it to train a machine learning mo
 
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
-1. Navigate to the **Data Science** home page.
+1. Navigate to your workspace from the hub menu bar on the left.
 1. Select the `diabetes-regression` experiment to open it.
 
     > **Tip:**
