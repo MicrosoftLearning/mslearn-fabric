@@ -199,7 +199,7 @@ Now that you've prepared the data, you can use it to train a machine learning mo
     with mlflow.start_run():
         mlflow.sklearn.autolog()
 
-    model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
+        model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
     ```
 
     The code trains a classification model using Logistic Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow.
