@@ -75,7 +75,7 @@ In the context of Microsoft Fabric, KQL can be used to query and analyze data fr
 
 Overall, KQL is a powerful and flexible query language that can help you gain insights into your data quickly and easily, whether you're working with Microsoft Fabric or other data sources. With its intuitive syntax and powerful capabilities, KQL is definitely worth exploring further.
 
-In this module, we focus on the basics of queries against KQL Database You see quickly that in KQL, there's no ```SELECT``` we can simply use the table name and press run. We cover the steps of a simple analysis using KQL first and then SQL both against the same KQL Database, which is based on Azure Data Explorer.
+In this module, we focus on the basics of queries against a KQL Database using KQL first and then T-SQL. We'll focus on the basis elements of T-SQL syntax that are used for queries inlcuding:
 
 **SELECT** queries, which are used to retrieve data from one or more tables. For example, you can use a SELECT query to get the names and salaries of all employees in a company.
 
