@@ -96,7 +96,7 @@ For "enable data copy to OneLake" - are you adding a lakehouse as a destination?
 
    ![Image of EventStream canvas](./Images/real-time-analytics-canvas.png)
 
-2. Enter the values for your Sample Data as shown in the following table and then select **Add and Configure**.
+2. Enter the values for your Sample Data as shown in the following table and then select **Add**.
 
    | Field       | Recommended Value |
    | ----------- | ----------------- |
@@ -115,7 +115,7 @@ For "enable data copy to OneLake" - are you adding a lakehouse as a destination?
    | Workspace        | The workspace where you created a KQL database |
    | KQL Database     | MyStockData                                    |
 
-3. Select **Add and configure**.
+3. Select **Create and configure**.
 
 ## Configure data ingestion
 
