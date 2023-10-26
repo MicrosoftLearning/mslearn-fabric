@@ -10,7 +10,7 @@ In this lab, you'll use a machine learning model to predict a quantitative measu
 
 By completing this lab, you'll gain hands-on experience in generating predictions and visualizing the results.
 
-This lab will take approximately **45** minutes to complete.
+This lab will take approximately **20** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -29,13 +29,14 @@ Before working with models in Fabric, create a workspace with the Fabric trial e
 
 To ingest data, train, and register a model, you'll run the cells in a notebook. You can upload the notebook to your workspace.
 
-1. At the bottom left of the Fabric portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. In a new browser tab navigate to `https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/08/Generate-Predictions.ipynb)`
+1. Select the **Download raw file** icon to download the Generate-Predictions notebook to a folder of your choice.
+1. Return to the Fabric browser tab and, at the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
 1. In the **Data science** home page, select **Import notebook**.
 
     You'll get a notification when the notebook is imported successfully.
 
 1. Navigate to the imported notebook named `Generate-Predictions`.
-
 1. Read the instructions in the notebook carefully and run each cell individually.
 
 ## Clean up resources

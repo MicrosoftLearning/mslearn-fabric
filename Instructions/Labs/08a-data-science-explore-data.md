@@ -134,8 +134,7 @@ Now, let's generate descriptive statistics to understand the distribution of num
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    desc_stats = df.describe()
-    print(desc_stats)
+    df.describe()
     ```
 
     The average age is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.

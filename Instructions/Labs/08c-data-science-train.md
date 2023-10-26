@@ -10,7 +10,7 @@ In this lab, you'll train a machine learning model to predict a quantitative mea
 
 By completing this lab, you'll gain hands-on experience in machine learning and model tracking, and learn how to work with *notebooks*, *experiments*, and *models* in Microsoft Fabric.
 
-This lab will take approximately **45** minutes to complete.
+This lab will take approximately **25** minutes to complete.
 
 > **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
@@ -29,7 +29,7 @@ Before working with models in Fabric, create a workspace with the Fabric trial e
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages).
 
-1. At the bottom left of the Fabric portal, select the **Data engineering** icon and switch to the **Data science** experience.
+1. At the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
 
 1. In the **Data science** home page, create a new **Notebook**.
 
@@ -47,11 +47,8 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 ## Load data into a dataframe
 
-Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns. First, you'll need to ad
+Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In the **Add lakehouse** pane, select **Add** to add a lakehouse.
-1. Select **New lakehouse** and select **Add**.
-1. Create a new **Lakehouse** with a name of your choice.
 1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
@@ -110,7 +107,6 @@ Now that you've loaded the data, you can use it to train a machine learning mode
     ```python
     from sklearn.model_selection import train_test_split
     
-    print("Splitting data...")
     X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
@@ -140,7 +136,7 @@ Now that you've loaded the data, you can use it to train a machine learning mode
        mlflow.log_param("estimator", "LinearRegression")
     ```
 
-    The code trains a classification model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
+    The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
@@ -156,7 +152,7 @@ Now that you've loaded the data, you can use it to train a machine learning mode
        mlflow.log_param("estimator", "DecisionTreeRegressor")
     ```
 
-    The code trains a classification model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
+    The code trains a regression model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
 
 ## Use MLflow to search and view your experiments
 
@@ -216,7 +212,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
-1. Navigate to the **Data Science** home page.
+1. Navigate to your workspace from the menu bar on the left.
 1. Select the `experiment-diabetes` experiment to open it.
 
     > **Tip:**
@@ -225,7 +221,9 @@ Microsoft Fabric will keep track of all your experiments and allows you to visua
 1. Select the **View** tab.
 1. Select **Run list**.
 1. Select the two latest runs by checking each box.
+
     As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the metrics are plotted by run name.
+
 1. Select the **&#128393;** (Edit) button of the graph visualizing the mean absolute error for each run.
 1. Change the **visualization type** to `bar`.
 1. Change the **X-axis** to `estimator`.
@@ -241,7 +239,7 @@ After comparing machine learning models that you've trained across experiment ru
 1. In the experiment overview, ensure the **View** tab is selected.
 1. Select **Run details**.
 1. Select the run with the highest R2 score.
-1. Select **Save** in the **Save as model** box.
+1. Select **Save** in the **Save run as model** box.
 1. Select **Create a new model** in the newly opened pop-up window.
 1. Select the `model` folder.
 1. Name the model `model-diabetes`, and select **Save**.
@@ -253,7 +251,7 @@ Note that the model, the experiment, and the experiment run are linked, allowing
 
 Now that you've finished training and evaluating the models, you can save the notebook with a meaningful name and end the Spark session.
 
-1. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
+1. Return to your notebook, and, in the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings.
 2. Set the **Name** of the notebook to **Train and compare models**, and then close the settings pane.
 3. On the notebook menu, select **Stop session** to end the Spark session.
 
