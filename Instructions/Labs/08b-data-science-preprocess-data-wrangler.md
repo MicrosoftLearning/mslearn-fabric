@@ -126,9 +126,9 @@ Now let's apply a few transformations to the **Brand** feature.
 1. Navigate to the **Operations** panel, expand **Find and replace**, and then select **Find and replace**.
 
 1. On the **Find and replace** panel, change the following properties:
-    
-    - **Old value:** "."
-    - **New value:** " " (space character)
+
+    - **Old value:** "`.`"
+    - **New value:** "` `" (space character)
 
     You can see the results of the operation automatically previewed in the display grid.
 
