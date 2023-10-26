@@ -136,23 +136,24 @@ Now let's apply a few transformations to the **Brand** feature.
 
 1. Back to the **Operations** panel, expand **Format**.
 
-1. Select **Convert text to capital case**. Switch the **Capitalize all words** toggle, and then select **Apply**.
+1. Select **Capitalize first character**. Switch the **Capitalize all words** toggle on, and then select **Apply**.
 
-1. Select **Add code to notebook**. Additionally, you can also save the transformed dataset as a .csv file.
+1. Select **Add code to notebook**. Additionally, you can also copy the code and save the transformed dataset as a .csv file.
 
-    >**Note:** The code is automatically copied to the notebook cell, and is ready for use. 
+    >**Note:** The code is automatically copied to the notebook cell, and is ready for use.
 
 1. Replace the lines 10 and 11 with the code `df = clean_data(df)`, as the code generated in Data Wrangler doesn't overwrite the original dataframe. The final code block should look like this:
- 
+
     ```python
     def clean_data(df):
         # Replace all instances of "." with " " in column: 'Brand'
         df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)
-        # Convert text to capital case in column: 'Brand'
+        # Capitalize the first character in column: 'Brand'
         df['Brand'] = df['Brand'].str.title()
         return df
     
-    df = clean_data(df)
+    df = clean_data(df.copy())
+    df.head()
     ```
 
 1. Run the code cell, and check the `Brand` variable.
