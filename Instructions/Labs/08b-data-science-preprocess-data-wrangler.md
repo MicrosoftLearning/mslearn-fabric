@@ -91,13 +91,13 @@ Now you're ready to run code to get data. You'll work with the [**OJ Sales datas
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
 
-    ```
-        WeekStarting	Store	Brand	    Quantity	Advert	Price	Revenue
-    0	1991-10-17	    947	    minute.maid	13306	    1	    2.42	32200.52
-    1	1992-03-26	    1293	dominicks	18596	    1	    1.94	36076.24
-    2	1991-08-15	    2278	dominicks	17457	    1	    2.14	37357.98
-    3	1992-09-03	    2175	tropicana	9652	    1	    2.07	19979.64
-    ```
+    |   |WeekStarting|Store|Brand|Quantity|Advert|Price|Revenue|
+    |---|---|---|---|---|---|---|---|
+    |0|1991-10-17|947|minute.maid|13306|1|2.42|32200.52|
+    |1|1992-03-26|1293|dominicks|18596|1|1.94|36076.24|
+    |2|1991-08-15|2278|dominicks|17457|1|2.14|37357.98|
+    |3|1992-09-03|2175|tropicana|9652|1|2.07|19979.64|
+    |...|...|...|...|...|...|...|...|
 
     The output shows the first four rows of the OJ Sales dataset.
 
@@ -107,7 +107,7 @@ Now that we have loaded the data, the next step is to preprocess it using Data W
 
 1. Select **Data** in the notebook ribbon, and then select **Launch Data Wrangler** dropdown.
 
-1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel. 
+1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel.
 
 1. Select the **Revenue** feature, and observe the data distribution of this feature.
 
