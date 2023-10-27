@@ -10,6 +10,9 @@ The KQL Queryset uses the Kusto Query language, which is compatible with many SQ
 
 This lab takes approximately **25** minutes to complete.
 
+## Scenario
+In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics NYC taxicab rides that you pull summary statistics (profiling) the data from the Fabric environment. You use KQLto query this data and gather information in order to gain informational insights about the data.
+
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
@@ -39,15 +42,19 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of enable onelake](./Images/enable-onelake-availability.png)
 
+    then use the slider to turn on the availability.
+
+   ![Image of selecting the slider in Data Lake.](./images/data-availability-data-lake.png)
+
 5. Select **sample data** box from the options of ***Start by getting data***.
  
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
-6. choose the **Automotive Metrics analytics** box from the options for sample data.
+   then choose the **Automotive operations analytics** box from the options for sample data.
 
    ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
 
-7. Once the data is finished loading, we can verify the KQL Database is populated.
+6. Once the data is finished loading, we can verify the KQL Database is populated.
 
    ![Data being loaded into the KQL Database](./Images/choose-automotive-operations-analytics.png)
 
@@ -59,9 +66,6 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
     ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
 
-
-## Scenario
-In this scenario, you're an analyst that's tasked with querying a sample dataset of raw metrics NYC taxicab rides that you pull summary statistics (profiling) the data from the Fabric environment. You use KQLto query this data and gather information in order to gain informational insights about the data.
 
 ## Introduction to Kusto Query Language (KQL) and its syntax
 
@@ -147,7 +151,7 @@ Trips
 
 ## ```ORDER BY``` data from our sample dataset using KQL
 
-1. To make more sense of our data, we typically order it by a column, and this process is done in KQL with either a ```sort by``` or ```order by``` operator and they act the same way.
+To make more sense of our data, we typically order it by a column, and this process is done in KQL with either a ```sort by``` or ```order by``` operator and they act the same way.
  
 ```kql
 // using the sort by operators
@@ -165,7 +169,7 @@ Trips
 
 ## ```WHERE``` clause to filter data in our sample KQL Query
 
-1. Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within the where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
+Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within the where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
 
 ```kql
 // let's filter our dataset immediately from the source by applying a filter directly after the table.
@@ -214,7 +218,7 @@ from Trips
 Select sum(trip_distance) as [Total Trip Distance]
 from Trips
 ```
- >**NOTE:** The use of the quotations is not necessary in the T-SQL compared to the KQL query, also the lakc of the summarize command isn't necessary in T-SQL.
+ >**NOTE:** The use of the quotations is not necessary in T-SQL compared to the KQL query, also note the `summarize` and `sort by` commands aren't available in T-SQL.
 
 ## ```GROUP BY``` data from our sample dataset using T-SQL
 
@@ -286,6 +290,6 @@ ORDER BY Borough ASC;
 ## Clean up resources
 
 In this exercise, you have created a KQL database and set up a sample dataset for querying. After that you queried the data using KQL and SQL. When you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
-1. In the bar on the left, select the icon for your workspace.
-2. In the ... menu on the toolbar, select Workspace settings.
-3. In the Other section, select Remove this workspace.
+1. In the bar on the left, select the **icon** for your workspace.
+2. In the ... menu on the toolbar, select **Workspace settings**.
+3. In the **Other** section, select **Remove this workspace**.
