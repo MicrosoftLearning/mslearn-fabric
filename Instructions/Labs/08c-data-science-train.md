@@ -107,7 +107,6 @@ Now that you've loaded the data, you can use it to train a machine learning mode
     ```python
     from sklearn.model_selection import train_test_split
     
-    print("Splitting data...")
     X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
@@ -207,13 +206,13 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 
     The output should resemble the following image:
 
-    ![Screenshot of the plotted evaluation metrics.](./Images/plotted-metrics.png)
+    ![Screenshot of the plotted evaluation metrics.](./Images/data-science-metrics.png)
 
 ## Explore your experiments
 
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
-1. Navigate to your workspace from the hub menu bar on the left.
+1. Navigate to your workspace from the menu bar on the left.
 1. Select the `experiment-diabetes` experiment to open it.
 
     > **Tip:**
@@ -222,7 +221,9 @@ Microsoft Fabric will keep track of all your experiments and allows you to visua
 1. Select the **View** tab.
 1. Select **Run list**.
 1. Select the two latest runs by checking each box.
+
     As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the metrics are plotted by run name.
+
 1. Select the **&#128393;** (Edit) button of the graph visualizing the mean absolute error for each run.
 1. Change the **visualization type** to `bar`.
 1. Change the **X-axis** to `estimator`.
