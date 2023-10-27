@@ -99,7 +99,8 @@ In this module, we focus on the basics of queries against a KQL Database using K
 
 1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
 
-```kql
+```kusto
+
 Trips
 | take 100
 ```
@@ -110,7 +111,8 @@ Trips
 
 > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
 
-```kql
+```kusto
+
 // Use 'project' and 'take' to view a sample number of records in the table and check the data.
 Trips 
 | project vendor_id, trip_distance
@@ -119,7 +121,8 @@ Trips
 
 3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
-```kql
+```kusto
+
 Trips 
 | project vendor_id, ["Trip Distance"] = trip_distance
 | take 10
@@ -127,7 +130,8 @@ Trips
 
 4. We may also want to summarize the trips to see how many miles were traveled:
 
-```kql
+```kusto
+
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance)
 ```
@@ -135,7 +139,8 @@ Trips
 
 1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
-```kql
+```kusto
+
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
 | project Borough = pickup_boroname, ["Total Trip Distance"]
@@ -143,7 +148,8 @@ Trips
 
 2. In this case we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
 
-```kql
+```kusto
+
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
 | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
@@ -153,7 +159,8 @@ Trips
 
 To make more sense of our data, we typically order it by a column, and this process is done in KQL with either a ```sort by``` or ```order by``` operator and they act the same way.
  
-```kql
+```kusto
+
 // using the sort by operators
 Trips
 | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
@@ -171,7 +178,8 @@ Trips
 
 Unlike SQL, our WHERE clause is immediately called in our KQL Query. We can still use the ```and``` and the ```or``` logical operators within the where clause and it evaluates to true or false against the table and can be simple or a complex expression that might involve multiple columns, operators, and functions.
 
-```kql
+```kusto
+
 // let's filter our dataset immediately from the source by applying a filter directly after the table.
 Trips
 | where pickup_boroname == "Manhattan"
