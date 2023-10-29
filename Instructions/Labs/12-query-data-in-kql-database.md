@@ -71,7 +71,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
 Kusto Query Language (KQL) is a query language used to analyze data in Microsoft Azure Data Explorer, which is a part of the Azure Fabric. KQL is designed to be simple and intuitive, making it easy for beginners to learn and use. At the same time, it's also highly flexible and customizable, allowing advanced users to perform complex queries and analysis.
 
-KQL is based on a syntax similar to SQL, but with some key differences. For example, KQL uses a pipe operator (|) instead of a semicolon (;) to separate commands, and it uses a different set of functions and operators for filtering and manipulating data.
+KQL is based on a syntax similar to SQL, but with some key differences. For example, KQL uses a pipe operator (\|) instead of a semicolon (\;) to separate commands, and it uses a different set of functions and operators for filtering and manipulating data.
 
 One of the key features of KQL is its ability to handle large volumes of data quickly and efficiently. This capability makes it ideal for analyzing logs, telemetry data, and other types of big data. KQL also supports a wide range of data sources, including structured and unstructured data, making it a versatile tool for data analysis.
 
