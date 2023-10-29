@@ -6,7 +6,7 @@ lab:
 # Get started with querying a Kusto database in Microsoft Fabric
 A KQL Queryset is a tool that allows you to execute queries, modify, and display query results from a KQL database. You can link each tab in the KQL Queryset to a different KQL database, and save your queries for future use or share them with others for data analysis. You can also switch the KQL database for any tab, so you can compare the query results from different data sources.
 
-The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. To learn more about the [Kusto Query Language (KQL)](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext), 
+The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. Learn more about the **Kusto Query Language** (KQL) [here](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext).
 
 This lab takes approximately **25** minutes to complete.
 
