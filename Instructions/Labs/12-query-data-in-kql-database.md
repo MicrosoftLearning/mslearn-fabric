@@ -241,6 +241,7 @@ GROUP BY pickup_boroname
 2. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
 
 ```sql
+
 SELECT CASE
          WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
          ELSE pickup_boroname
