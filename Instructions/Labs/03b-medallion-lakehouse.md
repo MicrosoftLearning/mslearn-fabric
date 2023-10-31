@@ -127,8 +127,6 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     The first line of the code imports the necessary functions from PySpark. You're then adding new columns to the dataframe so you can track the source file name, whether the order was flagged as being a before the fiscal year of interest, and when the row was created and modified.
 
-    You're also adding columns for the CustomerID and ItemID, which will be populated later.
-
     Finally, you're updating the CustomerName column to "Unknown" if it's null or empty.
 
 8. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
@@ -363,7 +361,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     ```python
     from pyspark.sql.functions import col, split
     
-    # Create customer_gold dataframe
+    # Create customer_silver dataframe
     
     dfdimCustomer_silver = df.dropDuplicates(["CustomerName","Email"]).select(col("CustomerName"),col("Email")) \
         .withColumn("First",split(col("CustomerName"), " ").getItem(0)) \
@@ -371,7 +369,7 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     # Display the first 10 rows of the dataframe to preview your data
 
-    display(dfdimCustomer_silver .head(10))
+    display(dfdimCustomer_silver.head(10))
     ```
 
      Here you have created a new DataFrame dfdimCustomer_silver by performing various transformations such as dropping duplicates, selecting specific columns, and splitting the "CustomerName" column to create "First" and "Last" name columns. The result is a DataFrame with cleaned and structured customer data, including separate "First" and "Last" name columns extracted from the "CustomerName" column.
@@ -441,12 +439,12 @@ Note that you could have done all of this in a single notebook, but for the purp
         .execute()
     ```
 
-12. **Add another code block** to create the **customer_gold** dataframe. You'll use this later on the Sales join.
+12. **Add another code block** to create the **product_silver** dataframe.
   
     ```python
     from pyspark.sql.functions import col, split, lit
     
-    # Create Customer_gold dataframe, this dataframe will be used later on on the Sales join
+    # Create product_silver dataframe
     
     dfdimProduct_silver = df.dropDuplicates(["Item"]).select(col("Item")) \
         .withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
@@ -476,6 +474,8 @@ Note that you could have done all of this in a single notebook, but for the purp
     display(dfdimProduct_gold.head(10))
     ```
 
+      This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information.
+
 14. Similar to what you've done with your other dimensions, you need to ensure that your product table remains up-to-date as new data comes in. **In a new code block**, paste and run the following:
 
     ```python
@@ -504,8 +504,6 @@ Note that you could have done all of this in a single notebook, but for the purp
               ) \
               .execute()
       ```
-
-      This calculates the next available product ID based on the current data in the table, assigns these new IDs to the products, and then displays the updated product information (if the display command is uncommented).
 
       **Now that you have your dimensions built out, the final step is to create the fact table.**
 
