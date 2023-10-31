@@ -66,7 +66,7 @@ In this tutorial, you'll learn how to:
 
    ![Image of choose eventstream](./Images/select-eventstream.png)
 
-3. You'll be prompted to **Name** your eventstream. Give the EventStream a name that you'll remember, such as ***MyStockES**, press the **Create** button.
+3. You'll be prompted to **Name** your eventstream. Give the EventStream a name that you'll remember, such as **MyStockES**, press the **Create** button.
 
    ![Image of name eventstream](./Images/name-eventstream.png)
 
@@ -76,7 +76,7 @@ In this tutorial, you'll learn how to:
 
    ![Image of EventStream canvas](./Images/real-time-analytics-canvas.png)
 
-2. Enter the values for your Sample Data as shown in the following table and then select **Add and Configure**.
+2. Enter the values for your Sample Data as shown in the following table and then select **Add**.
 
    | Field       | Recommended Value |
    | ----------- | ----------------- |
@@ -95,7 +95,7 @@ In this tutorial, you'll learn how to:
    | Workspace        | The workspace where you created a KQL database |
    | KQL Database     | MyStockData                                    |
 
-3. Select **Add and configure**.
+3. Select **Create and configure**.
 
 ## Configure data ingestion
 
@@ -130,7 +130,7 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
 > **Note**: The KQL Editor comes with both syntax and Inellisense highlighting, which allows you to quickly gain knowledge of the Kusto Query Language (KQL).
 
-1. Browse to your newly created and hydrated KQL Database named ***MyStockData***.
+1. Browse to your newly created and hydrated KQL Database named **MyStockData**.
 2. In the Data tree, select the More menu [...] on the MyStockData table. Then select Query table > Show any 100 records.
 
    ![Image of KQL Query set](./Images/kql-query-sample.png)
