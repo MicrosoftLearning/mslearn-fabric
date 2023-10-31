@@ -25,28 +25,24 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. In the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Power BI**.
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-4. When your new workspace opens, it should be empty.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. When your new workspace opens, it should be empty.
 
-    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
+    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
-Now that you have a workspace, it's time to switch to the *Data engineering* experience in the portal and create a data lakehouse for your data files.
+Now that you have a workspace, it's time to create a data lakehouse for your data files.
 
-1. At the bottom left of the Power BI portal, switch to the **Data Engineering** experience. If you do not see the data engineering experience, contact your Fabric administrator with a request to [enable Fabric](https://learn.microsoft.com/fabric/admin/fabric-switch).
-
-    The data engineering home page includes tiles to create commonly used data engineering assets.
-
-2. In the **Data engineering** home page, create a new **Lakehouse** with a name of your choice.
+1. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new lakehouse will be created:
 
     ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-3. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
+1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
     - The **Tables** folder contains tables that you can query using SQL semantics. Tables in a Microsoft Fabric lakehouse are based on the open source *Delta Lake* file format, commonly used in Apache Spark.
     - The **Files** folder contains data files in the OneLake storage for the lakehouse that aren't associated with managed delta tables. You can also create *shortcuts* in this folder to reference data that is stored externally.
 

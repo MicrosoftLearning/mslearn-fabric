@@ -14,25 +14,29 @@ For this experience, you'll build the code across multiple notebook code cells, 
 
 Because you're also working with a sample dataset, the optimization doesn't reflect what you may see in production at scale; however, you can still see improvement and when every millisecond counts, optimization is key.
 
-> **Note**: You'll need a **Microsoft Fabric license** to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license.
->
-> You'll also need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+> **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+
+## Activate a Microsoft Fabric trial
+
+1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
+1. Select the **Account Manager** icon (the *user* image at the top right)
+1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
+1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
+
+## Create a workspace
+
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. When your new workspace opens, it should be empty.
+
+    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create workspace and lakehouse destination
 
-Start by creating a workspace with the Fabric trial enabled, a new lakehouse, and a destination folder in the lakehouse.
-
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select the **Data Engineering** experience.
-
-    ![Screenshot of Synapse Data Engineering experience](Images/data-engineering-home.png)
-
-1. In the menu bar on the left, select **Workspaces**.
-
-1. Create a new workspace with a name of your choice, and select a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-
-1. When your new workspace opens, it should be empty with a diamond next to workspace name, as shown here:
-
-    ![Screenshot of a new, empty workspace](Images/new-workspace.png)
+Start by creating a new lakehouse, and a destination folder in the lakehouse.
 
 1. From your workspace, select **+ New > Lakehouse**, supply a name, and **Create**.
 

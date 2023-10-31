@@ -10,18 +10,25 @@ Data Activator in Microsoft Fabric takes action based on what's happening in you
 
 This lab takes approximately **30** minutes to complete.
 
-> **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+> **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+
+## Activate a Microsoft Fabric trial
+
+1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
+1. Select the **Account Manager** icon (the *user* image at the top right)
+1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
+1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
 
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-4. When your new workspace opens, it should be empty, as shown here:
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Data Activator**.
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. When your new workspace opens, it should be empty.
 
-    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
+    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 In this lab, you´ll use the Data Activator in Fabric to create a *reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
 
@@ -33,11 +40,7 @@ In this scenario, you're a data analyst for a company that sells and ships a ran
 
 ## Create a reflex
 
-1. In the **Microsoft Fabric** experience portal, select the **Data Activator** experience by first selecting the current Fabric experience icon in the lower left hand corner of the screen and then selecting the **Data Activator** from the menu. For example, in the following screenshot, the current Fabric experience is **Power BI**.
-
-    ![Screenshot of selecting the Data Activator Experience.](./Images/data-activator-select-experience.png)
-
-1. You should now be in the Data Activator Home screen. The Fabric Experience icon on the lower right also changed to the Data Activator one. Let's create a new reflex by selecting the **reflex (Preview)** button.
+1. Ensure you're in the Data Activator Home screen by verifying that the icon on the lower right reflects the Data Activator. Let's create a new reflex by selecting the **reflex (Preview)** button.
 
     ![Screenshot of the Data Activator Home screen.](./Images/data-activator-home-screen.png)
 
