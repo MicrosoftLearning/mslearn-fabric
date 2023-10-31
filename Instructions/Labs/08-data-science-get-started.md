@@ -16,7 +16,7 @@ This lab will take approximately **20** minutes to complete.
 
 ## Activate a Microsoft Fabric trial
 
-1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
+1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [`https://app.fabric.microsoft.com`](https://app.fabric.microsoft.com).
 1. Select the **Account Manager** icon (the *user* image at the top right)
 1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
 1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
