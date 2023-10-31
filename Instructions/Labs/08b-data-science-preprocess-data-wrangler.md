@@ -10,26 +10,22 @@ In this lab, you'll learn how to use Data Wrangler in Microsoft Fabric to prepro
 
 This lab will take approximately **30** minutes to complete.
 
-> **Note**: You'll need a Microsoft Fabric license to complete this exercise. See [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial) for details of how to enable a free Fabric trial license. You will need a Microsoft *school* or *work* account to do this. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+> **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Create a workspace
+## Activate a Microsoft Fabric trial
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
-
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Synapse Data Science**.
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-4. When your new workspace opens, it should be empty, as shown here:
-
-    ![Screenshot of an empty workspace in Power BI.](./Images/new-workspace.png)
+1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
+1. Select the **Account Manager** icon (the *user* image at the top right)
+1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
+1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
 
 ## Create a notebook
 
 To train a model, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages) as *experiments*.
 
-1. At the bottom left of the Power BI portal, select the **PowerBI** icon and switch to the **Data science** experience.
+1. In the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Science**.
 
-1. In the **Data science** home page, create a new **Notebook**.
+1. In the **Synapse Data Science** home page, create a new **Notebook**.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
