@@ -18,7 +18,7 @@ This lab will take approximately **20** minutes to complete.
 
 Before working with models in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Power BI**.
+1. Sign into [Microsoft Fabric](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` and select **Synapse Data Science**.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty, as shown here:
@@ -31,8 +31,8 @@ To ingest data, train, and register a model, you'll run the cells in a notebook.
 
 1. In a new browser tab navigate to `https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/08/Generate-Predictions.ipynb`
 1. Select the **Download raw file** icon to download the `Generate-Predictions` notebook to a folder of your choice.
-1. Return to the Fabric browser tab and, at the bottom left of the Fabric portal, select the **Power BI** icon and switch to the **Data science** experience.
-1. In the **Data science** home page, select **Import notebook**.
+1. Return to the Fabric tab and navigate to the **Home** page.
+1. Select **Import notebook**.
 
     You'll get a notification when the notebook is imported successfully.
 
