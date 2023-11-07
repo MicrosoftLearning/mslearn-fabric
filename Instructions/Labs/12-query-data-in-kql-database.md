@@ -128,8 +128,7 @@ Trips
 | project vendor_id, trip_distance
 | take 10
 ```
-
-3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
+ 3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
 ```kusto
 
@@ -138,7 +137,7 @@ Trips
 | take 10
 ```
 
-4. We may also want to summarize the trips to see how many miles were traveled:
+ 4. We may also want to summarize the trips to see how many miles were traveled:
 
 ```kusto
 
