@@ -117,7 +117,7 @@ Trips
   > **NOTE:**
   > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
     
- 2. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
+ 1. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
 
 > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
 
@@ -128,7 +128,7 @@ Trips
 | project vendor_id, trip_distance
 | take 10
 ```
- 3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
+ 1. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
 ```kusto
 
@@ -137,7 +137,7 @@ Trips
 | take 10
 ```
 
- 4. We may also want to summarize the trips to see how many miles were traveled:
+ 1. We may also want to summarize the trips to see how many miles were traveled:
 
 ```kusto
 
