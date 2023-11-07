@@ -107,7 +107,7 @@ In this module, we focus on the basics of queries against a KQL Database using K
 
 ## ```SELECT``` data from our sample dataset using KQL
 
-1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
+ 1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
 
 ```kusto
 
@@ -117,7 +117,7 @@ Trips
   > **NOTE:**
   > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
     
-2. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
+ 2. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
 
 > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
 
