@@ -108,44 +108,44 @@ In this module, we focus on the basics of queries against a KQL Database using K
 ## ```SELECT``` data from our sample dataset using KQL
 
 1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
-
-```kusto
-
-Trips
-| take 100
-```
-  > **NOTE:**
-  > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
+    
+    ```kusto
+    
+    Trips
+    | take 100
+    ```
+      > **NOTE:**
+      > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
     
 2. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
 
-> **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
-
-```kusto
-
-// Use 'project' and 'take' to view a sample number of records in the table and check the data.
-Trips 
-| project vendor_id, trip_distance
-| take 10
-```
+    > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
+    
+    ```kusto
+    
+    // Use 'project' and 'take' to view a sample number of records in the table and check the data.
+    Trips 
+    | project vendor_id, trip_distance
+    | take 10
+    ```
 3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
-```kusto
-
-Trips 
-| project vendor_id, ["Trip Distance"] = trip_distance
-| take 10
-```
+    ```kusto
+    
+    Trips 
+    | project vendor_id, ["Trip Distance"] = trip_distance
+    | take 10
+    ```
 
 4. We may also want to summarize the trips to see how many miles were traveled:
 
-```kusto
-
-Trips
-| summarize ["Total Trip Distance"] = sum(trip_distance)
-```
-## ```GROUP BY``` data from our sample dataset using KQL
-
+    ```kusto
+    
+    Trips
+    | summarize ["Total Trip Distance"] = sum(trip_distance)
+    ```
+    ## ```GROUP BY``` data from our sample dataset using KQL
+    
 1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
 ```kusto
