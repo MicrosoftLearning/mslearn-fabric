@@ -3,7 +3,9 @@ lab:
     title: 'Query data in KQL Database'
     module: 'Query data from a Kusto Query database in Microsoft Fabric'
 ---
+
 # Get started with querying a Kusto database in Microsoft Fabric
+
 A KQL Queryset is a tool that allows you to execute queries, modify, and display query results from a KQL database. You can link each tab in the KQL Queryset to a different KQL database, and save your queries for future use or share them with others for data analysis. You can also switch the KQL database for any tab, so you can compare the query results from different data sources.
 
 The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. To learn more about the [kusto query (KQL)language](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext).
@@ -34,7 +36,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
-In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL database from a sample eventstream. Real-Time Analytics conveniently provides a sample dataset that you can use to explore RTA's capabilities. You use this sample data to create KQL | SQL queries and querysets that analyzes real-time data and allow for other uses in downstream processes.
+In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL database from a sample eventstream. Real-Time Analytics conveniently provides a sample dataset that you can use to explore RTA's capabilities. You use this sample data to create KQL/SQL queries and querysets that analyzes real-time data and allow for other uses in downstream processes.
 
 ## Create a KQL Database
 
@@ -52,15 +54,15 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of enable onelake](./Images/enable-onelake-availability.png)
 
-    then use the slider to turn on the availability.
+   Then use the slider to turn on the availability.
 
    ![Image of selecting the slider in Data Lake.](./images/data-availability-data-lake.png)
 
 5. Select **sample data** box from the options of ***Start by getting data***.
- 
+
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
-   then choose the **Automotive operations analytics** box from the options for sample data.
+   Then choose the **Automotive operations analytics** box from the options for sample data.
 
    ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
 
@@ -75,7 +77,6 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
    > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
     ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
-
 
 ## Introduction to Kusto Query Language (KQL) and its syntax
 
@@ -108,19 +109,20 @@ In this module, we focus on the basics of queries against a KQL Database using K
 ## ```SELECT``` data from our sample dataset using KQL
 
 1. In this query, we pull 100 records from the Trips table. We use the ```take``` keyword to ask the engine to return 100 records.
-    
+
     ```kusto
     
     Trips
     | take 100
     ```
-      > **NOTE:**
-      > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character. 
-    
-2. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
+
+    > **NOTE:**
+    > The Pipe ```|``` character is used for two purposes in KQL includuing to separate query operators in a tabular expression statement. It is also used as a logical OR operator within square or round brackets to denote that you may specify one of the items separated by the pipe character.
+
+1. We can be more precise by adding specific attributes we would like to query using the ```project``` keyword and then using the ```take``` keyword to tell the engine how many records to return.
 
     > **NOTE:** the use of ```//``` denotes comments used within the Microsoft Fabric ***Explore your data*** query tool.
-    
+
     ```kusto
     
     // Use 'project' and 'take' to view a sample number of records in the table and check the data.
@@ -128,7 +130,8 @@ In this module, we focus on the basics of queries against a KQL Database using K
     | project vendor_id, trip_distance
     | take 10
     ```
-3. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
+
+1. Another common practice in analysis is renaming columns in our queryset to make them more user friendly. This can be accomplished by using the new column name followed by the equals sign and the column we wish to rename.
 
     ```kusto
     
@@ -137,15 +140,16 @@ In this module, we focus on the basics of queries against a KQL Database using K
     | take 10
     ```
 
-4. We may also want to summarize the trips to see how many miles were traveled:
+1. We may also want to summarize the trips to see how many miles were traveled:
 
     ```kusto
     
     Trips
     | summarize ["Total Trip Distance"] = sum(trip_distance)
     ```
-    ## ```GROUP BY``` data from our sample dataset using KQL
-    
+
+## ```GROUP BY``` data from our sample dataset using KQL
+
 1. Then we may want to ***group by*** the pickup location that we do with the ```summarize``` operator. We're also able to use the ```project``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
 ```kusto
