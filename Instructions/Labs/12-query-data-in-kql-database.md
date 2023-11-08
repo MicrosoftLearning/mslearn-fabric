@@ -210,104 +210,104 @@ KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint th
 
 1. In this query, we pull the first 100 records from the **Trips** table using the ```TOP``` clause. 
 
-```sql
-// We can use the TOP clause to limit the number of records returned
-
-SELECT TOP 100 * from Trips
-```
+    ```sql
+    // We can use the TOP clause to limit the number of records returned
+    
+    SELECT TOP 100 * from Trips
+    ```
 
 1. If you use the ```//```, which is a comment in the ***Explore your data** tool within the KQL database, you can't highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this double-hypen will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
 
-```sql
--- instead of using the 'project' and 'take' keywords we simply use a standard SQL Query
-SELECT TOP 10 vendor_id, trip_distance
-FROM Trips
-```
+    ```sql
+    -- instead of using the 'project' and 'take' keywords we simply use a standard SQL Query
+    SELECT TOP 10 vendor_id, trip_distance
+    FROM Trips
+    ```
 
 1. Again, you can see that standard T-SQL features work fine with the query where we rename trip_distance to a more user friendly name.
 
-```sql
-
--- No need to use the 'project' or 'take' operators as standard T-SQL Works
-SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
-from Trips
-```
+    ```sql
+    
+    -- No need to use the 'project' or 'take' operators as standard T-SQL Works
+    SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
+    from Trips
+    ```
 
 1. We may also want to summarize the trips to see how many miles were traveled:
 
-```sql
-Select sum(trip_distance) as [Total Trip Distance]
-from Trips
-```
- >**NOTE:** The use of the quotations is not necessary in T-SQL compared to the KQL query, also note the `summarize` and `sort by` commands aren't available in T-SQL.
+    ```sql
+    Select sum(trip_distance) as [Total Trip Distance]
+    from Trips
+    ```
+     >**NOTE:** The use of the quotations is not necessary in T-SQL compared to the KQL query, also note the `summarize` and `sort by` commands aren't available in T-SQL.
 
 ## ```GROUP BY``` data from our sample dataset using T-SQL
 
 1. Then we may want to ***group by*** the pickup location that we do with the ```GROUP BY``` operator. We're also able to use the ```AS``` operator that allows us to select and rename the columns you want to include in your output. In this case, we group by borough within the NY Taxi system to provide our users with the total distance traveled from each borough.
 
-```sql
-SELECT pickup_boroname AS Borough, Sum(trip_distance) AS [Total Trip Distance]
-FROM Trips
-GROUP BY pickup_boroname
-```
+    ```sql
+    SELECT pickup_boroname AS Borough, Sum(trip_distance) AS [Total Trip Distance]
+    FROM Trips
+    GROUP BY pickup_boroname
+    ```
 
 1. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
 
-```sql
-
-SELECT CASE
-         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
-         ELSE pickup_boroname
-       END AS Borough,
-       SUM(trip_distance) AS [Total Trip Distance]
-FROM Trips
-GROUP BY CASE
-           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
-           ELSE pickup_boroname
-         END;
-```
+    ```sql
+    
+    SELECT CASE
+             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
+             ELSE pickup_boroname
+           END AS Borough,
+           SUM(trip_distance) AS [Total Trip Distance]
+    FROM Trips
+    GROUP BY CASE
+               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
+               ELSE pickup_boroname
+             END;
+    ```
 
 ## ```ORDER BY``` data from our sample dataset using T-SQL
 
 1. To make more sense of our data, we typically order it by a column, and this process is done in T-SQL with an ```ORDER BY``` operator. There's no ***SORT BY*** operator in T-SQL
  
-```sql
--- Group by pickup_boroname and calculate the summary statistics of trip_distance
-SELECT CASE
-         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-         ELSE pickup_boroname
-       END AS Borough,
-       SUM(trip_distance) AS [Total Trip Distance]
-FROM Trips
-GROUP BY CASE
-           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-           ELSE pickup_boroname
-         END
--- Add an ORDER BY clause to sort by Borough in ascending order
-ORDER BY Borough ASC;
-```
-## ```WHERE``` clause to filter data in our sample T-SQL Query
-
+    ```sql
+    -- Group by pickup_boroname and calculate the summary statistics of trip_distance
+    SELECT CASE
+             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+             ELSE pickup_boroname
+           END AS Borough,
+           SUM(trip_distance) AS [Total Trip Distance]
+    FROM Trips
+    GROUP BY CASE
+               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+               ELSE pickup_boroname
+             END
+    -- Add an ORDER BY clause to sort by Borough in ascending order
+    ORDER BY Borough ASC;
+    ```
+    ## ```WHERE``` clause to filter data in our sample T-SQL Query
+    
 1. Unlike KQL, our ```WHERE``` clause would go at end of the T-SQL Statement; however, in this case we have a ```GROUP BY``` clause, which requires us to use the ```HAVING``` statement and we use the new name of the column, in this case **Borough** as the column name to filter from.
 
-```sql
--- Group by pickup_boroname and calculate the summary statistics of trip_distance
-SELECT CASE
-         WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-         ELSE pickup_boroname
-       END AS Borough,
-       SUM(trip_distance) AS [Total Trip Distance]
-FROM Trips
-GROUP BY CASE
-           WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-           ELSE pickup_boroname
-         END
--- Add a having clause due to the GROUP BY statement
-HAVING Borough = 'Manhattan'
--- Add an ORDER BY clause to sort by Borough in ascending order
-ORDER BY Borough ASC;
-
-```
+    ```sql
+    -- Group by pickup_boroname and calculate the summary statistics of trip_distance
+    SELECT CASE
+             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+             ELSE pickup_boroname
+           END AS Borough,
+           SUM(trip_distance) AS [Total Trip Distance]
+    FROM Trips
+    GROUP BY CASE
+               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
+               ELSE pickup_boroname
+             END
+    -- Add a having clause due to the GROUP BY statement
+    HAVING Borough = 'Manhattan'
+    -- Add an ORDER BY clause to sort by Borough in ascending order
+    ORDER BY Borough ASC;
+    
+    ```
 
 ## Clean up resources
 
