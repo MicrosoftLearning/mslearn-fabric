@@ -44,13 +44,13 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of choose KQL Database](./Images/select-kqldatabase.png)
 
-2. You're prompted to **Name** the KQL Database
+1. You're prompted to **Name** the KQL Database
 
    ![Image of name KQL Database](./Images/name-kqldatabase.png)
 
-3. Give the KQL Database a name that you remember, such as **MyStockData**, press **Create**.
+1. Give the KQL Database a name that you remember, such as **MyStockData**, press **Create**.
 
-4. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
+1. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
    ![Image of enable onelake](./Images/enable-onelake-availability.png)
 
@@ -58,7 +58,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of selecting the slider in Data Lake.](./images/data-availability-data-lake.png)
 
-5. Select **sample data** box from the options of ***Start by getting data***.
+1. Select **sample data** box from the options of ***Start by getting data***.
 
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
@@ -66,11 +66,11 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
 
-6. Once the data is finished loading, we can verify the KQL Database is populated.
+1. Once the data is finished loading, we can verify the KQL Database is populated.
 
    ![Data being loaded into the KQL Database](./Images/choose-automotive-operations-analytics.png)
 
-7. Once the data is loaded, verify the data is loaded into the KQL database. You can accomplish this operation by selecting the ellipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
+1. Once the data is loaded, verify the data is loaded into the KQL database. You can accomplish this operation by selecting the ellipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
 
     ![Image of selecting the top 100 files from the RawServerMetrics table](./Images/rawservermetrics-top-100.png)
 
@@ -159,7 +159,7 @@ Trips
 | project Borough = pickup_boroname, ["Total Trip Distance"]
 ```
 
-2. In this case we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
+1. In this case we have a blank value, which is never good for analysis, and we can use the ```case``` function along with the ```isempty``` and the ```isnull``` functions to categorize into a ***Unidentified*** category for follow-up.
 
 ```kusto
 
@@ -216,7 +216,7 @@ KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint th
 SELECT TOP 100 * from Trips
 ```
 
-2. If you use the ```//```, which is a comment in the ***Explore your data** tool within the KQL database, you can't highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this double-hypen will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
+1. If you use the ```//```, which is a comment in the ***Explore your data** tool within the KQL database, you can't highlight it when executing T-SQL queries, rather you should use the standard ```--``` SQL comments notation. this double-hypen will also tell the KQL Engine to expect T-SQL in Azure Data Explorer.
 
 ```sql
 -- instead of using the 'project' and 'take' keywords we simply use a standard SQL Query
@@ -224,7 +224,7 @@ SELECT TOP 10 vendor_id, trip_distance
 FROM Trips
 ```
 
-3. Again, you can see that standard T-SQL features work fine with the query where we rename trip_distance to a more user friendly name.
+1. Again, you can see that standard T-SQL features work fine with the query where we rename trip_distance to a more user friendly name.
 
 ```sql
 
@@ -233,7 +233,7 @@ SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
 from Trips
 ```
 
-4. We may also want to summarize the trips to see how many miles were traveled:
+1. We may also want to summarize the trips to see how many miles were traveled:
 
 ```sql
 Select sum(trip_distance) as [Total Trip Distance]
@@ -251,7 +251,7 @@ FROM Trips
 GROUP BY pickup_boroname
 ```
 
-2. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
+1. In this case we have a blank value, which is never good for analysis, and we can use the ```CASE``` function along with the ```IS NULL``` function and the ```''``` empty value to categorize into a ***Unidentified*** category for follow-up. 
 
 ```sql
 
