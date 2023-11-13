@@ -73,7 +73,7 @@ Now you're ready to run code to get data and train a model. You'll work with the
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    display(df)
+   display(df)
     ```
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
