@@ -42,7 +42,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
    # Perform data exploration for data science
 
    Use the code in this notebook to perform data exploration for data science.
-    ``` 
+    ```
 
 ## Load data into a dataframe
 
@@ -51,19 +51,19 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
 1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe.
 
     ```python
-    # Azure storage access info for open dataset diabetes
-    blob_account_name = "azureopendatastorage"
-    blob_container_name = "mlsamples"
-    blob_relative_path = "diabetes"
-    blob_sas_token = r"" # Blank since container is Anonymous access
+   # Azure storage access info for open dataset diabetes
+   blob_account_name = "azureopendatastorage"
+   blob_container_name = "mlsamples"
+   blob_relative_path = "diabetes"
+   blob_sas_token = r"" # Blank since container is Anonymous access
     
-    # Set Spark config to access  blob storage
-    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
-    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
-    print("Remote blob path: " + wasbs_path)
+   # Set Spark config to access  blob storage
+   wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+   spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+   print("Remote blob path: " + wasbs_path)
     
-    # Spark read parquet, note that it won't load any data yet by now
-    df = spark.read.parquet(wasbs_path)
+   # Spark read parquet, note that it won't load any data yet by now
+   df = spark.read.parquet(wasbs_path)
     ```
 
 1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
@@ -73,7 +73,7 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    display(df)
+   display(df)
     ```
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
@@ -92,8 +92,8 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
 1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
 
     ```python
-    df = df.toPandas()
-    df.head()
+   df = df.toPandas()
+   df.head()
     ```
 
 ## Check the shape of the data
@@ -103,13 +103,13 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    # Display the number of rows and columns in the dataset
-    print("Number of rows:", df.shape[0])
-    print("Number of columns:", df.shape[1])
+   # Display the number of rows and columns in the dataset
+   print("Number of rows:", df.shape[0])
+   print("Number of columns:", df.shape[1])
 
-    # Display the data types of each column
-    print("\nData types of columns:")
-    print(df.dtypes)
+   # Display the data types of each column
+   print("\nData types of columns:")
+   print(df.dtypes)
     ```
 
     The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The `SEX` variable likely contains categorical or string data.
@@ -119,9 +119,9 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    missing_values = df.isnull().sum()
-    print("\nMissing values per column:")
-    print(missing_values)
+   missing_values = df.isnull().sum()
+   print("\nMissing values per column:")
+   print(missing_values)
     ```
 
     The code checks for missing values. Observe that there's no missing data in the dataset.
@@ -133,7 +133,7 @@ Now, let's generate descriptive statistics to understand the distribution of num
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    df.describe()
+   df.describe()
     ```
 
     The average age is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.
@@ -145,28 +145,28 @@ Let's verify the `BMI` feature, and plot its distribution to get a better unders
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    import numpy as np
+   import matplotlib.pyplot as plt
+   import seaborn as sns
+   import numpy as np
     
-    # Calculate the mean, median of the BMI variable
-    mean = df['BMI'].mean()
-    median = df['BMI'].median()
+   # Calculate the mean, median of the BMI variable
+   mean = df['BMI'].mean()
+   median = df['BMI'].median()
+   
+   # Histogram of the BMI variable
+   plt.figure(figsize=(8, 6))
+   plt.hist(df['BMI'], bins=20, color='skyblue', edgecolor='black')
+   plt.title('BMI Distribution')
+   plt.xlabel('BMI')
+   plt.ylabel('Frequency')
     
-    # Histogram of the BMI variable
-    plt.figure(figsize=(8, 6))
-    plt.hist(df['BMI'], bins=20, color='skyblue', edgecolor='black')
-    plt.title('BMI Distribution')
-    plt.xlabel('BMI')
-    plt.ylabel('Frequency')
+   # Add lines for the mean and median
+   plt.axvline(mean, color='red', linestyle='dashed', linewidth=2, label='Mean')
+   plt.axvline(median, color='green', linestyle='dashed', linewidth=2, label='Median')
     
-    # Add lines for the mean and median
-    plt.axvline(mean, color='red', linestyle='dashed', linewidth=2, label='Mean')
-    plt.axvline(median, color='green', linestyle='dashed', linewidth=2, label='Median')
-    
-    # Add a legend
-    plt.legend()
-    plt.show()
+   # Add a legend
+   plt.legend()
+   plt.show()
     ```
 
     From this graph, you're able to observe the range and distribution of `BMI` in the dataset. For example, most of `BMI` fall within 23.2 and 29.2, and the data is right skewed.
@@ -178,35 +178,35 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    import matplotlib.pyplot as plt
-    import seaborn as sns
+   import matplotlib.pyplot as plt
+   import seaborn as sns
 
-    # Scatter plot of Quantity vs. Price
-    plt.figure(figsize=(8, 6))
-    sns.scatterplot(x='BMI', y='Y', data=df)
-    plt.title('BMI vs. Target variable')
-    plt.xlabel('BMI')
-    plt.ylabel('Target')
-    plt.show()
+   # Scatter plot of Quantity vs. Price
+   plt.figure(figsize=(8, 6))
+   sns.scatterplot(x='BMI', y='Y', data=df)
+   plt.title('BMI vs. Target variable')
+   plt.xlabel('BMI')
+   plt.ylabel('Target')
+   plt.show()
     ```
-    
+
     We can see that as the `BMI` increases, the target variable also increases, indicating a positive linear relationship between these two variables.
 
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
-    import seaborn as sns
-    import matplotlib.pyplot as plt
+   import seaborn as sns
+   import matplotlib.pyplot as plt
     
-    fig, ax = plt.subplots(figsize=(7, 5))
+   fig, ax = plt.subplots(figsize=(7, 5))
     
-    # Replace numeric values with labels
-    df['SEX'] = df['SEX'].replace({1: 'Male', 2: 'Female'})
+   # Replace numeric values with labels
+   df['SEX'] = df['SEX'].replace({1: 'Male', 2: 'Female'})
     
-    sns.boxplot(x='SEX', y='BP', data=df, ax=ax)
-    ax.set_title('Blood pressure across Gender')
-    plt.tight_layout()
-    plt.show()
+   sns.boxplot(x='SEX', y='BP', data=df, ax=ax)
+   ax.set_title('Blood pressure across Gender')
+   plt.tight_layout()
+   plt.show()
     ```
 
     These observations suggest that there are differences in the blood pressure profiles of male and female patients. On average, female patients have a higher blood pressure than male patients.
@@ -214,29 +214,29 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
 1. Aggregating the data can make it more manageable for visualization and analysis. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
-    import matplotlib.pyplot as plt
-    import seaborn as sns
+   import matplotlib.pyplot as plt
+   import seaborn as sns
     
-    # Calculate average BP and BMI by SEX
-    avg_values = df.groupby('SEX')[['BP', 'BMI']].mean()
+   # Calculate average BP and BMI by SEX
+   avg_values = df.groupby('SEX')[['BP', 'BMI']].mean()
     
-    # Bar chart of the average BP and BMI by SEX
-    ax = avg_values.plot(kind='bar', figsize=(15, 6), edgecolor='black')
+   # Bar chart of the average BP and BMI by SEX
+   ax = avg_values.plot(kind='bar', figsize=(15, 6), edgecolor='black')
     
-    # Add title and labels
-    plt.title('Avg. Blood Pressure and BMI by Gender')
-    plt.xlabel('Gender')
-    plt.ylabel('Average')
+   # Add title and labels
+   plt.title('Avg. Blood Pressure and BMI by Gender')
+   plt.xlabel('Gender')
+   plt.ylabel('Average')
     
-    # Display actual numbers on the bar chart
-    for p in ax.patches:
-        ax.annotate(format(p.get_height(), '.2f'), 
-                    (p.get_x() + p.get_width() / 2., p.get_height()), 
-                    ha = 'center', va = 'center', 
-                    xytext = (0, 10), 
-                    textcoords = 'offset points')
+   # Display actual numbers on the bar chart
+   for p in ax.patches:
+       ax.annotate(format(p.get_height(), '.2f'), 
+                   (p.get_x() + p.get_width() / 2., p.get_height()), 
+                   ha = 'center', va = 'center', 
+                   xytext = (0, 10), 
+                   textcoords = 'offset points')
     
-    plt.show()
+   plt.show()
     ```
 
     This graph shows that the average blood pressure is higher in female patients compared to male patients. Additionally, it shows that the average Body Mass Index (BMI) is slightly higher in females than in males.
@@ -244,15 +244,15 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
     ```python
-    import matplotlib.pyplot as plt
-    import seaborn as sns
+   import matplotlib.pyplot as plt
+   import seaborn as sns
     
-    plt.figure(figsize=(10, 6))
-    sns.lineplot(x='AGE', y='BMI', data=df, ci=None)
-    plt.title('BMI over Age')
-    plt.xlabel('Age')
-    plt.ylabel('BMI')
-    plt.show()
+   plt.figure(figsize=(10, 6))
+   sns.lineplot(x='AGE', y='BMI', data=df, ci=None)
+   plt.title('BMI over Age')
+   plt.xlabel('Age')
+   plt.ylabel('BMI')
+   plt.show()
     ```
 
     The age group of 19 to 30 years has the lowest average BMI values, while the highest average BMI is found in the age group of 65 to 79 years. Additionally, observe that the average BMI for most age groups falls within the overweight range.
@@ -264,14 +264,14 @@ Let's calculate correlations between different features to understand their rela
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code.
 
     ```python
-    df.corr(numeric_only=True)
+   df.corr(numeric_only=True)
     ```
 
 1. A heatmap is a useful tool for quickly visualizing the strength and direction of relationships between variable pairs. It can highlight strong positive or negative correlations, and identify pairs that lack any correlation. To create a heatmap, add another code cell to the notebook, and enter the following code.
 
     ```python
-    plt.figure(figsize=(15, 7))
-    sns.heatmap(df.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
+   plt.figure(figsize=(15, 7))
+   sns.heatmap(df.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
     ```
 
     `S1` and `S2` variables have a high positive correlation of **0.89**, indicating that they move in the same direction. When `S1` increases, `S2` also tends to increase, and vice versa. Additionally, `S3` and `S4` have a strong negative correlation of **-0.73**. This means that as `S3` increases, `S4` tends to decrease.
