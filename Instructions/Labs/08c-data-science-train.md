@@ -39,7 +39,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
 1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
-    
+
     ```text
    # Train a machine learning model and track with MLflow
     ```
@@ -92,9 +92,9 @@ Now you're ready to run code to get data and train a model. You'll work with the
 1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
 
     ```python
-    import pandas as pd
-    df = df.toPandas()
-    df.head()
+   import pandas as pd
+   df = df.toPandas()
+   df.head()
     ```
 
 ## Train a machine learning model
@@ -104,11 +104,11 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Run the following code to split the data into a training and test dataset, and to separate the features from the label you want to predict:
 
     ```python
-    from sklearn.model_selection import train_test_split
+   from sklearn.model_selection import train_test_split
     
-    X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
+   X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
@@ -124,15 +124,15 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.linear_model import LinearRegression
+   from sklearn.linear_model import LinearRegression
     
-    with mlflow.start_run():
-       mlflow.autolog()
+   with mlflow.start_run():
+      mlflow.autolog()
     
-       model = LinearRegression()
-       model.fit(X_train, y_train)
+      model = LinearRegression()
+      model.fit(X_train, y_train)
     
-       mlflow.log_param("estimator", "LinearRegression")
+      mlflow.log_param("estimator", "LinearRegression")
     ```
 
     The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
@@ -140,15 +140,15 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.tree import DecisionTreeRegressor
+   from sklearn.tree import DecisionTreeRegressor
     
-    with mlflow.start_run():
-       mlflow.autolog()
+   with mlflow.start_run():
+      mlflow.autolog()
     
-       model = DecisionTreeRegressor(max_depth=5) 
-       model.fit(X_train, y_train)
+      model = DecisionTreeRegressor(max_depth=5) 
+      model.fit(X_train, y_train)
     
-       mlflow.log_param("estimator", "DecisionTreeRegressor")
+      mlflow.log_param("estimator", "DecisionTreeRegressor")
     ```
 
     The code trains a regression model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
