@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Load data using data pipeline'
+    title: 'Load data into a warehouse using T-SQL'
     module: 'Load data into a warehouse in Microsoft Fabric'
 ---
 
