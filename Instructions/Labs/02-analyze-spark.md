@@ -575,7 +575,7 @@ While **matplotlib** enables you to create complex charts of multiple types, it 
    # Clear the plot area
    plt.clf()
 
-   # Create a bar chart
+   # Create a line chart
    ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
    plt.show()
     ```
