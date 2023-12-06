@@ -73,46 +73,54 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
 
 1. From your workspace, select the warehouse you created.
 
-1. In the warehouse **Explorer**, select **New SQL query**, and provide the following query.
+1. In the warehouse **Explorer**, select **New SQL query**, then copy and run the following query.
 
     ```sql
     CREATE SCHEMA [Sales]
-    
+    GO
+        
     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Fact_Sales' AND SCHEMA_NAME(schema_id)='Sales')
-    CREATE TABLE Sales.Fact_Sales (
-        CustomerID INT NOT NULL,
-		ItemID INT NOT NULL,
-		SalesOrderNumber VARCHAR(30),
-        SalesOrderLineNumber INT,
-        OrderDate DATE,
-        Quantity INT,
-        TaxAmount FLOAT,
-        UnitPrice FLOAT
-    );
-
+    	CREATE TABLE Sales.Fact_Sales (
+    		CustomerID VARCHAR(255) NOT NULL,
+    		ItemID VARCHAR(255) NOT NULL,
+    		SalesOrderNumber VARCHAR(30),
+    		SalesOrderLineNumber INT,
+    		OrderDate DATE,
+    		Quantity INT,
+    		TaxAmount FLOAT,
+    		UnitPrice FLOAT
+    	);
+    
     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Customer' AND SCHEMA_NAME(schema_id)='Sales')
         CREATE TABLE Sales.Dim_Customer (
-            CustomerID INT NOT NULL,
+            CustomerID VARCHAR(255) NOT NULL,
             CustomerName VARCHAR(255) NOT NULL,
             EmailAddress VARCHAR(255) NOT NULL
         );
-    
-    ALTER TABLE Sales.Dim_Customer add CONSTRAINT PK_Dim_Customer PRIMARY KEY NONCLUSTERED (CustomerID) NOT ENFORCED
         
+    ALTER TABLE Sales.Dim_Customer add CONSTRAINT PK_Dim_Customer PRIMARY KEY NONCLUSTERED (CustomerID) NOT ENFORCED
+    GO
+    
     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Item' AND SCHEMA_NAME(schema_id)='Sales')
         CREATE TABLE Sales.Dim_Item (
-            ItemID INT NOT NULL,
+            ItemID VARCHAR(255) NOT NULL,
             ItemName VARCHAR(255) NOT NULL
         );
-    
+        
     ALTER TABLE Sales.Dim_Item add CONSTRAINT PK_Dim_Item PRIMARY KEY NONCLUSTERED (ItemID) NOT ENFORCED
+    GO
+    
+    CREATE VIEW [Sales].[Staging_Sales]
+    AS
+        SELECT * FROM [ExternalData].[dbo].[staging_sales];
+    GO
     ```
 
     > **Important:** In a data warehouse, foreign key constraints are not always necessary at the table level. While foreign key constraints can help ensure data integrity, they can also add overhead to the ETL (Extract, Transform, Load) process and slow down data loading. The decision to use foreign key constraints in a data warehouse should be based on a careful consideration of the trade-offs between data integrity and performance.
 
 1. In the **Explorer**, navigate to **Schemas >> Sales >> Tables**. Note the *Fact_Sales*, *Dim_Customer*, and *Dim_Item* tables you just created.
 
-1. Open a new **New SQL query** editor, and provide the following query. Update *<your lakehouse name>* with the lakehouse you created.
+1. Open a new **New SQL query** editor, then copy and run the following query. Update *<your lakehouse name>* with the lakehouse you created.
 
     ```sql
     CREATE VIEW Sales.Staging_Sales
@@ -128,7 +136,7 @@ Now that the fact and dimensions tables are created, let's create a stored proce
 
 For the sake of simplicity in this case study, you'll use the customer name and item name as the primary keys.
 
-1. Create a new **New SQL query** editor, and provide the following query.
+1. Create a new **New SQL query** editor, then copy and run the following query.
 
     ```sql
     CREATE OR ALTER PROCEDURE Sales.LoadDataFromStaging (@OrderYear INT)
@@ -164,7 +172,7 @@ For the sake of simplicity in this case study, you'll use the customer name and 
         WHERE YEAR(OrderDate) = @OrderYear;
     END
     ```
-1. Create a new **New SQL query** editor, and provide the following query.
+1. Create a new **New SQL query** editor, then copy and run the following query.
 
     ```sql
     EXEC Sales.LoadDataFromStaging 2021
@@ -176,7 +184,7 @@ For the sake of simplicity in this case study, you'll use the customer name and 
 
 Let's run some analytical queries to validate the data in the warehouse.
 
-1. On the top menu, select **New SQL query**, and provide the following query.
+1. On the top menu, select **New SQL query**, then copy and run the following query.
 
     ```sql
     SELECT c.CustomerName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
@@ -190,7 +198,7 @@ Let's run some analytical queries to validate the data in the warehouse.
 
     > **Note:** This query shows the customers by total sales for the year of 2021. The customer with the highest total sales for the specified year is **Jordan Turner**, with total sales of **14686.69**. 
 
-1. On the top menu, select **New SQL query** or reuse the same editor, and provide the following query.
+1. On the top menu, select **New SQL query** or reuse the same editor, then copy and run the following query.
 
     ```sql
     SELECT i.ItemName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
@@ -205,7 +213,7 @@ Let's run some analytical queries to validate the data in the warehouse.
 
     > **Note:** This query shows the top-seliing items by total sales for the year of 2021. These results suggest that the *Mountain-200 bike* model, in both black and silver colors, was the most popular item among customers in 2021.
 
-1. On the top menu, select **New SQL query** or reuse the same editor, and provide the following query.
+1. On the top menu, select **New SQL query** or reuse the same editor, then copy and run the following query.
 
     ```sql
     WITH CategorizedSales AS (
