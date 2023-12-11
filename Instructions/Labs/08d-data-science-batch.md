@@ -119,7 +119,7 @@ First, let's train a machine learning model that uses a *regression* algorithm t
    print("Version: {}".format(mv.version))
     ```
 
-    Your model is now saved in your workspace as `diabetes-model`. Optionally, you can use the browse feature in your workspace to find the model in the workspace and explore it using the UI.
+    Your model is now saved in your workspace as **diabetes-model**. Optionally, you can use the browse feature in your workspace to find the model in the workspace and explore it using the UI.
 
 ## Create a test dataset in a lakehouse
 
