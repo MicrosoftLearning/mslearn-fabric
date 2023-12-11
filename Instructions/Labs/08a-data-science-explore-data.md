@@ -16,8 +16,8 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the Microsoft Fabric home page at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com) in a browser.
-1. Select **Synapse Data Science**.
+1. Navigate to the Microsoft Fabric home page at `https://app.fabric.microsoft.com` in a browser, and if necessary, sign in with your Fabric credentials.
+1. On the Fabric home page, select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -36,7 +36,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
-1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
+1. If necessary, use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
    # Perform data exploration for data science
@@ -66,7 +66,7 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
    df = spark.read.parquet(wasbs_path)
     ```
 
-1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press **SHIFT** + **ENTER** on your keyboard to run a cell.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
@@ -87,7 +87,7 @@ Now you're ready to run code to get data. You'll work with the [**diabetes datas
     |50|1|23.0|101.0|192|125.4|52.0|4.0|4.2905|80|135|
     | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-    The output shows the rows and columns of the diabetes dataset.
+    The output shows the rows and columns of the diabetes dataset. The data consists of ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements for diabetes patients, as well as the response of interest (a quantitative measure of disease progression one year after baseline), which is labelled **Y**.
 
 1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
 
@@ -136,11 +136,11 @@ Now, let's generate descriptive statistics to understand the distribution of num
    df.describe()
     ```
 
-    The average age is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average `BMI` is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum `BMI` is 18 and the maximum is 42.2.
+    The average age is approximately 48.5 years, with a standard deviation of 13.1 years. The youngest individual is 19 years old and the oldest is 79 years old. The average BMI is approximately 26.4, which falls in the **overweight** category according to [WHO standards](https://www.who.int/health-topics/obesity#tab=tab_1). The minimum BMI is 18 and the maximum is 42.2.
 
 ## Plot the data distribution
 
-Let's verify the `BMI` feature, and plot its distribution to get a better understanding of its characteristics.
+Let's verify the BMI feature, and plot its distribution to get a better understanding of its characteristics.
 
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
@@ -169,7 +169,7 @@ Let's verify the `BMI` feature, and plot its distribution to get a better unders
    plt.show()
     ```
 
-    From this graph, you're able to observe the range and distribution of `BMI` in the dataset. For example, most of `BMI` fall within 23.2 and 29.2, and the data is right skewed.
+    From this graph, you're able to observe the range and distribution of BMI in the dataset. For example, most of BMI fall within 23.2 and 29.2, and the data is right skewed.
 
 ## Perform multivariate analysis
 
@@ -190,7 +190,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
    plt.show()
     ```
 
-    We can see that as the `BMI` increases, the target variable also increases, indicating a positive linear relationship between these two variables.
+    We can see that as the BMI increases, the target variable also increases, indicating a positive linear relationship between these two variables.
 
 1. Add another code cell to the notebook. Then, enter the following code into this cell and execute it.
 
@@ -248,7 +248,7 @@ Let's generate visualizations such as scatter plots and box plots to uncover pat
    import seaborn as sns
     
    plt.figure(figsize=(10, 6))
-   sns.lineplot(x='AGE', y='BMI', data=df, ci=None)
+   sns.lineplot(x='AGE', y='BMI', data=df, errorbar=None)
    plt.title('BMI over Age')
    plt.xlabel('Age')
    plt.ylabel('BMI')
@@ -274,7 +274,7 @@ Let's calculate correlations between different features to understand their rela
    sns.heatmap(df.corr(numeric_only=True), annot=True, vmin=-1, vmax=1, cmap="Blues")
     ```
 
-    `S1` and `S2` variables have a high positive correlation of **0.89**, indicating that they move in the same direction. When `S1` increases, `S2` also tends to increase, and vice versa. Additionally, `S3` and `S4` have a strong negative correlation of **-0.73**. This means that as `S3` increases, `S4` tends to decrease.
+    S1 and S2 variables have a high positive correlation of **0.89**, indicating that they move in the same direction. When S1 increases, S2 also tends to increase, and vice versa. Additionally, S3 and S4 have a strong negative correlation of **-0.73**. This means that as S3 increases, S4 tends to decrease.
 
 ## Save the notebook and end the Spark session
 

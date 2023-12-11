@@ -16,8 +16,8 @@ This lab will take approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the Microsoft Fabric home page at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com)` in a browser.
-1. Select **Synapse Data Science**.
+1. Navigate to the Microsoft Fabric home page at `https://app.fabric.microsoft.com` in a browser, and if necessary, sign in with your Fabric credentials.
+1. On the Fabric home page, select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -36,7 +36,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
-1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
+1. If necessary, use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
    # Perform data exploration for data science
