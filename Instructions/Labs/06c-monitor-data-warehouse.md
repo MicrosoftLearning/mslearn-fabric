@@ -67,7 +67,7 @@ Microsoft Fabric data warehouses include dynamic management views (DMVs), which 
     ```
 
 1. Run the modified query and view the results, which show details of all requests being executed in the data warehouse.
-1. Modify the SQL code to join the DMVs and return information about currently running requests, like this:
+1. Modify the SQL code to join the DMVs and return information about currently running requests in the same database, like this:
 
     ```sql
    SELECT connections.connection_id,
@@ -79,10 +79,11 @@ Microsoft Fabric data warehouses include dynamic management views (DMVs), which 
    INNER JOIN sys.dm_exec_requests AS requests
        ON requests.session_id = sessions.session_id
    WHERE requests.status = 'running'
+       AND requests.database_id = DB_ID()
    ORDER BY requests.total_elapsed_time DESC;
     ```
 
-1. Run the modified query and view the results, which show details of all running queries. You may see some requests being run by the system as well as the process for the query itself (which will be running with your login name).
+1. Run the modified query and view the results, which show details of all running queries in the database (including this one).
 1. In the **New SQL query** drop-down list, select **New SQL query** to add a second query tab. Then in the new empty query tab, run the following code:
 
     ```sql
