@@ -57,8 +57,7 @@ The SQL query editor provides support for IntelliSense, code completion, syntax 
     FROM dbo.Trip AS T
     JOIN dbo.[Date] AS D
         ON T.[DateID]=D.[DateID]
-    GROUP BY D.MonthName
-    ORDER BY D.Month;
+    GROUP BY D.MonthName;
     ```
 
 1. Use the **&#9655; Run** button to run the SQL script and view the results, which show the total number of trips and total revenue by month.
@@ -73,8 +72,7 @@ The SQL query editor provides support for IntelliSense, code completion, syntax 
     FROM dbo.Trip AS T
     JOIN dbo.[Date] AS D
         ON T.[DateID]=D.[DateID]
-    GROUP BY D.DayName
-    ORDER BY D.DayOfWeek;
+    GROUP BY D.DayName;
     ```
 
 1. Run the modified query and view the results, which show the average trip duration and distance by day of the week.
@@ -129,7 +127,14 @@ Let's query your data warehouse to check for consistency.
     SELECT COUNT(*) FROM dbo.Trip WHERE TripDurationSeconds < 0;
     ```
 
-    > **Note:** Although the data may appear to be inconsistent, it is important to verify with the business if this is actually the case or if it is valid data depending on the context.
+1. In the new blank query pane, enter and run the following Transact-SQL code:
+
+    ```sql
+    -- Remove trips with negative trip duration
+    DELETE FROM dbo.Trip WHERE TripDurationSeconds < 0;
+    ```
+
+    > **Note:** There are several ways to handle inconsistent data. Rather than removing it, one alternative is to replace it with a different value such as the mean or median.
 
 1. Close all query tabs.
 
