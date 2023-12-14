@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Enforce model security'
+    title: 'Enforce semantic model security'
     module: 'Design and build tabular models'
 ---
 
@@ -20,7 +20,7 @@ In this lab, you learn how to:
 
 - Validate roles.
 
-- Map security principals to dataset roles.
+- Map security principals to semantic model roles.
 
 ## Get started
 
@@ -110,7 +110,7 @@ In this task, you will create a workspace.
 
 3. Select **Save**.
 
-	*Once created, the workspace is opened. In a later exercise, you will publish a dataset to this workspace.*
+	*Once created, the workspace is opened. In a later exercise, you will publish a semantic model to this workspace.*
 
 ### Review the data model
 
@@ -137,7 +137,7 @@ In this task, you will review the data model.
 
 ## Create static roles
 
-In this exercise, you will create and validate static roles, and then see how you would map security principals to the dataset roles.
+In this exercise, you will create and validate static roles, and then see how you would map security principals to the semantic model roles.
 
 ### Create static roles
 
@@ -250,12 +250,12 @@ This task relies on the existence of a **Salespeople_Australia** security group 
 
 1. Switch to the Power BI service (web browser).
 
-2. In the workspace landing page, notice the **Sales Analysis - Enforce model security** dataset.
+2. In the workspace landing page, notice the **Sales Analysis - Enforce model security** semantic model.
 
 	![](../images/dp500-enforce-model-security-image31.png)
 
 
-3. Hover the cursor over the dataset, and when the ellipsis appears, select the ellipsis, and then select **Security**.
+3. Hover the cursor over the semantic model, and when the ellipsis appears, select the ellipsis, and then select **Security**.
 
 	![](../images/dp500-enforce-model-security-image32.png)
 
@@ -283,7 +283,7 @@ This task relies on the existence of a **Salespeople_Australia** security group 
 
 	*In a real-world solution, each role should be mapped to a security group.*
 
-	*This design approach is simple and effective when security groups exist for each region. However, there are disadvantages: it requires more effort to create and set up. It also requires updating and republishing the dataset when new regions are onboarded.*
+	*This design approach is simple and effective when security groups exist for each region. However, there are disadvantages: it requires more effort to create and set up. It also requires updating and republishing the semantic model when new regions are onboarded.*
 
 	*In the next exercise, you will create a dynamic role that is data-driven. This design approach can help address these disadvantages.*
 
@@ -292,13 +292,13 @@ This task relies on the existence of a **Salespeople_Australia** security group 
 
 ### Clean up the solution
 
-In this task, you will clean up the solution by removing the dataset and the model roles.
+In this task, you will clean up the solution by removing the semantic model and the model roles.
 
-1. To remove the dataset, hover the cursor over the dataset, and when the ellipsis appears, select the ellipsis, and then select **Delete**.
+1. To remove the semantic model, hover the cursor over the semantic model, and when the ellipsis appears, select the ellipsis, and then select **Delete**.
 
 	![](../images/dp500-enforce-model-security-image37.png)
 
-	*You will republish a revised dataset in the next exercise.*
+	*You will republish a revised semantic model in the next exercise.*
 
 2. When prompted to confirm the deletion, select **Delete**.
 
@@ -328,7 +328,7 @@ In this task, you will clean up the solution by removing the dataset and the mod
 
 ## Create a dynamic role
 
-In this exercise, you will add a table to the model, create and validate a dynamic role, and then map a security principal to the dataset role.
+In this exercise, you will add a table to the model, create and validate a dynamic role, and then map a security principal to the semantic model role.
 
 ### Add the Salesperson table
 
@@ -527,7 +527,7 @@ In this task, you will finalize the design by publishing the report and mapping 
 
 4. Switch to the Power BI service (web browser).
 
-5. Go to the security settings for the **Sales Analysis - Enforce model security** dataset.
+5. Go to the security settings for the **Sales Analysis - Enforce model security** semantic model.
 
 6. Map the **Salespeople** security group the **Salespeople** role.
 
