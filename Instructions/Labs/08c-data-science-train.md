@@ -63,7 +63,7 @@ Now you're ready to run code to get data and train a model. You'll work with the
    print("Remote blob path: " + wasbs_path)
     
    # Spark read parquet, note that it won't load any data yet by now
-    df = spark.read.parquet(wasbs_path)
+   df = spark.read.parquet(wasbs_path)
     ```
 
 1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press **SHIFT** + **ENTER** on your keyboard to run a cell.
