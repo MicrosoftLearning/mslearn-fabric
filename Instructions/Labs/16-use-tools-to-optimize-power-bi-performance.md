@@ -52,12 +52,7 @@ environment, continue to the next task.*
 
 1. Upon completion, select **Open file** to run the installer.
 
-    ![Graphical user interface, application Description automatically generated](./Images/calculationgroups-downloadTE.png)
-
 1.  In the Tabular Editor installer window, select **Next**.
-
-    ![Graphical user interface, application Description automatically
-    generated](./Images/image2.png)
 
 1.  At the **License Agreement** step, if you agree, select **I agree**, and then select **Next**.
 
@@ -75,23 +70,15 @@ environment, continue to the next task.*
 
 ### Set up Power BI Desktop
 
-In this task, you will open a pre-developed Power BI Desktop solution.
+In this task, you will open the pre-developed Power BI Desktop solution that you downloaded earlier (**Use tools to optimize Power BI performance.pbix** file).
 
-1. In File Explorer, go to the **D:\DP500\Allfiles\13\Starter** folder.
+1. Open the file and in the **Save As** window, save the file to a location you'll remember.
 
-2. To open a pre-developed Power BI Desktop file, double-click the **Sales Analysis - Use tools to optimize Power BI performance.pbix** file.
-
-3. To save the file, on the **File** ribbon tab, select **Save as**.
-
-4. In the **Save As** window, go to the **D:\DP500\Allfiles\13\MySolution** folder.
-
-5. Select **Save**.
-
-6. Select the **External Tools** ribbon tab.
+1. Select the **External Tools** ribbon tab.
 
 	![](./Images/dp500-use-tools-to-optimize-power-bi-performance-image8.png)
 
-7. Notice that you can launch Tabular Editor from this ribbon tab.
+1. Notice that you can launch Tabular Editor from this ribbon tab.
 
 	![](./Images/dp500-use-tools-to-optimize-power-bi-performance-image9.png)
 
