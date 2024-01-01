@@ -43,7 +43,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
 
 1. Select the **Reporting** tab of the ribbon and choose **New semantic model**. This enables you to create a new semantic model using only specific tables and views from your data warehouse, for use by data teams and the business to build reports.
 
-1. Name the semantic model "Taxi Revenue", ensure it's in the workspace you just created, and select the following tables:
+1. Name the semantic model **Taxi Revenue**, ensure it's in the workspace you just created, and select the following tables:
    - Date
    - Trip
    - Geography
@@ -51,7 +51,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
      
    ![Screenshot of the New semantic model interface with four tables selected](./Images/new-semantic-model.png)
      
-### Create relationships between tables
+## Create relationships between tables
 
 Now you'll create relationships between the tables to accurrately analyze and visualize your data. If you're familiar with creating relationships in Power BI desktop, this will look familiar.
 
@@ -63,56 +63,45 @@ Now you'll create relationships between the tables to accurrately analyze and vi
    
     Now, you'll create relationships between the tables. If you're familiar with creating relationships in Power BI desktop, this will look familiar!
 
-    *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the Trip table is our fact table, and our dimensions are date, geography, and weather.*
+    *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the **Trip** table is our fact table, and our dimensions are **Date**, **Geography**, and **Weather**.*
 
 1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and frop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
 
 1. Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
 
-### Organize the model diagram
+1. Create relationships to the **Trip** fact table from the **Geography** and **Weather** dimensions, repeating the step above. Also ensure these relationships are **One to many**, with one occurance of the key in the dimension table, and many in the fact table. 
 
-In this task, you will organize the model diagram to easily understand the star schema design.
+1. Drag the tables into position so that the **Trip** fact table is located at the bottom of the diagram, and the remaining tables, which are dimension tables, are located around the fact table.
 
-1. In Power BI Desktop, at the left, select **Model** view.
+    ![Screenshot of the star schema diagram](./Images/star-schema-diagram.png)
 
- ![](../images/dp500-create-a-star-schema-model-image43.png)
+    *The creation of the star schema model is now complete. There are many modeling configurations that could now be applied, like adding hierarchies, calculations, and setting properties like column visibility.*
 
-2. To resize the model diagram to fit to screen, at the bottom-right, select the **Fit to screen** icon.
+    > **Tip**: In the Properties pane of the window, toggle *Pin related fields to top of card* to Yes. This will help you (and others reporting off of this model) see which fields are being used in relationships at a glance. You can also interact with the fields in your tables using the properties pane. For example, if you want to confirm data types are set properly, you can select a field and review the format in the properties pane.
 
- ![](../images/dp500-create-a-star-schema-model-image44.png)
+     ![Screenshot of the properties pane](./Images/properties-pane.png)
 
-3. Drag the tables into position so that the **Sales** fact table is located at the middle of the diagram, and the remaining tables, which are dimension tables, are located around the fact table.
+## Explore your data
 
-4. If any of the dimension tables aren't related to the fact table, use the following instructions to create a relationship:
+You now have a semantic model built off your warehouse that has relationships established that are necessary for reporting. Let's take a look at the data using the **Explore data** feature.
 
-- Drag the dimension key column (for example, **ProductKey**) and drop it on the corresponding column of the **Sales** table.
+1. Navigate back to your workspace and select your **Taxi Revenue semantic model**.
 
-- In the **Create Relationship** window, select **OK**.
+1. In the window, select **Explore this data** from the ribbon. Here you'll take a look at your data in tabular format. This offers a focused experience to explore your data without creating a full Power BI report.
 
-5. Review the final layout of the model diagram.
+1. Add **YearName** and **MonthName** to the rows, and explore the **average number of passengers**, **average trip amount**, and **average trip duration** in the values field well.
 
- ![](../images/dp500-create-a-star-schema-model-image45.png)
+    *When you drag and drop a numeric field into the explore pane, it will default to summarize the number. To change the aggregation from **Summarize** to **Average**, select the field and change the aggregation in the popup window.*
 
- *The creation of the star schema model is now complete. There are many modeling configurations that could now be applied, like adding hierarchies, calculations, and setting properties like column visibility.*
+    ![Screenshot of the explore data window, with a matrix visual looking at averages over time.](./Images/explore-data-fabric.png)
 
-6. To save the solution, at the top-left, select the **File** menu and from there select **Save as**.
+1. To look at this data as a visual rather than just a matrix, select **Visual** at the bottom of the window. Select a bar chart to quickly visualize this data.
 
-7. In the **Save As** window, go to the **D:\DP500\Allfiles\04\MySolution** folder.
+   *A bar chart is not the best way to look at this data. Play around with the different visuals and the fields you're looking at in the "Rearrange data" section of the Data pane on the right side of the screen.*
 
-8. In the **File name** box, enter **Sales Analysis**.
+1. You can now save this Exploration view to your workspace by clicking the **Save** button in the top left corner. You also have the ability to **Share** the view by selecting **Share** in the upper right corner. This will enable you to share the data exploration with colleagues.
 
- ![](../images/dp500-create-a-star-schema-model-image46.png)
+1. After you have Saved your exploration, navigate back to your workspace to see your data warehouse, default semantic model, the semantic model you created, and your exploration.
 
-9. Select **Save**.
+    ![Screenshot of a workspace in Fabric displaying a data warehouse, a default semantic model, a semantic model, and a data exploration.](./Images/semantic-model-workspace.png)
 
-10. Close Power BI Desktop.
-
-### Pause the SQL pool
-
-In this task, you will stop the SQL pool.
-
-1. In a web browser, go to [https://portal.azure.com](https://portal.azure.com/).
-
-2. Locate the SQL pool.
-
-3. Pause the SQL pool.
