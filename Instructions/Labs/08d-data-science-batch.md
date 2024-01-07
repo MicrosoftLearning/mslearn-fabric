@@ -133,7 +133,7 @@ To use the model, you're going to need a dataset of patient details for whom you
     ```python
    from pyspark.sql.types import IntegerType, DoubleType
 
-   # Create a new daraframe with patient data
+   # Create a new dataframe with patient data
    data = [
        (62, 2, 33.7, 101.0, 157, 93.2, 38.0, 4.0, 4.8598, 87),
        (50, 1, 22.7, 87.0, 183, 103.2, 70.0, 3.0, 3.8918, 69),
