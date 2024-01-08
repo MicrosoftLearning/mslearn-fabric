@@ -39,7 +39,7 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
     ![](../Labs/images/command-prompt-2.png)
 
-3. In the command prompt window, enter the following command to download the course files and save them to a folder called DP500.
+3. In the command prompt window, enter the following command to download the course files and save them to a folder called fabric.
 
     `git clone https://github.com/MicrosoftLearning/mslearn-fabric fabric`
 
@@ -201,7 +201,7 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
 2. In the formula bar (located beneath the ribbon), replace the text with the following measure definition, and then press **Enter**.
 
-    *Tip: All formulas are available to copy and paste from the **D:\DP500\Allfiles\06\Assets\Snippets.txt**.*
+    *Tip: All formulas are available to copy and paste from the **D:\fabric\Allfiles\Labs\15\Assets\Snippets.txt**.*
 
     ```DAX
     Sales Shipped =
