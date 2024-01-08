@@ -53,13 +53,13 @@ In this task, you will open a pre-developed Power BI Desktop solution.
 
 1. To open File Explorer, on the taskbar, select the **File Explorer** shortcut.
 
-2. In File Explorer, go to the **D:\DP500\Allfiles\06\Starter** folder.
+2. In File Explorer, go to the **D:\fabric\Allfiles\Labs\15\Starter** folder.
 
 3. To open a pre-developed Power BI Desktop file, double-click the **Sales Analysis - Work with model relationships.pbix** file.
 
 4. To save the file, on the **File** ribbon tab, select **Save as**.
 
-5. In the **Save As** window, go to the **D:\DP500\Allfiles\06\MySolution** folder.
+5. In the **Save As** window, go to the **D:\fabric\Allfiles\Labs\15\MySolution** folder.
 
 6. Select **Save**.
 
@@ -291,7 +291,7 @@ In this task, you will create a query to add another date table to the model.
 
     *Select **Connect***
 
-	    ![](../Labs/images/work-with-model-relationships-image53.png)
+     ![](../Labs/images/work-with-model-relationships-image53.png)
 
 2. In the **Power Query Editor** window, in the **Queries** pane (located at the left), right-click the **Date** query, and then select **Reference**.
 
