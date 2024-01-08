@@ -40,7 +40,7 @@ In this exercise, you will prepare your environment.
 
     ![](../images/command-prompt-2.png)
 
-1. In the command prompt window, enter the following command to download the course files and save them to a folder called DP500.
+1. In the command prompt window, enter the following command to download the course files and save them to a folder called fabric.
 
     `git clone https://github.com/MicrosoftLearning/mslearn-fabric fabric`
 
