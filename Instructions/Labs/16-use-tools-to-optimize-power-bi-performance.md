@@ -22,9 +22,27 @@ In this lab, you learn how to:
 
 For this lab we'll be using Power BI desktop, Tabular Editor, and DAX Studio to optimize a semantic model.
 
-### Download the Power BI starter file
+### Clone the repository for this course
 
-1. Navigate to [GitHub](https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/16/Starter%20File%20-%20Use%20tools%20to%20optimize%20Power%20BI%20performance.pbix) and download the **Starter file**. This is a .pbix file that you'll open in Power BI Desktop. Use the ellipses menu ... to get the download option to download the raw .pbix file.
+1. On the start menu, open the Command Prompt
+
+    ![](../Labs/images/command-prompt.png)
+
+2. In the command prompt window, navigate to the D drive by typing:
+
+    `d:`
+
+   Press enter.
+
+    ![](../Labs/images/command-prompt-2.png)
+
+3. In the command prompt window, enter the following command to download the course files and save them to a folder called fabric.
+
+    `git clone https://github.com/MicrosoftLearning/mslearn-fabric fabric`
+
+4. When the repository has been cloned, close the command prompt window.
+
+5. Open the D drive in the file explorer to ensure the files have been downloaded.
 
 ## Use Best Practice Analyzer
 
@@ -59,7 +77,7 @@ environment, continue to the next task.*
 
 1. At the **Application Shortcuts** step, select **Next**.
 
-1. At the **Confirm Installation** step, select **Next**. 
+1. At the **Confirm Installation** step, select **Next**.
 
     *If prompted, select **Yes** to allow app to make changes.*
 
@@ -69,15 +87,25 @@ environment, continue to the next task.*
 
 ### Set up Power BI Desktop
 
-In this task, you will open the pre-developed Power BI Desktop solution that you downloaded earlier (**Use tools to optimize Power BI performance.pbix** file).
+In this task, you will open a pre-developed Power BI Desktop solution.
 
-1. Open the file and in the **Save As** window, save the file to a location you'll remember.
+1. To open File Explorer, on the taskbar, select the **File Explorer** shortcut.
 
-1. Select the **External Tools** ribbon tab.
+2. In File Explorer, go to the **D:\fabric\Allfiles\Labs\16\Starter** folder.
+
+3. To open a pre-developed Power BI Desktop file, double-click the **Sales Analysis - Use tools to optimize Power BI performance** file.
+
+4. To save the file, on the **File** ribbon tab, select **Save as**.
+
+5. In the **Save As** window, go to the **D:\fabric\Allfiles\Labs\16\MySolution** folder.
+
+6. Select **Save**.
+
+7. Select the **External Tools** ribbon tab.
 
     ![](./Images/use-tools-to-optimize-power-bi-performance-image8.png)
 
-1. Notice that you can launch Tabular Editor from this ribbon tab.
+8. Notice that you can launch Tabular Editor from this ribbon tab.
 
     ![](./Images/use-tools-to-optimize-power-bi-performance-image9.png)
 
@@ -119,7 +147,7 @@ In this task, you will load BPA rules.
 
 3. Paste in the following script.
 
-    *Tip: The script is available to copy and paste from the **D:\DP500\Allfiles\13\Assets\Snippets.txt**.*
+    *Tip: The script is available to copy and paste from the **D:\fabric\Allfiles\Labs\16\Assets\Snippets.txt**.*
 
     ```csharp
     System.Net.WebClient w = new System.Net.WebClient(); 
@@ -204,7 +232,7 @@ In this task, you will open BPA and review the results of the checks.
 
 6. In the Expression Editor, modify the DAX formula to use the more efficient (and safe) [DIVIDE](https://docs.microsoft.com/dax/divide-function-dax) function, as follows.
 
-    *Tip: All formulas are available to copy and paste from the **D:\DP500\Allfiles\13\Assets\Snippets.txt**.*
+    *Tip: All formulas are available to copy and paste from the **D:\fabric\Allfiles\Labs\16\Snippets.txt**.*
 
     ```dax
     DIVIDE ( [Profit], SUM ( 'Sales'[Sales Amount] ) )C#
@@ -274,7 +302,7 @@ Download and install DAX studio to optimize DAX queries.
 
     ```https://daxstudio.org/downloads/```
 
-1. Select **DAX Studio v.2.x.x (installer)** - this will initiate the file install.
+1. Select **DaxStudio_3_X_XX_setup.exe (installer)** - this will initiate the file install.
     *note: The version of DAX studio will change slightly over time. Download the latest release.*
 
 1. Upon completion, select **Open file** to run the installer.
@@ -327,7 +355,7 @@ In this task, you will optimize a query by using an improved measure formula.
 
 1. On the **File** menu, select **Browse**.
 
-2. In the **Open** window, go to the **D:\DP500\Allfiles\13\Assets** folder.
+2. In the **Open** window, go to the **D:\fabric\Allfiles\Labs\16\Assets** folder.
 
 3. Select **Monthly Profit Growth.dax**.
 
