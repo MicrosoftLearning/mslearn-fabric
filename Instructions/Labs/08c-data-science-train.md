@@ -119,7 +119,7 @@ Now that you've loaded the data, you can use it to train a machine learning mode
    mlflow.set_experiment(experiment_name)
     ```
 
-    The code creates an MLflow experiment named `experiment-diabetes`. Your models will be tracked in this experiment.
+    The code creates an MLflow experiment named **experiment-diabetes**. Your models will be tracked in this experiment.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
