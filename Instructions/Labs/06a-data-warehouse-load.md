@@ -102,11 +102,6 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
         
     ALTER TABLE Sales.Dim_Item add CONSTRAINT PK_Dim_Item PRIMARY KEY NONCLUSTERED (ItemID) NOT ENFORCED
     GO
-    
-    CREATE VIEW [Sales].[Staging_Sales]
-    AS
-        SELECT * FROM [ExternalData].[dbo].[staging_sales];
-    GO
     ```
 
     > **Important:** In a data warehouse, foreign key constraints are not always necessary at the table level. While foreign key constraints can help ensure data integrity, they can also add overhead to the ETL (Extract, Transform, Load) process and slow down data loading. The decision to use foreign key constraints in a data warehouse should be based on a careful consideration of the trade-offs between data integrity and performance.
