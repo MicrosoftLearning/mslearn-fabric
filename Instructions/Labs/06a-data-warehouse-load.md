@@ -33,7 +33,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 
 1. Download the file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv).
 
-1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **sales.csv** file from your local computer (or lab VM if applicable) to the lakehouse.
+1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload files**, and then upload the **sales.csv** file from your local computer (or lab VM if applicable) to the lakehouse.
 
 1. After the files have been uploaded, select **Files**. Verify that the CSV file has been uploaded, as shown here:
 
@@ -46,7 +46,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 1. Provide the following information in the **Load file to new table** dialog.
     - **New table name:** staging_sales
     - **Use header for columns names:** Selected
-    - **Separator:**\n
+    - **Separator:** ,
 
 1. Select **Load**.
 
