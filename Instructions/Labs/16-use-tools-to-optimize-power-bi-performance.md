@@ -67,15 +67,16 @@ environment, continue to the next task.*
 
 In this task, you will open a pre-developed Power BI Desktop solution.
 
-1. Open the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/16/Starter/Sales%20Analysis%20-%20Use%20tools%20to%20optimize%20Power%20BI%20performance.pbix) and save to a location you will remember.
+1. Open the **Sales Analysis** starter file located 
+here: `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/16/Starter/Sales%20Analysis%20-%20Use%20tools%20to%20optimize%20Power%20BI%20performance.pbix` and save it to a location you will remember.
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
 
-7. Select the **External Tools** ribbon tab.
+1. Select the **External Tools** ribbon tab.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image8.png)
 
-8. Notice that you can launch Tabular Editor from this ribbon tab.
+1. Notice that you can launch Tabular Editor from this ribbon tab.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image9.png)
 
@@ -116,8 +117,6 @@ In this task, you will load BPA rules.
     ![](Images/use-tools-to-optimize-power-bi-performance-image13.png)
 
 3. Paste in the following script.
-
-    *Tip: The script is available to copy and paste from the **D:\fabric\Allfiles\Labs\16\Assets\Snippets.txt**.*
 
     ```csharp
     System.Net.WebClient w = new System.Net.WebClient(); 
@@ -205,7 +204,7 @@ In this task, you will open BPA and review the results of the checks.
     *Tip: All formulas are available to copy and paste from the **D:\fabric\Allfiles\Labs\16\Snippets.txt**.*
 
     ```dax
-    DIVIDE ( [Profit], SUM ( 'Sales'[Sales Amount] ) )C#
+    DIVIDE ( [Profit], SUM ( 'Sales'[Sales Amount] ) )
     ```
 
 7. To save the model changes, on the toolbar, select the **Save changes to the connected database** command (or press **Ctrl+S**).
@@ -256,6 +255,8 @@ In this task, you will open BPA and review the results of the checks.
 
     *You must also save the Power BI Desktop file to ensure the Tabular Editor changes are saved.*
 
+    *In the message about pending changes, select **Apply later**.*
+
 ## Use DAX Studio
 
 In this exercise, you'll use DAX Studio to optimize DAX queries in the Power BI report file.
@@ -301,7 +302,7 @@ In this task, you will download DAX Studio.
     ![Graphical user interface, application Description automatically
     generated](Images/use-tools-to-optimize-power-bi-performance-image31f.png)
 
-1. In the **Connect** window, select the **PBI / SSDT Model** option.
+1. In the **Connect** window, select the **Power BI / SSDT Model** option.
 
 1. In the corresponding dropdown list, ensure the **Sales Analysis - Use tools to optimize Power BI performance** model is selected.
 
@@ -321,45 +322,47 @@ In this task, you will optimize a query by using an improved measure formula.
 
 *Note that it's difficult to optimize a query when the data model volumes are small. This exercise focuses on using DAX Studio rather than optimizing DAX queries.*
 
-1. On the **File** menu, select **Browse**.
+1. In a browser window navigate to `https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/16/Assets/Monthly%20Profit%20Growth.dax`, download the file and save it to a location you remember.
 
-2. In the **Open** window, go to the **D:\fabric\Allfiles\Labs\16\Assets** folder.
+2. Switch to the Dax Studio window, and on the **File** menu, select **Browse**.
 
-3. Select **Monthly Profit Growth.dax**.
+3. In the **Open** window, go to the **D:\fabric\Allfiles\Labs\16\Assets** folder.
 
-4. Select **Open**.
+4. Select **Monthly Profit Growth.dax**.
+
+5. Select **Open**.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image33.png)
 
-5. Read the comments at the top of the file, and then review the query that follows.
+6. Read the comments at the top of the file, and then review the query that follows.
 
     *It's not important to understand the query in its entirety.*
 
     *The query defines two measures that determine monthly profit growth. Currently, the query only uses the first measure (at line 72). When a measure isn't used, it doesn't impact on the query execution.*
 
-6. To run a server trace to record detailed timing information for performance profiling, on the **Home** ribbon tab, from inside the **Traces** group, select **Server Timings**.
+7. To run a server trace to record detailed timing information for performance profiling, on the **Home** ribbon tab, from inside the **Traces** group, select **Server Timings**.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image34.png)
 
-7. To run the script, on the **Home** ribbon tab, from inside the **Query** group, select the **Run** icon.
+8. To run the script, on the **Home** ribbon tab, from inside the **Query** group, select the **Run** icon.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image35.png)
 
-8. In the lower pane, review the query result.
+9. In the lower pane, review the query result.
 
     *The last column displays the measure results.*
 
-9. In the lower pane, select the **Server Timings** tab.
+10. In the lower pane, select the **Server Timings** tab.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image36.png)
 
-10. Review the statistics available at the left side.
+11. Review the statistics available at the left side.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image37.png)
 
     *From top left to bottom right, the statistics tell you how many milliseconds it took to run the query, and the duration the storage engine (SE) CPU took. In this case (your results will differ), the formula engine (FE) took 73.5% of the time, while the SE took the remaining 26.5% of the time. There were 34 individual SE queries and 21 cache hits.*
 
-11. Run the query again, and notice that all SE queries come from the SE cache.
+12. Run the query again, and notice that all SE queries come from the SE cache.
 
     *That's because the results were cached for reuse. Sometimes in your testing, you may want to clear the cache. In that case, on the **Home** ribbon tab, by selecting the down arrow for the **Run** command.*
 
@@ -367,15 +370,15 @@ In this task, you will optimize a query by using an improved measure formula.
 
     *The second measure definition provides a more efficient result. You will now update the query to use the second measure.*
 
-12. At line 72, replace the word **Bad** with **Better**.
+13. At line 72, replace the word **Bad** with **Better**.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image39.png)
 
-13. Run the query, and then review the server timing statistics.
+14. Run the query, and then review the server timing statistics.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image40.png)
 
-14. Run it a second time to result in full cache hits.
+15. Run it a second time to result in full cache hits.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image41.png)
 
