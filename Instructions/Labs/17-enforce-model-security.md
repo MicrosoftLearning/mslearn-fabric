@@ -28,8 +28,7 @@ In this exercise, you will prepare your environment.
 
 ### Download the Power BI starter file
 
-1. Open the **Sales Analysis** starter file located 
-here: `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/17/Starter/Sales%20Analysis%20-%20Enforce%20model%20security.pbix` and save to a location you will remember.
+1. Download the [Sales Analysis starter file](https://aka.ms/fabric-security-starter) from `https://aka.ms/fabric-security-starter` and save it on your local computer (in any folder).
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
 
