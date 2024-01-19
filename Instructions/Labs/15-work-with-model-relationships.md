@@ -29,7 +29,7 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 1. Open the **Sales Analysis** starter file located here: `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Starter/Sales%20Analysis%20-%20Work%20with%20model%20relationships.pbix` and save it to a location you will remember.
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
-    >Note : Ignore anc close any warnings asking to apply changes.
+    >Note : Ignore and close the warning asking to apply changes.
 
 ### Review the data model
 
