@@ -28,7 +28,7 @@ In this exercise, you will prepare your environment.
 
 ### Download the Power BI starter file
 
-1. Open the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/17/Starter/Sales%20Analysis%20-%20Enforce%20model%20security.pbix) and save to a location you will remember.
+1. Download the [Sales Analysis starter file](https://aka.ms/fabric-security-starter) from `https://aka.ms/fabric-security-starter` and save it on your local computer (in any folder).
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
 
@@ -38,7 +38,7 @@ In this exercise, you will prepare your environment.
 
 In this task, you will sign in to the Power BI service, start a trial license, and create a workspace.
 
-1. In a web browser, go to [app.powerbi.com](https://app.powerbi.com/).
+1. In a web browser, go to `https://app.powerbi.com/`.
 
 2. Complete the sign in process with the same account used in Power BI Desktop.
 
@@ -50,17 +50,13 @@ In this task, you will sign in to the Power BI service, start a trial license, a
 
 In this task, you will create a workspace.
 
-1. In the Power BI service, to create a workspace, in the **Navigation** pane (located at the left), select **Workspaces**, and then select **Create workspace**.
+1. In the Power BI service, to create a workspace, in the **Navigation** pane (located at the left), select **Workspaces**, and then select **+ New workspace**.
 
-    ![](Images/enforce-model-security-image5.png)
-
-2. In the **Create a workspace** pane (located at the right), in the **Workspace name** box, enter a name for the workspace.
+2. In the **Create a workspace** pane (located at the right), in the **Name** box, enter a name for the workspace.
 
     *The workspace name must be unique within the tenant.*
 
-    ![](Images/enforce-model-security-image6.png)
-
-3. Select **Save**.
+3. Select **Apply**.
 
     *Once created, the workspace is opened. In a later exercise, you will publish a semantic model to this workspace.*
 
@@ -172,7 +168,7 @@ In this task, you will validate one of the static roles.
 
 In this task, you will publish the report.
 
-1. Save the Power BI Desktop file.
+1. Save the Power BI Desktop file. When asked to apply pending changes, select **Apply later**.
 
 	![](Images/enforce-model-security-image27.png)
 
@@ -283,6 +279,16 @@ In this task, you will add the **Salesperson** table to the model.
 2. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon.
 
     ![](Images/enforce-model-security-image44.png)
+
+    *If you are prompted to specify how to connect, **Edit Credentials** and specify how to sign-in.*
+
+    ![](Images/work-with-model-relationships-image52.png)
+
+    *Select **Connect***
+
+     ![](Images/work-with-model-relationships-image53.png)
+
+    *In the **Encryption Support** page, select **OK**.*
 
 3. In the **Power Query Editor** window, in the **Queries** pane (located at the left), right-click the **Customer** query, and then select **Duplicate**.
 
@@ -400,7 +406,7 @@ In this task, you will create a dynamic role, which enforces permissions based o
 
     ![](Images/enforce-model-security-image65.png)
 
-6. In the **Table filter DAX expression** box, replace **"Value"** with **USERPRINCIPALNAME()**.
+6. In the **Table filter DAX expression** box, replace **"Value"** with `USERPRINCIPALNAME()`.
 
     ![](Images/enforce-model-security-image66.png)
 
