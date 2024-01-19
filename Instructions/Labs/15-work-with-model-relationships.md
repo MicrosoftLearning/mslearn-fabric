@@ -26,7 +26,7 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 ### Download starter file
 
-1. Open the **Sales Analysis** starter file located here: `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Starter/Sales%20Analysis%20-%20Work%20with%20model%20relationships.pbix` and save it to a location you will remember.
+1. Download the [Sales Analysis starter file](https://aka.ms/fabric-relationships-starter) from `https://aka.ms/fabric-relationships-starter` and save it on your local computer (in any folder).
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
     >Note : Ignore and close the warning asking to apply changes.
@@ -242,15 +242,15 @@ In this task, you will disable two relationship options.
 
 In this task, you will create a query to add another date table to the model.
 
-1. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon, and then select the *Customer* table.
+1. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon, which opens the **Power Query Editor**.
 
     ![](Images/work-with-model-relationships-image33.png)
 
-    *If you are prompted to specify how to connect, **Edit Credentials** and specify how to sign-in.*
+    *If you are prompted to specify how to connect, **Edit Credentials**.*
 
     ![](Images/work-with-model-relationships-image52.png)
 
-    *Select **Connect***
+    *Leave the default connection settings for Windows with "Use my current credentials", then **Connect**.*
 
      ![](Images/work-with-model-relationships-image53.png)
     *Select **Yes** to close the warning message.*
