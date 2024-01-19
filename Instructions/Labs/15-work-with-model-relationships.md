@@ -26,9 +26,10 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 ### Download starter file
 
-1. Open the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Starter/Sales%20Analysis%20-%20Work%20with%20model%20relationships.pbix) and save to a location you will remember.
+1. Download the [Sales Analysis starter file](https://aka.ms/fabric-relationships-starter) from `https://aka.ms/fabric-relationships-starter` and save it on your local computer (in any folder).
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
+    >Note : Ignore and close the warning asking to apply changes.
 
 ### Review the data model
 
@@ -165,8 +166,6 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
 2. In the formula bar (located beneath the ribbon), replace the text with the following measure definition, and then press **Enter**.
 
-    *Tip: All formulas are available to copy and paste from the **D:\fabric\Allfiles\Labs\15\Assets\Snippets.txt**.*
-
     ```DAX
     Sales Shipped =
     CALCULATE (
@@ -213,9 +212,7 @@ In this task, you will remove the existing relationship to the **ShipDateKey** c
 
     ![](Images/work-with-model-relationships-image27.png)
 
-3. When prompted to confirm the deletion, select **OK**.
-
-    ![](Images/work-with-model-relationships-image28.png)
+3. When prompted to confirm the deletion, select **Yes**.
 
     *Deleting the relationship results in an error with the **Sales Shipped** measure. You will rewrite the measure formula later in this lab.*
 
@@ -245,17 +242,18 @@ In this task, you will disable two relationship options.
 
 In this task, you will create a query to add another date table to the model.
 
-1. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon.
+1. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon, which opens the **Power Query Editor**.
 
     ![](Images/work-with-model-relationships-image33.png)
 
-    *If you are prompted to specify how to connect, **Edit Credentials** and specify how to sign-in.*
+    *If you are prompted to specify how to connect, **Edit Credentials**.*
 
     ![](Images/work-with-model-relationships-image52.png)
 
-    *Select **Connect***
+    *Leave the default connection settings for Windows with "Use my current credentials", then **Connect**.*
 
      ![](Images/work-with-model-relationships-image53.png)
+    *Select **Yes** to close the warning message.*
 
 2. In the **Power Query Editor** window, in the **Queries** pane (located at the left), right-click the **Date** query, and then select **Reference**.
 
