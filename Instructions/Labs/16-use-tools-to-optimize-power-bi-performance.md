@@ -67,8 +67,7 @@ environment, continue to the next task.*
 
 In this task, you will open a pre-developed Power BI Desktop solution.
 
-1. Open the **Sales Analysis** starter file located 
-here: `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/16/Starter/Sales%20Analysis%20-%20Use%20tools%20to%20optimize%20Power%20BI%20performance.pbix` and save it to a location you will remember.
+1. Download the [Sales Analysis starter file](https://aka.ms/fabric-optimize-starter) from `https://aka.ms/fabric-optimize-starter` and save it to a location you will remember.
 
 1. Navigate to the downloaded file and open it in Power BI Desktop.
 
@@ -322,15 +321,11 @@ In this task, you will optimize a query by using an improved measure formula.
 
 *Note that it's difficult to optimize a query when the data model volumes are small. This exercise focuses on using DAX Studio rather than optimizing DAX queries.*
 
-1. In a browser window navigate to `https://github.com/MicrosoftLearning/mslearn-fabric/blob/main/Allfiles/Labs/16/Assets/Monthly%20Profit%20Growth.dax`, download the file and save it to a location you remember.
+1. In a browser window download the [Monthly Profit Growth.dax](https://aka.ms/fabric-optimize-dax) files from `https://aka.ms/fabric-optimize-dax` and save it on your local computer (in any folder).
 
-2. Switch to the Dax Studio window, and on the **File** menu, select **Browse**.
+   ![](https://github.com/MicrosoftLearning/mslearn-fabric/assets/34583336/58254cce-753e-4322-9060-536e12554aa7)
 
-3. In the **Open** window, go to the **D:\fabric\Allfiles\Labs\16\Assets** folder.
-
-4. Select **Monthly Profit Growth.dax**.
-
-5. Select **Open**.
+3. Switch to the Dax Studio window and from the **File** menu, select **Browse** to navigate to the **Monthly Profit Growth.dax** file and **Open** the file.
 
     ![](Images/use-tools-to-optimize-power-bi-performance-image33.png)
 
