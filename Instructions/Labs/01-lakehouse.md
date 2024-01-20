@@ -131,9 +131,9 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 
 ## Create a report
 
-The tables in your lakehouse are automatically added to a default dataset that defines a data model for reporting with Power BI.
+The tables in your lakehouse are automatically added to a default semantic model that defines a data model for reporting with Power BI.
 
-1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the dataset is shown.
+1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the semantic model is shown.
 
     ![Screenshot of a data model.](./Images/data-model.png)
 
@@ -159,12 +159,12 @@ The tables in your lakehouse are automatically added to a default dataset that d
 6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your workspace to verify that it contains the following items:
     - Your lakehouse.
     - The SQL endpoint for your lakehouse.
-    - A default dataset for the tables in your lakehouse.
+    - A default semantic model for the tables in your lakehouse.
     - The **Item Sales Report** report.
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a default dataset to support data visualizations.
+In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a default semantic model to support data visualizations.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
