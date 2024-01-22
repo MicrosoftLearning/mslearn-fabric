@@ -119,7 +119,7 @@ Let's review what you want your trigger to do: *You want to create a reflex that
 
     ![Screenshot of the Data Activator reflex Design choose condition type.](./Images/data-activator-trigger-select-condition-type.png)
 
-1. Now you need to enter the values for your condition. Enter ***33*** and ***44*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *44* degrees.
+1. Now you need to enter the values for your condition. Enter ***33*** and ***41*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *41* degrees.
 
     ![Screenshot of the Data Activator reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
 
