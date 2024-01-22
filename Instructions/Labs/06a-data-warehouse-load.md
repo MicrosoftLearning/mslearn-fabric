@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 In our scenario, since we don't have any available data, we must ingest data to be used for loading the warehouse. You'll create a data lakehouse for the data files you're going to use to load the warehouse.
 
-1. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
+1. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with the name **ExternalData**.
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll download a CVS file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
@@ -46,7 +46,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 1. Provide the following information in the **Load file to new table** dialog.
     - **New table name:** staging_sales
     - **Use header for columns names:** Selected
-    - **Separator:**\n
+    - **Separator:** ,
 
 1. Select **Load**.
 
