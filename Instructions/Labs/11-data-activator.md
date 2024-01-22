@@ -61,7 +61,7 @@ To get familiar with the *Design* mode, select the different sections of the scr
 
 ### Data mode
 
-If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. Thia sample is already set up with three EventStreams that are monitoring the package delivery status.
+If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. This sample is already set up with three EventStreams that are monitoring the package delivery status.
 
 ![Screenshot of the Data Activator reflex Data mode.](./Images/data-activator-data-tab.png)
 
