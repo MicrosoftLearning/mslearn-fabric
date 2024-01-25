@@ -146,7 +146,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
-9. Confirm that your changes have been applied to the data by viewing the dataframe. Run the following cell:
+9. Confirm that your changes have been applied to the data by viewing the dataframe. Run the following code in a new code cell:
 
     ```python
    display(df)
