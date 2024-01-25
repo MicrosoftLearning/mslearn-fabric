@@ -112,7 +112,7 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
    print(df.dtypes)
     ```
 
-    The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The `SEX` variable likely contains categorical or string data.
+    The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The **SEX** variable likely contains categorical or string data.
 
 ## Check for missing data
 
