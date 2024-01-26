@@ -46,7 +46,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 1. Provide the following information in the **Load file to new table** dialog.
     - **New table name:** staging_sales
     - **Use header for columns names:** Selected
-    - **Separator:**\n
+    - **Separator:**,
 
 1. Select **Load**.
 
