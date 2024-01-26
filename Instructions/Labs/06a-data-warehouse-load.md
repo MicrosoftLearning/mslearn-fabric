@@ -183,7 +183,7 @@ Let's run some analytical queries to validate the data in the warehouse.
     SELECT c.CustomerName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
     FROM Sales.Fact_Sales s
     JOIN Sales.Dim_Customer c
-    ON s.SalesOrderNumber = c.SalesOrderNumber
+    ON s.CustomerID = c.CustomerID
     WHERE YEAR(s.OrderDate) = 2021
     GROUP BY c.CustomerName
     ORDER BY TotalSales DESC;
