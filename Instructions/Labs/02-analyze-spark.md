@@ -16,9 +16,9 @@ This lab will take approximately **45** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com`, select **Synapse Data Engineering**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
@@ -31,7 +31,7 @@ Now that you have a workspace, it's time to create a data lakehouse for the data
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer (or lab VM if applicable) and then upload them to your lakehouse.
 
-1. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
+1. Download and extract the [data files](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip) for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
 
 1. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
 1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer (or lab VM if applicable) to the lakehouse.
@@ -146,13 +146,14 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
-9. Confirm that your changes have been applied to the data by viewing the dataframe. Run the following cell:
+9. Confirm that your changes have been applied to the data by viewing the dataframe.
+10. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then run the following code in the new code cell:
 
     ```python
    display(df)
     ```
 
-10. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
+11. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
     from pyspark.sql.types import *
@@ -173,7 +174,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     display(df)
     ```
 
-11. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
+12. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
 
     **Note**: Only a subset of the rows is displayed, so you may not be able to see examples from all years.
 

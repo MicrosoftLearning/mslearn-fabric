@@ -46,7 +46,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 1. Provide the following information in the **Load file to new table** dialog.
     - **New table name:** staging_sales
     - **Use header for columns names:** Selected
-    - **Separator:**\n
+    - **Separator:** ,
 
 1. Select **Load**.
 
@@ -101,11 +101,6 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
         );
         
     ALTER TABLE Sales.Dim_Item add CONSTRAINT PK_Dim_Item PRIMARY KEY NONCLUSTERED (ItemID) NOT ENFORCED
-    GO
-    
-    CREATE VIEW [Sales].[Staging_Sales]
-    AS
-        SELECT * FROM [ExternalData].[dbo].[staging_sales];
     GO
     ```
 
@@ -183,7 +178,7 @@ Let's run some analytical queries to validate the data in the warehouse.
     SELECT c.CustomerName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
     FROM Sales.Fact_Sales s
     JOIN Sales.Dim_Customer c
-    ON s.SalesOrderNumber = c.SalesOrderNumber
+    ON s.CustomerID = c.CustomerID
     WHERE YEAR(s.OrderDate) = 2021
     GROUP BY c.CustomerName
     ORDER BY TotalSales DESC;

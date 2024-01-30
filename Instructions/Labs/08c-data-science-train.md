@@ -48,7 +48,11 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code in it:
 
     ```python
    # Azure storage access info for open dataset diabetes

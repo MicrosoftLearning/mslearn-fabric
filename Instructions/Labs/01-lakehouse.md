@@ -18,9 +18,9 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com`, select **Synapse Data Engineering**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
@@ -45,7 +45,7 @@ Now that you have a workspace, it's time to create a data lakehouse for your dat
 
 Fabric provides multiple ways to load data into the lakehouse, including built-in support for pipelines that copy data external sources and data flows (Gen 2) that you can define using visual tools based on Power Query. However one of the simplest ways to ingest small amounts of data is to upload files or folders from your local computer (or lab VM if applicable).
 
-1. Download the **sales.csv** file from [https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv), saving it as **sales.csv** on your local computer (or lab VM if applicable).
+1. Download the [sales.csv](https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv) file from `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`, saving it as **sales.csv** on your local computer (or lab VM if applicable).
 
    > **Note**: To download the file, open a new tab in the browser and paste in the URL. Right click anywhere on the page containing the data and select **Save as** to save the page as a CSV file.
 
@@ -88,9 +88,7 @@ The sales data you uploaded is in a file, which data analysts and engineers can 
 
 When you create a lakehouse and define tables in it, a SQL endpoint is automatically created through which the tables can be queried using SQL `SELECT` statements.
 
-1. At the top-right of the Lakehouse page, switch from **Lakehouse** to **SQL endpoint**. Then wait a short time until the SQL query endpoint for your lakehouse opens in a visual interface from which you can query its tables, as shown here:
-
-    ![Screenshot of the SQL endpoint page.](./Images/lakehouse-sql-endpoint.png)
+1. At the top-right of the Lakehouse page, switch from **Lakehouse** to **SQL analytics endpoint**. Then wait a short time until the SQL analytics endpoint for your lakehouse opens in a visual interface from which you can query its tables.
 
 2. Use the **New SQL query** button to open a new query editor, and enter the following SQL query:
 
@@ -131,13 +129,14 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 
 ## Create a report
 
-The tables in your lakehouse are automatically added to a default semantic model that defines a data model for reporting with Power BI.
+The tables in your lakehouse are automatically added to a default semantic model for reporting with Power BI.
+
 
 1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the semantic model is shown.
 
-    ![Screenshot of a data model.](./Images/data-model.png)
+    ![Screenshot of a semantic model.](./Images/data-model.png)
 
-    > **Note**: In this exercise, the data model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
+    > **Note**: In this exercise, the semantic model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
 
 2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. A new browser tab opens in which you can design your report.
 
@@ -158,7 +157,7 @@ The tables in your lakehouse are automatically added to a default semantic model
 5. On the **File** menu, select **Save**. Then save the report as **Item Sales Report** in the workspace you created previously.
 6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your workspace to verify that it contains the following items:
     - Your lakehouse.
-    - The SQL endpoint for your lakehouse.
+    - The SQL analytics endpoint for your lakehouse.
     - A default semantic model for the tables in your lakehouse.
     - The **Item Sales Report** report.
 
