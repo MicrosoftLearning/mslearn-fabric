@@ -25,7 +25,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 In this lab, you´ll use the Data Activator in Fabric to create a *reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
 
-> **Note**: The Data Activator sample process generates some random data in the background. The more more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
+> **Note**: The Data Activator sample process generates some random data in the background. The more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
 
 ## Scenario
 
@@ -61,7 +61,7 @@ To get familiar with the *Design* mode, select the different sections of the scr
 
 ### Data mode
 
-If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. Thia sample is already set up with three EventStreams that are monitoring the package delivery status.
+If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. This sample is already set up with three EventStreams that are monitoring the package delivery status.
 
 ![Screenshot of the Data Activator reflex Data mode.](./Images/data-activator-data-tab.png)
 
@@ -119,7 +119,7 @@ Let's review what you want your trigger to do: *You want to create a reflex that
 
     ![Screenshot of the Data Activator reflex Design choose condition type.](./Images/data-activator-trigger-select-condition-type.png)
 
-1. Now you need to enter the values for your condition. Enter ***33*** and ***44*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *44* degrees.
+1. Now you need to enter the values for your condition. Enter ***33*** and ***41*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *41* degrees.
 
     ![Screenshot of the Data Activator reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
 
@@ -164,7 +164,7 @@ The only problem with this trigger is that while the trigger sent an email with 
 
     ![Screenshot of the Data Activator add property to trigger.](./Images/data-activator-trigger-add-property-existing-trigger.png)
 
-1. Since you updated the trigger, the correct action should be to update and not save the trigger, but for this lab we do the opposite and select **Save** button instead of **Update** button to also see what happens. The reason you should have selected the *Update* button is because when you select to *update* the trigger it both saves the trigger and updates the currently running trigger with the new conditions. If you just select the *Save* button, the currently running trigger doesn't the new conditions until you select to update the trigger. Let's go ahead and select the **Save** button.
+1. Since you updated the trigger, the correct action should be to update and not save the trigger, but for this lab we do the opposite and select **Save** button instead of **Update** button to also see what happens. The reason you should have selected the *Update* button is because when you select to *update* the trigger it both saves the trigger and updates the currently running trigger with the new conditions. If you just select the *Save* button, the currently running trigger doesn't apply the new conditions until you select to update the trigger. Let's go ahead and select the **Save** button.
 
 1. Because you selected to *Save* instead of *Update*, you noticed that the message *There's a property update available. Update now to ensure the trigger has the most recent changes* appears at the top of the screen. The message additionally has an *Update* button. Let's go ahead and select the **Update** button.
 

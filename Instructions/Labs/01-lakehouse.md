@@ -131,7 +131,8 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 
 The tables in your lakehouse are automatically added to a default semantic model for reporting with Power BI.
 
-1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the dataset is shown.
+
+1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the semantic model is shown.
 
     ![Screenshot of a semantic model.](./Images/data-model.png)
 

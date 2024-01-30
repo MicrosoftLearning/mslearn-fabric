@@ -6,7 +6,7 @@ lab:
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
 
-In this exercise you will build out a medallion architecture in a Fabric lakehouse using notebooks. You will create a workspace, create a lakehouse, upload data to the bronze layer, transform the data and load it to the silver Delta table, transform the data further and load it to the gold Delta tables, and then explore the dataset and create relationships.
+In this exercise you will build out a medallion architecture in a Fabric lakehouse using notebooks. You will create a workspace, create a lakehouse, upload data to the bronze layer, transform the data and load it to the silver Delta table, transform the data further and load it to the gold Delta tables, and then explore the semantic model and create relationships.
 
 This exercise should take approximately **45** minutes to complete
 
@@ -23,7 +23,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace-medallion.png)
 
-5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI dataset.
+5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
 
     ![Screenshot of the workspace settings page in Fabric.](./Images/workspace-settings.png)
 
@@ -582,25 +582,24 @@ Note that you could have done all of this in a single notebook, but for the purp
 
 You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
 
-## Create a dataset
+## Create a semantic model
 
-In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the dataset directly in your workspace to create relationships and measures for reporting.
+In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the semantic model directly in your workspace to create relationships and measures for reporting.
 
-Note that you can't use the **default dataset** that is automatically created when you create a lakehouse. You must create a new dataset that includes the gold tables you created in this exercise, from the lakehouse explorer.
+Note that you can't use the **default semantic model** that is automatically created when you create a lakehouse. You must create a new semantic model that includes the gold tables you created in this exercise, from the lakehouse explorer.
 
 1. In your workspace, navigate to your **Sales** lakehouse.
-2. Select **New Power BI dataset** from the ribbon of the lakehouse explorer view.
-3. Select your transformed gold tables to include in your dataset and select **Confirm**.
+2. Select **New semantic model** from the ribbon of the lakehouse explorer view.
+3. Assign the name **Sales_Gold** to your new semantic model.
+4. Select your transformed gold tables to include in your semantic model and select **Confirm**.
    - dimdate_gold
    - dimcustomer_gold
    - dimproduct_gold
    - factsales_gold
 
-    This will open the dataset in Fabric where you can create relationships and measures, as show here:
+    This will open the semantic model in Fabric where you can create relationships and measures, as shown here:
 
-    ![Screenshot of a dataset in Fabric.](./Images/dataset-relationships.png)
-
-4. Rename your dataset so that it's easier to identify. Select the dataset name in the top left corner of the window. Rename the dataset to **Sales_Gold**.
+    ![Screenshot of a semantic model in Fabric.](./Images/dataset-relationships.png)
 
 From here, you or other members of your data team can create reports and dashboards based on the data in your lakehouse. These reports will be connected directly to the gold layer of your lakehouse, so they'll always reflect the latest data.
 
