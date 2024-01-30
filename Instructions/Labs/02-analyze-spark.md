@@ -71,7 +71,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
-2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+1. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
    df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
@@ -81,11 +81,11 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     > **Tip**: You can hide the Lakehouse explorer panes on the left by using their **<<** icons. Doing so will help you focus on the notebook.
 
-3. Use the **&#9655; Run cell** button on the left of the cell to run it.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
     > **Note**: Since this is the first time you've run any Spark code, a Spark session must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
-4. When the cell command has completed, review the output below the cell, which should look similar to this:
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     | Index | SO43701 | 11 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 16 | 3399.99 | 271.9992 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -95,7 +95,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     The output shows the rows and columns of data from the 2019.csv file. However, note that the column headers don't look right. The default code used to load the data into a dataframe assumes that the CSV file includes the column names in the first row, but in this case the CSV file just includes the data with no header information.
 
-5. Modify the code to set the **header** option to **false** as follows:
+1. Modify the code to set the **header** option to **false** as follows:
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
@@ -103,7 +103,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
    display(df)
     ```
 
-6. Re-run the cell and review the output, which should look similar to this:
+1. Re-run the cell and review the output, which should look similar to this:
 
    | Index | _c0 | _c1 | _c2 | _c3 | _c4 | _c5 | _c6 | _c7 | _c8 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -114,7 +114,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe correctly includes first row as data values, but the column names are auto-generated and not very helpful. To make sense of the data, you need to explicitly define the correct schema and data type for the data values in the file.
 
-7. Modify the code as follows to define a schema and apply it when loading the data:
+1. Modify the code as follows to define a schema and apply it when loading the data:
 
     ```python
    from pyspark.sql.types import *
@@ -135,7 +135,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
    display(df)
     ```
 
-8. Run the modified cell and review the output, which should look similar to this:
+1. Run the modified cell and review the output, which should look similar to this:
 
    | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -146,14 +146,15 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
-9. Confirm that your changes have been applied to the data by viewing the dataframe.
-10. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then run the following code in the new code cell:
+1. Confirm that your changes have been applied to the data by viewing the dataframe.
 
-    ```python
+1. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then run the following code in the new code cell:
+
+    ```Python
    display(df)
     ```
 
-11. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
+1. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
     from pyspark.sql.types import *
@@ -174,7 +175,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     display(df)
     ```
 
-12. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
+1. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
 
     **Note**: Only a subset of the rows is displayed, so you may not be able to see examples from all years.
 
@@ -270,7 +271,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 1. Add a new cell with the following code to save the transformed dataframe in Parquet format (Overwriting the data if it already exists):
 
-    ```python
+    ```Python
    transformed_df.write.mode("overwrite").parquet('Files/transformed_data/orders')
    print ("Transformed data saved!")
     ```
@@ -283,7 +284,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 3. Add a new cell with the following code to load a new dataframe from the parquet files in the **transformed_orders/orders** folder:
 
-    ```python
+    ```Python
    orders_df = spark.read.format("parquet").load("Files/transformed_data/orders")
    display(orders_df)
     ```
@@ -294,7 +295,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 1. Add a new cell with the following code; which saves the dataframe, partitioning the data by **Year** and **Month**:
 
-    ```python
+    ```Python
    orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
    print ("Transformed data saved!")
     ```
@@ -307,7 +308,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
 
-    ```python
+    ```Python
    orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
    display(orders_2021_df)
     ```
