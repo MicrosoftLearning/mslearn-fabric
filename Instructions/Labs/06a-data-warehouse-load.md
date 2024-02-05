@@ -38,7 +38,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll download a CVS file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
-1. Download the file for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv](https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv).
+1. Download the file for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv`.
 
 1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **sales.csv** file from your local computer (or lab VM if applicable) to the lakehouse.
 
