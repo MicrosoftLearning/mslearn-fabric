@@ -48,7 +48,11 @@ To run code, you can create a *notebook*. Notebooks provide an interactive envir
 
 Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code in the new code cell:
 
     ```python
    # Azure storage access info for open dataset diabetes
@@ -108,7 +112,7 @@ Now that you have ingested and explored the data, you can transform the data. Yo
    df.head()
     ```
 
-1. Select **Data** in the notebook ribbon, and then select **Launch Data Wrangler** dropdown.
+1. Select **Data** in the notebook ribbon, and then select **Transform DataFrame in Data Wrangler** dropdown.
 1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel.
 
     Currently, the label column is `Y`, which is a continuous variable. To train a machine learning model that predicts Y, you need to train a regression model. The (predicted) values of Y may be difficult to interpret. Instead, we could explore training a classification model which predicts whether someone is low risk or high risk for developing diabetes. To be able to train a classification model, you need to create a binary label column based on the values from `Y`.
@@ -221,11 +225,11 @@ Microsoft Fabric will keep track of all your experiments and allows you to visua
 
 After comparing machine learning models that you've trained across experiments, you can choose the best performing model. To use the best performing model, save the model and use it to generate predictions.
 
-1. Select **Save** in the **Save as model** box.
-1. Select **Create a new model** in the newly opened pop-up window.
+1. Select **Save as ML model** in the experiment ribbon.
+1. Select **Create a new ML model** in the newly opened pop-up window.
 1. Select the `model` folder.
 1. Name the model `model-diabetes`, and select **Save**.
-1. Select **View model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **Model versions**.
+1. Select **View ML model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **ML model versions**.
 
 Note that the model, the experiment, and the experiment run are linked, allowing you to review how the model is trained.
 

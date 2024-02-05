@@ -48,7 +48,11 @@ You'll use a *notebook* to train and use a model in this exercise.
 
 First, let's train a machine learning model that uses a *regression* algorithm to predict the response of interest for diabetes patients (a quantitative measure of disease progression one year after baseline)
 
-1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load and prepare data and use it to train a model.
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code to load and prepare data and use it to train a model.
 
     ```python
    import pandas as pd
@@ -133,7 +137,7 @@ To use the model, you're going to need a dataset of patient details for whom you
     ```python
    from pyspark.sql.types import IntegerType, DoubleType
 
-   # Create a new daraframe with patient data
+   # Create a new dataframe with patient data
    data = [
        (62, 2, 33.7, 101.0, 157, 93.2, 38.0, 4.0, 4.8598, 87),
        (50, 1, 22.7, 87.0, 183, 103.2, 70.0, 3.0, 3.8918, 69),

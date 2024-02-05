@@ -48,7 +48,11 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 Now you're ready to run code to get data. You'll work with the [**diabetes dataset**](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe.
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code to load the dataset into a dataframe.
 
     ```python
    # Azure storage access info for open dataset diabetes
@@ -112,7 +116,7 @@ Now that you've loaded the data, you can check the structure of the dataset, suc
    print(df.dtypes)
     ```
 
-    The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The `SEX` variable likely contains categorical or string data.
+    The dataset contains **442 rows** and **11 columns**. This means you have 442 samples and 11 features or variables in your dataset. The **SEX** variable likely contains categorical or string data.
 
 ## Check for missing data
 

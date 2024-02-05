@@ -12,13 +12,6 @@ This lab will take approximately **30** minutes to complete.
 
 > **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Activate a Microsoft Fabric trial
-
-1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
-1. Select the **Account Manager** icon (the *user* image at the top right)
-1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
-1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
-
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
@@ -53,7 +46,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 1. Provide the following information in the **Load file to new table** dialog.
     - **New table name:** staging_sales
     - **Use header for columns names:** Selected
-    - **Separator:**\n
+    - **Separator:** ,
 
 1. Select **Load**.
 
@@ -108,11 +101,6 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
         );
         
     ALTER TABLE Sales.Dim_Item add CONSTRAINT PK_Dim_Item PRIMARY KEY NONCLUSTERED (ItemID) NOT ENFORCED
-    GO
-    
-    CREATE VIEW [Sales].[Staging_Sales]
-    AS
-        SELECT * FROM [ExternalData].[dbo].[staging_sales];
     GO
     ```
 
@@ -190,7 +178,7 @@ Let's run some analytical queries to validate the data in the warehouse.
     SELECT c.CustomerName, SUM(s.UnitPrice * s.Quantity) AS TotalSales
     FROM Sales.Fact_Sales s
     JOIN Sales.Dim_Customer c
-    ON s.SalesOrderNumber = c.SalesOrderNumber
+    ON s.CustomerID = c.CustomerID
     WHERE YEAR(s.OrderDate) = 2021
     GROUP BY c.CustomerName
     ORDER BY TotalSales DESC;
