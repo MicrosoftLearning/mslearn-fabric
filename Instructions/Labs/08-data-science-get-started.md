@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Explore data science in Microsoft Fabric'
+    title: 'Get started with data science in Microsoft Fabric'
     module: 'Get started with data science in Microsoft Fabric'
 ---
 

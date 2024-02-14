@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Create and use notebooks for data exploration'
+    title: 'Explore data for data science with notebooks in Microsoft Fabric'
     module: 'Explore data for data science with notebooks in Microsoft Fabric'
 ---
 
