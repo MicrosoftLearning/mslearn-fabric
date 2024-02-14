@@ -4,7 +4,7 @@ lab:
     module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
 ---
 
-# Generate and save batch predictions
+# Generate batch predictions using a deployed model in Microsoft Fabric
 
 In this lab, you'll use a machine learning model to predict a quantitative measure of diabetes.
 

@@ -4,7 +4,7 @@ lab:
     module: 'Get started with data science in Microsoft Fabric'
 ---
 
-# Explore data science in Microsoft Fabric
+# Get started with data science in Microsoft Fabric
 
 In this lab, you'll ingest data, explore the data in a notebook, process the data with the Data Wrangler, and train two types of models. By performing all these steps, you'll be able to explore the data science features in Microsoft Fabric.
 
