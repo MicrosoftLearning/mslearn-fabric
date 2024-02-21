@@ -67,7 +67,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
 > **Note**: Spark supports multiple coding languages, including Scala, Java, and others. In this exercise, we'll use *PySpark*, which is a Spark-optimized variant of Python. PySpark is one of the most commonly used languages on Spark and is the default language in Fabric notebooks.
 
-1. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
+1. With the notebook visible, in the **Explorer** pane, expand **Lakehouses** and then expand the **Files** list for your lakehouse and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
@@ -146,14 +146,6 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
-1. Confirm that your changes have been applied to the data by viewing the dataframe.
-
-1. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then run the following code in the new code cell:
-
-    ```Python
-   display(df)
-    ```
-
 1. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
@@ -185,7 +177,7 @@ The dataframe object includes a wide range of functions that you can use to filt
 
 ### Filter a dataframe
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it.
+1. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then enter the following code in it.
 
     ```Python
    customers = df['CustomerName', 'Email']
@@ -278,7 +270,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
     > **Note**: Commonly, *Parquet* format is preferred for data files that you will use for further analysis or ingestion into an analytical store. Parquet is a very efficient format that is supported by most large scale data analytics systems. In fact, sometimes your data transformation requirement may simply be to convert data from another format (such as CSV) to Parquet!
 
-2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new folder named **orders**, which in turn contains one or more Parquet files.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Lakehouses** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new folder named **orders**, which in turn contains one or more Parquet files.
 
     ![Screenshot of a folder containing parquet files.](./Images/saved-parquet.png)
 
@@ -300,7 +292,7 @@ A common task for data engineers is to ingest data in a particular format or str
    print ("Transformed data saved!")
     ```
 
-2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Lakehouses** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
 
     ![Screenshot of a hierarchy of partitioned data files.](./Images/partitioned-files.png)
 
@@ -337,7 +329,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 
 2. Run the code cell and review the output, which describes the definition of the new table.
 
-3. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
+3. In the **Lakehouses** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
     ![Screenshot of the salesorder table in Explorer.](./Images/table-view.png)
 
@@ -389,7 +381,7 @@ A picture is proverbially worth a thousand words, and a chart is often better th
 
 2. Run the code and observe that it returns the data from the **salesorders** view you created previously.
 3. In the results section beneath the cell, change the **View** option from **Table** to **Chart**.
-4. Use the **View options** button at the top right of the chart to display the options pane for the chart. Then set the options as follows and select **Apply**:
+4. Use the **Customize chart** button at the top right of the chart to display the options pane for the chart. Then set the options as follows and select **Apply**:
     - **Chart type**: Bar chart
     - **Key**: Item
     - **Values**: Quantity
