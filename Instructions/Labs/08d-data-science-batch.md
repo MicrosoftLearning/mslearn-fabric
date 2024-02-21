@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Generate and save batch predictions'
+    title: 'Generate batch predictions using a deployed model in Microsoft Fabric'
     module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
 ---
 
-# Generate and save batch predictions
+# Generate batch predictions using a deployed model in Microsoft Fabric
 
 In this lab, you'll use a machine learning model to predict a quantitative measure of diabetes.
 
@@ -129,7 +129,7 @@ First, let's train a machine learning model that uses a *regression* algorithm t
 
 To use the model, you're going to need a dataset of patient details for whom you need to predict a diabetes diagnosis. You'll create this dataset as a table in a Microsoft Fabric Lakehouse.
 
-1. In the Notebook editor, in the **Lakehouses** pane on the left, select **Add** to add a lakehouse.
+1. In the Notebook editor, in the **Explorer** pane on the left, select **+ Data sources** to add a lakehouse.
 1. Select **New lakehouse** and select **Add**, and create a new **Lakehouse** with a valid name of your choice.
 1. When asked to stop the current session, select **Stop now** to restart the notebook.
 1. When the lakehouse is created and attached to your notebook, add a new code cell run the following code to create a dataset and save it in a table in the lakehouse:

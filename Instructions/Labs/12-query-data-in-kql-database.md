@@ -49,8 +49,8 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    Then use the slider to turn on the availability.
 
-   ![Image of selecting the slider in Data Lake.](./images/data-availability-data-lake.png)
-
+   ![Image of selecting the slider in Data Lake](./Images/data-availability-data-lake.png)
+   
 1. Select **sample data** box from the options of ***Start by getting data***.
 
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
