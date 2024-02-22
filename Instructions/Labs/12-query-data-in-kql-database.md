@@ -69,6 +69,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    > **NOTE**: The first time you run this, it can take several seconds to allocate compute resources.
 
+
     ![Image of the 100 records from the data](./Images/explore-with-kql-take-100.png)
 
 ## Introduction to Kusto Query Language (KQL) and its syntax
