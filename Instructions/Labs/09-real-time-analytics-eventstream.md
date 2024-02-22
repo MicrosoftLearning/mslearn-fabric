@@ -57,6 +57,8 @@ In this tutorial, you'll learn how to:
 
 2. Make sure to toggle the button to **Active** and then select **Done**.
 
+ > **Note:** You don't need to select a folder, Fabric will create it for you.
+
    ![Image of enable onelake toggle](./Images/enable-onelake-toggle.png)
 
 ## Create an Eventstream
