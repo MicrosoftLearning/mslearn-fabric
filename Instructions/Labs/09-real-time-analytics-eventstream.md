@@ -126,7 +126,7 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
    ![Image of KQL Query Results last 24](./Images/kql-query-results-last24.png)
 
-> **Note**: Notice that the volumes of the streaming data exceed the query limits. This behavior may vary depending on the amount of data streamed into your database.
+> **Note**: You may see a warning that you have exceeded query limits. This behavior will vary depending on the amount of data streamed into your database.
 
 You can continue to navigate using the built-in query functions to familiarize yourself with your data.
 
