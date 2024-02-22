@@ -96,35 +96,16 @@ In this tutorial, you'll learn how to:
    | Destination Name | MyStockData                                    |
    | Workspace        | The workspace where you created a KQL database |
    | KQL Database     | MyStockData                                    |
+   | Destination Table| MyStockData                                    |
+   | Input data format| Json                                           |
 
-3. Select **Create and configure**.
+3. Select **Add**.
 
-## Configure data ingestion
-
-1. In the **Ingest data** dialogue page, Select the **New Table**, enter MyStockData.
-
-   ![Image of insert stock data](./Images/ingest-stream-data-to-kql.png)
-
-2. Select **Next: Source**.
-3. In the **Source** page confirm the **Data connection name**, then select **Next: Schema**.
-
-   ![Image of data source name](./Images/ingest-data.png)
-
-4. The incoming data is uncompressed for sample data, so keep the compression type as uncompressed.
-5. From the **Data Format** dropdown, select **JSON**.
-
-   ![Image of Change to JSON](./Images/injest-as-json.png)
-
-6. After that, it may be necessary to change some or all data types from your incoming stream to your destination(s) tables.
-7. You can accomplish this task by selecting the **down arrow>Change data type**. Then verify that the columns reflect the correct data type:
-
-   ![Image of change data types](./Images/change-data-type-in-es.png)
-
-8. When finished, select **Next: Summary**
+> **Note**: Your data ingestion will begin immediately.
 
 Wait for all the steps to be marked with green check marks. You should see the page title **Continuous ingestion from Eventsream established.** After that, select **Close** to return to your Eventstream page.
 
-> **Note**: It may be necessary to refresh the page to view your table after the Eventstream connection has been built and established
+> **Note**: It may be necessary to refresh the page to view your table after the Eventstream connection has been built and established.
 
 ## KQL Queries
 
