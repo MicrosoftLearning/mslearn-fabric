@@ -1,0 +1,29 @@
+>> Sales Shipped measure definition [1]
+==================================================
+Sales Shipped =
+CALCULATE (
+    SUM ( 'Sales'[Sales Amount] ),
+    USERELATIONSHIP ( 'Date'[DateKey], 'Sales'[ShipDateKey] )
+)
+
+
+>> Sales Shipped measure definition [2]
+==================================================
+Sales Shipped =
+CALCULATE (
+    SUM ( 'Sales'[Sales Amount] ),
+    CROSSFILTER ( 'Date'[DateKey], 'Sales'[OrderDateKey], NONE ),
+    TREATAS (
+        VALUES ( 'Date'[DateKey] ),
+        'Ship Date'[ShipDateKey]
+    )
+)
+
+
+>> Sales Unshipped measure definition
+==================================================
+Sales Unshipped =
+CALCULATE (
+    SUM ( 'Sales'[Sales Amount] ),
+    ISBLANK ( 'Sales'[ShipDateKey] )
+)

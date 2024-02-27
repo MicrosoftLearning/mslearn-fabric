@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Train and track a model in Microsoft Fabric'
+    title: 'Train and track machine learning models with MLflow in Microsoft Fabric'
     module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
 ---
 
@@ -18,8 +18,8 @@ This lab will take approximately **25** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` in a browser.
-1. Select **Synapse Data Science**.
+1. Navigate to the Microsoft Fabric home page at `https://app.fabric.microsoft.com` in a browser, and if necessary, sign in with your Fabric credentials.
+1. On the Fabric home page, select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -38,7 +38,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
-1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
+1. If necessary, use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
    # Train a machine learning model and track with MLflow
@@ -48,32 +48,36 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code in it:
 
     ```python
-    # Azure storage access info for open dataset diabetes
-    blob_account_name = "azureopendatastorage"
-    blob_container_name = "mlsamples"
-    blob_relative_path = "diabetes"
-    blob_sas_token = r"" # Blank since container is Anonymous access
+   # Azure storage access info for open dataset diabetes
+   blob_account_name = "azureopendatastorage"
+   blob_container_name = "mlsamples"
+   blob_relative_path = "diabetes"
+   blob_sas_token = r"" # Blank since container is Anonymous access
     
-    # Set Spark config to access  blob storage
-    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
-    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
-    print("Remote blob path: " + wasbs_path)
+   # Set Spark config to access  blob storage
+   wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+   spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+   print("Remote blob path: " + wasbs_path)
     
-    # Spark read parquet, note that it won't load any data yet by now
-    df = spark.read.parquet(wasbs_path)
+   # Spark read parquet, note that it won't load any data yet by now
+   df = spark.read.parquet(wasbs_path)
     ```
 
-1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press **SHIFT** + **ENTER** on your keyboard to run a cell.
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    display(df)
+   display(df)
     ```
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
@@ -92,9 +96,9 @@ Now you're ready to run code to get data and train a model. You'll work with the
 1. The data is loaded as a Spark dataframe. Scikit-learn will expect the input dataset to be a Pandas dataframe. Run the code below to convert your dataset to a Pandas dataframe:
 
     ```python
-    import pandas as pd
-    df = df.toPandas()
-    df.head()
+   import pandas as pd
+   df = df.toPandas()
+   df.head()
     ```
 
 ## Train a machine learning model
@@ -104,11 +108,11 @@ Now that you've loaded the data, you can use it to train a machine learning mode
 1. Run the following code to split the data into a training and test dataset, and to separate the features from the label you want to predict:
 
     ```python
-    from sklearn.model_selection import train_test_split
+   from sklearn.model_selection import train_test_split
     
-    X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
+   X, y = df[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df['Y'].values
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
@@ -119,39 +123,39 @@ Now that you've loaded the data, you can use it to train a machine learning mode
    mlflow.set_experiment(experiment_name)
     ```
 
-    The code creates an MLflow experiment named `experiment-diabetes`. Your models will be tracked in this experiment.
+    The code creates an MLflow experiment named **experiment-diabetes**. Your models will be tracked in this experiment.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.linear_model import LinearRegression
+   from sklearn.linear_model import LinearRegression
     
-    with mlflow.start_run():
-       mlflow.autolog()
+   with mlflow.start_run():
+      mlflow.autolog()
     
-       model = LinearRegression()
-       model.fit(X_train, y_train)
+      model = LinearRegression()
+      model.fit(X_train, y_train)
     
-       mlflow.log_param("estimator", "LinearRegression")
+      mlflow.log_param("estimator", "LinearRegression")
     ```
 
-    The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `LinearRegression`.
+    The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called **estimator** with the value *LinearRegression*.
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.tree import DecisionTreeRegressor
+   from sklearn.tree import DecisionTreeRegressor
     
-    with mlflow.start_run():
-       mlflow.autolog()
+   with mlflow.start_run():
+      mlflow.autolog()
     
-       model = DecisionTreeRegressor(max_depth=5) 
-       model.fit(X_train, y_train)
+      model = DecisionTreeRegressor(max_depth=5) 
+      model.fit(X_train, y_train)
     
-       mlflow.log_param("estimator", "DecisionTreeRegressor")
+      mlflow.log_param("estimator", "DecisionTreeRegressor")
     ```
 
-    The code trains a regression model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called `estimator`, with the value `DecisionTreeRegressor`.
+    The code trains a regression model using Decision Tree Regressor. Parameters, metrics, and artifacts, are automatically logged with MLflow. Additionally, you're logging a parameter called **estimator** with the value *DecisionTreeRegressor*.
 
 ## Use MLflow to search and view your experiments
 
@@ -180,7 +184,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
    mlflow.search_runs(exp.experiment_id)
     ```
 
-1. To more easily compare job runs and outputs, you can configure the search to order the results. For example, the following cell orders the results by `start_time`, and only shows a maximum of `2` results:
+1. To more easily compare job runs and outputs, you can configure the search to order the results. For example, the following cell orders the results by *start_time*, and only shows a maximum of 2 results:
 
     ```python
    mlflow.search_runs(exp.experiment_id, order_by=["start_time DESC"], max_results=2)
@@ -212,7 +216,7 @@ When you've trained and tracked models with MLflow, you can use the MLflow libra
 Microsoft Fabric will keep track of all your experiments and allows you to visually explore them.
 
 1. Navigate to your workspace from the menu bar on the left.
-1. Select the `experiment-diabetes` experiment to open it.
+1. Select the **experiment-diabetes** experiment to open it.
 
     > **Tip:**
     > If you don't see any logged experiment runs, refresh the page.
@@ -224,8 +228,8 @@ Microsoft Fabric will keep track of all your experiments and allows you to visua
     As a result, your two last runs will be compared to each other in the **Metric comparison** pane. By default, the metrics are plotted by run name.
 
 1. Select the **&#128393;** (Edit) button of the graph visualizing the mean absolute error for each run.
-1. Change the **visualization type** to `bar`.
-1. Change the **X-axis** to `estimator`.
+1. Change the **visualization type** to **bar**.
+1. Change the **X-axis** to **estimator**.
 1. Select **Replace** and explore the new graph.
 1. Optionally, you can repeat these steps for the other graphs in the **Metric comparison** pane.
 
@@ -237,12 +241,12 @@ After comparing machine learning models that you've trained across experiment ru
 
 1. In the experiment overview, ensure the **View** tab is selected.
 1. Select **Run details**.
-1. Select the run with the highest R2 score.
-1. Select **Save** in the **Save run as model** box.
+1. Select the run with the highest Training R2 score.
+1. Select **Save** in the **Save run as model** box (you may need to scroll to the right to see this).
 1. Select **Create a new model** in the newly opened pop-up window.
-1. Select the `model` folder.
+1. Select the **model** folder.
 1. Name the model `model-diabetes`, and select **Save**.
-1. Select **View model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **Model versions**.
+1. Select **View ML model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **Model versions**.
 
 Note that the model, the experiment, and the experiment run are linked, allowing you to review how the model is trained.
 

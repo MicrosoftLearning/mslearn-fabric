@@ -12,18 +12,11 @@ This exercise should take approximately **40** minutes to complete
 
 > **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Activate a Microsoft Fabric trial
-
-1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
-1. Select the **Account Manager** icon (the *user* image at the top right)
-1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
-1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
-
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com`, select **Synapse Data Engineering**.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty.
@@ -38,7 +31,7 @@ Now that you have a workspace, it's time to create a data lakehouse for the data
 
     After a minute or so, a new empty lakehouse. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
-1. Download the data file for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv`, saving it as **products.csv** on your local computer (or lab VM if applicable).
+1. Download the [data file](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv) for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv`, saving it as **products.csv** on your local computer (or lab VM if applicable).
 
 1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **New subfolder** and create a folder named **products**.
 
@@ -89,13 +82,17 @@ You can save the dataframe as a delta table by using the `saveAsTable` method. D
 
 *Managed* tables are tables for which both the schema metadata and the data files are managed by Fabric. The data files for the table are created in the **Tables** folder.
 
-1. Under the results returned by the first code cell, use the **+ Code** button to add a new code cell if one doesn't already exist. Then enter the following code in the new cell and run it:
+1. Under the results returned by the first code cell, use the **+ Code** icon to add a new code cell if one doesn't already exist.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+2. Enter the following code in the new cell and run it:
 
     ```python
    df.write.format("delta").saveAsTable("managed_products")
     ```
 
-2. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **managed_products** table has been created.
+3. In the **Lakehouse explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **managed_products** table has been created.
 
 ### Create an *external* table
 

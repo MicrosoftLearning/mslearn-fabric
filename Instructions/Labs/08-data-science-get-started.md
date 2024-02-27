@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Explore data science in Microsoft Fabric'
+    title: 'Get started with data science in Microsoft Fabric'
     module: 'Get started with data science in Microsoft Fabric'
 ---
 
-# Explore data science in Microsoft Fabric
+# Get started with data science in Microsoft Fabric
 
 In this lab, you'll ingest data, explore the data in a notebook, process the data with the Data Wrangler, and train two types of models. By performing all these steps, you'll be able to explore the data science features in Microsoft Fabric.
 
@@ -18,7 +18,7 @@ This lab will take approximately **20** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` in a browser.
+1. Navigate to the Microsoft Fabric home page at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com) in a browser.
 1. Select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
@@ -48,22 +48,26 @@ To run code, you can create a *notebook*. Notebooks provide an interactive envir
 
 Now you're ready to run code to get data and train a model. You'll work with the [diabetes dataset](https://learn.microsoft.com/azure/open-datasets/dataset-diabetes?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe: a common structure for working with data in rows and columns.
 
-1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook, and enter the following code in it:
+1. In your notebook, use the **+ Code** icon below the latest cell output to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code in the new code cell:
 
     ```python
-    # Azure storage access info for open dataset diabetes
-    blob_account_name = "azureopendatastorage"
-    blob_container_name = "mlsamples"
-    blob_relative_path = "diabetes"
-    blob_sas_token = r"" # Blank since container is Anonymous access
+   # Azure storage access info for open dataset diabetes
+   blob_account_name = "azureopendatastorage"
+   blob_container_name = "mlsamples"
+   blob_relative_path = "diabetes"
+   blob_sas_token = r"" # Blank since container is Anonymous access
     
-    # Set Spark config to access  blob storage
-    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
-    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
-    print("Remote blob path: " + wasbs_path)
+   # Set Spark config to access  blob storage
+   wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+   spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+   print("Remote blob path: " + wasbs_path)
     
-    # Spark read parquet, note that it won't load any data yet by now
-    df = spark.read.parquet(wasbs_path)
+   # Spark read parquet, note that it won't load any data yet by now
+   df = spark.read.parquet(wasbs_path)
     ```
 
 1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
@@ -73,7 +77,7 @@ Now you're ready to run code to get data and train a model. You'll work with the
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    display(df)
+   display(df)
     ```
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
@@ -104,11 +108,11 @@ Now that you have ingested and explored the data, you can transform the data. Yo
 1. The data is loaded as a Spark dataframe. To launch the Data Wrangler, you need to convert the data to a Pandas dataframe. Run the following code in your notebook:
 
     ```python
-    df = df.toPandas()
-    df.head()
+   df = df.toPandas()
+   df.head()
     ```
 
-1. Select **Data** in the notebook ribbon, and then select **Launch Data Wrangler** dropdown.
+1. Select **Data** in the notebook ribbon, and then select **Transform DataFrame in Data Wrangler** dropdown.
 1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel.
 
     Currently, the label column is `Y`, which is a continuous variable. To train a machine learning model that predicts Y, you need to train a regression model. The (predicted) values of Y may be difficult to interpret. Instead, we could explore training a classification model which predicts whether someone is low risk or high risk for developing diabetes. To be able to train a classification model, you need to create a binary label column based on the values from `Y`.
@@ -125,7 +129,7 @@ Now that you have ingested and explored the data, you can transform the data. Yo
 1. Run the following code in a new cell to verify that the `Risk` column is shaped as expected:
 
     ```python
-    df_clean.describe()
+   df_clean.describe()
     ```
 
 ## Train machine learning models
@@ -137,19 +141,19 @@ Now that you've prepared the data, you can use it to train a machine learning mo
 1. Run the following code to split the data into a training and test dataset, and to separate the features from the label `Y` you want to predict:
 
     ```python
-    from sklearn.model_selection import train_test_split
+   from sklearn.model_selection import train_test_split
     
-    X, y = df_clean[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df_clean['Y'].values
+   X, y = df_clean[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df_clean['Y'].values
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    import mlflow
-    experiment_name = "diabetes-regression"
-    mlflow.set_experiment(experiment_name)
+   import mlflow
+   experiment_name = "diabetes-regression"
+   mlflow.set_experiment(experiment_name)
     ```
 
     The code creates an MLflow experiment named `diabetes-regression`. Your models will be tracked in this experiment.
@@ -157,13 +161,13 @@ Now that you've prepared the data, you can use it to train a machine learning mo
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.linear_model import LinearRegression
+   from sklearn.linear_model import LinearRegression
     
-    with mlflow.start_run():
-       mlflow.autolog()
+   with mlflow.start_run():
+      mlflow.autolog()
     
-       model = LinearRegression()
-       model.fit(X_train, y_train)
+      model = LinearRegression()
+      model.fit(X_train, y_train)
     ```
 
     The code trains a regression model using Linear Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow.
@@ -173,19 +177,19 @@ Now that you've prepared the data, you can use it to train a machine learning mo
 1. Run the following code to split the data into a training and test dataset, and to separate the features from the label `Risk` you want to predict:
 
     ```python
-    from sklearn.model_selection import train_test_split
+   from sklearn.model_selection import train_test_split
     
-    X, y = df_clean[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df_clean['Risk'].values
+   X, y = df_clean[['AGE','SEX','BMI','BP','S1','S2','S3','S4','S5','S6']].values, df_clean['Risk'].values
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+   X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     ```
 
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    import mlflow
-    experiment_name = "diabetes-classification"
-    mlflow.set_experiment(experiment_name)
+   import mlflow
+   experiment_name = "diabetes-classification"
+   mlflow.set_experiment(experiment_name)
     ```
 
     The code creates an MLflow experiment named `diabetes-classification`. Your models will be tracked in this experiment.
@@ -193,12 +197,12 @@ Now that you've prepared the data, you can use it to train a machine learning mo
 1. Add another new code cell to the notebook, enter the following code in it, and run it:
 
     ```python
-    from sklearn.linear_model import LogisticRegression
+   from sklearn.linear_model import LogisticRegression
     
-    with mlflow.start_run():
-        mlflow.sklearn.autolog()
+   with mlflow.start_run():
+       mlflow.sklearn.autolog()
 
-        model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
+       model = LogisticRegression(C=1/0.1, solver="liblinear").fit(X_train, y_train)
     ```
 
     The code trains a classification model using Logistic Regression. Parameters, metrics, and artifacts, are automatically logged with MLflow.
@@ -221,11 +225,11 @@ Microsoft Fabric will keep track of all your experiments and allows you to visua
 
 After comparing machine learning models that you've trained across experiments, you can choose the best performing model. To use the best performing model, save the model and use it to generate predictions.
 
-1. Select **Save** in the **Save as model** box.
-1. Select **Create a new model** in the newly opened pop-up window.
+1. Select **Save as ML model** in the experiment ribbon.
+1. Select **Create a new ML model** in the newly opened pop-up window.
 1. Select the `model` folder.
 1. Name the model `model-diabetes`, and select **Save**.
-1. Select **View model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **Model versions**.
+1. Select **View ML model** in the notification that appears at the top right of your screen when the model is created. You can also refresh the window. The saved model is linked under **ML model versions**.
 
 Note that the model, the experiment, and the experiment run are linked, allowing you to review how the model is trained.
 

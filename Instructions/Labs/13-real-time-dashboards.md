@@ -13,13 +13,6 @@ This lab takes approximately **25** minutes to complete.
 
 > **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Activate a Microsoft Fabric trial
-
-1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
-1. Select the **Account Manager** icon (the *user* image at the top right)
-1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
-1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
-
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.

@@ -12,20 +12,13 @@ This lab will take approximately **45** minutes to complete.
 
 > **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
 
-## Activate a Microsoft Fabric trial
-
-1. After signing up for a Microsoft Fabric account, navigate to the Microsoft Fabric portal at [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com).
-1. Select the **Account Manager** icon (the *user* image at the top right)
-1. In the account manager menu, select **Start trial** to start a Microsoft Fabric trial.
-1. After successfully upgrading to Microsoft Fabric, navigate to the home page by selecting **Fabric Home Page**.
-
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com`, select **Synapse Data Engineering**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
@@ -38,7 +31,7 @@ Now that you have a workspace, it's time to create a data lakehouse for the data
 
     After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download and extract a folder of text files your local computer (or lab VM if applicable) and then upload them to your lakehouse.
 
-1. Download and extract the data files for this exercise from [https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip).
+1. Download and extract the [data files](https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip) for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
 
 1. After extracting the zipped archive, verify that you have a folder named **orders** that contains CSV files named **2019.csv**, **2020.csv**, and **2021.csv**.
 1. Return to the web browser tab containing your lakehouse, and in the **...** menu for the **Files** folder in the **Explorer** pane, select **Upload** and **Upload folder**, and then upload the **orders** folder from your local computer (or lab VM if applicable) to the lakehouse.
@@ -74,11 +67,11 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
 > **Note**: Spark supports multiple coding languages, including Scala, Java, and others. In this exercise, we'll use *PySpark*, which is a Spark-optimized variant of Python. PySpark is one of the most commonly used languages on Spark and is the default language in Fabric notebooks.
 
-1. With the notebook visible, expand the **Files** list and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
+1. With the notebook visible, in the **Explorer** pane, expand **Lakehouses** and then expand the **Files** list for your lakehouse and select the **orders** folder so that the CSV files are listed next to the notebook editor, like this:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-files.png)
 
-2. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
+1. In the **...** menu for **2019.csv**, select **Load data** > **Spark**. A new code cell containing the following code should be added to the notebook:
 
     ```python
    df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
@@ -88,11 +81,11 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     > **Tip**: You can hide the Lakehouse explorer panes on the left by using their **<<** icons. Doing so will help you focus on the notebook.
 
-3. Use the **&#9655; Run cell** button on the left of the cell to run it.
+1. Use the **&#9655; Run cell** button on the left of the cell to run it.
 
     > **Note**: Since this is the first time you've run any Spark code, a Spark session must be started. This means that the first run in the session can take a minute or so to complete. Subsequent runs will be quicker.
 
-4. When the cell command has completed, review the output below the cell, which should look similar to this:
+1. When the cell command has completed, review the output below the cell, which should look similar to this:
 
     | Index | SO43701 | 11 | 2019-07-01 | Christy Zhu | christy12@adventure-works.com | Mountain-100 Silver, 44 | 16 | 3399.99 | 271.9992 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -102,7 +95,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     The output shows the rows and columns of data from the 2019.csv file. However, note that the column headers don't look right. The default code used to load the data into a dataframe assumes that the CSV file includes the column names in the first row, but in this case the CSV file just includes the data with no header information.
 
-5. Modify the code to set the **header** option to **false** as follows:
+1. Modify the code to set the **header** option to **false** as follows:
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
@@ -110,7 +103,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
    display(df)
     ```
 
-6. Re-run the cell and review the output, which should look similar to this:
+1. Re-run the cell and review the output, which should look similar to this:
 
    | Index | _c0 | _c1 | _c2 | _c3 | _c4 | _c5 | _c6 | _c7 | _c8 |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -121,7 +114,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe correctly includes first row as data values, but the column names are auto-generated and not very helpful. To make sense of the data, you need to explicitly define the correct schema and data type for the data values in the file.
 
-7. Modify the code as follows to define a schema and apply it when loading the data:
+1. Modify the code as follows to define a schema and apply it when loading the data:
 
     ```python
    from pyspark.sql.types import *
@@ -142,7 +135,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
    display(df)
     ```
 
-8. Run the modified cell and review the output, which should look similar to this:
+1. Run the modified cell and review the output, which should look similar to this:
 
    | Index | SalesOrderNumber | SalesOrderLineNumber | OrderDate | CustomerName | Email | Item | Quantity | UnitPrice | Tax |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
@@ -153,13 +146,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
     Now the dataframe includes the correct column names (in addition to the **Index**, which is a built-in column in all dataframes based on the ordinal position of each row). The data types of the columns are specified using a standard set of types defined in the Spark SQL library, which were imported at the beginning of the cell.
 
-9. Confirm that your changes have been applied to the data by viewing the dataframe. Run the following cell:
-
-    ```python
-   display(df)
-    ```
-
-10. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
+1. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
     ```python
     from pyspark.sql.types import *
@@ -180,7 +167,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
     display(df)
     ```
 
-11. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
+1. Run the modified code cell and review the output, which should now include sales for 2019, 2020, and 2021.
 
     **Note**: Only a subset of the rows is displayed, so you may not be able to see examples from all years.
 
@@ -190,7 +177,7 @@ The dataframe object includes a wide range of functions that you can use to filt
 
 ### Filter a dataframe
 
-1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it.
+1. Add a new code cell by using the **+ Code** link that appears when you move the mouse under the left side of the current cell's output (or on the menu bar, on the **Edit** tab, select **+ Add code cell**). Then enter the following code in it.
 
     ```Python
    customers = df['CustomerName', 'Email']
@@ -235,7 +222,7 @@ The dataframe object includes a wide range of functions that you can use to filt
    display(yearlySales)
     ```
 
-4. Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the *OrderDate* field (which is why the code includes an **import** statement to import functions from the Spark SQL library). It then uses an **alias** method is used to assign a column name to the extracted year value. The data is then grouped by the derived *Year* column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
+4. Run the code cell you added, and note that the results show the number of sales orders per year. Note that the **select** method includes a SQL **year** function to extract the year component of the *OrderDate* field (which is why the code includes an **import** statement to import functions from the Spark SQL library). It then uses an **alias** method to assign a column name to the extracted year value. The data is then grouped by the derived *Year* column and the count of rows in each group is calculated before finally the **orderBy** method is used to sort the resulting dataframe.
 
 ## Use Spark to transform data files
 
@@ -276,20 +263,20 @@ A common task for data engineers is to ingest data in a particular format or str
 
 1. Add a new cell with the following code to save the transformed dataframe in Parquet format (Overwriting the data if it already exists):
 
-    ```python
+    ```Python
    transformed_df.write.mode("overwrite").parquet('Files/transformed_data/orders')
    print ("Transformed data saved!")
     ```
 
     > **Note**: Commonly, *Parquet* format is preferred for data files that you will use for further analysis or ingestion into an analytical store. Parquet is a very efficient format that is supported by most large scale data analytics systems. In fact, sometimes your data transformation requirement may simply be to convert data from another format (such as CSV) to Parquet!
 
-2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new folder named **orders**, which in turn contains one or more Parquet files.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Lakehouses** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and select the **transformed_orders** folder to verify that it contains a new folder named **orders**, which in turn contains one or more Parquet files.
 
     ![Screenshot of a folder containing parquet files.](./Images/saved-parquet.png)
 
 3. Add a new cell with the following code to load a new dataframe from the parquet files in the **transformed_orders/orders** folder:
 
-    ```python
+    ```Python
    orders_df = spark.read.format("parquet").load("Files/transformed_data/orders")
    display(orders_df)
     ```
@@ -300,12 +287,12 @@ A common task for data engineers is to ingest data in a particular format or str
 
 1. Add a new cell with the following code; which saves the dataframe, partitioning the data by **Year** and **Month**:
 
-    ```python
+    ```Python
    orders_df.write.partitionBy("Year","Month").mode("overwrite").parquet("Files/partitioned_data")
    print ("Transformed data saved!")
     ```
 
-2. Run the cell and wait for the message that the data has been saved. Then, in the **Explorer** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
+2. Run the cell and wait for the message that the data has been saved. Then, in the **Lakehouses** pane on the left, in the **...** menu for the **Files** node, select **Refresh**; and expand the **partitioned_orders** folder to verify that it contains a hierarchy of folders named **Year=*xxxx***, each containing folders named **Month=*xxxx***. Each month folder contains a parquet file with the orders for that month.
 
     ![Screenshot of a hierarchy of partitioned data files.](./Images/partitioned-files.png)
 
@@ -313,7 +300,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
 3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
 
-    ```python
+    ```Python
    orders_2021_df = spark.read.format("parquet").load("Files/partitioned_data/Year=2021/Month=*")
    display(orders_2021_df)
     ```
@@ -342,7 +329,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
 
 2. Run the code cell and review the output, which describes the definition of the new table.
 
-3. In the **Explorer** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
+3. In the **Lakehouses** pane, in the **...** menu for the **Tables** folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
     ![Screenshot of the salesorder table in Explorer.](./Images/table-view.png)
 
@@ -394,7 +381,7 @@ A picture is proverbially worth a thousand words, and a chart is often better th
 
 2. Run the code and observe that it returns the data from the **salesorders** view you created previously.
 3. In the results section beneath the cell, change the **View** option from **Table** to **Chart**.
-4. Use the **View options** button at the top right of the chart to display the options pane for the chart. Then set the options as follows and select **Apply**:
+4. Use the **Customize chart** button at the top right of the chart to display the options pane for the chart. Then set the options as follows and select **Apply**:
     - **Chart type**: Bar chart
     - **Key**: Item
     - **Values**: Quantity
@@ -575,7 +562,7 @@ While **matplotlib** enables you to create complex charts of multiple types, it 
    # Clear the plot area
    plt.clf()
 
-   # Create a bar chart
+   # Create a line chart
    ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
    plt.show()
     ```

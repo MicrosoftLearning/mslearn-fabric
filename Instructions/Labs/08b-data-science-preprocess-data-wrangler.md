@@ -16,8 +16,8 @@ This lab will take approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com) at `https://app.fabric.microsoft.com` in a browser.
-1. Select **Synapse Data Science**.
+1. Navigate to the Microsoft Fabric home page at `https://app.fabric.microsoft.com` in a browser, and if necessary, sign in with your Fabric credentials.
+1. On the Fabric home page, select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -36,7 +36,7 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
     When the cell changes to a markdown cell, the text it contains is rendered.
 
-1. Use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
+1. If necessary, use the **&#128393;** (Edit) button to switch the cell to editing mode, then delete the content and enter the following text:
 
     ```text
    # Perform data exploration for data science
@@ -48,22 +48,26 @@ To train a model, you can create a *notebook*. Notebooks provide an interactive 
 
 Now you're ready to run code to get data. You'll work with the [**OJ Sales dataset**](https://learn.microsoft.com/en-us/azure/open-datasets/dataset-oj-sales-simulated?tabs=azureml-opendatasets?azure-portal=true) from the Azure Open Datasets. After loading the data, you'll convert the data to a Pandas dataframe, which is the structure supported by Data Wrangler.
 
-1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook. Enter the following code to load the dataset into a dataframe.
+1. In your notebook, use the **+ Code** icon below the latest cell to add a new code cell to the notebook.
+
+    > **Tip**: To see the **+ Code** icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the **Edit** tab, select **+ Add code cell**.
+
+1. Enter the following code to load the dataset into a dataframe.
 
     ```python
-    # Azure storage access info for open dataset diabetes
-    blob_account_name = "azureopendatastorage"
-    blob_container_name = "ojsales-simulatedcontainer"
-    blob_relative_path = "oj_sales_data"
-    blob_sas_token = r"" # Blank since container is Anonymous access
+   # Azure storage access info for open dataset diabetes
+   blob_account_name = "azureopendatastorage"
+   blob_container_name = "ojsales-simulatedcontainer"
+   blob_relative_path = "oj_sales_data"
+   blob_sas_token = r"" # Blank since container is Anonymous access
     
-    # Set Spark config to access  blob storage
-    wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
-    spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
-    print("Remote blob path: " + wasbs_path)
+   # Set Spark config to access  blob storage
+   wasbs_path = f"wasbs://%s@%s.blob.core.windows.net/%s" % (blob_container_name, blob_account_name, blob_relative_path)
+   spark.conf.set("fs.azure.sas.%s.%s.blob.core.windows.net" % (blob_container_name, blob_account_name), blob_sas_token)
+   print("Remote blob path: " + wasbs_path)
     
-    # Spark reads csv
-    df = spark.read.csv(wasbs_path, header=True)
+   # Spark reads csv
+   df = spark.read.csv(wasbs_path, header=True)
     ```
 
 1. Use the **&#9655; Run cell** button on the left of the cell to run it. Alternatively, you can press `SHIFT` + `ENTER` on your keyboard to run a cell.
@@ -73,19 +77,19 @@ Now you're ready to run code to get data. You'll work with the [**OJ Sales datas
 1. Use the **+ Code** icon below the cell output to add a new code cell to the notebook, and enter the following code in it:
 
     ```python
-    import pandas as pd
+   import pandas as pd
 
-    df = df.toPandas()
-    df = df.sample(n=500, random_state=1)
+   df = df.toPandas()
+   df = df.sample(n=500, random_state=1)
     
-    df['WeekStarting'] = pd.to_datetime(df['WeekStarting'])
-    df['Quantity'] = df['Quantity'].astype('int')
-    df['Advert'] = df['Advert'].astype('int')
-    df['Price'] = df['Price'].astype('float')
-    df['Revenue'] = df['Revenue'].astype('float')
+   df['WeekStarting'] = pd.to_datetime(df['WeekStarting'])
+   df['Quantity'] = df['Quantity'].astype('int')
+   df['Advert'] = df['Advert'].astype('int')
+   df['Price'] = df['Price'].astype('float')
+   df['Revenue'] = df['Revenue'].astype('float')
     
-    df = df.reset_index(drop=True)
-    df.head(4)
+   df = df.reset_index(drop=True)
+   df.head(4)
     ```
 
 1. When the cell command has completed, review the output below the cell, which should look similar to this:
@@ -144,20 +148,20 @@ Now let's apply a few transformations to the **Brand** feature.
 1. Replace the lines 10 and 11 with the code `df = clean_data(df)`, as the code generated in Data Wrangler doesn't overwrite the original dataframe. The final code block should look like this:
 
     ```python
-    def clean_data(df):
-        # Replace all instances of "." with " " in column: 'Brand'
-        df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)
-        # Capitalize the first character in column: 'Brand'
-        df['Brand'] = df['Brand'].str.title()
-        return df
+   def clean_data(df):
+       # Replace all instances of "." with " " in column: 'Brand'
+       df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)
+       # Capitalize the first character in column: 'Brand'
+       df['Brand'] = df['Brand'].str.title()
+       return df
     
-    df = clean_data(df)
+   df = clean_data(df)
     ```
 
 1. Run the code cell, and check the `Brand` variable.
 
     ```python
-    df['Brand'].unique()
+   df['Brand'].unique()
     ```
 
     The result should show the values *Minute Maid*, *Dominicks*, and *Tropicana*.
@@ -259,18 +263,18 @@ Suppose we need to understand the average revenue generated by each brand. In th
 1. Combine the code from the `Brand` variable transformation with the code generated by the aggregation step in the `clean_data(df)` function. The final code block should look like this:
 
     ```python
-    def clean_data(df):    
-        # Replace all instances of "." with " " in column: 'Brand'    
-        df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)    
-        # Capitalize the first character in column: 'Brand'    
-        df['Brand'] = df['Brand'].str.title()
+   def clean_data(df):    
+       # Replace all instances of "." with " " in column: 'Brand'    
+       df['Brand'] = df['Brand'].str.replace(".", " ", case=False, regex=False)    
+       # Capitalize the first character in column: 'Brand'    
+       df['Brand'] = df['Brand'].str.title()
         
-        # Performed 1 aggregation grouped on column: 'Brand'    
-        df = df.groupby(['Brand']).agg(Revenue_mean=('Revenue', 'mean')).reset_index()    
+       # Performed 1 aggregation grouped on column: 'Brand'    
+       df = df.groupby(['Brand']).agg(Revenue_mean=('Revenue', 'mean')).reset_index()    
         
-        return df    
+       return df    
         
-    df = clean_data(df)
+   df = clean_data(df)
     ```
 
 1. Run the cell code.
@@ -278,7 +282,7 @@ Suppose we need to understand the average revenue generated by each brand. In th
 1. Check the data in dataframe.
 
     ```python
-    print(df)
+   print(df)
     ```
 
     Results:
