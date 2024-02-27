@@ -45,15 +45,19 @@ Kusto query language (KQL) is used to query static or streaming data in a table 
         - **Table**: *Create a new table named* **sales** by clicking on the + sign to the left of ***New table***
 
         ![New table wizard step one](./images/import-wizard-local-file-1.png?raw=true)
+
         - Youll now see the **Drag files here or a Browse for files** hyperlink appear in the same window.
 
         ![New table wizard step two](./images/import-wizard-local-file-2.png?raw=true)
+
         - browse or drag your **sales.csv** onto the screen and wait for the Status box to change to a green check box and then select **Next**
 
         ![New table wizard step three](./Images/import-wizard-local-file-3.png?raw=true)
+
         - In this screen you'll see that your column headings are in teh first row although the system detected them, we still need to move the slider above these lines **First row is column header** in order to get keep from getting any errors.
         
         ![New table wizard step four](./Images/import-wizard-local-file-4.png?raw=true)
+        
         - Once you select this slider you will see everything looks good to go, select the **Finish** button on the bottom right of the panel.
 
         ![New table wizard step five](./images/import-wizard-local-file-5.png?raw=true)
