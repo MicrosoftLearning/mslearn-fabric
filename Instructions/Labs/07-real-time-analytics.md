@@ -49,17 +49,30 @@ Kusto query language (KQL) is used to query static or streaming data in a table 
 3. When the new database has been created, select the option to get data from **Local File**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
         - **Database**: *The database you created is already selected*
-        - **Table**: *Create a new table named* **sales**.
-    - **Source**:
-        - **Source type**: File
-        - **Upload files**: *Drag or Browse for the file you downloaded earlier*
-    - **Schema**:
-        - **Compression type**: Uncompressed
-        - **Data format**: CSV
-        - **Ignore the first record**: *Selected*
-        - **Mapping name**: sales_mapping
-    - **Summary**:
-        - *Review the preview of the table and close the wizard.*
+        - **Table**: *Create a new table named* **sales** by clicking on the + sign to the left of ***New table***
+
+        ![New table wizard step one](./images/import-wizard-local-file-1.png)
+        - Youll now see the **Drag files here or a Browse for files** hyperlink appear in the same window.
+
+        ![New table wizard step two](./images/import-wizard-local-file-2.png)
+        - browse or drag your **sales.csv** onto the screen and wait for the Status box to change to a green check box and then select **Next**
+
+        ![New table wizard step three](./Images/import-wizard-local-file-3.png)
+        - In this screen you'll see that your column headings are in teh first row although the system detected them, we still need to move the slider above these lines **First row is column header** in order to get keep from getting any errors.
+        
+        ![New table wizard step four](./Images/import-wizard-local-file-4.png)
+        - Once you select this slider you will see everything looks good to go, select the **Finish** button on the bottom right of the panel.
+
+        ![New table wizard step five](./images/import-wizard-local-file-5.png)
+
+        - Wait for the steps in the summary screen to complete which include:
+            - Create table (sales)
+            - create mapping (sales_mapping)
+            - Data queuing
+            - Ingestion
+        - Select the **Close** button
+                
+        ![New table wizard step six](./Images/import-wizard-local-file-6.png)
 
 > **Note**: In this example, you imported a very small amount of static data from a file, which is fine for the purposes of this exercise. In reality, you can use Kusto to analyze much larger volumes of data; including real-time data from a streaming source such as Azure Event Hubs.
 
