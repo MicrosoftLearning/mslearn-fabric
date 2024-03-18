@@ -39,7 +39,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Image of name KQL Database](./Images/name-kqldatabase.png)
 
-1. Give the KQL Database a name that you remember, such as **MyStockData**, press **Create**.
+1. Give the KQL Database a name that you remember, such as **TaxiData**, press **Create**.
 
 1. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
