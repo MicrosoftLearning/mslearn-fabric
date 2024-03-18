@@ -6,17 +6,17 @@ lab:
 
 # Create and explore a semantic model
 
-## Overview
-
-**The estimated time to complete the lab is 30 minutes**
-
-In this lab, you'll use the Fabric interface to develop a data model over the sample NY Taxi data in a Fabric data warehouse.
+In this exercise, you'll use Microsoft Fabric to develop a data model for the sample NY Taxi data in a data warehouse.
 
 You'll practice:
 
 - Creating a custom semantic model from a Fabric data warehouse.
 - Create relationships and organize the model diagram.
 - Explore the data in your semantic model directly in Fabric.
+
+This lab takes approximately **30** minutes to complete.
+
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace
 

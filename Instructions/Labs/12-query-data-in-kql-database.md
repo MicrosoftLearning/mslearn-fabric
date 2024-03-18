@@ -8,15 +8,13 @@ lab:
 
 A KQL Queryset is a tool that allows you to execute queries, modify, and display query results from a KQL database. You can link each tab in the KQL Queryset to a different KQL database, and save your queries for future use or share them with others for data analysis. You can also switch the KQL database for any tab, so you can compare the query results from different data sources.
 
+In this exercise, you'll perform the role of an analyst who's tasked with querying a sample dataset of raw metrics NYC taxicab rides that you pull summary statistics (profiling) the data from the Fabric environment. You use KQL to query this data and gather information to gain informational insights about the data.
+
 The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. To learn more about the [kusto query (KQL)language](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext).
 
 This lab takes approximately **25** minutes to complete.
 
-## Scenario
-
-In this scenario, you're an analyst who's tasked with querying a sample dataset of raw metrics NYC taxicab rides that you pull summary statistics (profiling) the data from the Fabric environment. You use KQL to query this data and gather information to gain informational insights about the data.
-
-> **Note**: You need a Microsoft *school* or *work* account to complete this exercise. If you don't have one, you can [sign up for a trial of Microsoft Office 365 E3 or higher](https://www.microsoft.com/microsoft-365/business/compare-more-office-365-for-business-plans).
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace
 

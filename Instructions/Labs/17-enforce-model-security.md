@@ -6,21 +6,18 @@ lab:
 
 # Enforce model security
 
-## Overview
+In this exercise, you will update a pre-developed data model to enforce security. Specifically, salespeople at the Adventure Works company should only be able to see sales data related to their assigned sales region.
 
-**The estimated time to complete the lab is 45 minutes**
-
-In this lab, you will update a pre-developed data model to enforce security. Specifically, salespeople at the Adventure Works company should only be able to see sales data related to their assigned sales region.
-
-In this lab, you learn how to:
+In this exercise, you learn how to:
 
 - Create static roles.
-
 - Create dynamic roles.
-
 - Validate roles.
-
 - Map security principals to semantic model roles.
+
+This lab takes approximately **45** minutes to complete.
+
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Get started
 

@@ -6,19 +6,17 @@ lab:
 
 # Work with model relationships
 
-## Overview
+In this exercise, you will work with model relationships specifically to address the need for role-playing dimensions. It will involve working with active and inactive relationships, and also Data Analysis Expressions (DAX) functions that modify relationship behavior.
 
-**The estimated time to complete the lab is 45 minutes**
-
-In this lab, you will work with model relationships specifically to address the need for role-playing dimensions. It will involve working with active and inactive relationships, and also Data Analysis Expressions (DAX) functions that modify relationship behavior.
-
-In this lab, you learn how to:
+In this exercise, you learn how to:
 
 - Interpret relationship properties in the model diagram.
-
 - Set relationship properties.
-
 - Use DAX functions that modify relationship behavior.
+
+This lab takes approximately **45** minutes to complete.
+
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Explore model relationships
 

@@ -6,17 +6,16 @@ lab:
 
 # Use tools to optimize Power BI performance
 
-## Overview
-
-**The estimated time to complete the lab is 30 minutes**
-
 In this lab, you will learn how to use two external tools to help you develop, manage, and optimize data models and DAX queries.
 
-In this lab, you learn how to use:
+In this exercise, you learn how to use:
 
 - Best Practice Analyzer (BPA) in Tabular Editor.
-
 - DAX Studio.
+
+This lab takes approximately **30** minutes to complete.
+
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Get started
 
