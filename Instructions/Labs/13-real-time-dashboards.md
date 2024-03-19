@@ -47,7 +47,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
  
    ![Image of selection options with sample data highlighted](./Images/load-sample-data.png)
 
-6. choose the **Automotive Metrics analytics** box from the options for sample data.
+6. Choose the **Automotive Metrics analytics** box from the options for sample data.
 
    ![Image of choosing analytics data for lab](./Images/create-sample-data.png)
 
@@ -55,7 +55,7 @@ In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL dat
 
    ![Data being loaded into the KQL Database](./Images/choose-automotive-operations-analytics.png)
 
-7. Once the data is loaded, verify the data is loaded into the KQL database. You can accomplish this operation by selecting the ellipses to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
+7. Once the data is loaded, verify the data is loaded into the KQL database. You can accomplish this operation by selecting the ellipsis (...) to the right of the table, navigating to **Query table** and selecting **Show any 100 records**.
 
     ![Image of selecting the top 100 files from the RawServerMetrics table](./Images/rawservermetrics-top-100.png)
 
@@ -81,7 +81,7 @@ Trips
 | sort by Borough asc 
 
 ```
-3. Press the Run button and verify your query has no errors.
+3. Press the **Run** button and verify your query has no errors.
 4. On the right side of the panel, select the **Visual formatting** tab and complete the ***Tile name*** and ***Visual type***.
 
    ![Image of the visual formatting tile.](./Images/visual-formatting-tile.png)
