@@ -1,7 +1,7 @@
 ---
 lab:
-    title: 'Get started with Real-Time Analytics in Microsoft Fabric'
-    module: 'Get started with Real-Time Analytics in Microsoft Fabric'
+    title: 'Get started with Eventstream in Microsoft Fabric'
+    module: 'Get started with Eventstream in Microsoft Fabric'
 ---
 # Get started with Eventstream in Real-Time Analytics (RTA)
 
