@@ -308,10 +308,10 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     dfUpdates = dfdimDate_gold
     
-    deltaTable.alias('silver') \
+    deltaTable.alias('existing_gold') \
       .merge(
         dfUpdates.alias('updates'),
-        'silver.OrderDate = updates.OrderDate'
+        'existing_gold.OrderDate = updates.OrderDate'
       ) \
        .whenMatchedUpdate(set =
         {
@@ -396,10 +396,10 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     dfUpdates = dfdimCustomer_gold
     
-    deltaTable.alias('silver') \
+    deltaTable.alias('existing_gold') \
       .merge(
         dfUpdates.alias('updates'),
-        'silver.CustomerName = updates.CustomerName AND silver.Email = updates.Email'
+        'existing_gold.CustomerName = updates.CustomerName AND existing_gold.Email = updates.Email'
       ) \
        .whenMatchedUpdate(set =
         {
@@ -478,10 +478,10 @@ Note that you could have done all of this in a single notebook, but for the purp
             
     dfUpdates = dfdimProduct_gold
             
-    deltaTable.alias('silver') \
+    deltaTable.alias('existing_gold') \
       .merge(
             dfUpdates.alias('updates'),
-            'silver.ItemName = updates.ItemName AND silver.ItemInfo = updates.ItemInfo'
+            'existing_gold.ItemName = updates.ItemName AND existing_gold.ItemInfo = updates.ItemInfo'
             ) \
             .whenMatchedUpdate(set =
             {
@@ -546,6 +546,8 @@ Note that you could have done all of this in a single notebook, but for the purp
     display(dffactSales_gold.head(10))
     ```
 
+    Here you're cleaning and transforming the updated data contained in sales_silver (df) and joining it with the existing gold Customer (dfdimCustomer_temp) and Product (dfdimProduct_temp) tables.
+
 17. Now you'll ensure that sales data remains up-to-date by running the following code in a **new code block**:
 
     ```python
@@ -555,10 +557,10 @@ Note that you could have done all of this in a single notebook, but for the purp
     
     dfUpdates = dffactSales_gold
     
-    deltaTable.alias('silver') \
+    deltaTable.alias('existing_gold') \
       .merge(
         dfUpdates.alias('updates'),
-        'silver.OrderDate = updates.OrderDate AND silver.CustomerID = updates.CustomerID AND silver.ItemID = updates.ItemID'
+        'existing_gold.OrderDate = updates.OrderDate AND existing_gold.CustomerID = updates.CustomerID AND existing_gold.ItemID = updates.ItemID'
       ) \
        .whenMatchedUpdate(set =
         {
@@ -578,7 +580,7 @@ Note that you could have done all of this in a single notebook, but for the purp
       .execute()
     ```
 
-     Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
+     Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (deltaTable) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
 
 You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
 
