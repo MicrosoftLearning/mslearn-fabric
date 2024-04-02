@@ -39,7 +39,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
 
 1. In the center of the data warehouse user interface, you'll see a few different ways to load data into your warehouse. Select **Sample data** to load NYC Taxi data into your data warehouse. This will take a couple of minutes.
 
-1. After your sample data has loaded, use the **Explorer** pane on the right to see what tables and views already exist in the sample data warehouse.
+1. After your sample data has loaded, use the **Explorer** pane on the left to see what tables and views already exist in the sample data warehouse.
 
 1. Select the **Reporting** tab of the ribbon and choose **New semantic model**. This enables you to create a new semantic model using only specific tables and views from your data warehouse, for use by data teams and the business to build reports.
 
