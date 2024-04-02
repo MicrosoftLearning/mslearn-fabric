@@ -65,7 +65,7 @@ Now you'll create relationships between the tables to accurrately analyze and vi
 
     *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the **Trip** table is our fact table, and our dimensions are **Date**, **Geography**, and **Weather**.*
 
-1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and frop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
+1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and drop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
 
 1. Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
 
