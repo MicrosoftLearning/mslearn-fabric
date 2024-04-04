@@ -39,7 +39,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
 
 1. In the center of the data warehouse user interface, you'll see a few different ways to load data into your warehouse. Select **Sample data** to load NYC Taxi data into your data warehouse. This will take a couple of minutes.
 
-1. After your sample data has loaded, use the **Explorer** pane on the right to see what tables and views already exist in the sample data warehouse.
+1. After your sample data has loaded, use the **Explorer** pane on the left to see what tables and views already exist in the sample data warehouse.
 
 1. Select the **Reporting** tab of the ribbon and choose **New semantic model**. This enables you to create a new semantic model using only specific tables and views from your data warehouse, for use by data teams and the business to build reports.
 
@@ -65,7 +65,7 @@ Now you'll create relationships between the tables to accurrately analyze and vi
 
     *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the **Trip** table is our fact table, and our dimensions are **Date**, **Geography**, and **Weather**.*
 
-1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and frop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
+1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and drop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
 
 1. Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
 

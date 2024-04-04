@@ -97,8 +97,8 @@ A relational data warehouse typically consists of *fact* and *dimension* tables.
     - **Assume referential integrity**: Unselected
 
 4. Repeat the process to create many-to-one relationships between the following tables:
-    - **FactOrderSales.CustomerKey** &#8594; **DimCustomer.CustomerKey**
-    - **FactOrderSales.SalesOrderDateKey** &#8594; **DimDate.DateKey**
+    - **FactSalesOrder.CustomerKey** &#8594; **DimCustomer.CustomerKey**
+    - **FactSalesOrder.SalesOrderDateKey** &#8594; **DimDate.DateKey**
 
     When all of the relationships have been defined, the model should look like this:
 
