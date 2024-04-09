@@ -39,7 +39,7 @@ Start by creating a new lakehouse, and a destination folder in the lakehouse.
 
 1. From **Files**, select the **[...]** to create **New subfolder** named **RawData**.
 
-1. From the Lakehouse Explorer within the lakehouse, select **Files > ... > Properties**.
+1. From the Lakehouse Explorer within the lakehouse, select **RawData > ... > Properties**.
 
 1. Copy the **ABFS path** for the **RawData** folder to an empty notepad for later use, which should look something like:
     `abfss://{workspace_name}@onelake.dfs.fabric.microsoft.com/{lakehouse_name}.Lakehouse/Files/{folder_name}/{file_name}`
@@ -219,7 +219,7 @@ This lab is focused on data ingestion, which really explains the *extract, trans
     display(opttable_df.limit(10))
     ```
 
-1. Now, select the &#9660; arrow next to the **Run Cell** button for the first of these two queries, and from the drop-down select **Run this cell and below**.
+1. Now, select the &#9660; arrow next to the **Run Cell** button for the first of these two queries, and from the drop-down select **Run this cell and all below**.
 
     This will run the last two code cells. Notice the execution time difference between querying the table with non optimized data and a table with optimized data.
 
@@ -230,5 +230,5 @@ In this exercise, you have used notebooks with PySpark in Fabric to load data an
 When you're finished exploring, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Remove this workspace**.
+2. In the workspace page, select **Workspace settings**.
+3. At the bottom of the **General** section, select **Remove this workspace**.
