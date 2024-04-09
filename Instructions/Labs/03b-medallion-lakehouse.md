@@ -198,6 +198,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
       ) \
       .execute()
     ```
+13. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
     This operation is important because it enables you to update existing records in the table based on the values of specific columns, and insert new records when no match is found. This is a common requirement when you're loading data from a source system that may contain updates to existing and new records.
 
