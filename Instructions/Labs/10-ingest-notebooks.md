@@ -39,7 +39,7 @@ Start by creating a new lakehouse, and a destination folder in the lakehouse.
 
 1. From **Files**, select the **[...]** to create **New subfolder** named **RawData**.
 
-1. From the Lakehouse Explorer within the lakehouse, select **Files > ... > Properties**.
+1. From the Lakehouse Explorer within the lakehouse, select **RawData > ... > Properties**.
 
 1. Copy the **ABFS path** for the **RawData** folder to an empty notepad for later use, which should look something like:
     `abfss://{workspace_name}@onelake.dfs.fabric.microsoft.com/{lakehouse_name}.Lakehouse/Files/{folder_name}/{file_name}`
