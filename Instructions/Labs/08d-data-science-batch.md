@@ -209,5 +209,5 @@ In this exercise, you have used a model to generate batch predictions.
 If you've finished exploring the notebook, you can delete the workspace that you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Remove this workspace** .
+2. In the workspace page, select **Workspace settings**.
+3. At the bottom of the **General** section, select **Remove this workspace**.
