@@ -135,6 +135,6 @@ If you've finished exploring dataflows in Microsoft Fabric, you can delete the w
 
 1. Navigate to Microsoft Fabric in your browser.
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-1. In the workspace page, select **Workspace settings**.
-1. At the bottom of the **General** section, select **Remove this workspace**.
+1. In the **...** menu on the toolbar, select **Workspace settings**.
+1. In the **Other** section, select **Remove this workspace**.
 1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
