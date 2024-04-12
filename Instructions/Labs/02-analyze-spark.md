@@ -148,7 +148,7 @@ Now you're ready to run code that loads the data into a *dataframe*. Dataframes 
 
 1. The dataframe includes only the data from the **2019.csv** file. Modify the code so that the file path uses a \* wildcard to read the sales order data from all of the files in the **orders** folder:
 
-    ```python
+    ```Python
     from pyspark.sql.types import *
 
     orderSchema = StructType([
