@@ -296,7 +296,7 @@ A common task for data engineers is to ingest data in a particular format or str
 
     ![Screenshot of a hierarchy of partitioned data files.](./Images/partitioned-files.png)
 
-    Partitioning data files is a common way to optimize performance when dealing with large volumes of data. This technique can significant improve performance and make it easier to filter data.
+    Partitioning data files is a common way to optimize performance when dealing with large volumes of data. This technique can significantly improve performance and make it easier to filter data.
 
 3. Add a new cell with the following code to load a new dataframe from the **orders.parquet** file:
 
