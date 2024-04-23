@@ -93,7 +93,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 6. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
-7. Once published, you can right-click on the dataflow in your workspace, select **Properties**, and rename your dataflow.
+7. Once published, you can click on the ellipsis **(...)** next to the dataflow name in your workspace, select **Properties**, and rename your dataflow.
 
 ## Add a dataflow to a pipeline
 
@@ -136,5 +136,4 @@ If you've finished exploring dataflows in Microsoft Fabric, you can delete the w
 1. Navigate to Microsoft Fabric in your browser.
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 1. In the **...** menu on the toolbar, select **Workspace settings**.
-1. In the **Other** section, select **Remove this workspace**.
-1. Don't save the changes to Power BI Desktop, or delete the .pbix file if already saved.
+1. In the **General** section, select **Remove this workspace**.
