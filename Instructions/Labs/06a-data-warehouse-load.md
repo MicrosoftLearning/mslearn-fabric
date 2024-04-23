@@ -249,4 +249,4 @@ If you've finished exploring your data warehouse, you can delete the workspace y
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **Other** section, select **Remove this workspace**.
+3. In the **General** section, select **Remove this workspace**.
