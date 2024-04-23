@@ -93,7 +93,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 6. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
-7. Once published, you can click on the ellipsis **(...)** next to the dataflow name in your workspace, select **Properties**, and rename your dataflow.
+7. Once published, you can click on the ellipsis **(...)** next to the dataflow in your workspace, select **Properties**, and rename your dataflow.
 
 ## Add a dataflow to a pipeline
 
