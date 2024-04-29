@@ -98,6 +98,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
    GROUP BY Item
    ORDER BY Revenue DESC;
     ```
+> **Note**: If you are in a lab VM and have any problems entering the SQL query, you can download the [01-Snippets.txt](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/01/Assets/01-Snippets.txt) file from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/01/Assets/01-Snippets.txt`, saving it on the VM. You can then copy the query from the text file.
 
 3. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
 
@@ -134,9 +135,11 @@ The tables in your lakehouse are automatically added to a default semantic model
 
 1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the semantic model is shown.
 
-    ![Screenshot of a semantic model.](./Images/data-model.png)
+    ![Screenshot 2024-04-29 155248](https://github.com/afelix-95/mslearn-fabric/assets/148110824/ba9bd67d-8968-4c46-ac7a-f96a9f697f4c)
 
-    > **Note**: In this exercise, the semantic model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
+    > **Note 1**: In this exercise, the semantic model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
+    
+    > **Note 2**: The views `frequently_run_queries`, `long_running_queries`, `exec_sessions_history`, and `exec_requests_history` are part of the `queryinsights` schema automatically created by Fabric. It is a feature that provides a holistic view of historical query activity on the SQL analytics endpoint. Since this feature is out of the scope of this exercise, those views should be ignored for now.
 
 2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. A new browser tab opens in which you can design your report.
 

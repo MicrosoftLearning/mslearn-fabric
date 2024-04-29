@@ -1,0 +1,6 @@
+>> Use SQL to query tables
+==================================================
+SELECT Item, SUM(Quantity * UnitPrice) AS Revenue
+FROM sales
+GROUP BY Item
+ORDER BY Revenue DESC;
