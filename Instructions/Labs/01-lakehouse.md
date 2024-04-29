@@ -98,6 +98,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
    GROUP BY Item
    ORDER BY Revenue DESC;
     ```
+> **Note**: If you are in a lab VM and have any problems entering the SQL query, you can download the [01-Snippets.txt](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/01/Assets/01-Snippets.txt) file from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/01/Assets/01-Snippets.txt`, saving it on the VM. You can then copy the query from the text file.
 
 3. Use the **&#9655; Run** button to run the query and view the results, which should show the total revenue for each product.
 
