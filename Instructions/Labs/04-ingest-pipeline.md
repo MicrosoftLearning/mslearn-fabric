@@ -181,6 +181,8 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
     ![Screenshot of a pipeline with a Dataflow activity.](./Images/pipeline-run.png)
 
+> Note: In case you receive the error message *Spark SQL queries are only possible in the context of a lakehouse. Please attach a lakehouse to proceed*: Open your notebook, select the lakehouse you created on the left pane, select **Remove all Lakehouses** and then add it again. Go back to the pipeline designer and select **&#9655; Run**.
+
 8. In the hub menu bar on the left edge of the portal, select your lakehouse.
 9. In the **Explorer** pane, expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
 
