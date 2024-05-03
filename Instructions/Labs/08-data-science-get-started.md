@@ -94,7 +94,7 @@ Now you're ready to run code to get data and train a model. You'll work with the
     The output shows the rows and columns of the diabetes dataset.
 
 1. There are two tabs at the top of the rendered table: **Table** and **Chart**. Select **Chart**.
-1. Select the **View options** at the right top of the chart to change the visualization.
+1. Select the **Customize chart** at the right top of the chart to change the visualization.
 1. Change the chart to the following settings:
     * **Chart Type**: `Box plot`
     * **Key**: *Leave empty*
@@ -112,8 +112,7 @@ Now that you have ingested and explored the data, you can transform the data. Yo
    df.head()
     ```
 
-1. Select **Data** in the notebook ribbon, and then select **Transform DataFrame in Data Wrangler** dropdown.
-1. Select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel.
+1. Select **Data Wrangler** in the notebook ribbon, and then select the `df` dataset. When Data Wrangler launches, it generates a descriptive overview of the dataframe in the **Summary** panel.
 
     Currently, the label column is `Y`, which is a continuous variable. To train a machine learning model that predicts Y, you need to train a regression model. The (predicted) values of Y may be difficult to interpret. Instead, we could explore training a classification model which predicts whether someone is low risk or high risk for developing diabetes. To be able to train a classification model, you need to create a binary label column based on the values from `Y`.
 
