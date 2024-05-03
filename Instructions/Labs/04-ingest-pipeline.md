@@ -49,6 +49,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
     - **Connection**: Create new connection
     - **Connection name**: *Specify a unique name*
+    - **Data gateway**: (none)
     - **Authentication kind**: Basic (*Leave the username and password blank*)
 5. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
@@ -64,7 +65,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **First row as header**: Selected
     - **Compression type**: None
 7. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-8. On the **Choose data destination** page, select your existing lakehouse. Then select **Next**.
+8. On the **Connect to data destination** page, select your existing lakehouse. Then select **Next**.
 9. Set the following data destination options, and then select **Next**:
     - **Root folder**: Files
     - **Folder path name**: new_data
