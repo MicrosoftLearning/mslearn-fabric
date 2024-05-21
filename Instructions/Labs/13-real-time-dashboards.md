@@ -94,11 +94,11 @@ BikepointID, Latitude, Longitude, No_Bikes
 
 Once you're happy with the visualization, simply select the **Apply changes** and then either add additional visualizations to support your Real-Time Dashboard or perform additional steps, such as **Parameters** or **Schedules**.
 
-   [ ![Create a visualization from a KQL query.](./images/create-visual-in-tiles.png) ](./images/create-visual-in-tiles-large.png#lightbox)
+   [ ![Create a visualization from a KQL query.](./Images/create-visual-in-tiles.png) ](./Images/create-visual-in-tiles-large.png#lightbox)
 
 Once the changes are applied you will see the data and can then make adjustments for readability and understanding by your users.
 
-   [ ![Applied changes to bike visualization map.](./images/first-published-visual.png) ](./images/first-published-visual-large.png#lightbox)
+   [ ![Applied changes to bike visualization map.](./Images/first-published-visual.png) ](./Images/first-published-visual-large.png#lightbox)
 
 You can continue to create **new tiles** that have table information and visualization information to ease understanding to your user community. You also have the ability, as shown earlier to **add page[s]**, **New data source[s]**. Next we'll focus on adding a parameter to assist with navigating and reducing the amount of information that is presented to a user.
 
@@ -110,19 +110,19 @@ Creating a parameter starts easily enough:
 1. Select the New Parameters button on the top menu. The Parameters pane opens.
 1. Select the + Add button at the top of the right pane.
 
-    [ ![Add new parameter.](./images/add-new-parameter.png) ](./images/add-new-parameter-large.png#lightbox)
+    [ ![Add new parameter.](./Images/add-new-parameter.png) ](./Images/add-new-parameter-large.png#lightbox)
 
 1. Fill in the relevant properties for your parameter.
 
-    [ ![Configure the parameter settings.](./images/configure-parameter.png) ](./images/configure-parameter-large.png#lightbox)
+    [ ![Configure the parameter settings.](./Images/configure-parameter.png) ](./Images/configure-parameter-large.png#lightbox)
 
 1. One of the more important features of a parameter is the ability to **Add a query** to give the user only options that are relevant to the underlying information.
 
-    ![Add a query to the parameter selection.](./images/add-lookup-query.png)
+    ![Add a query to the parameter selection.](./Images/add-lookup-query.png)
 
 1. Select Done to create the parameter.
 
-    [ ![Complete configuration and select done in parameter settings.](./images/complete-parameter-settings.png) ](./images/complete-parameter-settings-large.png#lightbox)
+    [ ![Complete configuration and select done in parameter settings.](./Images/complete-parameter-settings.png) ](./Images/complete-parameter-settings-large.png#lightbox)
 
 ### Parameter properties
 
@@ -157,7 +157,7 @@ Creating a parameter starts easily enough:
 | project BikepointID, Latitude, Longitude, No_Bikes
 
 ```
-   [ ![update each query in the tiles to include the parameters.](./Images/update-each-query.png) ](./images/update-each-query-large.png#lightbox)
+   [ ![update each query in the tiles to include the parameters.](./Images/update-each-query.png) ](./Images/update-each-query-large.png#lightbox)
 
 ## Enable auto refresh
 
@@ -165,13 +165,13 @@ Auto-refresh is a functionality that enables the automatic updating of dashboard
 
 1. Select the Manage tab > Auto refresh.
 
-    [ ![enable the auto refresh feature.](./images/enable-auto-refresh.png) ](./images/enable-auto-refresh-large.png#lightbox)
+    [ ![enable the auto refresh feature.](./Images/enable-auto-refresh.png) ](./Images/enable-auto-refresh-large.png#lightbox)
 
 1. Toggle the option so auto refresh is Enabled.
 1. Select values for Minimum time interval and Default refresh rate.
 1. Select Apply and then Save the dashboard.
 
-    [ ![Enable the auto refresh and set intervals.](./images/enable-and-configure-refresh-rate.png) ](./images/enable-and-configure-refresh-rate-large.png#lightbox)
+    [ ![Enable the auto refresh and set intervals.](./Images/enable-and-configure-refresh-rate.png) ](./Images/enable-and-configure-refresh-rate-large.png#lightbox)
 
 This ends the lesson.
 
