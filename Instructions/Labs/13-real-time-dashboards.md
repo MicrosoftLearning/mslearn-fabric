@@ -39,7 +39,7 @@ In this lab, you use the Real-Time Intelligence in Fabric to create a Real-Time 
 
 4. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
-   [ ![Image of enable onelake.](./Images/real-time-dashboard-details.png)](./images/real-time-dashboard-details-large.png#lightbox)
+   [ ![Image of enable onelake.](./Images/real-time-dashboard-details.png)](./Images/real-time-dashboard-details-large.png#lightbox)
 
 ## Add a data source
 
@@ -48,31 +48,31 @@ Data sources serve as reusable references to specific databases or queries withi
 1. Select the **Manage** tab, then select **New data source** on the ***menu bar***.
 1. Select the **+ Add** button in the **Data sources** pane.
 
-    [ ![Add new data source to Real-Time Dashboard.](./images/add-data-source-to-real-time-dashboard-large.png) ](./Images/add-data-source-to-real-time-dashboard-large.png#lightbox)
+    [ ![Add new data source to Real-Time Dashboard.](./Images/add-data-source-to-real-time-dashboard-large.png) ](./Images/add-data-source-to-real-time-dashboard-large.png#lightbox)
 
 1. choose from one of the two main options of **OneLake data hub** or **Azure Data Explorer**.
 
-    ![choose a data source for Real-Time Dashboard.](./images/data-source-options-real-time-dashboards.png)
+    ![choose a data source for Real-Time Dashboard.](./Images/data-source-options-real-time-dashboards.png)
 
 1. Choose the **datasource** that meets your busines needs, then select the **Connect** button.
 
-    [ ![Select appropriate datasource.](./images/select-onelake-data-hub.png) ](./images/select-onelake-data-hub-large.png#lightbox)
+    [ ![Select appropriate datasource.](./Images/select-onelake-data-hub.png) ](./Images/select-onelake-data-hub-large.png#lightbox)
 
     > **Note**
     > Once you connect to a datasource, you will have the ability to confirm, and create additional datasrouces within the selected location.
 
 1. Confirm your **datasource** connection in the **Create new data source** pane, and select **Create**.
 
-    [ ![Confirm database in the Create new data source.](./images/conected-now-create-datasource.png) ](./images/conected-now-create-datasource-large.png#lightbox)
+    [ ![Confirm database in the Create new data source.](./Images/conected-now-create-datasource.png) ](./Images/conected-now-create-datasource-large.png#lightbox)
 
 1. At this point, you'll want to select the elipses **...** to the right of **Page n**, and select **Rename page** to a name appropriate for the tile's usage.
 1. Select **+ Add tile**
 
-    [ ![Rename page and add tiles.](./images/rename-page-add-tile.png) ](./images/rename-page-add-tile-large.png#lightbox)
+    [ ![Rename page and add tiles.](./Images/rename-page-add-tile.png) ](./Images/rename-page-add-tile-large.png#lightbox)
 
 1. You'll be redirected to the **tile query pane** where you can add parameters and pull in base queries to support your tile. 
 
-    [ ![Query window and adding new data source pane.](./images/write-query-for-tile.png) ](./images/write-query-for-tile-large.png#lightbox)
+    [ ![Query window and adding new data source pane.](./Images/write-query-for-tile.png) ](./Images/write-query-for-tile-large.png#lightbox)
 
     > **Note**
     > You'll have the option to add a new data source in the drop-down window in the same window. This source can be within your personal workspace or any workspace you may have another KQL database stored within an Evenhouse where you have access to.
