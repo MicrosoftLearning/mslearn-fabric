@@ -237,8 +237,6 @@ To save a Queryset is straightforward and has a couple of approaches.
 
 5. From this point, you have the option to take individual queries and use them in dashboards or Power BI Reports using the **Pin to dashboard** or **Build PowerBI Report** buttons.
 
-This ends the lesson.
-
 ## Clean up resources
 
 In this exercise, you have created a KQL database and set up continuous streaming with eventstream. After that you queried the data using KQL and SQL. When you've finished exploring your KQL database, you can delete the workspace you created for this exercise.

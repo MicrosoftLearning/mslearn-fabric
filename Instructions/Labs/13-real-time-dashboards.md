@@ -173,8 +173,6 @@ Auto-refresh is a functionality that enables the automatic updating of dashboard
 
     [ ![Enable the auto refresh and set intervals.](./Images/enable-and-configure-refresh-rate.png) ](./Images/enable-and-configure-refresh-rate-large.png#lightbox)
 
-This ends the lesson.
-
 ## Clean up resources
 
 In this exercise, you have created a KQL database and set up a sample dataset for querying. After that, you queried the data using KQL and SQL. When you've finished exploring your KQL database, you can delete the workspace you created for this exercise.

@@ -300,7 +300,6 @@ KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint th
     ORDER BY Borough ASC;
     
     ```
-This ends the lesson.
 
 ## Clean up resources
 
