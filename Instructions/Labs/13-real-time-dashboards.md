@@ -58,7 +58,7 @@ Data sources serve as reusable references to specific databases or queries withi
 
     [ ![Select appropriate datasource.](./images/select-onelake-data-hub.png) ](./images/select-onelake-data-hub-large.png)
 
-    > [!NOTE:]
+    > **Note**
     > Once you connect to a datasource, you will have the ability to confirm, and create additional datasrouces within the selected location.
 
 1. Confirm your **datasource** connection in the **Create new data source** pane, and select **Create**.
@@ -74,7 +74,7 @@ Data sources serve as reusable references to specific databases or queries withi
 
     [ ![Query window and adding new data source pane.](./images/write-query-for-tile.png) ](./images/write-query-for-tile-large.png)
 
-    > [!Note:]
+    > **Note**
     > You'll have the option to add a new data source in the drop-down window in the same window. This source can be within your personal workspace or any workspace you may have another KQL database stored within an Evenhouse where you have access to.
 
 ## Write Queries
