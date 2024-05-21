@@ -1,10 +1,10 @@
 ---
 lab:
     title: 'Real-time dashboards'
-    module: 'Query data from a Kusto Query database in Microsoft Fabric'
+    module: 'Get Started with Real-Time Dashboards in Microsoft Fabric'
 ---
 
-# Get started with querying a Kusto database in Microsoft Fabric
+# Get started with Real-Time Dashboards in Microsoft Fabric
 
 Real-time dashboards allow you to glean insight from within Microsoft Fabric using the Kusto Query Language (KQL) to retrieve both structure and unstructured data and render it in charts, scatterplots, tables, and more within panels that allow for linking similar to slicers within Power BI. 
 
