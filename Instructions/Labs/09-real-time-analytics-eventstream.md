@@ -45,7 +45,7 @@ In this tutorial, you'll learn how to:
 1. Select the Real-Time Intelligence option in Microsoft Fabric.
 1. Select Eventhouse from the menubar, and give your eventhouse a name.
     
-    ![Image of creating an Eventhouse](./images/create-eventhouse.png)
+    ![Image of creating an Eventhouse](./Images/create-eventhouse.png)
 
 ## Create a KQL Database
 
@@ -68,7 +68,7 @@ In this tutorial, you'll learn how to:
 
 6. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
-   [ ![Image of enable onlake](./Images/enable-onelake-availability.png) ](./images/enable-onelake-availability-large.png)
+   [ ![Image of enable onlake](./Images/enable-onelake-availability.png) ](./Images/enable-onelake-availability-large.png)
 
 7. Make sure to toggle the button to **Active** and then select **Done**.
 
@@ -94,16 +94,16 @@ In this tutorial, you'll learn how to:
 
 1. In the Eventstream canvas, select **New source** from the drop-down list, then select **Sample Data**.
 
-    [ ![Image of Using Sampel data](./images/eventstream-select-sample-data.png) ](./images/eventstream-select-sample-data-large.png#lightbox)
+    [ ![Image of Using Sampel data](./Images/eventstream-select-sample-data.png) ](./Images/eventstream-select-sample-data-large.png#lightbox)
 
 2.  In the **Add source**, give your source a name, and select **Bicycles Reflex compatible)
 1.  Select the **Add** button.
 
-    ![Select and name sample data event stream](./images/eventstream-sample-data.png)
+    ![Select and name sample data event stream](./Images/eventstream-sample-data.png)
 
 1. Once selecting the **Add** button, your stream will be mapped and you will be automotically redirected to the **eventstream canvas**.
 
-   [ ![Review the eventstrea canvas](./images/real-time-intelligence-eventstream-sourced.png) ](./images/real-time-intelligence-eventstream-sourced-large.png#lightbox)
+   [ ![Review the eventstrea canvas](./Images/real-time-intelligence-eventstream-sourced.png) ](./Images/real-time-intelligence-eventstream-sourced-large.png#lightbox)
 
 3. Enter the values for your Sample Data as shown in the following table and then select **Add**.
  
@@ -114,12 +114,12 @@ In this tutorial, you'll learn how to:
 
 1. After publishing, you can select the **Transform events or add destination** and then, select **KQL Database** as an option.
 
-   [ ![set KQL Database as eventstream destination](./images/select-kql-destination.png) ](./images/select-kql-destination-large.png)
+   [ ![set KQL Database as eventstream destination](./Images/select-kql-destination.png) ](./Images/select-kql-destination-large.png)
 
 
 2. You'll see a new side panel open up that gives you many options. Enter the necessary details of your KQL Database.
 
-   [ ![KQL Database eventstream with ingestion modes](./images/kql-database-event-processing-before-ingestion.png) ](./images/kql-database-event-processing-before-ingestion.png)
+   [ ![KQL Database eventstream with ingestion modes](./Images/kql-database-event-processing-before-ingestion.png) ](./Images/kql-database-event-processing-before-ingestion.png)
 
     - **Data ingestion mode:** There are two ways of ingesting data into KQL Database:
         - ***Direct ingestion:*** Ingest data directly to a KQL table without any transformation.
@@ -148,15 +148,15 @@ In this tutorial, you'll learn how to:
 
     C. Fill out the properties of the **Group by** settings section
 
-    [ ![Add group by to the transformation event.](./images/eventstream-add-aggregates.png) ](./images/eventstream-add-aggregates-large.png)
+    [ ![Add group by to the transformation event.](./Images/eventstream-add-aggregates.png) ](./Images/eventstream-add-aggregates-large.png)
 
 2. Once you create the **Group by** transform event, you will need to connect it from the **eventstream** to the **Group by**. You accomplish this without the use of code by clicking on the dot on the right hand side of the **eventstream** and dragging it to the dot on the left side of the new **group by** box.
 
-   [ ![Add link between eventstream and group by.](./images/group-by-drag-connectors.png) ](./images/group-by-drag-connectors-large.png)
+   [ ![Add link between eventstream and group by.](./Images/group-by-drag-connectors.png) ](./Images/group-by-drag-connectors-large.png)
 
 3. In the same manner, you can mouse-over the arrow between the **event stream** and the ***kql_dest*** and select the ***garbage can***
 
-   [ ![Remove a link between two events](./images/delete-flow-arrows.png) ](./images/delete-flow-arrows-large.png)
+   [ ![Remove a link between two events](./Images/delete-flow-arrows.png) ](./Images/delete-flow-arrows-large.png)
 
     > [!NOTE:]
     > Whenever you add or remove connectors, you will need to re-configure the destination objects.
@@ -221,7 +221,7 @@ To save a Queryset is straightforward and has a couple of approaches.
 
 1. In your **KQL database** while using the **Explore your data** tool, you can simply select **Save as KQL queryset**
 
-   ![Save KQL queryset from Explore your data](./images/save-as-queryset.png)
+   ![Save KQL queryset from Explore your data](./Images/save-as-queryset.png)
 
 2. Another approach is from the Real-Time Intelligence landing page by selecting the **KQL Queryset** button from the page and then naming your **queryset**
 
@@ -229,11 +229,11 @@ To save a Queryset is straightforward and has a couple of approaches.
 
 3. Once you're in the **Queryset landing page** you will see a **Copilot** button on the tool bar, select this to open the **Copilot pane** to ask questions about the data.
 
-    [ ![Open Copilot from menubar](./images/open-copilot-in-queryset.png) ](./images/open-copilot-in-queryset-large.png)
+    [ ![Open Copilot from menubar](./Images/open-copilot-in-queryset.png) ](./Images/open-copilot-in-queryset-large.png)
 
 4. In the **Copilot pane** you simply type your question and **Copilot** will generate the KQL query and allow you to ***copy*** or ***insert** the query into your queryset window. 
 
-    [ ![write copilot query by asking a question](./images/copilot-queryset-results.png) ](./images/copilot-queryset-results.png)
+    [ ![write copilot query by asking a question](./Images/copilot-queryset-results.png) ](./Images/copilot-queryset-results.png)
 
 5. From this point, you have the option to take individual queries and use them in dashboards or Power BI Reports using the **Pin to dashboard** or **Build PowerBI Report** buttons.
 
