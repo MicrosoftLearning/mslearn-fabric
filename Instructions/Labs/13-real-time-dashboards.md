@@ -39,7 +39,7 @@ In this lab, you use the Real-Time Intelligence in Fabric to create a Real-Time 
 
 4. In the **Database details** panel, select the pencil icon to turn on availability in OneLake.
 
-   [ ![Image of enable onelake.](./Images/real-time-dashboard-details.png) ](./images/real-time-dashboard-details-large.png#lightbox)
+   [ ![Image of enable onelake.](./Images/real-time-dashboard-details.png)](./images/real-time-dashboard-details-large.png#lightbox)
 
 ## Add a data source
 
