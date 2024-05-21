@@ -20,18 +20,18 @@ This lab takes approximately **25** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Real-Time Analytics**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Real-Time Intelligence**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
-In this lab, you use the Real-Time Analytics (RTA) in Fabric to create a KQL database from a sample eventstream. Real-Time Analytics conveniently provides a sample dataset that you can use to explore RTA's capabilities. You use this sample data to create KQL/SQL queries and querysets that analyze real-time data and allow for other uses in downstream processes.
+In this lab, you use the Real-Time Intelligence in Fabric to create a KQL database from a sample eventstream. Real-Time Intelligence conveniently provides a sample dataset that you can use to explore Real-Time Intelligences' capabilities. You use this sample data to create KQL/SQL queries and querysets that analyze real-time data and allow for other uses in downstream processes.
 
 ## Create a KQL Database
 
-1. Within the **Real-Time Analytics**, select the **KQL Database** box.
+1. Within the **Real-Time Intelligence**, select the **KQL Database** box.
 
    ![Image of choose KQL Database](./Images/select-kqldatabase.png)
 
@@ -300,6 +300,7 @@ KQL Database doesn't support T-SQL natively, but it provides a T-SQL endpoint th
     ORDER BY Borough ASC;
     
     ```
+This ends the lesson.
 
 ## Clean up resources
 

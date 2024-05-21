@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Get started with Real-Time Analytics in Microsoft Fabric'
-    module: 'Get started with real-time analytics in Microsoft Fabric'
+    title: 'Get started with Real-Time Intelligence in Microsoft Fabric'
+    module: 'Get started with Real-Time Intelligence in Microsoft Fabric'
 ---
 
-# Get started with Real-Time Analytics in Microsoft Fabric
+# Get started with Real-Time Intelligence in Microsoft Fabric
 
 Microsoft Fabric provides a runtime that you can use to store and query data by using Kusto Query Language (KQL). Kusto is optimized for data that includes a time series component, such as real-time data from log files or IoT devices.
 
@@ -16,7 +16,7 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Synapse Real-Time Analytics**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com), select **Real-Time Intelligence**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -34,11 +34,11 @@ Now that you have a workspace, it's time to download the data file you're going 
 
 Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data, you must create a table in a KQL database and ingest the data from the file.
 
-1. In the **Microsoft Fabric** experience portal, select the **Synapse Real-Time Analytics** experience image as shown here:
+1. In the **Microsoft Fabric** experience portal, select the **Real-Time Intelligence** experience image as shown here:
 
-    ![Screenshot of selected Fabric Experience home with RTA selected](./Images/fabric-experience-home.png)
+    ![Screenshot of selected Fabric Experience home with Real-Time Intelligence selected](./Images/fabric-experience-home.png)
 
-2. On the **Home** page for the **Real-Time Analytics** experience, select **KQL database** and create a new database with a name of your choice.
+2. On the **Home** page for the **Real-Time Intelligence** experience, select **KQL database** and create a new database with a name of your choice.
 3. When the new database has been created, select the option to get data from **Local File**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
         - **Database**: *The database you created is already selected*
