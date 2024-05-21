@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Real-time dashboards'
+    title: 'Real-time dashboards in Microsoft Fabric'
     module: 'Get Started with Real-Time Dashboards in Microsoft Fabric'
 ---
 
