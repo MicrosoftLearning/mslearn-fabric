@@ -233,7 +233,7 @@ To save a Queryset is straightforward and has a couple of approaches.
 
 4. In the **Copilot pane** you simply type your question and **Copilot** will generate the KQL query and allow you to ***copy*** or ***insert** the query into your queryset window. 
 
-    [ ![write copilot query by asking a question](./Images/copilot-queryset-results.png) ](./Images/copilot-queryset-results.png)
+    [ ![write copilot query by asking a question](./Images/copilot-queryset-results.png) ](./Images/copilot-queryset-results-large.png)
 
 5. From this point, you have the option to take individual queries and use them in dashboards or Power BI Reports using the **Pin to dashboard** or **Build PowerBI Report** buttons.
 
