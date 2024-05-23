@@ -138,7 +138,7 @@ Creating a parameter starts easily enough:
 | **Add "Select all" value** | Applicable to single and multiple selection parameter types, this option retrieves data for all parameter values and must be integrated into the query for functionality. |
 | **Default value** | The filter's default value, which is set upon the initial rendering of the dashboard. |
 
-6. Enusre that you add the parameter to each of the queries within the tiles and then select **Apply changes**.
+6. Ensure that you add the parameter to each of the queries within the tiles and then select **Apply changes**.
 
 **Before KQL query**
 ```kusto
