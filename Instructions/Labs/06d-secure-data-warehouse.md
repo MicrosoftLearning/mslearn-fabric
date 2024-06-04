@@ -12,7 +12,7 @@ This lab will take approximately **45** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
-## Create a workspace
+## Create a workspace 
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
