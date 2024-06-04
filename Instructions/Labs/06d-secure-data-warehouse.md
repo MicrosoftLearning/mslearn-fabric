@@ -39,7 +39,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 1. In your warehouse, select the **T-SQL** tile, and replace the default SQL code with the following T-SQL statements to create a table and to insert and view data.  
 
-    ```sql
+    ```tsql
     CREATE TABLE dbo.Customer
     (   
         CustomerID INT NOT NULL,   
@@ -70,23 +70,23 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 4. Connect as a test user that's a member of the **Viewer** workspace role and run the following T-SQL statement.
 
-    ```sql
+    ```tsql
     SELECT * FROM dbo.Customer;
     GO
     ```
 
     The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns are masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace 'testuser@testdomain.com' with the name of the user you're testing with who is a member of **Viewer** workspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace **testuser@testdomain.com** with the name of the user you're testing with who is a member of **Viewer** workspace role. 
 
-    ```sql
+    ```tsql
     GRANT UNMASK ON dbo.Customer TO [testuser@testdomain.com];
     GO
     ```
 
 6. Connect as the test user again and run the following T-SQL statement.
 
-    ```sql
+    ```tsql
     SELECT * FROM dbo.Customer;
     GO
     ```
@@ -99,8 +99,8 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Within the dropdown, under the header **Blank**, select **New SQL Query**.
 
-2. Create a table and insert data into it. So that you can test row-level security in a later step, replace 'testuser1@mydomain.com' with a user name from your environment and replace 'testuser2@mydomain.com' with your user name.
-    ```sql
+2. Create a table and insert data into it. So that you can test row-level security in a later step, replace **testuser1@mydomain.com** with a user name from your environment and replace **testuser2@mydomain.com** with your user name.
+    ```tsql
     CREATE TABLE dbo.Sales  
     (  
         OrderID INT,  
@@ -129,7 +129,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 4. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Sales** table has been created.
 5. Create a new schema, a security predicate defined as a function, and a security policy.  
 
-    ```sql
+    ```tsql
     --Create a separate schema to hold the row-level security objects (the predicate function and the security policy)
     CREATE SCHEMA rls;
     GO
@@ -155,12 +155,12 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions**, and verify that the function has been created.
 8. Confirm that you're logged as a user other than yourself by running the following T-SQL.
 
-    ```sql
+    ```tsql
     SELECT USER_NAME();
     GO
 5. Query the Sales table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as.
 
-    ```sql
+    ```tsql
     SELECT * FROM dbo.Sales;
     GO
 
@@ -172,7 +172,7 @@ Column-level security allows you to designate which users can access specific co
 
 2. Create a table and insert data into the table.
 
- ```sql
+ ```tsql
     CREATE TABLE dbo.Orders
     (   
         OrderID INT,   
@@ -191,9 +191,9 @@ Column-level security allows you to designate which users can access specific co
     GO
  ```
 
-3. Deny permission to view a column in the table. The T-SQL statement prevents 'testuser@mydomain.com' from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace 'testuser@mydomain.com' with a user name in your system who has Viewer permissions on the workspace.
+3. Deny permission to view a column in the table. The T-SQL statement prevents **testuser@mydomain.com** from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace **testuser@mydomain.com** with a user name in your system who has Viewer permissions on the workspace.
 
- ```sql
+ ```tsql
     DENY SELECT ON dbo.Orders (CreditCard) TO [testuser@mydomain.com];
  ```
 
@@ -201,7 +201,7 @@ Column-level security allows you to designate which users can access specific co
 
 5. Query the Orders table to confirm that column-level security works as expected. The following query will return only the OrderID and CustomerID columns, not the CrediteCard column.  
 
-    ```sql
+    ```tsql
     SELECT * FROM dbo.Orders;
     GO
 
@@ -246,7 +246,7 @@ Fabric warehouse has a permissions model that allows you to control access to da
 
 3. Next `DENY SELECT` permissions on the table to a user with who is a member of the Workspace Viewer role and `GRANT EXECUTE` on the procedure to the same user.
 
- ```sql
+ ```tsql
     DENY SELECT on dbo.Parts to [testuser@mydomain.com];
     GO
 
@@ -255,9 +255,9 @@ Fabric warehouse has a permissions model that allows you to control access to da
 
  ```
 
-4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of [testuser@mydomain.com]. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
+4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of **testuser@mydomain.com**. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
 
- ```sql
+ ```tsql
     EXEC dbo.sp_PrintMessage;
     GO
     
