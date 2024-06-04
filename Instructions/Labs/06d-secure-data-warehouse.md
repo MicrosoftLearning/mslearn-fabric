@@ -6,9 +6,9 @@ lab:
 
 # Secure data in a data warehouse
 
-Microsoft Fabric permissions and granular SQL permissions work together to govern Warehouse access and user permissions. In this exercise, you will secure data using granular permissions, column-level security, row-level security and dynamic data masking.
+Microsoft Fabric permissions and granular SQL permissions work together to govern Warehouse access and user permissions. In this exercise, you'll secure data using granular permissions, column-level security, row-level security, and dynamic data masking.
 
-This lab will take approximately **45** minutes to complete.
+This lab takes approximately **45** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
@@ -25,7 +25,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 ## Create a data warehouse
 
-Next, create a data warehouse in the workspace you just created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
+Next, create a data warehouse in the workspace you created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
 
 1. On the **Synapse Data Warehouse** home page, create a new **Warehouse** with a name of your choice.
 
@@ -35,7 +35,7 @@ Next, create a data warehouse in the workspace you just created. The Synapse Dat
 
 ## Apply dynamic data masking rules to columns in a table
 
-Dynamic data masking rules are applied on individual columns at the table level so all queries are affected by the masking. Users who do no have explicit permissions to view confidential data will see masked values in query results while users with explict permission to view the data will see it unobscured. There are four types of masks: default, email, random and custom string. In this exercise, you will apply a default mask, an email mask, and a custom string mask.
+Dynamic data masking rules are applied on individual columns at the table level so all queries are affected by the masking. Users who do no have explicit permissions to view confidential data see masked values in query results while users with explicit permission to view the data see it unobscured. There are four types of masks: default, email, random and custom string. In this exercise, you will apply a default mask, an email mask, and a custom string mask.
 
 1. In your warehouse, select the **T-SQL** tile, and replace the default SQL code with the following T-SQL statements to create a table and to insert and view data.  
 
@@ -66,7 +66,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customer** in the **dbo** schema of the data warehouse.
 
-3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customer** table has been created. The SELECT statement returns unmasked data because you are connected as the Workspace Admin which can see unmasked data.
+3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customer** table has been created. The SELECT statement returns unmasked data because you're connected as the Workspace Admin, which can see unmasked data.
 
 4. Connect as a test user that's a member of the **Viewer** workspace role and run the following T-SQL statement.
 
@@ -75,9 +75,9 @@ Dynamic data masking rules are applied on individual columns at the table level 
     GO
     ```
 
-    The test user has not been granted UNMASK permission so data returned for the FirstName, Phone and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
+    The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns are masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace 'testuser@testdomain.com' with the name of the user you're testing with who is a member of **Viewer** orkspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace 'testuser@testdomain.com' with the name of the user you're testing with who is a member of **Viewer** workspace role. 
 
     ```sql
     GRANT UNMASK ON dbo.Customer TO [testuser@testdomain.com];
@@ -95,7 +95,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 ## Apply row-level security
 
-Row-level security (RLS) can be used to limit access to rows based on the identity, or role of the user executing a query.  In this exercise, you will restrict access to rows by creating a security policy and a security predicate defined as an inline table-valued function.
+Row-level security (RLS) can be used to limit access to rows based on the identity, or role of the user executing a query. In this exercise, you restrict access to rows by creating a security policy and a security predicate defined as an inline table-valued function.
 
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Within the dropdown, under the header **Blank**, select **New SQL Query**.
 
@@ -166,7 +166,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 ## Implement column-level security
 
-Column-level security allows you to designate which users can access specific columns in a table. It is implemented by issuing a GRANT statement on a table specifying a list of columns and the user or role that can read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns are not viewable by a user other than yourself.
+Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a GRANT statement on a table specifying a list of columns and the user or role that can read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
 
 1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown.  Within the dropdown, under the header **Blank**, select **New SQL Query**.  
 
@@ -191,7 +191,7 @@ Column-level security allows you to designate which users can access specific co
     GO
  ```
 
-3. Deny permission to view a column in the table. The Transact SQL below will prevent '<testuser@mydomain.com>' from seeing the CreditCard column in the Orders table. In the `DENY` statement below, replace testuser@mydomain.com with a user name in your system who has Viewer permissions on the workspace.
+3. Deny permission to view a column in the table. The T-SQL statement prevents 'testuser@mydomain.com' from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace 'testuser@mydomain.com' with a user name in your system who has Viewer permissions on the workspace.
 
  ```sql
     DENY SELECT ON dbo.Orders (CreditCard) TO [testuser@mydomain.com];
@@ -212,9 +212,9 @@ Column-level security allows you to designate which users can access specific co
 
 ## Configure SQL granular permissions using T-SQL
 
-Fabric warehouse has a permissions model that allows you to control access to data at the workspace level, and at the item level. When you need more granular control of what users can do with securables in a Fabric warehouse, you can use the standard SQL data control language (DCL) commands `GRANT`,`DENY` and `REVOKE`. In this exercise, you will create objects, secure them using `GRANT`, and `DENY`, and then run queries to view the effect of applying granular permissions.
+Fabric warehouse has a permissions model that allows you to control access to data at the workspace level, and at the item level. When you need more granular control of what users can do with securables in a Fabric warehouse, you can use the standard SQL data control language (DCL) commands `GRANT`,`DENY` and, `REVOKE`. In this exercise, you create objects, secure them using `GRANT`, and `DENY`, and then run queries to view the effect of applying granular permissions.
 
-1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown.  Withing the header **Blank**, select **New SQL Query**.  
+1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown.  Within the header **Blank**, select **New SQL Query**.  
 
 2. Create a stored procedure and a table.
 
@@ -255,7 +255,7 @@ Fabric warehouse has a permissions model that allows you to control access to da
 
  ```
 
-4. Log in to Fabric as the user you specified in the `DENY` and `GRANT` statements above in place of [testuser@mydomain.com]. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
+4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of [testuser@mydomain.com]. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
 
  ```sql
     EXEC dbo.sp_PrintMessage;
@@ -266,7 +266,7 @@ Fabric warehouse has a permissions model that allows you to control access to da
 
 ## Clean up resources
 
-In this exercise, you have applied dynamic data masking to columns in a table, applied row-level security, implemented column-level security and configured SQL granular permissions using T-SQL.
+In this exercise, you applied dynamic data masking to columns in a table, applied row-level security, implemented column-level security and, configured SQL granular permissions using T-SQL.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 2. In the **...** menu on the toolbar, select **Workspace settings**.
