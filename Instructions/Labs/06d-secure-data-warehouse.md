@@ -77,7 +77,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
     The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `testuser@testdomain.com` with the name of the user you're testing with who is a member of **Viewer** workspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `testuser@testdomain.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
 
     ```tsql
     GRANT UNMASK ON dbo.Customer TO [testuser@testdomain.com];
