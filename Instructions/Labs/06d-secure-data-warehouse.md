@@ -70,10 +70,10 @@ Dynamic data masking rules are applied on individual columns at the table level 
     ```
     The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `testuser@testdomain.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `[<username1>@<your_domain>.com]` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
 
     ```tsql
-    GRANT UNMASK ON dbo.Customer TO [testuser@testdomain.com];
+    GRANT UNMASK ON dbo.Customer TO [<username1>@<your_domain>.com];
     ```
 
 6. Connect as the test user again and run the following T-SQL statement.
@@ -149,14 +149,14 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     ```tsql
     SELECT USER_NAME();
 
-5. Query the Sales table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as.
+5. Query the **Sales** table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as.
 
     ```tsql
     SELECT * FROM dbo.Sales;
 
 ## Implement column-level security
 
-Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a GRANT or DENY statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
+Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a `GRANT` or `DENY` statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
 
 1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown. Under the header **Blank**, select **New SQL Query**.  
 
@@ -178,7 +178,7 @@ Column-level security allows you to designate which users can access specific co
     SELECT * FROM dbo.Orders;
      ```
 
-3. Deny permission to view a column in the table. The T-SQL statement prevents `[<username>@<your_domain>.com]` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `[<username>@<your_domain>.com]` with a user name in your system who has Viewer permissions on the workspace.
+3. Deny permission to view a column in the table. The T-SQL statement prevents `[<username>@<your_domain>.com]` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `[<username>@<your_domain>.com]` with a user name in your system who has **Viewer** permissions on the workspace.
 
      ```tsql
     DENY SELECT ON dbo.Orders (CreditCard) TO [<username>@<your_domain>.com];
@@ -219,13 +219,13 @@ Fabric has a permissions model that allows you to control access to data at the 
     (1234, 'Wheel'),
     (5678, 'Seat');
     
-    --Execute the stored procedure and select from the table and note the results you get as a member of the Workspace Admin role. Look for output from the stored procedure on the 'Messages' tab.
+    --Execute the stored procedure and select from the table and note the results you get as a member of the **Workspace Admin** role. Look for output from the stored procedure on the 'Messages' tab.
       EXEC dbo.sp_PrintMessage;
     
     SELECT * FROM dbo.Parts
      ```
 
-3. Next `DENY SELECT` permissions on the table to a user  who is a member of the Workspace Viewer role and `GRANT EXECUTE` on the procedure to the same user. Replace `[<username>@<your_domain>.com]` with a user name from your environment that is a member of the workspace viewer role. 
+3. Next `DENY SELECT` permissions on the table to a user who is a member of the **Workspace Viewer** role and `GRANT EXECUTE` on the procedure to the same user. Replace `[<username>@<your_domain>.com]` with a user name from your environment that is a member of the **Workspace Viewer** role. 
 
      ```tsql
     DENY SELECT on dbo.Parts to [<username>@<your_domain>.com];
@@ -245,6 +245,6 @@ Fabric has a permissions model that allows you to control access to data at the 
 
 In this exercise, you applied dynamic data masking rules to columns in a table, applied row-level security, implemented column-level security and, configured SQL granular permissions using T-SQL.
 
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
+1. In the left navigation bar, select the icon for your workspace to view all of the items it contains.
+2. In the menu on the top toolbar, select **Workspace settings**.
 3. In the **General** section, select **Remove this workspace**.
