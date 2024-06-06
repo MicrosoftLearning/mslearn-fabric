@@ -50,7 +50,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Connection**: Create new connection
     - **Connection name**: *Specify a unique name*
     - **Data gateway**: (none)
-    - **Authentication kind**: Basic (*Leave the username and password blank*)
+    - **Authentication kind**: Anonymous
 5. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
     - **Request method**: GET
