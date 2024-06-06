@@ -172,7 +172,7 @@ Column-level security allows you to designate which users can access specific co
 
 2. Create a table and insert data into the table.
 
- ```tsql
+    ```tsql
     CREATE TABLE dbo.Orders
     (   
         OrderID INT,   
@@ -189,13 +189,13 @@ Column-level security allows you to designate which users can access specific co
 
     SELECT * FROM dbo.Orders;
     GO
- ```
+     ```
 
 3. Deny permission to view a column in the table. The T-SQL statement prevents `testuser@mydomain.com` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `testuser@mydomain.com` with a user name in your system who has Viewer permissions on the workspace.
 
- ```tsql
+     ```tsql
     DENY SELECT ON dbo.Orders (CreditCard) TO [testuser@mydomain.com];
- ```
+     ```
 
 4. Test column-level security by logging in to Fabric as the user you denied select permissions to.
 
@@ -218,7 +218,7 @@ Fabric has a permissions model that allows you to control access to data at the 
 
 2. Create a stored procedure and a table.
 
- ```
+     ```tsql
     CREATE PROCEDURE dbo.sp_PrintMessage
     AS
     PRINT 'Hello World.';
@@ -242,27 +242,27 @@ Fabric has a permissions model that allows you to control access to data at the 
     
     SELECT * FROM dbo.Parts
     GO
-  ```
+     ```
 
 3. Next `DENY SELECT` permissions on the table to a user  who is a member of the Workspace Viewer role and `GRANT EXECUTE` on the procedure to the same user. Replace `testuser@mydomain.com` with a user name from your environment that is a member of the workspace viewer role. 
 
- ```tsql
+     ```tsql
     DENY SELECT on dbo.Parts to [testuser@mydomain.com];
     GO
 
     GRANT EXECUTE on dbo.sp_PrintMessage to [testuser@mydomain.com];
     GO
 
- ```
+     ```
 
 4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of `testuser@mydomain.com`. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
 
- ```tsql
+     ```tsql
     EXEC dbo.sp_PrintMessage;
     GO
     
     SELECT * FROM dbo.Parts
- ```
+     ```
 
 ## Clean up resources
 
