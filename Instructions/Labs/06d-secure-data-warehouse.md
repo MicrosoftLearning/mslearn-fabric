@@ -131,8 +131,9 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
         RETURN SELECT 1 AS fn_securitypredicate_result   
     WHERE @SalesRep = USER_NAME();
     
-    --Create a security policy to invoke and enforce the function each time a query is run on the Sales table.
-    --The security policy has a filter predicate that silently filters the rows available to read operations (SELECT, UPDATE, and DELETE). 
+    /*Create a security policy to invoke and enforce the function each time a query is run on the Sales table.
+    The security policy has a filter predicate that silently filters the rows available to 
+    read operations (SELECT, UPDATE, and DELETE). */
     CREATE SECURITY POLICY SalesFilter  
     ADD FILTER PREDICATE rls.fn_securitypredicate(SalesRep)   
     ON dbo.Sales  
