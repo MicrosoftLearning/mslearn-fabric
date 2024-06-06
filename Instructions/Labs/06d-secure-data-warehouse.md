@@ -59,7 +59,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
     SELECT * FROM dbo.Customer;
     GO
     ```
-    When users who are restricted from seeing unmasked data query the table, the `FirstName` column will show the first letter of the string with XXXXXXX and none of the last characters. The `Phone` column will show xxxx. The `Email` column will show the first letter of the email address followed by XXX@XXX.com.
+    When users who are restricted from seeing unmasked data query the table, the `FirstName` column will show the first letter of the string with XXXXXXX and none of the last characters. The `Phone` column will show xxxx. The `Email` column will show the first letter of the email address followed by `XXX@XXX.com`.
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customer** in the **dbo** schema of the data warehouse.
 
