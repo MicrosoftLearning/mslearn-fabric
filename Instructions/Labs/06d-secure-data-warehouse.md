@@ -49,11 +49,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
         Email varchar(50) MASKED WITH (FUNCTION = 'email()') NULL   
     );
     GO
-    --Users restricted from seeing masked data will see the following when they query the table
-    --The FirstName column shows the first letter of the string with XXXXXXX and none of the last characters.
-    --The Phone column shows xxxx
-    --The Email column shows the first letter of the email address followed by XXX@XXX.com.
-    
+     
     INSERT dbo.Customer (CustomerID, FirstName, LastName, Phone, Email) VALUES
     (29485,'Catherine','Abel','555-555-5555','catherine0@adventure-works.com'),
     (29486,'Kim','Abercrombie','444-444-4444','kim2@adventure-works.com'),
@@ -63,6 +59,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
     SELECT * FROM dbo.Customer;
     GO
     ```
+    When users who are restricted from seeing unmasked data query the table, the `FirstName` column will show the first letter of the string with XXXXXXX and none of the last characters. The `Phone` column will show xxxx. The `Email` column will show the first letter of the email address followed by XXX@XXX.com.
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customer** in the **dbo** schema of the data warehouse.
 
