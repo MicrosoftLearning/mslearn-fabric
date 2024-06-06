@@ -10,10 +10,6 @@ Microsoft Fabric permissions and granular SQL permissions work together to gover
 
 This lab takes approximately **45** minutes to complete.
 
-**Prerequisite**
-
-
-
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
@@ -25,7 +21,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-empty-workspace.png)
 
-> **Note**: The exercises in this lab require two users: a Workspace Admin and a Workspace Viewer on the workspace just created. When you created the workspace required for the exercises, you automatically became a member of the Workspace Admin role. The second user from your environment can be added to the Workspace Viewer role in the workspace by clicking on  **Manage Access** in the top toolbar.
+> **Note**: The exercises in this lab require two users: a Workspace Admin and a Workspace Viewer on the workspace just created. When you created the workspace required for this exercise, you automatically became a member of the Workspace Admin role. The second user from your environment can be added to the Workspace Viewer role in the workspace by clicking on  **Manage Access** in the Workspace.
 
 ## Create a data warehouse
 
