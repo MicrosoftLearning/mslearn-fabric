@@ -1,7 +1,7 @@
 ---
 lab:
-    title: 'Secure data in a data warehouse'
-    module: 'Get started with data warehouses in Microsoft Fabric'
+    title: 'Secure a Microsoft Fabric data warehouse'
+    module: 'Secure a Microsoft Fabric data warehouse'
 ---
 
 # Secure data in a data warehouse
@@ -120,6 +120,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     ```tsql
     --Create a separate schema to hold the row-level security objects (the predicate function and the security policy)
     CREATE SCHEMA rls;
+    GO
     
     --Create the security predicate defined as an inline table-valued function. A predicate evalutes to true (1) or false (0). This security predicate returns 1, meaning a row is accessible, when a row in the SalesRep column is the same as the user executing the query.
 
@@ -130,6 +131,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     AS  
         RETURN SELECT 1 AS fn_securitypredicate_result   
     WHERE @SalesRep = USER_NAME();
+    GO
     
     /*Create a security policy to invoke and enforce the function each time a query is run on the Sales table.
     The security policy has a filter predicate that silently filters the rows available to 
@@ -138,6 +140,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     ADD FILTER PREDICATE rls.fn_securitypredicate(SalesRep)   
     ON dbo.Sales  
     WITH (STATE = ON);
+    GO
 
 6. Use the **&#9655; Run** button to run the SQL script
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions**, and verify that the function has been created.
