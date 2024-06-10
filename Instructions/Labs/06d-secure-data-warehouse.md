@@ -201,7 +201,7 @@ Column-level security allows you to designate which users can access specific co
     SELECT * FROM dbo.Orders;
     ```
 
-    --You'll receive an error because access to the CreditCard column has been restricted.  Try selecting only the OrderID and CustomerID fields and the query will succeed.
+    You'll receive an error because access to the CreditCard column has been restricted.  Try selecting only the OrderID and CustomerID fields and the query will succeed.
 
     ```tsql   
     SELECT OrderID, CustomerID from dbo.Orders
