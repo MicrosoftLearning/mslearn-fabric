@@ -97,6 +97,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Under the header **Blank**, select **New SQL Query**.
 
 2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `[<username1>@<your_domain>.com]` with a user name from your environment and replace `[<username2>@<your_domain>.com]` with your user name.
+
     ```tsql
     CREATE TABLE dbo.Sales  
     (  
@@ -138,7 +139,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
         RETURN SELECT 1 AS fn_securitypredicate_result   
     WHERE @SalesRep = USER_NAME();
     GO
-    
+
     /*Create a security policy to invoke and enforce the function each time a query is run on the Sales table.
     The security policy has a filter predicate that silently filters the rows available to 
     read operations (SELECT, UPDATE, and DELETE). */
@@ -147,19 +148,21 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     ON dbo.Sales  
     WITH (STATE = ON);
     GO
+    ```
 
 6. Use the **&#9655; Run** button to run the SQL script
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions**, and verify that the function has been created.
-8. Log in to Fabric as the user you replaced `[<username1>@<your_domain>.com]` with, in the Sales table `INSERT`statement from step 2. Confirm that you're logged in as that user by running the following T-SQL.
+8. Log in to Fabric as the user you replaced `[<username1>@<your_domain>.com]` with, in the Sales table `INSERT`statement from step 9. Confirm that you're logged in as that user by running the following T-SQL.
 
     ```tsql
     SELECT USER_NAME();
+    ```
 
-5. Query the **Sales** table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as.
+9. Query the **Sales** table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as.
 
     ```tsql
     SELECT * FROM dbo.Sales;
-
+    ```
 ## Implement column-level security
 
 Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a `GRANT` or `DENY` statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
@@ -196,9 +199,11 @@ Column-level security allows you to designate which users can access specific co
 
     ```tsql
     SELECT * FROM dbo.Orders;
+    ```
 
-    --You'll receive an error because access to the CreditCard column has been restricted.  Try selecting only the OrderID and CustomerID fields and the query will succeed.
+    You'll receive an error because access to the CreditCard column has been restricted.  Try selecting only the OrderID and CustomerID fields and the query will succeed.
 
+    ```tsql   
     SELECT OrderID, CustomerID from dbo.Orders
     ```
 
@@ -244,7 +249,7 @@ Fabric has a permissions model that allows you to control access to data at the 
      ```tsql
     EXEC dbo.sp_PrintMessage;
        
-    SELECT * FROM dbo.Parts
+    SELECT * FROM dbo.Parts;
      ```
 
 ## Clean up resources
