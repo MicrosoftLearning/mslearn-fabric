@@ -203,6 +203,7 @@ Column-level security allows you to designate which users can access specific co
 
     --You'll receive an error because access to the CreditCard column has been restricted.  Try selecting only the OrderID and CustomerID fields and the query will succeed.
 
+    ```tsql   
     SELECT OrderID, CustomerID from dbo.Orders
     ```
 
@@ -248,7 +249,7 @@ Fabric has a permissions model that allows you to control access to data at the 
      ```tsql
     EXEC dbo.sp_PrintMessage;
        
-    SELECT * FROM dbo.Parts
+    SELECT * FROM dbo.Parts;
      ```
 
 ## Clean up resources
