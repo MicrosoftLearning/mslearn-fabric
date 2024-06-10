@@ -164,7 +164,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     SELECT * FROM dbo.Sales;
     ```
 
-## Implement column-level security
+## Implement Column-level security
 
 Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a `GRANT` or `DENY` statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
 
@@ -230,6 +230,7 @@ Fabric has a permissions model that allows you to control access to data at the 
     INSERT dbo.Parts (PartID, PartName) VALUES
     (1234, 'Wheel'),
     (5678, 'Seat');
+     GO
     
     --Execute the stored procedure and select from the table and note the results you get as a member of the Workspace Admin role. Look for output from the stored procedure on the 'Messages' tab.
     EXEC dbo.sp_PrintMessage;
