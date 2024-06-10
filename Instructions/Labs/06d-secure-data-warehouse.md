@@ -63,7 +63,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
     SELECT * FROM dbo.Customer;
     
     ```
-    When users who are restricted from seeing unmasked data query the table, the **FirstName** column will show the first letter of the string with XXXXXXX and none of the last characters. The **Phone** column will show xxxx. The **Email** column will show the first letter of the email address followed by `XXX@XXX.com`. This approach ensure that sensitive data remains confidential, while still allowing restricted users to query the table.
+    When users who are restricted from seeing unmasked data query the table, the **FirstName** column will show the first letter of the string with XXXXXXX and none of the last characters. The **Phone** column will show xxxx. The **Email** column will show the first letter of the email address followed by `XXX@XXX.com`. This approach ensures that sensitive data remains confidential, while still allowing restricted users to query the table.
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customer** in the **dbo** schema of the data warehouse.
 
@@ -129,7 +129,10 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     CREATE SCHEMA rls;
     GO
     
-    --Create the security predicate defined as an inline table-valued function. A predicate evalutes to true (1) or false (0). This security predicate returns 1, meaning a row is accessible, when a row in the SalesRep column is the same as the user executing the query.
+    /*Create the security predicate defined as an inline table-valued function.
+    A predicate evalutes to true (1) or false (0). This security predicate returns 1,
+    meaning a row is accessible, when a row in the SalesRep column is the same as the user
+    executing the query.*/
 
     --Create a function to evaluate who is querying the table
     CREATE FUNCTION rls.fn_securitypredicate(@SalesRep AS VARCHAR(60)) 
