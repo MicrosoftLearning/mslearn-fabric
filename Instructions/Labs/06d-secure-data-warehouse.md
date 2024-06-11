@@ -98,7 +98,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `<username1>@<your_domain>.com` with a user name from your environment and replace `<username2>@<your_domain>.com` with your user name.
 
-```tsql
+    ```tsql
     CREATE TABLE dbo.Sales  
     (  
         OrderID INT,  
@@ -166,6 +166,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     ```tsql
     SELECT * FROM dbo.Sales;
     ```
+
 ## Implement column-level security
 
 Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a `GRANT` or `DENY` statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
@@ -180,7 +181,7 @@ Column-level security allows you to designate which users can access specific co
         OrderID INT,   
         CustomerID INT,  
         CreditCard VARCHAR(20)      
-        );
+    );
 
     INSERT dbo.Orders (OrderID, CustomerID, CreditCard) VALUES
     (1234, 5678, '111111111111111'),
@@ -222,7 +223,8 @@ Fabric has a permissions model that allows you to control access to data at the 
     CREATE PROCEDURE dbo.sp_PrintMessage
     AS
     PRINT 'Hello World.';
-  
+    GO
+
     CREATE TABLE dbo.Parts
     (
         PartID INT,
@@ -234,9 +236,12 @@ Fabric has a permissions model that allows you to control access to data at the 
     (5678, 'Seat');
      GO
     
-    --Execute the stored procedure and select from the table and note the results you get as a member of the Workspace Admin role. Look for output from the stored procedure on the 'Messages' tab.
+    /*Execute the stored procedure and select from the table and note the results you get
+    as a member of the Workspace Admin role. Look for output from the stored procedure on 
+    the 'Messages' tab.*/
     EXEC dbo.sp_PrintMessage;
-    
+    GO
+
     SELECT * FROM dbo.Parts
      ```
 
