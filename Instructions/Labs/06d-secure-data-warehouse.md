@@ -63,7 +63,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
     SELECT * FROM dbo.Customers;
     
     ```
-    When users who are restricted from seeing unmasked data query the table, the **FirstName** column will show the first letter of the string with XXXXXXX and none of the last characters. The **Phone** column will show xxxx. The **Email** column will show the first letter of the email address followed by `XXX@XXX.com`. This approach ensure that sensitive data remains confidential, while still allowing restricted users to query the table.
+    When users who are restricted from seeing unmasked data query the table, the **FirstName** column will show the first letter of the string with XXXXXXX and none of the last characters. The **Phone** column will show xxxx. The **Email** column will show the first letter of the email address followed by `XXX@XXX.com`. This approach ensures that sensitive data remains confidential, while still allowing restricted users to query the table.
 
 2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customers** in the **dbo** schema of the data warehouse.
 
@@ -98,7 +98,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `<username1>@<your_domain>.com` with a user name from your environment and replace `<username2>@<your_domain>.com` with your user name.
 
-    ```tsql
+```tsql
     CREATE TABLE dbo.Sales  
     (  
         OrderID INT,  
@@ -129,7 +129,10 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     CREATE SCHEMA rls;
     GO
     
-    --Create the security predicate defined as an inline table-valued function. A predicate evalutes to true (1) or false (0). This security predicate returns 1, meaning a row is accessible, when a row in the SalesRep column is the same as the user executing the query.
+    /*Create the security predicate defined as an inline table-valued function.
+    A predicate evalutes to true (1) or false (0). This security predicate returns 1,
+    meaning a row is accessible, when a row in the SalesRep column is the same as the user
+    executing the query.*/
 
     --Create a function to evaluate who is querying the table
     CREATE FUNCTION rls.fn_securitypredicate(@SalesRep AS VARCHAR(60)) 
@@ -213,7 +216,7 @@ Fabric has a permissions model that allows you to control access to data at the 
 
 1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown. Under the header **Blank**, select **New SQL Query**.  
 
-2. Create a stored procedure and a table.
+2. Create a stored procedure and a table. Then execute the procedure and query the table.
 
      ```tsql
     CREATE PROCEDURE dbo.sp_PrintMessage
@@ -229,9 +232,10 @@ Fabric has a permissions model that allows you to control access to data at the 
     INSERT dbo.Parts (PartID, PartName) VALUES
     (1234, 'Wheel'),
     (5678, 'Seat');
+     GO
     
-    --Execute the stored procedure and select from the table and note the results you get as a member of the **Workspace Admin** role. Look for output from the stored procedure on the 'Messages' tab.
-      EXEC dbo.sp_PrintMessage;
+    --Execute the stored procedure and select from the table and note the results you get as a member of the Workspace Admin role. Look for output from the stored procedure on the 'Messages' tab.
+    EXEC dbo.sp_PrintMessage;
     
     SELECT * FROM dbo.Parts
      ```
