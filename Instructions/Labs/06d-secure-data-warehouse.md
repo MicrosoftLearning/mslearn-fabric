@@ -257,7 +257,8 @@ Fabric has a permissions model that allows you to control access to data at the 
 
      ```tsql
     EXEC dbo.sp_PrintMessage;
-       
+    GO
+   
     SELECT * FROM dbo.Parts;
      ```
 
