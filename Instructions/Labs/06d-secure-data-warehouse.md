@@ -76,7 +76,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
     ```
     The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `<username1>@<your_domain>.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `<username>@<your_domain>.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
 
     ```tsql
     GRANT UNMASK ON dbo.Customers TO [<username>@<your_domain>.com];
@@ -155,7 +155,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 6. Use the **&#9655; Run** button to run the SQL script
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions**, and verify that the function has been created.
-8. Log in to Fabric as the user you replaced `<username1>@<your_domain>.com` with, in the Sales table `INSERT`statement from step 9. Confirm that you're logged in as that user by running the following T-SQL.
+8. Log in to Fabric as the user you replaced `<username1>@<your_domain>.com` with, in the Sales table `INSERT`statement. Confirm that you're logged in as that user by running the following T-SQL.
 
     ```tsql
     SELECT USER_NAME();
