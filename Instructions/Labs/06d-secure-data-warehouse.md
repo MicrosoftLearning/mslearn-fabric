@@ -46,7 +46,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 1. In your warehouse, select the **T-SQL** tile, and replace the default SQL code with the following T-SQL statements to create a table and to insert and view data.  
 
     ```tsql
-    CREATE TABLE dbo.Customer
+    CREATE TABLE dbo.Customers
     (   
         CustomerID INT NOT NULL,   
         FirstName varchar(50) MASKED WITH (FUNCTION = 'partial(1,"XXXXXXX",0)') NULL,     
@@ -55,37 +55,37 @@ Dynamic data masking rules are applied on individual columns at the table level 
         Email varchar(50) MASKED WITH (FUNCTION = 'email()') NULL   
     );
     
-    INSERT dbo.Customer (CustomerID, FirstName, LastName, Phone, Email) VALUES
+    INSERT dbo.Customers (CustomerID, FirstName, LastName, Phone, Email) VALUES
     (29485,'Catherine','Abel','555-555-5555','catherine0@adventure-works.com'),
     (29486,'Kim','Abercrombie','444-444-4444','kim2@adventure-works.com'),
     (29489,'Frances','Adams','333-333-3333','frances0@adventure-works.com');
     
-    SELECT * FROM dbo.Customer;
+    SELECT * FROM dbo.Customers;
     
     ```
     When users who are restricted from seeing unmasked data query the table, the **FirstName** column will show the first letter of the string with XXXXXXX and none of the last characters. The **Phone** column will show xxxx. The **Email** column will show the first letter of the email address followed by `XXX@XXX.com`. This approach ensure that sensitive data remains confidential, while still allowing restricted users to query the table.
 
-2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customer** in the **dbo** schema of the data warehouse.
+2. Use the **&#9655; Run** button to run the SQL script, which creates a new table named **Customers** in the **dbo** schema of the data warehouse.
 
-3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customer** table has been created. The `SELECT` statement returns unmasked data for you because as the workspace creator, you're a member of the Workspace Admin role which can see unmasked data.
+3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customers** table has been created. The `SELECT` statement returns unmasked data for you because as the workspace creator, you're a member of the Workspace Admin role which can see unmasked data.
 
 4. Connect as a test user that's a member of the **Viewer** workspace role and run the following T-SQL statement.
 
     ```tsql
-    SELECT * FROM dbo.Customer;
+    SELECT * FROM dbo.Customers;
     ```
     The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
-5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `[<username1>@<your_domain>.com]` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
+5. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `<username1>@<your_domain>.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
 
     ```tsql
-    GRANT UNMASK ON dbo.Customer TO [<username1>@<your_domain>.com];
+    GRANT UNMASK ON dbo.Customers TO [<username>@<your_domain>.com];
     ```
 
 6. Connect as the test user again and run the following T-SQL statement.
 
     ```tsql
-    SELECT * FROM dbo.Customer;
+    SELECT * FROM dbo.Customers;
     ```
 
     The data is returned unmasked because the test user has been granted the `UNMASK` permission.
@@ -96,7 +96,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Under the header **Blank**, select **New SQL Query**.
 
-2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `[<username1>@<your_domain>.com]` with a user name from your environment and replace `[<username2>@<your_domain>.com]` with your user name.
+2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `<username1>@<your_domain>.com` with a user name from your environment and replace `<username2>@<your_domain>.com` with your user name.
 
     ```tsql
     CREATE TABLE dbo.Sales  
@@ -109,12 +109,12 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
      
     --Populate the table with 6 rows of data, showing 3 orders for each test user. 
     INSERT dbo.Sales (OrderID, SalesRep, Product, Quantity) VALUES
-    (1, '[<username1>@<your_domain>.com]', 'Valve', 5),   
-    (2, '[<username1>@<your_domain>.com]', 'Wheel', 2),   
-    (3, '[<username1>@<your_domain>.com]', 'Valve', 4),  
-    (4, '[<username2>@<your_domain>.com]', 'Bracket', 2),   
-    (5, '[<username2>@<your_domain>.com]', 'Wheel', 5),   
-    (6, '[<username2>@<your_domain>.com]', 'Seat', 5);  
+    (1, '<username1>@<your_domain>.com', 'Valve', 5),   
+    (2, '<username1>@<your_domain>.com', 'Wheel', 2),   
+    (3, '<username1>@<your_domain>.com', 'Valve', 4),  
+    (4, '<username2>@<your_domain>.com', 'Bracket', 2),   
+    (5, '<username2>@<your_domain>.com', 'Wheel', 5),   
+    (6, '<username2>@<your_domain>.com', 'Seat', 5);  
      
     SELECT * FROM dbo.Sales;  
     ```
@@ -152,7 +152,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 6. Use the **&#9655; Run** button to run the SQL script
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions**, and verify that the function has been created.
-8. Log in to Fabric as the user you replaced `[<username1>@<your_domain>.com]` with, in the Sales table `INSERT`statement from step 9. Confirm that you're logged in as that user by running the following T-SQL.
+8. Log in to Fabric as the user you replaced `<username1>@<your_domain>.com` with, in the Sales table `INSERT`statement from step 9. Confirm that you're logged in as that user by running the following T-SQL.
 
     ```tsql
     SELECT USER_NAME();
@@ -187,7 +187,7 @@ Column-level security allows you to designate which users can access specific co
     SELECT * FROM dbo.Orders;
      ```
 
-3. Deny permission to view a column in the table. The T-SQL statement prevents `[<username>@<your_domain>.com]` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `[<username>@<your_domain>.com]` with a user name in your system who has **Viewer** permissions on the workspace.
+3. Deny permission to view a column in the table. The T-SQL statement prevents `<username>@<your_domain>.com` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `<username>@<your_domain>.com` with a user name in your system who has **Viewer** permissions on the workspace.
 
      ```tsql
     DENY SELECT ON dbo.Orders (CreditCard) TO [<username>@<your_domain>.com];
@@ -236,7 +236,7 @@ Fabric has a permissions model that allows you to control access to data at the 
     SELECT * FROM dbo.Parts
      ```
 
-3. Next `DENY SELECT` permissions on the table to a user who is a member of the **Workspace Viewer** role and `GRANT EXECUTE` on the procedure to the same user. Replace `[<username>@<your_domain>.com]` with a user name from your environment that is a member of the **Workspace Viewer** role. 
+3. Next `DENY SELECT` permissions on the table to a user who is a member of the **Workspace Viewer** role and `GRANT EXECUTE` on the procedure to the same user. Replace `<username>@<your_domain>.com` with a user name from your environment that is a member of the **Workspace Viewer** role. 
 
      ```tsql
     DENY SELECT on dbo.Parts to [<username>@<your_domain>.com];
@@ -244,7 +244,7 @@ Fabric has a permissions model that allows you to control access to data at the 
     GRANT EXECUTE on dbo.sp_PrintMessage to [<username>@<your_domain>.com];
      ```
 
-4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of `[<username>@<your_domain>.com]`. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
+4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of `<username>@<your_domain>.com`. Then test the granular permissions you applied by executing the stored procedure and querying the table.  
 
      ```tsql
     EXEC dbo.sp_PrintMessage;
