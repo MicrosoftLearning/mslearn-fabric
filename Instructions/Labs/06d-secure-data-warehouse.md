@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Get started with data warehouses in Microsoft Fabric'
+    title: 'Secure a Microsoft Fabric data warehouse'
     module: 'Secure a Microsoft Fabric data warehouse'
 ---
 
