@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Secure a Microsoft Fabric data warehouse'
+    title: 'Get started with data warehouses in Microsoft Fabric'
     module: 'Secure a Microsoft Fabric data warehouse'
 ---
 
@@ -130,7 +130,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
     GO
     
     /*Create the security predicate defined as an inline table-valued function.
-    A predicate evalutes to true (1) or false (0). This security predicate returns 1,
+    A predicate evaluates to true (1) or false (0). This security predicate returns 1,
     meaning a row is accessible, when a row in the SalesRep column is the same as the user
     executing the query.*/
 
