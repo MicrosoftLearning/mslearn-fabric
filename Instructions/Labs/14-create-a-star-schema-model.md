@@ -111,4 +111,3 @@ You now have a semantic model built off your warehouse that has relationships es
 1. After you have Saved your exploration, navigate back to your workspace to see your data warehouse, default semantic model, the semantic model you created, and your exploration.
 
     ![Screenshot of a workspace in Fabric displaying a data warehouse, a default semantic model, a semantic model, and a data exploration.](./Images/semantic-model-workspace.png)
-
