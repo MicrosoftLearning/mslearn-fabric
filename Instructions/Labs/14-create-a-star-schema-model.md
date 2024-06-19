@@ -73,8 +73,8 @@ Now you'll create relationships between the tables to accurrately analyze and vi
 
 1. Create two more relationships to the **Trip** fact table as follows:
 
-   - **Geography** | **GeographyID** to **Trip** | **DropoffGeographyID** (1:Many)
-   - **Weather** | **GeographyID** to **Trip** | **DropoffGeographyID** (1:Many)
+   - **Geography [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
+   - **Weather [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
 
     > **Note**: you need to change the relationship default cardinality to **1:Many** for both relationships.
 
