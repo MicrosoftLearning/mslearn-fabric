@@ -50,7 +50,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Connection**: Create new connection
     - **Connection name**: *Specify a unique name*
     - **Data gateway**: (none)
-    - **Authentication kind**: Basic (*Leave the username and password blank*)
+    - **Authentication kind**: Anonymous
 5. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
     - **Request method**: GET
@@ -149,8 +149,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     - **General**:
         - **Name**: Delete old files
     - **Source**
-        - **Data store type**: Workspace
-        - **Workspace data store**: *Your lakehouse*
+        - **Connection**: *Your lakehouse*
         - **File path type**: Wildcard file path
         - **Folder path**: Files / **new_data**
         - **Wildcard file name**: *.csv        
