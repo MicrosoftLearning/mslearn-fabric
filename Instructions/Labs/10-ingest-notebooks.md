@@ -145,42 +145,6 @@ Likely, your data ingestion task doesn't end with only loading a file. Delta tab
 
 You've now successfully connected to external data, written it to a parquet file, loaded the data into a DataFrame, transformed the data, and loaded it to a Delta table.
 
-## Optimize Delta table writes
-
-You're probably using big data in your organization and that's why you chose Fabric notebooks for data ingestion, so let's also cover how to optimize the ingestion and reads for your data. First, we'll repeat the steps to transform and write to a Delta table with write optimizations included.
-
-1. Create a new code cell and insert the following code:
-
-    ```python
-    from pyspark.sql.functions import col, to_timestamp, current_timestamp, year, month
- 
-    # Read the parquet data from the specified path
-    raw_df = spark.read.parquet(output_parquet_path)    
-
-    # Add dataload_datetime column with current timestamp
-    opt_df = raw_df.withColumn("dataload_datetime", current_timestamp())
-    
-    # Filter columns to exclude any NULL values in storeAndFwdFlag
-    opt_df = opt_df.filter(opt_df["storeAndFwdFlag"].isNotNull())
-    
-    # Enable V-Order
-    spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
-    
-    # Enable automatic Delta optimized write
-    spark.conf.set("spark.microsoft.delta.optimizeWrite.enabled", "true")
-    
-    # Load the filtered data into a Delta table
-    table_name = "yellow_taxi_opt"  # New table name
-    opt_df.write.format("delta").mode("append").saveAsTable(table_name)
-    
-    # Display results
-    display(opt_df.limit(1))
-    ```
-
-1. Confirm you have the same results as before the optimization code.
-
-Now, take note of the run times for both code blocks. Your times will vary, but you can see a clear performance boost with the optimized code.
-
 ## Analyze Delta table data with SQL queries
 
 This lab is focused on data ingestion, which really explains the *extract, transform, load* process, but it's valuable for you to preview the data too.
@@ -225,7 +189,7 @@ This lab is focused on data ingestion, which really explains the *extract, trans
 
 ## Clean up resources
 
-In this exercise, you have used notebooks with PySpark in Fabric to load data and save it to Parquet. You then used that Parquet file to further transform the data, and optimized Delta table writes. Finally you used SQL to query the Delta tables.
+In this exercise, you have used notebooks with PySpark in Fabric to load data and save it to Parquet. You then used that Parquet file to further transform the data. Finally you used SQL to query the Delta tables.
 
 When you're finished exploring, you can delete the workspace you created for this exercise.
 
