@@ -34,11 +34,16 @@ Now that you have a workspace, it's time to download the data file you're going 
 
 Kusto query language (KQL) is used to query static or streaming data in a table that is defined in a KQL database. To analyze the sales data, you must create a table in a KQL database and ingest the data from the file.
 
-1. In the **Microsoft Fabric** experience portal, select the **Real-Time Intelligence** experience image as shown here:
+1. At the bottom left of the portal, switch to the Real-Time Intelligence experience.
 
-    ![Screenshot of selected Fabric Experience home with Real-Time Intelligence selected](./Images/fabric-experience-home.png)
+    ![Screenshot of the experience switcher menu.](./Images/fabric-real-time.png)
 
-2. On the **Home** page for the **Real-Time Intelligence** experience, select **KQL database** and create a new database with a name of your choice.
+2. In the Real-Time Intelligence home page, create a new **Eventhouse** with a name of your choice.
+
+   ![Screenshot of the RTI Editor with Eventhouse Highlighted.](./Images/create-kql-db.png)
+
+   The Eventhouse is used to group and manage your databases across projects. An empty KQL database is automatically created with the eventhouse's name.
+   
 3. When the new database has been created, select the option to get data from **Local File**. Then use the wizard to import the data into a new table by selecting the following options:
     - **Destination**:
         - **Database**: *The database you created is already selected*
