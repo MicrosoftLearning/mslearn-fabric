@@ -41,7 +41,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named **Ingest Sales Data**.
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **data sources** section, select the **Generic protocol** tab and then select **HTTP**.
+3. In the **Copy Data** wizard, on the **Choose a data source** page, in the **New sources** section, click on **View More ->** and then select **HTTP**.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
