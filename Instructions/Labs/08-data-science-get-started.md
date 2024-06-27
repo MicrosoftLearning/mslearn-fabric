@@ -105,7 +105,7 @@ Now you're ready to run code to get data and train a model. You'll work with the
 
 Now that you have ingested and explored the data, you can transform the data. You can either run code in a notebook, or use the Data Wrangler to generate code for you.
 
-1. The data is loaded as a Spark dataframe. To launch the Data Wrangler, you need to convert the data to a Pandas dataframe. Run the following code in your notebook:
+1. The data is loaded as a Spark dataframe. While the Data Wrangler accepts either Spark or Pandas dataframes, it is currently optimized to work with Pandas. Therefore, you will convert the data to a Pandas dataframe. Run the following code in your notebook:
 
     ```python
    df = df.toPandas()
