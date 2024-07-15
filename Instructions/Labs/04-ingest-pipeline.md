@@ -43,6 +43,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
 3. In the **Copy Data** wizard, on the **Choose a data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
 
+
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
 4. In the **Connect to data source** pane, enter the following settings for the connection to your data source:
