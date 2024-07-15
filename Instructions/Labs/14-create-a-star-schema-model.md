@@ -60,16 +60,23 @@ Now you'll create relationships between the tables to accurrately analyze and vi
      *Note: A default semantic model is created automatically when you create a Warehouse or SQL analytics endpoint in Microsoft Fabric, and it inherits the business logic from the parent Lakehouse or Warehouse. A semantic model that you create yourself, as we've done here, is a custom model that you can design and modify according to your specific needs and preferences. You can create a custom semantic model by using Power BI Desktop, Power BI service, or other tools that connect to Microsoft Fabric.*
 
 1. Select **Open data model from the ribbon**.
-   
+
     Now, you'll create relationships between the tables. If you're familiar with creating relationships in Power BI desktop, this will look familiar!
 
     *Reviewing the star schema concept, we'll organize the tables in our model into a Fact table and Dimension tables. In this model, the **Trip** table is our fact table, and our dimensions are **Date**, **Geography**, and **Weather**.*
 
-1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column. **Select the DateID column** in the **Date** table and **drag and drop it on top of the DateID column in the Trip table**. Alternatively, you can select **Manage relationships** from the ribbon, followed by **New relationship**.
+1. Create a relationship between the **Date** table and the **Trip** table using the **DateID** column.
 
-1. Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
+    **Select the DateID column** in the **Date** table and *drag and drop it on top of the DateID column in the Trip table*.
 
-1. Create relationships to the **Trip** fact table from the **Geography** and **Weather** dimensions, repeating the step above. Also ensure these relationships are **One to many**, with one occurance of the key in the dimension table, and many in the fact table. 
+    Ensure the relationship is a **One to many** relationship from the **Date** table to the **Trip** table.
+
+1. Create two more relationships to the **Trip** fact table as follows:
+
+   - **Geography [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
+   - **Weather [GeographyID]** to **Trip [DropoffGeographyID]** (1:Many)
+
+    > **Note**: you need to change the relationship default cardinality to **1:Many** for both relationships.
 
 1. Drag the tables into position so that the **Trip** fact table is located at the bottom of the diagram, and the remaining tables, which are dimension tables, are located around the fact table.
 
@@ -104,4 +111,3 @@ You now have a semantic model built off your warehouse that has relationships es
 1. After you have Saved your exploration, navigate back to your workspace to see your data warehouse, default semantic model, the semantic model you created, and your exploration.
 
     ![Screenshot of a workspace in Fabric displaying a data warehouse, a default semantic model, a semantic model, and a data exploration.](./Images/semantic-model-workspace.png)
-

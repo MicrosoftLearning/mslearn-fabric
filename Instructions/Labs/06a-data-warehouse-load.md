@@ -29,7 +29,7 @@ In our scenario, since we don't have any available data, we must ingest data to 
 
 1. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
-    After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll download a CVS file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
+    After a minute or so, a new empty lakehouse will be created. You need to ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll download a CSV file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
 1. Download the file for this exercise from `https://github.com/MicrosoftLearning/dp-data/raw/main/sales.csv`.
 

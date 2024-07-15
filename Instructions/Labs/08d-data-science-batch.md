@@ -167,7 +167,7 @@ To use the model, you're going to need a dataset of patient details for whom you
 
    # Save the data in a delta table
    table_name = "diabetes_test"
-   df.write.format("delta").mode("overwrite").save(f"Tables/{table_name}")
+   df.write.format("delta").mode("overwrite").saveAsTable(table_name)
    print(f"Spark dataframe saved to delta table: {table_name}")
     ```
 
@@ -196,7 +196,7 @@ Now you can use the model you trained previously to generate diabetes progressio
    df_test = model.transform(df)
 
    # Save the results (the original features PLUS the prediction)
-   df_test.write.format('delta').mode("overwrite").option("mergeSchema", "true").save(f"Tables/{table_name}")
+   df_test.write.format('delta').mode("overwrite").option("mergeSchema", "true").saveAsTable(table_name)
     ```
 
 1. After the code has finished, select the **...** next to the **diabetes_test** table in the **Lakehouse explorer** pane, and select **Refresh**. A new field **predictions** has been added.
