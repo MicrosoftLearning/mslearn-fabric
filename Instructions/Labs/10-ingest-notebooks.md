@@ -125,7 +125,7 @@ Likely, your data ingestion task doesn't end with only loading a file. Delta tab
     filtered_df = filtered_df.filter(raw_df["storeAndFwdFlag"].isNotNull())
     
     # Load the filtered data into a Delta table
-    table_name = "yellow_taxi"  # Replace with your desired table name
+    table_name = "yellow_taxi"
     filtered_df.write.format("delta").mode("append").saveAsTable(table_name)
     
     # Display results
@@ -166,26 +166,11 @@ This lab is focused on data ingestion, which really explains the *extract, trans
     display(table_df.limit(10))
     ```
 
-1. Create another code cell, and insert this code as well:
+1. Select **&#9655; Run Cell** next to the code cell.
 
-    ```python
-    # Load table into df
-    delta_table_name = "yellow_taxi_opt"
-    opttable_df = spark.read.format("delta").table(delta_table_name)
-    
-    # Create temp SQL table
-    opttable_df.createOrReplaceTempView("yellow_taxi_opt")
-    
-    # SQL Query to confirm
-    opttable_df = spark.sql('SELECT * FROM yellow_taxi_opt')
-    
-    # Display results
-    display(opttable_df.limit(10))
-    ```
+     Many data analysts are comfortable working with SQL syntax. Spark SQL is a SQL language API in Spark that you can use to run SQL statements, or even persist data in relational tables.
 
-1. Now, select the &#9660; arrow next to the **Run Cell** button for the first of these two queries, and from the drop-down select **Run this cell and below**.
-
-    This will run the last two code cells. Notice the execution time difference between querying the table with non optimized data and a table with optimized data.
+   The code you just ran creates a relational *view* of the data in a dataframe, and then uses the **spark.sql** library to embed Spark SQL syntax within your Python code and query the view and return the results as a dataframe.
 
 ## Clean up resources
 
