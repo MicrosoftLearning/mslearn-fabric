@@ -53,7 +53,7 @@ In this tutorial, you'll learn how to:
 1. You'll have the option to name your database and select a **New database (default)** or create a **New shortcut database (follower)**.
 1. Select **Create**.
 
-     >[!Note]
+     >**Note:**
      > The follower database feature allows you to attach a database located in a different cluster to your Azure Data Explorer cluster. The follower database
     is attached in read-only mode, making it possible to view the data and run queries on the data that was ingested into the leader database . The follower database synchronizes changes in the leader databases. Because of the synchronization, there's a data lag of a few seconds to a few minutes in data availability. The length of the time lag depends on the overall size of the leader database metadata. The leader and follower databases use the same storage account to fetch the data. The storage is owned by the leader database. The follower database views the data without needing to ingest it. Since the attached database is a read-only database, the data, tables, and policies in the database can't be modified except for
     caching policy, principals, and permissions.
@@ -77,17 +77,15 @@ In this tutorial, you'll learn how to:
 ## Create an Eventstream
 
 1. In the menu bar, select **Real-Time Intelligence** (the icon looks similar to ![real-time intelligence logo](./Images/rta_logo.png))
-2. Under **New**, select **EventStream (Preview)**
+2. Under **New**, select **EventStream**
 
    ![Image of choose eventstream](./Images/select-eventstream.png)
 
-3. You'll be prompted to **Name** your eventstream. Give the EventStream a name that you'll remember, such as **MyStockES**, press the **Create** button.
+3. You'll be prompted to **Name** your eventstream. Give the EventStream a name that you'll remember, such as **MyStockES**, and select the **Enhanced Capabilities (preview)** option and select the **Create** button.
 
    ![Image of name eventstream](./Images/name-eventstream.png)
 
-4. **Name** the **New Eventstream** and select the **Enhanced Capabilities (preview)** option and select the **Create** button.
-
-     >[!Note:]
+     >**Note:**
      > The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
 
 ## Establish an eventstream source
@@ -96,18 +94,16 @@ In this tutorial, you'll learn how to:
 
     [ ![Image of Using Sampel data](./Images/eventstream-select-sample-data.png) ](./Images/eventstream-select-sample-data-large.png#lightbox)
 
-2.  In the **Add source**, give your source a name, and select **Bicycles Reflex compatible)
-1.  Select the **Add** button.
+2.  In the **Add source**, give your source a name, and select **Bicycles (Reflex compatible)**
+3.  Select the **Add** button.
 
     ![Select and name sample data event stream](./Images/eventstream-sample-data.png)
 
-1. Once selecting the **Add** button, your stream will be mapped and you will be automotically redirected to the **eventstream canvas**.
+4. Once selecting the **Add** button, your stream will be mapped and you will be automotically redirected to the **eventstream canvas**.
 
    [ ![Review the eventstrea canvas](./Images/real-time-intelligence-eventstream-sourced.png) ](./Images/real-time-intelligence-eventstream-sourced-large.png#lightbox)
-
-3. Enter the values for your Sample Data as shown in the following table and then select **Add**.
  
- > [!NOTE:]
+ > **Note:**
  > After you create the sample data source, you see it added to your eventstream on the canvas in Edit mode. To implement this newly added sample data, select **Publish**.
 
 ## Add a transform events or add destination activity
@@ -125,10 +121,9 @@ In this tutorial, you'll learn how to:
         - ***Direct ingestion:*** Ingest data directly to a KQL table without any transformation.
         - ***Event processing before ingestion:*** Transform the data with Event Processor before sending to a KQL table.      
         
-        > [!WARNING]
         > **Warning:** You **CANNOT** edit the ingestion mode once the KQL database destination is added to the eventstream.     
 
-   - **Destination name:** Enter a name for this Eventstream destination, such as "kql-dest."
+   - **Destination name:** Enter a name for this Eventstream destination, such as "kql-dest".
    - **Workspace:** Where your KQL database is located.
    - **KQL database:** Name of your KQL Database.
    - **Destination table:** Name of your KQL table. You can also enter a name to create a new table, for example, "bike-count."
@@ -142,26 +137,33 @@ In this tutorial, you'll learn how to:
 
 1. Within the **eventstream** canvas, select **Transform events**.
 
+    ![Add group by to the transformation event.](./Images/eventstream-add-aggregates.png)
+
     A. Select **Group by**.
 
     B. Select **Edit** depicted by the ***pencil*** icon.
 
-    C. Fill out the properties of the **Group by** settings section
+    C. Once you create the **Group by** transform event, you will need to connect it from the **eventstream** to the **Group by**. You accomplish this without the use of code by clicking on the dot on the right hand side of the **eventstream** and dragging it to the dot on the left side of the new **group by** box. 
 
-    [ ![Add group by to the transformation event.](./Images/eventstream-add-aggregates.png) ](./Images/eventstream-add-aggregates-large.png)
+    ![Add link between eventstream and group by.](./Images/group-by-drag-connectors.png)    
 
-2. Once you create the **Group by** transform event, you will need to connect it from the **eventstream** to the **Group by**. You accomplish this without the use of code by clicking on the dot on the right hand side of the **eventstream** and dragging it to the dot on the left side of the new **group by** box.
+2. Fill out the properties of the **Group by** settings section:
+    - **Operation name:** Enter a name for this transformation event
+    - **Aggregate type:** Sum
+    - **Field:** No_Bikes
+    - **Name:** SUM_No_Bikes
+    - **Group aggregations by:** Street
+      
+3. Select **Add** and then select **Save**.
 
-   [ ![Add link between eventstream and group by.](./Images/group-by-drag-connectors.png) ](./Images/group-by-drag-connectors-large.png)
-
-3. In the same manner, you can mouse-over the arrow between the **event stream** and the ***kql_dest*** and select the ***garbage can***
+4. In the same manner, you can mouse-over the arrow between the **event stream** and the ***kql-dest*** and select the ***garbage can**. You can then connect the **Group by** event to **kql-dest**.
 
    [ ![Remove a link between two events](./Images/delete-flow-arrows.png) ](./Images/delete-flow-arrows-large.png)
 
-    > [!NOTE:]
+    > **Note:**
     > Whenever you add or remove connectors, you will need to re-configure the destination objects.
 
-
+5. Select the pencil under **kql-dest** and create a new destination table named **Bike_sum** that will receive the output of the **Group by** event.
 
 ## KQL Queries
 
@@ -171,7 +173,7 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
 1. Browse to your newly created and hydrated KQL Database:
 
-    A.  Select the **kql_dest** 
+    A.  Select the **kql-dest** 
 
     B. Select the **Open item** hyperlink located in the **Related item** row
 
@@ -181,11 +183,11 @@ Kusto Query Language (KQL) is a read-only request to process data and return res
 
    [ ![Remove a link between two events](./Images/kql-query-sample.png) ](./Images/kql-query-sample-large.png)
 
-3. The sample query opens in the **Explore your data** pane with the table context already populated. This first query uses the take operator to return a sample number of records, and is useful to get a first look at the data structure and possible values. The auto populated sample queries are automatically run. You can see the query results in the results pane.
+3. The sample query opens in the **Explore your data** pane with the table context already populated. This first query uses the `take` operator to return a sample number of records, and is useful to get a first look at the data structure and possible values. The auto populated sample queries are automatically run. You can see the query results in the results pane.
 
    ![Image of KQL Query results](./Images/kql-query-results.png)
 
-4. Return to the data tree to select the next query, which uses summarize operator to count the number of records ingested in 15 minute intervals.
+4. Return to the data tree to select the next query **Summarize ingestion per hour**, which uses `summarize` operator to count the number of records ingested in a given interval.
 
    ![Image of KQL Query results](./Images/kql-query-results-15min-intervals.png)
 
