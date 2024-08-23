@@ -47,7 +47,7 @@ Now that you have a workspace, it's time to create a data lakehouse for the data
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
 2. Select the existing cell in the notebook, which contains some simple code, and then use its **&#128465;** (*Delete*) icon at its top-right to remove it - you will not need this code.
-3. In the **Lakehouse explorer** pane on the left, expand **Files** and select **products** to reveal a new pane showing the **products.csv** file you uploaded previously:
+3. In the **Explorer** pane, expand **Lakehouses** and then expand the **Files** list for your lakehouse and select the **products** folder to reveal a new pane showing the **products.csv** file you uploaded previously:
 
     ![Screenshot of a notebook with a Files pane.](./Images/notebook-products.png)
 
