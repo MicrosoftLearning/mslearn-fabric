@@ -436,7 +436,7 @@ Note that you could have done all of this in a single notebook, but for the purp
 12. **Add another code block** to create the **product_silver** dataframe.
   
     ```python
-    from pyspark.sql.functions import col, split, lit
+    from pyspark.sql.functions import col, split, lit, when
     
     # Create product_silver dataframe
     
