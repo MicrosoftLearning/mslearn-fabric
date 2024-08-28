@@ -85,7 +85,7 @@ In Microsoft Fabric, you can use notebooks to run Spark code.
 1. On the toolbar, use the **&#9723;** (*Stop session*) button to stop the Spark session.
 1. In the navigation bar, select **Monitor** to view the monitoring hub, and note that the notebook activity is listed.
 
-    ![Screenshot of the monitoring hub with a notebook activity.](./Images/notebook-output.png)
+    ![Screenshot of the monitoring hub with a notebook activity.](./Images/monitor-notebook.png)
 
 ## Monitor history for an item
 
