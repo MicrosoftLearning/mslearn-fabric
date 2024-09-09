@@ -139,9 +139,9 @@ The tables in your lakehouse are automatically added to a default semantic model
 
     > **Note 1**: In this exercise, the semantic model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
     
-    > **Note 2**: The views `frequently_run_queries`, `long_running_queries`, `exec_sessions_history`, and `exec_requests_history` are part of the `queryinsights` schema automatically created by Fabric. It is a feature that provides a holistic view of historical query activity on the SQL analytics endpoint. Since this feature is out of the scope of this exercise, those views should be ignored for now.
+    > **Note 2**: The views **frequently_run_queries**, **long_running_queries**, **exec_sessions_history**, and **exec_requests_history** are part of the **queryinsights** schema automatically created by Fabric. It is a feature that provides a holistic view of historical query activity on the SQL analytics endpoint. Since this feature is out of the scope of this exercise, those views should be ignored for now.
 
-2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. A new browser tab opens in which you can design your report.
+2. In the menu ribbon, select the **Reporting** tab. Then select **New report**. Your current page will change to a report designer view.
 
     ![Screenshot of the report designer.](./Images/report-designer.png)
 
@@ -157,8 +157,8 @@ The tables in your lakehouse are automatically added to a default semantic model
 
     ![Screenshot of a report containing a clustered bar chart.](./Images/clustered-bar-chart.png)
 
-5. On the **File** menu, select **Save**. Then save the report as **Item Sales Report** in the workspace you created previously.
-6. Close the browser tab containing the report to return to the SQL endpoint for your lakehouse. Then, in the hub menu bar on the left, select your workspace to verify that it contains the following items:
+5. On the **File** menu, select **Save**. Then save the report as `Item Sales Report` in the workspace you created previously.
+6. Now, in the hub menu bar on the left, select your workspace to verify that it contains the following items:
     - Your lakehouse.
     - The SQL analytics endpoint for your lakehouse.
     - A default semantic model for the tables in your lakehouse.
