@@ -4,7 +4,7 @@ lab:
     module: 'Design and build tabular models'
 ---
 
-# Enforce model security
+# Enforce semantic model security
 
 In this exercise, you will update a pre-developed data model to enforce security. Specifically, salespeople at the Adventure Works company should only be able to see sales data related to their assigned sales region.
 
