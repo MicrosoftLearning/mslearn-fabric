@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Query data in KQL Database'
+    title: 'Get started with querying a Kusto database in Microsoft Fabric'
     module: 'Query data from a Kusto Query database in Microsoft Fabric'
 ---
 
