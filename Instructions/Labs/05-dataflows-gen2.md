@@ -121,7 +121,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    ![Table loaded by a dataflow.](./Images/loaded-table.png)
 
-> **Tip**: In Power BI Desktop, you can connect directly to the data transformations done with your dataflow using the *Power BI dataflows (Legacy)* connector.
+> **Tip**: In Power BI Desktop, you can connect directly to the data transformations done with your dataflow by using the *Power BI dataflows (Legacy)* connector.
 >
 > You can also make additional transformations, publish as a new dataset, and distribute with intended audience for specialized datasets.
 >
