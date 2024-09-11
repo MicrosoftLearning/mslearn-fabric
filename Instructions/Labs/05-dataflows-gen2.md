@@ -82,7 +82,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
    ![Data destination configuration page.](./Images/data-destination-target.png)
 
-4. On the **Choose destination settings** page, select **Append** and then **Save settings**.
+4. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
     > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
     ![Data destination settings page.](./Images/destination-settings.png)
@@ -92,8 +92,6 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
    ![Query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
 6. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
-
-7. Once published, you can click on the ellipsis **(...)** next to the dataflow in your workspace, select **Properties**, and rename your dataflow.
 
 ## Add a dataflow to a pipeline
 
@@ -123,7 +121,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    ![Table loaded by a dataflow.](./Images/loaded-table.png)
 
-> **Tip**: Use the Power BI Desktop *Dataflows connector* to connect directly to the data transformations done with your dataflow.
+> **Tip**: In Power BI Desktop, you can connect directly to the data transformations done with your dataflow by using the *Power BI dataflows (Legacy)* connector.
 >
 > You can also make additional transformations, publish as a new dataset, and distribute with intended audience for specialized datasets.
 >
