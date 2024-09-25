@@ -88,7 +88,7 @@ In this task, you will visualize sales data by date and switch the active status
 
     *To clarify which fiscal year, it’s a good idea to rename the visual field (or add a title to the visual).*
 
-7. In the **Visualizations** pane for the table visual, from inside the **Values** well, select the down-arrow, and then select **Rename for this visual**.
+7. In the **Visualizations** pane for the table visual, from inside the **Columns** well, select the down-arrow, and then select **Rename for this visual**.
 
     ![](Images/work-with-model-relationships-image11.png)
 
@@ -190,7 +190,7 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
     *Another approach is to create a different model table for each role-playing dimension. You will do that in the next exercise.*
 
-6. To remove the measure from the table visual, in the **Visualizations** pane, from inside the **Values** well, for the **Sales Shipped** field, press **X**.
+6. To remove the measure from the table visual, in the **Visualizations** pane, from inside the **Columns** well, for the **Sales Shipped** field, press **X**.
 
     ![](Images/work-with-model-relationships-image25.png)
 
@@ -305,13 +305,13 @@ In this task, you will visualize the ship date data in a new table visual.
 
 5. Move the new table visual to the right of the existing table visual.
 
-6. Select the new table visual, and then in the **Visualizations** pane, from inside the **Values** well, remove the **Order Year** field.
+6. Select the new table visual, and then in the **Visualizations** pane, from inside the **Columns** well, remove the **Order Year** field.
 
     ![](Images/work-with-model-relationships-image42.png)
 
 7. In the **Data** pane, expand open the **Ship Date** table.
 
-8. To add a new field to the new table visual, from the **Ship Date** table, drag the **Ship Year** field to the **Values** well, above the **Sales Amount** field.
+8. To add a new field to the new table visual, from the **Ship Date** table, drag the **Ship Year** field to the **Columns** well, above the **Sales Amount** field.
 
     ![](Images/work-with-model-relationships-image43.png)
 
