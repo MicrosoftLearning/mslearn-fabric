@@ -22,7 +22,7 @@ First, create a workspace with the *Fabric trial* enabled.
 1. Create a **new workspace** with a name of your choice, selecting a licensing mode that includes Fabric capacity (Trial, Premium, or Fabric).
 1. When your new workspace opens, it should be empty.
 
-![Screen picture of an empty Fabric workspace.](../media/workspace-empty.jpg)
+![Screen picture of an empty Fabric workspace.](Images/workspace-empty.jpg)
 
 ## Create a lakehouse and upload data
 
@@ -34,7 +34,7 @@ Now that you have a workspace, it’s time to create a lakehouse and upload some
 1.	In the … menu for the products folder, **upload** the *products.csv* file from your local computer (or lab VM if applicable).
 1.	After the file has been uploaded, select the **products** folder to verify that the file has been uploaded, as shown here:
 
-![Screen picture of products.csv uploaded to the lakehouse.](../media/upload-products.jpg)
+![Screen picture of products.csv uploaded to the lakehouse.](Images/upload-products.jpg)
   
 ## Explore data in a DataFrame
 
@@ -75,7 +75,7 @@ display(df)
 
 8. When the cell code has completed, review the output below the cell, which should look similar to this:
 
-![Screen picture of products.csv data.](../media/products-schema.jpg)
+![Screen picture of products.csv data.](Images/products-schema.jpg)
  
 ## Create Delta tables
 
@@ -257,7 +257,7 @@ SELECT Category, NumProducts
 
 When the data is returned, select the **Chart** view to display a bar chart.
 
-![Screen picture of SQL select statement and results.](../media/sql-select.jpg)
+![Screen picture of SQL select statement and results.](Images/sql-select.jpg)
 
 Alternatively, you can run a SQL query using PySpark.
 
