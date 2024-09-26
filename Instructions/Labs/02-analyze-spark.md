@@ -23,7 +23,7 @@ Before you can work with data in Fabric you need to create a workspace.
 1. Give the new workspace a name and in the **Advanced** section, select the appropriate Licensing mode. If you have started a Microsoft Fabric trial, select Trial.
 1. Select **Apply** to create an empty workspace.
  
-![Screen picture of CSV files uploaded to a new Fabric workspace.](../media/uploaded-files.jpg)
+![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.jpg)
 
 ## Create a lakehouse and upload files
 
@@ -36,7 +36,7 @@ You can now ingest data into the lakehouse. There are several ways to do this, b
 1. Return to your new lakehouse. In the **Explorer** pane, next to the **Files** folder select the **…** menu, and select **Upload** and **Upload folder**. Navigate to the orders folder on your local computer (or lab VM if applicable) and select **Upload**.
 1. After the files have been uploaded, expand **Files** and select the **orders** folder. Check that the CSV files have been uploaded, as shown here:
 
-![Screen picture of a new Fabric workspace.](../media/new-workspace.jpg)
+![Screen picture of a new Fabric workspace.](Images/new-workspace.jpg)
 
 ## Create a notebook
 
@@ -51,7 +51,7 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 # Sales order data exploration
 Use this notebook to explore sales order data
 ```
-![Screen picture of a Fabric notebook with a markdown cell.](../media/name-markdown-notebook.jpg)
+![Screen picture of a Fabric notebook with a markdown cell.](Images/name-notebook-markdown.jpg)
 
 When you have finished, click anywhere in the notebook outside of the cell to stop editing it and see the rendered markdown.
 
@@ -66,7 +66,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 2. Select the lakehouse to display the Explorer pane, including the **orders** folder.
 3. From the top menu, select **Open notebook**, **Existing notebook**, and then Open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, expand the Files list, and select the orders folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
 
-![Screen picture of csv files in Explorer view.](explorer-notebook-view.jpg)
+![Screen picture of csv files in Explorer view.](Images/explorer-notebook-view.jpg)
 
 4. From the … menu for 2019.csv, select **Load data** > **Spark**. The following code is automatically generated in a new code cell:
 
@@ -84,7 +84,7 @@ display(df)
 
 6. When the cell code has completed, review the output below the cell, which should look like this:
  
-![Screen picture showing auto generated code and data.](../media/auto-generated-load.jpg)
+![Screen picture showing auto generated code and data.](Images/auto-generated-load.jpg)
 
 7. The output shows data from the 2019.csv file displayed in columns and rows.  Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the code as follows:
 
@@ -118,7 +118,7 @@ display(df)
 ```
 10. Run the cell and review the output:
 
-![Screen picture of code with schema defined and data.](../media/define-schema.jpg)
+![Screen picture of code with schema defined and data.](Images/define-schema.jpg)
 
 11.	This DataFrame includes only the data from the 2019.csv file. Modify the code so that the file path uses a * wildcard to read all the files in the orders folder:
 
@@ -218,7 +218,7 @@ display(yearlySales)
 * The *groupBy* method groups the data by the derived Year column.
 * The count of rows in each group is calculated before the *orderBy* method is used to sort the resulting DataFrame.
 
-![Screen picture showing the results of aggregating and grouping data in a DataFrame.](../media/spark-sql.jpg)
+![Screen picture showing the results of aggregating and grouping data in a DataFrame.](Images/spark-sql-dataframe.jpg)
 
 ## Use Spark to transform data files
 
@@ -282,7 +282,7 @@ display(orders_df)
 
 4. Run the cell.  A new DataFrame is created from the parquet files in the *transformed_data/orders* folder. Verify that the results show the order data that has been loaded from the parquet files.
 
-![Screen picture showing Parquet files.](../media/parquet-files.jpg)
+![Screen picture showing Parquet files.](Images/parquet-files.jpg)
 
 ### Save data in partitioned files
 
@@ -298,7 +298,7 @@ print ("Transformed data saved!")
 
 2.	Run the cell and wait for the message that the data has been saved. Then, in the Lakehouses pane on the left, in the … menu for the Files node, select **Refresh** and expand the partitioned_orders folder to verify that it contains a hierarchy of folders named *Year=xxxx*, each containing folders named *Month=xxxx*. Each month folder contains a parquet file with the orders for that month.
 
-![Screen picture showing data partitioned by Year and Month.](partitioned-data.jpg)
+![Screen picture showing data partitioned by Year and Month.](Images/partitioned-data.jpg)
 
 3. Add a new cell with the following code to load a new DataFrame from the orders.parquet file:
 
@@ -337,7 +337,7 @@ spark.sql("DESCRIBE EXTENDED salesorders").show(truncate=False)
 
 3. In the **Lakehouses** pane, in the … menu for the Tables folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
-![Screen picture showing that the salesorders table has been created.](../media/salesorders-table.jpg)
+![Screen picture showing that the salesorders table has been created.](Images/salesorders-table.jpg)
 
 4. In the … menu for the salesorders table, select **Load data** > **Spark**. A new code cell is added containing code similar to the following:
 
@@ -401,7 +401,7 @@ When you have finished, select **Apply**.
 
 4. Your chart should look similar to this:
 
-![Screen picture of Fabric notebook chart view.](../media/built-in-chart.jpg) 
+![Screen picture of Fabric notebook chart view.](Images/built-in-chart.jpg) 
 
 ### Get started with matplotlib
 
