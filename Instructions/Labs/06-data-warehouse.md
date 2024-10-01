@@ -125,7 +125,7 @@ Most queries in a relational data warehouse involve aggregating and grouping dat
    ORDER BY CalendarYear, MonthOfYear;
     ```
 
-    Note that the attributes in the time dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
+    Note that the attributes in the date dimension enable you to aggregate the measures in the fact table at multiple hierarchical levels - in this case, year and month. This is a common pattern in data warehouses.
 
 2. Modify the query as follows to add a second dimension to the aggregation.
 
@@ -217,7 +217,7 @@ You can easily visualize the data in either a single query, or in your data ware
       - **ProductKey**
       - **ProductAltKey** 
 
-1. Now you're ready to build a report and make this dataset available to others. On the Home menu, select **New report**. This will open a new window, where you can create a Power BI report.
+1. Now you're ready to build a report and make this dataset available to others. On the Reporting menu, select **New report**. This will open a new window, where you can create a Power BI report.
 
 1. In the **Data** pane, expand **FactSalesOrder**. Note that the columns you hid are no longer visible. 
 
