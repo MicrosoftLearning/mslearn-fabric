@@ -96,7 +96,7 @@ Item permissions control access to individual Fabric items within a workspace, l
     ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
 
 7. Select **Add user** and enter the name of the second user. 
-8. In the box that appears, under **Additional permissions** check only **Read all data using SQL (ReadData)**.
+8. In the box that appears, under **Additional permissions** check **Read all data using SQL (ReadData)** and uncheck all other boxes.
 
 9. Click **Grant**
 
@@ -106,7 +106,7 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 12. Select the warehouse and on the screen that appears, select **Open** from the top menu bar.
 
-13. When the warehouse view appears, click on the **Date** table to view it's rows.
+13. When the warehouse view appears, click on the **Date** table to view it's rows.  The rows are viewable because the user still has read access to the warehouse because ReadData permissions were applied by using item permissions on the warehouse.
 
 ## Apply OneLake data access roles within a Lakehouse
 
