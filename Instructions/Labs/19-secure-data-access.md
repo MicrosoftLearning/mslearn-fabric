@@ -114,23 +114,24 @@ OneLake data access roles let you create custom roles within a Lakehouse and gra
 
 In this exercise, you will assign a workspace role and create a OneLake data access role and experiment with how they work together to restrict access to folders in a Lakehouse.  
 
-1. Stay in the browser where you're logged in as the second, less privileged user.  
+1. Stay in the browser where you're logged in as the second user.  
 2. Select **OneLake data hub** on the left navigation bar.  Note that the second user doesn't see the lakehouse.  
-3. Return to the browser where you're logged in as the Workspace Admin and hover over the name of the lakehouse.  
-4. Click on the ellipse (**...**) to the right of the elipse and select **Manage permissions**
+3. Return to the browser where you're logged in as the Workspace Admin.
+4. Select **Workspaces** on the left menu and select your workspace.  Hover over the name of the lakehouse.  
+5. Click on the ellipse (**...**) to the right of the ellipse and select **Manage permissions**
 
       ![Screenshot of setting permissions on a lakehouse in Fabric.](./Images/lakehouse-manage-permissions.png)
 
-5. On the screen that appears, click **Add user**. Assign the second user to the lakehouse and ensure none of the checkboxes on the **Grant People Access** window are checked.  
+6. On the screen that appears, click **Add user**. Assign the second user to the lakehouse and ensure none of the checkboxes on the **Grant People Access** window are checked.  
 
       ![Screenshot of the grant access lakehouse window in Fabric.](./Images/grant-people-access-window.png)
 
-6. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
-7. Return to the browser where you're logged in as the second user.  Refresh the browser.
+7. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
+8. Return to the browser where you're logged in as the second user.  Refresh the browser.
 8. Select **OneLake data hub** in the left navigation pane.  
-9. Select the lakehouse to open it. 
-10.Select **Open** on the top menu bar
-11.When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature.
+10. Select the lakehouse to open it. 
+11.Select **Open** on the top menu bar
+12.When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature.
 12.
 1. 
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Under the header **Blank**, select **New SQL Query**.
