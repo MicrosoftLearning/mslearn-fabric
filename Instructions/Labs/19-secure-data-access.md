@@ -77,7 +77,8 @@ In this exercise, you will add a user to a workspace role, apply permissions and
 14. Select the **Date** table and wait for the rows to be loaded. You can see the rows because as a member of the Workspace Viewer role, you have CONNECT and ReadData permission on tables in the warehouse. See [Workspace roles](https://learn.microsoft.com/en-us/fabric/data-warehouse/workspace-roles) for more information on permissions granted to the Workspace Viewer role.
 15. Next, select the **Workspaces** icon on the left menu bar, then select the lakehouse.
 16. When the lakehouse opens, click on the dropdown box at the top left corner of the screen that says **Lakehouse** and select **SQL analytics endpoint**.
-17. Select the **publicholidays** table and note that data in the table is readable because the user is a member of the Workspace Viewer role.
+17. Select the **publicholidays** table and wait for the data to be displayed.  Note that data in the table is readable because the user is a member of the Workspace Viewer role.
+
 ## Apply item access control
 
 Item permissions control access to individual Fabric items within a workspace, like warehouses, lakehouses and semantic models.  In this exercise, you will remove the **Workspace Viewer** permissions applied in the previous exercise and then apply item level permissions on the warehouse so a less privileged user can only view the warehouse data, not the lakehouse data.
