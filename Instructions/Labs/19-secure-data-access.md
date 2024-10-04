@@ -8,7 +8,7 @@ lab:
 
 Microsoft Fabric has a multi-layer security model for managing data access.  Security can be set for an entire workspace, for individual items, or through granular permissions in each Fabric engine.  In this exercise, you'll secure data using workspace, and item access controls and OneLake data access roles.
 
-> **Note**: To complete the exercises in this lab, you'll need two users: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces).
+> **Note**: To complete the exercises in this lab, you'll need two users: one user should be assigned the Workspace Admin role, and the other will be assigned permissions throughout this lab. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces).
 
 This lab takes approximately **45** minutes to complete.
 
@@ -23,7 +23,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-empty-workspace.png)
 
-> **EDIT this before publishing** **Note**: When you create a workspace, you automatically become a member of the Workspace Admin role. You can add a second user from your environment to the Workspace Viewer role to test functionality configured in these exercises. This can be done by selecting **Manage Access** within the workspace, then **Add people or groups**. This will allow the second user to view the workspace content.
+> **Note**: When you create a workspace, you automatically become a member of the Workspace Admin role. 
 
 ## Create a data warehouse
 
@@ -41,7 +41,7 @@ Next, create a lakehouse in the workspace you created.
 2. In the workspace, click the New Item button. Under the Store data header, click **Lakehouse**. Create a new Lakehouse with the name of your choice.
 After a minute or so, a new Lakehouse will be created:
 
-    ![Screenshot of a new lakehouse in Fabric.](./Images/new-empty-lakehouse.png)
+    ![Screenshot of a new lakehouse in Fabric.](./Images/new-sample-lakehouse.png)
 
 3. Select the **Start with sample data** tile.  After a minute or so, the lakehouse will be populated with data.
 
@@ -67,7 +67,7 @@ In this exercise, you will add a user to a workspace role and see what is viewab
 12. Return to the InPrivate browser window where you're logged in as the second, less privileged user and click refresh button on the browser to refresh session permissions just assigned to the second user.
 13. Select the **Workspaces** icon on the left menu bar (the icon looks similar to &#128455;) and click on the workspace name you created as the Workspace Admin user. The second user can now see **All** of the items in the workspace because they were assigned the **Workspace Viewer** role.
 
-   ![Screenshot of workspace items in Fabric.](./Images/workspace-viewer-view.png)
+    ![Screenshot of workspace items in Fabric.](./Images/workspace-viewer-view.png)
 
 14. Click on the warehouse to open it.
 15. Select the **Date** table and wait for the rows to be loaded. You can see the table rows because as a member of the Workspace Viewer role, the contents of warehouses are viewable.
