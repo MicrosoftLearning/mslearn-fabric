@@ -39,7 +39,7 @@ Next, create a lakehouse in the workspace you created.
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to 🗇).
 2. Select the workspace you created.
-3. In the workspace, click the New Item button. Under the **Store data** header, click **Lakehouse**. Create a new Lakehouse with the name of your choice.
+3. In the workspace, click the **New Item** button. Under the **Store data** header, click **Lakehouse**. Create a new Lakehouse with the name of your choice.
 After a minute or so, a new Lakehouse will be created:
 
     ![Screenshot of a new lakehouse in Fabric.](./Images/new-sample-lakehouse.png)
@@ -54,25 +54,27 @@ In this exercise, you will add a user to a workspace role, apply permissions and
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 2. Next select the workspace you created.
-3. Click on **Managed access** on the top of the screen.
+3. Click on **Manage access** on the top of the screen.
 
-> **Note**: The user you're logged in as is a member of the **Workspace Admin** role because you created the workspace. No other users are assigned access to the workspace.
+> **Note**: You'll see the user you're logged, who is a a member of the **Workspace Admin** role because you created the workspace. No other users are assigned access to the workspace yet.
 
-4. Next, you'll see what a user without permissions on the workspace can view.  In your browser, click, the ellipse at the top right corner and select **New InPrivate Window**.
-5. Enter https://app.fabric.com and login as the second user you're using for testing.  
-6. On the bottom left corner of your screen, select the Fabric Experiences button and select **Data Warehouse**. Then select **Workspaces** (the icon looks similar to &#128455;).  
-7. Note that the second user doesn't have access to the workspace, so it's not viewable.
-8. Next, you'll assign the **Workspace Viewer** role to the second user and see that they can read everything in the warehouse in the workspace.  
-9. Return to the browser window where you're logged in as the first user or Workspace Admin. Ensure you're still on the page that shows the workspace you created.  It should have your new workspace items, the sample warehouse and lakehouse, listed at the bottom of the page.
-10. Select **Manage access** at the top right of the screen.
-11. Select **Add people or groups**.  Enter the email of the second, less privileged user you're testing with. Click **Add** to assign the user to the workspace **Viewer** role. 
-12. Return to the InPrivate browser window where you're logged in as the second, less privileged user and click refresh button on the browser to refresh session permissions just assigned to the second user.
-13. Select the **Workspaces** icon on the left menu bar (the icon looks similar to &#128455;) and click on the workspace name you created as the Workspace Admin user. The second user can now see **All** of the items in the workspace because they were assigned the **Workspace Viewer** role.
+4. Next, you'll see what a user without permissions on the workspace can view.  In your browser, open an InPrivate window. To do this in the Edge browser, click the ellipse at the top right corner and select **New InPrivate Window**.
+5. Enter https://app.fabric.microsoft.com and login as the second user you're using for testing.  
+6. On the bottom left corner of your screen, select **Microsoft Fabric** and then select **Data Warehouse**. Next select **Workspaces** (the icon looks similar to &#128455;).  
+
+> Note that the second user doesn't have access to the workspace, so it's not viewable.
+
+7. Next, you'll assign the **Workspace Viewer** role to the second user and see that they can read everything in the warehouse in the workspace.  
+8. Return to the browser window where you're logged in as the first user or Workspace Admin. Ensure you're still on the page that shows the workspace you created.  It should have your new workspace items, the sample warehouse and lakehouse, listed at the bottom of the page.
+9. Select **Manage access** at the top right of the screen.
+10. Select **Add people or groups**.  Enter the email of the second, less privileged user you're testing with. Click **Add** to assign the user to the workspace **Viewer** role. 
+11. Return to the InPrivate browser window where you're logged in as the second, less privileged user and click refresh button on the browser to refresh session permissions just assigned to the second user.
+12. Select the **Workspaces** icon on the left menu bar (the icon looks similar to &#128455;) and click on the workspace name you created as the Workspace Admin user. The second user can now see **All** of the items in the workspace because they were assigned the **Workspace Viewer** role.
 
     ![Screenshot of workspace items in Fabric.](./Images/workspace-viewer-view.png)
 
-14. Click on the warehouse to open it.
-15. Select the **Date** table and wait for the rows to be loaded. You can see the table rows because as a member of the Workspace Viewer role, the contents of warehouses are viewable.
+13. Click on the warehouse to open it.
+14. Select the **Date** table and wait for the rows to be loaded. You can see the table rows because as a member of the Workspace Viewer role, the contents of warehouses are viewable.
 
 ## Apply item access control
 
