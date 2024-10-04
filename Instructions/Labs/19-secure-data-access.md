@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 ## Create a data warehouse
 
-Next, create a data warehouse in the workspace you created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
+Next, create a data warehouse in the workspace you just created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
 
 1. In the workspace you just created, click the **New Item** button. Under the **Store data** header, click **Sample warehouse**.  Create a new **Sample Warehouse** with the name of your choice.  
     After a minute or so, a new warehouse will be created:
@@ -38,30 +38,32 @@ Next, create a data warehouse in the workspace you created. The Synapse Data War
 Next, create a lakehouse in the workspace you created. 
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to 🗇).
-2. In the workspace, click the New Item button. Under the Store data header, click **Lakehouse**. Create a new Lakehouse with the name of your choice.
+2. Select the workspace you created.
+3. In the workspace, click the New Item button. Under the **Store data** header, click **Lakehouse**. Create a new Lakehouse with the name of your choice.
 After a minute or so, a new Lakehouse will be created:
 
     ![Screenshot of a new lakehouse in Fabric.](./Images/new-sample-lakehouse.png)
 
-3. Select the **Start with sample data** tile.  After a minute or so, the lakehouse will be populated with data.
+4. Select the **Start with sample data** tile.  After a minute or so, the lakehouse will be populated with data.
 
 ## Apply workspace access controls
- 
 
-Workspace roles are used to control access to workspaces and the content within them.  Workspace roles can be assigned, for example, when users need to see **all** items in a workspace, when they need to manage workspace access, or create new Fabric items or when they need specific permissions to view, modify or share content in the workspace.  
+Workspace roles are used to control access to workspaces and the content within them.  Workspace roles can be assigned, for example, when users need to see all items in a workspace, when they need to manage workspace access, or create new Fabric items, or when they need specific permissions to view, modify or share content in the workspace.  
 
-In this exercise, you will add a user to a workspace role and see what is viewable when each set of permissions is applied. You'll open two browsers and login as different users. In one browser, you will be a **Workspace Admin** and in the other, you will login as a second, less privileged user. The Workspace Admin will change permissions for the second user and in the second browser, you'll be able to see the effects of changing permissions.  
+In this exercise, you will add a user to a workspace role, apply permissions and see what is viewable when each set of permissions is applied. You'll open two browsers and login as different users. In one browser, you will be a **Workspace Admin** and in the other, you will login as a second, less privileged user. In one browser, the Workspace Admin will change permissions for the second user and in the second browser, you'll be able to see the effects of changing permissions.  
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 2. Next select the workspace you created.
-3. Click on **Managed access** on the top of the screen.  Note that the user you're logged in as is a member of the workspace **Admin** role because you created the workspace. No other users are assigned access to the workspace.
+3. Click on **Managed access** on the top of the screen.
+
+> **Note**: The user you're logged in as is a member of the **Workspace Admin** role because you created the workspace. No other users are assigned access to the workspace.
+
 4. Next, you'll see what a user without permissions on the workspace can view.  In your browser, click, the ellipse at the top right corner and select **New InPrivate Window**.
 5. Enter https://app.fabric.com and login as the second user you're using for testing.  
 6. On the bottom left corner of your screen, select the Fabric Experiences button and select **Data Warehouse**. Then select **Workspaces** (the icon looks similar to &#128455;).  
 7. Note that the second user doesn't have access to the workspace, so it's not viewable.
 8. Next, you'll assign the **Workspace Viewer** role to the second user and see that they can read everything in the warehouse in the workspace.  
-9. Return to the browser window where you're logged in as the first user or Workspace Admin. Ensure you're still on the page that shows the workspace you created.  It should have your new workspace items, the sample warehouse and lakehouse, listed at the bottom of the page. 
-
+9. Return to the browser window where you're logged in as the first user or Workspace Admin. Ensure you're still on the page that shows the workspace you created.  It should have your new workspace items, the sample warehouse and lakehouse, listed at the bottom of the page.
 10. Select **Manage access** at the top right of the screen.
 11. Select **Add people or groups**.  Enter the email of the second, less privileged user you're testing with. Click **Add** to assign the user to the workspace **Viewer** role. 
 12. Return to the InPrivate browser window where you're logged in as the second, less privileged user and click refresh button on the browser to refresh session permissions just assigned to the second user.
