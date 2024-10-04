@@ -86,25 +86,26 @@ Item permissions control access to individual Fabric items within a workspace, l
 1. Return to the browser window where you're logged in as the Workspace Admin. Select **Workspaces** from the left navigation pane. 
 2. Select the workspace that you created to open it. 
 3. Select **Manage access** from the top of the screen.
-4. Select the word **Viewer** under the name of the second, less privileged user. On the menu that appears, select **Remove**.
+4. Select the word **Viewer** under the name of the second user. On the menu that appears, select **Remove**.
 
    ![Screenshot of workspace access dropdown in Fabric.](./Images/workspace-access.png)
 
-5. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear.  Select the ellipse and click **Manage permissions**
+5. Close the **Manage access** section.
+6. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear.  Select the ellipse and click **Manage permissions**
 
     ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
 
-6. Enter the name of the second, less privileged user. Under **Additional permissions** check only **Read all data using SQL (ReadData).
+7. Enter the name of the second, less privileged user. Under **Additional permissions** check only **Read all data using SQL (ReadData).
 
-7. Click **Grant**
+8. Click **Grant**
 
-8. Return to the browser window where you're logged in as the second, less privileged user.  Refresh the browser view.  
+9. Return to the browser window where you're logged in as the second user.  Refresh the browser view.  
 
-9. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Click on **OneLake data hub** on the left navigation menu to find the warehouse. 
+10. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Click on **OneLake data hub** on the left navigation menu to find the warehouse. 
 
-10. Select the warehouse and on the screen that appears, select **Open** from the top menu bar.
+11. Select the warehouse and on the screen that appears, select **Open** from the top menu bar.
 
-11. When the warehouse view appears, click on the **Date** table to view it's rows.
+12. When the warehouse view appears, click on the **Date** table to view it's rows.
 
 ## Apply OneLake data access roles within a Lakehouse
 
