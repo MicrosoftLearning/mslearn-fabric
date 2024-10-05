@@ -128,35 +128,34 @@ In this exercise, you will assign an item permission and create a OneLake data a
 
 7. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
 8. Return to the browser where you're logged in as the second user.  Refresh the browser.
-8. Select **OneLake data hub** in the left navigation pane.  
+9. Select **OneLake data hub** in the left navigation pane.  
 10. Select the lakehouse to open it. 
-11.Select **Open** on the top menu bar
-12.When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
-
+11. Select **Open** on the top menu bar
+12. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
 
       ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/create-onelake-role.png)
 
-14. Select new role on the **Manage OneLake data access (preview) screen that appears.
-1.  
+13. Select new role on the **Manage OneLake data access (preview) screen that appears.
+  
       ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/manage-onelake-roles.png)
-1. 
-1. Create a new role called **publicholiday** that can only access the publicholiday folder as shown in the screenshot below.
-1. 
+
+14. Create a new role called **publicholiday** that can only access the publicholidays folder as shown in the screenshot below.
+
       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/new-data-access-role.png)
-1. 
-1. When the role finishes creating, select **Assign role** and assign the role to your second user and select **Save**.
-1. 
+
+15. When the role finishes creating, select **Assign role** and assign the role to your second user and select **Save**.
+ 
        ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
-1. 
-1. Return to the browser where you're signed in as the second user.  Refresh the browser.
-1. Select the **publicholiday** table and wait for the data to load.
-1. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the public holiday table, not any of the files.
-1. 
+ 
+16. Return to the browser where you're signed in as the second user.  Refresh the browser.
+17. Select the **publicholidays** table and wait for the data to load.
+18. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the publicholidays table, not any of the files or folders.
+
        ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
 ## Clean up resources
 
-In this exercise, you applied dynamic data masking rules to columns in a table, applied row-level security, implemented column-level security and, configured SQL granular permissions using T-SQL.
+In this exercise, you secured data using workspace access controls, item access controls and OneLake data access roles.
 
 1. In the left navigation bar, select the icon for your workspace to view all of the items it contains.
 2. In the menu on the top toolbar, select **Workspace settings**.
