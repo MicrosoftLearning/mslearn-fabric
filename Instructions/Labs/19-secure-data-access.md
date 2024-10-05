@@ -112,7 +112,7 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 OneLake data access roles let you create custom roles within a Lakehouse and grant read permissions to folders you specify.  
 
-In this exercise, you will assign a workspace role and create a OneLake data access role and experiment with how they work together to restrict access to folders in a Lakehouse.  
+In this exercise, you will assign an item permission and create a OneLake data access role and experiment with how they work together to restrict access to data in a Lakehouse.  
 
 1. Stay in the browser where you're logged in as the second user.  
 2. Select **OneLake data hub** on the left navigation bar.  Note that the second user doesn't see the lakehouse.  
@@ -138,21 +138,21 @@ In this exercise, you will assign a workspace role and create a OneLake data acc
 
 14. Select new role on the **Manage OneLake data access (preview) screen that appears.
 1.  
-1.       ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/manage-onelake-roles.png)
+      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/manage-onelake-roles.png)
 1. 
 1. Create a new role called **publicholiday** that can only access the publicholiday folder as shown in the screenshot below.
 1. 
-1. 1.       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/new-data-access-role.png)
+      ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/new-data-access-role.png)
 1. 
 1. When the role finishes creating, select **Assign role** and assign the role to your second user and select **Save**.
 1. 
-1.  1. 1.       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
+       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
 1. 
 1. Return to the browser where you're signed in as the second user.  Refresh the browser.
 1. Select the **publicholiday** table and wait for the data to load.
 1. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the public holiday table, not any of the files.
 1. 
-1. 1.  1. 1.       ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
+       ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
 ## Clean up resources
 
