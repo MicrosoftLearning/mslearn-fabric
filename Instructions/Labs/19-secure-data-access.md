@@ -122,33 +122,34 @@ In this exercise, you will assign an item permission and create a OneLake data a
 
       ![Screenshot of setting permissions on a lakehouse in Fabric.](./Images/lakehouse-manage-permissions.png)
 
-6. On the screen that appears, click **Add user**. Assign the second user to the lakehouse and ensure none of the checkboxes on the **Grant People Access** window are checked.  
+6. On the screen that appears, click **Add user**. 
+7. Assign the second user to the lakehouse and ensure none of the checkboxes on the **Grant People Access** window are checked.  
 
       ![Screenshot of the grant access lakehouse window in Fabric.](./Images/grant-people-access-window.png)
 
-7. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
-8. Return to the browser where you're logged in as the second user.  Refresh the browser.
-9. Select **OneLake data hub** in the left navigation pane.  
-10. Select the lakehouse to open it. 
-11. Select **Open** on the top menu bar
-12. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
+8. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
+9. Return to the browser where you're logged in as the second user.  Refresh the browser.
+10. Select **OneLake data hub** in the left navigation pane.  
+11. Select the lakehouse to open it. 
+12. Select **Open** on the top menu bar
+13. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
 
       ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
 
-13. Select new role on the **Manage OneLake data access (preview) screen that appears.
+14. Select new role on the **Manage OneLake data access (preview) screen that appears.
   
       ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
 
-14. Create a new role called **publicholiday** that can only access the publicholidays folder as shown in the screenshot below.
+15. Create a new role called **publicholiday** that can only access the publicholidays folder as shown in the screenshot below.
 
       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/new-data-access-role.png)
 
-15. When the role finishes creating, select **Assign role** and assign the role to your second user and select **Save**.
+16. When the role finishes creating, select **Assign role** and assign the role to your second user and select **Save**.
  
        ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
  
-16. Select the **publicholidays** table and wait for the data to load.
-17. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the publicholidays table, not any of the files or folders.
+17. Select the **publicholidays** table and wait for the data to load.
+18. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the publicholidays table, not any of the files or folders.
 
        ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
