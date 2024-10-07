@@ -133,11 +133,11 @@ In this exercise, you will assign an item permission and create a OneLake data a
 11. Select **Open** on the top menu bar
 12. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
 
-      ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-role.png)
+      ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
 
 13. Select new role on the **Manage OneLake data access (preview) screen that appears.
   
-      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-roles.png)
+      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
 
 14. Create a new role called **publicholiday** that can only access the publicholidays folder as shown in the screenshot below.
 
