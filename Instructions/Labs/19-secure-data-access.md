@@ -127,12 +127,16 @@ In this exercise, you will assign an item permission and create a OneLake data a
 
       ![Screenshot of the grant access lakehouse window in Fabric.](./Images/grant-people-access-window.png)
 
-8. Select **Grant**.  Note that the second user now has read permissions on the lakehouse.
-9. Return to the browser where you're logged in as the second user.  Refresh the browser.
+8. Select **Grant**.  Note that the second user now has read permissions on the lakehouse. Read permission only allows the user to see metadata for the lakehouse but not the underlying data.  Next we'll confirm this. 
+9. Return to the browser where you're logged in as the second user. Refresh the browser.
 10. Select **OneLake data hub** in the left navigation pane.  
 11. Select the lakehouse to open it. 
-12. Select **Open** on the top menu bar
-13. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
+12. Select **Open** on the top menu bar.  Note that you're unable to expand the tables or files even though read permission has been granted. Next, you'll grant the second user access to a specific folder using OneLake data access permissions.
+13. Return to the browser where you're logged in as the workspace administrator.
+14. Select **Workspaces** from the left navigation bar.
+15. Select your workspace name.
+16. Select the lakehouse.
+1. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
 
       ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
 
