@@ -153,8 +153,7 @@ In this exercise, you will assign an item permission and create a OneLake data a
        ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
 
 17. Return to the browser where you're logged in as the second user. Ensure you're still on the page where the lakehouse is open. Refresh the browser.  
-18. Select the **publicholidays** table and wait for the data to load.
-19. **Note:** Only the data in the publicholidays table is accessible to the user because the user was assigned to the custom OneLake data access role that permits them to see only the data in the publicholidays table, not data in any of the other tables, files or folders.
+18. Select the **publicholidays** table and wait for the data to load. Only the data in the publicholidays table is accessible to the user because the user was assigned to the custom OneLake data access role. The role permits them to see only the data in the publicholidays table, not data in any of the other tables, files or folders.
 
        ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
