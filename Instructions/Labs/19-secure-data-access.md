@@ -93,10 +93,10 @@ Item permissions control access to individual Fabric items within a workspace, l
 5. Close the **Manage access** section.
 6. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear.  Select the ellipse and click **Manage permissions**
 
-    ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
-
 7. Select **Add user** and enter the name of the second user. 
 8. In the box that appears, under **Additional permissions** check **Read all data using SQL (ReadData)** and uncheck all other boxes.
+
+    ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
 
 9. Click **Grant**
 
