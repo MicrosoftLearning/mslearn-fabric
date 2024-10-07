@@ -133,11 +133,11 @@ In this exercise, you will assign an item permission and create a OneLake data a
 11. Select **Open** on the top menu bar
 12. When the lakehouse opens, click **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
 
-      ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/create-onelake-role.png)
+      ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-role.png)
 
 13. Select new role on the **Manage OneLake data access (preview) screen that appears.
   
-      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/manage-onelake-roles.png)
+      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-roles.png)
 
 14. Create a new role called **publicholiday** that can only access the publicholidays folder as shown in the screenshot below.
 
@@ -147,9 +147,8 @@ In this exercise, you will assign an item permission and create a OneLake data a
  
        ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
  
-16. Return to the browser where you're signed in as the second user.  Refresh the browser.
-17. Select the **publicholidays** table and wait for the data to load.
-18. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the publicholidays table, not any of the files or folders.
+16. Select the **publicholidays** table and wait for the data to load.
+17. Note that the user doesn't have access to any other data in the lakehouse because they were assigned to the custom role that permits them to see only data in the publicholidays table, not any of the files or folders.
 
        ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
