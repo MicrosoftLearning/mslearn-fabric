@@ -46,7 +46,7 @@ Next, create a lakehouse in the workspace you created.
 
     ![Screenshot of a new lakehouse in Fabric.](./Images/new-sample-lakehouse.png)
 
-5. Select the **Start with sample data** tile. After a minute or so, the lakehouse will be populated with data.
+4. Select the **Start with sample data** tile. After a minute or so, the lakehouse will be populated with data.
 
 ## Apply workspace access controls
 
