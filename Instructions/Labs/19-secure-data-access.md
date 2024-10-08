@@ -27,9 +27,10 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 ## Create a data warehouse
 
-Next, create a data warehouse in the workspace you created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
+Next, create a data warehouse in the workspace you created:
 
-1. In the workspace you created, select the **New Item** button. Under the **Store data** header, select **Sample warehouse**. Create a new **Sample Warehouse** with the name of your choice.  
+1. In the Synapse Data Warehouse home page, select the **Sample warehouse** shortcut to create a new warehouse with the name of your choice.  
+
     After a minute or so, a new warehouse will be created:
 
     ![Screenshot of a new warehouse.](./Images/new-sample-warehouse.png)
@@ -39,12 +40,13 @@ Next, create a lakehouse in the workspace you created.
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to 🗇).
 2. Select the workspace you created.
-3. In the workspace, select the **New Item** button. Under the **Store data** header, select **Lakehouse**. Create a new Lakehouse with the name of your choice.
-After a minute or so, a new Lakehouse will be created:
+3. In the workspace, select the **+ New** button and then select **Lakehouse**. Create a new Lakehouse with the name of your choice.
+
+   After a minute or so, a new Lakehouse will be created:
 
     ![Screenshot of a new lakehouse in Fabric.](./Images/new-sample-lakehouse.png)
 
-4. Select the **Start with sample data** tile. After a minute or so, the lakehouse will be populated with data.
+5. Select the **Start with sample data** tile. After a minute or so, the lakehouse will be populated with data.
 
 ## Apply workspace access controls
 
@@ -67,7 +69,7 @@ In this exercise, you add a user to a workspace role, apply permissions and, see
 7. Next, you assign the **Workspace Viewer** role to the second user and see that the role grants read access to the warehouse in the workspace.  
 8. Return to the browser window where you're logged in as the Workspace Admin. Ensure you're still on the page that shows the workspace you created. It should have your new workspace items, and the sample warehouse and lakehouse, listed at the bottom of the page.
 9. Select **Manage access** at the top right of the screen.
-10. Select **Add people or groups**. Enter the email of the second, user you're testing with. Select **Add** to assign the user to the workspace **Viewer** role. 
+10. Select **Add people or groups**. Enter the email of the second user you're testing with. Select **Add** to assign the user to the workspace **Viewer** role. 
 11. Return to the InPrivate browser window where you're logged in as the second user and select refresh button on the browser to refresh session permissions assigned to the second user.
 12. Select the **Workspaces** icon on the left menu bar (the icon looks similar to &#128455;) and select on the workspace name you created as the Workspace Admin user. The second user can now see all of the items in the workspace because they were assigned the **Workspace Viewer** role.
 
@@ -76,7 +78,7 @@ In this exercise, you add a user to a workspace role, apply permissions and, see
 13. Select the warehouse and open it.
 14. Select the **Date** table and wait for the rows to be loaded. You can see the rows because as a member of the Workspace Viewer role, you have CONNECT and ReadData permission on tables in the warehouse. For more information on permissions granted to the Workspace Viewer role, see [Workspace roles](https://learn.microsoft.com/en-us/fabric/data-warehouse/workspace-roles).
 15. Next, select the **Workspaces** icon on the left menu bar, then select the lakehouse.
-16. When the lakehouse opens, click on the dropdown box at the top left corner of the screen that says **Lakehouse** and select **SQL analytics endpoint**.
+16. When the lakehouse opens, click on the dropdown box at the top right corner of the screen that says **Lakehouse** and select **SQL analytics endpoint**.
 17. Select the **publicholidays** table and wait for the data to be displayed. Data in the lakehouse table is readable from the SQL analytics endpoint because the user is a member of the Workspace Viewer role that grants read permissions on the SQL analytics endpoint.
 
 ## Apply item access control
