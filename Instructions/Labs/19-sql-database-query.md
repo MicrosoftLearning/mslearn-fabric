@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Query a SQL database in Microsoft Fabric'
+    title: 'Work with SQL Database in Microsoft Fabric'
     module: 'Get started with SQL Database in Microsoft Fabric'
 ---
 
