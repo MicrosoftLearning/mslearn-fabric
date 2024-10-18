@@ -4,7 +4,7 @@ lab:
     module: 'Get started with SQL Database in Microsoft Fabric'
 ---
 
-# Query a SQL database in Microsoft Fabric
+# Work with SQL Database in Microsoft Fabric
 
 SQL database in Microsoft Fabric is a developer-friendly transactional database, based on Azure SQL Database, that allow you to easily create your operational database in Fabric. A SQL database in Fabric uses the SQL Database engine as Azure SQL Database.
 
