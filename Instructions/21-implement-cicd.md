@@ -31,7 +31,7 @@ Next, create a deployment pipeline.
 3. In the **Add a new deployment pipeline** window, name your pipeline **Lab Pipeline**
 4. Accept the defaults on the **Customize your stages** window.  
 
-:::image type="content" source="../images/customize-stages.png" alt-text="Screenshot of pipeline stages.":::
+   :::image type="content" source="../images/customize-stages.png" alt-text="Screenshot of pipeline stages.":::
 
 5. Select **Create**.
 
