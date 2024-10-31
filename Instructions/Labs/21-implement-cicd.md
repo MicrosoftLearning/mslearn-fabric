@@ -6,11 +6,11 @@ lab:
 
 # Implement deployment pipelines in Microsoft Fabric
 
-Deployment pipelines in Microsoft Fabric let you automate the process of copying   changes made to the content in Fabric items between environments like development, test, and production. You can use deployment pipelines to develop and test content before it reaches end users. In this exercise, you create a deployment pipeline, and assign stages to the pipeline. Then you create some content in a development workspace and deploy it between pipeline stages using deployment pipelines.
+Deployment pipelines in Microsoft Fabric let you automate the process of copying   changes made to the content in Fabric items between environments like development, test, and production. You can use deployment pipelines to develop and test content before it reaches end users. In this exercise, you create a deployment pipeline, and assign stages to the pipeline. Then you create some content in a development workspace and use deployment pipelines to deploy it between the Development, Test and Production pipeline stages.
 
 > **Note**: To complete this exercise, you need to be an member of the Fabric workspace admin role. To assign roles see [Roles in workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/roles-workspaces).
 
-This lab takes approximately **45** minutes to complete.
+This lab takes approximately **20** minutes to complete.
 
 ## Create workspaces
 
@@ -47,7 +47,7 @@ Assign workspaces to the stages of the deployment pipeline.
 
 ## Create content
 
-Fabric items haven't been created in your workspaces. Next, you create a lakehouse in the development workspace.
+Fabric items haven't been created in your workspaces. Next, create a lakehouse in the development workspace.
 
 1. In the menu bar on the left, select **Workspaces**.
 2. Select the **Development** workspace.
@@ -60,19 +60,19 @@ Fabric items haven't been created in your workspaces. Next, you create a lakehou
 
 8. In the menu bar on the left, select **Lab Pipeline**.
 9. In the **Development** stage, select the **>** until you see **Lakehouses**. The lakehouse shows up as new content in the Development stage. Between the **Development** and **Test** stages, there's an orange **X** within a circle. The orange X indicates that the Development and Test stages aren't synchronized.
-10. Select the downward arrow below the orange **X** within the circle to compare the content in the Development and Test environments. The LabLakehouse only exists in the Development stage.  
+10. Select the downward arrow below the orange **X** to compare the content in the Development and Test environments. Select **Compare**.The LabLakehouse only exists in the Development stage.  
 
   ![Screenshot the deployment pipeline showing content mismatches between stages.](./Images/lab-pipeline-compare.png)
 
 ## Deploy content between stages
 
-Copy the lakehouse from the **Development** stage to the **Test** and **Production** stages.
-1. Select the **Deploy** button in the development stage of the pipeline to copy the lakehouse in its current state to the text stage. 
+Deploy the lakehouse from the **Development** stage to the **Test** and **Production** stages.
+1. Select the **Deploy** button in the **Development** stage of the pipeline to copy the lakehouse in its current state to the text stage. 
 2. In the **Deploy to next stage** window, select **Deploy**.
-3. Note the orange X between the Test and Production stages. Select the downward facing arrow below the orange X and note that the lakehouse exists in the Development and Test stages but not yet in the Production stage.
+3. There is an orange X between the Test and Production stages. Select the downward facing arrow below the orange X. The lakehouse exists in the Development and Test stages but not yet in the Production stage.
 4. In the **Test** stage, select **Deploy**.
 5. In the **Deploy to next stage** window, select **Deploy**. The green check mark between the stages indicates that all stages in sync and contain the same content.
-6. Using deployment pipelines to deploy between stages, also updates the content in the workspaces corresponding to the deployment stage. Let's confirm.
+6. Using deployment pipelines to deploy between stages also updates the content in the workspaces corresponding to the deployment stage. Let's confirm.
 7. In the menu bar on the left, select **Workspaces**.
 8. Select the **Test** workspace. The lakehouse was copied there.
 9. Open the **Production** workspace from the **Workspaces** icon on the left menu. The lakehouse was copied to the Production workspace too.
