@@ -31,7 +31,7 @@ Next, create a deployment pipeline.
 3. In the **Add a new deployment pipeline** window, name your pipeline **Lab Pipeline**
 4. Accept the defaults on the **Customize your stages** window.  
 
-   ![Screenshot of pipeline stages.](../images/customize-stages.png)
+   ![Screenshot of pipeline stages.](./Images/customize-stages.png)
 
 5. Select **Create**.
 
@@ -43,7 +43,7 @@ Assign workspaces to the stages of the deployment pipeline.
 2. In the window that appears, select on the word **Select** under each deployment stage and select the name of the workspace that matches the name of the stage.
 3. Select **Assign a workspace** for each deployment stage.
 
-  ![Screenshot of deployment pipeline.](../images/deployment-pipeline.png)
+  ![Screenshot of deployment pipeline.](./Images/deployment-pipeline.png)
 
 ## Create content
 
@@ -56,15 +56,13 @@ Fabric items haven't been created in your workspaces. Next, you create a lakehou
 5. Select **Create**.
 6. In the Lakehouse Explorer window, select **Start with sample data** to populate the new lakehouse with data.
 
-  ![Screenshot of Lakehouse Explorer.](../images/lakehouse-explorer.png)
+  ![Screenshot of Lakehouse Explorer.](./Images/lakehouse-explorer.png)
 
 8. In the menu bar on the left, select **Lab Pipeline**.
 9. In the **Development** stage, select the **>** until you see **Lakehouses**. The lakehouse shows up as new content in the Development stage. Between the **Development** and **Test** stages, there's an orange **X** within a circle. The orange X indicates that the Development and Test stages aren't synchronized.
 10. Select the downward arrow below the orange **X** within the circle to compare the content in the Development and Test environments. The LabLakehouse only exists in the Development stage.  
 
- :::image type="content" source="../images/lab-pipeline-compare.png" alt-text="Screenshot the deployment pipeline showing content mismatches between stages.":::
-
-  ![Screenshot the deployment pipeline showing content mismatches between stages.](../images/lab-pipeline-compare.png)
+  ![Screenshot the deployment pipeline showing content mismatches between stages.](./Images/lab-pipeline-compare.png)
 
 ## Deploy content between stages
 
