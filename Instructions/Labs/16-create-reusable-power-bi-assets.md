@@ -55,6 +55,14 @@ In this task, you'll create a report by connecting to the published semantic mod
     ![Screenshot of the Save as selection with the drop-down menu expanded.](./Images/power-bi-save-file-types.png)
 
 1. Notice at the top of the Power BI Desktop window that your report name has **(Power BI Project)** next to it.
+1. You also need to enable the option to save the semantic model using Tabular Model Definition Language (TMDL), as it currently is a preview feature.
+1. Select **File** > **Options and settings** > **Options** > **Preview features** and check the **Store semantic model using TMDL format** option.
+
+    ![Screenshot of the options available in the Preview features category.](./Images/power-bi-enable-tmdl.png)
+   
+1. Select **OK**.
+
+    > If prompted to restart Power BI Desktop, do so before continuing the exercise.
 
 1. In the Home ribbon, navigate to **Get data > Power BI semantic models** to connect to the published semantic model.
 
@@ -72,9 +80,8 @@ Let's look at how changes in Power BI Desktop are reflected in the PBIP flat fil
 
     - YourReport.PBIP file
     - YourReport.Report folder
+    - YourReport.SemanticModel folder
     - .gitignore Git Ignore Source File
-
-There isn't a YourReport.SemanticModel folder because we are using a live connection to a semantic model in the service.
 
 ## Add a new table to your report
 
@@ -105,7 +112,7 @@ In this task, we'll make changes to the report in Power BI Desktop and see the c
 
 1. In File explorer, find the ***YourReport*.SemanticModel** file folder.
 1. Open the definition folder and notice the different files.
-1. Open the **relationships.tmdl** file in a Notepad, and notice there are 9 relationships listed.
+1. Open the **relationships.tmdl** file in a Notepad, and notice there are 9 relationships listed. Close the file.
 1. Back in Power BI Desktop, navigate to the **Modeling** tab in the ribbon.
 1. Select **Manage relationships** and notice there are 9 relationships.
 1. Create a new relationship as follows:
@@ -159,7 +166,7 @@ Your table should look like the following image with four columns and correctly 
 
 In this task, you'll create a template file so you can share a lightweight file with others for better collaboration.
 
-1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `bike.png` file.
+1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `AdventureWorksLogo.jpg` file.
 1. Position this image in the top left corner.
 1. Select a new visual and add **Profit** and **Category** to the fields. *We used a Donut chart for our following screenshot.*
 
@@ -194,7 +201,7 @@ In this task, you'll create a template file so you can share a lightweight file 
 1. **Close & Apply**
 1. Navigate back to the Themes and see that your modified Accessible theme is still applied to the report.
 1. Also notice the message that *you haven't loaded any data yet* in the Data pane.
-1. **Save as** a PBIP file with the same name you previously used to overwrite the file.
+1. **Save as** a PBIT file with the same name you previously used to overwrite the file.
 1. Close the untitled file without saving. You should still have your other PBIP file open.
 
 Now you have a template with a consistent theme without any pre-loaded data.
