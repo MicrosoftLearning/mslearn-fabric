@@ -25,6 +25,7 @@ In this task, you use an existing report to create a shared semantic model for r
 
 1. From a web browser, navigate and sign in to the Fabric service: [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com)
 1. Navigate to the Power BI experience and create a new workspace with a unique name of your choice.
+
     ![Screenshot of the Workspace pane highlighting the + New workspace button.](./Images/power-bi-new-workspace.png)
 
 1. In the top ribbon in your new workspace, select **Upload > Browse**.
@@ -86,7 +87,9 @@ In this task, you'll add a new table because the semantic model doesn't have all
 1. The From Web dialog box will pop up once connected. Enter the following file path as the URL path. Keep Basic radio button selected.
     `"C:\Users\Student\Downloads\16-reusable-assets\us-resident-population-estimates-2020.html"`
 1. Select the box for the **HTML Tables > Table 2** and **Transform Data** to proceed.
+
     ![Screenshot of the Navigator dialog box to choose which content to load or transform.](./Images/power-bi-navigator-html.png)
+
 1. A new Power Query Editor window will open with the Table 2 data preview.
 1. Rename **Table 2** to *US Population*.
 1. Rename STATE to **State** and NUMBER to **Population**.
@@ -159,6 +162,7 @@ In this task, you'll create a template file so you can share a lightweight file 
 1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `bike.png` file.
 1. Position this image in the top left corner.
 1. Select a new visual and add **Profit** and **Category** to the fields. *We used a Donut chart for our following screenshot.*
+
     ![Screenshot of a Donut chart with Profit and Category and the table created in the last task.](./Images/power-bi-donut-table-default.png)
 
 1. Notice that there are 4 different colors in the legend.
@@ -166,14 +170,18 @@ In this task, you'll create a template file so you can share a lightweight file 
 1. Select the arrow next to **Themes** to expand and see all choices.
 1. Select one of the **Accessible themes** to apply to this report. *These themes are specifically created to be more accessible for report viewers.*
 1. Expand the Themes again and select **Customize current theme**.
+
     ![Screenshot of expanded Themes section.](./Images/power-bi-theme-blade.png)
 
 1. In the Customize theme window, navigate to the **Text** tab. Change the font family to a Segoe UI font for each of the sections.
+
     ![Screenshot of the Text section and font family expanded to highlight Segoe UI Semibold.](./Images/power-bi-customize-theme-fonts.png)
 
 1. **Apply** the changes once completed.
 1. Notice the different colors in the visuals with the new theme applied.
+
     ![Screenshot of the configured report page.](./Images/power-bi-icon-donut-table-custom.png)
+
 1. Select **File > Save as** to create the PBIT file.
 1. Change the file type to PBIT and save it in the same location as the PBIP file.
 1. Enter a description for what users can expect from this template when they use it and select OK.
@@ -202,9 +210,12 @@ In this task, you'll publish your Power BI Project file and look at the related 
 1. **Don't upgrade** the PBIR version, if prompted.
 1. Select the workspace you created at the start of this exercise.
 1. Select **Open 'YourReport.pbip' in Power BI** when you get the message that the file was published, but disconnected.
+
     ![Screenshot of the message that the file was published, but disconnected.](./Images/power-bi-published-disconnected-message.png)
+
 1. Once you are in your workspace, you can see the previous semantic model and report, and your new semantic model and report.
 1. In the right corner below Workspace settings, select **Lineage view** to see how your new report depends on other data sources.
+
     ![Screenshot of the lineage view with a database and two text files connecting to a single semantic model from our starter file. That same semantic model connects to the starter file report and has a new semantic model connected to the new report.](./Images/power-bi-lineage-view.png)
 
 > When semantic models relate to other semantic models, it's known as chaining. In this lab, the starter semantic model is chained to the newly created semantic model, enabling its reuse for a specialized purpose.
