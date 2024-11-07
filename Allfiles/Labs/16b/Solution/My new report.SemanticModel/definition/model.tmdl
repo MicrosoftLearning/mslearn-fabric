@@ -1,0 +1,29 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.138.530.0 (24.11)
+
+annotation PBI_QueryOrder = ["DirectQuery to AS - 16-Starter-Sales Analysis","US Population"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Salesperson (Performance)'
+ref table SalespersonRegion
+ref table Product
+ref table Reseller
+ref table Region
+ref table Sales
+ref table Targets
+ref table Salesperson
+ref table Date
+ref table 'US Population'
+
+ref cultureInfo en-US
+

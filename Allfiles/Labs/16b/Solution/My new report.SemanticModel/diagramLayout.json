@@ -1,0 +1,152 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 518.95928972457375
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 10,
+            "y": 242.28571217396927
+          },
+          "nodeIndex": "Targets",
+          "nodeLineageTag": "fc05aa02-32da-45a3-a497-78e97999d244",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 179.72784185257132,
+            "y": 519.376781418582
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "b11a86cf-d92e-4f86-bce2-8906a4823d37",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 899.93675851846592,
+            "y": 704.58617174228687
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "dd665867-e7a6-4a52-9aad-35c90f0546d2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 694.754789797453,
+            "y": 378.88131864553043
+          },
+          "nodeIndex": "Region",
+          "nodeLineageTag": "5f6774b0-7a2d-4c98-a680-f126af8c7e5c",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 631.90205980854921,
+            "y": 1058.2834156171853
+          },
+          "nodeIndex": "Reseller",
+          "nodeLineageTag": "8f18aec2-8698-42c2-a2d0-6e0ab97c60ed",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 466.79412658070038,
+            "y": 704.54589930202633
+          },
+          "nodeIndex": "Sales",
+          "nodeLineageTag": "c90c54c3-ecc7-4006-acae-213e629b2b9e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 281.58208349553297,
+            "y": 1057.7611929967482
+          },
+          "nodeIndex": "Salesperson",
+          "nodeLineageTag": "7d2bb797-a22f-4f92-93c2-336cc56df79c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 10.112408615532672,
+            "y": -10
+          },
+          "nodeIndex": "Salesperson (Performance)",
+          "nodeLineageTag": "30cafbe7-1db4-40f7-a023-2211b63f024f",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 297.15152311849863,
+            "y": 157.5396898341121
+          },
+          "nodeIndex": "SalespersonRegion",
+          "nodeLineageTag": "1bc088d9-fc8b-44d4-a55c-864d6465b75c",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1069.8027268195187,
+            "y": 1138.30261252745
+          },
+          "nodeIndex": "US Population",
+          "nodeLineageTag": "d209525b-8c0e-405e-b3ee-7c7b89c277d5",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 9
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.704971223964577,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
