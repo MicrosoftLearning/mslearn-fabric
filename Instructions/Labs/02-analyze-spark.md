@@ -12,7 +12,7 @@ This lab will take approximately 45 minutes to complete.
 
 ## Prerequisites
 
-* A [Microsoft Fabric trial](/fabric/get-started/fabric-trial#start-the-fabric-capacity-trial).
+* A [Microsoft Fabric trial](https://www.microsoft.com/en-us/microsoft-fabric/getting-started).
 
 ## Create a workspace
 
