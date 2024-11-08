@@ -22,13 +22,15 @@ Create three workspaces with the Fabric trial enabled.
 4. Repeat steps 1 & 2, creating two more workspaces named Test, and Production. Your workspaces are: Development, Test, and Production.
 5. Select the **Workspaces** icon on the menu bar on the left and confirm that there are three workspaces named:  Development, Test, and Production
 
+> **Note**: If you are prompted to enter a unique name for the workspaces, append one or more random numbers to the words: Development, Test, or Production.
+
 ## Create a deployment pipeline
 
 Next, create a deployment pipeline.
 
 1. In the menu bar on the left, select **Workspaces**.
 2. Select **Deployment Pipelines**, then **New pipeline**.
-3. In the **Add a new deployment pipeline** window, name your pipeline **Lab Pipeline**
+3. In the **Add a new deployment pipeline** window, give the pipeline a unique name.
 4. Accept the defaults on the **Customize your stages** window.  
 
    ![Screenshot of pipeline stages.](./Images/customize-stages.png)
@@ -39,7 +41,7 @@ Next, create a deployment pipeline.
 
 Assign workspaces to the stages of the deployment pipeline.
 
-1. On the left menu bar, select the **Lab Pipeline**. 
+1. On the left menu bar, select the pipeline you created. 
 2. In the window that appears, select on the word **Select** under each deployment stage and select the name of the workspace that matches the name of the stage.
 3. Select **Assign a workspace** for each deployment stage.
 
@@ -47,7 +49,7 @@ Assign workspaces to the stages of the deployment pipeline.
 
 ## Create content
 
-Fabric items haven't been created in your workspaces. Next, create a lakehouse in the development workspace.
+Fabric items haven't been created in your workspaces yet. Next, create a lakehouse in the development workspace.
 
 1. In the menu bar on the left, select **Workspaces**.
 2. Select the **Development** workspace.
@@ -58,8 +60,8 @@ Fabric items haven't been created in your workspaces. Next, create a lakehouse i
 
   ![Screenshot of Lakehouse Explorer.](./Images/lakehouse-explorer.png)
 
-8. In the menu bar on the left, select **Lab Pipeline**.
-9. In the **Development** stage, select the **>** until you see **Lakehouses**. The lakehouse shows up as new content in the Development stage. Between the **Development** and **Test** stages, there's an orange **X** within a circle. The orange X indicates that the Development and Test stages aren't synchronized.
+8. In the menu bar on the left, select the pipeline you created.
+9. In the **Development** stage, select the **>** until you see **Lakehouses**. The lakehouse shows up as new content in the Development stage. Between the **Development** and **Test** stages, there's an orange **X** within a circle. The orange **X** indicates that the Development and Test stages aren't synchronized.
 10. Select the downward arrow below the orange **X** to compare the content in the Development and Test environments. Select **Compare**.The LabLakehouse only exists in the Development stage.  
 
   ![Screenshot the deployment pipeline showing content mismatches between stages.](./Images/lab-pipeline-compare.png)
