@@ -12,8 +12,8 @@
             "type": 201
           },
           {
-            "name": "bike20068459833052366.png",
-            "path": "bike20068459833052366.png",
+            "name": "AdventureWorksLogo813982383943191.jpg",
+            "path": "AdventureWorksLogo813982383943191.jpg",
             "type": 100
           }
         ],
@@ -45,7 +45,7 @@
       "name": "2d68da32837bde277801",
       "visualContainers": [
         {
-          "config": "{\"name\":\"0a8d3e21599fd61ed54e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":230,\"y\":53.33333333333333,\"z\":1000,\"width\":454.44444444444446,\"height\":360}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Product.Category\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sales.Profit\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Product\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Category\"},\"Name\":\"Product.Category\",\"NativeReferenceName\":\"Category\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Profit\"},\"Name\":\"Sales.Profit\",\"NativeReferenceName\":\"Profit\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Profit\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "config": "{\"name\":\"0a8d3e21599fd61ed54e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":230,\"y\":53.33333333333333,\"z\":1000,\"width\":454.44444444444446,\"height\":360,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"donutChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Product.Category\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sales.Profit\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Product\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Category\"},\"Name\":\"Product.Category\",\"NativeReferenceName\":\"Category\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Profit\"},\"Name\":\"Sales.Profit\",\"NativeReferenceName\":\"Profit\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Profit\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 360.00,
           "width": 454.44,
@@ -54,16 +54,16 @@
           "z": 1000.00
         },
         {
-          "config": "{\"name\":\"2797ba07270a9ce17c8c\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1001,\"width\":157.91093775883618,\"height\":159.1446169600771,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"bike20068459833052366.png\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "config": "{\"name\":\"93bdcdb644affb2573d1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":52.24630834435656,\"z\":1001,\"width\":230.1325486596658,\"height\":228.8885889371811,\"tabOrder\":2001}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"AdventureWorksLogo813982383943191.jpg\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
           "filters": "[]",
-          "height": 159.14,
-          "width": 157.91,
+          "height": 228.89,
+          "width": 230.13,
           "x": 0.00,
-          "y": 0.00,
+          "y": 52.25,
           "z": 1001.00
         },
         {
-          "config": "{\"name\":\"c3636e7d712da35c46aa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":734.2857142857143,\"y\":52.85714285714286,\"z\":0,\"width\":454.28571428571433,\"height\":360}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"US Population.State\"},{\"queryRef\":\"US Population.Population\"},{\"queryRef\":\"Sales.Sales per Capita\"},{\"queryRef\":\"Sum(Sales.Sales)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"u\",\"Entity\":\"US Population\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Population\"},\"Name\":\"US Population.Population\",\"NativeReferenceName\":\"Population\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales per Capita\"},\"Name\":\"Sales.Sales per Capita\",\"NativeReferenceName\":\"Sales per Capita\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales\"}},\"Function\":0},\"Name\":\"Sum(Sales.Sales)\",\"NativeReferenceName\":\"Sum of Sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"State\"},\"Name\":\"US Population.State\",\"NativeReferenceName\":\"State\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales per Capita\"}}}]},\"drillFilterOtherVisuals\":true}}",
+          "config": "{\"name\":\"c3636e7d712da35c46aa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":734.2857142857143,\"y\":52.85714285714286,\"z\":0,\"width\":454.28571428571433,\"height\":360,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"US Population.State\"},{\"queryRef\":\"US Population.Population\"},{\"queryRef\":\"Sales.Sales per Capita\"},{\"queryRef\":\"Sum(Sales.Sales)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"u\",\"Entity\":\"US Population\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"Population\"},\"Name\":\"US Population.Population\",\"NativeReferenceName\":\"Population\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales per Capita\"},\"Name\":\"Sales.Sales per Capita\",\"NativeReferenceName\":\"Sales per Capita\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales\"}},\"Function\":0},\"Name\":\"Sum(Sales.Sales)\",\"NativeReferenceName\":\"Sum of Sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"u\"}},\"Property\":\"State\"},\"Name\":\"US Population.State\",\"NativeReferenceName\":\"State\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Sales per Capita\"}}}]},\"drillFilterOtherVisuals\":true}}",
           "filters": "[]",
           "height": 360.00,
           "width": 454.29,
