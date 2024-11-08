@@ -173,7 +173,7 @@ In this task, you'll create a template file so you can share a lightweight file 
 
 1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `AdventureWorksLogo.jpg` file.
 1. Position this image in the top left corner.
-1. Select a new visual and add **Profit** and **Category** to the fields.
+1. Select a new visual and add **Sales \| Profit** and **Product \| Category** to it.
 
     > We used a Donut chart for our following screenshot.
 
