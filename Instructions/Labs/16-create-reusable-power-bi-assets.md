@@ -145,10 +145,13 @@ In this task, you'll add a measure and visual to extend the semantic model and u
     ```
 
 1. Locate the new **Sales per Capita** measure and drag it onto the canvas.
-1. Drag **Sales**, **State**, and **Population** fields to the same visual.
+1. Drag **Sales \| Sales**, **US Population \| State**, and **US Population \| Population** fields to the same visual.
+
+   > *The labs use a shorthand notation to reference a field. It will look like this: **Sales \| Unit Price**. In this example, **Sales** is the table name and **Unit Price** is the field name.*
+
 1. Select the visual and change it to a **Table**.
 1. Notice the inconsistent formatting for the Sales per Capita and Population data.
-1. Select each visual and change the format and decimal places.
+1. Select each field in the Data pane and change the format and decimal places.
     - Sales per Capita: Currency \| 4 decimal places
     - Population: Whole number \| Comma separated \| 0 decimal places
 
