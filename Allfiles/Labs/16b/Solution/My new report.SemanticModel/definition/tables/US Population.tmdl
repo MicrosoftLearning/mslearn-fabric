@@ -1,0 +1,37 @@
+table 'US Population'
+	lineageTag: d209525b-8c0e-405e-b3ee-7c7b89c277d5
+
+	column State
+		dataType: string
+		lineageTag: 128e4f19-6da4-4466-98fc-ce34f2cb130b
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: int64
+		formatString: #,0
+		lineageTag: a05bbf85-243d-41bc-9864-4110a1603749
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'US Population' = m
+		mode: import
+		source =
+				let
+				    Source = File.Contents("C:\Users\anrudduc\learn-pr\Self-Publishing\reusable assets lab\OLD\starter from scratch\us-resident-population-estimates-2020.html"),
+				    #"Extracted Table From Html" = Html.Table(Source, {{"Column1", "TABLE:nth-child(3) > * > TR > :nth-child(1)"}, {"Column2", "TABLE:nth-child(3) > * > TR > :nth-child(2)"}, {"Column3", "TABLE:nth-child(3) > * > TR > :nth-child(3)"}}, [RowSelector="TABLE:nth-child(3) > * > TR"]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Extracted Table From Html", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"STATE", type text}, {"NUMBER", Int64.Type}, {"RANK", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"RANK"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"NUMBER", "Population"}, {"STATE", "State"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

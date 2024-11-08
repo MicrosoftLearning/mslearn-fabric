@@ -1,0 +1,68 @@
+/// Salesperson related to region(s)
+table 'Salesperson (Performance)'
+	lineageTag: 3a1f6d96-7778-460f-8e8d-d7c85f535d98
+	sourceLineageTag: 30cafbe7-1db4-40f7-a023-2211b63f024f
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		lineageTag: 489ce5c6-484f-4a99-8839-24a611132311
+		sourceLineageTag: c44af1bf-53ad-476e-b494-3839e0c3204c
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = User
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		lineageTag: 64e08c0e-252a-4dd3-bd73-75c90180cec7
+		sourceLineageTag: 29d6a6cb-8d7c-4fac-bd97-824645bff4c3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = User
+
+	column Title
+		dataType: string
+		lineageTag: 67cee150-a30c-498d-b1c2-f14223ad6400
+		sourceLineageTag: 8efa946d-14e2-4138-bc8c-5136c2a775be
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = User
+
+	column UPN
+		dataType: string
+		isHidden
+		lineageTag: 9c2c3e39-aaf3-4596-b3d9-800359c38000
+		sourceLineageTag: b7627f0f-d6d9-4bcf-9d3c-dacff4ec08af
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: UPN
+
+		annotation SummarizationSetBy = User
+
+	column Salesperson
+		dataType: string
+		lineageTag: 1689ceb7-830f-4164-b126-15e4fba7e9a2
+		sourceLineageTag: 665b013f-c666-4d6b-bc2c-d3d668ba96c7
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Salesperson
+
+		annotation SummarizationSetBy = User
+
+	partition 'Salesperson (Performance)' = entity
+		mode: directQuery
+		source
+			entityName: Salesperson (Performance)
+			expressionSource: 'DirectQuery to AS - 16-Starter-Sales Analysis'
+

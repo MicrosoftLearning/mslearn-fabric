@@ -1,0 +1,72 @@
+table Region
+	lineageTag: 5c50f373-18ee-422e-a7bd-73f136039a4c
+	sourceLineageTag: 5f6774b0-7a2d-4c98-a680-f126af8c7e5c
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		lineageTag: 2db635a5-8c18-4534-a912-90e2bd2576da
+		sourceLineageTag: f4528c79-1b41-49c4-85eb-37659b17b9ff
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = User
+
+	column Region
+		dataType: string
+		lineageTag: ca3771e5-0941-409c-bc7e-fad1332c1d2a
+		sourceLineageTag: bc3c173c-de85-4fda-a7b2-558608e12c73
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = User
+
+	column Country
+		dataType: string
+		lineageTag: f6215352-f396-43de-a0be-43247f8762dc
+		sourceLineageTag: 2d895830-1ae2-4591-9e37-93ef1acd8059
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = User
+
+	column Group
+		dataType: string
+		lineageTag: 8b6d741b-ce92-4192-ae90-5c8456f7435c
+		sourceLineageTag: baec4f43-4cd6-42b1-8acf-ce51387016ae
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = User
+
+	hierarchy Regions
+		lineageTag: 834b538d-2e48-442c-9ad1-838c9e0f8c98
+		sourceLineageTag: 2952f8f8-8b0e-4ee8-8d4a-f684f8791e60
+
+		level Group
+			lineageTag: ad2273a5-72fd-4b78-b929-27922d53f427
+			sourceLineageTag: a50cefde-441a-480b-92f3-b97366e2001e
+			column: Group
+
+		level Country
+			lineageTag: 4deefd9e-6054-4415-a185-04824dd65899
+			sourceLineageTag: 8e84fcee-331d-4e85-9de8-a69ffbba4ed4
+			column: Country
+
+		level Region
+			lineageTag: 3f1d3279-f6df-4c67-a4c4-2d32bc775a3e
+			sourceLineageTag: f48dfa0d-4137-4515-9035-fc5a61d3eacb
+			column: Region
+
+	partition Region = entity
+		mode: directQuery
+		source
+			entityName: Region
+			expressionSource: 'DirectQuery to AS - 16-Starter-Sales Analysis'
+

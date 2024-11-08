@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "conceptualSchemaSettings": {},
+  "queries": [
+    {
+      "name": "DirectQuery to AS - 16-Starter-Sales Analysis",
+      "lineageTag": "fc4c2148-0507-40ae-b970-4d06348fa82d",
+      "text": [
+        "let",
+        "    Source = AnalysisServices.Database(\"powerbi://api.powerbi.com/v1.0/myorg/YourName\", \"16-Starter-Sales Analysis\"),",
+        "    Cubes = Table.Combine(Source[Data]),",
+        "    Cube = Cubes{[Id=\"Model\", Kind=\"Cube\"]}[Data]",
+        "in",
+        "    Cube"
+      ],
+      "isDirectQuery": true,
+      "lastLoadedAsTableFormulaText": "{\"IncludesReferencedQueries\":false,\"RootFormulaText\":\"let\\r\\n    Source = AnalysisServices.Database(\\\"powerbi://api.powerbi.com/v1.0/myorg/YourName\\\", \\\"16-Starter-Sales Analysis\\\"),\\r\\n    Cubes = Table.Combine(Source[Data]),\\r\\n    Cube = Cubes{[Id=\\\"Model\\\", Kind=\\\"Cube\\\"]}[Data]\\r\\nin\\r\\n    Cube\",\"ReferencedQueriesFormulaText\":{}}",
+      "loadAsTableDisabled": false,
+      "resultType": "Unknown",
+      "isHidden": true
+    },
+    {
+      "name": "US Population",
+      "lineageTag": "d209525b-8c0e-405e-b3ee-7c7b89c277d5",
+      "navigationStepName": "Navigation",
+      "text": [
+        "let",
+        "    Source = File.Contents(\"C:\\Users\\Student\\Downloads\\16-reusable-assets\\us-resident-population-estimates-2020.html\"),",
+        "    #\"Extracted Table From Html\" = Html.Table(Source, {{\"Column1\", \"TABLE:nth-child(3) > * > TR > :nth-child(1)\"}, {\"Column2\", \"TABLE:nth-child(3) > * > TR > :nth-child(2)\"}, {\"Column3\", \"TABLE:nth-child(3) > * > TR > :nth-child(3)\"}}, [RowSelector=\"TABLE:nth-child(3) > * > TR\"]),",
+        "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Extracted Table From Html\", [PromoteAllScalars=true]),",
+        "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"STATE\", type text}, {\"NUMBER\", Int64.Type}, {\"RANK\", type text}}),",
+        "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"RANK\"}),",
+        "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"NUMBER\", \"Population\"}, {\"STATE\", \"State\"}})",
+        "in",
+        "    #\"Renamed Columns\""
+      ],
+      "isDirectQuery": false,
+      "lastLoadedAsTableFormulaText": "{\"IncludesReferencedQueries\":false,\"RootFormulaText\":\"let\\r\\n    Source = File.Contents(\\\"C:\\\\Users\\\\anrudduc\\\\learn-pr\\\\Self-Publishing\\\\reusable assets lab\\\\OLD\\\\starter from scratch\\\\us-resident-population-estimates-2020.html\\\"),\\r\\n    #\\\"Extracted Table From Html\\\" = Html.Table(Source, {{\\\"Column1\\\", \\\"TABLE:nth-child(3) > * > TR > :nth-child(1)\\\"}, {\\\"Column2\\\", \\\"TABLE:nth-child(3) > * > TR > :nth-child(2)\\\"}, {\\\"Column3\\\", \\\"TABLE:nth-child(3) > * > TR > :nth-child(3)\\\"}}, [RowSelector=\\\"TABLE:nth-child(3) > * > TR\\\"]),\\r\\n    #\\\"Promoted Headers\\\" = Table.PromoteHeaders(#\\\"Extracted Table From Html\\\", [PromoteAllScalars=true]),\\r\\n    #\\\"Changed Type\\\" = Table.TransformColumnTypes(#\\\"Promoted Headers\\\",{{\\\"STATE\\\", type text}, {\\\"NUMBER\\\", Int64.Type}, {\\\"RANK\\\", type text}}),\\r\\n    #\\\"Removed Columns\\\" = Table.RemoveColumns(#\\\"Changed Type\\\",{\\\"RANK\\\"}),\\r\\n    #\\\"Renamed Columns\\\" = Table.RenameColumns(#\\\"Removed Columns\\\",{{\\\"NUMBER\\\", \\\"Population\\\"}, {\\\"STATE\\\", \\\"State\\\"}})\\r\\nin\\r\\n    #\\\"Renamed Columns\\\"\",\"ReferencedQueriesFormulaText\":{}}",
+      "loadAsTableDisabled": false,
+      "resultType": "Exception",
+      "isHidden": false
+    }
+  ],
+  "queryGroups": [],
+  "culture": "en-US",
+  "firewallEnabled": true
+}

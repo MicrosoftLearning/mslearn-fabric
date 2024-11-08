@@ -1,0 +1,111 @@
+table Reseller
+	lineageTag: c2a139cd-1b12-4bbd-aea4-c4f15ce4c1f8
+	sourceLineageTag: 8f18aec2-8698-42c2-a2d0-6e0ab97c60ed
+
+	column ResellerKey
+		dataType: int64
+		isHidden
+		isNullable: false
+		formatString: 0
+		lineageTag: 1dd1f556-641d-4a5f-95b0-ec886e41416c
+		sourceLineageTag: 6e7e9057-9f99-4e3d-b97a-8f1971657186
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		annotation SummarizationSetBy = User
+
+	column 'Business Type'
+		dataType: string
+		lineageTag: 3f45b77c-c2c3-4d5d-a113-1ec50456f864
+		sourceLineageTag: 22cb0578-d589-4fc7-8658-750d9783ca51
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Business Type
+
+		annotation SummarizationSetBy = User
+
+	column Reseller
+		dataType: string
+		lineageTag: 88a9bf7f-dce8-4310-8050-bb33e38e98f7
+		sourceLineageTag: b487d3bb-83eb-4ca3-a470-8efb781d68d2
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Reseller
+
+		annotation SummarizationSetBy = User
+
+	column City
+		dataType: string
+		lineageTag: 5beb4af8-87c8-4a28-92b0-2235e5281ad0
+		sourceLineageTag: 35c811f8-8abf-442d-a31e-71b02f7e1af3
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = User
+
+	column State-Province
+		dataType: string
+		lineageTag: e4e2845b-fa7b-4392-9033-4617e05e2885
+		sourceLineageTag: 987ad92b-87ef-4c9a-87aa-7cd7c9a3036b
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State-Province
+
+		annotation SummarizationSetBy = User
+
+	column Country-Region
+		dataType: string
+		lineageTag: b899d878-0a4d-4a62-ab8e-e0f3be2c150e
+		sourceLineageTag: aa6ac85c-86e5-4f58-b75a-8376c0c8ac42
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country-Region
+
+		annotation SummarizationSetBy = User
+
+	hierarchy Resellers
+		lineageTag: a01b7631-e0ea-425f-a297-6b032e0b54ed
+		sourceLineageTag: a54c82a1-76ba-48de-9948-18488253b5a1
+
+		level Reseller
+			lineageTag: eea301e1-f7c0-4218-a449-bb392bdc41b1
+			sourceLineageTag: c409da2a-cfc5-482f-a171-80afc91352c7
+			column: Reseller
+
+		level 'Business Type'
+			lineageTag: cb169319-d30e-40ad-86f3-558ca9a4d91c
+			sourceLineageTag: 7c25b373-faf0-4d10-a202-ee79a8923eb8
+			column: 'Business Type'
+
+	hierarchy Geography
+		lineageTag: a6403c62-d8bf-498e-a4b9-25643f480565
+		sourceLineageTag: e1563909-1070-432c-b5b8-2e6b8ab5144d
+
+		level Country-Region
+			lineageTag: 25093cd0-c26c-4718-9076-1191a3b678c6
+			sourceLineageTag: 2caa75c9-b1ee-4e4f-be2b-112f07f20a51
+			column: Country-Region
+
+		level State-Province
+			lineageTag: bfb38488-fd0d-44b5-8152-3d9b15710eae
+			sourceLineageTag: 6e0b034e-4310-4f2f-8d4a-a544c023a742
+			column: State-Province
+
+		level City
+			lineageTag: 6fbb1fa5-59f3-4947-ba37-37108708eb54
+			sourceLineageTag: 732d00cb-430b-4b8f-8097-84e839c26481
+			column: City
+
+		level Reseller
+			lineageTag: d3f5f139-50b1-461c-aa83-986c0f517231
+			sourceLineageTag: 81d9a1b5-da16-4b32-bf19-f4f6bc8bdb76
+			column: Reseller
+
+	partition Reseller = entity
+		mode: directQuery
+		source
+			entityName: Reseller
+			expressionSource: 'DirectQuery to AS - 16-Starter-Sales Analysis'
+

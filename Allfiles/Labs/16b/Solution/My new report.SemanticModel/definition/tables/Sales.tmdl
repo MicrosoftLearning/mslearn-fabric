@@ -1,0 +1,233 @@
+table Sales
+	lineageTag: d011e21c-3913-493a-b6fd-5022a2c14e7d
+	sourceLineageTag: c90c54c3-ecc7-4006-acae-213e629b2b9e
+
+	measure Profit = EXTERNALMEASURE("Profit", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: f5b89451-737b-47aa-808c-45d229f927cc
+		sourceLineageTag: e9392e16-8287-4a63-8f98-14ddbc88ec6d
+		dataCategory: Uncategorized
+
+	measure 'Profit Margin' = EXTERNALMEASURE("Profit Margin", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: 2365c808-8b7d-46b6-b24a-8a13cbba8746
+		sourceLineageTag: 6dcf0ce0-a21f-454e-8857-7bf5e2b7b031
+		dataCategory: Uncategorized
+
+	measure 'Avg Price' = EXTERNALMEASURE("Avg Price", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Pricing
+		lineageTag: 9bcfa08f-1bf3-49d8-b35d-5dad67a2f666
+		sourceLineageTag: 9ca76f2a-b132-4cb0-813c-f4e65d5f9c71
+		dataCategory: Uncategorized
+
+	measure 'Median Price' = EXTERNALMEASURE("Median Price", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Pricing
+		lineageTag: d68aa176-2c6e-4404-a0a4-a31d13a4f388
+		sourceLineageTag: 22c94527-a543-4638-8cf7-fb934808620e
+		dataCategory: Uncategorized
+
+	measure 'Min Price' = EXTERNALMEASURE("Min Price", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Pricing
+		lineageTag: a8fca671-da86-48a7-842f-176b7c4d9fdb
+		sourceLineageTag: 94d285a5-58ae-40fb-98dd-29b64a058507
+		dataCategory: Uncategorized
+
+	measure 'Max Price' = EXTERNALMEASURE("Max Price", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Pricing
+		lineageTag: d48c8467-4a85-4ef6-afe1-249de8c38e5c
+		sourceLineageTag: 793f0df1-015b-4908-b5bd-aefbd1dfdb62
+		dataCategory: Uncategorized
+
+	measure Orders = EXTERNALMEASURE("Orders", INTEGER, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0
+		displayFolder: Counts
+		lineageTag: 4fb79728-a93b-4fa8-b114-d53b49b59898
+		sourceLineageTag: 57f38fd6-cf9a-4d06-a7ee-1a306043c61b
+		dataCategory: Uncategorized
+
+	measure 'Order Lines' = EXTERNALMEASURE("Order Lines", INTEGER, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0
+		displayFolder: Counts
+		lineageTag: 4d5dff7c-93b6-4231-9131-25e4e346ef46
+		sourceLineageTag: da03adc1-acfb-4d73-9aaa-b5e373c5e88f
+		dataCategory: Uncategorized
+
+	measure 'Sales % All Region' = EXTERNALMEASURE("Sales % All Region", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Ratios
+		lineageTag: 8ffba007-60e8-44ea-9c67-d4ab7213dce5
+		sourceLineageTag: 008e9ca5-2758-43de-9595-76282e69f31d
+		dataCategory: Uncategorized
+
+	measure 'Sales % Country' = EXTERNALMEASURE("Sales % Country", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Ratios
+		lineageTag: f19a72b2-708f-41c6-bb5c-7eb6d1913698
+		sourceLineageTag: 954e603d-5c04-4a90-ad4c-8f34b04ea323
+		dataCategory: Uncategorized
+
+	measure 'Sales % Group' = EXTERNALMEASURE("Sales % Group", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		displayFolder: Ratios
+		lineageTag: a0178da3-679c-4e41-8fc7-87132d7b59f0
+		sourceLineageTag: 565a0642-ff70-4055-95e3-f5233d204ae8
+		dataCategory: Uncategorized
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales YTD' = EXTERNALMEASURE("Sales YTD", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Time Intelligence
+		lineageTag: ccc1d7bc-af20-49c7-9e9b-ac44d6c367f0
+		sourceLineageTag: a9440108-f6a0-4e23-b6c9-9fa7662ff79b
+		dataCategory: Uncategorized
+
+	measure 'Sales YoY Growth' = EXTERNALMEASURE("Sales YoY Growth", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Time Intelligence
+		lineageTag: 01e5408a-0d93-4ce4-868b-e7ac0af695d2
+		sourceLineageTag: 5e215bb9-dc07-4caa-a171-431cb225e29a
+		dataCategory: Uncategorized
+
+	measure 'Sales per Capita' = ```
+			
+			    DIVIDE(
+			        SUM(Sales[Sales]),
+			        SUM('US Population'[Population])
+			    )
+			```
+		formatString: \$#,0.0000;(\$#,0.0000);\$#,0.0000
+		lineageTag: db973cbe-3ea9-4cf7-8620-fc10c469846a
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column SalesOrderNumber
+		dataType: string
+		isHidden
+		lineageTag: 18a24817-e9f3-4a20-9791-ad94fb212fc1
+		sourceLineageTag: f7a951a1-052d-44bb-911c-0f487977d8e6
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = User
+
+	column OrderDate
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 7c0d9970-6bc3-4c26-b38f-0301be6c12ed
+		sourceLineageTag: f09e25ae-d1b9-4233-80a0-f947efe49834
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = User
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dda7131c-3acc-495b-b668-9ca532ad26a6
+		sourceLineageTag: 322e241e-6244-4cd7-bb79-bf30ad967c85
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = User
+
+	column ResellerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7b4c97b4-752d-4cac-8282-704e0781130c
+		sourceLineageTag: fa69a045-873a-49b5-847a-2eda5565fab7
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		annotation SummarizationSetBy = User
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 147f7056-135a-423d-8fc3-0dd44c7d8f10
+		sourceLineageTag: 84ab0fd3-0c83-4456-a495-f0e3817be1b3
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = User
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 03bf3b2e-8f32-4d46-8806-34619ef3cc26
+		sourceLineageTag: e2190568-d580-4d50-abaf-e366040afd52
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = User
+
+	column Quantity
+		dataType: int64
+		formatString: #,0
+		lineageTag: 168cbd6e-ec87-4ed9-a111-ae44aa6dc200
+		sourceLineageTag: 1f8ac87e-c2b3-4d8f-bf03-f927b297974e
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = User
+
+	column 'Unit Price'
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f78ff5ec-9377-405a-b8a4-62fd9df32f74
+		sourceLineageTag: 914c5056-0675-4279-90b9-9b47f4096186
+		dataCategory: Uncategorized
+		summarizeBy: average
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = User
+
+	column Sales
+		dataType: decimal
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a655ad3f-e507-41ee-906b-5bd46e112411
+		sourceLineageTag: 4465de7d-4f58-462b-8ddb-6207fcce0d92
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = User
+
+	/// Based in standard cost
+	column Cost
+		dataType: decimal
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: f6c2d3b3-e972-4b29-9109-4684dfbe900b
+		sourceLineageTag: 4891cf60-2811-4a99-9d25-63cb318cbb38
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = User
+
+	partition Sales = entity
+		mode: directQuery
+		source
+			entityName: Sales
+			expressionSource: 'DirectQuery to AS - 16-Starter-Sales Analysis'
+

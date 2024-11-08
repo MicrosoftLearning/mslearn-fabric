@@ -1,0 +1,64 @@
+table Targets
+	lineageTag: 5c67d908-0588-43c0-9dbc-1c64794f92c8
+	sourceLineageTag: fc05aa02-32da-45a3-a497-78e97999d244
+
+	measure Target = EXTERNALMEASURE("Target", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 35b9a71b-304f-4f4f-9f7f-cc49da4a2c84
+		sourceLineageTag: ffc79c2c-8c37-499d-919a-2a3511102514
+		dataCategory: Uncategorized
+
+	measure Variance = EXTERNALMEASURE("Variance", CURRENCY, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: b13637da-507d-4a2e-b2ec-a8a3143d4441
+		sourceLineageTag: b4b78e5d-a649-4965-9c84-fae75fa12d98
+		dataCategory: Uncategorized
+
+	measure 'Variance Margin' = EXTERNALMEASURE("Variance Margin", DOUBLE, "DirectQuery to AS - 16-Starter-Sales Analysis")
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 98f580df-ae8b-40e5-a721-44c8f60d78ad
+		sourceLineageTag: 35ad240b-b1a0-4fce-8c33-f0f9bb99044a
+		dataCategory: Uncategorized
+
+	column EmployeeID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 43ba6344-85f8-4c35-8fea-db1375de5929
+		sourceLineageTag: 7552db63-13e7-4c1c-8e70-ee51dcd1066d
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = User
+
+	column TargetAmount
+		dataType: decimal
+		isHidden
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 75b2d0f5-0938-4d30-8bef-ad5c5bd40406
+		sourceLineageTag: c8642aff-9cd7-43b3-ad05-ba32d7661db3
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: TargetAmount
+
+		annotation SummarizationSetBy = User
+
+	column TargetMonth
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: c04bf5fc-851f-4f6a-8f57-4f7e31a6b462
+		sourceLineageTag: 542d3ac9-7ec1-4b7a-8768-ea712b42a580
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: TargetMonth
+
+		annotation SummarizationSetBy = User
+
+	partition Targets = entity
+		mode: directQuery
+		source
+			entityName: Targets
+			expressionSource: 'DirectQuery to AS - 16-Starter-Sales Analysis'
+
