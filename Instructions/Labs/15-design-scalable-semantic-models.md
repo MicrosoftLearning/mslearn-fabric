@@ -89,27 +89,7 @@ In this task, you will visualize sales data by date and use inactive relationshi
 
     *The table visual shows the sum of the **Sales Amount** column grouped by year. But what does **Fiscal Year** mean? Because there’s an active relationship between the **Date** and **Sales** tables to the **OrderDateKey** column, **Fiscal Year** means the fiscal year in which the orders were made.*
 
-    *To clarify which fiscal year, it’s a good idea to rename the visual field (or add a title to the visual).*
-
-7. In the **Visualizations** pane for the table visual, from inside the **Columns** well, select the down-arrow, and then select **Rename for this visual**.
-
-    ![](Images/work-with-model-relationships-image11.png)
-
-8. Replace the text with **Order Year**, and then press **Enter**.
-
-    ![](Images/work-with-model-relationships-image12.png)
-
-    *Note: It’s quicker to rename a visual field by double-clicking its name.*
-
-9. Notice that the table visual column header updates to the new name.
-
-    ![](Images/work-with-model-relationships-image13.png)
-
 ## Use inactive relationships
-
-In this exercise, you will learn how to make a relationship active in a DAX formula.
-
-### Use inactive relationships
 
 In this task, you will use the USERELATIONSHIP function to make an inactive relationship active.
 
@@ -122,8 +102,8 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
     ```DAX
     Sales Shipped =
     CALCULATE (
-    SUM ( 'Sales'[Sales Amount] ),
-    USERELATIONSHIP ( 'Date'[DateKey], 'Sales'[ShipDateKey] )
+    SUM ('Sales'[Sales Amount]),
+    USERELATIONSHIP('Date'[DateKey], 'Sales'[ShipDateKey])
     )
     ```
 
@@ -141,96 +121,51 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
     ![](Images/work-with-model-relationships-image24.png)
 
-    *Creating measures that temporarily set relationships as active is one way to work with role-playing dimensions. However, it can become tedious when there’s a need to create role-playing versions for many measures. For example, if there were 10 sales-related measures and three role-playing dates, it could mean creating 30 measures. Creating them with calculation groups could make the process easier.*
+    *Creating measures that temporarily set relationships as active is one way to work with role-playing dimensions. However, it can become tedious when there’s a need to create role-playing versions for many measures. For example, if there were 10 sales-related measures and three role-playing dates, it could mean creating 30 measures. Creating them with calculation groups makes the process easier.*
 
 ## Create calculation groups
 
 In this task, you will create a calculation group to support all date analysis.
 
-### Remove the inactive relationships
-
-In this task, you will remove the existing relationship to the **ShipDateKey** column.
-
 1. Switch to **Model** view.
 
     ![](Images/work-with-model-relationships-image26.png)
 
-2. In the model diagram, right-click the **ShipDateKey** relationship, and then select **Delete**.
+1. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. Select **Yes** in the warning window to confirm the creation of the calculation group.
+
+> Note: Once you create a calculation group, Power BI Desktop won't create implicit measures anymore, being required from the user to create explicit measures whenever they want to aggregate data columns.
+
+1. Rename the calculation group to *Analyze By Date*.
+
+1. In the **Model** tab of the **Data** pane, select the calculation item automatically created with your calculation group.
+
+1. Replace and commit the item's formula with the following:
+
+    ```DAX
+   Order Date = SELECTEDMEASURE()
+    ```
+
+1. Right-click on the **Calculation items** field and select **New calculation item**.
+
+1. Use the following DAX formula for the new item:
+
+    ```DAX
+   Ship Date = CALCULATE(SELECTEDMEASURE(), USERELATIONSHIP('Date'[DateKey], 'Sales'[ShipDateKey]))
+    ```
+
+1. Create a third item with the following DAX formula:
+
+    ```DAX
+   Due Date = CALCULATE(SELECTEDMEASURE(), USERELATIONSHIP('Date'[DateKey], 'Sales'[DueDateKey]))
+    ```
+   
+1. In the model diagram, right-click the **ShipDateKey** relationship, and then select **Delete**.
 
     ![](Images/work-with-model-relationships-image27.png)
 
-3. When prompted to confirm the deletion, select **Yes**.
+1. When prompted to confirm the deletion, select **Yes**.
 
     *Deleting the relationship results in an error with the **Sales Shipped** measure. You will rewrite the measure formula later in this lab.*
-
-### Disable relationship options
-
-In this task, you will disable two relationship options.
-
-1. On the **File** ribbon tab, select **Options and settings**, and then select **Options**.
-
-    ![](Images/work-with-model-relationships-image29.png)
-
-2. In the **Options** window, at the bottom-left, from inside the **CURRENT FILE** group, select **Data Load**.
-
-    ![](Images/work-with-model-relationships-image30.png)
-
-3. In the **Relationships** section, uncheck the two enabled options.
-
-    ![](Images/work-with-model-relationships-image31.png)
-
-    *Generally, in your day-to-day work it’s okay to keep these options enabled. However, for the purposes of this lab, you will create relationships explicitly.*
-
-4. Select **OK**.
-
-    ![](Images/work-with-model-relationships-image32.png)
-
-### Add another date table
-
-In this task, you will create a query to add another date table to the model.
-
-1. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon, which opens the **Power Query Editor**.
-
-    ![](Images/work-with-model-relationships-image33.png)
-
-    *If you are prompted to specify how to connect, **Edit Credentials**.*
-
-    ![](Images/work-with-model-relationships-image52.png)
-
-    *Leave the default connection settings for Windows with "Use my current credentials", then **Connect**.*
-
-     ![](Images/work-with-model-relationships-image53.png)
-    *Select **Yes** to close the warning message.*
-
-2. In the **Power Query Editor** window, in the **Queries** pane (located at the left), right-click the **Date** query, and then select **Reference**.
-
-    ![](Images/work-with-model-relationships-image34.png)
-
-    *A referencing query is one that uses another query as its source. So, this new query sources its date from the **Date** query.*
-
-3. In the **Query Settings** pane (located at the right), in the **Name** box, replace the text with **Ship Date**.
-
-    ![](Images/work-with-model-relationships-image35.png)
-
-4. To rename the **DateKey** column, double-click the **DateKey** column header.
-
-5. Replace the text with **ShipDateKey**, and then press **Enter**.
-
-    ![](Images/work-with-model-relationships-image36.png)
-
-6. Also rename the **Fiscal Year** column as **Ship Year**.
-
-    *If possible, it’s a good idea to rename all columns so they describe the role they’re playing. In this lab, to keep things simple you will rename only two columns.*
-
-7. To load the table to the model, on the **Home** ribbon tab, select the **Close &amp; Apply** icon.
-
-    ![](Images/work-with-model-relationships-image37.png)
-
-8. When the table has added to the model, to create a relationship, from the **Ship Date** table drag the **ShipDateKey** column to the **ShipDateKey** column of the **Sales** table.
-
-    ![](Images/work-with-model-relationships-image38.png)
-
-9. Notice that an active relationship now exists between the **Ship Date** and **Sales** tables.
 
 ### Visualize ship date data
 
@@ -275,10 +210,6 @@ In this task, you will visualize the ship date data in a new table visual.
     *Lastly, it’s not possible to achieve a combination of filters in the one visual. For example, it’s not possible to combine sales ordered and sales shipped in the same visual without creating a measure. You will create that measure in the next exercise.*
 
 ## Explore other relationship functions
-
-In this exercise, you will work with other DAX relationship functions.
-
-### Explore other relationship functions
 
 In this task, you will work with the CROSSFILTER and TREATAS functions to modify relationship behavior during calculations.
 
