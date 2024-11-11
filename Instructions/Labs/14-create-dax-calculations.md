@@ -22,7 +22,7 @@ In this lab you learn how to:
 
 To complete this exercise, first open a web browser and enter the following URL to download the zip folder:
 
-`https://github.com/MicrosoftLearning/mslearn-fabric/raw/Main/Allfiles/Labs/14/14-create-dax.zip`
+`https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/14/14-create-dax.zip`
 
 Extract the folder to the **C:\Users\Student\Downloads\14-create-dax** folder.
 
@@ -375,7 +375,7 @@ In this task, you'll create more measures that use more complex formulas.
 
 	![Picture 44](Images/create-dax-calculations-in-power-bi-desktop_image48.png)
 
-	> *While it appears all salespeople aren't meeting target, remember that the table visual isn’t yet filtered by a specific time period. You’ll produce sales performance reports that filter by a user-selected time period in the **Design a Report in Power BI Desktop** lab.*
+	> *While it appears all salespeople aren't meeting target, remember that the table visual isn’t yet filtered by a specific time period.*
 
 1. At the top-right corner of the **Data** pane, collapse and then expand open the pane.
 
