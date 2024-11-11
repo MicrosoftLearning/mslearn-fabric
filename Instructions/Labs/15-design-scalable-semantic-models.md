@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Work with model relationships'
-    module: 'Design and build tabular models'
+    title: 'Design scalable semantic models'
+    module: 'Design scalable semantic models'
 ---
 
-# Work with model relationships
+# Design scalable semantic models
 
 In this exercise, you will work with model relationships specifically to address the need for role-playing dimensions. It will involve working with active and inactive relationships, and also Data Analysis Expressions (DAX) functions that modify relationship behavior.
 
@@ -14,7 +14,7 @@ In this exercise, you learn how to:
 - Set relationship properties.
 - Use DAX functions that modify relationship behavior.
 
-This lab takes approximately **45** minutes to complete.
+This lab takes approximately **30** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
@@ -24,9 +24,12 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 ### Download starter file
 
-1. Download the [Sales Analysis starter file](https://aka.ms/fabric-relationships-starter) from `https://aka.ms/fabric-relationships-starter` and save it on your local computer (in any folder).
+1. Download the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/Main/Allfiles/Labs/15/15-scalable-semantic-models.zip) from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/Main/Allfiles/Labs/15/15-scalable-semantic-models.zip` and save it on your local computer.
 
-1. Navigate to the downloaded file and open it in Power BI Desktop.
+1. Extract the folder to the **C:\Users\Student\Downloads\15-scalable-semantic-models** folder.
+
+1. Open the **15-Starter-Sales Analysis.pbix** file.
+   
     >Note : Ignore and close the warning asking to apply changes.
 
 ### Review the data model
@@ -58,7 +61,7 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 ### Visualize date data
 
-In this task, you will visualize sales data by date and switch the active status of relationships.
+In this task, you will visualize sales data by date and use inactive relationships.
 
 1. Switch to **Report** view.
 
@@ -102,54 +105,6 @@ In this task, you will visualize sales data by date and switch the active status
 
     ![](Images/work-with-model-relationships-image13.png)
 
-### Modify relationship active status
-
-In this task, you will modify the active status of two relationships.
-
-1. On the **Modeling** ribbon, select **Manage Relationships**.
-
-    ![](Images/work-with-model-relationships-image14.png)
-
-2. In the **Manage relationships** window, for the relationship between the **Sales** and **Date** tables for the **OrderDateKey** column (third in the list), uncheck the **Active** checkbox.
-
-    ![](Images/work-with-model-relationships-image15.png)
-
-3. Check the **Active** checkbox for the relationship between the **Sales** and **Date** tables for the **ShipDateKey** column (last in the list).
-
-    ![](Images/work-with-model-relationships-image16.png)
-
-4. Select **Close**.
-
-    ![](Images/work-with-model-relationships-image17.png)
-
-    *These configurations have switched the active relationship between the **Date** and **Sales** tables to the **ShipDateKey** column.*
-
-5. Review the table visual that now shows sales amounts grouped by ship years.
-
-    ![](Images/work-with-model-relationships-image18.png)
-
-6. Rename the first column as **Ship Year**.
-
-    ![](Images/work-with-model-relationships-image19.png)
-
-    *The first row represents a blank group because some orders have not yet shipped. In other words, there are BLANKs in the **ShipDateKey** column of the **Sales** table.*
-
-7. In the **Manage relationships** window, revert the **OrderDateKey** relationship back to active by using the following steps:
-
-    - Open the **Manage relationships** window
-
-    - Uncheck the **Active** checkbox for the **ShipDateKey** relationship (last in the list)
-
-    - Check the **Active** checkbox for the **OrderDateKey** relationship (third in the list)
-
-    - Close the **Manage relationships** window
-
-    - Rename the first visual field in the table visual as **Order Year**
-
-    ![](Images/work-with-model-relationships-image20.png)
-
-    *In the next exercise, you will learn how to make a relationship active in a DAX formula.*
-
 ## Use inactive relationships
 
 In this exercise, you will learn how to make a relationship active in a DAX formula.
@@ -188,15 +143,9 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
     *Creating measures that temporarily set relationships as active is one way to work with role-playing dimensions. However, it can become tedious when there’s a need to create role-playing versions for many measures. For example, if there were 10 sales-related measures and three role-playing dates, it could mean creating 30 measures. Creating them with calculation groups could make the process easier.*
 
-    *Another approach is to create a different model table for each role-playing dimension. You will do that in the next exercise.*
+## Create calculation groups
 
-6. To remove the measure from the table visual, in the **Visualizations** pane, from inside the **Columns** well, for the **Sales Shipped** field, press **X**.
-
-    ![](Images/work-with-model-relationships-image25.png)
-
-## Add another Date table
-
-In this exercise, you will add a date table to support ship date analysis.
+In this task, you will create a calculation group to support all date analysis.
 
 ### Remove the inactive relationships
 
