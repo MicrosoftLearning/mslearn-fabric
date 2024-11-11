@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.138.530.0 (24.11)
+annotation PBIDesktopVersion = 2.137.1102.0 (24.10)
 
 annotation PBI_QueryOrder = ["DirectQuery to AS - 16-Starter-Sales Analysis","US Population"]
 
