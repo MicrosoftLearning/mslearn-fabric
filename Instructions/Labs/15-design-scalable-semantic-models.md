@@ -163,43 +163,58 @@ In this task, you will create a calculation group for Time Inteligence analysis.
    )
     ```
 
+The last calculation item should return values in percentage only, so it needs a dynamic format string to change the format of the measures it affects.
+
+1. In the **Properties** pane of the YoY item, enable the **Dynamic format string** feature.
+
+1. In the DAX formula bar, verify that the field to its left is set as **Format**, and write the following format string:
+
+    ```DAX
+   "0.##%"
+    ```
+    
 1. Confirm that your calculation group looks as follows:
 
 
 
-### Visualize the data
+### Apply a calculation group to measures
 
-In this task, you will visualize the ship date data in a new table visual.
+In this task, you will visualize how the calculation items affect measures in a visual.
 
 1. Switch to **Report** view.
 
     ![](Images/work-with-model-relationships-image39.png)
 
-2. To clone the table visual, first select the visual.
+1. At the bottom of the canvas, select the **Overview** tab.
 
-3. On the **Home** ribbon tab, from inside the **Clipboard** group, select **Copy**.
+1. Select the matrix visual already created in the canvas and drag the **Yearly Calculations** calculation column from the **Data** pane to the **Columns** field in the **Visualizations** pane.
 
-    ![](Images/work-with-model-relationships-image40.png)
 
-4. To paste the copied visual, on the **Home** ribbon tab, from inside the **Clipboard** group, select **Paste**.
+
+Observe that now the matrix has a set of sales figures for each calculation item. Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.
+
+### Create field parameters
+4. 
+
+5. To paste the copied visual, on the **Home** ribbon tab, from inside the **Clipboard** group, select **Paste**.
 
     *Tip: You can also use the **Ctrl+C** and **Ctrl+V** shortcuts.*
 
     ![](Images/work-with-model-relationships-image41.png)
 
-5. Move the new table visual to the right of the existing table visual.
+6. Move the new table visual to the right of the existing table visual.
 
-6. Select the new table visual, and then in the **Visualizations** pane, from inside the **Columns** well, remove the **Order Year** field.
+7. Select the new table visual, and then in the **Visualizations** pane, from inside the **Columns** well, remove the **Order Year** field.
 
     ![](Images/work-with-model-relationships-image42.png)
 
-7. In the **Data** pane, expand open the **Ship Date** table.
+8. In the **Data** pane, expand open the **Ship Date** table.
 
-8. To add a new field to the new table visual, from the **Ship Date** table, drag the **Ship Year** field to the **Columns** well, above the **Sales Amount** field.
+9. To add a new field to the new table visual, from the **Ship Date** table, drag the **Ship Year** field to the **Columns** well, above the **Sales Amount** field.
 
     ![](Images/work-with-model-relationships-image43.png)
 
-9. Verify that the new table visual shows sales amount grouped by ship year.
+10. Verify that the new table visual shows sales amount grouped by ship year.
 
     ![](Images/work-with-model-relationships-image44.png)
 
