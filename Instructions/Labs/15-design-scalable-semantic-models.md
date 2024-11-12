@@ -6,17 +6,15 @@ lab:
 
 # Design scalable semantic models
 
-In this exercise, you will work with model relationships specifically to address the need for role-playing dimensions. It will involve working with active and inactive relationships, and also Data Analysis Expressions (DAX) functions that modify relationship behavior.
+In this exercise, you will work with DAX functions to enhance flexibility and efficiency of data models, particularly through features like calculation groups and field parameters. By using these features together, you can make interactive reports without needing multiple visuals or complex DAX expressions, creating highly flexible and scalable semantic models.
 
 In this exercise, you learn how to:
 
-- Interpret relationship properties in the model diagram.
-- Set relationship properties.
-- Use DAX functions that modify relationship behavior.
+- Use DAX functions to modify relationship behavior.
+- Create calculation groups and apply them in dynamic time intelligence calculations.
+- Create field parameters to dinamically select and display different fields and measures.
 
 This lab takes approximately **30** minutes to complete.
-
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Explore model relationships
 
@@ -30,26 +28,27 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 1. Open the **15-Starter-Sales Analysis.pbix** file.
    
-    >Note : Ignore and close the warning asking to apply changes.
+    >Note : Ignore and close any warnings asking to apply changes.
 
 ### Review the data model
 
 1. In Power BI Desktop, at the left, switch to **Model** view.
 
     ![](Images/work-with-model-relationships-image2.png)
-2. Use the model diagram to review the model design.
+   
+1. Use the model diagram to review the model design.
 
     ![](Images/work-with-model-relationships-image3.png)
 
-3. Notice that there are three relationships between the **Date** and **Sales** tables.
+1. Notice that there are three relationships between the **Date** and **Sales** tables.
 
     ![](Images/work-with-model-relationships-image4.png)
 
     *The **Date** column in the **Date** table is a unique column representing the "one” side of the relationships. Filters applied to any column of the **Date** table propagate to the **Sales** table using one of the relationships.*
 
-4. Hover the cursor over each of the three relationships to highlight the "many” side column in the **Sales** table.
+5. Hover the cursor over each of the three relationships to highlight the "many” side column in the **Sales** table.
 
-5. Notice that the relationship to the **OrderDate** column is a solid line, while the other relationships are represented by a dotted line.
+6. Notice that the relationship to the **OrderDate** column is a solid line, while the other relationships are represented by a dotted line.
 
     *A solid line represents an active relationship. There can only be one active relationship path between two model tables, and the path is used by default to propagate filters between tables. Conversely, a dotted line represents an inactive relationship. Inactive relationships are used only when explicitly invoked by DAX formulas.*
 
@@ -191,7 +190,7 @@ In this task, you will visualize how the calculation items affect measures in a 
 
 
 
-Observe that now the matrix has a set of sales figures for each calculation item. Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.
+    *Observe that now the matrix has a set of sales figures for each calculation item. Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.*
 
 ### Create field parameters
 
@@ -223,11 +222,30 @@ In this task, you will edit the **Sales Figures** field parameter by directly mo
 1. Select the **Salesperson Performance** tab at the bottom of the canvas.
 
 
-In this canvas, you have a clustered bar chart with Total Sales by Month. Above this visual you have bookmark buttons that can be used to change the chart between Total Sales and Target by month. While creating the bookmark buttons allows you to change the visual type with each option, if you need to switch between many measures, you will have to create a bookmark button for each of them and that can be very time consuming. Instead, we can use a field parameter with all the measures we want to analyze and quickly switch between them.
+    *In this canvas, you have a clustered bar chart with Total Sales by Month. Above this visual you have bookmark buttons that can be used to change the chart between Total Sales and Target by month. While creating the bookmark buttons allows you to change the visual type with each option, if you need to switch between many measures, you will have to create a bookmark button for each of them and that can be very time consuming. Instead, we can use a field parameter with all the measures we want to analyze and quickly switch between them.*
 
 1. Select the bar chart visual and replace the **Total Sales** field in **X-axis** with the **Sales Figures** field parameter.
 
-1. For this visual we still need to evaluate the Target by Month, which is not in the field parameter.
+1. Create a **Slicer** visual and drag the **Sales Figures** parameter to the **Field** area.
+
+For this visual you still need to evaluate the Target by Month, which is not in the field parameter.
+
+1. Select the **Sales Figures** parameter in the Data pane and add the Target field in the parameter's DAX expression as below:
+
+    ```DAX
+   Sales Figures = {
+    ("Total Sales", NAMEOF('Sales'[Total Sales]), 0),
+    ("Profit", NAMEOF('Sales'[Profit]), 1),
+    ("Profit Margin", NAMEOF('Sales'[Profit Margin]), 2),
+    ("Orders", NAMEOF('Sales'[Orders]), 3),
+    ("Target", NAMEOF('Targets'[Target]), 4)
+   }
+    ```
+
+1. Commit the changes and verify that the visual changes as you select the different Sales figures.
+
+1. Delete the bookmark buttons.
+   
 ## Finish up
 
 To finish the exercise, close Power BI Desktop - no need to save the file.
