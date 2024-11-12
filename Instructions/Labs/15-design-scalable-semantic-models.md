@@ -111,7 +111,7 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
     ![](Images/work-with-model-relationships-image23.png)
 
-4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year is different, due to some orders being done in the first year, but shipped only in the second year.
+4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year in **Total Sales** and **Sales Shipped** is different. That is due to orders being received in a given year while being shipped only in the following year or are not even shipped yet.
 
     ![](Images/work-with-model-relationships-image24.png)
 
@@ -125,18 +125,18 @@ In this task, you will create a calculation group for Time Inteligence analysis.
 
     ![](Images/work-with-model-relationships-image26.png)
 
-1. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. Select **Yes** in the warning window to confirm the creation of the calculation group.
+1. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. If a warning window pops up, select **Yes** to confirm the creation of the calculation group.
 
 > Note: Once you create a calculation group, Power BI Desktop won't create implicit measures anymore, being required from the user to create explicit measures whenever they want to aggregate data columns. An implicit measure occurs when, in the Report view, you use a data column from the Data pane directly in a visual. The visual allows you to aggregate it as a SUM, AVERAGE, MIN, MAX, or some other basic aggregation, which becomes an implicit measure.
 
-1. Rename the calculation group to *Analyze By Date*.
+1. Rename the calculation group to *Time Calculations* and the calculation column to *Yearly Calculations*.
 
 1. In the **Model** tab of the **Data** pane, select the calculation item automatically created with your calculation group.
 
 1. Replace and commit the item's formula with the following:
 
     ```DAX
-   Order Date = SELECTEDMEASURE()
+   Year-to-Date (YTD) = CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
     ```
 
 1. Right-click on the **Calculation items** field and select **New calculation item**.
@@ -144,13 +144,23 @@ In this task, you will create a calculation group for Time Inteligence analysis.
 1. Use the following DAX formula for the new item:
 
     ```DAX
-   Ship Date = CALCULATE(SELECTEDMEASURE(), USERELATIONSHIP('Date'[DateKey], 'Sales'[ShipDateKey]))
+   Previous Year (PY) = CALCULATE(SELECTEDMEASURE(), PREVIOUSYEAR('Date'[Date]))
     ```
 
 1. Create a third item with the following DAX formula:
 
     ```DAX
-   Due Date = CALCULATE(SELECTEDMEASURE(), USERELATIONSHIP('Date'[DateKey], 'Sales'[DueDateKey]))
+   Year-over-Year (YoY) Growth = 
+   VAR MeasurePriorYear =
+   CALCULATE(
+       SELECTEDMEASURE(),
+       SAMEPERIODLASTYEAR('Date'[Date])
+   )
+   RETURN
+   DIVIDE(
+       (SELECTEDMEASURE() - MeasurePriorYear),
+       MeasurePriorYear
+   )
     ```
 
 1. Confirm that your calculation group looks as follows:
