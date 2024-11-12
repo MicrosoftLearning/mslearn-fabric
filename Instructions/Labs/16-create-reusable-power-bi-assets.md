@@ -1,5 +1,5 @@
 ---
-lab:
+lab: 'Create reusable Power BI assets'
     title: 'Create reusable Power BI assets'
 ---
 
