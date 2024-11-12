@@ -216,7 +216,18 @@ In this task, you will create field parameters to change visuals.
 
 1. Check the different sales figures in the slicer and how the matrix changes when each of them is selected.
 
+### Edit field parameters
 
-### Finish up
+In this task, you will edit the **Sales Figures** field parameter by directly modifying its DAX expression.
+
+1. Select the **Salesperson Performance** tab at the bottom of the canvas.
+
+
+In this canvas, you have a clustered bar chart with Total Sales by Month. Above this visual you have bookmark buttons that can be used to change the chart between Total Sales and Target by month. While creating the bookmark buttons allows you to change the visual type with each option, if you need to switch between many measures, you will have to create a bookmark button for each of them and that can be very time consuming. Instead, we can use a field parameter with all the measures we want to analyze and quickly switch between them.
+
+1. Select the bar chart visual and replace the **Total Sales** field in **X-axis** with the **Sales Figures** field parameter.
+
+1. For this visual we still need to evaluate the Target by Month, which is not in the field parameter.
+## Finish up
 
 To finish the exercise, close Power BI Desktop - no need to save the file.
