@@ -24,9 +24,9 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 1. Download the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/Main/Allfiles/Labs/15/15-scalable-semantic-models.zip) from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/Main/Allfiles/Labs/15/15-scalable-semantic-models.zip` and save it on your local computer.
 
-1. Extract the folder to the **C:\Users\Student\Downloads\15-scalable-semantic-models** folder.
+2. Extract the folder to the **C:\Users\Student\Downloads\15-scalable-semantic-models** folder.
 
-1. Open the **15-Starter-Sales Analysis.pbix** file.
+3. Open the **15-Starter-Sales Analysis.pbix** file.
    
     >Note : Ignore and close any warnings asking to apply changes.
 
@@ -34,21 +34,21 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
 1. In Power BI Desktop, at the left, switch to **Model** view.
 
-    ![](Images/work-with-model-relationships-image2.png)
+    ![](Images/design-scalable-semantic-models-image1.png)
    
-1. Use the model diagram to review the model design.
+2. Use the model diagram to review the model design.
 
-    ![](Images/work-with-model-relationships-image3.png)
+    ![](Images/design-scalable-semantic-models-image2.png)
 
-1. Notice that there are three relationships between the **Date** and **Sales** tables.
+3. Notice that there are three relationships between the **Date** and **Sales** tables.
 
-    ![](Images/work-with-model-relationships-image4.png)
+    ![](Images/design-scalable-semantic-models-image3.png)
 
     *The **Date** column in the **Date** table is a unique column representing the "one” side of the relationships. Filters applied to any column of the **Date** table propagate to the **Sales** table using one of the relationships.*
 
-5. Hover the cursor over each of the three relationships to highlight the "many” side column in the **Sales** table.
+4. Hover the cursor over each of the three relationships to highlight the "many” side column in the **Sales** table.
 
-6. Notice that the relationship to the **OrderDate** column is a solid line, while the other relationships are represented by a dotted line.
+5. Notice that the relationship to the **OrderDate** column is a solid line, while the other relationships are represented by a dotted line.
 
     *A solid line represents an active relationship. There can only be one active relationship path between two model tables, and the path is used by default to propagate filters between tables. Conversely, a dotted line represents an inactive relationship. Inactive relationships are used only when explicitly invoked by DAX formulas.*
 
@@ -62,27 +62,27 @@ In this task, you will visualize sales data by date and use inactive relationshi
 
 1. Switch to **Report** view.
 
-    ![](Images/work-with-model-relationships-image5.png)
+    ![](Images/design-scalable-semantic-models-image4.png)
 
 2. To add a table visual, in the **Visualizations** pane, select the **Table** visual icon.
 
-    ![](Images/work-with-model-relationships-image6.png)
+    ![](Images/design-scalable-semantic-models-image5.png)
 
 3. To add columns to the table visual, in the **Data** pane (located at the right), first expand the **Date** table.
 
-    ![](Images/work-with-model-relationships-image7.png)
+    ![](Images/design-scalable-semantic-models-image6.png)
 
 4. Drag the **Year** column and drop it into the table visual.
 
-    ![](Images/work-with-model-relationships-image8.png)
+    ![](Images/design-scalable-semantic-models-image7.png)
 
 5. Expand open the **Sales** table, and then drag and drop the **Total Sales** column into the table visual.
 
-    ![](Images/work-with-model-relationships-image9.png)
+    ![](Images/design-scalable-semantic-models-image8.png)
 
 6. Review the table visual.
 
-    ![](Images/work-with-model-relationships-image10.png)
+    ![](Images/design-scalable-semantic-models-image9.png)
 
     *The table visual shows the sum of the **Total Sales** column grouped by year. But what does **Year** mean? Because there’s an active relationship between the **Date** and **Sales** tables to the **OrderDate** column, **Year** means the fiscal year in which the orders were made.*
 
@@ -92,7 +92,7 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
 1. In the **Data** pane, right-click the **Sales** table, and then select **New measure**.
 
-    ![](Images/work-with-model-relationships-image21.png)
+    ![](Images/design-scalable-semantic-models-image10.png)
 
 2. In the formula bar (located beneath the ribbon), replace the text with the following measure definition, and then press **Enter**.
 
@@ -108,11 +108,11 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
 3. Add the **Sales Shipped** measure to the table visual.
 
-    ![](Images/work-with-model-relationships-image23.png)
+    ![](Images/design-scalable-semantic-models-image11.png)
 
 4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year in **Total Sales** and **Sales Shipped** is different. That is due to orders being received in a given year while being shipped only in the following year or are not even shipped yet.
 
-    ![](Images/work-with-model-relationships-image24.png)
+    ![](Images/design-scalable-semantic-models-image12.png)
 
     *Creating measures that temporarily set relationships as active is one way to work with role-playing dimensions. However, it can become tedious when there’s a need to create role-playing versions for many measures. For example, if there were 10 sales-related measures and three role-playing dates, it could mean creating 30 measures. Creating them with calculation groups makes the process easier.*
 
@@ -122,31 +122,31 @@ In this task, you will create a calculation group for Time Inteligence analysis.
 
 1. Switch to **Model** view.
 
-    ![](Images/work-with-model-relationships-image26.png)
+2. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. If a warning window pops up, select **Yes** to confirm the creation of the calculation group.
 
-1. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. If a warning window pops up, select **Yes** to confirm the creation of the calculation group.
+   ![](Images/design-scalable-semantic-models-image13.png)
 
 > Note: Once you create a calculation group, Power BI Desktop won't create implicit measures anymore, being required from the user to create explicit measures whenever they want to aggregate data columns. An implicit measure occurs when, in the Report view, you use a data column from the Data pane directly in a visual. The visual allows you to aggregate it as a SUM, AVERAGE, MIN, MAX, or some other basic aggregation, which becomes an implicit measure.
 
-1. Rename the calculation group to *Time Calculations* and the calculation column to *Yearly Calculations*.
+3. Rename the calculation group to *Time Calculations* and the calculation column to *Yearly Calculations*.
 
-1. In the **Model** tab of the **Data** pane, select the calculation item automatically created with your calculation group.
+4. In the **Model** tab of the **Data** pane, select the calculation item automatically created with your calculation group.
 
-1. Replace and commit the item's formula with the following:
+5. Replace and commit the item's formula with the following:
 
     ```DAX
    Year-to-Date (YTD) = CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
     ```
 
-1. Right-click on the **Calculation items** field and select **New calculation item**.
+6. Right-click on the **Calculation items** field and select **New calculation item**.
 
-1. Use the following DAX formula for the new item:
+7. Use the following DAX formula for the new item:
 
     ```DAX
    Previous Year (PY) = CALCULATE(SELECTEDMEASURE(), PREVIOUSYEAR('Date'[Date]))
     ```
 
-1. Create a third item with the following DAX formula:
+8. Create a third item with the following DAX formula:
 
     ```DAX
    Year-over-Year (YoY) Growth = 
@@ -164,17 +164,17 @@ In this task, you will create a calculation group for Time Inteligence analysis.
 
 The last calculation item should return values in percentage only, so it needs a dynamic format string to change the format of the measures it affects.
 
-1. In the **Properties** pane of the YoY item, enable the **Dynamic format string** feature.
+9. In the **Properties** pane of the YoY item, enable the **Dynamic format string** feature.
 
-1. In the DAX formula bar, verify that the field to its left is set as **Format**, and write the following format string:
+10. In the DAX formula bar, verify that the field to its left is set as **Format**, and write the following format string:
 
     ```DAX
    "0.##%"
     ```
     
-1. Confirm that your calculation group looks as follows:
+11. Confirm that your calculation group looks as follows:
 
-
+    ![](Images/design-scalable-semantic-models-image14.png)
 
 ### Apply a calculation group to measures
 
@@ -182,13 +182,11 @@ In this task, you will visualize how the calculation items affect measures in a 
 
 1. Switch to **Report** view.
 
-    ![](Images/work-with-model-relationships-image39.png)
+2. At the bottom of the canvas, select the **Overview** tab.
 
-1. At the bottom of the canvas, select the **Overview** tab.
+3. Select the matrix visual already created in the canvas and drag the **Yearly Calculations** calculation column from the **Data** pane to the **Columns** field in the **Visualizations** pane.
 
-1. Select the matrix visual already created in the canvas and drag the **Yearly Calculations** calculation column from the **Data** pane to the **Columns** field in the **Visualizations** pane.
-
-
+    ![](Images/design-scalable-semantic-models-image15.png)
 
     *Observe that now the matrix has a set of sales figures for each calculation item. Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.*
 
@@ -198,22 +196,24 @@ In this task, you will create field parameters to change visuals.
 
 1. Select the **Modeling** tab in the top ribbon, then expand the **New parameter** button and select **Fields**.
 
+    ![](Images/design-scalable-semantic-models-image16.png)
 
-
-1. In the Parameters window, rename the parameter to **Sales Figures**, verify that the option **Add slicer to this page** is checked, and add the following fields from the **Sales** table:
+2. In the Parameters window, rename the parameter to **Sales Figures**, verify that the option **Add slicer to this page** is checked, and add the following fields from the **Sales** table:
 
    * Total Sales
    * Profit
    * Profit Margin
    * Orders
 
-1. Select **Create**.
+    ![](Images/design-scalable-semantic-models-image17.png)
 
-1. Once the slicer is created, you can select the matrix and remove all fields from **Values** in the Visualizations pane and add instead the Sales Figures field parameter.
+3. Select **Create**.
 
+4. Once the slicer is created, you can select the matrix and remove all fields from **Values** in the Visualizations pane and add instead the Sales Figures field parameter.
 
+    ![](Images/design-scalable-semantic-models-image18.png)
 
-1. Check the different sales figures in the slicer and how the matrix changes when each of them is selected.
+5. Check the different sales figures in the slicer and how the matrix changes when each of them is selected.
 
 ### Edit field parameters
 
@@ -221,16 +221,15 @@ In this task, you will edit the **Sales Figures** field parameter by directly mo
 
 1. Select the **Salesperson Performance** tab at the bottom of the canvas.
 
-
     *In this canvas, you have a clustered bar chart with Total Sales by Month. Above this visual you have bookmark buttons that can be used to change the chart between Total Sales and Target by month. While creating the bookmark buttons allows you to change the visual type with each option, if you need to switch between many measures, you will have to create a bookmark button for each of them and that can be very time consuming. Instead, we can use a field parameter with all the measures we want to analyze and quickly switch between them.*
 
-1. Select the bar chart visual and replace the **Total Sales** field in **X-axis** with the **Sales Figures** field parameter.
+2. Select the bar chart visual and replace the **Total Sales** field in **X-axis** with the **Sales Figures** field parameter.
 
-1. Create a **Slicer** visual and drag the **Sales Figures** parameter to the **Field** area.
+3. Create a **Slicer** visual and drag the **Sales Figures** parameter to the **Field** area.
 
 For this visual you still need to evaluate the Target by Month, which is not in the field parameter.
 
-1. Select the **Sales Figures** parameter in the Data pane and add the Target field in the parameter's DAX expression as below:
+4. Select the **Sales Figures** parameter in the Data pane and add the Target field in the parameter's DAX expression as below:
 
     ```DAX
    Sales Figures = {
@@ -242,9 +241,9 @@ For this visual you still need to evaluate the Target by Month, which is not in 
    }
     ```
 
-1. Commit the changes and verify that the visual changes as you select the different Sales figures.
+5. Commit the changes and verify that the visual changes as you select the different Sales figures.
 
-1. Delete the bookmark buttons.
+6. Delete the bookmark buttons.
    
 ## Finish up
 
