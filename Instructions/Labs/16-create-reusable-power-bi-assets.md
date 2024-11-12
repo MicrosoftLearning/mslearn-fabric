@@ -1,6 +1,7 @@
 ---
-lab: 'Create reusable Power BI assets'
+lab:
     title: 'Create reusable Power BI assets'
+    module: 'Create reusable Power BI assets'
 ---
 
 # Create reusable Power BI assets
