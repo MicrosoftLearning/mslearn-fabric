@@ -41,17 +41,15 @@ In this exercise, you will open a pre-developed Power BI Desktop solution to lea
 
     ![](Images/work-with-model-relationships-image3.png)
 
-    *The model comprises six dimension tables and one fact table. The **Sales** fact table stores sales order details. It’s a classic star schema design.*
-
 3. Notice that there are three relationships between the **Date** and **Sales** tables.
 
     ![](Images/work-with-model-relationships-image4.png)
 
-    *The **DateKey** column in the **Date** table is a unique column representing the "one” side of the relationships. Filters applied to any column of the **Date** table propagate to the **Sales** table using one of the relationships.*
+    *The **Date** column in the **Date** table is a unique column representing the "one” side of the relationships. Filters applied to any column of the **Date** table propagate to the **Sales** table using one of the relationships.*
 
 4. Hover the cursor over each of the three relationships to highlight the "many” side column in the **Sales** table.
 
-5. Notice that the relationship to the **OrderDateKey** column is a solid line, while the other relationships are represented by a dotted line.
+5. Notice that the relationship to the **OrderDate** column is a solid line, while the other relationships are represented by a dotted line.
 
     *A solid line represents an active relationship. There can only be one active relationship path between two model tables, and the path is used by default to propagate filters between tables. Conversely, a dotted line represents an inactive relationship. Inactive relationships are used only when explicitly invoked by DAX formulas.*
 
@@ -75,11 +73,11 @@ In this task, you will visualize sales data by date and use inactive relationshi
 
     ![](Images/work-with-model-relationships-image7.png)
 
-4. Drag the **Fiscal Year** column and drop it into the table visual.
+4. Drag the **Year** column and drop it into the table visual.
 
     ![](Images/work-with-model-relationships-image8.png)
 
-5. Expand open the **Sales** table, and then drag and drop the **Sales Amount** column into the table visual.
+5. Expand open the **Sales** table, and then drag and drop the **Total Sales** column into the table visual.
 
     ![](Images/work-with-model-relationships-image9.png)
 
@@ -87,7 +85,7 @@ In this task, you will visualize sales data by date and use inactive relationshi
 
     ![](Images/work-with-model-relationships-image10.png)
 
-    *The table visual shows the sum of the **Sales Amount** column grouped by year. But what does **Fiscal Year** mean? Because there’s an active relationship between the **Date** and **Sales** tables to the **OrderDateKey** column, **Fiscal Year** means the fiscal year in which the orders were made.*
+    *The table visual shows the sum of the **Total Sales** column grouped by year. But what does **Year** mean? Because there’s an active relationship between the **Date** and **Sales** tables to the **OrderDate** column, **Year** means the fiscal year in which the orders were made.*
 
 ## Use inactive relationships
 
@@ -102,22 +100,18 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
     ```DAX
     Sales Shipped =
     CALCULATE (
-    SUM ('Sales'[Sales Amount]),
-    USERELATIONSHIP('Date'[DateKey], 'Sales'[ShipDateKey])
+    SUM ('Sales'[Sales]),
+    USERELATIONSHIP('Date'[Date], 'Sales'[ShipDate])
     )
     ```
 
-    *This formula uses the CALCULATE function to modify the filter context. It’s the USERELATIONSHIP function that, for the purpose of this calculation, makes the **ShipDateKey** relationship active.*
+    *This formula uses the CALCULATE function to modify the filter context. It’s the USERELATIONSHIP function that, for the purpose of this calculation, makes the **ShipDate** relationship active.*
 
-3. On the **Measure tools** contextual ribbon, from inside the **Formatting** group, set the decimals places to **2**.
-
-    ![](Images/work-with-model-relationships-image22.png)
-
-4. Add the **Sales Shipped** measure to the table visual.
+3. Add the **Sales Shipped** measure to the table visual.
 
     ![](Images/work-with-model-relationships-image23.png)
 
-5. Widen the table visual so all columns are fully visible.
+4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year is different, due to some orders being done in the first year, but shipped only in the second year.
 
     ![](Images/work-with-model-relationships-image24.png)
 
@@ -125,7 +119,7 @@ In this task, you will use the USERELATIONSHIP function to make an inactive rela
 
 ## Create calculation groups
 
-In this task, you will create a calculation group to support all date analysis.
+In this task, you will create a calculation group for Time Inteligence analysis.
 
 1. Switch to **Model** view.
 
@@ -133,7 +127,7 @@ In this task, you will create a calculation group to support all date analysis.
 
 1. In the Model view, select **Calculation Group** to create a new calculation group table, group column, and item. Select **Yes** in the warning window to confirm the creation of the calculation group.
 
-> Note: Once you create a calculation group, Power BI Desktop won't create implicit measures anymore, being required from the user to create explicit measures whenever they want to aggregate data columns.
+> Note: Once you create a calculation group, Power BI Desktop won't create implicit measures anymore, being required from the user to create explicit measures whenever they want to aggregate data columns. An implicit measure occurs when, in the Report view, you use a data column from the Data pane directly in a visual. The visual allows you to aggregate it as a SUM, AVERAGE, MIN, MAX, or some other basic aggregation, which becomes an implicit measure.
 
 1. Rename the calculation group to *Analyze By Date*.
 
@@ -158,16 +152,12 @@ In this task, you will create a calculation group to support all date analysis.
     ```DAX
    Due Date = CALCULATE(SELECTEDMEASURE(), USERELATIONSHIP('Date'[DateKey], 'Sales'[DueDateKey]))
     ```
-   
-1. In the model diagram, right-click the **ShipDateKey** relationship, and then select **Delete**.
 
-    ![](Images/work-with-model-relationships-image27.png)
+1. Confirm that your calculation group looks as follows:
 
-1. When prompted to confirm the deletion, select **Yes**.
 
-    *Deleting the relationship results in an error with the **Sales Shipped** measure. You will rewrite the measure formula later in this lab.*
 
-### Visualize ship date data
+### Visualize the data
 
 In this task, you will visualize the ship date data in a new table visual.
 
