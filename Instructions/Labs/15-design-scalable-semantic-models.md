@@ -194,103 +194,28 @@ In this task, you will visualize how the calculation items affect measures in a 
 Observe that now the matrix has a set of sales figures for each calculation item. Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.
 
 ### Create field parameters
-4. 
 
-5. To paste the copied visual, on the **Home** ribbon tab, from inside the **Clipboard** group, select **Paste**.
+In this task, you will create field parameters to change visuals.
 
-    *Tip: You can also use the **Ctrl+C** and **Ctrl+V** shortcuts.*
+1. Select the **Modeling** tab in the top ribbon, then expand the **New parameter** button and select **Fields**.
 
-    ![](Images/work-with-model-relationships-image41.png)
 
-6. Move the new table visual to the right of the existing table visual.
 
-7. Select the new table visual, and then in the **Visualizations** pane, from inside the **Columns** well, remove the **Order Year** field.
+1. In the Parameters window, rename the parameter to **Sales Figures**, verify that the option **Add slicer to this page** is checked, and add the following fields from the **Sales** table:
 
-    ![](Images/work-with-model-relationships-image42.png)
+   * Total Sales
+   * Profit
+   * Profit Margin
+   * Orders
 
-8. In the **Data** pane, expand open the **Ship Date** table.
+1. Select **Create**.
 
-9. To add a new field to the new table visual, from the **Ship Date** table, drag the **Ship Year** field to the **Columns** well, above the **Sales Amount** field.
+1. Once the slicer is created, you can select the matrix and remove all fields from **Values** in the Visualizations pane and add instead the Sales Figures field parameter.
 
-    ![](Images/work-with-model-relationships-image43.png)
 
-10. Verify that the new table visual shows sales amount grouped by ship year.
 
-    ![](Images/work-with-model-relationships-image44.png)
+1. Check the different sales figures in the slicer and how the matrix changes when each of them is selected.
 
-    *The model now has two date tables, each with an active relationship to the **Sales** table. The benefit of this design approach is that it’s flexible. It’s now possible to use all measures and summarizable fields with either date table.*
-
-    *There are, however, some disadvantages. Each role-playing table will contribute to a larger model size—although dimension table aren’t typically large in terms of rows. Each role-playing table will also require duplicating model configurations, like marking the date table, creating hierarchies, and other settings. Also, additional tables contribute to a possible overwhelming number of fields. Users may find it more difficult to find the model resources they need.*
-
-    *Lastly, it’s not possible to achieve a combination of filters in the one visual. For example, it’s not possible to combine sales ordered and sales shipped in the same visual without creating a measure. You will create that measure in the next exercise.*
-
-## Explore other relationship functions
-
-In this task, you will work with the CROSSFILTER and TREATAS functions to modify relationship behavior during calculations.
-
-1. In the **Data** pane, from inside the **Sales** table, select the **Sales Shipped** measure.
-
-    ![](Images/work-with-model-relationships-image45.png)
-
-2. In the formula base, replace the text with the following definition:
-
-    ```dax
-    Sales Shipped =
-    CALCULATE (
-    SUM ( 'Sales'[Sales Amount] ),
-    CROSSFILTER ( 'Date'[DateKey], 'Sales'[OrderDateKey], NONE ),
-    TREATAS (
-    VALUES ( 'Date'[DateKey] ),
-    'Ship Date'[ShipDateKey]
-        )
-    )
-    ```
-
-    *This formula uses the CALCULATE function to sum the **Sales Amount** column by using modified relationship behaviors. The CROSSFILTER function disables the active relationship to the **OrderDateKey** column (this function can also modify filter direction). The TREATAS function creates a virtual relationship by applying the in-context **DateKey** values to the **ShipDateKey** column.*
-
-3. Add the revised **Sales Shipped** measure to the first table visual.
-
-    ![](Images/work-with-model-relationships-image46.png)
-
-4. Review the first table visual.
-
-    ![](Images/work-with-model-relationships-image47.png)
-
-5. Notice that there is no BLANK group.
-
-    *Because there are no BLANKs in the **OrderDateKey** column, a BLANK group wasn’t generated. Showing unshipped sales will require a different approach.*
-
-### Show unshipped sales
-
-In this task, you will create a measure to show the unshipped sales amount.
-
-1. Create a measure named **Sales Unshipped** in the **Sales** table by using the following definition:
-
-    ```DAX
-    Sales Unshipped =
-    CALCULATE (
-    SUM ( 'Sales'[Sales Amount] ),
-    ISBLANK ( 'Sales'[ShipDateKey] )
-    )
-    ```
-
-    *This formula sums the **Sales Amount** column where the **ShipDateKey** column is BLANK.*
-
-2. Format the measure to use two decimal places.
-
-3. To add a new visual to the page, first select a blank area of the report page.
-
-4. In the **Visualizations** pane, select the **Card** visual icon.
-
-    ![](Images/work-with-model-relationships-image48.png)
-
-5. Drag the **Sales Unshipped** measure into the card visual.
-
-    ![](Images/work-with-model-relationships-image49.png)
-
-6. Verify that the final report page layout looks like the following.
-
-    ![](Images/work-with-model-relationships-image50.png)
 
 ### Finish up
 
