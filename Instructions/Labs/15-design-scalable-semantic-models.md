@@ -70,7 +70,7 @@ In this task, you will visualize the total sales by year and use inactive relati
 
 6. Review the table visual.
 
-![Table visual with Year and Total Sales.](./images/table-year-total-sales.png)
+![Table visual with Year and Total Sales.](Images/table-year-total-sales.png)
 
 > The table visual shows the sum of the **Total Sales** column grouped by year. But what does **Year** mean? Because there’s an active relationship between the **Date** and **Sales** tables to the **OrderDate** column, **Year** means the fiscal year in which the orders were made.
 
@@ -96,9 +96,9 @@ In this task, you will use the `USERELATIONSHIP` function to make an inactive re
 
 3. Add the **Sales Shipped** measure to the table visual.
 
-4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year in **Total Sales** and **Sales Shipped** is different. That difference is due to orders being received in a given year while being shipped only in the following year or are not even shipped yet.
+4. Widen the table visual so all columns are fully visible. Observe that the **Total** row is the same but the sales amount for each year in **Total Sales** and **Sales Shipped** is different. That difference is due to orders being received in a given year while being shipped only in the following year or that are not even shipped yet.
 
-![Table with Year, Total Sales, and Sales Shipped.](./images/relationship-table-final.png)
+![Table with Year, Total Sales, and Sales Shipped.](Images/relationship-table-final.png)
 
 > Creating measures that temporarily set relationships as active is one way to work with role-playing dimensions. However, it can become tedious when there’s a need to create role-playing versions for many measures. For example, if there were 10 sales-related measures and three role-playing dates, it could mean creating 30 measures. Creating them with calculation groups makes the process easier.
 
@@ -172,7 +172,7 @@ In this task, you will visualize how the calculation items affect measures in a 
 
 4. Observe that now the matrix has a set of sales figures for each calculation item. 
 
-   ![Screenshot of the matrix with the Yearly Calculations added.](./images/calculation-group-matrix.png)
+   ![Screenshot of the matrix with the Yearly Calculations added.](Images/calculation-group-matrix.png)
 
 > Having all this information in one visual at once can be hard to read and therefore, it would be convenient to limit the visual to one sales figure at a time. In order to do that, we can use a field parameter.
 
@@ -203,7 +203,7 @@ In this task, you will create field parameters to change visuals.
 
 6. See how the Profit field is selected using the slicer for the Sales Figures field parameter. This is the same matrix from above, so you can see the three calculation items (PY, YoY, YTD) but only applied to Profit because of the slicer.
 
-    ![Screenshot of matrix with calculation group and field parameters and one field selected.](./images/matrix-parameters-selected.png)
+    ![Screenshot of matrix with calculation group and field parameters and one field selected.](Images/matrix-parameters-selected.png)
 
 ### Edit field parameters
 
@@ -213,7 +213,7 @@ In this task, you will edit the **Sales Figures** field parameter by directly mo
 
     > While creating the bookmark buttons allows you to change the visual type with each option, if you need to switch between many measures, you will have to create a bookmark button for each of them and that can be very time consuming. Instead, we can use a field parameter with all the measures we want to analyze and quickly switch between them.
 
-    ![Salesperson performance page before changes.](./images/field-parameters-bar-chart-start.png)
+    ![Salesperson performance page before changes.](Images/field-parameters-bar-chart-start.png)
 
 2. Select the bar chart visual and replace the **Total Sales** field in **X-axis** with the **Sales Figures** field parameter.
 
@@ -237,7 +237,7 @@ For this visual you still need to evaluate the Target by Month, which is not in 
 
 6. Delete the bookmark buttons, and observe the final state of the report page.
 
-    ![Final state of Salesperson Performance with field parameters.](./images/field-parameters-bar-chart-final.png)
+    ![Final state of Salesperson Performance with field parameters.](Images/field-parameters-bar-chart-final.png)
 
 ## Lab complete
 
