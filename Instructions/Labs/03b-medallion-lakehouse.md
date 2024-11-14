@@ -326,7 +326,7 @@ Note that you could have done all of this in a single notebook, but for the purp
           "Month": "updates.Month",
           "Year": "updates.Year",
           "mmmyyyy": "updates.mmmyyyy",
-          "yyyymm": "yyyymm"
+          "yyyymm": "updates.yyyymm"
         }
       ) \
       .execute()
