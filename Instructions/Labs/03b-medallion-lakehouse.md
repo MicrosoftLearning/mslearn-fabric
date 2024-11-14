@@ -598,7 +598,7 @@ Note that you can't use the **default semantic model** that is automatically cre
    - dimproduct_gold
    - factsales_gold
 
-    This will open the semantic model in Fabric where you can create relationships and measures, as shown here:
+    This will open the semantic model in Fabric where you can create relationships and measures.
 
     ![Screenshot of a semantic model in Fabric.](./Images/dataset-relationships.png)
 
