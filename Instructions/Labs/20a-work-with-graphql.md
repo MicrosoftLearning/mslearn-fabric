@@ -16,8 +16,8 @@ This lab will take approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Warehouse**.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`.
+1. In the menu bar on the left, select **New workspace**.
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
@@ -27,8 +27,8 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to create a SQL database.
 
-1. On Fabric portal, select **+ Create** on the left panel.
-1. Navigate to the **Databases** section, and select **SQL Database**.
+1. On Fabric portal, select **+ New item** on the left panel.
+1. Navigate to the **Store data** section, and select **SQL database**.
 1. Enter **AdventureWorksLT** as the database name, and select **Create**.
 1. Once you have created your database, you can load sample data into your database from **Sample data** card.
 
