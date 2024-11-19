@@ -102,15 +102,14 @@ You will integrate an external data about public holidays with sales order. Then
 
     ```sql
     INSERT INTO SalesLT.PublicHolidays (CountryOrRegion, HolidayName, Date, IsPaidTimeOff)
-    SELECT CountryOrRegion, HolidayName, Date, IsPaidTimeOff
-    FROM OPENROWSET 
-    (BULK 'abs://holidaydatacontainer@azureopendatastorage.blob.core.windows.net/Processed/*.parquet'
-    , FORMAT = 'PARQUET') AS [PublicHolidays]
-    WHERE countryorRegion in ('Canada', 'United Kingdom', 'United States')
-        AND YEAR([date]) = 2024
+    VALUES
+        ('Canada', 'Victoria Day', '2024-02-19', 1),
+        ('United Kingdom', 'Christmas Day', '2024-12-25', 1),
+        ('United Kingdom', 'Spring Bank Holiday', '2024-05-27', 1),
+        ('United States', 'Thanksgiving Day', '2024-11-28', 1);
     ```
     
-    This query reads holiday data from Parquet files in Azure Blob Storage, filters it to include only holidays in Canada, the United Kingdom, and the United States for the year 2024, and then inserts this filtered data into the `SalesLT.PublicHolidays` table.    
+    In this example, this query inserts holidays for Canada, the United Kingdom, and the United States for the year 2024 into the `SalesLT.PublicHolidays` table.    
 
 1. In a new or existing query editor, enter and execute the following T-SQL code.
 
@@ -190,7 +189,7 @@ Let's create a view based on the query we used earlier, and add a filter to it.
 
 > **Further Information**: See [What is Microsoft Fabric?](https://learn.microsoft.com/fabric/get-started/microsoft-fabric-overview) in the Microsoft Fabric documentation to learn more about other components available in the platform.
 
-In this exercise, you have created, imported external data, queried, and secured data in a SQL database in Microsoft Fabric.
+In this exercise, you have created, queried, and secured data in a SQL database in Microsoft Fabric.
 
 ## Clean up resources
 
