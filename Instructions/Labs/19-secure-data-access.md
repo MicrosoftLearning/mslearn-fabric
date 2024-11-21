@@ -140,7 +140,7 @@ In this exercise, you assign an item permission and create a OneLake data access
 
       ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
 
-14. Select new role on the **Managed OneLake data access (preview)** screen that appears.
+14. Select new role on the **Manage OneLake data access (preview)** screen that appears.
   
       ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
 
