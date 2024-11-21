@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Create a medallion architecture in a Microsoft Fabric lakehouse'
-    module: 'Organize a Fabric lakehouse using medallion architecture design' 
+    module: 'Organize a Fabric lakehouse using medallion architecture design'
 ---
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
