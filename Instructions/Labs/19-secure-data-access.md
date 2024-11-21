@@ -14,7 +14,7 @@ This lab takes approximately **45** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Synapse Data Warehouse**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Warehouse**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Next, create a data warehouse in the workspace you created:
 
-1. In the Synapse Data Warehouse home page, select the **Sample warehouse** shortcut to create a new warehouse with the name of your choice.  
+1. In the Data Warehouse home page, select the **Sample warehouse** shortcut to create a new warehouse with the name of your choice.  
 
     After a minute or so, a new warehouse will be created:
 
@@ -38,7 +38,7 @@ Next, create a lakehouse in the workspace you created.
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to 🗇).
 2. Select the workspace you created.
-3. In the workspace, select the **+ New** button and then select **Lakehouse**. Create a new Lakehouse with the name of your choice.
+3. In the workspace, select the **+ New Item** button and then select **Lakehouse**. Create a new Lakehouse with the name of your choice.
 
    After a minute or so, a new Lakehouse will be created:
 
@@ -102,7 +102,7 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 10. Return to the browser window where you're logged in as the second user. Refresh the browser view.  
 
-11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake data hub** on the left navigation menu to find the warehouse. 
+11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake** on the left navigation menu to find the warehouse. 
 
 12. Select the warehouse. On the screen that appears, select **Open** from the top menu bar.
 
@@ -115,7 +115,7 @@ OneLake data access roles let you create custom roles within a Lakehouse and gra
 In this exercise, you assign an item permission and create a OneLake data access role and experiment with how they work together to restrict access to data in a Lakehouse.  
 
 1. Stay in the browser where you're logged in as the second user.  
-2. Select **OneLake data hub** on the left navigation bar. The second user doesn't see the lakehouse.  
+2. Select **OneLake** on the left navigation bar. The second user doesn't see the lakehouse.  
 3. Return to the browser where you're logged in as the Workspace Admin.
 4. Select **Workspaces** on the left menu and select your workspace. Hover over the name of the lakehouse.  
 5. Select on the ellipse (**...**) to the right of the ellipse and select **Manage permissions**
@@ -129,7 +129,7 @@ In this exercise, you assign an item permission and create a OneLake data access
 
 8. Select **Grant**. The second user now has read permissions on the lakehouse. Read permission only allows the user to see metadata for the lakehouse but not the underlying data. Next we'll validate this.
 9. Return to the browser where you're logged in as the second user. Refresh the browser.
-10. Select **OneLake data hub** in the left navigation pane.  
+10. Select **OneLake** in the left navigation pane.  
 11. Select the lakehouse and open it. 
 12. Select **Open** on the top menu bar. You're unable to expand the tables or files even though read permission was granted. Next, you grant the second user access to a specific folder using OneLake data access permissions.
 13. Return to the browser where you're logged in as the workspace administrator.
@@ -140,7 +140,7 @@ In this exercise, you assign an item permission and create a OneLake data access
 
       ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
 
-14. Select new role on the **Managed OneLake data access (preview)** screen that appears.
+14. Select new role on the **Manage OneLake data access (preview)** screen that appears.
   
       ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
 
