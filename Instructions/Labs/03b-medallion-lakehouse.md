@@ -21,8 +21,6 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 4. When your new workspace opens, it should be empty.
 
-   ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace-medallion.png)
-
 5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
 
     ![Screenshot of the workspace settings page in Fabric.](./Images/workspace-settings.png)
@@ -153,8 +151,6 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 10. Run the cell to execute the code using the ****&#9655;** (*Run cell*)** button.
 
 11. Select the **...** in the Tables section of the lakehouse explorer pane and select **Refresh**. You should now see the new **sales_silver** table listed. The **&#9650;** (triangle icon) indicates that it's a Delta table.
-
-    ![Screenshot of the sales_silver table in a lakehouse.](./Images/sales-silver-table.png)
 
     > **Note**: If you don't see the new table, wait a few seconds and then select **Refresh** again, or refresh the entire browser tab.
 
