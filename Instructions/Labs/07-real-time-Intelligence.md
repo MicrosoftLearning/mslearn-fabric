@@ -115,14 +115,13 @@ Now that you have a table of data in your database, you can use KQL code to quer
     ```
 
 8. Run the query and review the results, which should contain the total net revenue for each product between January 1st and December 31st 2020 in ascending order of product name.
-9. Select **Save as KQL queryset** and save the query as **Revenue by Product**.
 
 ## Create a Power BI report from a KQL Queryset
 
 You can use your KQL Queryset as the basis for a Power BI report.
 
 1. In the query workbench editor for your query set, run the query and wait for the results.
-2. Select **Build Power BI report** and wait for the report editor to open.
+2. Select **Power BI** and wait for the report editor to open.
 3. In the report editor, in the **Data** pane, expand **Kusto Query Result** and select the **Item** and **TotalRevenue** fields.
 4. On the report design canvas, select the table visualization that has been added and then in the **Visualizations** pane, select **Clustered bar chart**.
 
