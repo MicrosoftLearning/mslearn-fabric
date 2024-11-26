@@ -23,26 +23,26 @@ Before you can work with data in Fabric you need to create a workspace.
 1. Give the new workspace a name and in the **Advanced** section, select the appropriate Licensing mode. If you have started a Microsoft Fabric trial, select Trial.
 1. Select **Apply** to create an empty workspace.
  
-    ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.jpg)
+    ![Screen picture of a new Fabric workspace.](Images/new-workspace.jpg)
 
 ## Create a lakehouse and upload files
 
-Now that you have a workspace, you can create a lakehouse to store your data files. From your new workspace, select **New** and **Lakehouse**. Give the lakehouse a name, and then select **Create**. After a short delay, a new lakehouse is created.
+Now that you have a workspace, you can create a lakehouse to store your data files. From your new workspace, select **+ New item** and **Lakehouse**. Give the lakehouse a name, and then select **Create**. After a short delay, a new lakehouse is created.
 
 You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a folder of text files to your local computer (or lab VM if applicable) and then upload them to your lakehouse.
 
-1. Download the datafiles from https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip.
+1. Download the datafiles from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
 1. Extract the zipped archive and verify that you have a folder named *orders* which contains three CSV files: 2019.csv, 2020.csv, and 2021.csv.
 1. Return to your new lakehouse. In the **Explorer** pane, next to the **Files** folder select the **…** menu, and select **Upload** and **Upload folder**. Navigate to the orders folder on your local computer (or lab VM if applicable) and select **Upload**.
 1. After the files have been uploaded, expand **Files** and select the **orders** folder. Check that the CSV files have been uploaded, as shown here:
 
-    ![Screen picture of a new Fabric workspace.](Images/new-workspace.jpg)
+    ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.jpg)
 
 ## Create a notebook
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. Select your workspace, then select **New** and **Notebook**. After a few seconds, a new notebook containing a single cell will open. Notebooks are made up of one or more cells that can contain code or markdown (formatted text).
+1. Select your workspace, then select **+ New item** and **Notebook**. After a few seconds, a new notebook containing a single cell will open. Notebooks are made up of one or more cells that can contain code or markdown (formatted text).
 1. Fabric assigns a name to each notebook you create, such as Notebook 1, Notebook 2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
 1. Select the first cell (which is currently a code cell), and then in the top-right tool bar, use the **M↓** button to convert it to a markdown cell. The text contained in the cell will then be displayed as formatted text.
 1. Use the 🖉 (Edit) button to switch the cell to editing mode, then modify the markdown as shown below.
@@ -65,7 +65,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 
 1. Select your new workspace from the left bar. You will see a list of items contained in the workspace including your lakehouse and notebook.
 2. Select the lakehouse to display the Explorer pane, including the **orders** folder.
-3. From the top menu, select **Open notebook**, **Existing notebook**, and then Open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, expand the Files list, and select the orders folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
+3. From the top menu, select **Open notebook**, **Existing notebook**, and then open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, expand the Files list, and select the orders folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
 
     ![Screen picture of csv files in Explorer view.](Images/explorer-notebook-view.jpg)
 
@@ -156,7 +156,7 @@ The DataFrame object provides additional functionality such as the ability to fi
 
 ### Filter a DataFrame
 
-1. Add a code cell by selecting **+ Code** which appears when you hover the mouse above or below the current cell or its output. Alternatively, from the ribbon menu select **Edit** and **+ Add** code cell.
+1. Add a code cell by selecting **+ Code** which appears when you hover the mouse above or below the current cell or its output. Alternatively, from the ribbon menu select **Edit** and **+ Add code cell below**.
 
 2.	The following code filters the data so that only two columns are returned. It also uses *count* and *distinct* to summarize the number of records:
 
@@ -300,7 +300,7 @@ When dealing with large volumes of data, partitioning can significantly improve 
     print ("Transformed data saved!")
     ```
 
-2.	Run the cell and wait for the message that the data has been saved. Then, in the Lakehouses pane on the left, in the … menu for the Files node, select **Refresh** and expand the partitioned_orders folder to verify that it contains a hierarchy of folders named *Year=xxxx*, each containing folders named *Month=xxxx*. Each month folder contains a parquet file with the orders for that month.
+2.	Run the cell and wait for the message that the data has been saved. Then, in the Lakehouses pane on the left, in the … menu for the Files node, select **Refresh** and expand the partitioned_data folder to verify that it contains a hierarchy of folders named *Year=xxxx*, each containing folders named *Month=xxxx*. Each month folder contains a parquet file with the orders for that month.
 
     ![Screen picture showing data partitioned by Year and Month.](Images/partitioned-data.jpg)
 
