@@ -18,7 +18,7 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Engineering**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -29,7 +29,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to create a data lakehouse for your data files.
 
-1. In the **Synapse Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
+1. In the **Data Engineering** home page, create a new **Lakehouse** with a name of your choice.
 
     After a minute or so, a new lakehouse will be created:
 
@@ -69,7 +69,7 @@ In many scenarios, the data you need to work with in your lakehouse may be store
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
 1. On the **Home** page, select the **Files/Data** folder so you can see the **sales.csv** file it contains.
-2. In the **...** menu for the **sales.csv** file, select **Load to Tables**.
+2. In the **...** menu for the **sales.csv** file, select **Load to Tables** > **New table**.
 3. In **Load to table** dialog box, set the table name to **sales** and confirm the load operation. Then wait for the table to be created and loaded.
 
     > **Tip**: If the **sales** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
@@ -108,7 +108,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 
 While many data professionals are familiar with SQL, data analysts with Power BI experience can apply their Power Query skills to create visual queries.
 
-1. On the toolbar, select **New visual query**.
+1. On the toolbar, expand the **New SQL query** option and select **New visual query**.
 2. Drag the **sales** table to the new visual query editor pane that opens to create a Power Query as shown here: 
 
     ![Screenshot of a Visual query.](./Images/visual-query.png)
@@ -133,9 +133,9 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 The tables in your lakehouse are automatically added to a default semantic model for reporting with Power BI.
 
 
-1. At the bottom of the SQL Endpoint page, select the **Model** tab. The data model schema for the semantic model is shown.
+1. In the toolbar, select **Model layouts**. The data model schema for the semantic model is shown.
 
-    ![Screenshot 2024-04-29 155248](https://github.com/afelix-95/mslearn-fabric/assets/148110824/ba9bd67d-8968-4c46-ac7a-f96a9f697f4c)
+    ![Screenshot of model layouts](./Images/lakehouse-model-layouts.png)
 
     > **Note 1**: In this exercise, the semantic model consists of a single table. In a real-world scenario, you would likely create multiple tables in your lakehouse, each of which would be included in the model. You could then define relationships between these tables in the model.
     
@@ -171,5 +171,5 @@ In this exercise, you have created a lakehouse and imported data into it. You've
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
+2. In the toolbar, select **Workspace settings**.
 3. In the **General** section, select **Remove this workspace**.
