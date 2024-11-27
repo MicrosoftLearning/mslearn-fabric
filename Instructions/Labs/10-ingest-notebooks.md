@@ -20,7 +20,7 @@ Because you're also working with a sample dataset, the optimization doesn't refl
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Synapse Data Engineering**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Engineering**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -31,7 +31,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Start by creating a new lakehouse, and a destination folder in the lakehouse.
 
-1. From your workspace, select **+ New > Lakehouse**, supply a name, and **Create**.
+1. From your workspace, select **+ New item > Lakehouse**, supply a name, and **Create**.
 
     > **Note:** It may take a few minutes to create a new lakehouse with no **Tables** or **Files**.
 
@@ -86,15 +86,15 @@ Create a new Fabric notebook and connect to external data source with PySpark.
 1. Insert the following code into a **new code cell**:
 
     ```python
-        # Declare file name    
-        file_name = "yellow_taxi"
+    # Declare file name    
+    file_name = "yellow_taxi"
     
-        # Construct destination path
-        output_parquet_path = f"**InsertABFSPathHere**/{file_name}"
-        print(output_parquet_path)
+    # Construct destination path
+    output_parquet_path = f"**InsertABFSPathHere**/{file_name}"
+    print(output_parquet_path)
         
-        # Load the first 1000 rows as a Parquet file
-        blob_df.limit(1000).write.mode("overwrite").parquet(output_parquet_path)
+    # Load the first 1000 rows as a Parquet file
+    blob_df.limit(1000).write.mode("overwrite").parquet(output_parquet_path)
     ```
 
 1. Add your **RawData** ABFS path and select **&#9655; Run Cell** to write 1000 rows to a yellow_taxi.parquet file.
@@ -122,7 +122,7 @@ Likely, your data ingestion task doesn't end with only loading a file. Delta tab
     filtered_df = raw_df.withColumn("dataload_datetime", current_timestamp())
     
     # Filter columns to exclude any NULL values in storeAndFwdFlag
-    filtered_df = filtered_df.filter(raw_df["storeAndFwdFlag"].isNotNull())
+    filtered_df = filtered_df.filter(col("storeAndFwdFlag").isNotNull())
     
     # Load the filtered data into a Delta table
     table_name = "yellow_taxi"
@@ -179,5 +179,5 @@ In this exercise, you have used notebooks with PySpark in Fabric to load data an
 When you're finished exploring, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **General** section, select **Remove this workspace**.
+1. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
+1. Select **Delete** to delete the workspace.
