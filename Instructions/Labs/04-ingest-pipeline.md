@@ -195,5 +195,5 @@ In this exercise, you've learned how to implement a pipeline in Microsoft Fabric
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
-3. In the **General** section, select **Remove this workspace**.
+1. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
+1. Select **Delete** to delete the workspace.
