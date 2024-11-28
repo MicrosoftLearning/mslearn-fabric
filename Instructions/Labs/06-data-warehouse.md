@@ -16,7 +16,7 @@ This lab will take approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Synapse Data Warehouse**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Warehouse**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -27,7 +27,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to create a data warehouse. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
 
-1. In the **Synapse Data Warehouse** home page, create a new **Warehouse** with a name of your choice.
+1. In the **Data Warehouse** home page, create a new **Warehouse** with a name of your choice.
 
     After a minute or so, a new warehouse will be created:
 
@@ -37,7 +37,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
 
 A warehouse is a relational database in which you can define tables and other objects.
 
-1. In your new warehouse, select the **Create tables with T-SQL** tile, and replace the default SQL code with the following CREATE TABLE statement:
+1. In your new warehouse, select the **T-SQL** tile, and use the following CREATE TABLE statement:
 
     ```sql
    CREATE TABLE dbo.DimProduct
@@ -65,9 +65,8 @@ A warehouse is a relational database in which you can define tables and other ob
     ```
 
 5. Run the new query to insert three rows into the **DimProduct** table.
-6. When the query has finished, select the **Data** tab at the bottom of the page in the data warehouse. In the **Explorer** pane, select the **DimProduct** table and verify that the three rows have been added to the table.
+6. When the query has finished, in the **Explorer** pane, select the **DimProduct** table and verify that the three rows have been added to the table.
 7. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt` into the new query pane.
-<!-- I had to remove the GO command in this query as well -->
 8. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
 9. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
     - **DimCustomer**
@@ -81,15 +80,17 @@ A warehouse is a relational database in which you can define tables and other ob
 
 A relational data warehouse typically consists of *fact* and *dimension* tables. The fact tables contain numeric measures you can aggregate to analyze business performance (for example, sales revenue), and the dimension tables contain attributes of the entities by which you can aggregate the data (for example, product, customer, or time). In a Microsoft Fabric data warehouse, you can use these keys to define a data model that encapsulates the relationships between the tables.
 
-1. At the bottom of the page in the data warehouse, select the **Model** tab.
+1. In the toolbar, select the **Model layouts** button.
 2. In the model pane, rearrange the tables in your data warehouse so that the **FactSalesOrder** table is in the middle, like this:
 
     ![Screenshot of the data warehouse model page.](./Images/model-dw.png)
 
+> **Note**: The views **frequently_run_queries**, **long_running_queries**, **exec_sessions_history**, and **exec_requests_history** are part of the **queryinsights** schema automatically created by Fabric. It is a feature that provides a holistic view of historical query activity on the SQL analytics endpoint. Since this feature is out of the scope of this exercise, those views should be ignored for now.
+
 3. Drag the **ProductKey** field from the **FactSalesOrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
-    - **Table 1**: FactSalesOrder
+    - **From table**: FactSalesOrder
     - **Column**: ProductKey
-    - **Table 2**: DimProduct
+    - **To table**: DimProduct
     - **Column**: ProductKey
     - **Cardinality**: Many to one (*:1)
     - **Cross filter direction**: Single
@@ -177,7 +178,7 @@ A data warehouse in Microsoft Fabric has many of the same capabilities you may b
 
 Instead of writing SQL code, you can use the graphical query designer to query the tables in your data warehouse. This experience is similar to Power Query online, where you can create data transformation steps with no code. For more complex tasks, you can use Power Query's M (Mashup) language.
 
-1. On the **Home** menu, select **New visual query**.
+1. On the **Home** menu, expand the options under **New SQL query** and select **New visual query**.
 
 1. Drag **FactSalesOrder** onto the **canvas**. Notice that a preview of the table is displayed in the **Preview** pane below.
 
@@ -200,7 +201,7 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 
 You can easily visualize the data in either a single query, or in your data warehouse. Before you visualize, hide columns and/or tables that aren't friendly to report designers.
 
-1. In the **Explorer** pane, select the **Model** view. 
+1. Select the **Model layouts** button. 
 
 1. Hide the following columns in your Fact and Dimension tables that are not necessary to create a report. Note that this does not remove the columns from the model, it simply hides them from view on the report canvas.
    1. FactSalesOrder
