@@ -16,7 +16,7 @@ This lab takes approximately **45** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Synapse Data Warehouse**.
+1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Warehouse**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -29,7 +29,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Next, create a data warehouse in the workspace you created. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
 
-1. On the **Synapse Data Warehouse** home page, create a new **Warehouse** with a name of your choice.
+1. On the **Data Warehouse** home page, create a new **Warehouse** with a name of your choice.
 
     After a minute or so, a new warehouse will be created:
 
@@ -39,7 +39,7 @@ Next, create a data warehouse in the workspace you created. The Synapse Data War
 
 Dynamic data masking rules are applied on individual columns at the table level so all queries are affected by the masking. Users who do not have explicit permissions to view confidential data see masked values in query results while users with explicit permission to view the data see it unobscured. There are four types of masks: default, email, random and custom string. In this exercise, you will apply a default mask, an email mask, and a custom string mask.
 
-1. In your warehouse, select the **T-SQL** tile, and replace the default SQL code with the following T-SQL statements to create a table and to insert and view data.  
+1. In your warehouse, select the **T-SQL** tile, and use the following T-SQL statements to create a table and to insert and view data.  
 
     ```T-SQL
    CREATE TABLE dbo.Customers
@@ -91,7 +91,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 Row-level security (RLS) can be used to limit access to rows based on the identity, or role of the user executing a query. In this exercise, you restrict access to rows by creating a security policy and a security predicate defined as an inline table-valued function.
 
-1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown.  Under the header **Blank**, select **New SQL Query**.
+1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown and select **New SQL Query**.
 
 2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `username1@your_domain.com` with a user name from your environment and replace `username2@your_domain.com` with your user name.
 
@@ -166,7 +166,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 Column-level security allows you to designate which users can access specific columns in a table. It's implemented by issuing a `GRANT` or `DENY` statement on a table specifying a list of columns and the user or role that can or cannot read them. To streamline access management, assign permissions to roles in lieu of individual users. In this exercise, you will create a table, grant access to a subset of columns on the table, and test that restricted columns aren't viewable by a user other than yourself.
 
-1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown. Under the header **Blank**, select **New SQL Query**.  
+1. In the warehouse you created in the earlier exercise, select the **New SQL Query** dropdown, then select **New SQL Query**.  
 
 2. Create a table and insert data into the table.
 
