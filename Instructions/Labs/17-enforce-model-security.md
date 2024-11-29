@@ -101,37 +101,30 @@ In this task, you will create two static roles.
 
     ![](Images/enforce-model-security-image13.png)
 
-4. In the **Manage roles** window, select **Create**.
+4. In the **Manage roles** window, select **+ New**.
 
-    ![](Images/enforce-model-security-image14.png)
+5. To name the role, replace the selected *Untitled* text with **Australia**, and then press **Enter**.
 
-5. To name the role, replace the selected text with **Australia**, and then press **Enter**.
-
-    ![](Images/enforce-model-security-image15.png)
-
-6. In the **Tables** list, for the **Sales Territory** table, select the ellipsis, and then select **Add filter** > **[Region]**.
+6. In the **Select tables** list, select **Sales Territory**, and then in the **Filter data** section, select **+ New**.
+  
+7. In the new rule row, set the following settings:
+	* **Column**: Region
+ 	* **Condition**: Equals
+  	* **Value**: Australia
 
     ![](Images/enforce-model-security-image16.png)
 
-7. In the **Table filter DAX expression** box, replace **Value** with **Australia**.
+    *This rule filters the **Region** column by the value **Australia**.*
 
-    ![](Images/enforce-model-security-image17.png)
+10. To create another role, press **+ New** in the **Roles** section.
 
-    *This expression filters the **Region** column by the value **Australia**.*
-
-8. To create another role, press **Create**.
-
-    ![](Images/enforce-model-security-image18.png)
-
-9. Repeat the steps in this task to create a role named **Canada** that filters the **Region** column by **Canada**.
+11. Repeat the steps in this task to create a role named **Canada** that filters the **Region** column by **Canada**.
 
     ![](Images/enforce-model-security-image19.png)
 
     *In this lab, you'll create just the two roles. Consider, however, that in a real-world solution, a role must be created for each of the 11 Adventure Works regions.*
 
-10. Select **Save**.
-
-	![](Images/enforce-model-security-image20.png)
+12. Select **Save**.
 
 ### Validate the static roles
 
@@ -247,19 +240,13 @@ In this task, you will clean up the solution by removing the semantic model and 
 
     ![](Images/enforce-model-security-image39.png)
 
-5. In the **Manage roles** window, to remove the first role, select **Delete**.
+5. In the **Manage roles** window, to remove the first role, select the ellipsis next to it and then select **Delete**.
 
     ![](Images/enforce-model-security-image40.png)
 
-6. When prompted to confirm the deletion, press **Yes, delete**.
+6. Also remove the second role.
 
-    ![](Images/enforce-model-security-image41.png)
-
-7. Also remove the second role.
-
-8. Select **Save**.
-
-    ![](Images/enforce-model-security-image42.png)
+7. Select **Save**.
 
 ## Create a dynamic role
 
