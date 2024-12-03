@@ -163,6 +163,6 @@ In this exercise, you have created an eventhouse and pipulated tables in its dat
 When you've finished exploring your KQL database, you can delete the workspace you created for this exercise.
 
 1. In the bar on the left, select the icon for your workspace.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
+2. In the toolbar, select **Workspace settings**.
 3. In the **General** section, select **Remove this workspace**.
 .
