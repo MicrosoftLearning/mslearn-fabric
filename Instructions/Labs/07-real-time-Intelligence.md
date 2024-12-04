@@ -6,7 +6,7 @@ lab:
 
 # Get started with Real-Time Intelligence in Microsoft Fabric
 
-Microsoft Fabric provides a Real-Time Hub in which you can create analytical solutions for real-time data streams. In this exercise, you'll explore some of the main features of the Real-Time Hub in order to familiarize yourself with them.
+Microsoft Fabric provides a Real-Time Hub in which you can create analytical solutions for real-time data streams. In this exercise, you'll explore some of the main features of the Real-Time Intelligence capabilities in Microsoft Fabric in order to familiarize yourself with them.
 
 This lab takes approximately **30** minutes to complete.
 
