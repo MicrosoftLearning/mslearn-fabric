@@ -42,11 +42,10 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 1. Create a new database and name it `Eventhouse-DB`.
 
-
 ## Create an Eventstream
 
 1. In the main page of your KQL database, select **Get data**.
-2. For the data source, select **Eventstream** > **New eventstream**. Name the Eventstream `Bicycle data`.
+2. For the data source, select **Eventstream** > **New eventstream**. Name the Eventstream `bicycle-data`.
 
     The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
 
@@ -57,7 +56,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 1. In the Eventstream canvas, select **Use sample data**.
 2. Name the source `Bicycles`, and select the **Bicycles** sample data.
 
-    Your stream will be mapped and you will be automatically disp;layed on the **eventstream canvas**.
+    Your stream will be mapped and you will be automatically displayed on the **eventstream canvas**.
 
    ![Review the eventstream canvas](./Images/real-time-intelligence-eventstream-sourced.png)
 
@@ -68,7 +67,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
    - **Data ingestion mode:**: Event processing before ingestion
    - **Destination name:** `Bicycle-database`
    - **Workspace:** *Select the workspace you created at the beginning of this exercise*
-   - **Eventhouse**: *Select your event house*
+   - **Eventhouse**: *Select your eventhouse*
    - **KQL database:** Eventhouse-DB
    - **Destination table:** Create a new table named `bike-count`
    - **Input data format:** JSON
@@ -92,7 +91,7 @@ The eventstream you have created takes data from the sample source of bicycle da
     | take 100
     ```
 
-1. Select the query code and run it to see the first 100 rows in the table.
+1. Select the query code and run it to see 100 rows of data from the table.
 
     ![Screenshot of a KQL query.](./Images/kql-query.png)
 
