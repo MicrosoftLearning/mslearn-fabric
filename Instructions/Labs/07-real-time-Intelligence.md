@@ -23,7 +23,7 @@ Before working with data in Fabric, you need to create a workspace with the Fabr
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
-## Create an Eventhouse
+## Create an eventhouse
 
 Now that you have a workspace, you can start creating the Fabric items you'll need for your real-time intelligence solution. we'll start by creating an eventhouse, which contains a KQL database for your real-time data.
 
@@ -37,7 +37,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
     However, currently there are no tables to query. Let's resolve that problem by using an eventstream to ingest some data into the database.
 
-## Create an Eventstream
+## Create an eventstream
 
 1. In the main page of your KQL database, select **Get data**.
 2. For the data source, select **Eventstream** > **New eventstream**. Name the Eventstream `stock-stream`.
@@ -149,9 +149,9 @@ Real-Time Intelligence in Microsoft Fabric includes a technology named *Activato
 1. Create the alert and wait for it to be saved. Then close the pane confirming it has been created.
 1. In the menu bar on the left, select the page for your workspace (saving any unsaved changes to your dashboard if prompted).
 1. On the workspace page, view the items you have created in this exercise, including the activator for your alert.
-1. Open the activator, and in its page, under the **avgPrice** node, select the unique identifier for your event. Then view its **History** tab.
+1. Open the activator, and in its page, under the **avgPrice** node, select the unique identifier for your alert. Then view its **History** tab.
 
-    Your event may not have been triggered, in which case the history will contain no data. If the average stock price ever changes by more than 100, the activator will send you an email and the even will be recorded in the event history.
+    Your alert may not have been triggered, in which case the history will contain no data. If the average stock price ever changes by more than 100, the activator will send you an email and the alert will be recorded in the history.
 
 ## Clean up resources
 
