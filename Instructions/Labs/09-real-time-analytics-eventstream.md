@@ -81,7 +81,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
 ## Query captured data
 
-The eventstream you have created takes data from the sample source of bicycle data and loads it into the database in your eventhouse. You can query the captured data by querying the table in the database.
+The eventstream you have created takes data from the sample source of bicycle data and loads it into the database in your eventhouse. You can analyze the captured data by querying the table in the database.
 
 1. In the menu bar on the left, select your KQL database.
 1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes** table under the database. Then select the **Bikes** table.
@@ -146,9 +146,9 @@ The data you've captured is unaltered from the source. In many scenarios, you ma
 
     Note that the trasformed data includes the grouping field you specified (**Street**), the aggregation you specified (**SEUM_no_Bikes**), and a timestamp field indicating the end of the 5 second tumbling window in which the event occurred (**Window_End_Time**).
 
-## View the transformed data
+## Query the transformed data
 
-Now you can view the bicycle data that has been transformed and loaded into a table by your eventstream
+Now you can query the bicycle data that has been transformed and loaded into a table by your eventstream
 
 1. In the menu bar on the left, select your KQL database.
 1. 1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes-by-street** table under the database.
