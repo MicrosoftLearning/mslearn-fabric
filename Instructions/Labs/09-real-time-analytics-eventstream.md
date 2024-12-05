@@ -144,7 +144,7 @@ The data you've captured is unaltered from the source. In many scenarios, you ma
 
     ![Screenshot of a table for grouped data.](./Images/stream-table-with-windows.png)
 
-    Note that the trasformed data includes the grouping field you specified (**Street**), the aggregation you specified (**SEUM_no_Bikes**), and a timestamp field indicating the end of the 5 second tumbling window in which the event occurred (**Window_End_Time**).
+    Note that the trasformed data includes the grouping field you specified (**Street**), the aggregation you specified (**SUM_no_Bikes**), and a timestamp field indicating the end of the 5 second tumbling window in which the event occurred (**Window_End_Time**).
 
 ## Query the transformed data
 
