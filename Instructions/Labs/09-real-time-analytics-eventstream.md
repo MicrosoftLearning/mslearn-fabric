@@ -47,7 +47,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
     ![Screenshot of a new eventstream.](./Images//name-eventstream.png)
 
-## Add an source
+## Add a source
 
 1. In the Eventstream canvas, select **Use sample data**.
 2. Name the source `Bicycles`, and select the **Bicycles** sample data.
@@ -173,6 +173,64 @@ Now you can query the bicycle data that has been transformed and loaded into a t
     The results show the number of bikes observed in each street within each 5 second time period.
 
     ![Screenshot of a query returning grouped data.](./Images/kql-group-query.png)
+
+<!--
+## Add an Activator destination
+
+So far, you've used an eventstream to load data into tables in an eventhouse. You can also direct streams to an activator and automate actions based on values in the event data.
+
+1. In the menu bar on the left, return to the **Bicycle-data** eventstream. Then in the eventstream page, on the toolbar, select **Edit**.
+1. In the **Add destination** menu, select **Activator**. Then drag a connection from the output of the **Bicycle-data** stream to the input of the new Activator destination.
+1. Configure the new Activator destination with the following settings:
+    - **Destination name**: `low-bikes-activator`
+    - **Workspace**: *Select your workspace*
+    - **Activator**: *Create a **new** activator named `low-bikes`*
+    - **Input data format**: Json
+
+    ![Screenshot of an Activator destination.](./Images/activator-destination.png)
+
+1. Save the new destination.
+1. In the menu bar on the left, select your workspace to see all of the items you have created so far in this exercise - including the new **low-bikes** activator.
+1. Select the **low-bikes** activator to view its page, and then on the activator page select **Get data**.
+1. On the **select a data source** dialog box, scroll down until you see **Data streams** and then select the **Bicycle-data-stream**.
+
+    ![Screenshot of data sources for an activator.](./Images/select-activator-stream.png)
+
+1. Use the **Next**,  **Connect**, and **Finish** buttons to connect the stream to the activator.
+
+    > **Tip**: If the data preview obscures the **Next** button, close the dialog box, select the stream again, and click **Next** before the preview is rendered.
+
+1. When the stream has been connected, the activator page displays the **Events** tab:
+
+    ![Screenshot of the activator Events page.](./Images/activator-events-page.png)
+
+1. Add a new rule, and configure its definition with the following settings:
+    - **Monitor**:
+        - **Event**: Bicycle-data-stream-event
+    - **Condition**
+        - **Condition 1**:
+            - **Operation**: Numeric state: Is less than or equal to
+            - **Column**: No_Bikes
+            - **Value**: 3
+            - **Default type**: Same as window size
+    - **Action**:
+        - **Type**: Email
+        - **To**: *The email address for the account you are using in this exercise*
+        - **Subject**: `Low bikes`
+        - **Headline**: `The number of bikes is low`
+        - **Message**: `More bikes are needed.`
+        - **Context**: *Select the **Neighborhood**, **Street**, and **No-Bikes** columns.
+
+    ![Screenshot of an activator rule definition.](./Images/activator-rule.png)
+
+1. Save and start the rule.
+1. View the **Analytics** tab for the rule, which should show each instance if the condition being met as the stream of events is ingested by your eventstream.
+
+    Each instance will result in an email being sent notifying you of low bikes, which will result in a large numbers of emails, so...
+
+1. On the toolbar, select **Stop** to stop the rule from being processed.
+
+-->
 
 ## Clean up resources
 
