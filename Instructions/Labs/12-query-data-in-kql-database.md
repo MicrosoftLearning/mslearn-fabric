@@ -1,18 +1,18 @@
 ---
 lab:
-    title: 'Get started with querying a KQL database in Microsoft Fabric'
-    module: 'Query data from a KQL database in Microsoft Fabric'
+    title: 'Work with data in a Microsoft Fabric eventhouse'
+    module: 'Work with data in a Microsoft Fabric eventhouse'
 ---
 
-# Get started with querying a KQL database in Microsoft Fabric
+# Work with data in a Microsoft Fabric eventhouse
 
-A KQL Queryset is a tool that allows you to execute queries, modify, and display query results from a KQL database. You can link each tab in the KQL Queryset to a different KQL database, and save your queries for future use or share them with others for data analysis. You can also switch the KQL database for any tab, so you can compare the query results from different data sources.
+In Microsoft Fabric, an *eventhouse* is used to store real-time data related to events; often captured from a streaming data source by an *eventstream*.
 
-In this exercise, you'll perform the role of an analyst who's tasked with querying a dataset of NYC taxicab ride data. You use KQL to query this data and gather information to gain informational insights about the data.
+Within an eventhouse, the data is stored in one or more KQL databases, each of which contains tables and other objects that you can query by using Kusto Query Language (KQL) or a subset of Structured Query Language (SQL).
 
-> **Tip**: The KQL Queryset uses the Kusto Query language, which is compatible with many SQL functions, to create queries. To learn more about KQL, see [Kusto Query Language (KQL) overview](https://learn.microsoft.com/azure/data-explorer/kusto/query/?context=%2Ffabric%2Fcontext%2Fcontext).
+In this exercise, you'll create and populate an eventhouse with some sample data related to taxi rides, and then query the data using KQL and SQL.
 
-This lab takes approximately **25** minutes to complete.
+This exercise takes approximately **25** minutes to complete.
 
 ## Create a workspace
 
@@ -27,13 +27,20 @@ Before working with data in Fabric, create a workspace with the Fabric capacity 
 
 ## Create an Eventhouse
 
+Now that you have a workspace with support for a Fabric capacity, you can create an eventhouse in it.
+
 1. On the **Real-Time Intelligence** home page, create a new **Eventhouse** with a name of your choice. When the eventhouse has been created, close any prompts or tips that are displayed until you see the eventhouse page:
 
    ![Screenshot of a new eventhouse.](./Images/create-eventhouse.png)
-   
-1. In the **...** menu for the KQL database that was created in the eventhouse, select **Get data** > **Sample**. Then choose the **Automotive operations analytics** sample data.
 
-1. After the data is finished loading, verify that an **Automotive** table has been created.
+1. In the pane on the left, note that your eventhouse contains a KQL database with the same name as the eventhouse.
+1. Select the KQL database to view it.
+
+    Currently there are no tables in the database. In the rest of this exercise you'll use an eventstream to load data from a real-time source into a table.
+   
+1. In the page for the KQL database, select **Get data** > **Sample**. Then choose the **Automotive operations analytics** sample data.
+
+1. After the data is finished loading (which may take some time), verify that an **Automotive** table has been created.
 
    ![Screenshot of the Automotive table in an eventhouse database.](./Images/choose-automotive-operations-analytics.png)
 
@@ -93,7 +100,7 @@ You can use the *summarize* keyword with a function to aggregate and otherwise m
     | summarize ["Total Trip Distance"] = sum(trip_distance)
     ```
 
-    You can gruop the summarized data by a specified column or expression.
+    You can group the summarized data by a specified column or expression.
 
 1. TRun the following query to group the trip distances by borough within the NY Taxi system to determine the total distance traveled from each borough.
 
