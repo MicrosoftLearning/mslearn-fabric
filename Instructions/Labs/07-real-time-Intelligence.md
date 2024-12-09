@@ -6,7 +6,7 @@ lab:
 
 # Get started with Real-Time Intelligence in Microsoft Fabric
 
-Microsoft Fabric provides a Real-Time Hub in which you can create analytical solutions for real-time data streams. In this exercise, you'll explore some of the main features of the Real-Time Intelligence capabilities in Microsoft Fabric in order to familiarize yourself with them.
+Microsoft Fabric provides Real-Time Intelligence, enabling you to create analytical solutions for real-time data streams. In this exercise, you'll use the Real-Time Intelligence capabilities in Microsoft Fabric to ingest, analyze, and visualize a real-time stream of stock market data.
 
 This lab takes approximately **30** minutes to complete.
 
@@ -23,51 +23,66 @@ Before working with data in Fabric, you need to create a workspace with the Fabr
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
+## Create an eventstream
+
+Now you're ready to find and ingest real-time data from a streaming source. To do this, you'll start in the Fabric Real-Time Hub.
+
+> **Tip**: The first time you use the Real-Time Hub, some *getting started* tips may be displayed. You can close these.
+
+1. In the menu bar on the left, select the **Real-Time** hub.
+
+    The real-time hub provides an easy way to find and manage sources of streaming data.
+
+    ![Screenshot of the real-time hub in Fabric.](./Images/real-time-hub.png)
+
+1. In the real-time hub, in the **Connect to** section, select **Data sources**.
+1. Find the **Stock market** sample data source and select **Connect**. Then in the **Connect** wizard, name the source `stock` and edit the default eventstream name to change it to `stock-data`. The default stream associated with this data will automatically be named *stock-data-stream*:
+
+
+    ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
+
+1. Select **Next** and wait for the source and eventstream to be created, then select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
+
+   ![Screenshot of the eventstream canvas.](./Images/new-stock-stream.png)
+
 ## Create an eventhouse
 
-Now that you have a workspace, you can start creating the Fabric items you'll need for your real-time intelligence solution. we'll start by creating an eventhouse, which contains a KQL database for your real-time data.
+The eventstream ingests the real-time stock data, but doesn't currently do anything with it. Let's create an eventhouse where we can store the captured data in a table.
 
 1. On the menu bar on the left, select **Home**; and then in the Real-Time Intelligence home page, create a new **Eventhouse**, giving it a unique name of your choice.
-1. Close any tips or prompts that are displayed until you see your new empty eventhouse.
+
+    Close any tips or prompts that are displayed until you see your new empty eventhouse.
 
     ![Screenshot of a new eventhouse](./Images/create-eventhouse.png)
 
 1. In the pane on the left, note that your eventhouse contains a KQL database with the same name as the eventhouse. You can create tables for your real-time data in this database, or create additional databases as necessary.
 1. Select the database, and note that there is an associated *queryset*. This file contains some sample KQL queries that you can use to get started querying the tables in your database.
 
-    However, currently there are no tables to query. Let's resolve that problem by using an eventstream to ingest some data into the database.
-
-## Create an eventstream
+    However, currently there are no tables to query. Let's resolve that problem by getting data from the eventstream into a new table.
 
 1. In the main page of your KQL database, select **Get data**.
-2. For the data source, select **Eventstream** > **New eventstream**. Name the Eventstream `stock-stream`.
+1. For the data source, select **Eventstream** > **Existing eventstream**.
+1. In the **Select or create a destination table** pane, create a new table named `stock`. Then in the **Configure the data source** pane, select your workspace and the **stock-data** eventstream and name the connection `stock-data`.
 
-    The creation of your new eventstream will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
+   ![Screenshot of configuration for loading a table from an eventstream.](./Images/configure-destination.png)
 
-    ![Screenshot of a new eventstream.](./Images//name-eventstream.png)
+1. Use the **Next** button to complete the steps to inspect the data and then finish the configuration. Then close the configuration window to see your eventhouse with the stock table.
 
-1. In the eventstream canvas, select **Use sample data**.
-1. Name the source `Stock`, and select the **Stock Market** sample data.
+   ![Screenshot of and eventhouse with a table.](./Images/eventhouse-with-table.png)
 
-    Your stream will be mapped and you will be automatically displayed on the **eventstream canvas**.
+    The connection between the stream and the table has been created. Let's verify that in the eventstream.
 
-   ![Screenshot of the eventstream canvas.](./Images/new-stock-stream.png)
+1. In the menu bar on the left, select the **Real-Time** hub and then view the **My data streams** page. The **stock** table and the **stock-data-stream** stream should be listed.
 
-1. In the **Transform events or add destination** drop-down list, in the **Destinations** section, select **Eventhouse**.
-1. In the **Eventhouse** pane, configure the following setup options.
-   - **Data ingestion mode:**: Event processing before ingestion
-   - **Destination name:** `stock-table`
-   - **Workspace:** *Select the workspace you created at the beginning of this exercise*
-   - **Eventhouse**: *Select your eventhouse*
-   - **KQL database:** *Select your eventhouse KQL database*
-   - **Destination table:** Create a new table named `stock`
-   - **Input data format:** JSON
+   ![Screenshot of the my streams page in the real-time hub.](./Images/my-data-streams.png)
 
-   ![KQL Database eventstream with ingestion modes](./Images/configure-destination.png)
+1. In the **...** menu for the **stock-data-stream** stream, select **Open eventstream**.
 
-1. In the **Eventhouse** pane, select **Save**.
-1. On the toolbar, select **Publish**.
-1. Wait a minute or so for the data destination to become active.
+    The eventstream now shows a destination for the stream:
+
+   ![Screenshot an eventstream with a destination.](./Images/eventstream-destination.png)
+
+    > **Tip**: Select the destination on the design canvas, and if no data preview is shown beneath it, select **Refresh**.
 
     In this exercise, you've created a very simple eventstream that captures real-time data and loads it into a table. In a real soltuion, you'd typically add transformations to aggregate the data over temporal windows (for example, to capture the average price of each stock over five-minute periods).
 
