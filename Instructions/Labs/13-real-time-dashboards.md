@@ -99,6 +99,7 @@ Now that you have a stream of real-time data being loaded into a table in the ev
         | project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks
         | order by Neighbourhood asc
     ```
+
 1. Run the query, which shows the number of bikes and empty bike docks observed in each neighbourhood in the last 30 minutes.
 1. Apply the changes to see the data shown in a table in the tile on the dashboard.
 
