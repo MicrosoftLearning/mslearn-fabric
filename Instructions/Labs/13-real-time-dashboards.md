@@ -188,7 +188,9 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
 
 Your dashboard currently shows the latest bike, dock, and location data for all neighborhoods. Now lets add a parameter so you can select a specific neighborhood.
 
-1. On the dashboard toolbar, select **New parameter**.
+1. On the dashboard toolbar, on the **Manage** tabe, select **Parameters**.
+1. Note any existing parameters that have been automatically created (for example a *Time range* parameter). Then **Delete** them.
+1. Select **New parameter**.
 1. Add a parameter with the following settings:
     - **Label**: `Neighbourhood`
     - **Parameter type**: Multiple selection
@@ -214,7 +216,6 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
     - **Default value**: Select all
 
 1. Select **Done** to create the parameter.
-1. On the toolbar, on the **Manage** tab, select **Parameters**. Verify that the **Neighbourhood** parameter is listed, and delete any others that have been created automatically.
 
     Now that you've added a parameter, you need to modify the base query to filter the data based on the chosen neighborhoods.
 
