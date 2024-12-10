@@ -255,6 +255,17 @@ Your dashboard currently consists of a single page. You can add more pages to pr
 
    ![Screenshot of a dashboard with two pages](./Images/dashboard-page-2.png)
 
+## Configure auto refresh
+
+Users can manually refresh the dashboard, but it may be useful to have it automatically refresh the data at a set interval.
+
+1. On the dashboard toolbar, on the **Manage** tabe, select **Auto refresh**.
+1. In the **Auto refresh** pane, configure the following settings:
+    - **Enabled**: *Selected*
+    - **Minimum time interval**: Allow all refresh intervals
+    - **Default refresh rate**: 30 minutes
+1. Apply the auto refresh settings.
+
 ## Save and share the dashboard
 
 Now you have a useful dashboard, you can save it and share it with other users.
