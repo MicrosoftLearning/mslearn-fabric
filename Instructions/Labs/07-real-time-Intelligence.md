@@ -38,7 +38,6 @@ Now you're ready to find and ingest real-time data from a streaming source. To d
 1. In the real-time hub, in the **Connect to** section, select **Data sources**.
 1. Find the **Stock market** sample data source and select **Connect**. Then in the **Connect** wizard, name the source `stock` and edit the default eventstream name to change it to `stock-data`. The default stream associated with this data will automatically be named *stock-data-stream*:
 
-
     ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
 
 1. Select **Next** and wait for the source and eventstream to be created, then select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
