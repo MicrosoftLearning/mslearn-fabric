@@ -35,12 +35,12 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 1. In the pane on the left, note that your eventhouse contains a KQL database with the same name as the eventhouse.
 1. Select the KQL database to view it.
 
-    Currently there are no tables in the database. In the rest of this exercise you'll use an eventstream to load data from a real-time source into a table.
-
 ## Create an eventstream
 
+Currently there are no tables in the database. We'll use an eventstream to load data from a real-time source into a table.
+
 1. In the main page of your KQL database, select **Get data**.
-2. For the data source, select **Eventstream** > **New eventstream**. Name the Eventstream `Bicycle-data`.
+2. For the data source, select **Eventstream** > **New eventstream**. Name the eventstream `Bicycle-data`.
 
     ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
 
