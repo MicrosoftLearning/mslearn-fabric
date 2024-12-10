@@ -225,7 +225,6 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
         | where ingestion_time() between (ago(30min) .. now())
           and (isempty(['selected_neighbourhoods']) or Neighbourhood  in (['selected_neighbourhoods']))
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
-        | project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks, Latitude, Longitude
     ```
 
 1. Select **Done** to save the base query.
