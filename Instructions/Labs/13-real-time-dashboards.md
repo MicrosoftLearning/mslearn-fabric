@@ -235,7 +235,7 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
 
    ![A screenshot of a dashboard with parameters selected.](./Images/dashboard-parameters.png)
 
-1. Select **Reset** to remove the selected parameters.
+1. Select **Reset** to remove the selected parameter filters.
 
 ## Add a page
 
