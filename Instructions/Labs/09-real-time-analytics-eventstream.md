@@ -45,7 +45,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
     The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
 
-    ![Screenshot of a new eventstream.](./Images//name-eventstream.png)
+    ![Screenshot of a new eventstream.](./Images/empty-eventstream.png)
 
 ## Add a source
 
@@ -58,7 +58,8 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
 ## Add a destination
 
-1. In the **Transform events or add destination** drop-down list, in the **Destinations** section, select **Eventhouse**.
+1. Use the **+** icon to the right of the **Bicycle-data** node to add a new **Eventhouse** node.
+1. Use the *pencil* icon in the new eventhouse node to edit it.
 1. In the **Eventhouse** pane, configure the following setup options.
    - **Data ingestion mode:**: Event processing before ingestion
    - **Destination name:** `bikes-table`
@@ -84,11 +85,11 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 The eventstream you have created takes data from the sample source of bicycle data and loads it into the database in your eventhouse. You can analyze the captured data by querying the table in the database.
 
 1. In the menu bar on the left, select your KQL database.
-1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes** table under the database. Then select the **Bikes** table.
+1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes** table under the database. Then select the **bikes** table.
 
    ![A table in a KQL database.](./Images/kql-table.png)
 
-1. In the **...** menu for the **bikes** table**, select **Query table** > **Records ingested in the last 24 hours**.
+1. In the **...** menu for the **bikes** table, select **Query table** > **Records ingested in the last 24 hours**.
 1. In the query pane, note that the following query has been generated and run, with the results shown beneath:
 
     ```kql

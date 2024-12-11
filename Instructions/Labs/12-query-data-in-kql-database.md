@@ -164,7 +164,7 @@ KQL Database doesn't support Transact-SQL natively, but it provides a T-SQL endp
 
 1. In your queryset, add and run the following Transact-SQL query: 
 
-    ```sql  
+    ```sql
     SELECT TOP 100 * from Automotive
     ```
 
