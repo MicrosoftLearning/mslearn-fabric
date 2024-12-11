@@ -45,7 +45,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
     The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to the primary editor, ready to begin integrating sources into your event stream.
 
-    ![Screenshot of a new eventstream.](./Images//name-eventstream.png)
+    ![Screenshot of a new eventstream.](./Images/empty-eventstream.png)
 
 ## Add a source
 
@@ -58,7 +58,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
 ## Add a destination
 
-1. In the **Transform events or add destination** drop-down list, in the **Destinations** section, select **Eventhouse**.
+1. In the **Add destination** drop-down list, select **Eventhouse**.
 1. In the **Eventhouse** pane, configure the following setup options.
    - **Data ingestion mode:**: Event processing before ingestion
    - **Destination name:** `bikes-table`
@@ -71,7 +71,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
    ![Eventstream destination settings.](./Images/kql-database-event-processing-before-ingestion.png)
 
 1. In the **Eventhouse** pane, select **Save**. 
-1. On the toolbar, select **Publish**.
+1. Make sure that the **Bicycle-data** node is connected to the **bikes-table** node, then select **Publish**.
 1. Wait a minute or so for the data destination to become active. Then select the **bikes-table** node in the design canvas and view the **Data preview** pane underneath to see the latest data that has been ingested:
 
    ![A destination table in an eventstream.](./Images/stream-data-preview.png)
@@ -84,7 +84,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 The eventstream you have created takes data from the sample source of bicycle data and loads it into the database in your eventhouse. You can analyze the captured data by querying the table in the database.
 
 1. In the menu bar on the left, select your KQL database.
-1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes** table under the database. Then select the **Bikes** table.
+1. On the **database** tab, in the toolbar for your KQL database, use the **Refresh** button to refresh the view until you see the **bikes** table under the database. Then select the **bikes** table.
 
    ![A table in a KQL database.](./Images/kql-table.png)
 
