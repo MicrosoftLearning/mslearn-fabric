@@ -99,6 +99,7 @@ Now that you have a stream of real-time data being loaded into a table in the ev
         | project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks
         | order by Neighbourhood asc
     ```
+
 1. Run the query, which shows the number of bikes and empty bike docks observed in each neighbourhood in the last 30 minutes.
 1. Apply the changes to see the data shown in a table in the tile on the dashboard.
 
@@ -157,10 +158,8 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     bikes
         | where ingestion_time() between (ago(30min) .. now())
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
-        | project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks, Latitude, Longitude
-    ```
 
-1. Run the query and verify that it returns all of the columns needed for both visuals in the dashboard.
+1. Run the query and verify that it returns all of the columns needed for both visuals in the dashboard (and some others).
 
    ![A screenshot of a base query.](./Images/dashboard-base-query.png)
 
@@ -189,7 +188,9 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
 
 Your dashboard currently shows the latest bike, dock, and location data for all neighborhoods. Now lets add a parameter so you can select a specific neighborhood.
 
-1. On the dashboard toolbar, select **New parameter**.
+1. On the dashboard toolbar, on the **Manage** tabe, select **Parameters**.
+1. Note any existing parameters that have been automatically created (for example a *Time range* parameter). Then **Delete** them.
+1. Select **New parameter**.
 1. Add a parameter with the following settings:
     - **Label**: `Neighbourhood`
     - **Parameter type**: Multiple selection
@@ -215,7 +216,6 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
     - **Default value**: Select all
 
 1. Select **Done** to create the parameter.
-1. On the toolbar, on the **Manage** tab, select **Parameters**. Verify that the **Neighbourhood** parameter is listed, and delete any others that have been created automatically.
 
     Now that you've added a parameter, you need to modify the base query to filter the data based on the chosen neighborhoods.
 
@@ -226,7 +226,6 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
         | where ingestion_time() between (ago(30min) .. now())
           and (isempty(['selected_neighbourhoods']) or Neighbourhood  in (['selected_neighbourhoods']))
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
-        | project Neighbourhood, latest_observation, No_Bikes, No_Empty_Docks, Latitude, Longitude
     ```
 
 1. Select **Done** to save the base query.
@@ -255,6 +254,17 @@ Your dashboard currently consists of a single page. You can add more pages to pr
 1. Apply the changes. Then resize the tile to fill the height of the dashboard.
 
    ![Screenshot of a dashboard with two pages](./Images/dashboard-page-2.png)
+
+## Configure auto refresh
+
+Users can manually refresh the dashboard, but it may be useful to have it automatically refresh the data at a set interval.
+
+1. On the dashboard toolbar, on the **Manage** tabe, select **Auto refresh**.
+1. In the **Auto refresh** pane, configure the following settings:
+    - **Enabled**: *Selected*
+    - **Minimum time interval**: Allow all refresh intervals
+    - **Default refresh rate**: 30 minutes
+1. Apply the auto refresh settings.
 
 ## Save and share the dashboard
 
