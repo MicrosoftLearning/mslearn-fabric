@@ -42,7 +42,7 @@ Currently there are no tables in the database. We'll use an eventstream to load 
 1. In the main page of your KQL database, select **Get data**.
 2. For the data source, select **Eventstream** > **New eventstream**. Name the eventstream `Bicycle-data`.
 
-    ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
+    ![Screenshot of a new eventstream.](./Images/empty-eventstream.png)
 
     The creation of your new event stream in the workspace will be completed in just a few moments. Once established, you will be automatically redirected to select a data source for your eventstream.
 
@@ -53,7 +53,7 @@ Currently there are no tables in the database. We'll use an eventstream to load 
 
    ![Review the eventstream canvas](./Images/real-time-intelligence-eventstream-sourced.png)
 
-1. In the **Transform events or add destination** drop-down list, in the **Destinations** section, select **Eventhouse**.
+1. In the **Add destination** drop-down list, select **Eventhouse**.
 1. In the **Eventhouse** pane, configure the following setup options.
    - **Data ingestion mode:**: Event processing before ingestion
    - **Destination name:** `bikes-table`
@@ -66,7 +66,7 @@ Currently there are no tables in the database. We'll use an eventstream to load 
    ![Eventstream destination settings.](./Images/kql-database-event-processing-before-ingestion.png)
 
 1. In the **Eventhouse** pane, select **Save**. 
-1. On the toolbar, select **Publish**.
+1. Connect the **Bicycles-data** node's output to the **bikes-table** node, then select **Publish**.
 1. Wait a minute or so for the data destination to become active. Then select the **bikes-table** node in the design canvas and view the **Data preview** pane underneath to see the latest data that has been ingested:
 
    ![A screenshot of a destination table in an eventstream.](./Images/stream-data-preview.png)
@@ -188,9 +188,9 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
 
 Your dashboard currently shows the latest bike, dock, and location data for all neighborhoods. Now lets add a parameter so you can select a specific neighborhood.
 
-1. On the dashboard toolbar, on the **Manage** tabe, select **Parameters**.
+1. On the dashboard toolbar, on the **Manage** tab, select **Parameters**.
 1. Note any existing parameters that have been automatically created (for example a *Time range* parameter). Then **Delete** them.
-1. Select **New parameter**.
+1. Select **+ Add**.
 1. Add a parameter with the following settings:
     - **Label**: `Neighbourhood`
     - **Parameter type**: Multiple selection
