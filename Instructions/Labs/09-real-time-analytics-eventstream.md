@@ -88,7 +88,7 @@ The eventstream you have created takes data from the sample source of bicycle da
 
    ![A table in a KQL database.](./Images/kql-table.png)
 
-1. In the **...** menu for the **bikes** table**, select **Query table** > **Records ingested in the last 24 hours**.
+1. In the **...** menu for the **bikes** table, select **Query table** > **Records ingested in the last 24 hours**.
 1. In the query pane, note that the following query has been generated and run, with the results shown beneath:
 
     ```kql
