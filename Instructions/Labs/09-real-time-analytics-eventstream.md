@@ -72,7 +72,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
    ![Eventstream destination settings.](./Images/kql-database-event-processing-before-ingestion.png)
 
 1. In the **Eventhouse** pane, select **Save**. 
-1. Make sure that the **Bicycle-data** node is connected to the **bikes-table** node, then select **Publish**.
+1. On the toolbar, select **Publish**.
 1. Wait a minute or so for the data destination to become active. Then select the **bikes-table** node in the design canvas and view the **Data preview** pane underneath to see the latest data that has been ingested:
 
    ![A destination table in an eventstream.](./Images/stream-data-preview.png)
