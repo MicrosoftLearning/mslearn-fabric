@@ -165,9 +165,8 @@ Now you can query the bicycle data that has been transformed and loaded into a t
 
     ```kql
     ['bikes-by-street']
-    | where Window_End_Time >= ago(5s)
-    | summarize TotalBikes = sum(tolong(SUM_No_Bikes)) by Window_End_Time, Street
-    | sort by Window_End_Time desc , Street asc
+    | summarize TotalBikes = sum(tolong(SUM_No_Bikes)) by bin(Window_End_Time, 5s), Street
+    | sort by Window_End_Time asc, Street asc
     ```
 
 1. Select the modified query and run it.
