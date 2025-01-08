@@ -195,7 +195,7 @@ Instead of writing SQL code, you can use the graphical query designer to query t
 
 1. If you're interested in looking at data for a single product, per a manager request, you can now use the **ProductName** column to filter the data in the query. Filter the **ProductName** column to look at **Cable Lock** data only.
 
-1. From here, you can analyze the results of this single query by selecting **Visualize results** or **Open in Excel**. You can now see exactly what the manager was asking for, so we don't need to analyze the results further.
+1. From here, you can analyze the results of this single query by selecting **Visualize results** or **Download Excel file**. You can now see exactly what the manager was asking for, so we don't need to analyze the results further.
 
 ### Visualize your data
 
@@ -232,7 +232,7 @@ You can easily visualize the data in either a single query, or in your data ware
 
 1. In the **File** menu, select **Save**. Then save the report as **Sales Report** in the workspace you created previously.
 
-1. In the menu hub on the left, navigate back to the workspace. Notice that you now have three items saved in your workspace: your data warehouse, its default dataset, and the report you created.
+1. In the menu hub on the left, navigate back to the workspace. Notice that you now have three items saved in your workspace: your data warehouse, its default semantic model, and the report you created.
 
     ![Screenshot of the workspace with the three items listed.](./Images/workspace-items.png)
 
