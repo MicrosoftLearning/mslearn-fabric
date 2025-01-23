@@ -190,7 +190,7 @@ This task relies on the existence of a **Salespeople_Australia** security group 
 
     ![](Images/enforce-model-security-image32.png)
 
-    *The **Security** option supports mapping Microsoft Azure Active Directory (Azure AD) security principals, which includes security groups and users.*
+    *The **Security** option supports mapping Microsoft Entra security principals, which includes security groups and users.*
 
 4. At the left, notice the list of roles, and that **Australia** is selected.
 
