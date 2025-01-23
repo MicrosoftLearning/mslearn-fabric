@@ -31,7 +31,7 @@ Now that you have a workspace, it's time to create a data warehouse. The Synapse
 
     After a minute or so, a new warehouse will be created:
 
-    ![Screenshot of a new warehouse.](./Images/new-data-warehouse.png)
+    ![Screenshot of a new warehouse.](./Images/new-data-warehouse2.png)
 
 ## Create tables and insert data
 
