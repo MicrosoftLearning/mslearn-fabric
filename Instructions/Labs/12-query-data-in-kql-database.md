@@ -18,7 +18,6 @@ This exercise takes approximately **25** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric capacity enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Real-Time Intelligence**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -29,20 +28,13 @@ Before working with data in Fabric, create a workspace with the Fabric capacity 
 
 Now that you have a workspace with support for a Fabric capacity, you can create an eventhouse in it.
 
-1. On the **Real-Time Intelligence** home page, create a new **Eventhouse** with a name of your choice. When the eventhouse has been created, close any prompts or tips that are displayed until you see the eventhouse page:
+1. In the menu bar on the left, select **Workloads**. Then, select the **Real-Time Intelligence** tile.
+1. On the **Real-Time Intelligence** home page, in the *Explore Real-Time Intelligence Sample* tile, select **Open**. It will automatically create an eventhouse called **RTISample**:
 
-   ![Screenshot of a new eventhouse.](./Images/create-eventhouse.png)
+   ![Screenshot of a new eventhouse with sample data.](./Images/create-eventhouse-sample.png)
 
 1. In the pane on the left, note that your eventhouse contains a KQL database with the same name as the eventhouse.
-1. Select the KQL database to view it.
-
-    Currently there are no tables in the database. In the rest of this exercise you'll use an eventstream to load data from a real-time source into a table.
-   
-1. In the page for the KQL database, select **Get data** > **Sample**. Then choose the **Automotive operations analytics** sample data.
-
-1. After the data is finished loading (which may take some time), verify that an **Automotive** table has been created.
-
-   ![Screenshot of the Automotive table in an eventhouse database.](./Images/choose-automotive-operations-analytics.png)
+1. Verify that a **Bikestream** table has also been created.
 
 ## Query data by using KQL
 
@@ -54,7 +46,7 @@ Kusto Query Language (KQL) is an intuitive, comprehensive language that you can 
 1. Modify the first example query as follows.
 
     ```kql
-    Automotive
+    Bikestream
     | take 100
     ```
 
@@ -71,8 +63,8 @@ Kusto Query Language (KQL) is an intuitive, comprehensive language that you can 
 
     ```kql
     // Use 'project' and 'take' to view a sample number of records in the table and check the data.
-    Automotive 
-    | project vendor_id, trip_distance
+    Bikestream
+    | project Street, No_Bikes
     | take 10
     ```
 
@@ -83,8 +75,8 @@ Kusto Query Language (KQL) is an intuitive, comprehensive language that you can 
 1. Try the following query:
 
     ```kql
-    Automotive 
-    | project vendor_id, ["Trip Distance"] = trip_distance
+    Bikestream 
+    | project Street, ["Number of Empty Docks"] = No_Empty_Docks
     | take 10
     ```
 
@@ -92,33 +84,35 @@ Kusto Query Language (KQL) is an intuitive, comprehensive language that you can 
 
 You can use the *summarize* keyword with a function to aggregate and otherwise manipulate data.
 
-1. Try the following query, which uses the **sum** function to summarize the trip data to see how many miles were traveled in total:
+1. Try the following query, which uses the **sum** function to summarize the rental data to see how many bikes are available in total:
 
     ```kql
 
-    Automotive
-    | summarize ["Total Trip Distance"] = sum(trip_distance)
+    Bikestream
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes)
     ```
 
     You can group the summarized data by a specified column or expression.
 
-1. TRun the following query to group the trip distances by borough within the NY Taxi system to determine the total distance traveled from each borough.
+1. Run the following query to group the number of bikes by neighbourhood to determine the amount of available bikes in each neighbourhood:
 
     ```kql
-    Automotive
-    | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
-    | project Borough = pickup_boroname, ["Total Trip Distance"]
+    Bikestream
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes) by Neighbourhood
+    | project Neighbourhood, ["Total Number of Bikes"]
     ```
 
-    The results include a blank value, which is never good for analysis.
+    If any of the bike points has a null or empty entry for neighbourhood, the results of summarization will include a blank value, which is never good for analysis.
 
-1. Modify the query as shown here to use the *case* function along with the *isempty* and *isnull* functions to group all trips for which the borough is unknown into a ***Unidentified*** category for follow-up.
+1. Modify the query as shown here to use the *case* function along with the *isempty* and *isnull* functions to group all trips for which the neighbourhood is unknown into a ***Unidentified*** category for follow-up.
 
     ```kql
-    Automotive
-    | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
-    | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
+    Bikestream
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes) by Neighbourhood
+    | project Neighbourhood = case(isempty(Neighbourhood) or isnull(Neighbourhood), "Unidentified", Neighbourhood), ["Total Number of Bikes"]
     ```
+
+    >**Note**: As this sample dataset is well-maintained, you might not have an Unidentified field in the query result.
 
 ### Sort data by using KQL
 
@@ -127,33 +121,33 @@ To make more sense of our data, we typically order it by a column, and this proc
 1. Try the following query:
 
     ```kql
-    Automotive
-    | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
-    | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
-    | sort by Borough asc
+    Bikestream
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes) by Neighbourhood
+    | project Neighbourhood = case(isempty(Neighbourhood) or isnull(Neighbourhood), "Unidentified", Neighbourhood), ["Total Number of Bikes"]
+    | sort by Neighbourhood asc
     ```
 
 1. Modify the query as follows and run it again, and note that the *order by* operator works the same way as *sort by*:
 
     ```kql
-    Automotive
-    | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
-    | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
-    | order by Borough asc 
+    Bikestream
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes) by Neighbourhood
+    | project Neighbourhood = case(isempty(Neighbourhood) or isnull(Neighbourhood), "Unidentified", Neighbourhood), ["Total Number of Bikes"]
+    | order by Neighbourhood asc
     ```
 
 ### Filter data by using KQL
 
 In KQL, the *where* clause is used to filter data. You can combine conditions in a *where* clause by using *and* and *or* logical operators.
 
-1. Run the following query to filter the trip data to include only trips that originated in Manhatten:
+1. Run the following query to filter the bike data to include only bike points in the Chelsea neighbourhood:
 
     ```kql
-    Automotive
-    | where pickup_boroname == "Manhattan"
-    | summarize ["Total Trip Distance"] = sum(trip_distance) by pickup_boroname
-    | project Borough = case(isempty(pickup_boroname) or isnull(pickup_boroname), "Unidentified", pickup_boroname), ["Total Trip Distance"]
-    | sort by Borough asc
+    Bikestream
+    | where Neighbourhood == "Chelsea"
+    | summarize ["Total Number of Bikes"] = sum(No_Bikes) by Neighbourhood
+    | project Neighbourhood = case(isempty(Neighbourhood) or isnull(Neighbourhood), "Unidentified", Neighbourhood), ["Total Number of Bikes"]
+    | sort by Neighbourhood asc
     ```
 
 ## Query data by using Transact-SQL
@@ -165,90 +159,90 @@ KQL Database doesn't support Transact-SQL natively, but it provides a T-SQL endp
 1. In your queryset, add and run the following Transact-SQL query: 
 
     ```sql
-    SELECT TOP 100 * from Automotive
+    SELECT TOP 100 * from Bikestream
     ```
 
 1. Modify the query as follows to retrieve specific columns
 
     ```sql
-    SELECT TOP 10 vendor_id, trip_distance
-    FROM Automotive
+    SELECT TOP 10 Street, No_Bikes
+    FROM Bikestream
     ```
 
-1. Modify the query to assign an alias that renames **trip_distance** to a more user-friendly name.
+1. Modify the query to assign an alias that renames **No_Empty_Docks** to a more user-friendly name.
 
     ```sql
-    SELECT TOP 10 vendor_id, trip_distance as [Trip Distance]
-    from Automotive
+    SELECT TOP 10 Street, No_Empty_Docks as [Number of Empty Docks]
+    from Bikestream
     ```
 
 ### Summarize data by using Transact-SQL
 
-1. Run the following query to find the total distance travelled:
+1. Run the following query to find the total number of bikes available:
 
     ```sql
-    SELECT sum(trip_distance) AS [Total Trip Distance]
-    FROM Automotive
+    SELECT sum(No_Bikes) AS [Total Number of Bikes]
+    FROM Bikestream
     ```
 
-1. Modify the query to group the total distance by pickup borough:
+1. Modify the query to group the total number of bikes by neighbourhood:
 
     ```sql
-    SELECT pickup_boroname AS Borough, Sum(trip_distance) AS [Total Trip Distance]
-    FROM Automotive
-    GROUP BY pickup_boroname
+    SELECT Neighbourhood, Sum(No_Bikes) AS [Total Number of Bikes]
+    FROM Bikestream
+    GROUP BY Neighbourhood
     ```
 
-1. Modify the query further to use a *CASE* statement to group trips with an unknown origin into a ***Unidentified*** category for follow-up. 
+1. Modify the query further to use a *CASE* statement to group bike points with an unknown origin into a ***Unidentified*** category for follow-up. 
 
     ```sql
     SELECT CASE
-             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
-             ELSE pickup_boroname
-           END AS Borough,
-           SUM(trip_distance) AS [Total Trip Distance]
-    FROM Automotive
+             WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+             ELSE Neighbourhood
+           END AS Neighbourhood,
+           SUM(No_Bikes) AS [Total Number of Bikes]
+    FROM Bikestream
     GROUP BY CASE
-               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'Unidentified'
-               ELSE pickup_boroname
+               WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+               ELSE Neighbourhood
              END;
     ```
 
 ### Sort data by using Transact-SQL
 
-1. Run the following query to order the grouped results by borough
+1. Run the following query to order the grouped results by neighbourhood:
  
     ```sql
     SELECT CASE
-             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-             ELSE pickup_boroname
-           END AS Borough,
-           SUM(trip_distance) AS [Total Trip Distance]
-    FROM Automotive
+             WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+             ELSE Neighbourhood
+           END AS Neighbourhood,
+           SUM(No_Bikes) AS [Total Number of Bikes]
+    FROM Bikestream
     GROUP BY CASE
-               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-               ELSE pickup_boroname
-             END
-    ORDER BY Borough ASC;
+               WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+               ELSE Neighbourhood
+             END;
+    ORDER BY Neighbourhood ASC;
     ```
 
 ### Filter data by using Transact-SQL
     
-1. Run the following query to filter the grouped data so that only rows having a borough of "Manhattan" are included in the results
+1. Run the following query to filter the grouped data so that only rows having a neighbourhood of "Chelsea" are included in the results
 
     ```sql
     SELECT CASE
-             WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-             ELSE pickup_boroname
-           END AS Borough,
-           SUM(trip_distance) AS [Total Trip Distance]
-    FROM Automotive
+             WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+             ELSE Neighbourhood
+           END AS Neighbourhood,
+           SUM(No_Bikes) AS [Total Number of Bikes]
+    FROM Bikestream
     GROUP BY CASE
-               WHEN pickup_boroname IS NULL OR pickup_boroname = '' THEN 'unidentified'
-               ELSE pickup_boroname
-             END
-    HAVING Borough = 'Manhattan'
-    ORDER BY Borough ASC;
+               WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
+               ELSE Neighbourhood
+             END;
+    HAVING Neighbourhood = 'Chelsea'
+    ORDER BY Neibourhood ASC;
     ```
 
 ## Clean up resources
