@@ -18,6 +18,7 @@ This lab will take approximately 45 minutes to complete.
 
 Before you can work with data in Fabric you need to create a workspace.
 
+1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 1. From the left menu bar, select **Workspaces** (🗇) and then **New workspace**.
 1. Give the new workspace a name and in the **Advanced** section, select the appropriate Licensing mode. If you have started a Microsoft Fabric trial, select Trial.
 1. Select **Apply** to create an empty workspace.
