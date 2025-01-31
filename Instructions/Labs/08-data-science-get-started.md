@@ -18,8 +18,6 @@ This lab will take approximately **20** minutes to complete.
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser.
-1. Select **Synapse Data Science**.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -30,7 +28,9 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 To run code, you can create a *notebook*. Notebooks provide an interactive environment in which you can write and run code (in multiple languages).
 
-1. In the **Synapse Data Science** home page, create a new **Notebook**.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Science* section, select **Notebook**. Give it a unique name of your choice.
+
+    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
