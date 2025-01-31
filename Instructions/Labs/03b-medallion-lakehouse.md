@@ -16,12 +16,10 @@ This exercise should take approximately **45** minutes to complete
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Power BI**.
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-4. When your new workspace opens, it should be empty.
-
-5. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. When your new workspace opens, it should be empty.
+1. Navigate to the workspace settings and enable the **Data model editing** preview feature. This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
 
     ![Screenshot of the workspace settings page in Fabric.](./Images/workspace-settings.png)
 
@@ -31,7 +29,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 Now that you have a workspace, it's time to create a data lakehouse for the data you're going to analyze.
 
-1. In the workspace you just created, create a new **Lakehouse** named **Sales** by clicking the **New item** button.
+1. In the workspace you just created, create a new **Lakehouse** named **Sales** by clicking the **+ New item** button.
 
     After a minute or so, a new empty lakehouse will be created. Next, you'll ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
