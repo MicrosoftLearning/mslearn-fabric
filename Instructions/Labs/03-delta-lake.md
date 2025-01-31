@@ -17,7 +17,6 @@ This exercise should take approximately **45** minutes to complete
 
 First, create a workspace with the *Fabric trial* enabled.
 
-1. On the Microsoft Fabric home page at `https://app.fabric.microsoft.com`, select the **Data Engineering** experience.
 1. In the menu bar on the left, select **Workspaces** (🗇).
 1. Create a **new workspace** with a name of your choice, selecting a licensing mode that includes Fabric capacity (Trial, Premium, or Fabric).
 1. When your new workspace opens, it should be empty.
@@ -28,7 +27,10 @@ First, create a workspace with the *Fabric trial* enabled.
 
 Now that you have a workspace, it’s time to create a lakehouse and upload some data.
 
-1. In the **Data Engineering** home page, create a **new Lakehouse** with a name of your choice. 
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
+
+    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+
 1. There are various ways to ingest data, but in this exercise you’ll download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse. Download the [data file](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv) from `https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv`, saving it as *products.csv*.
 1.	Return to the web browser tab containing your lakehouse, and in the Explorer pane, next to the **Files** folder, select the … menu.  Create a **New subfolder** called *products*.
 1.	In the … menu for the products folder, **upload** the *products.csv* file from your local computer (or lab VM if applicable).
