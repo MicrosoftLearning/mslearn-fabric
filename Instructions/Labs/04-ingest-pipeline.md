@@ -10,7 +10,7 @@ A data lakehouse is a common analytical data store for cloud-scale analytics sol
 
 Fabric also supports Apache Spark, enabling you to write and run code to process data at scale. By combining the pipeline and Spark capabilities in Fabric, you can implement complex data ingestion logic that copies data from external sources into the OneLake storage on which the lakehouse is based, and then uses Spark code to perform custom data transformations before loading it into tables for analysis.
 
-This lab will take approximately **30** minutes to complete.
+This lab will take approximately **45** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
