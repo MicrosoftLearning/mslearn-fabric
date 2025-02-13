@@ -223,7 +223,7 @@ KQL Database doesn't support Transact-SQL natively, but it provides a T-SQL endp
     GROUP BY CASE
                WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
                ELSE Neighbourhood
-             END;
+             END
     ORDER BY Neighbourhood ASC;
     ```
 
@@ -241,7 +241,7 @@ KQL Database doesn't support Transact-SQL natively, but it provides a T-SQL endp
     GROUP BY CASE
                WHEN Neighbourhood IS NULL OR Neighbourhood = '' THEN 'Unidentified'
                ELSE Neighbourhood
-             END;
+             END
     HAVING Neighbourhood = 'Chelsea'
     ORDER BY Neibourhood ASC;
     ```
