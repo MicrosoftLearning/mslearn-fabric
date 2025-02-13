@@ -63,7 +63,7 @@ The eventstream ingests the real-time stock data, but doesn't currently do anyth
 
 1. In the main page of your KQL database, select **Get data**.
 1. For the data source, select **Eventstream** > **Existing eventstream**.
-1. In the **Select or create a destination table** pane, create a new table named `stock`. Then in the **Configure the data source** pane, select your workspace and the **stock-data** eventstream and name the connection `stock-data`.
+1. In the **Select or create a destination table** pane, create a new table named `stock`. Then in the **Configure the data source** pane, select your workspace and the **stock-data** eventstream and name the connection `stock-table`.
 
    ![Screenshot of configuration for loading a table from an eventstream.](./Images/configure-destination.png)
 
@@ -73,11 +73,7 @@ The eventstream ingests the real-time stock data, but doesn't currently do anyth
 
     The connection between the stream and the table has been created. Let's verify that in the eventstream.
 
-1. In the menu bar on the left, select the **Real-Time** hub and then view the **My data streams** page. The **stock** table and the **stock-data-stream** stream should be listed.
-
-   ![Screenshot of the my streams page in the real-time hub.](./Images/my-data-streams.png)
-
-1. In the **...** menu for the **stock-data-stream** stream, select **Open eventstream**.
+1. In the menu bar on the left, select the **Real-Time** hub and then view the **My data streams** page. In the **...** menu for the **stock-data-stream** stream, select **Open eventstream**.
 
     The eventstream now shows a destination for the stream:
 
