@@ -161,7 +161,7 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     bikes
         | where ingestion_time() between (ago(30min) .. now())
         | summarize latest_observation = arg_max(ingestion_time(), *) by Neighbourhood
-
+    ```
 1. Run the query and verify that it returns all of the columns needed for both visuals in the dashboard (and some others).
 
    ![A screenshot of a base query.](./Images/dashboard-base-query.png)

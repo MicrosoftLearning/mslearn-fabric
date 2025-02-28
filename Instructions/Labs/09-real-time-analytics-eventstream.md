@@ -58,8 +58,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
 
 ## Add a destination
 
-1. Use the **+** icon to the right of the **Bicycle-data** node to add a new **Eventhouse** node.
-1. Use the *pencil* icon in the new eventhouse node to edit it.
+1. Select the **Transform events or add destination** tile and search for **Eventhouse**.
 1. In the **Eventhouse** pane, configure the following setup options.
    - **Data ingestion mode:**: Event processing before ingestion
    - **Destination name:** `bikes-table`
