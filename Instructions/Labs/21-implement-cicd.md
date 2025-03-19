@@ -30,20 +30,16 @@ Next, create a deployment pipeline.
 
 1. In the menu bar on the left, select **Workspaces**.
 2. Select **Deployment Pipelines**, then **New pipeline**.
-3. In the **Add a new deployment pipeline** window, give the pipeline a unique name.
-4. Accept the defaults on the **Customize your stages** window.  
-
-   ![Screenshot of pipeline stages.](./Images/customize-stages.png)
-
-5. Select **Create**.
+3. In the **Add a new deployment pipeline** window, give the pipeline a unique name and select **Next**.
+4. In the new pipeline window, select **Create and continue**.
 
 ## Assign workspaces to stages of a deployment pipeline
 
 Assign workspaces to the stages of the deployment pipeline.
 
 1. On the left menu bar, select the pipeline you created. 
-2. In the window that appears, select on the word **Select** under each deployment stage and select the name of the workspace that matches the name of the stage.
-3. Select **Assign a workspace** for each deployment stage.
+2. In the window that appears, expand the options under **Assign a workspace** on each deployment stage and select the name of the workspace that matches the name of the stage.
+3. Select the check mark **Assign** for each deployment stage.
 
   ![Screenshot of deployment pipeline.](./Images/deployment-pipeline.png)
 
@@ -53,16 +49,17 @@ Fabric items haven't been created in your workspaces yet. Next, create a lakehou
 
 1. In the menu bar on the left, select **Workspaces**.
 2. Select the **Development** workspace.
-3. Select **New Item**
+3. Select **New Item**.
 4. In the window that appears, select **Lakehouse** and in the **New lakehouse window**, name the lakehouse, **LabLakehouse**.
 5. Select **Create**.
 6. In the Lakehouse Explorer window, select **Start with sample data** to populate the new lakehouse with data.
 
   ![Screenshot of Lakehouse Explorer.](./Images/lakehouse-explorer.png)
 
+7. Select the sample **NYCTaxi**.
 8. In the menu bar on the left, select the pipeline you created.
-9. In the **Development** stage, select the **>** until you see **Lakehouses**. The lakehouse shows up as new content in the Development stage. Between the **Development** and **Test** stages, there's an orange **X** within a circle. The orange **X** indicates that the Development and Test stages aren't synchronized.
-10. Select the downward arrow below the orange **X** to compare the content in the Development and Test environments. Select **Compare**.The LabLakehouse only exists in the Development stage.  
+9. Select the **Development** stage, and under the deployment pipeline canvas you can see the lakehouse you created as a stage item. In the left edge of the **Test** stage, there's an **X** within a circle. The **X** indicates that the Development and Test stages aren't synchronized.
+10. Select the **Test** stage and under the deployment pipeline canvas you can see that the lakehouse you created is only a stage item in the source, which in this case refers to the **Development** stage.  
 
   ![Screenshot the deployment pipeline showing content mismatches between stages.](./Images/lab-pipeline-compare.png)
 
