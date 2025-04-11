@@ -414,7 +414,7 @@ When you have finished, select **Apply**.
     ```python
     sqlQuery = "SELECT CAST(YEAR(OrderDate) AS CHAR(4)) AS OrderYear, \
                     SUM((UnitPrice * Quantity) + Tax) AS GrossRevenue, \
-                    SUM(Quantity) AS YearlyCounts \
+                    COUNT(DISTINCT SalesOrderNumber) AS YearlyCounts \
                 FROM salesorders \
                 GROUP BY CAST(YEAR(OrderDate) AS CHAR(4)) \
                 ORDER BY OrderYear"
