@@ -81,7 +81,7 @@ The eventstream ingests the real-time stock data, but doesn't currently do anyth
 
     > **Tip**: Select the destination on the design canvas, and if no data preview is shown beneath it, select **Refresh**.
 
-    In this exercise, you've created a very simple eventstream that captures real-time data and loads it into a table. In a real soltuion, you'd typically add transformations to aggregate the data over temporal windows (for example, to capture the average price of each stock over five-minute periods).
+    In this exercise, you've created a very simple eventstream that captures real-time data and loads it into a table. In a real solution, you'd typically add transformations to aggregate the data over temporal windows (for example, to capture the average price of each stock over five-minute periods).
 
     Now let's explore how you can query and analyze the captured data.
 
