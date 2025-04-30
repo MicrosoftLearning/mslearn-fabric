@@ -60,7 +60,7 @@ Now that you have a workspace, a lakehouse, and the sales table with the data yo
 
     After a minute or so, a new warehouse will be created:
 
-    ![Screenshot of a new warehouse.](./Images/new-data-warehouse.png)
+    ![Screenshot of a new warehouse.](./Images/new-empty-data-warehouse.png)
 
 ## Create fact table, dimensions and view
 
@@ -109,6 +109,8 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
     > **Important:** In a data warehouse, foreign key constraints are not always necessary at the table level. While foreign key constraints can help ensure data integrity, they can also add overhead to the ETL (Extract, Transform, Load) process and slow down data loading. The decision to use foreign key constraints in a data warehouse should be based on a careful consideration of the trade-offs between data integrity and performance.
 
 1. In the **Explorer**, navigate to **Schemas >> Sales >> Tables**. Note the *Fact_Sales*, *Dim_Customer*, and *Dim_Item* tables you just created.
+
+    > **Note**: If you can't see the new schemas, open the **...** menu for **Tables** in the **Explorer** pane, then select **Refresh**.
 
 1. Open a new **New SQL query** editor, then copy and run the following query. Update *<your lakehouse name>* with the lakehouse you created.
 
