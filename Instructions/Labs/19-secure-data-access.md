@@ -21,17 +21,15 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-empty-workspace.png)
 
-> **Note**: When you create a workspace, you automatically become a member of the Workspace Admin role. 
+> **Note**: When you create a workspace, you automatically become a member of the Workspace Admin role.
 
 ## Create a data warehouse
 
 Next, create a data warehouse in the workspace you created:
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Warehouse* section, select **Sample warehouse** and create a new data warehouse with a name of your choice.
+1. Click **+ New Item**. On the *New item* page, under the *Store Data* section, select **Sample warehouse** and create a new data warehouse with a name of your choice.
 
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
-
-    After a minute or so, a new warehouse will be created:
+     After a minute or so, a new warehouse will be created:
 
     ![Screenshot of a new warehouse.](./Images/new-sample-warehouse.png)
 
@@ -156,8 +154,6 @@ In this exercise, you assign an item permission and create a OneLake data access
 
 17. Return to the browser where you're logged in as the second user. Ensure you're still on the page where the lakehouse is open. Refresh the browser.  
 18. Select the **publicholidays** table and wait for the data to load. Only the data in the publicholidays table is accessible to the user because the user was assigned to the custom OneLake data access role. The role permits them to see only the data in the publicholidays table, not data in any of the other tables, files, or folders.
-
-       ![Screenshot of the what the OneLake data access role allows the user to see.](./Images/custom-role-view.png)
 
 ## Clean up resources
 
