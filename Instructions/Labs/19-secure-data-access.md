@@ -100,7 +100,7 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 9. Select **Grant**
 
-10. Return to the browser window where you're logged in as the second user. Refresh the browser view.  
+10. Return to the browser window where you're logged in as the second user. Refresh the browser view.
 
 11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake** on the left navigation menu to find the warehouse. 
 
