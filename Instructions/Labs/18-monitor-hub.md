@@ -16,7 +16,7 @@ This lab takes approximately **30** minutes to complete.
 
 Before working with data in Fabric, create a workspace in a tenant with the Fabric capacity enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
+1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
@@ -44,12 +44,10 @@ Now that you have a workspace, it's time to create a data lakehouse for your dat
 In Microsoft Fabric, you can use a Dataflow (Gen2) to ingest data from a wide range of sources. In this exercise, you'll use a dataflow to get data from a CSV file and load it into a table in your lakehouse.
 
 1. On the **Home** page for your lakehouse, in the **Get data** menu, select **New Dataflow Gen2**.
-
-   A new dataflow named **Dataflow 1** is created and opened.
+1. Name the new dataflow `Get Product Data` and select **Create**.
 
     ![Screenshot of a new dataflow.](./Images/new-data-flow.png)
 
-1. At the top left of the dataflow page, select **Dataflow 1** to see its details and rename the dataflow to **Get Product Data**.
 1. In the dataflow designer, select **Import from a Text/CSV file**. Then complete the Get Data wizard to create a data connection by linking to `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/products.csv` using anonymous authentication. When you have completed the wizard, a preview of the data will be shown in the dataflow designer like this:
 
     ![Screenshot of a dataflow query.](./Images/data-flow-query.png)
@@ -68,15 +66,17 @@ In Microsoft Fabric, you can use a Dataflow (Gen2) to ingest data from a wide ra
 
 In Microsoft Fabric, you can use notebooks to run Spark code.
 
-1. In the navigation hub, select **Home**. The  on the Data Engineering home page, create a new **Notebook**.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
 
     A new notebook named **Notebook 1** is created and opened.
 
     ![Screenshot of a new notebook.](./Images/new-notebook.png)
 
-1. At the top left of the notebook, select **Notebook 1** to view its details, and change its name to **Query Products**.
-1. In the notebook editor, in the **Explorer** pane, select **Lakehouses** and add the lakehouse you created previously.
-1. In the **...** menu for the **Products** table, select **Load data** > **Spark**. This adds a new code cell to the notebook as shown here:
+1. At the top left of the notebook, select **Notebook 1** to view its details, and change its name to `Query Products`.
+1. In the notebook editor, in the **Explorer** pane, select **Add data items** and then select **Existing data sources**.
+1. Add the lakehouse you created previously.
+1. Expand the lakehouse item until you reach the **products** table.
+1. In the **...** menu for the **products** table, select **Load data** > **Spark**. This adds a new code cell to the notebook as shown here:
 
     ![Screenshot of a notebook with code to query a table.](./Images/load-spark.png)
 
