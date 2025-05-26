@@ -10,7 +10,8 @@ In this lab you will ingest data into the Fabric lakehouse and use PySpark to re
 
 This lab will take approximately 45 minutes to complete.
 
-> **Note**: You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> [!Note] 
+> You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace
 
