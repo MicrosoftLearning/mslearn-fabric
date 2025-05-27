@@ -12,15 +12,16 @@ Fabric also supports Apache Spark, enabling you to write and run code to process
 
 This lab will take approximately **45** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> [!Note] 
+> You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
+1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
@@ -41,54 +42,52 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
-1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named **Ingest Sales Data**.
-2. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
-3. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
-
+1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named `Ingest Sales Data`.
+1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
+1. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
-4. In the **Connect to data source** pane, enter the following settings for the connection to your data source:
+1. In the **Connect to data source** pane, enter the following settings for the connection to your data source:
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
     - **Connection**: Create new connection
     - **Connection name**: *Specify a unique name*
     - **Data gateway**: (none)
     - **Authentication kind**: Anonymous
-5. Select **Next**. Then ensure the following settings are selected:
+1. Select **Next**. Then ensure the following settings are selected:
     - **Relative URL**: *Leave blank*
     - **Request method**: GET
     - **Additional headers**: *Leave blank*
     - **Binary copy**: <u>Un</u>selected
     - **Request timeout**: *Leave blank*
     - **Max concurrent connections**: *Leave blank*
-6. Select **Next**, and wait for the data to be sampled and then ensure that the following settings are selected:
+1. Select **Next**, and wait for the data to be sampled and then ensure that the following settings are selected:
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: Selected
     - **Compression type**: None
-7. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-8. On the **Connect to data destination** page, set the following data destination options, and then select **Next**:
+1. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
+1. On the **Connect to data destination** page, set the following data destination options, and then select **Next**:
     - **Root folder**: Files
     - **Folder path name**: new_data
     - **File name**: sales.csv
     - **Copy behavior**: None
-10. Set the following file format options and then select **Next**:
+1. Set the following file format options and then select **Next**:
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **Add header to file**: Selected
     - **Compression type**: None
-11. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
+1. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
-12. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
-
-13. In the menu bar on the left, select your lakehouse.
-14. On the **Home** page, in the **Lakehouse explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
+1. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
+1. In the menu bar on the left, select your lakehouse.
+1. On the **Home** page, in the **Explorer** pane, expand **Files** and select the **new_data** folder to verify that the **sales.csv** file has been copied.
 
 ## Create a notebook
 
@@ -133,8 +132,8 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     > **Note**: Since this is the first time you've run any Spark code in this session, the Spark pool must be started. This means that the first cell can take a minute or so to complete.
 
-6. When the notebook run has completed, in the **Lakehouse explorer** pane on the left, in the **...** menu for **Tables** select **Refresh** and verify that a **sales** table has been created.
-7. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings. Then set the **Name** of the notebook to **Load Sales** and close the settings pane.
+6. When the notebook run has completed, in the **Explorer** pane on the left, in the **...** menu for **Tables** select **Refresh** and verify that a **sales** table has been created.
+7. In the notebook menu bar, use the ⚙️ **Settings** icon to view the notebook settings. Then set the **Name** of the notebook to `Load Sales` and close the settings pane.
 8. In the hub menu bar on the left, select your lakehouse.
 9. In the **Explorer** pane, refresh the view. Then expand **Tables**, and select the **sales** table to see a preview of the data it contains.
 
@@ -149,12 +148,12 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
 3. Select the **Delete data** activity, and in the pane below the design canvas, set the following properties:
     - **General**:
-        - **Name**: Delete old files
+        - **Name**: `Delete old files`
     - **Source**
         - **Connection**: *Your lakehouse*
         - **File path type**: Wildcard file path
         - **Folder path**: Files / **new_data**
-        - **Wildcard file name**: *.csv        
+        - **Wildcard file name**: `*.csv`        
         - **Recursively**: *Selected*
     - **Logging settings**:
         - **Enable logging**: *<u>Un</u>selected*
@@ -168,7 +167,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
 6. Select the **Notebook** activity, and then in the pane below the design canvas, set the following properties:
     - **General**:
-        - **Name**: Load Sales notebook
+        - **Name**: `Load Sales notebook`
     - **Settings**:
         - **Notebook**: Load Sales
         - **Base parameters**: *Add a new parameter with the following properties:*
