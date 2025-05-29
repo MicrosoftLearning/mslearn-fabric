@@ -58,7 +58,7 @@ In this task, you'll create a report by connecting to the published semantic mod
     ![Screenshot of the options available in the Preview features category.](./Images/power-bi-enable-tmdl.png)
 
 1. Select **Save as** choose the file type by selecting the arrow in the drop-down menu when you name the file.
-1. Select the **.*.pbip*** file extension, then choose a name for your report, and save in a folder you will remember.
+1. Select the **.pbip** file extension, then choose a name for your report, and save in a folder you will remember.
 
     ![Screenshot of the Save as selection with the drop-down menu expanded.](./Images/power-bi-save-file-types.png)
 
@@ -74,10 +74,10 @@ In this task, you'll create a report by connecting to the published semantic mod
 
 Let's look at how changes in Power BI Desktop are reflected in the .tmdl files.
 
-1. From your desktop, use File explorer to navigate to the folder where you saved the *.*.pbip** file.
+1. From your desktop, use File explorer to navigate to the folder where you saved the **.pbip** file.
 1. You should see the following items:
 
-    - YourReport.*.pbip* file
+    - YourReport.pbip file
     - YourReport.Report folder
     - YourReport.SemanticModel folder
     - .gitignore Git Ignore Source File
@@ -94,7 +94,7 @@ In this task, you'll add a new table because the semantic model doesn't have all
 
 1. The From Web dialog box will pop up once connected. Keep Basic radio button selected. Enter the following file path as the URL path.
 
-    `"C:\Users\Student\Downloads\16-reusable-assets\us-resident-population-estimates-2020.html"`
+    `C:\Users\Student\Downloads\16-reusable-assets\us-resident-population-estimates-2020.html`
 
 1. Select the box for the **HTML Tables > Table 2**, and then select **Transform Data** to proceed.
 
