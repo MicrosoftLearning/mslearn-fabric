@@ -6,7 +6,7 @@ lab:
 
 # Create reusable Power BI assets
 
-In this exercise you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files and shared semantic models. At the end, you'll explore the lineage view how these items relate to each other in the Power BI service.
+In this exercis,e you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files and shared semantic models. At the end, lineage view shows how these items relate to each other in the Power BI service.
 
    > Note: this exercise doesn't require a Fabric license and can be completed in a Power BI or Microsoft Fabric environment.
 
@@ -19,27 +19,6 @@ Before you can start this exercise, you need to open a web browser and enter the
 `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16b/16-reusable-assets.zip`
 
 Extract the folder to the **C:\Users\Student\Downloads\16-reusable-assets** folder.
-
-## Publish a report to the Power BI service
-
-In this task, you use an existing report to create a shared semantic model for reuse to develop other reports.
-
-1. From a web browser, navigate and sign in to the Fabric service: [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com)
-1. Navigate to the Power BI experience and create a new workspace with a unique name of your choice.
-
-    ![Screenshot of the Workspace pane highlighting the + New workspace button.](./Images/power-bi-new-workspace.png)
-
-1. In the top ribbon in your new workspace, select **Upload > Browse**.
-1. In the new File Explorer dialog box, navigate to and select the starter *.pbix* file and select **Open** to upload.
-1. Notice how you now have two different items in the workspace with the same name:
-
-    - Report
-    - Semantic model
-
-1. Open the report and notice the color theme used. *You'll change this in a later task.*
-1. You can now close your web browser.
-
-> Power BI *.pbix* files contain both the semantic model and report visuals. When you publish reports to the service, these items are separated. You'll see this separation again later.
 
 ## Create a new Power BI project
 
@@ -219,26 +198,23 @@ In this task, you'll create a template file so you can share a lightweight file 
 
 > Now you have a template with a consistent theme without any pre-loaded data.
 
-## Publish and explore your assets
+### Review final state
 
-In this task, you'll publish your Power BI Project file and look at the related items using Lineage view in the service.
+In the following screenshot, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **lineage view** to see how your new report depends on other data sources.
 
-> Important: We created a local DirectQuery model when we added the HTML data source. Published reports require a gateway to access the on-premises data, so you will receive an error. This doesn't affect the value of this task, but might be confusing.
+From left to right, the following items are visible:
 
-1. In your Power BI Project file, select **Publish**.
-1. **Save** your file, if prompted.
-1. **Don't upgrade** the *PBIR* version, if prompted.
-1. Select the workspace you created at the start of this exercise.
-1. Select **Open 'YourReport.*.pbip*' in Power BI** when you get the message that the file was published, but disconnected.
+- Data sources: 2 text/csv files and a SQL server connection.
+- 16-Starter-Sales Analysis semantic model, which is connected to the data sources.
+- 16-Starter-Sales Analysis report, which is connected to the 16-Starter-Sales Analysis semantic model.
+- My new report semantic model, which is connected to the 16-Starter-Sales Analysis semantic model.
+- My new report report, which is connected to the My new report semantic model.
 
-    ![Screenshot of the message that the file was published, but disconnected.](./Images/power-bi-published-disconnected-message.png)
+> When semantic models relate to other semantic models, it's known as **chaining**. In this lab, the starter semantic model is chained to the newly created semantic model, enabling its reuse for a specialized purpose.
 
-1. Once you are in your workspace, you can see the previous semantic model and report, and your new semantic model and report.
-1. In the right corner below Workspace settings, select **Lineage view** to see how your new report depends on other data sources.
+![Screenshot of the lineage view with a database and two text files connecting to a single semantic model from our starter file. That same semantic model connects to the starter file report and has a new semantic model connected to the new report.](./Images/power-bi-lineage-view.png)
 
-    ![Screenshot of the lineage view with a database and two text files connecting to a single semantic model from our starter file. That same semantic model connects to the starter file report and has a new semantic model connected to the new report.](./Images/power-bi-lineage-view.png)
 
-> When semantic models relate to other semantic models, it's known as chaining. In this lab, the starter semantic model is chained to the newly created semantic model, enabling its reuse for a specialized purpose.
 
 ## Clean up
 
