@@ -66,15 +66,17 @@ Fabric items haven't been created in your workspaces yet. Next, create a lakehou
 ## Deploy content between stages
 
 Deploy the lakehouse from the **Development** stage to the **Test** and **Production** stages.
-1. Select the **Deploy** button in the **Development** stage of the pipeline to copy the lakehouse in its current state to the text stage. 
-2. In the **Deploy to next stage** window, select **Deploy**.
-3. There is an orange X between the Test and Production stages. Select the downward facing arrow below the orange X. The lakehouse exists in the Development and Test stages but not yet in the Production stage.
-4. In the **Test** stage, select **Deploy**.
-5. In the **Deploy to next stage** window, select **Deploy**. The green check mark between the stages indicates that all stages in sync and contain the same content.
-6. Using deployment pipelines to deploy between stages also updates the content in the workspaces corresponding to the deployment stage. Let's confirm.
-7. In the menu bar on the left, select **Workspaces**.
-8. Select the **Test** workspace. The lakehouse was copied there.
-9. Open the **Production** workspace from the **Workspaces** icon on the left menu. The lakehouse was copied to the Production workspace too.
+1. Select the **Test** stage in the deployment pipeline canvas.
+1. Under the deployment pipeline canvas, select the checkbox next to the Lakehouse item. Then select the **Deploy** button to copy the lakehouse in its current state to the **Test** stage.
+1. In the **Deploy to next stage** window that appears, select **Deploy**.
+ There is now an X in a circle in the Production stage in the deployment pipeline canvas. The lakehouse exists in the Development and Test stages but not yet in the Production stage.
+1. Select the **Production** stage in the deployment canvas.
+1. Under the deployment pipeline canvas, select the checkbox next to the Lakehouse item. Then select the **Deploy** button to copy the lakehouse in its current state to the **Production** stage.
+1. In the **Deploy to next stage** window that appears, select **Deploy**. The green check marks between the stages indicates that all stages in sync and contain the same content.
+1. Using deployment pipelines to deploy between stages also updates the content in the workspaces corresponding to the deployment stage. Let's confirm.
+1. In the menu bar on the left, select **Workspaces**.
+1. Select the **Test** workspace. The lakehouse was copied there.
+1. Open the **Production** workspace from the **Workspaces** icon on the left menu. The lakehouse was copied to the Production workspace too.
 
 ## Clean up
 
