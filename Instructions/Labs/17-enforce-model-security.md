@@ -17,7 +17,7 @@ In this exercise, you learn how to:
 
 This lab takes approximately **45** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> **Note**: You need access to a Power BI environment to complete this exercise.
 
 ## Get started
 
