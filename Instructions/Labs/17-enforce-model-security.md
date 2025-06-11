@@ -1,7 +1,7 @@
 ---
 lab:
     title: 'Enforce semantic model security'
-    module: 'Design and build tabular models'
+    module: 'Enforce semantic model security'
 ---
 
 # Enforce semantic model security
@@ -33,7 +33,7 @@ In this exercise, you will prepare your environment.
 
 ### Sign in to the Power BI service
 
-In this task, you will sign in to the Power BI service, start a trial license, and create a workspace.
+In this task, you will sign in to the Power BI service, start a trial license, and access "My workspace."
 
 1. In a web browser, go to `https://app.powerbi.com/`.
 
@@ -43,19 +43,9 @@ In this task, you will sign in to the Power BI service, start a trial license, a
 
     *Tip: The Power BI web browser experience is known as the **Power BI service**.*
 
-### Create a workspace
+## Create static roles
 
-In this task, you will create a workspace.
-
-1. In the Power BI service, to create a workspace, in the **Navigation** pane (located at the left), select **Workspaces**, and then select **+ New workspace**.
-
-2. In the **Create a workspace** pane (located at the right), in the **Name** box, enter a name for the workspace.
-
-    *The workspace name must be unique within the tenant.*
-
-3. Select **Apply**.
-
-    *Once created, the workspace is opened. In a later exercise, you will publish a semantic model to this workspace.*
+In this exercise, you will create and validate static roles, and then see how you would map security principals to the semantic model roles.
 
 ### Review the data model
 
@@ -78,10 +68,6 @@ In this task, you will review the data model.
 4. Notice that the table includes a **Region** column.
 
     *The **Region** column stores the Adventure Works sales regions. At this organization, salespeople are only allowed to see data related to their assigned sales region. In this lab, you will implement two different row-level security techniques to enforce data permissions.*
-
-## Create static roles
-
-In this exercise, you will create and validate static roles, and then see how you would map security principals to the semantic model roles.
 
 ### Create static roles
 
@@ -166,7 +152,7 @@ In this task, you will publish the report.
 
     ![](Images/enforce-model-security-image28.png)
 
-3. In the **Publish to Power BI** window, select your workspace, and then select **Select**.
+3. In the **Publish to Power BI** window, select **"My workspace"** and then **Select**.
 
     ![](Images/enforce-model-security-image29.png)
 
@@ -174,11 +160,11 @@ In this task, you will publish the report.
 
     ![](Images/enforce-model-security-image30.png)
 
-### Configure row-level security (*optional*)
+#### Configure row-level security (optional)
 
 In this task, you will see how to configure row-level security in the Power BI service.
 
-This task relies on the existence of a **Salespeople_Australia** security group in the tenant you are working in. This security group does NOT automatically exist in the tenant. If you have permissions on your tenant, you can follow the steps below. If you are using a tenant provided to you in training, you will not have the appropriate permissions to create security groups. Please read through the tasks, but note that you will not be able to complete them in the absence of the existence of the security group. **After reading through, proceed to the Clean Up task.**
+> Note: This task relies on the existence of a **Salespeople_Australia** security group in the tenant you are working in. This security group does NOT automatically exist in the tenant. If you have permissions on your tenant, you can follow the steps below. If you are using a tenant provided to you in training, you will not have the appropriate permissions to create security groups. Please read through the tasks, but note that you will not be able to complete them in the absence of the existence of the security group. **After reading through, proceed to the Clean Up task.**
 
 1. Switch to the Power BI service (web browser).
 
@@ -218,7 +204,7 @@ This task relies on the existence of a **Salespeople_Australia** security group 
 
     *In the next exercise, you will create a dynamic role that is data-driven. This design approach can help address these disadvantages.*
 
-8. To return to the workspace landing page, in the **Navigation** pane, select the workspace.
+8. To return to the workspace landing page, in the **Navigation** pane, select your workspace.
 
 ### Clean up the solution
 
@@ -440,11 +426,11 @@ In this task, you will validate the dynamic role.
 
 In this task, you will finalize the design by publishing the report and mapping a security group to the role.
 
-*The steps in this task are deliberately brief. For full step details, refer to the task steps of the previous exercise.*
+*The steps in this task are deliberately brief. For full step details, refer to the task steps of the earlier exercise.*
 
 1. Save the Power BI Desktop file.
 
-2. Publish the report to the workspace you created at the beginning of the lab.
+2. Publish the report to **"My workspace."**
 
 3. Close Power BI Desktop.
 
