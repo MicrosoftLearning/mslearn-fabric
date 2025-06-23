@@ -22,31 +22,24 @@ Extract the folder to the **C:\Users\Student\Downloads\16-reusable-assets** fold
 
 ## Create a new Power BI project
 
-In this task, you'll create a report by connecting to the published semantic model and save it as a Power BI Project file (*.pbip*). Power BI Project files store the report and semantic model details in flat files that work with source control. You might use Visual Studio Code to modify these files or Git to track changes.
+In this task, you'll create a report as a Power BI Project file (*.pbip*). Power BI Project files store the report and semantic model details in flat files that work with source control. You might use Visual Studio Code to modify these files or Git to track changes.
 
 1. From your desktop, open the Power BI Desktop app and create a blank report.
 
-    > When prompted, sign in with the same account used in the Fabric service.
-
 1. Select **File** > **Options and settings** > **Options** > **Preview features** and select the **Store semantic model using TMDL format** option and **OK**.
 
-    > This enables the option to save the semantic model using Tabular Model Definition Language (TMDL), which is currently a preview feature.
-
-1. If prompted to restart Power BI Desktop, do so before continuing the exercise.
+    > This enables the option to save the semantic model using Tabular Model Definition Language (TMDL), which is currently a preview feature. If prompted to restart Power BI Desktop, do so before continuing the exercise.
 
     ![Screenshot of the options available in the Preview features category.](./Images/power-bi-enable-tmdl.png)
 
-1. Select **Save as** choose the file type by selecting the arrow in the drop-down menu when you name the file.
+1. Select **Save as** and choose the file type by selecting the arrow in the drop-down menu when you name the file.
+
 1. Select the **.pbip** file extension, then choose a name for your report, and save in a folder you will remember.
 
     ![Screenshot of the Save as selection with the drop-down menu expanded.](./Images/power-bi-save-file-types.png)
 
 1. Notice at the top of the Power BI Desktop window that your report name has **(Power BI Project)** next to it.
-1. In the Home ribbon, navigate to **Get data > Power BI semantic models** to connect to the published semantic model.
 
-    ![Screenshot of the Power BI semantic model connector in the Get data section.](./Images/power-bi-connect-semantic-models.png)
-
-1. Once connected, you should see 9 tables in the Data pane.
 1. **Save** your file again.
 
 ### Review Power BI Project file details
@@ -66,12 +59,8 @@ Let's look at how changes in Power BI Desktop are reflected in the .tmdl files.
 In this task, you'll add a new table because the semantic model doesn't have all of the data you need.
 
 1. In Power BI Desktop, navigate to **Get data > Web** to add the new data.
-1. Notice the message that a DirectQuery connection is required. Choose **Add a local model** to proceed.
-1. A new dialog box will show a database and tables for you to choose. Select all and **Submit**.
 
-    > The semantic model is being treated as an SQL Server Analysis Server database.
-
-1. The From Web dialog box will pop up once connected. Keep Basic radio button selected. Enter the following file path as the URL path.
+1. The From Web dialog box will pop up once connected. Keep the **Basic** radio button selected. Enter the following file path as the URL path.
 
     `C:\Users\Student\Downloads\16-reusable-assets\us-resident-population-estimates-2020.html`
 
@@ -88,7 +77,7 @@ In this task, you'll add a new table because the semantic model doesn't have all
 1. **Save** your file.
 1. If prompted, **Don't upgrade** to the Power BI Report enhanced format.
 
-### Review Power BI Project file details
+### Create a relationship
 
 In this task, we'll make changes to the report in Power BI Desktop and see the changes in the flat .tmdl files.
 
@@ -200,7 +189,7 @@ In this task, you'll create a template file so you can share a lightweight file 
 
 ### Review final state
 
-In the following screenshot, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **lineage view** to see how your new report depends on other data sources.
+In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this stateu, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
 
 From left to right, the following items are visible:
 
