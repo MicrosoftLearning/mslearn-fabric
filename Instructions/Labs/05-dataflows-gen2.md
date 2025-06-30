@@ -39,7 +39,7 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 Now that you have a lakehouse, you need to ingest some data into it. One way to do this is to define a dataflow that encapsulates an *extract, transform, and load* (ETL) process.
 
-1. In the home page for your workspace, select **Get data** > **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
+1. In the home page for your lakehouse, select **Get data** > **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
 
  ![New dataflow.](./Images/new-dataflow.png)
 
@@ -74,7 +74,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
 
-   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
+   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a default destination is already set, you can remove it and add a new one.
 
 2. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
@@ -93,13 +93,13 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
    ![Query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
-6. Select **Publish** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
+6. On the toolbar ribbon, select the **Home** tab. Then select **Save & run** and wait for the **Dataflow 1** dataflow to be created in your workspace.
 
 ## Add a dataflow to a pipeline
 
 You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created in a few different experiences, including Data Factory experience.
 
-1. From your Fabric-enabled workspace, make sure you're still in the **Data Engineering** experience. Select **+ New item** > **Data pipeline**, then when prompted, create a new pipeline named **Load data**.
+1. From your Fabric-enabled workspace, select **+ New item** > **Data pipeline**, then when prompted, create a new pipeline named **Load data**.
 
    The pipeline editor opens.
 
@@ -107,7 +107,7 @@ You can include a dataflow as an activity in a pipeline. Pipelines are used to o
 
    > **Tip**: If the Copy Data wizard opens automatically, close it!
 
-2. Select **Add pipeline activity**, and add a **Dataflow** activity to the pipeline.
+2. Select **Pipeline activity**, and add a **Dataflow** activity to the pipeline.
 
 3. With the new **Dataflow1** activity selected, on the **Settings** tab, in the **Dataflow** drop-down list, select **Dataflow 1** (the data flow you created previously)
 
