@@ -22,9 +22,9 @@ Extract the folder to the **C:\Users\Student\Downloads\16-reusable-assets** fold
 
 ## Create a new Power BI project
 
-In this task, you'll create a report as a Power BI Project file (*.pbip*). Power BI Project files store the report and semantic model details in flat files that work with source control. You might use Visual Studio Code to modify these files or Git to track changes.
+In this task, you'll save a report as a Power BI Project file (*.pbip*). Power BI Project files store the report and semantic model details in flat files that work with source control. You might use Visual Studio Code to modify these files or Git to track changes.
 
-1. From your desktop, open the Power BI Desktop app and create a blank report.
+1. Open the **16-Starter-Sales Analysis.pbix** file within the **16-reusable-assets** folder.
 
 1. Select **File** > **Options and settings** > **Options** > **Preview features** and select the **Store semantic model using TMDL format** option and **OK**.
 
