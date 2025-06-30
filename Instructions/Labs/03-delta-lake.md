@@ -67,6 +67,7 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
     ```
 
 1. Click anywhere in the notebook outside of the cell to stop editing it.
+1. In the **Explorer** pane, select **Add data items**, and then select **Existing data sources**. Connect to the lakehouse you created previously.
 1. Add a new code cell, and add the following code to read the products data into a DataFrame using a defined schema:
 
     ```python
