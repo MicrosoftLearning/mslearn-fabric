@@ -10,7 +10,7 @@ In Microsoft Fabric, a data warehouse provides a relational database for large-s
 
 This lab will take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) to complete this exercise.
+> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
 
 ## Create a workspace
 
@@ -66,7 +66,7 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 1. We're aiming to analyze sales revenue by month. Enter the following prompt and send it.
 
-```
+```plaintext
 /generate-sql Calculate monthly sales revenue
 ```
 
@@ -82,7 +82,7 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 1. Create a **New SQL Query**, and ask a follow-up question to also include the month name and sales region in the results:
 
-```
+```plaintext
 /generate-sql Retrieves sales revenue data grouped by year, month, month name and sales region
 ```
 
@@ -90,15 +90,17 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 1. Let's create a view from this query by asking Copilot the following question:
 
-```
+```plaintext
 /generate-sql Create a view in the dbo schema that shows sales revenue data grouped by year, month, month name and sales region
 ```
 
-1. Select the **Insert Code** icon and ▷ **Run** the query. Review the output it generates. The query does not execute successfully because the SQL statement includes the database name as a prefix, which is not allowed in the data warehouse when defining a view.
+1. Select the **Insert Code** icon and ▷ **Run** the query. Review the output it generates. 
 
-![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
+The query does not execute successfully because the SQL statement includes the database name as a prefix, which is not allowed in the data warehouse when defining a view.
 
 1. Select the **Fix query errors** option. Observe how Copilot makes corrections to the query.
+
+![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
 
 Here's an example of the query it corrected - notice the `Auto-Fix` comments.
 
@@ -124,7 +126,7 @@ GROUP BY
 
 1. Enter another prompt to Retrieve a detailed product listing, organized by category. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
 
-```
+```plaintext
 /generate-sql Retrieve a detailed product listing, organized by category. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
 ```
 
