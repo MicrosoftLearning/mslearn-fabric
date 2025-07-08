@@ -22,32 +22,35 @@ This lab will take approximately 30 minutes to complete.
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with Fabric enabled.
+Before working with data in Fabric, create a workspace with Fabric enabled. A workspace in Microsoft Fabric serves as a collaborative environment where you can organize and manage all your data engineering artifacts including lakehouses, notebooks, and datasets. Think of it as a project folder that contains all the resources needed for your data analysis.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
+   
+   > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
+
 4. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
-Now that you have a workspace, it's time to create a lakehouse into which you'll ingest data.
+Now that you have a workspace, it's time to create a lakehouse into which you'll ingest data. A lakehouse combines the benefits of a data lake (storing raw data in various formats) with a data warehouse (structured data optimized for analytics). It will serve as both the storage location for our raw population data and the target for our cleaned, transformed dataset.
 
 1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
-    ![Screenshot of the create button in Fabric.](./Images/copilot-fabric-notebook-create.png)
+![Screenshot of the create button in Fabric.](./Images/copilot-fabric-notebook-create.png)
 
-    After a minute or so, a new empty lakehouse will be created.
+After a minute or so, a new empty lakehouse will be created.
 
-    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
+![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
 ## Create a notebook
 
-You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
+You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code, visualize results, and document your data analysis process. They're ideal for exploratory data analysis and iterative development, allowing you to see the results of each step immediately.
 
 1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
 
@@ -55,15 +58,17 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 
     ![Screenshot of a new notebook.](./Images/new-notebook.png)
 
-1. Fabric assigns a name to each notebook you create, such as Notebook 1, Notebook 2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
+2. Fabric assigns a name to each notebook you create, such as Notebook 1, Notebook 2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
 
 ![Screenshot of a new notebook, with the ability to rename.](./Images/copilot-fabric-notebook-rename.png)
 
-1. Select the first cell (which is currently a code cell), and then in the top-right tool bar, use the **M↓** button to convert it to a markdown cell. The text contained in the cell will then be displayed as formatted text.
+3. Select the first cell (which is currently a code cell), and then in the top-right tool bar, use the **M↓** button to convert it to a markdown cell. The text contained in the cell will then be displayed as formatted text.
+
+   > **Why use markdown cells**: Markdown cells allow you to document your analysis with formatted text, making your notebook more readable and easier to understand for others (or yourself when you return to it later).
 
 ![Screenshot of a notebook, changing the first cell to become markdown](./Images/copilot-fabric-notebook-markdown.png)
 
-1. Use the 🖉 (Edit) button to switch the cell to editing mode, then modify the markdown as shown below.
+4. Use the 🖉 (Edit) button to switch the cell to editing mode, then modify the markdown as shown below.
 
     ```md
    # Explore Eurostat population data.
@@ -76,18 +81,26 @@ When you have finished, click anywhere in the notebook outside of the cell to st
 
 ## Attach the lakehouse to your notebook
 
+To work with data in your lakehouse from the notebook, you need to attach the lakehouse to your notebook. This connection allows your notebook to read from and write to the lakehouse storage, creating a seamless integration between your analysis environment and your data storage.
+
 1. Select your new workspace from the left bar. You will see a list of items contained in the workspace including your lakehouse and notebook.
 
-1. Select the lakehouse to display the Explorer pane.
+2. Select the lakehouse to display the Explorer pane.
 
-1. From the top menu, select **Open notebook**, **Existing notebook**, and then open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, and expand the Files list. Notice there are no table or files listed yet next to the notebook editor, like this:
+3. From the top menu, select **Open notebook**, **Existing notebook**, and then open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, and expand the Files list. Notice there are no table or files listed yet next to the notebook editor, like this:
 
     ![Screen picture of csv files in Explorer view.](Images/copilot-fabric-notebook-step-2-lakehouse-attached.png)
+
+   > **What you see**: The Explorer pane on the left shows your lakehouse structure. Currently, it's empty, but as we load and process data, you'll see files appearing in the **Files** section and tables in the **Tables** section.
 
 
 ## Load data
 
+Now we'll use Copilot to help us download data from the Eurostat API. Instead of writing Python code from scratch, we'll describe what we want to do in natural language, and Copilot will generate the appropriate code. This demonstrates one of the key benefits of AI-assisted coding: you can focus on the business logic rather than the technical implementation details.
+
 1. Create a new cell in your notebook and copy the following instruction into it. To indicate that we want Copilot to generate code, use `%%code` as the first instruction in the cell. 
+
+   > **About the `%%code` magic command**: This special instruction tells Copilot that you want it to generate Python code based on your natural language description. It's one of several "magic commands" that help you interact with Copilot more effectively.
 
 ```plaintext
 %%code
@@ -99,11 +112,14 @@ https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/proj_23np$defaultv
 Then write the file to the default lakehouse into a folder named temp. Create the folder if it doesn't exist yet.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+2. Select ▷ **Run cell** to the left of the cell to run the code.
 
 Copilot generates the following code, which might differ slightly depending on your environment and the latest updates to Copilot.
 
+
 ![Screenshot of the code generated by copilot.](Images/copilot-fabric-notebook-step-3-code-magic.png)
+
+> **How Copilot works**: Notice how Copilot translates your natural language request into working Python code. It understands that you need to make an HTTP request, handle the file system, and save the data to a specific location in your lakehouse.
 
 Here's the full code for your convencience, in case you experience exceptions during execution:
 
@@ -134,13 +150,15 @@ with open(file_path, "wb") as file:
 print(f"File downloaded and saved to {file_path}")
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. The file should be downloaded and saved in the temporary folder of your Lakehouse.
+3. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. The file should be downloaded and saved in the temporary folder of your Lakehouse.
 
 > **Note**: you might need to refresh your lakehouse Files by selecting the three dots ...
 
 ![Screenshot of the a temp file created in the lakehouse.](Images/copilot-fabric-notebook-step-4-lakehouse-refreshed.png)
 
-1. Now, create a new cell in your notebook and copy the following instruction into it.
+4. Now, create a new cell in your notebook and copy the following instruction into it.
+
+   > **Next step**: Now that we have the raw data file in our lakehouse, we need to load it into a Spark DataFrame so we can analyze and transform it. A DataFrame is a distributed collection of data organized into named columns, similar to a table in a database or a spreadsheet.
 
 ```plaintext
 %%code
@@ -152,7 +170,7 @@ The fields are separated with a tab.
 Show the contents of the DataFrame using display method.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. The dataframe should contain the data from the TSV file. Here's an example of what the generated code might look like:
+5. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. The dataframe should contain the data from the TSV file. Here's an example of what the generated code might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -177,9 +195,13 @@ Here's an example of what the output might look like:
 |                                          ... |       ...  |       ...  |   ...  |   5081250  |
 |                         A,BSL,F,TOTAL,PER,CY |    463622  |    476907  |   ...  |    504781  |
 
+> **Understanding the data structure**: Notice that the first column contains multiple values separated by commas (frequency, projection type, sex, age, unit, and geographic location), while the remaining columns represent years with population values. This structure is common in statistical datasets but needs to be cleaned for effective analysis.
+
 ## Transform data: split fields
 
 Let's now go ahead and transform the data. We need to make sure the first field is split into separate columns. Additionally, we also need to make sure to work with correct data types and apply filtering. 
+
+> **Why we need to split the fields**: The first column contains multiple pieces of information concatenated together (frequency, projection type, sex, age group, unit, and geographic code). For proper analysis, each of these should be in its own column. This process is called "normalizing" the data structure.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
@@ -189,7 +211,7 @@ Let's now go ahead and transform the data. We need to make sure the first field 
 Split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -208,7 +230,7 @@ spark_df = spark_df.withColumn("freq", split(col("freq,projection,sex,age,unit,g
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code. You might need to scroll the table to the right to see the new fields added to the table.
+3. Select ▷ **Run cell** to the left of the cell to run the code. You might need to scroll the table to the right to see the new fields added to the table.
 
 ![Screenshot of the resulting table with additional fields.](Images/copilot-fabric-notebook-split-fields.png)
 
@@ -216,7 +238,9 @@ display(spark_df)
 
 There are some fields in the table that have no real added value (there is only one distinct value). As a best practice, we need to clean them up and remove them from the dataset.
 
-1. Create a new cell in your notebook and copy the following instruction into it.
+> **Data cleaning principle**: Columns with only one unique value don't provide analytical value and can make your dataset unnecessarily complex. Removing them simplifies the data structure and improves performance. In this case, 'freq' (frequency), 'age' (all records show TOTAL), and 'unit' (all records show PER for persons) are constant across all rows.
+
+4. Create a new cell in your notebook and copy the following instruction into it.
 
 ```plaintext
 %%code
@@ -224,7 +248,7 @@ There are some fields in the table that have no real added value (there is only 
 Remove the fields 'freq', 'age', 'unit'.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+5. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -236,9 +260,11 @@ spark_df = spark_df.drop("freq", "age", "unit")
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+6. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ## Transform data: reposition fields
+
+Organizing your data with the most important identifying columns first makes it easier to read and understand. In data analysis, it's a common practice to position categorical/dimensional columns (like projection type, sex, and geographic location) before the numerical/measure columns (the population values by year).
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
@@ -248,7 +274,7 @@ display(spark_df)
 The fields 'projection', 'sex', 'geo' should be positioned first.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -261,9 +287,13 @@ spark_df = spark_df.select(new_column_order)
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+3. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ## Transform data: replace values
+
+The projection field currently contains cryptic codes that aren't user-friendly. For better readability and analysis, we'll replace these codes with descriptive names that clearly explain what each projection scenario represents.
+
+> **Understanding projection scenarios**: Statistical organizations often use different scenarios to model future population changes. The baseline represents the most likely scenario, while sensitivity tests show how population might change under different assumptions about fertility rates, mortality rates, and migration patterns.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
@@ -279,7 +309,7 @@ The 'projection' field contains codes that should be replaced with the following
     _'NMIGR' -> 'Sensitivity test: no migration'.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -300,13 +330,15 @@ spark_df = spark_df.withColumn("projection",
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+3. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ![Screenshot of the resulting table with project field values replaced.](Images/copilot-fabric-notebook-replace-values.png)
 
 ## Transform data: filter data
 
 The population projections table contains 2 rows for countries that do not exist: EU27_2020 (*totals for European Union - 27 countries*) and EA20 (*Euro area - 20 countries*). We need to remove these 2 rows, because we want to keep the data only at the lowest grain.
+
+> **Data granularity principle**: For detailed analysis, it's important to work with data at the most granular level possible. Aggregated values (like EU totals) can always be calculated when needed, but including them in your base dataset can lead to double-counting or confusion in analysis.
 
 ![Screenshot of the table with geo EA20 and EU2_2020 highlighted.](Images/copilot-fabric-notebook-europe.png)
 
@@ -318,7 +350,7 @@ The population projections table contains 2 rows for countries that do not exist
 Filter the 'geo' field and remove values 'EA20' and 'EU27_2020' (these are not countries).
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -330,7 +362,7 @@ spark_df = spark_df.filter((spark_df['geo'] != 'EA20') & (spark_df['geo'] != 'EU
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+3. Select ▷ **Run cell** to the left of the cell to run the code.
 
 The population project table also contains a field 'sex' which contains the following distinct values:
 
@@ -340,7 +372,9 @@ The population project table also contains a field 'sex' which contains the foll
 
 Again, we need to remove the totals, so we keep the data at the lowest level of detail.
 
-1. Create a new cell in your notebook and copy the following instruction into it.
+> **Why remove totals**: Similar to the geographic aggregations, we want to keep only the individual sex categories (Male and Female) and exclude the total values. This allows for more flexible analysis - you can always sum Male and Female values to get totals, but you can't split totals back into components.
+
+4. Create a new cell in your notebook and copy the following instruction into it.
 
 ```plaintext
 %%code
@@ -348,7 +382,7 @@ Again, we need to remove the totals, so we keep the data at the lowest level of 
 Filter the 'sex' field and remove 'T' (these are totals).
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+5. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -360,11 +394,13 @@ spark_df = spark_df.filter(spark_df['sex'] != 'T')
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+6. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ## Transform data: trim spaces
 
 Some field names in the population projection table have a space at the end. We need to apply a trim operation to the names of these fields.
+
+> **Data quality concern**: Extra spaces in column names can cause issues when querying data or creating visualizations. It's a common data quality issue, especially when data comes from external sources or is exported from other systems. Trimming spaces ensures consistency and prevents hard-to-debug issues later.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
@@ -374,7 +410,7 @@ Some field names in the population projection table have a space at the end. We 
 Strip spaces from all field names in the dataframe.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -388,11 +424,13 @@ spark_df = spark_df.select([col(column).alias(column.strip()) for column in spar
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+3. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ## Transform data: data type conversion
 
 If we want to properly analyze the data later (using Power BI or SQL for example), we need to make sure the data types (like numbers and datetime) are set correctly. 
+
+> **Importance of correct data types**: When data is loaded from text files, all columns are initially treated as strings. Converting year columns to integers enables mathematical operations (like calculations and aggregations) and ensures proper sorting. This step is crucial for downstream analytics and visualization tools.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
@@ -402,7 +440,7 @@ If we want to properly analyze the data later (using Power BI or SQL for example
 Convert the data type of all the year fields to integer.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
+2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -417,7 +455,7 @@ spark_df = spark_df.select(*spark_df.columns[:3], *year_columns)
 display(spark_df)
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code. Here's an example of what the output might look like (columns and rows removed for brevity):
+3. Select ▷ **Run cell** to the left of the cell to run the code. Here's an example of what the output might look like (columns and rows removed for brevity):
 
 |          projection|sex|geo|    2022|    2023|     ...|    2100|
 |--------------------|---|---|--------|--------|--------|--------| 
@@ -434,6 +472,8 @@ display(spark_df)
 
 Next, we want to save the transformed data to our lakehouse. 
 
+> **Why save the transformed data**: After all this data cleaning and transformation work, we want to persist the results. Saving the data as a table in the lakehouse allows us and others to use this clean dataset for various analytics scenarios without having to repeat the transformation process. It also enables other tools in the Microsoft Fabric ecosystem (like Power BI, SQL Analytics Endpoint, and Data Factory) to work with this data.
+
 1. Create a new cell in your notebook and copy the following instruction into it.
 
 ```plaintext
@@ -442,7 +482,7 @@ Next, we want to save the transformed data to our lakehouse.
 Save the dataframe as a new table named 'Population' in the default lakehouse.
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code. Copilot generates code, which might differ slightly depending on your environment and the latest updates to Copilot.
+2. Select ▷ **Run cell** to the left of the cell to run the code. Copilot generates code, which might differ slightly depending on your environment and the latest updates to Copilot.
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -450,25 +490,31 @@ Save the dataframe as a new table named 'Population' in the default lakehouse.
 spark_df.write.format("delta").saveAsTable("Population")
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code.
+3. Select ▷ **Run cell** to the left of the cell to run the code.
 
 ## Validation: ask questions
+
+Now let's explore the power of Copilot for data analysis. Instead of writing complex SQL queries or visualization code from scratch, we can ask Copilot natural language questions about our data and it will generate the appropriate code to answer them.
 
 1. To validate that the data is saved correctly, expand the tables in your Lakehouse and check the contents (you might need to refresh the Tables folder by selecting the three dots ...). 
 
 ![Screenshot of lakehouse now containing a new table named 'Population'.](Images/copilot-fabric-notebook-step-5-lakehouse-refreshed.png)
 
-1. From the Home ribbon, select the Copilot option.
+2. From the Home ribbon, select the Copilot option.
+
+   > **Copilot chat interface**: The Copilot panel provides a conversational interface where you can ask questions about your data in natural language. It can generate code for analysis, create visualizations, and help you explore patterns in your dataset.
 
 ![Screenshot of notebook with Copilot panel open.](Images/copilot-fabric-notebook-step-6-copilot-pane.png)
 
-1. Enter the following prompt:
+3. Enter the following prompt:
 
 ```plaintext
 What are the projected population trends for geo BE from 2020 to 2050 as a line chart visualization. Use only existing columns from the population table. Perform the query using SQL.
 ```
 
-1. Observe the output generated, which might differ slightly depending on your environment and the latest updates to Copilot. Copy the code fragment into a new cell.
+   > **What this demonstrates**: This prompt showcases Copilot's ability to understand context (our Population table), generate SQL queries, and create visualizations. It's particularly powerful because it combines data querying with visualization in a single request.
+
+4. Observe the output generated, which might differ slightly depending on your environment and the latest updates to Copilot. Copy the code fragment into a new cell.
 
 ```python
 #### ATTENTION: AI-generated code can include errors or operations you didn't intend. Review the code in this cell carefully before running it.
@@ -506,11 +552,13 @@ fig.update_layout(
 fig.show()
 ```
 
-1. Select ▷ **Run cell** to the left of the cell to run the code. 
+5. Select ▷ **Run cell** to the left of the cell to run the code. 
 
 Observe the chart it created:
 
 ![Screenshot of notebook with line chart created.](Images/copilot-fabric-notebook-step-7-line-chart.png)
+
+> **What you've accomplished**: You've successfully used Copilot to generate a visualization that shows population trends for Belgium over time. This demonstrates the end-to-end data engineering workflow: data ingestion, transformation, storage, and analysis - all with AI assistance.
 
 ## Clean up resources
 
@@ -519,6 +567,6 @@ In this exercise, you’ve learned how to use Copilot and Spark to work with dat
 If you’ve finished exploring your data, you can end the Spark session and delete the workspace that you created for this exercise.
 
 1.	On the notebook menu, select **Stop session** to end the Spark session.
-1.	In the bar on the left, select the icon for your workspace to view all of the items it contains.
-1.	Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
-1.	Select **Delete** to delete the workspace.
+2.	In the bar on the left, select the icon for your workspace to view all of the items it contains.
+3.	Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
+4.	Select **Delete** to delete the workspace.
