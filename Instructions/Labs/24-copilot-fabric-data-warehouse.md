@@ -34,7 +34,9 @@ In this exercise, you are a data analyst at a retail company that wants to bette
 Before working with data in Fabric, create a workspace with Fabric enabled. A workspace in Microsoft Fabric serves as a collaborative environment where you can organize and manage all your data engineering artifacts including lakehouses, notebooks, and datasets. Think of it as a project folder that contains all the resources needed for your data analysis.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
+
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
    
    > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
@@ -79,13 +81,13 @@ Since the data warehouse is a relational database, you can use SQL to query its 
 
 2. From the Home ribbon, select the Copilot option. This opens the Copilot assistant pane where you can interact with AI to generate queries.
 
-![Screenshot of Copilot pane opened in the warehouse.](./Images/copilot-fabric-data-warehouse-start.png)
+    ![Screenshot of Copilot pane opened in the warehouse.](./Images/copilot-fabric-data-warehouse-start.png)
 
 3. Let’s start by exploring what Copilot can do. Click on the suggestion labeled `What can Copilot do?` and send it as your prompt.
 
 Read the output and observe Copilot is currently in preview and can help with brainstorming, generating SQL queries, explain and fix queries, etc.
 
-![Screenshot of Copilot pane with help in the warehouse.](./Images/copilot-fabric-data-warehouse-pane.png)
+    ![Screenshot of Copilot pane with help in the warehouse.](./Images/copilot-fabric-data-warehouse-pane.png)
 
 4. We're aiming to analyze sales revenue by month. This is a common business requirement - understanding revenue trends over time helps identify seasonal patterns, growth trends, and performance metrics. Enter the following prompt and send it.
 
@@ -97,11 +99,11 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 6. Select the **Insert Code** icon located at the top-right corner of the query. This transfers the generated SQL from the Copilot pane into your SQL editor, where you can execute it.
 
-![Screenshot of Copilot pane with first sql query.](./Images/copilot-fabric-data-warehouse-sql-1.png)
+    ![Screenshot of Copilot pane with first sql query.](./Images/copilot-fabric-data-warehouse-sql-1.png)
 
 7. Execute the query by selecting the ▷ **Run** option above the query and observe the output. You should see monthly revenue totals that demonstrate how your sales data is aggregated across time periods.
 
-![Screenshot of sql query results.](./Images/copilot-fabric-data-warehouse-sql-1-results.png)
+    ![Screenshot of sql query results.](./Images/copilot-fabric-data-warehouse-sql-1-results.png)
 
 8. Create a **New SQL Query**, and ask a follow-up question to also include the month name and sales region in the results. This demonstrates how you can iteratively refine your queries with Copilot - building on previous requests to create more detailed analysis:
 
@@ -123,7 +125,7 @@ The query does not execute successfully because the SQL statement includes the d
 
 12. Select the **Fix query errors** option. Observe how Copilot makes corrections to the query. This demonstrates one of Copilot's powerful features - not only can it generate queries, but it can also troubleshoot and fix syntax errors automatically.
 
-![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
+    ![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
 
 Here's an example of the query it corrected - notice the `Auto-Fix` comments that explain what changes were made:
 
