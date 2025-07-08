@@ -43,7 +43,7 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 4. When your new workspace opens, it should be empty.
 
-    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
+![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a data warehouse
 
@@ -55,7 +55,7 @@ Now that you have a workspace, it's time to create a data warehouse. A data ware
 
     After a minute or so, a new warehouse will be created:
 
-    ![Screenshot of a new warehouse.](./Images/new-data-warehouse2.png)
+![Screenshot of a new warehouse.](./Images/new-data-warehouse2.png)
 
 ## Create tables and insert data
 
