@@ -175,9 +175,9 @@ print(f"File downloaded and saved to {file_path}")
 
 ![Screenshot of the a temp file created in the lakehouse.](Images/copilot-fabric-notebook-step-4-lakehouse-refreshed.png)
 
-4. Now, create a new cell in your notebook and copy the following instruction into it.
+4. Now that we have the raw data file in our lakehouse, we need to load it into a Spark DataFrame so we can analyze and transform it. Create a new cell in your notebook and copy the following instruction into it.
 
-   > **Next step**: Now that we have the raw data file in our lakehouse, we need to load it into a Spark DataFrame so we can analyze and transform it. A DataFrame is a distributed collection of data organized into named columns, similar to a table in a database or a spreadsheet.
+   > **Information**: A DataFrame is a distributed collection of data organized into named columns, similar to a table in a database or a spreadsheet.
 
 ```plaintext
 %%code
@@ -255,7 +255,7 @@ display(spark_df)
 
 ## Transform data: remove fields
 
-There are some fields in the table that have no real added value (there is only one distinct value). As a best practice, we need to clean them up and remove them from the dataset.
+Some fields in the table offer no meaningful value, as they contain only a single distinct entry. As a best practice, we should remove them from the dataset.
 
 > **Data cleaning principle**: Columns with only one unique value don't provide analytical value and can make your dataset unnecessarily complex. Removing them simplifies the data structure and improves performance. In this case, 'freq' (frequency), 'age' (all records show TOTAL), and 'unit' (all records show PER for persons) are constant across all rows.
 
@@ -528,7 +528,7 @@ Now let's explore the power of Copilot for data analysis. Instead of writing com
 3. Enter the following prompt:
 
 ```plaintext
-What are the projected population trends for geo BE from 2020 to 2050 as a line chart visualization. Use only existing columns from the population table. Perform the query using SQL.
+What are the projected population trends for geo BE  from 2020 to 2050 as a line chart visualization. Make sure to sum up male and female numbers. Use only existing columns from the population table. Perform the query using SQL.
 ```
 
    > **What this demonstrates**: This prompt showcases Copilot's ability to understand context (our Population table), generate SQL queries, and create visualizations. It's particularly powerful because it combines data querying with visualization in a single request.
@@ -540,26 +540,29 @@ What are the projected population trends for geo BE from 2020 to 2050 as a line 
 
 import plotly.graph_objs as go
 
-# Query to get the projected population trends for geo BE from 2022 to 2050
+# Perform the SQL query to get projected population trends for geo BE, summing up male and female numbers
 result = spark.sql(
     """
-    SELECT `2022`, `2023`, `2025`, `2030`, `2035`,
-           `2040`, `2045`, `2050`
+    SELECT projection, sex, geo, SUM(`2022`) as `2022`, SUM(`2023`) as `2023`, SUM(`2025`) as `2025`,
+           SUM(`2030`) as `2030`, SUM(`2035`) as `2035`, SUM(`2040`) as `2040`,
+           SUM(`2045`) as `2045`, SUM(`2050`) as `2050`
     FROM Population
     WHERE geo = 'BE' AND projection = 'Baseline projections'
+    GROUP BY projection, sex, geo
     """
 )
-df = result.toPandas()
+df = result.groupBy("projection").sum()
+df = df.orderBy("projection").toPandas()
 
 # Extract data for the line chart
-years = df.columns.tolist()
-values = df.iloc[0].tolist()
+years = df.columns[1:].tolist()
+values = df.iloc[0, 1:].tolist()
 
 # Create the plot
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=years, y=values, mode='lines+markers', name='Projected Population'))
 
-# Update layout
+# Update the layout
 fig.update_layout(
     title='Projected Population Trends for Geo BE (Belgium) from 2022 to 2050',
     xaxis_title='Year',
