@@ -8,9 +8,26 @@ lab:
 
 In Microsoft Fabric, a data warehouse provides a relational database for large-scale analytics. Unlike the default read-only SQL endpoint for tables defined in a lakehouse, a data warehouse provides full SQL semantics; including the ability to insert, update, and delete data in the tables. In this lab, we will explore how we can leverage Copilot to create SQL Queries.
 
-This lab will take approximately **30** minutes to complete.
+This exercise should take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+## What you’ll learn
+
+By completing this lab, you will be able to:
+
+- Understand the role of data warehouses in Microsoft Fabric.
+- Create and configure a workspace and data warehouse in Fabric.
+- Load and explore sample data using SQL.
+- Use Copilot to generate, refine, and troubleshoot SQL queries from natural language prompts.
+- Create views and perform advanced data analysis with AI-assisted SQL generation.
+- Apply Copilot's capabilities to accelerate data exploration and analysis tasks.
+
+## Before you start
+
+You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+
+## Exercise scenario
+
+In this exercise, you are a data analyst at a retail company that wants to better understand sales performance using Microsoft Fabric. Your team has recently adopted Fabric's data warehouse capabilities and is interested in leveraging Copilot to accelerate data exploration and reporting. You will create a new data warehouse, load sample retail sales data, and use Copilot to generate and refine SQL queries. By the end of the lab, you'll have hands-on experience using AI to analyze sales trends, create reusable views, and perform advanced data analysis—all within the Fabric environment.
 
 ## Create a workspace
 

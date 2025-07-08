@@ -6,20 +6,29 @@ lab:
 
 # Work smarter with Copilot in Microsoft Fabric dataflow gen2
 
-In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report.
+In Microsoft Fabric, Dataflows (Gen2) connect to various data sources and perform transformations in Power Query Online. They can then be used in Data Pipelines to ingest data into a lakehouse or other analytical store, or to define a dataset for a Power BI report. This lab provides an introduction to Copilot in Dataflows (Gen2) rather than focusing on building a complex enterprise solution.
 
-This lab is designed to introduce you to Copilot in Dataflows (Gen2), and not create a complex solution that may exist in an enterprise. This lab takes **approximately 30 minutes** to complete.
+This exercise should take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+## What you’ll learn
 
-## Key learning outcomes
+By completing this lab, you will:
 
-Learners will understand how to:
+- Understand how to use Copilot in Microsoft Fabric Dataflow Gen2 to accelerate data transformation tasks.
+- Learn how to ingest, clean, and transform data using Power Query Online with Copilot assistance.
+- Apply best practices for data quality, including renaming columns, removing unwanted characters, and setting appropriate data types.
+- Gain experience in parsing and expanding XML data within a dataflow.
+- Categorize continuous data into meaningful groups for analysis.
+- Publish transformed data to a lakehouse and validate the results.
+- Recognize the value of AI-assisted data engineering for improving productivity and data quality.
 
-- Use natural language prompts with Copilot to perform data transformations
-- Handle complex data cleaning scenarios (XML parsing, character removal, data type conversions)
-- Create conditional columns using AI assistance
-- Document data transformation processes using AI-generated explanations
+## Before you start
+
+You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+
+## Exercise scenario
+
+Contoso, a global retail company, is modernizing its data infrastructure using Microsoft Fabric. As a data engineer, you are tasked with preparing store information for analytics. The raw data is stored in a CSV file and includes embedded XML fields, inconsistent column names, and unwanted characters. Your goal is to use Copilot in Dataflow Gen2 to ingest, clean, transform, and enrich this data—making it ready for reporting and analysis in the lakehouse. This hands-on exercise will guide you through each step, demonstrating how Copilot accelerates and simplifies common data engineering tasks.
 
 ## Create a workspace
 

@@ -8,11 +8,26 @@ lab:
 
 A Microsoft Fabric data agent enables natural interaction with your data by allowing you to ask questions in plain English and receive structured, human-readable responses. By eliminating the need to understand query languages like SQL (Structured Query Language), DAX (Data Analysis Expressions), or KQL (Kusto Query Language), the data agent makes data insights accessible across the organization, regardless of technical skill level.
 
+This exercise should take approximately **30** minutes to complete.
+
+## What you’ll learn
+
+By completing this lab, you will:
+
+- Understand the purpose and benefits of Microsoft Fabric data agents for natural language data analysis.
+- Learn how to create and configure a Fabric workspace and data warehouse.
+- Gain hands-on experience loading and exploring a star schema sales dataset.
+- See how data agents translate plain English questions into SQL queries.
+- Develop skills to ask effective analytical questions and interpret AI-generated results.
+- Build confidence in leveraging AI tools to democratize data access and insights.
+
+## Before you start
+
+You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+
+## Exercise scenario
+
 In this exercise, we will create a sales data warehouse, load some data into it and then create a Fabric data agent. We will then ask it a variety of questions and explore how the data agent translates natural language into SQL queries to provide insights. This hands-on approach will demonstrate the power of AI-assisted data analysis without requiring deep SQL knowledge. Let's start!
-
-This lab will take approximately **30** minutes to complete.
-
-> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
 
 ## Create a workspace
 
@@ -68,11 +83,11 @@ A Fabric data agent is an AI-powered assistant that can understand natural langu
 
    > **Why naming matters**: A descriptive name helps you and your team understand the purpose and scope of this data agent, especially when managing multiple agents for different data domains.
 
-![Screenshot of creating a new data agent and assigning it a name](./Images/copilot-fabric-data-agent-create.png)
+![Screenshot of creating a new data agent and assigning it a name.](./Images/copilot-fabric-data-agent-create.png)
 
 1. Select **Add a data source**. 
 
-![Screenshot of data agent created](./Images/copilot-fabric-data-agent-created.png)
+![Screenshot of data agent created.](./Images/copilot-fabric-data-agent-created.png)
 
 1. Choose the data warehouse you created earlier.
 
@@ -82,7 +97,7 @@ A Fabric data agent is an AI-powered assistant that can understand natural langu
 
    > **Table selection strategy**: By selecting all four tables, we're giving the data agent access to the complete data model. This enables it to answer complex questions that span multiple tables, such as sales trends by customer location or product performance over time.
 
-![Screenshot of data agent warehouse tables selected](./Images/copilot-fabric-data-agent-select-tables.png)
+![Screenshot of data agent warehouse tables selected.](./Images/copilot-fabric-data-agent-select-tables.png)
 
 ## Ask questions
 

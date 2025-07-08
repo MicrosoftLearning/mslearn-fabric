@@ -6,26 +6,46 @@ lab:
 
 # Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks
 
-In this lab, we use Copilot for Fabric Data Engineering to load, transform, and save data in a Lakehouse, using a notebook. Let's imagine Contoso Health, a multi-specialty hospital network, wants to expand its services in the EU and wants to analyze projected population data. This example uses the [Eurostat](https://ec.europa.eu/eurostat/web/main/home) (statistical office of the European Union) population projection dataset.
+In this lab, we use Copilot for Fabric Data Engineering to load, transform, and save data in a Lakehouse, using a notebook. Notebooks provide an interactive environment that combines code, visualizations, and narrative text in a single document. This format makes it easy to document your workflow, explain your reasoning, and share results with others. By using notebooks, you can iteratively develop and test code, visualize data at each step, and keep a clear record of your analysis process. This approach enhances collaboration, reproducibility, and understanding, making notebooks an ideal tool for data engineering and analytics tasks.
 
-Source: EUROPOP2023 Population on January 1 by age, sex, and type of projection [[proj_23np](https://ec.europa.eu/eurostat/databrowser/product/view/proj_23np?category=proj.proj_23n)], Last updated June 28, 2023.
+Traditionally, working with notebooks for data engineering requires you to write code in languages such as Python or Scala and have a solid understanding of frameworks and libraries like Apache Spark and pandas. This can be challenging for those new to programming or unfamiliar with these tools. With Copilot in Fabric notebooks, you can describe your data tasks in natural language, and Copilot will generate the necessary code for you—handling much of the technical complexity and allowing you to focus on your analysis.
 
-This lab will take approximately 30 minutes to complete.
+This exercise should take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+## What you’ll learn
+
+By completing this lab, you will be able to:
+
+- Create and configure a Microsoft Fabric workspace and lakehouse for data engineering tasks.
+- Use Copilot in Fabric notebooks to generate code from natural language prompts.
+- Ingest, clean, and transform data using Apache Spark and Copilot-assisted workflows.
+- Normalize and prepare statistical datasets for analysis by splitting, filtering, and converting data types.
+- Save transformed data as a table in the lakehouse for downstream analytics.
+- Use Copilot to generate queries and visualizations for data exploration and validation.
+- Understand best practices for data cleaning, transformation, and collaborative analytics in Microsoft Fabric.
+
+## Before you start
+
+You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
 
 > **Note**: For your convenience, a notebook with all prompts for this excercise is available to you for download at:
 
 `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/23/Starter/eurostat-notebook.ipynb`
 
-> **Note**: AI-generated content can have mistakes. Make sure it's accurate and appropriate before using it. 
+## Exercise scenario
+
+Let's imagine Contoso Health, a multi-specialty hospital network, wants to expand its services in the EU and wants to analyze projected population data. This example uses the [Eurostat](https://ec.europa.eu/eurostat/web/main/home) (statistical office of the European Union) population projection dataset.
+
+Source: EUROPOP2023 Population on January 1 by age, sex, and type of projection [[proj_23np](https://ec.europa.eu/eurostat/databrowser/product/view/proj_23np?category=proj.proj_23n)], Last updated June 28, 2023.
 
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace with Fabric enabled. A workspace in Microsoft Fabric serves as a collaborative environment where you can organize and manage all your data engineering artifacts including lakehouses, notebooks, and datasets. Think of it as a project folder that contains all the resources needed for your data analysis.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
+
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+
 3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
    
    > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
@@ -66,7 +86,7 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 
    > **Why use markdown cells**: Markdown cells allow you to document your analysis with formatted text, making your notebook more readable and easier to understand for others (or yourself when you return to it later).
 
-![Screenshot of a notebook, changing the first cell to become markdown](./Images/copilot-fabric-notebook-markdown.png)
+![Screenshot of a notebook, changing the first cell to become markdown.](./Images/copilot-fabric-notebook-markdown.png)
 
 4. Use the 🖉 (Edit) button to switch the cell to editing mode, then modify the markdown as shown below.
 
@@ -115,7 +135,6 @@ Then write the file to the default lakehouse into a folder named temp. Create th
 2. Select ▷ **Run cell** to the left of the cell to run the code.
 
 Copilot generates the following code, which might differ slightly depending on your environment and the latest updates to Copilot.
-
 
 ![Screenshot of the code generated by copilot.](Images/copilot-fabric-notebook-step-3-code-magic.png)
 
