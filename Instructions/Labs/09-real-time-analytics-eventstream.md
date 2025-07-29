@@ -97,7 +97,7 @@ The eventstream you have created takes data from the sample source of bicycle da
     | where ingestion_time() between (now(-1d) .. now())
     ```
 
-1. Select the query code and run it to see 100 rows of data from the table.
+1. Select the query code and run it to see 24 hours of data from the table.
 
     ![Screenshot of a KQL query.](./Images/kql-query.png)
 
