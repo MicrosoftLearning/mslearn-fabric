@@ -74,7 +74,7 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
     CREATE SCHEMA [Sales]
     GO
         
-    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Fact_Sales' AND SCHEMA_NAME(schema_id)='Sales')
+    IF OBJECT_ID('Sales.Fact_Sales', 'U') IS NULL
     	CREATE TABLE Sales.Fact_Sales (
     		CustomerID VARCHAR(255) NOT NULL,
     		ItemID VARCHAR(255) NOT NULL,
@@ -86,7 +86,7 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
     		UnitPrice FLOAT
     	);
     
-    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Customer' AND SCHEMA_NAME(schema_id)='Sales')
+    IF OBJECT_ID('Sales.Dim_Customer', 'U') IS NULL
         CREATE TABLE Sales.Dim_Customer (
             CustomerID VARCHAR(255) NOT NULL,
             CustomerName VARCHAR(255) NOT NULL,
@@ -96,7 +96,7 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
     ALTER TABLE Sales.Dim_Customer add CONSTRAINT PK_Dim_Customer PRIMARY KEY NONCLUSTERED (CustomerID) NOT ENFORCED
     GO
     
-    IF NOT EXISTS (SELECT * FROM sys.tables WHERE name='Dim_Item' AND SCHEMA_NAME(schema_id)='Sales')
+    IF OBJECT_ID('Sales.Dim_Item', 'U') IS NULL
         CREATE TABLE Sales.Dim_Item (
             ItemID VARCHAR(255) NOT NULL,
             ItemName VARCHAR(255) NOT NULL
