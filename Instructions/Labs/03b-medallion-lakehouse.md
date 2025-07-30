@@ -204,6 +204,8 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
     You now have data in your silver delta table that is ready for further transformation and modeling.
 
+1. After running the last cell, select the **Run** tab above the ribbon and then select **Stop session** to stop the compute resource being used by the notebook.
+
 ## Explore data in the silver layer using the SQL endpoint
 
 Now that you have data in your silver layer, you can use the SQL analytics endpoint to explore the data and perform some basic analysis. This is useful if you're familiar with SQL and want to do some basic exploration of your data. In this exercise we're using the SQL endpoint view in Fabric, but you can use other tools like SQL Server Management Studio (SSMS) and Azure Data Explorer.
@@ -260,6 +262,8 @@ You could have done all of this in a single notebook, but for this exercise you'
    df = spark.read.table("Sales.sales_silver")
     ```
 
+    > **Note**: If you receive a `[TooManyRequestsForCapacity]` error when running the first cell, make sure you stopped the session previously running in the first notebook.
+ 
 1. **Add a new code block** and paste the following code to create your date dimension table and run it:
 
     ```python
