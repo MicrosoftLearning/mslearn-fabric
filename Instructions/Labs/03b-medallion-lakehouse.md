@@ -262,7 +262,7 @@ You could have done all of this in a single notebook, but for this exercise you'
    df = spark.read.table("Sales.sales_silver")
     ```
 
->**NOTE**: If you receive an `[TooManyRequestsForCapacity]` error when running the first cell, make sure you stopped the session previously running in the first notebook.
+    > **Note**: If you receive a `[TooManyRequestsForCapacity]` error when running the first cell, make sure you stopped the session previously running in the first notebook.
  
 1. **Add a new code block** and paste the following code to create your date dimension table and run it:
 
