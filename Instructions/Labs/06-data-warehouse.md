@@ -25,7 +25,7 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
 ## Create a data warehouse
 
-Now that you have a workspace, it's time to create a data warehouse. The Synapse Data Warehouse home page includes a shortcut to create a new warehouse:
+Now that you have a workspace, it's time to create a data warehouse.
 
 1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Warehouse* section, select **Warehouse**. Give it a unique name of your choice.
 
@@ -82,14 +82,13 @@ A warehouse is a relational database in which you can define tables and other ob
 
 A relational data warehouse typically consists of *fact* and *dimension* tables. The fact tables contain numeric measures you can aggregate to analyze business performance (for example, sales revenue), and the dimension tables contain attributes of the entities by which you can aggregate the data (for example, product, customer, or time). In a Microsoft Fabric data warehouse, you can use these keys to define a data model that encapsulates the relationships between the tables.
 
-1. In the toolbar, select the **Model layouts** button.
-2. In the model pane, rearrange the tables in your data warehouse so that the **FactSalesOrder** table is in the middle, like this:
+1. In the toolbar, select **New semantic model**.
+1. In the **New semantic model** window, name the semantic model and select all four tables. Select **Confirm**.
+1. A new browser tab will automatically open with your new semantic model. In the model pane, rearrange the tables in your data warehouse so that the **FactSalesOrder** table is in the middle, like this:
 
     ![Screenshot of the data warehouse model page.](./Images/model-dw.png)
 
-> **Note**: The views **frequently_run_queries**, **long_running_queries**, **exec_sessions_history**, and **exec_requests_history** are part of the **queryinsights** schema automatically created by Fabric. It is a feature that provides a holistic view of historical query activity on the SQL analytics endpoint. Since this feature is out of the scope of this exercise, those views should be ignored for now.
-
-3. Drag the **ProductKey** field from the **FactSalesOrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
+1. Drag the **ProductKey** field from the **FactSalesOrder** table and drop it on the **ProductKey** field in the **DimProduct** table. Then confirm the following relationship details:
     - **From table**: FactSalesOrder
     - **Column**: ProductKey
     - **To table**: DimProduct
@@ -99,7 +98,7 @@ A relational data warehouse typically consists of *fact* and *dimension* tables.
     - **Make this relationship active**: Selected
     - **Assume referential integrity**: Unselected
 
-4. Repeat the process to create many-to-one relationships between the following tables:
+1. Repeat the process to create many-to-one relationships between the following tables:
     - **FactSalesOrder.CustomerKey** &#8594; **DimCustomer.CustomerKey**
     - **FactSalesOrder.SalesOrderDateKey** &#8594; **DimDate.DateKey**
 
@@ -115,7 +114,7 @@ Since the data warehouse is a relational database, you can use SQL to query its 
 
 Most queries in a relational data warehouse involve aggregating and grouping data (using aggregate functions and GROUP BY clauses) across related tables (using JOIN clauses).
 
-1. Create a new SQL Query, and run the following code:
+1. Navigate back to the browser tab with your warehouse and create a new SQL Query, and run the following code:
 
     ```sql
    SELECT  d.[Year] AS CalendarYear,
