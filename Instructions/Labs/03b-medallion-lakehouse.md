@@ -587,7 +587,9 @@ You could have done all of this in a single notebook, but for this exercise you'
 
 You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
 
-## Create a semantic model
+## (OPTIONAL) Create a semantic model
+
+**Note**: While this task is entirely optional, you need a Power BI license or Fabric F64 SKU to create and edit semantic models.
 
 In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the semantic model directly in your workspace to create relationships and measures for reporting.
 
