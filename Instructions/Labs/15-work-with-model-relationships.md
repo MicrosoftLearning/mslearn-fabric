@@ -1,10 +1,12 @@
 ---
 lab:
-    title: 'Work with model relationships'
+    title: 'Work with model relationships (optional)'
     module: 'Design and build tabular models'
 ---
 
 # Work with model relationships
+
+> **IMPORTANT**: This exercise is deprecated, and will be removed or uodated soon. The instructions might no longer be accurate, and the exercise is unsupported.
 
 In this exercise, you will work with model relationships specifically to address the need for role-playing dimensions. It will involve working with active and inactive relationships, and also Data Analysis Expressions (DAX) functions that modify relationship behavior.
 
@@ -400,3 +402,4 @@ In this task, you will create a measure to show the unshipped sales amount.
 ### Finish up
 
 To finish the exercise, close Power BI Desktop - no need to save the file.
+
