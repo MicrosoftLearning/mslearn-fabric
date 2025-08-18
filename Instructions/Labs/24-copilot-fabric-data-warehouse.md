@@ -91,7 +91,7 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 4. We're aiming to analyze sales revenue by month. This is a common business requirement - understanding revenue trends over time helps identify seasonal patterns, growth trends, and performance metrics. Enter the following prompt and send it.
 
-```plaintext
+```copilot-prompt
 /generate-sql Calculate monthly sales revenue
 ```
 
@@ -107,7 +107,7 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 8. Create a **New SQL Query**, and ask a follow-up question to also include the month name and sales region in the results. This demonstrates how you can iteratively refine your queries with Copilot - building on previous requests to create more detailed analysis:
 
-```plaintext
+```copilot-prompt
 /generate-sql Retrieves sales revenue data grouped by year, month, month name and sales region
 ```
 
@@ -115,7 +115,7 @@ Read the output and observe Copilot is currently in preview and can help with br
 
 10. Let's create a view from this query by asking Copilot the following question. Views are virtual tables that store query logic, making it easier to reuse complex queries and provide consistent data access patterns for reporting and analysis:
 
-```plaintext
+```copilot-prompt
 /generate-sql Create a view in the dbo schema that shows sales revenue data grouped by year, month, month name and sales region
 ```
 
@@ -153,7 +153,7 @@ Notice how Copilot not only fixed the syntax errors but also provided helpful co
 
 13. Enter another prompt to retrieve a detailed product listing, organized by category. This query will demonstrate more advanced SQL features like window functions for ranking data within groups. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
 
-```plaintext
+```copilot-prompt
 /generate-sql Retrieve a detailed product listing, organized by category. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
 ```
 

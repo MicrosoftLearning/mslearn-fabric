@@ -122,7 +122,7 @@ Now we'll use Copilot to help us download data from the Eurostat API. Instead of
 
    > **About the `%%code` magic command**: This special instruction tells Copilot that you want it to generate Python code based on your natural language description. It's one of several "magic commands" that help you interact with Copilot more effectively.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Download the following file from this URL:
@@ -179,7 +179,7 @@ print(f"File downloaded and saved to {file_path}")
 
    > **Information**: A DataFrame is a distributed collection of data organized into named columns, similar to a table in a database or a spreadsheet.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Load the file 'Files/temp/proj_23np.tsv' into a spark dataframe.
@@ -224,7 +224,7 @@ Let's now go ahead and transform the data. We need to make sure the first field 
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
@@ -261,7 +261,7 @@ Some fields in the table offer no meaningful value, as they contain only a singl
 
 4. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Remove the fields 'freq', 'age', 'unit'.
@@ -287,7 +287,7 @@ Organizing your data with the most important identifying columns first makes it 
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 The fields 'projection', 'sex', 'geo' should be positioned first.
@@ -316,7 +316,7 @@ The projection field currently contains cryptic codes that aren't user-friendly.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 The 'projection' field contains codes that should be replaced with the following values:
@@ -363,7 +363,7 @@ The population projections table contains 2 rows for countries that do not exist
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Filter the 'geo' field and remove values 'EA20' and 'EU27_2020' (these are not countries).
@@ -395,7 +395,7 @@ Again, we need to remove the totals, so we keep the data at the lowest level of 
 
 4. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Filter the 'sex' field and remove 'T' (these are totals).
@@ -423,7 +423,7 @@ Some field names in the population projection table have a space at the end. We 
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Strip spaces from all field names in the dataframe.
@@ -453,7 +453,7 @@ If we want to properly analyze the data later (using Power BI or SQL for example
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Convert the data type of all the year fields to integer.
@@ -495,7 +495,7 @@ Next, we want to save the transformed data to our lakehouse.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
-```plaintext
+```copilot-prompt
 %%code
 
 Save the dataframe as a new table named 'Population' in the default lakehouse.
@@ -527,7 +527,7 @@ Now let's explore the power of Copilot for data analysis. Instead of writing com
 
 3. Enter the following prompt:
 
-```plaintext
+```copilot-prompt
 What are the projected population trends for geo BE  from 2020 to 2050 as a line chart visualization. Make sure to sum up male and female numbers. Use only existing columns from the population table. Perform the query using SQL.
 ```
 

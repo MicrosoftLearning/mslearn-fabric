@@ -107,7 +107,7 @@ Now is the time to start experimenting and ask questions to our data agent. This
 
 1. Ask a question by typing in the following prompt: 
 
-```plaintext
+```copilot-prompt
 How many products did we sell by fiscal year?
 ```
 
@@ -133,7 +133,7 @@ ORDER BY d.Year;
 
 3. Continue with the following question: 
 
-```plaintext
+```copilot-prompt
 What are the top 10 most popular products all time?
 ```
 
@@ -141,7 +141,7 @@ What are the top 10 most popular products all time?
 
 4. Follow up with this question: 
 
-```plaintext
+```copilot-prompt
 What are the historical trends across all my data?
 ```
 
@@ -149,19 +149,19 @@ What are the historical trends across all my data?
 
 5. Try additional questions to explore different aspects of your data:
 
-```plaintext
+```copilot-prompt
 In which countries are our customers located?
 ```
 
-```plaintext
+```copilot-prompt
 How many products did we sell in the United States?
 ```
 
-```plaintext
+```copilot-prompt
 How much revenue did we make in FY 2022?
 ```
 
-```plaintext
+```copilot-prompt
 How much was our total sales revenue, by fiscal year, fiscal quarter and month name?
 ```
 
