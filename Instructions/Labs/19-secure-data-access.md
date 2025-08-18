@@ -8,7 +8,7 @@ lab:
 
 Microsoft Fabric has a multi-layer security model for managing data access. Security can be set for an entire workspace, for individual items, or through granular permissions in each Fabric engine. In this exercise, you secure data using workspace, and item access controls and OneLake data access roles.
 
-> **Note**: To complete the exercises in this lab, you'll need two users: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces).
+> **Note**: To complete the exercises in this lab, you'll need two users: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces). If you don't have access to a second account in the same organization, you can still do the exercise as an Workspace Admin and skip the steps done as an Workspace Viewer account, referring to the exercise's screenshots to see what an Workspace Viewer account has access to.
 
 This lab takes approximately **45** minutes to complete.
 
@@ -94,20 +94,18 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 5. Close the **Manage access** section.
 6. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear. Select the ellipse and select **Manage permissions**
-
 7. Select **Add user** and enter the name of the second user. 
 8. In the box that appears, under **Additional permissions** check **Read all data using SQL (ReadData)** and uncheck all other boxes.
 
     ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
 
 9. Select **Grant**
-
 10. Return to the browser window where you're logged in as the second user. Refresh the browser view.
+11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake catalog** on the left navigation menu to find the warehouse: 
 
-11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake** on the left navigation menu to find the warehouse. 
+    ![Screenshot of OneLake catalog.](./Images/onelake-catalog.png)
 
 12. Select the warehouse. On the screen that appears, select **Open** from the top menu bar.
-
 13. When the warehouse view appears, select the **Date** table to view table data. The rows are viewable because the user still has read access to the warehouse because ReadData permissions were applied by using item permissions on the warehouse.
 
 ## Apply OneLake data access roles in a Lakehouse
@@ -117,45 +115,46 @@ OneLake data access roles let you create custom roles within a Lakehouse and gra
 In this exercise, you assign an item permission and create a OneLake data access role and experiment with how they work together to restrict access to data in a Lakehouse.  
 
 1. Stay in the browser where you're logged in as the second user.  
-2. Select **OneLake** on the left navigation bar. The second user doesn't see the lakehouse.  
+2. Select **OneLake catalog** on the left navigation bar. The second user doesn't see the lakehouse.  
 3. Return to the browser where you're logged in as the Workspace Admin.
 4. Select **Workspaces** on the left menu and select your workspace. Hover over the name of the lakehouse.  
 5. Select on the ellipse (**...**) to the right of the ellipse and select **Manage permissions**
 
-      ![Screenshot of setting permissions on a lakehouse in Fabric.](./Images/lakehouse-manage-permissions.png)
+    ![Screenshot of setting permissions on a lakehouse in Fabric.](./Images/lakehouse-manage-permissions.png)
 
 6. On the screen that appears, select **Add user**. 
 7. Assign the second user to the lakehouse and ensure none of the checkboxes on the **Grant People Access** window are checked.  
 
-      ![Screenshot of the grant access lakehouse window in Fabric.](./Images/grant-people-access-window.png)
+    ![Screenshot of the grant access lakehouse window in Fabric.](./Images/grant-people-access-window.png)
 
 8. Select **Grant**. The second user now has read permissions on the lakehouse. Read permission only allows the user to see metadata for the lakehouse but not the underlying data. Next we'll validate this.
 9. Return to the browser where you're logged in as the second user. Refresh the browser.
 10. Select **OneLake** in the left navigation pane.  
 11. Select the lakehouse and open it. 
-12. Select **Open** on the top menu bar. You're unable to expand the tables or files even though read permission was granted. Next, you grant the second user access to a specific folder using OneLake data access permissions.
-13. Return to the browser where you're logged in as the workspace administrator.
-14. Select **Workspaces** from the left navigation bar.
-15. Select your workspace name.
-16. Select the lakehouse.
-1. When the lakehouse opens, select **Manage OneLake data access** on the top menu bar and enable the feature by clicking the **Continue** button.
+12. Select **Open** on the top menu bar. You're unable to expand the tables or files even though read permission was granted.
 
-      ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
+    ![Screenshot of lakehouse unable to load data.](./Images/lakehouse-metadata-only-access.png)
 
-14. Select new role on the **Manage OneLake data access (preview)** screen that appears.
+13. Next, you grant the second user access to a specific folder using OneLake data access permissions.
+14. Return to the browser where you're logged in as the workspace administrator.
+15. Select **Workspaces** from the left navigation bar.
+16. Select your workspace name.
+17. Select the lakehouse.
+18. When the lakehouse opens, select **Manage OneLake data access** on the top menu bar and enable the feature by selecting the **Continue** button.
+
+    ![Screenshot of the Manage OneLake data access (preview) feature on the menu bar in Fabric.](./Images/manage-onelake-roles.png)
+
+19. Select **+ New** on the **OneLake security** screen that appears.
   
-      ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
+    ![Screenshot of the new role functionality in the manage OneLake data access feature.](./Images/create-onelake-role.png)
 
-15. Create a new role called **publicholidays** that can only access the publicholidays folder as shown in the screenshot below.
+20. Create a new role called **publicholidays**, then select **Selected data** and **Browse Lakehouse**. In the new window, select the publicholidays table.
+21. In the **Add members to your role** field, add your second user.
+22. In the **Preview role** section, confirm that the **publicholidays** table is added to the **Data preview** tab with Read permissions and your second user is added to the **Members preview** tab. Select **Create role**.
+23. Return to the browser where you're logged in as the second user. Ensure you're still on the page where the lakehouse is open. Refresh the browser.  
+24. Select the **publicholidays** table and wait for the data to load. Only the data in the publicholidays table is accessible to the user because the user was assigned to the custom OneLake data access role. The role permits them to see only the data in the publicholidays table, not data in any of the other tables, files, or folders.
 
-      ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/new-data-access-role.png)
-
-16. When the role finishes creating, select **Assign role** and assign the role to your second user, select **Add** and, select **Save**.
- 
-       ![Screenshot of the folder assignment in the manage OneLake data access feature.](./Images/assign-role.png)
-
-17. Return to the browser where you're logged in as the second user. Ensure you're still on the page where the lakehouse is open. Refresh the browser.  
-18. Select the **publicholidays** table and wait for the data to load. Only the data in the publicholidays table is accessible to the user because the user was assigned to the custom OneLake data access role. The role permits them to see only the data in the publicholidays table, not data in any of the other tables, files, or folders.
+    ![Screenshot of the lakehouse with table access.](./Images/lakehouse-table-access.png)
 
 ## Clean up resources
 
