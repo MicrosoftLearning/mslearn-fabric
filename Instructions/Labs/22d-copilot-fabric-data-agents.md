@@ -65,8 +65,9 @@ A warehouse is a relational database in which you can define tables and other ob
 
    > **What this script does**: The script creates a complete sales data warehouse with customer information, product details, date dimensions, and sales transactions. This realistic dataset will allow us to ask meaningful business questions to our data agent.
 
-1. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
-1. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
+2. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
+
+3. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
     - **DimCustomer** - Contains customer information including names, locations, and contact details
     - **DimDate** - Contains date-related attributes like fiscal years, quarters, and months for time-based analysis
     - **DimProduct** - Contains product information including names, categories, and pricing
@@ -81,7 +82,7 @@ A Fabric data agent is an AI-powered assistant that can understand natural langu
 1. Create a new data agent.
    ![Screenshot of creating a new data agent](./Images/copilot-fabric-data-agent-new.png)
 
-2. Give it a name like **sales-data-agent**.
+2. Give it a name like **`sales-data-agent`**.
 
    > **Why naming matters**: A descriptive name helps you and your team understand the purpose and scope of this data agent, especially when managing multiple agents for different data domains.
 
@@ -185,10 +186,10 @@ As you experiment with questions, keep these data characteristics in mind to ask
 
 Congratulations! You have successfully:
 
-1. **Created a Fabric workspace** and data warehouse with a realistic sales dataset
-2. **Built and configured a data agent** that can understand natural language questions about your data
-3. **Experienced AI-powered data analysis** by asking questions in plain English and seeing how they translate to SQL queries
-4. **Explored various types of analytical questions** from simple aggregations to complex trend analysis
+- **Created a Fabric workspace** and data warehouse with a realistic sales dataset
+- **Built and configured a data agent** that can understand natural language questions about your data
+- **Experienced AI-powered data analysis** by asking questions in plain English and seeing how they translate to SQL queries
+- **Explored various types of analytical questions** from simple aggregations to complex trend analysis
 
 ### Key takeaways
 
