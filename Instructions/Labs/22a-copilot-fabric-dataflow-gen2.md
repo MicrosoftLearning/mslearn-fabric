@@ -69,7 +69,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 2. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
 
  - **Link to file**: *Selected*
- - **File path or URL**: `https://raw.githubusercontent.com/microsoft/sql-server-samples/refs/heads/master/samples/databases/adventure-works/oltp-install-script/Store.csv`
+ - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22a/Store.csv`
  - **Connection**: Create new connection
  - **data gateway**: (none)
  - **Authentication kind**: Anonymous

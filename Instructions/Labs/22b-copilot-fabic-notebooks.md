@@ -30,7 +30,7 @@ You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.co
 
 > **Note**: For your convenience, a notebook with all prompts for this excercise is available to you for download at:
 
-`https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/23/Starter/eurostat-notebook.ipynb`
+`https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/22b/Starter/eurostat-notebook.ipynb`
 
 ## Exercise scenario
 

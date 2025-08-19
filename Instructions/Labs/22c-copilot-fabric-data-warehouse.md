@@ -61,7 +61,7 @@ Now that you have a workspace, it's time to create a data warehouse. A data ware
 
 A warehouse is a relational database in which you can define tables and other objects. To demonstrate Copilot's capabilities, we need sample data to work with. We'll create a typical retail sales schema with dimension tables (customer, date, product) and a fact table (sales orders) - this is a common pattern in data warehousing called a star schema.
 
-1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. This opens a SQL editor where you can write and execute Transact-SQL commands. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/create-dw.txt` into the new query pane. This script contains all the necessary CREATE TABLE and INSERT statements to build our sample dataset.
+1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. This opens a SQL editor where you can write and execute Transact-SQL commands. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22c/create-dw.txt` into the new query pane. This script contains all the necessary CREATE TABLE and INSERT statements to build our sample dataset.
 
 2. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run. During this time, the database engine is creating the table structures and populating them with sample retail sales data.
 
