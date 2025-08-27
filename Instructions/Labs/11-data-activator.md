@@ -1,51 +1,57 @@
 # Use Data Activator in Fabric
 
-> **IMPORTANT**: This exercise is deprecated, and will be removed or uodated soon. The instructions are no longer accurate, and the exercise is unsupported.
-
-Data Activator in Microsoft Fabric takes action based on what's happening in your data. Data Activator lets you monitor your data and create triggers to react to your data changes.
+Data Activator in Microsoft Fabric takes action based on what's happening in your data. An Activator lets you monitor your data and create triggers to react to your data changes.
 
 This lab takes approximately **30** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
-## Create a workspace
-
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
-
-1. On the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric`, select **Data Activator**.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
-
-    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
-
-In this lab, you´ll use the Data Activator in Fabric to create a *reflex*. Data Activator conveniently provides a sample dataset that you can use to explore Data Activator's capabilities. You´ll use this sample data to create a *reflex* that analyzes some real-time data and creates a trigger to send an email out when a condition is met.
-
-> **Note**: The Data Activator sample process generates some random data in the background. The more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
-
 ## Scenario
 
 In this scenario, you're a data analyst for a company that sells and ships a range of products.  You're responsible for the data of all shipments and sales to the city of Redmond. You want to create a reflex that monitors the packages that are out for delivery. One category of products you ship is medical prescriptions that need to be refrigerated at a particular temperature during transit. You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond. Let's get started!
 
-## Create a reflex
+## Create a workspace
 
-1. Ensure you're in the Data Activator Home screen by verifying that the icon on the lower right reflects the Data Activator. Let's create a new reflex by selecting the **reflex (Preview)** button.
+Before working with data in Fabric, create a workspace with the Fabric trial enabled.
 
-    ![Screenshot of the Data Activator Home screen.](./Images/data-activator-home-screen.png)
+1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser, and sign in with your Fabric credentials.
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+1. When your new workspace opens, it should be empty.
 
-1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Data Activator. Select the **Use Sample Data** button to finish creating your reflex.
+    ![Screenshot of an empty workspace in Fabric.](./Images/new-empty-workspace.png)
 
-    ![Screenshot of the Data Activator Get Data screen.](./Images/data-activator-get-started.png)
+In this lab, you´ll use the Activator in Fabric to create triggers based on data changes. Fabric's Activator conveniently provides a sample dataset that you can use to explore the Activator's capabilities. You´ll use this sample data to analyze some real-time data streaming and create a trigger to send an email out when a condition is met.
 
-1. By default, Data Activator creates your reflex with the name *Reflex YYYY-MM-DD hh:mm:ss*. Since you may have multiple reflexes in your workspace, you should change the default reflex's name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Reflex*** for our example.
+> **Note**: The Activator sample process generates some random data in the background. The more complex your conditions and filters are, the more time it takes to trigger them. If you don't see any data in the graph, wait a few minutes and refresh the page. That said, you don't need to wait for the data to be displayed in the graphs to continue with the lab.
 
-    ![Screenshot of the Data Activator reflex home screen.](./Images/data-activator-reflex-home-screen.png)
+## Create an Activator
 
-Our reflex is now created and we can start adding triggers and actions to it.
+Next, create an Activator in the workspace you created:
 
-## Get familiar with the reflex home screen
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Real-Time Intelligence* section, select **Activator**.
 
-The reflex's home screen is divided into two sections, the *Design* mode the *Data* mode. You can select the mode by selecting the respective tab on the bottom left of the screen.  The *Design* mode tab is where you define your objects with your triggers, properties and events. The *Data* mode tab is where you can add your data sources and view the data that your reflex processes. Let's take a look at the *Design* mode tab, which should be opened by default when you create your reflex.
+    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+
+    After a minute or so, a new activator will be created:
+
+    ![Screenshot of the Data Activator Home screen.](./Images/activator-home-screen.png)
+
+1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Activator. Select the **Try sample** tile to populate your activator with sample data.
+1. By default, the Activator is created with the name *Activator YYYY-MM-DD hh:mm:ss*. Since you may have multiple activators in your workspace, you should change the default name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
+
+    ![Screenshot of the Data Activator reflex home screen.](./Images/activator-reflex-home-screen.png)
+
+Our reflex project is now created and we can start adding triggers and actions to it.
+
+## Get familiar with the Activator home screen
+
+Let's explore the eventstream data this sample is built on.
+
+1. The new activator has an **Explorer** section. Scroll down and select the **Package delivery events** stream.
+
+These events show the real-time status of packages that are in the process of being delivered.
+
 
 ### Design mode
 
