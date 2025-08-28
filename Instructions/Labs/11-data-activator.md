@@ -37,12 +37,17 @@ Next, create an Activator in the workspace you created:
 
     ![Screenshot of the Data Activator Home screen.](./Images/activator-home-screen.png)
 
-1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Activator. Select the **Try sample** tile to populate your activator with sample data.
-1. By default, the Activator is created with the name *Activator YYYY-MM-DD hh:mm:ss*. Since you may have multiple activators in your workspace, you should change the default name to a more descriptive one. Select the pulldown besides the current Activator name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
+    On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Activator. 
+
+1. Select the **Try sample** tile to populate your activator with sample data.
+
+    By default, the Activator is created with the name *Activator YYYY-MM-DD hh:mm:ss*. Since you may have multiple activators in your workspace, you should change the default name to a more descriptive one.
+
+1. Select the pulldown besides the current Activator name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
 
     ![Screenshot of the Data Activator reflex home screen.](./Images/activator-reflex-home-screen.png)
 
-Our Activator project is now created and we can start adding triggers and actions to it.
+Our Activator project is now created and we can start navigating through its objects, properties and rules.
 
 ## Get familiar with the Activator home screen
 
@@ -56,7 +61,7 @@ Let's explore the eventstream data this sample is built on.
 
 1. Review the data in the **Event details** live table. Each data point contains information about incoming events. You might have to scroll to see it all.
 
-The **Explorer** pane displays objects that use data from eventstreams. These objects have properties from which rules can be created. In this example, **Package** is the object created from the **Package delivery events** eventstream.
+    The **Explorer** pane displays objects that use data from eventstreams. These objects have properties from which rules can be created. In this example, **Package** is the object created from the **Package delivery events** eventstream.
 
 1. In the **Explorer** pane, under the **Temperature** property, select the rule **Too hot for medicine**.
 1. In the **Definition** pane, review how the rule works. In the **Monitor** section, the **Temperature** property is selected as attribute being monitored. The temperature values come from the Temperature column in the **Event details** table that we saw earlier in the eventstream. 
@@ -101,7 +106,7 @@ Let's review what you want your rule to do: *You want to create an alert rule th
 
     ![Screenshot of the Data Activator new rule.](./Images/activator-new-rule.png)
 
-So far you´ve defined the property and condition you want the rule to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  
+    So far you´ve defined the property and condition you want the rule to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  
 
 1. In the **Definition** pane, expand the **Property filter** section.
 1. In the **Filter 1** box, set the attribute to **City**, set the operation to **Is equal to**, and select **Redmond** as the value.
@@ -110,7 +115,7 @@ So far you´ve defined the property and condition you want the rule to fire on, 
 
     ![Screenshot of the Activator rule with filters set.](./Images/activator-rule-filters.png)
 
-You're almost there! You just need to define what action you want to take when the trigger fires. In this case, you want to send an email to the shipping department.
+    You're almost there! You just need to define what action you want to take when the trigger fires. In this case, you want to send an email to the shipping department.
 
 1. In the **Action** section, enter the following values:
     - **Type**: Email
@@ -123,7 +128,7 @@ You're almost there! You just need to define what action you want to take when t
 
 1. Select **Save and start**.
 
-You have now created and started a rule in your Activator. The rule should trigger several times every hour.
+    You have now created and started a rule in your Activator. The rule should trigger several times every hour.
 
 1. Once you have verified that the rule works, you can turn it off using the **Stop** button on the ribbon.
 
