@@ -72,109 +72,67 @@ The **Explorer** pane displays objects that use data from eventstreams. These ob
 
 In a real world scenario, there might not be a need to create a new object for this eventstream since the Activator sample already includes an object called *Package*. But for this lab, we create a new object to demonstrate how to create one. Let's create a new object called *Redmond Packages*.
 
-1. If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen.
+1. Select the **Package delivery events** eventstream, and then select **New object** on the ribbon.
 
-1. Select the ***Package In Transit*** event. Pay close attention to the values in the *PackageId*, *Temperature*, *ColdChainType*, *City*, and *SpecialCare* columns. You´ll use these columns to create your trigger.
+1. In the **Build object** pane to the right, enter the following values:
+    - **Object name**: `Redmond Packages`
+    - **Unique Identifier**: **PackageId**
+    - **Properties**: **City**, **ColdChainType**, **SpecialCare**, **Temperature**
 
-1. If the *Assign your Data* dialog isn't already open on the right-hand side, select the **Assign your data** button on the right of the screen.
+1. Select **Create**.
 
-    ![Screenshot of the Data Activator reflex Data mode assign your data button.](./Images/data-activator-data-tab-assign-data-button.png)
+    ![Screenshot of the Activator Build object pane.](./Images/activator-build-object.png)
 
-1. On the *Assign your data* dialog, select the ***Assign to new object*** tab and enter the following values:
-
-    - **Object Name**: *Redmond Packages*
-    - **Assign key column**: *PackageId*
-    - **Assign properties**: *City, ColdChainType, SpecialCare, Temperature*
-
-    ![Screenshot of the Data Activator reflex Data mode assign your data dialog.](./Images/data-activator-data-tab-assign-data.png)
-
-1. Select **Save** and then select **Save and go to design mode**.
-
-1. You should now be back in the *Design* mode. A new object called ***Redmond Packages*** has been added. Select this new object, expand its *Events* and select the **Package in Transit** event.
-
-    ![Screenshot of the Data Activator reflex Design mode with new object.](./Images/data-activator-design-tab-new-object.png)
-
-Time to create your rule.
+In the **Explorer** pane, a new object called **Redmond Packages** has been added. Time to create your rule.
 
 ## Create a rule
 
-Let's review what you want your trigger to do: *You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you´ll create one specifically for the packages shipped to the city of Redmond*.
+Let's review what you want your rule to do: *You want to create an alert rule that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be below 20 degrees. Since the Package object already contains a similar rule, you´ll create one specifically for the packages shipped to the city of Redmond*.
 
-1. Within the *Package In Transit* event from the **Redmond Packages** object select the **New Trigger** button on the top menu. A new trigger is created with the default name of *Untitled*, change the name to ***Medicine temp out of range*** to better define your trigger.
+1. Select the **Temperature** property within the *Redmond Packages* object and select the **New Rule** button on the ribbon, if not already selected.
+1. In the **Create rule** pane, enter the following values:
+    - **Condition**: Increases above
+    - **Value**: `20`
+    - **Occurrence**: Every time the condition is met
+    - **Action**: Send me an email
 
-    ![Screenshot of the Data Activator reflex Design create new trigger.](./Images/data-activator-trigger-new.png)
+1. Select **Create**.
+1. A new rule is created with the default name of *Temperature alert*. Change the name to ***Medicine temp out of range*** by selecting the pencil icon next to the rule's name in the middle pane.
 
-1. Time to select the property or event column that triggers your reflex. Since you created several properties when you created your object, select the **Existing property** button and select the ***Temperature*** property. 
+    ![Screenshot of the Data Activator new rule.](./Images/activator-new-rule.png)
 
-    ![Screenshot of the Data Activator reflex Design select a property.](./Images/data-activator-trigger-select-property.png)
+So far you´ve defined the property and condition you want the rule to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  
 
-    Selecting this property should return a graph with a sample historic temperature values.
+1. In the **Definition** pane, expand the **Property filter** section.
+1. In the **Filter 1** box, set the attribute to **City**, set the operation to **Is equal to**, and select **Redmond** as the value.
+1. Select **Add filter**, then add a new filter with the **SpecialCare** attribute, set it to **Is equal to** and enter **Medicine** as the value.
+1. Let's add one more filter just to make sure that the medicine is refrigerated. Select the **Add filter** button, set the ***ColdChainType*** attribute, set it to **Is equal to** and enter **Refrigerated** as the value.
 
-    ![Screenshot of the Data Activator property graph of historic values.](./Images/data-activator-trigger-property-sample-graph.png)
+    ![Screenshot of the Activator rule with filters set.](./Images/activator-rule-filters.png)
 
-1. Now you need to decide what type of condition you want to trigger from this property. In this case, you want to trigger your reflex when the temperature is above 41 or below 33 degrees. Since we're looking for a numeric range, select the **Numeric** button and select the **Exits range** condition.
+You're almost there! You just need to define what action you want to take when the trigger fires. In this case, you want to send an email to the shipping department.
 
-    ![Screenshot of the Data Activator reflex Design choose condition type.](./Images/data-activator-trigger-select-condition-type.png)
-
-1. Now you need to enter the values for your condition. Enter ***33*** and ***41*** as your range values. Since you choose the *exits numeric range* condition, the trigger should fire when the temperature is below *33* or above *41* degrees.
-
-    ![Screenshot of the Data Activator reflex Design enter condition values.](./Images/data-activator-trigger-select-condition-define.png)
-
-1. So far you´ve defined the property and condition you want the trigger to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  Select the **Add filter** button, set the property to ***City*** , set the relationship to ***Equal***, and enter ***Redmond*** as the value. Then, add a new filter with the ***SpecialCare*** property, set it to ***Equal*** and enter ***Medicine*** as the value.
-
-    ![Screenshot of the Data Activator reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter.png)
-
-1. Let's add one more filter just to make sure that the medicine is refrigerated. Select the **Add filter** button, set the ***ColdChainType*** property, set it to ***Equal*** and enter ***Refrigerated*** as the value.
-
-    ![Screenshot of the Data Activator reflex Design add filter.](./Images/data-activator-trigger-select-condition-add-filter-additional.png)
-
-1. You're almost there! You just need to define what action you want to take when the trigger fires. In this case, you want to send an email to the shipping department. Select the **Email** button.
-
-    ![Screenshot of the Data Activator add action.](./Images/data-activator-trigger-select-action.png)
-
-1. Enter the following values for your email action:
-
-    - **Send to**: Your current user account should be selected by default, which should be fine for this lab.
+1. In the **Action** section, enter the following values:
+    - **Type**: Email
+    - **To**: Your current user account should be selected by default, which should be fine for this lab.
     - **Subject**: *Redmond Medical Package outside acceptable temperature range*
-    - **Headline**: *Temperature too high or too low*
-    - **Additional information**: Select the *Temperature* property from the checkbox list.
+    - **Headline**: *Temperature too high*
+    - **Context**: Select the *Temperature* property from the checkbox list.
 
-    ![Screenshot of the Data Activator define action.](./Images/data-activator-trigger-define-action.png)
+    ![Screenshot of the Data Activator define action.](./Images/activator-define-action.png)
 
-1. Select **Save** and then **Start** from the top menu.
+1. Select **Save and start**.
 
-You have now created and started a trigger in Data Activator.
+You have now created and started a rule in your Activator. The rule should trigger several times every hour.
 
-## Update and stop a trigger
-
-The only problem with this trigger is that while the trigger sent an email with the temperature, the trigger didn't send the *PackageId* of the package. Let's go ahead and update the trigger to include the *PackageId*.
-
-1. Select the **Packages in Transit** event from the **Redmond Packages** object and select **New Property** from the top menu.
-
-    ![Screenshot of the Data Activator select event from object.](./Images/data-activator-trigger-select-event.png)
-
-1. Let's add the **PackageId** property by selecting the column from the *Packages in Transit* event. Don't forget to change the property name from *Untitled* to *PackageId*.
-
-    ![Screenshot of the Data Activator create property.](./Images/data-activator-trigger-create-new-property.png)
-
-1. Let's update our trigger action. Select the **Medicine temp out of range** trigger, scroll to the **Act** section at bottom, select the **Additional information** and add the **PackageId** property. DO NOT select the **Save** button yet.
-
-    ![Screenshot of the Data Activator add property to trigger.](./Images/data-activator-trigger-add-property-existing-trigger.png)
-
-1. Since you updated the trigger, the correct action should be to update and not save the trigger, but for this lab we do the opposite and select **Save** button instead of **Update** button to also see what happens. The reason you should have selected the *Update* button is because when you select to *update* the trigger it both saves the trigger and updates the currently running trigger with the new conditions. If you just select the *Save* button, the currently running trigger doesn't apply the new conditions until you select to update the trigger. Let's go ahead and select the **Save** button.
-
-1. Because you selected to *Save* instead of *Update*, you noticed that the message *There's a property update available. Update now to ensure the trigger has the most recent changes* appears at the top of the screen. The message additionally has an *Update* button. Let's go ahead and select the **Update** button.
-
-    ![Screenshot of the Data Activator update trigger.](./Images/data-activator-trigger-updated.png)
-
-1. Stop the trigger by selecting the **Stop** button from the top menu.
+1. Once you have verified that the rule works, you can turn it off using the **Stop** button on the ribbon.
 
 ## Clean up resources
 
-In this exercise, you have created a reflex with a trigger in Data Activator. You should now be familiar with the Data Activator interface and how to create a reflex and it objects, trigger and properties.
+In this exercise, you have created an Activator with an alert rule. You should now be familiar with the Activator interface and how to create objects, properties, and rules.
 
-If you've finished exploring your Data Activator reflex, you can delete the workspace you created for this exercise.
+If you've finished exploring your Activator, you can delete the workspace you created for this exercise.
 
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-2. In the **...** menu on the toolbar, select **Workspace settings**.
+1. In the left navigation bar, select the icon for your workspace to view all of the items it contains.
+2. In the menu on the top toolbar, select **Workspace settings**.
 3. In the **General** section, select **Remove this workspace**.
