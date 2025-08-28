@@ -8,7 +8,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Scenario
 
-In this scenario, you're a data analyst for a company that sells and ships a range of products.  You're responsible for the data of all shipments and sales to the city of Redmond. You want to create a reflex that monitors the packages that are out for delivery. One category of products you ship is medical prescriptions that need to be refrigerated at a particular temperature during transit. You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond. Let's get started!
+In this scenario, you're a data analyst for a company that sells and ships a range of products.  You're responsible for the data of all shipments and sales to the city of Redmond. You want to create an alert rule that monitors the packages that are out for delivery. One category of products you ship is medical prescriptions that need to be refrigerated at a particular temperature during transit. You want to create an alert that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should be between 33 degrees and 41 degrees. Since the Activator events already contain a similar trigger, you create one specifically for the packages shipped to the city of Redmond. Let's get started!
 
 ## Create a workspace
 
@@ -38,44 +38,39 @@ Next, create an Activator in the workspace you created:
     ![Screenshot of the Data Activator Home screen.](./Images/activator-home-screen.png)
 
 1. On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Activator. Select the **Try sample** tile to populate your activator with sample data.
-1. By default, the Activator is created with the name *Activator YYYY-MM-DD hh:mm:ss*. Since you may have multiple activators in your workspace, you should change the default name to a more descriptive one. Select the pulldown besides the current reflex name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
+1. By default, the Activator is created with the name *Activator YYYY-MM-DD hh:mm:ss*. Since you may have multiple activators in your workspace, you should change the default name to a more descriptive one. Select the pulldown besides the current Activator name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
 
     ![Screenshot of the Data Activator reflex home screen.](./Images/activator-reflex-home-screen.png)
 
-Our reflex project is now created and we can start adding triggers and actions to it.
+Our Activator project is now created and we can start adding triggers and actions to it.
 
 ## Get familiar with the Activator home screen
 
 Let's explore the eventstream data this sample is built on.
 
-1. The new activator has an **Explorer** section. Scroll down and select the **Package delivery events** stream.
+1. In the **Explorer** pane, scroll down and select the **Package delivery events** stream.
 
-These events show the real-time status of packages that are in the process of being delivered.
+    These events show the real-time status of packages that are in the process of being delivered.
 
+    ![Screenshot of the Event details live table.](./Images/activator-event-details.png)
 
-### Design mode
+1. Review the data in the **Event details** live table. Each data point contains information about incoming events. You might have to scroll to see it all.
 
-If you're not currently in *Design* mode, select the **Design** tab on the bottom left of the screen.
+The **Explorer** pane displays objects that use data from eventstreams. These objects have properties from which rules can be created. In this example, **Package** is the object created from the **Package delivery events** eventstream.
 
-![Screenshot of the Data Activator reflex Design mode.](./Images/data-activator-design-tab.png)
+1. In the **Explorer** pane, under the **Temperature** property, select the rule **Too hot for medicine**.
+1. In the **Definition** pane, review how the rule works. In the **Monitor** section, the **Temperature** property is selected as attribute being monitored. The temperature values come from the Temperature column in the **Event details** table that we saw earlier in the eventstream. 
 
-To get familiar with the *Design* mode, select the different sections of the screen, triggers, properties and events. We cover each section in more detail in the following sections.
+    ![Screenshot of the temperature rule.](./Images/activator-temperature-rule.png) 
 
-### Data mode
-
-If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen. In a real world example, you would add your own data sources from your EventStreams and Power BI visuals here. For this lab, you´re using the sample data provided by Data Activator. This sample is already set up with three EventStreams that are monitoring the package delivery status.
-
-![Screenshot of the Data Activator reflex Data mode.](./Images/data-activator-data-tab.png)
-
-Select each of the different events and observe the data being used in the stream.
-
-![Screenshot of the Data Activator reflex Data mode events.](./Images/data-activator-get-data-tab-event-2.png)
-
-It's time to add a trigger to our reflex, but first, let's create a new object.
+1. In the **Condition** section, you see the rule condition to monitor temperatures that are higher than 20 degrees Celsius.
+1. In the **Property filter** section, you see a customized filter that ensures our rule applies only to packages containing medicine. In the eventstream table, the rule looks at the column named **SpecialCare**, here represented as the property *Special care contents*. In the *Special care contents* property, some of the packages have a value of Medicine.
+1. Lastly, we have the **Action** section. Our rule is set to send a Teams message if the condition is met. You can also set it to send an email instead.
+1. Select the action type that you prefer, verify that you are the recipient, and then select **Send me a test action**. You should receive the message set in the **Message** field with details about the trigger, such as activation time and package ID.
 
 ## Create an object
 
-In a real world scenario, there might not be a need to create a new object for this reflex since the Data Activator sample already includes an object called *Package*. But for this lab, we create a new object to demonstrate how to create one. Let's create a new object called *Redmond Packages*.
+In a real world scenario, there might not be a need to create a new object for this eventstream since the Activator sample already includes an object called *Package*. But for this lab, we create a new object to demonstrate how to create one. Let's create a new object called *Redmond Packages*.
 
 1. If you're not currently in *Data* mode, select the **Data** tab on the bottom left of the screen.
 
@@ -99,9 +94,9 @@ In a real world scenario, there might not be a need to create a new object for t
 
     ![Screenshot of the Data Activator reflex Design mode with new object.](./Images/data-activator-design-tab-new-object.png)
 
-Time to create your trigger.
+Time to create your rule.
 
-## Create a trigger
+## Create a rule
 
 Let's review what you want your trigger to do: *You want to create a reflex that sends an email to the shipping department if the temperature of a package containing a prescription is higher or lower than a certain threshold. The ideal temperature should between 33 degrees and 41 degrees. Since the reflex events already contain a similar trigger, you´ll create one specifically for the packages shipped to the city of Redmond*.
 
