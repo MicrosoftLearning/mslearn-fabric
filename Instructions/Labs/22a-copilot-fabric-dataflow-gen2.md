@@ -36,13 +36,13 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
 
     > **Important**: Copilot features in Fabric require a paid capacity (F2 or higher). Trial workspaces don't support Copilot functionality.
 
-4. When your new workspace opens, it should be empty.
+1. When your new workspace opens, it should be empty.
 
 ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
@@ -66,7 +66,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 ![Screenshot of a new dataflow.](./Images/copilot-fabric-dataflow-new.png)
 
-2. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
+1. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
 
  - **Link to file**: *Selected*
  - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22a/Store.csv`
@@ -75,15 +75,15 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
  - **Authentication kind**: Anonymous
  - **Privacy Level**: None
 
-3. Select **Next** to preview the file data, and then **Create** the data source. The Power Query editor shows the data source and an initial set of query steps to format the data, as shown here:
+1. Select **Next** to preview the file data, and then **Create** the data source. The Power Query editor shows the data source and an initial set of query steps to format the data, as shown here:
 
 ![Screenshot of a query in the Power Query editor.](./Images/copilot-fabric-dataflow-power-query.png)
 
-4. On the **Home** ribbon tab, from inside the **Insights** group, select **Copilot**, as shown here:
+1. On the **Home** ribbon tab, from inside the **Insights** group, select **Copilot**, as shown here:
     
 ![Screenshot of the Copilot pane opened in the dataflow.](./Images/copilot-fabric-dataflow-copilot-pane.png)
 
-5. The column names are currently too generic and lack clear meaning (likely showing as Column1, Column2, etc.). Meaningful column names are crucial for data understanding and downstream processing. Use the following prompt to refine them and ensure they convey the intended information accurately:
+1. The column names are currently too generic and lack clear meaning (likely showing as Column1, Column2, etc.). Meaningful column names are crucial for data understanding and downstream processing. Use the following prompt to refine them and ensure they convey the intended information accurately:
 
 ```copilot-prompt
 Rename columns to BusinessEntityID, Name, SalesPersonID, Demographics, rowguid, ModifiedDate
@@ -93,7 +93,7 @@ Take note that the column names are now accurate and descriptive. Furthermore, a
 
 ![Screenshot of columns renamed, as a result of a copilot prompt.](./Images/copilot-fabric-dataflow-step.png)
 
-6. Certain columns contain a '+' character at the end of their text values. This is a common data quality issue that can interfere with data analysis and processing downstream. 
+1. Certain columns contain a '+' character at the end of their text values. This is a common data quality issue that can interfere with data analysis and processing downstream. 
 
 ![Screenshot of certain columns that contain a '+' character.](./Images/copilot-fabric-dataflow-plus-character.png)
 
@@ -105,7 +105,7 @@ Delete the last character from the columns Name, Demographics, rowguid
 
 **Why this matters**: Removing extraneous characters ensures data consistency and prevents issues when performing string operations or data joins later in the process.
 
-7. The table contains some redundant columns that need to be removed to streamline our dataset and improve processing efficiency. Use the following prompt to refine the data accordingly:
+1. The table contains some redundant columns that need to be removed to streamline our dataset and improve processing efficiency. Use the following prompt to refine the data accordingly:
 
 ![Screenshot of certain columns that should be removed.](./Images/copilot-fabric-dataflow-remove-columns.png)
 
@@ -115,7 +115,7 @@ Remove the rowguid and Column7 columns
 
 **Note**: The `rowguid` column is typically used for internal database operations and isn't needed for analysis. `Column7` appears to be an empty or irrelevant column that adds no value to our dataset.
 
-8. The Demographics column includes an invisible Unicode character, the Byte Order Mark (BOM) \ufeff, which interferes with XML data parsing. We need to remove it to ensure proper processing. Enter the following prompt in the Copilot pane:
+1. The Demographics column includes an invisible Unicode character, the Byte Order Mark (BOM) \ufeff, which interferes with XML data parsing. We need to remove it to ensure proper processing. Enter the following prompt in the Copilot pane:
 
 ```copilot-prompt
 Remove the Byte Order Mark (BOM) \ufeff from the Demographics column
@@ -127,7 +127,7 @@ Notice the formula that was generated to remove the character:
 
 ![Screenshot of the dataflow formula with the bom character removed.](./Images/copilot-fabric-dataflow-bom-character.png)
 
-9. We are now prepared to parse the XML data and expand it into separate columns. The Demographics column contains XML-formatted data that holds valuable store information like annual sales, square footage, and other business metrics.
+1. We are now prepared to parse the XML data and expand it into separate columns. The Demographics column contains XML-formatted data that holds valuable store information like annual sales, square footage, and other business metrics.
 
 ![Screenshot of the dataflow table with a focus on the XML fields](./Images/copilot-fabric-dataflow-xml.png)
 
@@ -143,7 +143,7 @@ Notice new columns have been added to the table (you might need to scroll to the
 
 ![Screenshot of the dataflow table with the XML fields expanded.](./Images/copilot-fabric-dataflow-copilot-xml-fields-expanded.png)
 
-10. Remove the Demographics column, as we no longer need it since we've extracted all the valuable information into separate columns. Enter the following prompt in the Copilot pane:
+1. Remove the Demographics column, as we no longer need it since we've extracted all the valuable information into separate columns. Enter the following prompt in the Copilot pane:
 
 ```copilot-prompt
 Remove the Demographics column.
@@ -151,7 +151,7 @@ Remove the Demographics column.
 
 **Why remove this column**: Now that we've parsed the XML and created individual columns for each piece of information, the original Demographics column containing the raw XML is redundant and can be safely removed to keep our dataset clean.
 
-11. The ModifiedDate column has an ampersand (&) at the end of its values. It needs to be removed before parsing to ensure proper data processing.
+1. The ModifiedDate column has an ampersand (&) at the end of its values. It needs to be removed before parsing to ensure proper data processing.
 
 ![Screenshot of the dataflow table with the modified date having an ampersand.](./Images/copilot-fabric-dataflow-modified-date.png)
 
@@ -161,7 +161,7 @@ Enter the following prompt in the Copilot pane:
 Remove the last character from the ModifiedDate
 ```
 
-12. We are now ready to convert its data type to DateTime for proper date/time operations and analysis. Enter the following prompt in the Copilot pane:
+1. We are now ready to convert its data type to DateTime for proper date/time operations and analysis. Enter the following prompt in the Copilot pane:
 
 ```copilot-prompt
 Set the data type to DateTime
@@ -173,7 +173,7 @@ Notice the ModifiedDate data type has changed to DateTime:
 
 ![Screenshot of the dataflow modified date type correct.](./Images/copilot-fabric-dataflow-modified-date-type-correct.png)
 
-13. Adjust the data types of several columns to numeric values to enable mathematical operations and proper aggregations. Enter the following prompt in the Copilot pane:
+1. Adjust the data types of several columns to numeric values to enable mathematical operations and proper aggregations. Enter the following prompt in the Copilot pane:
 
 ```copilot-prompt
 Set the data type to whole number for the following columns: AnnualSales, AnnualRevenue, SquareFeet, NumberEmployee
@@ -181,7 +181,7 @@ Set the data type to whole number for the following columns: AnnualSales, Annual
 
 **Why convert to numbers**: Having numeric data types allows for proper mathematical calculations, aggregations (sum, average, etc.), and statistical analysis that wouldn't be possible with text-based data.
 
-14. The SquareFeet field holds numerical values ranging from 6,000 to 80,000. Creating categorical groupings from continuous numeric data is a common analytical technique that makes data easier to interpret and analyze.
+1. The SquareFeet field holds numerical values ranging from 6,000 to 80,000. Creating categorical groupings from continuous numeric data is a common analytical technique that makes data easier to interpret and analyze.
 
 ![Screenshot of the dataflow table with the square feet column profile highlighted.](./Images/copilot-fabric-dataflow-square-feet.png)
 
@@ -198,7 +198,7 @@ Notice a new column StoreSize has been added, with a formula based on the Square
 
 ![Screenshot of the dataflow table with the store size field, formula and column profile.](./Images/copilot-fabric-dataflow-store-size.png)
 
-15. Modify the data types of columns that currently lack a specified type. Enter the following prompt in the Copilot pane:
+1. Modify the data types of columns that currently lack a specified type. Enter the following prompt in the Copilot pane:
 
 ```copilot-prompt
 Set the datatype of the following columns to text: Name, BankName, BusinessType, YearOpened, Specialty, Brands, Internet, StoreSize
@@ -240,21 +240,21 @@ Observe that the result appears in the Copilot pane. Below is an example of the 
 
    > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
 
-2. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
+1. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
 ![Data destination configuration page.](./Images/dataflow-connection.png)
 
-3. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **Store**:
+1. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **Store**:
 
 ![Data destination configuration page.](./Images/copilot-fabric-dataflow-choose-destination.png)
 
-4. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
+1. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
 
     > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
 ![Data destination settings page.](./Images/copilot-fabric-dataflow-destination-column-mapping.png)
 
-5. Select **Save & run** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
+1. Select **Save & run** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
 ## Validate your work
 
@@ -262,9 +262,9 @@ Now it's time to validate the ETL process from the dataflow and ensure all trans
 
 1. Navigate back to your workspace and open the lakehouse you created earlier.
 
-2. In the lakehouse, locate and open the **Store** table. (You might need to wait a few minutes before it gets populated as the dataflow processes the data.)
+1. In the lakehouse, locate and open the **Store** table. (You might need to wait a few minutes before it gets populated as the dataflow processes the data.)
 
-3. Observe the following key aspects of your transformed data:
+1. Observe the following key aspects of your transformed data:
 
    - **Column names**: Verify they match the meaningful names you specified (BusinessEntityID, Name, SalesPersonID, etc.)
    - **Data types**: Check that numeric columns show as numbers, DateTime columns show as date/time, and text columns show as text
@@ -282,7 +282,7 @@ Now it's time to validate the ETL process from the dataflow and ensure all trans
 If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
 
 1. Navigate to Microsoft Fabric in your browser.
-2. In the bar on the left, select the icon for your workspace to view all of the items it contains.
-3. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
-4. Select **Delete** to delete the workspace.
+1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+1. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
+1. Select **Delete** to delete the workspace.
 

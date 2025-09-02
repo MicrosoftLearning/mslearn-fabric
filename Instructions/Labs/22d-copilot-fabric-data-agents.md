@@ -35,13 +35,13 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 
-2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 
-3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
    
    > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
 
-4. When your new workspace opens, it should be empty.
+41 When your new workspace opens, it should be empty.
 
 ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
@@ -61,13 +61,13 @@ Now that you have a workspace, it's time to create a data warehouse. A data ware
 
 A warehouse is a relational database in which you can define tables and other objects. To make our data agent useful, we need to populate it with sample sales data. The script we'll run creates a typical data warehouse schema with dimension tables (containing descriptive attributes) and a fact table (containing measurable business events). This star schema design is optimized for analytical queries that the data agent will generate.
 
-1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22c/create-dw.txt` into the new query pane.
+1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22d/create-dw.txt` into the new query pane.
 
    > **What this script does**: The script creates a complete sales data warehouse with customer information, product details, date dimensions, and sales transactions. This realistic dataset will allow us to ask meaningful business questions to our data agent.
 
-2. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
+1. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run.
 
-3. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
+1. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
     - **DimCustomer** - Contains customer information including names, locations, and contact details
     - **DimDate** - Contains date-related attributes like fiscal years, quarters, and months for time-based analysis
     - **DimProduct** - Contains product information including names, categories, and pricing
@@ -82,21 +82,21 @@ A Fabric data agent is an AI-powered assistant that can understand natural langu
 1. Create a new data agent.
    ![Screenshot of creating a new data agent](./Images/copilot-fabric-data-agent-new.png)
 
-2. Give it a name like **`sales-data-agent`**.
+1. Give it a name like **`sales-data-agent`**.
 
    > **Why naming matters**: A descriptive name helps you and your team understand the purpose and scope of this data agent, especially when managing multiple agents for different data domains.
 
    ![Screenshot of creating a new data agent and assigning it a name.](./Images/copilot-fabric-data-agent-create.png)
 
-3. Select **Add a data source**. 
+1. Select **Add a data source**. 
 
    ![Screenshot of data agent created.](./Images/copilot-fabric-data-agent-created.png)
 
-4. Choose the data warehouse you created earlier.
+1. Choose the data warehouse you created earlier.
 
    > **Connecting to your data**: The data agent needs access to your tables to understand the schema and relationships. This allows it to generate accurate SQL queries based on your questions.
 
-5. Expand the data warehouse, and check **DimCustomer**, **DimDate**, **DimProduct** and **FactSalesOrder**.
+1. Expand the data warehouse, and check **DimCustomer**, **DimDate**, **DimProduct** and **FactSalesOrder**.
 
    > **Table selection strategy**: By selecting all four tables, we're giving the data agent access to the complete data model. This enables it to answer complex questions that span multiple tables, such as sales trends by customer location or product performance over time.
 
@@ -114,7 +114,7 @@ How many products did we sell by fiscal year?
 
 Note the resulting answer: We sold a total of 12,630 products in the fiscal year 2021 and 13,336 products in the fiscal year 2022.
 
-2. Expand the step completed and its substep. This reveals the SQL query that was generated by the data agent in order to answer the question.
+1. Expand the step completed and its substep. This reveals the SQL query that was generated by the data agent in order to answer the question.
 
    > **Learning opportunity**: By examining the generated SQL, you can understand how the data agent interpreted your question and learn about the underlying data relationships. This transparency builds trust in the AI-generated results.
 
@@ -132,7 +132,7 @@ ORDER BY d.Year;
 
    > **SQL Explanation**: This query joins the fact table (FactSalesOrder) with the date dimension (DimDate) to group sales by year and sum the quantities. Notice how the data agent automatically understood that "products sold" refers to the Quantity field and "fiscal year" maps to the Year field in the date dimension.
 
-3. Continue with the following question: 
+1. Continue with the following question: 
 
 ```copilot-prompt
 What are the top 10 most popular products all time?
@@ -140,7 +140,7 @@ What are the top 10 most popular products all time?
 
    > **What to expect**: This question will demonstrate how the data agent can perform ranking operations, joining product information with sales data to identify bestsellers.
 
-4. Follow up with this question: 
+1. Follow up with this question: 
 
 ```copilot-prompt
 What are the historical trends across all my data?
@@ -148,7 +148,7 @@ What are the historical trends across all my data?
 
    > **Advanced analytics**: This broader question will show how the data agent can provide trend analysis across multiple dimensions, potentially including time-based patterns in sales, customer behavior, and product performance.
 
-5. Try additional questions to explore different aspects of your data:
+1. Try additional questions to explore different aspects of your data:
 
 ```copilot-prompt
 In which countries are our customers located?
