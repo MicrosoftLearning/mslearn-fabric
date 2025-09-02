@@ -67,31 +67,11 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customers** table has been created. The `SELECT` statement returns unmasked data for you because as the workspace creator, you're a member of the Workspace Admin role which can see unmasked data.
 
-4. Connect as a test user that's a member of the **Viewer** workspace role and run the following T-SQL statement.
-
-    ```T-SQL
-   SELECT * FROM dbo.Customers;
-    ```
-    
-    The test user hasn't been granted UNMASK permission so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement:
-
-   ![Screenshot of the Customers table with masked data.](./Images/masked-table.png)
-
-6. Reconnect as yourself, the Workspace Admin, and run the following T-SQL to unmask data for the test user. Replace `<username>@<your_domain>.com` with the name of the user you're testing with who is a member of the **Viewer** workspace role. 
-
-    ```T-SQL
-   GRANT UNMASK ON dbo.Customers TO [<username>@<your_domain>.com];
-    ```
-
-7. Connect as the test user again and run the following T-SQL statement.
-
-    ```T-SQL
-   SELECT * FROM dbo.Customers;
-    ```
-
-    The data is returned unmasked because the test user has been granted the `UNMASK` permission:
-
-    ![Screenshot of the Customers table with unmasked data.](./Images/unmasked-table.png)
+    >**Note**: If you connect as a test user that's a member of the **Viewer** workspace role and run a `SELECT` statement on the **Customers** table, you'll see similar results for the masked data.
+   
+    ![Screenshot of the Customers table with masked data.](./Images/masked-table.png)
+ 
+    The test user hasn't been granted UNMASK permission, so data returned for the FirstName, Phone, and Email columns is masked because those columns were defined with a mask in the `CREATE TABLE` statement.
 
 ## Apply row-level security
 
