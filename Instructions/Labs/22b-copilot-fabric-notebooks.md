@@ -227,7 +227,7 @@ Let's now go ahead and transform the data. We need to make sure the first field 
 ```copilot-prompt
 %%code
 
-Split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
+From the currently loaded DataFrame, split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
 ```
 
 2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -264,7 +264,7 @@ Some fields in the table offer no meaningful value, as they contain only a singl
 ```copilot-prompt
 %%code
 
-Remove the fields 'freq', 'age', 'unit'.
+From the currently loaded DataFrame, remove the fields 'freq', 'age', 'unit'.
 ```
 
 5. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -290,7 +290,7 @@ Organizing your data with the most important identifying columns first makes it 
 ```copilot-prompt
 %%code
 
-The fields 'projection', 'sex', 'geo' should be positioned first.
+From the currently loaded DataFrame, the fields 'projection', 'sex', 'geo' should be positioned first.
 ```
 
 2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -320,12 +320,12 @@ The projection field currently contains cryptic codes that aren't user-friendly.
 %%code
 
 The 'projection' field contains codes that should be replaced with the following values:
-    _'BSL' -> 'Baseline projections'.
-    _'LFRT' -> 'Sensitivity test: lower fertility'.
-    _'LMRT' -> 'Sensitivity test: lower mortality'.
-    _'HMIGR' -> 'Sensitivity test: higher migration'.
-    _'LMIGR' -> 'Sensitivity test: lower migration'.
-    _'NMIGR' -> 'Sensitivity test: no migration'.
+- 'BSL' -> 'Baseline projections'.
+- 'LFRT' -> 'Sensitivity test: lower fertility'.
+- 'LMRT' -> 'Sensitivity test: lower mortality'.
+- 'HMIGR' -> 'Sensitivity test: higher migration'.
+- 'LMIGR' -> 'Sensitivity test: lower migration'.
+- 'NMIGR' -> 'Sensitivity test: no migration'.
 ```
 
 2. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
