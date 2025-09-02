@@ -61,7 +61,7 @@ Now that you have a workspace, it's time to create a data warehouse. A data ware
 
 A warehouse is a relational database in which you can define tables and other objects. To make our data agent useful, we need to populate it with sample sales data. The script we'll run creates a typical data warehouse schema with dimension tables (containing descriptive attributes) and a fact table (containing measurable business events). This star schema design is optimized for analytical queries that the data agent will generate.
 
-1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22c/create-dw.txt` into the new query pane.
+1. On the **Home** menu tab, use the **New SQL Query** button to create a new query. Then copy and paste the Transact-SQL code from `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22d/create-dw.txt` into the new query pane.
 
    > **What this script does**: The script creates a complete sales data warehouse with customer information, product details, date dimensions, and sales transactions. This realistic dataset will allow us to ask meaningful business questions to our data agent.
 
