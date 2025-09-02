@@ -67,7 +67,7 @@ Dynamic data masking rules are applied on individual columns at the table level 
 
 3. Then, in the **Explorer** pane, expand **Schemas** > **dbo** > **Tables** and verify that the **Customers** table has been created. The `SELECT` statement returns unmasked data for you because as the workspace creator, you're a member of the Workspace Admin role which can see unmasked data.
 
-    >**Note**: If you connect as a test user that's a member of the **Viewer** workspace role and run a `SELECT` statement on the **Customers** table, you'll see similar results for the masked data.
+    >**Note**: If you connect as a test user that's a member of the **Viewer** workspace role and run a `SELECT` statement on the **Customers** table, you'll see the following results for the masked data.
    
     ![Screenshot of the Customers table with masked data.](./Images/masked-table.png)
  
