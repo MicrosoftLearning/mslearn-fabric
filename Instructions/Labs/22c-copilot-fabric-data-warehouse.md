@@ -39,7 +39,7 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
    
-   > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
+    > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
 
 1. When your new workspace opens, it should be empty.
 
@@ -55,7 +55,7 @@ Now that you have a workspace, it's time to create a data warehouse. A data ware
 
     After a minute or so, a new warehouse will be created. The provisioning process sets up the underlying infrastructure and creates the necessary components for your analytical database:
 
-![Screenshot of a new warehouse.](./Images/new-data-warehouse2.png)
+    ![Screenshot of a new warehouse.](./Images/new-data-warehouse2.png)
 
 ## Create tables and insert data
 
@@ -66,6 +66,7 @@ A warehouse is a relational database in which you can define tables and other ob
 1. Run the query, which creates a simple data warehouse schema and loads some data. The script should take around 30 seconds to run. During this time, the database engine is creating the table structures and populating them with sample retail sales data.
 
 1. Use the **Refresh** button on the toolbar to refresh the view. Then in the **Explorer** pane, verify that the **dbo** schema in the data warehouse now contains the following four tables:
+   
     - **DimCustomer** - Contains customer information including names and addresses
     - **DimDate** - A date dimension table with calendar information (year, month, day names, etc.)
     - **DimProduct** - Product catalog with categories, names, and pricing information
@@ -81,85 +82,85 @@ Since the data warehouse is a relational database, you can use SQL to query its 
 
 1. From the Home ribbon, select the Copilot option. This opens the Copilot assistant pane where you can interact with AI to generate queries.
 
-![Screenshot of Copilot pane opened in the warehouse.](./Images/copilot-fabric-data-warehouse-start.png)
+    ![Screenshot of Copilot pane opened in the warehouse.](./Images/copilot-fabric-data-warehouse-start.png)
 
 1. Let’s start by exploring what Copilot can do. Click on the suggestion labeled `What can Copilot do?` and send it as your prompt.
 
-Read the output and observe Copilot is currently in preview and can help with brainstorming, generating SQL queries, explain and fix queries, etc.
-
-![Screenshot of Copilot pane with help in the warehouse.](./Images/copilot-fabric-data-warehouse-pane.png)
-
+    Read the output and observe Copilot is currently in preview and can help with brainstorming, generating SQL queries, explain and fix queries, etc.
+    
+    ![Screenshot of Copilot pane with help in the warehouse.](./Images/copilot-fabric-data-warehouse-pane.png)
+    
 1. We're aiming to analyze sales revenue by month. This is a common business requirement - understanding revenue trends over time helps identify seasonal patterns, growth trends, and performance metrics. Enter the following prompt and send it.
 
-```copilot-prompt
-/generate-sql Calculate monthly sales revenue
-```
+    ```copilot-prompt
+    /generate-sql Calculate monthly sales revenue
+    ```
 
 1. Review the output that was generated, which might differ slightly depending on your environment and the latest updates to Copilot. Notice how Copilot interprets your request and creates appropriate JOIN statements between the fact and dimension tables to aggregate sales data by month.
 
 1. Select the **Insert Code** icon located at the top-right corner of the query. This transfers the generated SQL from the Copilot pane into your SQL editor, where you can execute it.
 
-![Screenshot of Copilot pane with first sql query.](./Images/copilot-fabric-data-warehouse-sql-1.png)
+    ![Screenshot of Copilot pane with first sql query.](./Images/copilot-fabric-data-warehouse-sql-1.png)
 
 1. Execute the query by selecting the ▷ **Run** option above the query and observe the output. You should see monthly revenue totals that demonstrate how your sales data is aggregated across time periods.
 
-![Screenshot of sql query results.](./Images/copilot-fabric-data-warehouse-sql-1-results.png)
+    ![Screenshot of sql query results.](./Images/copilot-fabric-data-warehouse-sql-1-results.png)
 
 1. Create a **New SQL Query**, and ask a follow-up question to also include the month name and sales region in the results. This demonstrates how you can iteratively refine your queries with Copilot - building on previous requests to create more detailed analysis:
 
-```copilot-prompt
-/generate-sql Retrieves sales revenue data grouped by year, month, month name and sales region
-```
+    ```copilot-prompt
+    /generate-sql Retrieves sales revenue data grouped by year, month, month name and sales region
+    ```
 
 1. Select the **Insert Code** icon and ▷ **Run** the query. Observe the output it returns. Notice how Copilot adapts the query to include additional dimensions while maintaining the core revenue calculation logic.
 
 1. Let's create a view from this query by asking Copilot the following question. Views are virtual tables that store query logic, making it easier to reuse complex queries and provide consistent data access patterns for reporting and analysis:
 
-```copilot-prompt
-/generate-sql Create a view in the dbo schema that shows sales revenue data grouped by year, month, month name and sales region
-```
+    ```copilot-prompt
+    /generate-sql Create a view in the dbo schema that shows sales revenue data grouped by year, month, month name and sales region
+    ```
 
 1. Select the **Insert Code** icon and ▷ **Run** the query. Review the output it generates. 
 
-The query does not execute successfully because the SQL statement includes the database name as a prefix, which is not allowed in the data warehouse when defining a view. This is a common syntax issue when working across different database platforms - what works in one environment might need adjustment in another.
+    The query does not execute successfully because the SQL statement includes the database name as a prefix, which is not allowed in the data warehouse when defining a view. This is a common syntax issue when working across different database platforms - what works in one environment might need adjustment in another.
 
 1. Select the **Fix query errors** option. Observe how Copilot makes corrections to the query. This demonstrates one of Copilot's powerful features - not only can it generate queries, but it can also troubleshoot and fix syntax errors automatically.
 
-![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
-
-Here's an example of the query it corrected - notice the `Auto-Fix` comments that explain what changes were made:
-
-```sql
--- Auto-Fix: Removed the database name prefix from the CREATE VIEW statement
-CREATE VIEW [dbo].[SalesRevenueView] AS
-SELECT 
-    [DD].[Year],
-    [DD].[Month],
-    [DD].[MonthName],
+    ![Screenshot of sql query with error.](./Images/copilot-fabric-data-warehouse-view-error.png)
+    
+    Here's an example of the query it corrected - notice the `Auto-Fix` comments that explain what changes were made:
+    
+    ```sql
+    -- Auto-Fix: Removed the database name prefix from the CREATE VIEW statement
+    CREATE VIEW [dbo].[SalesRevenueView] AS
+    SELECT 
+        [DD].[Year],
+        [DD].[Month],
+        [DD].[MonthName],
+        -- NOTE: I couldn't find SalesRegion information in your warehouse schema
+        SUM([FS1].[SalesTotal]) AS [TotalRevenue]
+    FROM 
+        [dbo].[FactSalesOrder] AS [FS1] -- Auto-Fix: Removed the database name prefix
+    JOIN 
+        [dbo].[DimDate] AS [DD] ON [FS1].[SalesOrderDateKey] = [DD].[DateKey] -- Auto-Fix: Removed the database name prefix
     -- NOTE: I couldn't find SalesRegion information in your warehouse schema
-    SUM([FS1].[SalesTotal]) AS [TotalRevenue]
-FROM 
-    [dbo].[FactSalesOrder] AS [FS1] -- Auto-Fix: Removed the database name prefix
-JOIN 
-    [dbo].[DimDate] AS [DD] ON [FS1].[SalesOrderDateKey] = [DD].[DateKey] -- Auto-Fix: Removed the database name prefix
--- NOTE: I couldn't find SalesRegion information in your warehouse schema
-GROUP BY 
-    [DD].[Year],
-    [DD].[Month],
-    [DD].[MonthName]; 
-```
-
-Notice how Copilot not only fixed the syntax errors but also provided helpful comments explaining the changes and noting that sales region information wasn't available in the current schema.
+    GROUP BY 
+        [DD].[Year],
+        [DD].[Month],
+        [DD].[MonthName]; 
+    ```
+    
+    Notice how Copilot not only fixed the syntax errors but also provided helpful comments explaining the changes and noting that sales region information wasn't available in the current schema.
 
 1. Enter another prompt to retrieve a detailed product listing, organized by category. This query will demonstrate more advanced SQL features like window functions for ranking data within groups. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
 
-```copilot-prompt
-/generate-sql Retrieve a detailed product listing, organized by category. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
-```
+    ```copilot-prompt
+    /generate-sql Retrieve a detailed product listing, organized by category. For each product category, it should display the available products along with their list prices and rank them within their respective categories based on price. 
+    ```
 
 1. Select the **Insert Code** icon and ▷ **Run** the query. Observe the output it returns. 
 
-This allows for easy comparison of products within the same category, helping identify the most and least expensive items. The ranking functionality is particularly useful for product management, pricing analysis, and inventory decisions.
+    This allows for easy comparison of products within the same category, helping identify the most and least expensive items. The ranking functionality is particularly useful for product management, pricing analysis, and inventory decisions.
 
 ## Summary
 
