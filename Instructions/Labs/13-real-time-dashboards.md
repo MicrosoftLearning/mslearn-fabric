@@ -80,19 +80,22 @@ Currently there are no tables in the database. We'll use an eventstream to load 
 
 Now that you have a stream of real-time data being loaded into a table in the eventhouse, you can visualize it with a real-time dashboard.
 
-1. In the menu bar on the left, select the **Home** hub. Then on the home page, create a new **Real-Time Dashboard** named `bikes-dashboard`.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Real-Time Inteligence* section, select **Real-Time Dashboard** and name it `bikes-dashboard`.
+
+    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first. 
 
     A new empty dashboard is created.
 
 
     ![A screenshot of a new dashboard.](./Images/new-dashboard.png)
 
-1. In the toolbar, select **New data source** and add a new **One lake data hub** data source. Then select your eventhouse and create a new data source with the following settings:
+1. In the toolbar, select **New data source**, and then select **Eventhouse / KQL Database**. Then select your eventhouse and create a new data source with the following settings:
     - **Display name**: `Bike Rental Data`
     - **Database**: *The default database in your eventhouse*.
     - **Passthrough identity**: *Selected*
 
-1. Close the **Data sources** pane, and then on the dashboard design canvas, select **Add tile**.
+1. Select **Add**.
+1. On the dashboard design canvas, select **Add tile**.
 1. In the query editor, ensure that the **Bike Rental Data** source is selected and enter the following KQL code:
 
     ```kql
@@ -175,7 +178,7 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     | order by Neighbourhood asc
     ```
 
-1. Apply the changes and verify that the bar chart still displays data for all neighborhoods.
+1. Apply the changes and verify that the bar chart still displays data for all neighbourhoods.
 
 1. Edit the **Bike Locations** map visual, and change the query to the following code:
 
@@ -185,11 +188,11 @@ Your dashboard contains two visuals that are based on similar queries. To avoid 
     | order by Neighbourhood asc
     ```
 
-1. Apply the changes and verify that the map still displays data for all neighborhoods.
+1. Apply the changes and verify that the map still displays data for all neighbourhoods.
 
 ## Add a parameter
 
-Your dashboard currently shows the latest bike, dock, and location data for all neighborhoods. Now lets add a parameter so you can select a specific neighborhood.
+Your dashboard currently shows the latest bike, dock, and location data for all neighbourhoods. Now lets add a parameter so you can select a specific neighbourhood.
 
 1. On the dashboard toolbar, on the **Manage** tab, select **Parameters**.
 1. Note any existing parameters that have been automatically created (for example a *Time range* parameter). Then **Delete** them.
@@ -220,7 +223,7 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
 
 1. Select **Done** to create the parameter.
 
-    Now that you've added a parameter, you need to modify the base query to filter the data based on the chosen neighborhoods.
+    Now that you've added a parameter, you need to modify the base query to filter the data based on the chosen neighbourhoods.
 
 1. In the toolbar, select **Base queries**. Then select the **base_bike_data** query and edit it to add an **and** condition to the **where** clause to filter based on the selected parameter values, as shown in the following code:
 
@@ -233,7 +236,7 @@ Your dashboard currently shows the latest bike, dock, and location data for all 
 
 1. Select **Done** to save the base query.
 
-1. In the dashboard, use the **Neighbourhood** parameter to filter the data based on the neighborhoods you select.
+1. In the dashboard, use the **Neighbourhood** parameter to filter the data based on the neighbourhoods you select.
 
    ![A screenshot of a dashboard with parameters selected.](./Images/dashboard-parameters.png)
 
@@ -262,7 +265,7 @@ Your dashboard currently consists of a single page. You can add more pages to pr
 
 Users can manually refresh the dashboard, but it may be useful to have it automatically refresh the data at a set interval.
 
-1. On the dashboard toolbar, on the **Manage** tabe, select **Auto refresh**.
+1. On the dashboard toolbar, on the **Manage** tab, select **Auto refresh**.
 1. In the **Auto refresh** pane, configure the following settings:
     - **Enabled**: *Selected*
     - **Minimum time interval**: Allow all refresh intervals

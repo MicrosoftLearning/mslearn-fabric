@@ -40,7 +40,7 @@ Now you're ready to find and ingest real-time data from a streaming source. To d
 
     ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
 
-1. Select **Next** and wait for the source and eventstream to be created, then select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
+1. Select **Next**, then **Connect** and wait for the source and eventstream to be created, then select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
 
    ![Screenshot of the eventstream canvas.](./Images/new-stock-stream.png)
 
@@ -73,7 +73,7 @@ The eventstream ingests the real-time stock data, but doesn't currently do anyth
 
     The connection between the stream and the table has been created. Let's verify that in the eventstream.
 
-1. In the menu bar on the left, select the **Real-Time** hub and then view the **My data streams** page. In the **...** menu for the **stock-data-stream** stream, select **Open eventstream**.
+1. In the menu bar on the left, select the **Real-Time** hub. In the **...** menu for the **stock-data-stream** stream, select **Open eventstream**.
 
     The eventstream now shows a destination for the stream:
 
@@ -119,14 +119,14 @@ The eventstream captures real-time stock market data and loads it into a table i
 Now that you have a table that is being populated by stream of data, you can use a real-time dashboard to visualize the data.
 
 1. In the query editor, select the KQL query you used to retrieve the average stock prices for the last five minutes.
-1. On the toolbar, select **Pin to dashboard**. Then pin the query **in a new dashboard** with the following settings:
+1. On the toolbar, select **Save to dashboard**. Then pin the query **in a new dashboard** with the following settings:
     - **Dashboard name**: `Stock Dashboard`
     - **Tile name**: `Average Prices`
 1. Create the dashboard and open it. It should look like this:
 
     ![Screenshot of a new dashboard.](./Images/stock-dashboard-table.png)
 
-1. At the top of the dashboard, switch from **Viewing** mode to **Editing** mode.
+1. At the top-right of the dashboard, switch from **Viewing** mode to **Editing** mode.
 1. Select the **Edit** (*pencil*) icon for the **Average Prices** tile.
 1. In the **Visual formatting** pane, change the **Visual** from *Table* to *Column chart*:
 
