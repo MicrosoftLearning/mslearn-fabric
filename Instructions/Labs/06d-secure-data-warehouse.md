@@ -8,7 +8,7 @@ lab:
 
 Microsoft Fabric permissions and granular SQL permissions work together to govern Warehouse access and user permissions. In this exercise, you'll secure data using granular permissions, column-level security, row-level security, and dynamic data masking.
 
-> **Note**: To fully complete the exercises in this lab, you'll need two users: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces). If you don't have access to a second account in the same organization, you can still do the exercise as an Workspace Admin and skip the steps done as an Workspace Viewer account, referring to the exercise's screenshots to see what an Workspace Viewer account has access to.
+> **Note**: There are optional steps in this exercise, which require a second user account to see the security measured applied: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces). If you don't have access to a second account in the same organization, you can still do the exercise as an Workspace Admin, referring to the exercise's screenshots to see what an Workspace Viewer account has access to.
 
 This lab takes approximately **45** minutes to complete.
 
@@ -79,7 +79,7 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 1. In the warehouse you created in the last exercise, select the **New SQL Query** dropdown and select **New SQL Query**.
 
-2. Create a table and insert data into it. So that you can test row-level security in a later step, replace `username1@your_domain.com` with a user name from your environment and replace `username2@your_domain.com` with your user name.
+2. Create a table and insert data into it. So that you can implement row-level security in a later step, replace `<username1>@<your_domain>.com` with either a fictitious user name or a real one from your environment (**Viewer role**), and replace `<username2>@<your_domain>.com` with your user name (**Admin role**).
 
     ```T-SQL
    CREATE TABLE dbo.Sales  
@@ -136,17 +136,8 @@ Row-level security (RLS) can be used to limit access to rows based on the identi
 
 6. Use the **&#9655; Run** button to run the SQL script
 7. Then, in the **Explorer** pane, expand **Schemas** > **rls** > **Functions** > **Table-valued Functions**, and verify that the function has been created.
-8. Log in to Fabric as the user you replaced `<username1>@<your_domain>.com` with, in the Sales table `INSERT`statement. Confirm that you're logged in as that user by running the following T-SQL.
 
-    ```T-SQL
-   SELECT USER_NAME();
-    ```
-
-9. Query the **Sales** table to confirm that row-level security works as expected. You should only see data that meets the conditions in the security predicate defined for the user you're logged in as:
-
-    ```T-SQL
-   SELECT * FROM dbo.Sales;
-    ```
+    > **Note**: If you connect as the user you replaced `<username1>@<your_domain>.com` with, and run a `SELECT` statement on the **Sales** table, you'll see the following results for row-level security.
 
     ![Screenshot of the Sales table with RLS.](./Images/rls-table.png)
 
@@ -172,27 +163,17 @@ Column-level security allows you to designate which users can access specific co
    SELECT * FROM dbo.Orders;
     ```
 
-3. Deny permission to view a column in the table. The T-SQL statement prevents `<username1>@<your_domain>.com` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `<username1>@<your_domain>.com` with a user name in your system who has **Viewer** permissions on the workspace.
+3. Deny permission to view a column in the table. The T-SQL statement prevents `<username1>@<your_domain>.com` from seeing the CreditCard column in the Orders table. In the `DENY` statement, replace `<username1>@<your_domain>.com` with the user name representing the **Viewer** role account on the workspace.
 
     ```T-SQL
    DENY SELECT ON dbo.Orders (CreditCard) TO [<username1>@<your_domain>.com];
     ```
 
-4. Test column-level security by logging in to Fabric as the user you denied select permissions to.
-
-5. Query the Orders table to confirm that column-level security works as expected:
-
-    ```T-SQL
-   SELECT * FROM dbo.Orders;
-    ```
+    > **Note**: If you connect as the user you replaced `<username1>@<your_domain>.com` with, and run a `SELECT` statement on the **Orders** table, you'll see the following results for column-level security.
 
     ![Screenshot of the Orders table query with error.](./Images/cls-table.png)
 
-    You'll receive an error because access to the CreditCard column has been restricted. Try selecting only the OrderID and CustomerID fields and the query will succeed.
-
-    ```T-SQL
-   SELECT OrderID, CustomerID from dbo.Orders
-    ```
+    In the screenshot you see an error because access to the CreditCard column has been restricted. Selecting only the OrderID and CustomerID fields would return a successful query.
 
 ## Configure SQL granular permissions using T-SQL
 
@@ -226,7 +207,7 @@ Fabric has a permissions model that allows you to control access to data at the 
    SELECT * FROM dbo.Parts
     ```
 
-3. Next `DENY SELECT` permissions on the table to a user who is a member of the **Workspace Viewer** role and `GRANT EXECUTE` on the procedure to the same user. Replace `<username1>@<your_domain>.com` with a user name from your environment that is a member of the **Workspace Viewer** role.
+3. Next `DENY SELECT` permissions on the table to a user who is a member of the **Workspace Viewer** role and `GRANT EXECUTE` on the procedure to the same user. Replace `<username1>@<your_domain>.com` with the user name representing the **Workspace Viewer** role.
 
     ```T-SQL
    DENY SELECT on dbo.Parts to [<username1>@<your_domain>.com];
@@ -234,14 +215,7 @@ Fabric has a permissions model that allows you to control access to data at the 
    GRANT EXECUTE on dbo.sp_PrintMessage to [<username1>@<your_domain>.com];
     ```
 
-4. Sign in to Fabric as the user you specified in the `DENY` and `GRANT` statements in place of `<username1>@<your_domain>.com`. Then test the granular permissions you applied by executing the stored procedure and querying the table:
-
-    ```T-SQL
-   EXEC dbo.sp_PrintMessage;
-   GO
-   
-   SELECT * FROM dbo.Parts;
-    ```
+    > **Note**: If you connect as the user you replaced `<username1>@<your_domain>.com` with, execute the stored procedure and run a `SELECT` statement on the **Parts** table, you'll see the following results for granular permissions.
 
     ![Screenshot of the Parts table query with error.](./Images/grant-deny-table.png)
 
