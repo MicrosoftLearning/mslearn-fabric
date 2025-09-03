@@ -44,7 +44,7 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 1. When your new workspace opens, it should be empty.
 
-![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
+    ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a lakehouse
 
@@ -56,7 +56,7 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
     After a minute or so, a new empty lakehouse will be created.
 
-![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
+    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
 ## Create a Dataflow (Gen2) to ingest data
 
@@ -64,176 +64,176 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 1. In the home page for your workspace, select **Get data** > **New Dataflow Gen2**. After a few seconds, the Power Query editor for your new dataflow opens as shown here.
 
-![Screenshot of a new dataflow.](./Images/copilot-fabric-dataflow-new.png)
+    ![Screenshot of a new dataflow.](./Images/copilot-fabric-dataflow-new.png)
 
 1. Select **Import from a Text/CSV file**, and create a new data source with the following settings:
 
- - **Link to file**: *Selected*
- - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22a/Store.csv`
- - **Connection**: Create new connection
- - **data gateway**: (none)
- - **Authentication kind**: Anonymous
- - **Privacy Level**: None
+   - **Link to file**: *Selected*
+   - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22a/Store.csv`
+   - **Connection**: Create new connection
+   - **data gateway**: (none)
+   - **Authentication kind**: Anonymous
+   - **Privacy Level**: None
 
 1. Select **Next** to preview the file data, and then **Create** the data source. The Power Query editor shows the data source and an initial set of query steps to format the data, as shown here:
 
-![Screenshot of a query in the Power Query editor.](./Images/copilot-fabric-dataflow-power-query.png)
+    ![Screenshot of a query in the Power Query editor.](./Images/copilot-fabric-dataflow-power-query.png)
 
 1. On the **Home** ribbon tab, from inside the **Insights** group, select **Copilot**, as shown here:
     
-![Screenshot of the Copilot pane opened in the dataflow.](./Images/copilot-fabric-dataflow-copilot-pane.png)
+    ![Screenshot of the Copilot pane opened in the dataflow.](./Images/copilot-fabric-dataflow-copilot-pane.png)
 
 1. The column names are currently too generic and lack clear meaning (likely showing as Column1, Column2, etc.). Meaningful column names are crucial for data understanding and downstream processing. Use the following prompt to refine them and ensure they convey the intended information accurately:
 
-```copilot-prompt
-Rename columns to BusinessEntityID, Name, SalesPersonID, Demographics, rowguid, ModifiedDate
-```
+    ```copilot-prompt
+    Rename columns to BusinessEntityID, Name, SalesPersonID, Demographics, rowguid, ModifiedDate
+    ```
 
-Take note that the column names are now accurate and descriptive. Furthermore, an additional step has been incorporated into the Applied Steps list, showing how Copilot automatically generates Power Query M code behind the scenes:
-
-![Screenshot of columns renamed, as a result of a copilot prompt.](./Images/copilot-fabric-dataflow-step.png)
+    Take note that the column names are now accurate and descriptive. Furthermore, an additional step has been incorporated into the Applied Steps list, showing how Copilot automatically generates Power Query M code behind the scenes:
+    
+    ![Screenshot of columns renamed, as a result of a copilot prompt.](./Images/copilot-fabric-dataflow-step.png)
 
 1. Certain columns contain a '+' character at the end of their text values. This is a common data quality issue that can interfere with data analysis and processing downstream. 
 
-![Screenshot of certain columns that contain a '+' character.](./Images/copilot-fabric-dataflow-plus-character.png)
-
-Let's eliminate these unwanted characters using the following prompt:
-
-```copilot-prompt
-Delete the last character from the columns Name, Demographics, rowguid
-```
-
-**Why this matters**: Removing extraneous characters ensures data consistency and prevents issues when performing string operations or data joins later in the process.
+    ![Screenshot of certain columns that contain a '+' character.](./Images/copilot-fabric-dataflow-plus-character.png)
+    
+    Let's eliminate these unwanted characters using the following prompt:
+    
+    ```copilot-prompt
+    Delete the last character from the columns Name, Demographics, rowguid
+    ```
+    
+    **Why this matters**: Removing extraneous characters ensures data consistency and prevents issues when performing string operations or data joins later in the process.
 
 1. The table contains some redundant columns that need to be removed to streamline our dataset and improve processing efficiency. Use the following prompt to refine the data accordingly:
 
-![Screenshot of certain columns that should be removed.](./Images/copilot-fabric-dataflow-remove-columns.png)
-
-```copilot-prompt
-Remove the rowguid and Column7 columns
-```
-
-**Note**: The `rowguid` column is typically used for internal database operations and isn't needed for analysis. `Column7` appears to be an empty or irrelevant column that adds no value to our dataset.
-
+    ![Screenshot of certain columns that should be removed.](./Images/copilot-fabric-dataflow-remove-columns.png)
+    
+    ```copilot-prompt
+    Remove the rowguid and Column7 columns
+    ```
+    
+    **Note**: The `rowguid` column is typically used for internal database operations and isn't needed for analysis. `Column7` appears to be an empty or irrelevant column that adds no value to our dataset.
+    
 1. The Demographics column includes an invisible Unicode character, the Byte Order Mark (BOM) \ufeff, which interferes with XML data parsing. We need to remove it to ensure proper processing. Enter the following prompt in the Copilot pane:
 
-```copilot-prompt
-Remove the Byte Order Mark (BOM) \ufeff from the Demographics column
-```
-
-**Understanding BOM**: The Byte Order Mark is a Unicode character that can appear at the beginning of text files to indicate the byte order of the text encoding. While useful for file encoding detection, it can cause issues when parsing structured data like XML.
-
-Notice the formula that was generated to remove the character:
-
-![Screenshot of the dataflow formula with the bom character removed.](./Images/copilot-fabric-dataflow-bom-character.png)
-
+    ```copilot-prompt
+    Remove the Byte Order Mark (BOM) \ufeff from the Demographics column
+    ```
+    
+    **Understanding BOM**: The Byte Order Mark is a Unicode character that can appear at the beginning of text files to indicate the byte order of the text encoding. While useful for file encoding detection, it can cause issues when parsing structured data like XML.
+    
+    Notice the formula that was generated to remove the character:
+    
+    ![Screenshot of the dataflow formula with the bom character removed.](./Images/copilot-fabric-dataflow-bom-character.png)
+    
 1. We are now prepared to parse the XML data and expand it into separate columns. The Demographics column contains XML-formatted data that holds valuable store information like annual sales, square footage, and other business metrics.
 
-![Screenshot of the dataflow table with a focus on the XML fields](./Images/copilot-fabric-dataflow-xml.png)
-
-Enter the following prompt in the Copilot pane:
-
-```copilot-prompt
-Parse this XML and expand it's columns
-```
-
-**Understanding XML parsing**: XML (eXtensible Markup Language) is a structured data format commonly used to store hierarchical information. By parsing and expanding the XML, we convert nested data into a flat, tabular structure that's easier to analyze.
-
-Notice new columns have been added to the table (you might need to scroll to the right).
-
-![Screenshot of the dataflow table with the XML fields expanded.](./Images/copilot-fabric-dataflow-copilot-xml-fields-expanded.png)
+    ![Screenshot of the dataflow table with a focus on the XML fields](./Images/copilot-fabric-dataflow-xml.png)
+    
+    Enter the following prompt in the Copilot pane:
+    
+    ```copilot-prompt
+    Parse this XML and expand it's columns
+    ```
+    
+    **Understanding XML parsing**: XML (eXtensible Markup Language) is a structured data format commonly used to store hierarchical information. By parsing and expanding the XML, we convert nested data into a flat, tabular structure that's easier to analyze.
+    
+    Notice new columns have been added to the table (you might need to scroll to the right).
+    
+    ![Screenshot of the dataflow table with the XML fields expanded.](./Images/copilot-fabric-dataflow-copilot-xml-fields-expanded.png)
 
 1. Remove the Demographics column, as we no longer need it since we've extracted all the valuable information into separate columns. Enter the following prompt in the Copilot pane:
 
-```copilot-prompt
-Remove the Demographics column.
-```
+    ```copilot-prompt
+    Remove the Demographics column.
+    ```
 
-**Why remove this column**: Now that we've parsed the XML and created individual columns for each piece of information, the original Demographics column containing the raw XML is redundant and can be safely removed to keep our dataset clean.
+    **Why remove this column**: Now that we've parsed the XML and created individual columns for each piece of information, the original Demographics column containing the raw XML is redundant and can be safely removed to keep our dataset clean.
 
 1. The ModifiedDate column has an ampersand (&) at the end of its values. It needs to be removed before parsing to ensure proper data processing.
 
-![Screenshot of the dataflow table with the modified date having an ampersand.](./Images/copilot-fabric-dataflow-modified-date.png)
-
-Enter the following prompt in the Copilot pane:
-
-```copilot-prompt
-Remove the last character from the ModifiedDate
-```
+    ![Screenshot of the dataflow table with the modified date having an ampersand.](./Images/copilot-fabric-dataflow-modified-date.png)
+    
+    Enter the following prompt in the Copilot pane:
+    
+    ```copilot-prompt
+    Remove the last character from the ModifiedDate
+    ```
 
 1. We are now ready to convert its data type to DateTime for proper date/time operations and analysis. Enter the following prompt in the Copilot pane:
 
-```copilot-prompt
-Set the data type to DateTime
-```
+    ```copilot-prompt
+    Set the data type to DateTime
+    ```
 
-**Data type importance**: Converting to the correct data type is crucial for enabling proper sorting, filtering, and date-based calculations in downstream analysis.
+    **Data type importance**: Converting to the correct data type is crucial for enabling proper sorting, filtering, and date-based calculations in downstream analysis.
 
-Notice the ModifiedDate data type has changed to DateTime:
-
-![Screenshot of the dataflow modified date type correct.](./Images/copilot-fabric-dataflow-modified-date-type-correct.png)
-
+    Notice the ModifiedDate data type has changed to DateTime:
+    
+    ![Screenshot of the dataflow modified date type correct.](./Images/copilot-fabric-dataflow-modified-date-type-correct.png)
+    
 1. Adjust the data types of several columns to numeric values to enable mathematical operations and proper aggregations. Enter the following prompt in the Copilot pane:
 
-```copilot-prompt
-Set the data type to whole number for the following columns: AnnualSales, AnnualRevenue, SquareFeet, NumberEmployee
-```
-
-**Why convert to numbers**: Having numeric data types allows for proper mathematical calculations, aggregations (sum, average, etc.), and statistical analysis that wouldn't be possible with text-based data.
-
+    ```copilot-prompt
+    Set the data type to whole number for the following columns: AnnualSales, AnnualRevenue, SquareFeet, NumberEmployee
+    ```
+    
+    **Why convert to numbers**: Having numeric data types allows for proper mathematical calculations, aggregations (sum, average, etc.), and statistical analysis that wouldn't be possible with text-based data.
+    
 1. The SquareFeet field holds numerical values ranging from 6,000 to 80,000. Creating categorical groupings from continuous numeric data is a common analytical technique that makes data easier to interpret and analyze.
 
-![Screenshot of the dataflow table with the square feet column profile highlighted.](./Images/copilot-fabric-dataflow-square-feet.png)
-
-Let's generate a new column to categorize the store size accordingly. Enter the following prompt in the Copilot pane:
-
-```copilot-prompt
-Add a column StoreSize, based on the SquareFeet:
-    0 - 10000: Small
-    10001 - 40000: Medium
-    40001 - 80000: Large
-```
-
-Notice a new column StoreSize has been added, with a formula based on the SquareFeet column. Notice also the column profile has the 3 distinct values: Small, Medium, and Large.
-
-![Screenshot of the dataflow table with the store size field, formula and column profile.](./Images/copilot-fabric-dataflow-store-size.png)
-
+    ![Screenshot of the dataflow table with the square feet column profile highlighted.](./Images/copilot-fabric-dataflow-square-feet.png)
+    
+    Let's generate a new column to categorize the store size accordingly. Enter the following prompt in the Copilot pane:
+    
+    ```copilot-prompt
+    Add a column StoreSize, based on the SquareFeet:
+        0 - 10000: Small
+        10001 - 40000: Medium
+        40001 - 80000: Large
+    ```
+    
+    Notice a new column StoreSize has been added, with a formula based on the SquareFeet column. Notice also the column profile has the 3 distinct values: Small, Medium, and Large.
+    
+    ![Screenshot of the dataflow table with the store size field, formula and column profile.](./Images/copilot-fabric-dataflow-store-size.png)
+    
 1. Modify the data types of columns that currently lack a specified type. Enter the following prompt in the Copilot pane:
 
-```copilot-prompt
-Set the datatype of the following columns to text: Name, BankName, BusinessType, YearOpened, Specialty, Brands, Internet, StoreSize
-```
-
-**Data type consistency**: Explicitly setting data types ensures predictable behavior in downstream processes and prevents automatic type inference that might lead to unexpected results.
-
+    ```copilot-prompt
+    Set the datatype of the following columns to text: Name, BankName, BusinessType, YearOpened, Specialty, Brands, Internet, StoreSize
+    ```
+    
+    **Data type consistency**: Explicitly setting data types ensures predictable behavior in downstream processes and prevents automatic type inference that might lead to unexpected results.
+    
 ## Code explanation
 
 1. We've performed several transformations. Let's request Copilot to summarize the steps we've taken:
 
-```copilot-prompt
-Describe this query
-```
-
-Observe that the result appears in the Copilot pane. Below is an example of the explanation provided. Your results might vary slightly as AI-generated content can have mistakes.
-
-![Screenshot of Copilot dataflow explained.](./Images/copilot-fabric-dataflow-result.png)
-
-*Here's an explanation for **Store**: Load and transform a CSV file, parse XML data, and categorize stores by size.*
-
-- _**Source**: Load a CSV file from a URL with a pipe delimiter and specific encoding._
-- _**Changed column type**: Change the data types of the columns._
-- _**Rename columns**: Rename the columns to meaningful names._
-- _**Custom**: Remove the last character from the "Name", "Demographics", and "rowguid" columns._
-- _**Remove columns**: Remove the "rowguid" and "Column7" columns._
-- _**Custom 1**: Remove any leading special characters from the "Demographics" column._
-- _**Custom 2**: Parse the "Demographics" column as XML and expand it into multiple columns._
-- _**Remove columns 1**: Remove the original "Demographics" column._
-- _**Transform columns**: Remove the last character from the "ModifiedDate" column._
-- _**Transform columns 1**: Convert the "ModifiedDate" column to datetime type._
-- _**Change type**: Change the data types of the "AnnualSales", "AnnualRevenue", "SquareFeet", and "NumberEmployees" columns to integer._
-- _**Conditional column**: Add a new column "StoreSize" based on the "SquareFeet" value, categorizing stores as "Small", "Medium", or "Large"._
-- _**Change type 1**: Change the data types of several columns to text._
-
+    ```copilot-prompt
+    Describe this query
+    ```
+    
+    Observe that the result appears in the Copilot pane. Below is an example of the explanation provided. Your results might vary slightly as AI-generated content can have mistakes.
+    
+    ![Screenshot of Copilot dataflow explained.](./Images/copilot-fabric-dataflow-result.png)
+    
+    *Here's an explanation for **Store**: Load and transform a CSV file, parse XML data, and categorize stores by size.*
+    
+    - _**Source**: Load a CSV file from a URL with a pipe delimiter and specific encoding._
+    - _**Changed column type**: Change the data types of the columns._
+    - _**Rename columns**: Rename the columns to meaningful names._
+    - _**Custom**: Remove the last character from the "Name", "Demographics", and "rowguid" columns._
+    - _**Remove columns**: Remove the "rowguid" and "Column7" columns._
+    - _**Custom 1**: Remove any leading special characters from the "Demographics" column._
+    - _**Custom 2**: Parse the "Demographics" column as XML and expand it into multiple columns._
+    - _**Remove columns 1**: Remove the original "Demographics" column._
+    - _**Transform columns**: Remove the last character from the "ModifiedDate" column._
+    - _**Transform columns 1**: Convert the "ModifiedDate" column to datetime type._
+    - _**Change type**: Change the data types of the "AnnualSales", "AnnualRevenue", "SquareFeet", and "NumberEmployees" columns to integer._
+    - _**Conditional column**: Add a new column "StoreSize" based on the "SquareFeet" value, categorizing stores as "Small", "Medium", or "Large"._
+    - _**Change type 1**: Change the data types of several columns to text._
+    
 ## Add data destination for Dataflow
 
 1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
@@ -242,17 +242,17 @@ Observe that the result appears in the Copilot pane. Below is an example of the 
 
 1. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
-![Data destination configuration page.](./Images/dataflow-connection.png)
+    ![Data destination configuration page.](./Images/dataflow-connection.png)
 
 1. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **Store**:
 
-![Data destination configuration page.](./Images/copilot-fabric-dataflow-choose-destination.png)
+    ![Data destination configuration page.](./Images/copilot-fabric-dataflow-choose-destination.png)
 
 1. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
 
     > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
-![Data destination settings page.](./Images/copilot-fabric-dataflow-destination-column-mapping.png)
+    ![Data destination settings page.](./Images/copilot-fabric-dataflow-destination-column-mapping.png)
 
 1. Select **Save & run** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
@@ -275,7 +275,7 @@ Now it's time to validate the ETL process from the dataflow and ensure all trans
 
    ![Table loaded by a dataflow.](./Images/copilot-fabric-dataflow-lakehouse-result.png)
 
-**Why this matters**: The final table should contain clean, well-structured data with meaningful column names, appropriate data types, and the new StoreSize categorical column. This demonstrates how Copilot can help transform raw, messy data into a clean, analysis-ready dataset.
+    **Why this matters**: The final table should contain clean, well-structured data with meaningful column names, appropriate data types, and the new StoreSize categorical column. This demonstrates how Copilot can help transform raw, messy data into a clean, analysis-ready dataset.
 
 ## Clean up resources
 
