@@ -224,10 +224,11 @@ Let's now go ahead and transform the data. We need to make sure the first field 
 
 1. Create a new cell in your notebook and copy the following instruction into it.
 
+
     ```copilot-prompt
     %%code
     
-    Split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
+    From the currently loaded DataFrame, split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
     ```
 
 1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -264,7 +265,7 @@ Some fields in the table offer no meaningful value, as they contain only a singl
     ```copilot-prompt
     %%code
     
-    Remove the fields 'freq', 'age', 'unit'.
+    From the currently loaded DataFrame, remove the fields 'freq', 'age', 'unit'.
     ```
 
 1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -290,7 +291,7 @@ Organizing your data with the most important identifying columns first makes it 
     ```copilot-prompt
     %%code
     
-    The fields 'projection', 'sex', 'geo' should be positioned first.
+    From the currently loaded DataFrame, the fields 'projection', 'sex', 'geo' should be positioned first.
     ```
 
 1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
@@ -315,6 +316,7 @@ The projection field currently contains cryptic codes that aren't user-friendly.
 > **Understanding projection scenarios**: Statistical organizations often use different scenarios to model future population changes. The baseline represents the most likely scenario, while sensitivity tests show how population might change under different assumptions about fertility rates, mortality rates, and migration patterns.
 
 1. Create a new cell in your notebook and copy the following instruction into it.
+
 
     ```copilot-prompt
     %%code
