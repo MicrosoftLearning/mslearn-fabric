@@ -83,7 +83,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
        ])
     
    # Import all files from bronze folder of lakehouse
-   df = spark.read.format("csv").option("header", "true").schema(orderSchema).load("Files/bronze/*.csv")
+   df = spark.read.format("csv").option("header", "false").schema(orderSchema).load("Files/bronze/*.csv")
     
    # Display the first 10 rows of the dataframe to preview your data
    display(df.head(10))
