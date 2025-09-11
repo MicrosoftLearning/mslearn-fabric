@@ -1,6 +1,11 @@
-# Use Data Activator in Fabric
+---
+lab:
+    title: 'Use Activator in Microsoft Fabric'
+    module: 'Use Activator in Microsoft Fabric'
+---
+# Use Activator in Fabric
 
-Data Activator in Microsoft Fabric takes action based on what's happening in your data. An Activator lets you monitor your data and create triggers to react to your data changes.
+Activator in Microsoft Fabric takes action based on what's happening in your data. An Activator lets you monitor your data and create triggers to react to your data changes.
 
 This lab takes approximately **30** minutes to complete.
 
@@ -35,7 +40,7 @@ Next, create an Activator in the workspace you created:
 
     After a minute or so, a new activator will be created:
 
-    ![Screenshot of the Data Activator Home screen.](./Images/activator-home-screen.png)
+    ![Screenshot of the Activator Home screen.](./Images/activator-home-screen.png)
 
     On a real production environment, you would use your own data. However, for this lab, you use the sample data provided by Activator. 
 
@@ -45,7 +50,7 @@ Next, create an Activator in the workspace you created:
 
 1. Select the pulldown besides the current Activator name on the upper left-hand corner and change the name to ***Contoso Shipping Activator*** for our example.
 
-    ![Screenshot of the Data Activator reflex home screen.](./Images/activator-reflex-home-screen.png)
+    ![Screenshot of the Activator home screen.](./Images/activator-reflex-home-screen.png)
 
 Our Activator project is now created and we can start navigating through its objects, properties and rules.
 
@@ -104,7 +109,7 @@ Let's review what you want your rule to do: *You want to create an alert rule th
 1. Select **Create**.
 1. A new rule is created with the default name of *Temperature alert*. Change the name to ***Medicine temp out of range*** by selecting the pencil icon next to the rule's name in the middle pane.
 
-    ![Screenshot of the Data Activator new rule.](./Images/activator-new-rule.png)
+    ![Screenshot of the Activator new rule.](./Images/activator-new-rule.png)
 
     So far you´ve defined the property and condition you want the rule to fire on, but that still doesn't include all the parameters you need. You still need to make sure that the trigger only fires for the *city* of **Redmond** and for the *special care* type of **Medicine**. Let's go ahead and add a couple of filters for those conditions.  
 
@@ -124,7 +129,7 @@ Let's review what you want your rule to do: *You want to create an alert rule th
     - **Headline**: *Temperature too high*
     - **Context**: Select the *Temperature* property from the checkbox list.
 
-    ![Screenshot of the Data Activator define action.](./Images/activator-define-action.png)
+    ![Screenshot of the Activator define action.](./Images/activator-define-action.png)
 
 1. Select **Save and start**.
 
