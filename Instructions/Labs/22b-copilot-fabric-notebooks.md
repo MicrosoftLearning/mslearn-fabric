@@ -228,7 +228,7 @@ Let's now go ahead and transform the data. We need to make sure the first field 
     ```copilot-prompt
     %%code
     
-    From the currently loaded DataFrame, split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields.
+    From the currently loaded DataFrame, split the first field 'freq,projection,sex,age,unit,geo\TIME_PERIOD' using a comma into 6 separate fields. Then, remove the original column.
     ```
 
 1. Select ▷ **Run cell** to the left of the cell to run the code and observe the output. Here's an example of what the output might look like:
