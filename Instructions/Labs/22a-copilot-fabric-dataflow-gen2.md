@@ -74,6 +74,8 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
    - **data gateway**: (none)
    - **Authentication kind**: Anonymous
    - **Privacy Level**: None
+  
+> **Note**: If the connection already exists, you can select it instead of creating a new connection.
 
 1. Select **Next** to preview the file data, and then **Create** the data source. The Power Query editor shows the data source and an initial set of query steps to format the data, as shown here:
 
@@ -236,11 +238,13 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
     
 ## Add data destination for Dataflow
 
-1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
+1. On the toolbar ribbon, select the **Home** tab. Then in the **Default data destination** drop-down menu, select **Add**.
 
     > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
 
-1. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
+1. Select **Lakehouse**.
+
+1. In the **Connect to default data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
     ![Data destination configuration page.](./Images/dataflow-connection.png)
 
