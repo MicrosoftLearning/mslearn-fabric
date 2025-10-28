@@ -47,6 +47,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
  - **Link to file**: *Selected*
  - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/orders.csv`
  - **Connection**: Create new connection
+ - **Connection name**: *Specify a unique name*
  - **data gateway**: (none)
  - **Authentication kind**: Anonymous
 

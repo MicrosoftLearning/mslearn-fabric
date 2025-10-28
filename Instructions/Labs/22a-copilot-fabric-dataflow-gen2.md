@@ -71,6 +71,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
    - **Link to file**: *Selected*
    - **File path or URL**: `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-fabric/refs/heads/main/Allfiles/Labs/22a/Store.csv`
    - **Connection**: Create new connection
+   - **Connection name**: *Specify a unique name*
    - **data gateway**: (none)
    - **Authentication kind**: Anonymous
    - **Privacy Level**: None
