@@ -77,13 +77,22 @@ In this exercise, you add a user to a workspace role, apply permissions and, see
 
 13. Select the warehouse and open it.
 14. Select the **Date** table and wait for the rows to be loaded. You can see the rows because as a member of the Workspace Viewer role, you have CONNECT and ReadData permission on tables in the warehouse. For more information on permissions granted to the Workspace Viewer role, see [Workspace roles](https://learn.microsoft.com/en-us/fabric/data-warehouse/workspace-roles).
-15. Next, select the **Workspaces** icon on the left menu bar, then select the lakehouse.
-16. When the lakehouse opens, click on the dropdown box at the top right corner of the screen that says **Lakehouse** and select **SQL analytics endpoint**.
-17. Select the **publicholidays** table and wait for the data to be displayed. Data in the lakehouse table is readable from the SQL analytics endpoint because the user is a member of the Workspace Viewer role that grants read permissions on the SQL analytics endpoint.
+15. Next, you grant item-level permissions on the lakehouse so the second user can access the lakehouse SQL analytics endpoint. Return to the browser window where you're logged in as the Workspace Admin.
+16. Select **Workspaces** from the left navigation bar and select your workspace.
+17. Hover over the name of the lakehouse and an ellipse (**...**) will appear. Select the ellipse and select **Manage permissions**.
+18. Select **Add user** and enter the name of the second user.
+19. In the box that appears, under **Additional permissions** check **Read all SQL endpoint data (ReadData)** and uncheck all other boxes, then select **Grant**.
+
+    > **Note**: Unlike the warehouse, the Workspace Viewer role alone does not grant sufficient permissions to access lakehouse data through the SQL analytics endpoint. You must explicitly grant item-level Read permission on the lakehouse for users to query its data via the SQL analytics endpoint.
+
+20. Return to the InPrivate browser window where you're logged in as the second user and select the refresh button on the browser to refresh session permissions.
+21. Select the **Workspaces** icon on the left menu bar, then select the lakehouse.
+22. When the lakehouse opens, click on the dropdown box at the top right corner of the screen that says **Lakehouse** and select **SQL analytics endpoint**.
+23. Select the **publicholidays** table and wait for the data to be displayed. The data is now accessible because the user has both the Workspace Viewer role and item-level Read permission on the lakehouse, which together grant read permissions on the SQL analytics endpoint.
 
 ## Apply item access control
 
-Item permissions control access to individual Fabric items within a workspace, like warehouses, lakehouses and semantic models. In this exercise, you remove the **Workspace Viewer** permissions applied in the previous exercise and then apply item level permissions on the warehouse so a less privileged user can only view the warehouse data, not the lakehouse data.
+Item permissions control access to individual Fabric items within a workspace, like warehouses, lakehouses and semantic models. In this exercise, you remove the **Workspace Viewer** permissions and the lakehouse item permissions applied in the previous exercise and then apply item level permissions on the warehouse so a less privileged user can only view the warehouse data, not the lakehouse data.
 
 1. Return to the browser window where you're logged in as the Workspace Admin. Select **Workspaces** from the left navigation pane. 
 2. Select the workspace that you created to open it.
@@ -93,20 +102,23 @@ Item permissions control access to individual Fabric items within a workspace, l
    ![Screenshot of workspace access dropdown in Fabric.](./Images/workspace-access.png)
 
 5. Close the **Manage access** section.
-6. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear. Select the ellipse and select **Manage permissions**
-7. Select **Add user** and enter the name of the second user. 
-8. In the box that appears, under **Additional permissions** check **Read all data using SQL (ReadData)** and uncheck all other boxes.
+6. Now remove the lakehouse item permissions. Hover over the name of the lakehouse and an ellipse (**...**) will appear. Select the ellipse and select **Manage permissions**.
+7. Find the second user in the list, select the ellipse (**...**) next to their name, and select **Remove**.
+8. Close the **Manage permissions** section.
+9. In the workspace, hover over the name of your warehouse and an ellipse (**...**) will appear. Select the ellipse and select **Manage permissions**
+10. Select **Add user** and enter the name of the second user. 
+11. In the box that appears, under **Additional permissions** check **Read all data using SQL (ReadData)** and uncheck all other boxes.
 
     ![Screenshot of warehouse permissions being granted in Fabric.](./Images/grant-warehouse-access.png)
 
-9. Select **Grant**
-10. Return to the browser window where you're logged in as the second user. Refresh the browser view.
-11. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake catalog** on the left navigation menu to find the warehouse: 
+12. Select **Grant**
+13. Return to the browser window where you're logged in as the second user. Refresh the browser view.
+14. The second user no longer has access to the workspace and instead has access to only the warehouse. You can no longer browse workspaces on the left navigation pane to find the warehouse. Select **OneLake catalog** on the left navigation menu to find the warehouse: 
 
     ![Screenshot of OneLake catalog.](./Images/onelake-catalog.png)
 
-12. Select the warehouse. On the screen that appears, select **Open** from the top menu bar.
-13. When the warehouse view appears, select the **Date** table to view table data. The rows are viewable because the user still has read access to the warehouse because ReadData permissions were applied by using item permissions on the warehouse.
+15. Select the warehouse. On the screen that appears, select **Open** from the top menu bar.
+16. When the warehouse view appears, select the **Date** table to view table data. The rows are viewable because the user still has read access to the warehouse because ReadData permissions were applied by using item permissions on the warehouse.
 
 ## Apply OneLake data access roles in a Lakehouse
 
