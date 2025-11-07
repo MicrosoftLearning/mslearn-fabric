@@ -102,7 +102,7 @@ In this task, you will create two static roles.
 
 5. To name the role, replace the selected *Untitled* text with **Australia**, and then press **Enter**.
 
-6. In the **Select tables** list, select **Sales Territory**, and then in the **Filter data** section, select **+ New**.
+6. In the **Select tables** list, select **Sales Territory**, and then in the **Rules** section, select **+ New**.
   
 7. In the new rule row, set the following settings:
 	* **Column**: Region
@@ -143,11 +143,11 @@ In this task, you will validate one of the static roles.
 
     ![](Images/enforce-model-security-image24.png)
 
-5. Across the top of the report, notice the yellow banner that confirms the enforced role.
+5. Across the top of the report, notice the red banner that confirms the enforced role.
 
     ![](Images/enforce-model-security-image25.png)
 
-6. To stop viewing by using the role, at the right of the yellow banner, select **Stop viewing**.
+6. To stop viewing by using the role, at the right of the red banner, select **Stop viewing**.
 
 	![](Images/enforce-model-security-image26.png)
 
@@ -373,7 +373,7 @@ In this task, you will create a dynamic role, which enforces permissions based o
 
     ![](Images/enforce-model-security-image62.png)
 
-3. In the **Manage roles** window, select **Create**.
+3. In the **Manage roles** window, select **+ New**.
 
     ![](Images/enforce-model-security-image63.png)
 
@@ -383,11 +383,15 @@ In this task, you will create a dynamic role, which enforces permissions based o
 
     *This time, only one role needs to be created.*
 
-5. Add a filter to the **UPN** column of the **Salesperson** table.
+5. select the **Salesperson** table and in the **Rules** tab, select **Switch to DAX editor**.
 
     ![](Images/enforce-model-security-image65.png)
 
-6. In the **Table filter DAX expression** box, replace **"Value"** with `USERPRINCIPALNAME()`.
+6. In the **DAX editor** box, enter the following expression:
+
+    ```DAX
+   [UPN] = USERPRINCIPALNAME()
+    ```
 
     ![](Images/enforce-model-security-image66.png)
 
@@ -425,11 +429,11 @@ In this task, you will validate the dynamic role.
 
     ![](Images/enforce-model-security-image72.png)
 
-6. Across the top of the report, notice the yellow banner that confirms the enforced role.
+6. Across the top of the report, notice the red banner that confirms the enforced role.
 
     ![](Images/enforce-model-security-image73.png)
 
-7. To stop viewing by using the role, at the right of the yellow banner, select **Stop viewing**.
+7. To stop viewing by using the role, at the right of the red banner, select **Stop viewing**.
 
     ![](Images/enforce-model-security-image74.png)
 
