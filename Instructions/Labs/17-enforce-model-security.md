@@ -26,7 +26,7 @@ Make sure you have the following installed in your environment:
 * Power BI Desktop
 * SQL Server
 * SQL Server Management Studio (SSMS)
-* [AdventureWorksDW2022-DP500](https://github.com/afelix-95/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/00-Setup/DatabaseBackup/AdventureWorksDW2022-DP500.bak) database backup restored through SSMS
+* [AdventureWorksDW2022](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/00-Setup/DatabaseBackup/AdventureWorksDW2022.bak) database backup restored through SSMS
 
 >**Note**: You can find more information on how to restore a database backup using SSMS [here](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-ver16).
  
