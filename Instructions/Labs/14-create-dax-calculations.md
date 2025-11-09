@@ -183,7 +183,7 @@ In this task, you'll add more columns to enable filtering and grouping by differ
 
 	![Picture 21](Images/create-dax-calculations-in-power-bi-desktop_image28.png)
 
-1. Switch back to Report view. In the **Data** pane and select **Month**.
+1. Switch back to Report view. In the **Data** pane, select **Month**.
 
 1. On the **Column Tools** contextual ribbon, from inside the **Sort** group, select **Sort by Column**, and then select **MonthKey**.
 
@@ -231,7 +231,7 @@ In this task, you'll mark the **Date** table as a date table.
 
 1. On the **Table Tools** contextual ribbon, from inside the **Calendars** group, select **Mark as Date Table**.
 
-1. In the **Mark as a Date Table** window, slide the **Mark as a Date Table** property to **Yes** and in the **Choose a date column** dropdown list, select **Date**. Select **Save**.
+1. In the **Mark as a Date Table** window, slide the **Mark as a Date Table** property to **On** and in the **Choose a date column** dropdown list, select **Date**. Select **Save**.
 
 	![Mark as date table](Images/create-dax-calculations-in-power-bi-desktop_date-table.png)
 
