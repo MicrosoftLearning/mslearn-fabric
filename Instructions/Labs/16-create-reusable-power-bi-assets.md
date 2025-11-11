@@ -138,7 +138,7 @@ In this task, you'll add a measure and visual to extend the semantic model and u
 
 ## Configure a Power BI Template (.pbit) file
 
-In this task, you'll create a template file so you can share a lightweight file with others for better collaboration.
+In this task, you'll create a template file so you can share a reusable template that others can use with their own data sources. A Power BI Template (.pbit) file is a template that contains the report layout, visuals, and structure, but **doesn't include any data**. 
 
 1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `AdventureWorksLogo.jpg` file.
 1. Position this image in the top left corner.
@@ -171,7 +171,20 @@ In this task, you'll create a template file so you can share a lightweight file 
 1. Select **File > Save as** to create the *.pbit* file.
 1. Change the file type to *.pbit* and save it in the same location as the *.pbip* file.
 1. Enter a description for what users can expect from this template when they use it and select OK.
-1. Go back to File explorer and open the *.pbit* file and see that it looks exactly the same as the *.pbip* file.
+
+    > **Tip**: This description will be shown to users when they open the .pbit file, helping them understand what the template is for and what data sources they'll need to provide.
+
+1. Go back to File explorer and open the *.pbit* file.
+
+    > **Important**: When you open a .pbit file, Power BI will prompt you to provide data source connections because template files do not contain data. You may see dialog boxes asking you to:
+    > - Enter data source credentials
+    > - Specify file paths or server connections
+    > - Configure connection parameters
+    >
+    > This is expected behavior - it ensures that users connect the template to their own data sources rather than using embedded data.
+
+1. When prompted with data source dialogs, select **Cancel** or **Close** to dismiss them for now, as we're going to remove the data sources in the next steps.
+1. Notice that the report looks the same as the *.pbip* file, with the theme and visuals intact.
 
     > In this exercise, we only want a standard report theme template without a semantic model.
 
@@ -183,6 +196,13 @@ In this task, you'll create a template file so you can share a lightweight file 
 1. Navigate back to the Themes and see that your modified Accessible theme is still applied to the report.
 1. Also notice the message that *you haven't loaded any data yet* in the Data pane.
 1. **Save as** a *.pbit* file with the same name you previously used to overwrite the file.
+
+    > **Key takeaway**: You've now created a true Power BI template. This .pbit file contains your custom theme and report structure but no data. When others open this template, they'll be prompted to connect to their own data sources, making it perfect for:
+    > - Standardizing report designs across teams
+    > - Sharing report layouts without exposing data
+    > - Creating reusable templates with consistent branding and themes
+    > - Enabling users to apply the same report structure to different datasets
+
 1. Close the untitled file without saving. You should still have your other *.pbip* file open.
 
 > Now you have a template with a consistent theme without any pre-loaded data.
