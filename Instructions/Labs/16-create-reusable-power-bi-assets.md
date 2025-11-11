@@ -138,7 +138,7 @@ In this task, you'll add a measure and visual to extend the semantic model and u
 
 ## Configure a Power BI Template (.pbit) file
 
-In this task, you'll create a template file so you can create a reusable template that others can use with their own data sources. A Power BI Template (.pbit) file is a template that contains the report layout, visuals, and structure, but **doesn't include any data**. 
+In this task, you'll create a template file so you can share a reusable template that others can use with their own data sources. A Power BI Template (.pbit) file is a template that contains the report layout, visuals, and structure, but **doesn't include any data**. 
 
 1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `AdventureWorksLogo.jpg` file.
 1. Position this image in the top left corner.
