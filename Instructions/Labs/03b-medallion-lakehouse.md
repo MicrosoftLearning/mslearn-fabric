@@ -24,11 +24,6 @@ Before working with data in Fabric, create a workspace with the Fabric trial ena
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
-1. Navigate to the workspace settings and verify that the **Data model settings** preview feature is enabled. This will enable you to create relationships between tables in your lakehouse using a Power BI semantic model.
-
-    ![Screenshot of the workspace settings page in Fabric.](./Images/workspace-settings.png)
-
-    > **Note**: You may need to refresh the browser tab after enabling the preview feature.
 
 ## Create a lakehouse and upload data to bronze layer
 
