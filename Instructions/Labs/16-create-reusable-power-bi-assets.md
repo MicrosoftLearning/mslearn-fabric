@@ -40,7 +40,15 @@ In this task, you'll save a report as a Power BI Project file (*.pbip*). Power B
 
 1. Notice at the top of the Power BI Desktop window that your report name has **(Power BI Project)** next to it.
 
-1. **Save** your file again.
+1. **Close** Power BI Desktop and save your changes if prompted.
+
+1. **Reopen** Power BI Desktop and open the **.pbip** file you just saved.
+
+1. If prompted to **Upgrade** the project to use TMDL format, select **Upgrade** to enable the Tabular Model Definition Language format for the semantic model.
+
+    > This upgrade is necessary to store the semantic model using TMDL format, which allows you to see the .tmdl files in the next steps.
+
+1. **Save** your file.
 
 ### Review Power BI Project file details
 
