@@ -207,11 +207,55 @@ In this task, you'll create a template file so you can share a reusable template
 
 > Now you have a template with a consistent theme without any pre-loaded data.
 
+## Publish and create chained semantic models
+
+In this task, you'll publish your Power BI Project file to the Power BI service and create a new report with a chained semantic model. This will enable you to view the lineage of your assets.
+
+### Publish to Power BI service
+
+1. Ensure you have your *.pbip* file open in Power BI Desktop (the one with the Sales per Capita measure and visuals).
+
+1. On the **Home** ribbon tab, select **Publish**.
+
+1. In the **Publish to Power BI** window, select **My workspace** (or another workspace if preferred) and then **Select**.
+
+1. When the publishing succeeds, select **Got it**.
+
+    > Your report and semantic model are now published to the Power BI service.
+
+### Create a new report with a chained semantic model
+
+In this task, you'll create a new report that uses the semantic model you just published, demonstrating semantic model chaining.
+
+1. Switch to the Power BI service in your web browser. If not already open, navigate to `https://app.powerbi.com`.
+
+1. In **My workspace** (or the workspace you published to), locate your published **16-Starter-Sales Analysis** semantic model.
+
+1. Hover over the semantic model, select the ellipsis (**...**), and then select **Create report**.
+
+    > This creates a new report that is connected to your published semantic model, demonstrating semantic model chaining.
+
+1. In the new report, add a simple visual using fields from the semantic model:
+    - From the Data pane, drag **Sales \| Sales** to the canvas to create a visual.
+    - Drag **Product \| Category** to the same visual.
+
+1. On the **File** menu, select **Save**.
+
+1. Name your report *My new report* and select **Save**.
+
+    > You now have a new report with its own semantic model that is chained to the original semantic model.
+
 ### Review final state
 
-In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this stateu, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
+In this task, you review the lineage view to see how your reports and semantic models relate to each other and their data sources.
 
-From left to right, the following items are visible:
+1. In the Power BI service, navigate to **My workspace** (or the workspace you published to).
+
+1. In the top right of the workspace, select the **View** dropdown and choose **Lineage view**.
+
+    > The lineage view shows how your data sources, semantic models, and reports are connected.
+
+1. Review the lineage view. From left to right, the following items are visible:
 
 - Data sources: 2 text/csv files and a SQL server connection.
 - 16-Starter-Sales Analysis semantic model, which is connected to the data sources.
