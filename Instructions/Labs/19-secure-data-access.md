@@ -40,7 +40,7 @@ Next, create a lakehouse in the workspace you created.
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to 🗇).
 2. Select the workspace you created.
-3. In the workspace, select the **+ New Item** button and then select **Lakehouse**. Create a new Lakehouse with the name of your choice.
+3. In the workspace, select the **+ New Item** button and then select **Lakehouse**. Create a new Lakehouse with the name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
 
    After a minute or so, a new Lakehouse will be created:
 

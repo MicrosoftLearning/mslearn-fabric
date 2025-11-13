@@ -50,7 +50,7 @@ Fabric items haven't been created in your workspaces yet. Next, create a lakehou
 1. In the menu bar on the left, select **Workspaces**.
 2. Select the **Development** workspace.
 3. Select **New Item**.
-4. In the window that appears, select **Lakehouse** and in the **New lakehouse window**, name the lakehouse, **LabLakehouse**.
+4. In the window that appears, select **Lakehouse** and in the **New lakehouse window**, name the lakehouse, **LabLakehouse**. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
 5. Select **Create**.
 6. In the Lakehouse Explorer window, select **Start with sample data** to populate the new lakehouse with data.
 

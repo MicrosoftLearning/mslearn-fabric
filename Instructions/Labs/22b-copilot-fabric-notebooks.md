@@ -58,7 +58,7 @@ Before working with data in Fabric, create a workspace with Fabric enabled. A wo
 
 Now that you have a workspace, it's time to create a lakehouse into which you'll ingest data. A lakehouse combines the benefits of a data lake (storing raw data in various formats) with a data warehouse (structured data optimized for analytics). It will serve as both the storage location for our raw population data and the target for our cleaned, transformed dataset.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
