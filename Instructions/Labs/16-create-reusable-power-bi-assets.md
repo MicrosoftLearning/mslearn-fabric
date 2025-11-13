@@ -168,42 +168,37 @@ In this task, you'll create a template file so you can share a reusable template
 
     ![Screenshot of the configured report page.](./Images/power-bi-icon-donut-table-custom.png)
 
+    > In this exercise, we want to create a standard report theme template without a semantic model. To do this, we'll first remove the data sources before saving as a template.
+
+1. Delete the two visuals from the canvas (the donut chart and the table).
+1. Select **Transform data** on the home ribbon.
+1. In Power Query Editor, select the **US population** query and right-click to delete it.
+1. Select **Data source settings** in the ribbon and delete the **DirectQuery to AS - Power BI Semantic Model** data source and **Close**.
+1. **Close & Apply**
+1. Navigate back to the **View** tab and select **Themes** to verify that your modified Accessible theme is still applied to the report.
+1. Also notice the message that *you haven't loaded any data yet* in the Data pane.
+
+    > Now that we've removed the data sources, we can save this as a .pbit template file.
+
 1. Select **File > Save as** to create the *.pbit* file.
 1. Change the file type to *.pbit* and save it in the same location as the *.pbip* file.
-1. Enter a description for what users can expect from this template when they use it and select OK.
+1. Enter a description for what users can expect from this template when they use it and select **OK**.
 
     > **Tip**: This description will be shown to users when they open the .pbit file, helping them understand what the template is for and what data sources they'll need to provide.
 
-1. Go back to File explorer and open the *.pbit* file.
+1. Go back to File explorer and open the *.pbit* file you just created.
 
-    > **Important**: When you open a .pbit file, Power BI will prompt you to provide data source connections because template files do not contain data. You may see dialog boxes asking you to:
-    > - Enter data source credentials
-    > - Specify file paths or server connections
-    > - Configure connection parameters
-    >
-    > This is expected behavior - it ensures that users connect the template to their own data sources rather than using embedded data.
+    > **Important**: Since we removed all data sources before saving the template, Power BI will open the template without prompting for data source connections. This creates a clean template that contains only the report structure and theme.
 
-1. When prompted with data source dialogs, select **Cancel** or **Close** to dismiss them for now, as we're going to remove the data sources in the next steps.
-1. Notice that the report looks the same as the *.pbip* file, with the theme and visuals intact.
+1. Notice that the template opens with a blank canvas and the theme intact.
 
-    > In this exercise, we only want a standard report theme template without a semantic model.
-
-1. In this same new file, delete the two visuals from the canvas.
-1. Select **Transform data** on the home ribbon.
-1. In Power Query Editor, select the **US population** query and right-click to delete it.
-1. Select Data source settings in the ribbon and delete the **DirectQuery to AS - Power BI Semantic Model** data source and **Close**.
-1. **Close & Apply**
-1. Navigate back to the Themes and see that your modified Accessible theme is still applied to the report.
-1. Also notice the message that *you haven't loaded any data yet* in the Data pane.
-1. **Save as** a *.pbit* file with the same name you previously used to overwrite the file.
-
-    > **Key takeaway**: You've now created a true Power BI template. This .pbit file contains your custom theme and report structure but no data. When others open this template, they'll be prompted to connect to their own data sources, making it perfect for:
+    > **Key takeaway**: You've now created a true Power BI template. This .pbit file contains your custom theme and report structure but no data. When others open this template, they can start with a blank canvas and your organization's standard theme, making it perfect for:
     > - Standardizing report designs across teams
     > - Sharing report layouts without exposing data
     > - Creating reusable templates with consistent branding and themes
     > - Enabling users to apply the same report structure to different datasets
 
-1. Close the untitled file without saving. You should still have your other *.pbip* file open.
+1. Close the .pbit file without saving. You should still have your original *.pbip* file open.
 
 > Now you have a template with a consistent theme without any pre-loaded data.
 
