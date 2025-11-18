@@ -259,7 +259,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
     ![Data destination settings page.](./Images/copilot-fabric-dataflow-destination-column-mapping.png)
 
-1. Select **Save & run** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
+1. Click **Publish** in the lower right corner to save and run the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace and it will run automatically.
 
 ## Validate your work
 

@@ -94,7 +94,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
    ![Query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
-6. On the toolbar ribbon, select the **Home** tab. Then select **Save & run** and wait for the **Dataflow 1** dataflow to be created in your workspace.
+6. On the toolbar ribbon, select the **Home** tab. Then click **Publish** in the lower right corner to save and run the **Dataflow 1**. Wait for **Dataflow 1** to be created in your workspace and it will run automatically.
 
 ## Add a dataflow to a pipeline
 
