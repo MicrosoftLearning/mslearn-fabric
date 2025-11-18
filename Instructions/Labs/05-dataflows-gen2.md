@@ -73,28 +73,30 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 ## Add data destination for Dataflow
 
-1. On the toolbar ribbon, select the **Home** tab. Then in the **Add data destination** drop-down menu, select **Lakehouse**.
+1. On the toolbar ribbon, select the **Home** tab. Then in the **Default data destination** drop-down menu, select **Add**.
 
-   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a default destination is already set, you can remove it and add a new one.
+   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
 
-2. In the **Connect to data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
+2. Select **Lakehouse**.
+
+3. In the **Connect to default data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
  ![Data destination configuration page.](./Images/dataflow-connection.png)
 
-3. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
+4. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
 
    ![Data destination configuration page.](./Images/data-destination-target.png)
 
-4. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
+5. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
     > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
 
     ![Data destination settings page.](./Images/destination-settings.png)
 
-5. On the Menu bar, open **View** and select **Diagram view**. Notice the **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
+6. On the Menu bar, open **View** and select **Diagram view**. Notice the **Lakehouse** destination is indicated as an icon in the query in the Power Query editor.
 
    ![Query with a lakehouse destination.](./Images/lakehouse-destination.png)
 
-6. On the toolbar ribbon, select the **Home** tab. Then select **Save & run** and wait for the **Dataflow 1** dataflow to be created in your workspace.
+7. On the toolbar ribbon, select the **Home** tab. Then select **Save & run** and wait for the **Dataflow 1** dataflow to be created in your workspace.
 
 ## Add a dataflow to a pipeline
 
