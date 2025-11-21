@@ -83,6 +83,9 @@ Deploy the lakehouse from the **Development** stage to the **Test** and **Produc
 In this exercise, you created a deployment pipeline, and assigned stages to the pipeline. Then you created content in a development workspace and deployed it between pipeline stages using deployment pipelines.
 
 - In the left navigation bar, select **Deployment pipelines**, select your pipeline, and then select **Delete this pipeline** from the settings menu to remove the deployment pipeline.
+
+![Screenshot of deployment pipeline, highlighting the Delete pipeline action.](./Images/delete-pipeline.png)
+
 - After deleting the pipeline, select the icon for each workspace to view all of the items it contains.
 - In the menu on the top toolbar, select **Workspace settings**.
 - In the **General** section, select **Remove this workspace**.
