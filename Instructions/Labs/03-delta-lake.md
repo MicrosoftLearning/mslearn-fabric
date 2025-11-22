@@ -130,7 +130,7 @@ The files for managed tables are stored in the **Tables** folder in the lakehous
 
 You can also create external tables, which may be stored somewhere other than the lakehouse, with the schema metadata stored in the lakehouse.
 
-1. In the Explorer pane, in the … menu for the **Files** folder, select **Copy ABFS path**. The ABFS path is the fully qualified path to the lakehouse Files folder.
+1. In the Explorer pane, in the … menu for the **Files** folder, first create a new **external_products** subfolder. Next, select **Copy ABFS path**. The ABFS path is the fully qualified path to the lakehouse Files folder.
 
 1. In a new code cell, paste the ABFS path. Add the following code, using cut and paste to insert the abfs_path into the correct place in the code:
 
