@@ -42,7 +42,7 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
-1. On the **Home** page for your lakehouse, **from your new_data subfolder**, select **Get data** and then select **New data pipeline**, and create a new data pipeline named `Ingest Sales Data`.
+1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named `Ingest Sales Data`.
 1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
 1. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
 
