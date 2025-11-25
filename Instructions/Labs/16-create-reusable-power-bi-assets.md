@@ -217,7 +217,7 @@ In this task, you'll create a template file so you can share a reusable template
 
 ### Review final state
 
-In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this stateu, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
+In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this state, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
 
 From left to right, the following items are visible:
 
