@@ -6,7 +6,7 @@ lab:
 
 # Create reusable Power BI assets
 
-In this exercise, you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files and shared semantic models. At the end, lineage view shows how these items relate to each other in the Power BI service.
+In this exercise, you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files.
 
    > Note: this exercise doesn't require a Fabric license and can be completed in a Power BI, or Microsoft Fabric environment with a Power BI license.
 
@@ -18,7 +18,7 @@ Before you can start this exercise, you need to open a web browser and enter the
 
 `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16b/16-reusable-assets.zip`
 
-Extract the folder to the **C:\Users\Student\Downloads\16-reusable-assets** folder.
+Extract the zip file to the **C:\Users\Student\Downloads\16-reusable-assets** folder.
 
 ## Create a new Power BI project
 
@@ -140,99 +140,153 @@ In this task, you'll add a measure and visual to extend the semantic model and u
 
 1. Save your file.
 
-> Your table should look like the following image with four columns and correctly formatted numbers.
+    > Note: Your table should look like the following image with four columns and correctly formatted numbers.
 
-![Screenshot of a table visual with a few rows showing State, Population, Sales per Capita, and Sum of Sales.](./Images/power-bi-sales-per-capita-table.png)
+    ![Screenshot of a table visual with a few rows showing State, Population, Sales per Capita, and Sum of Sales.](./Images/power-bi-sales-per-capita-table.png)
 
-## Configure a Power BI Template (.pbit) file
 
-In this task, you'll create a template file so you can share a reusable template that others can use with their own data sources. A Power BI Template (.pbit) file is a template that contains the report layout, visuals, and structure, but **doesn't include any data**. 
+1. Open Notepad
+1. Open the file: `C:\Users\Student\Downloads\16-Starter-Sales Analysis.SemanticModel\definition\tables\Sales.tmdl`
+1. Locate the code around line 163 where you can observe the measure has been added like this:
+   
+    ```tmdl
+    
+    	measure 'Sales per Capita' =
+    			
+    			DIVIDE(
+    			    SUM(Sales[Sales]),
+    			    SUM('US Population'[Population])
+    			)
+    		formatString: \$#,0.0000;(\$#,0.0000);\$#,0.0000
+    		lineageTag: c95a1828-af50-484b-8310-64614fe2504b
+    
+    		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+    ```
 
-1. Go to the Insert tab on the ribbon in Power BI Desktop and select **Images**. Navigate to your downloads folder and select the `AdventureWorksLogo.jpg` file.
-1. Position this image in the top left corner.
-1. Select a new visual and add **Sales \| Profit** and **Product \| Category** to it.
+1. Close Notepad.
+2. Close Power BI Desktop. There is no need to save changes.
 
-    > We used a Donut chart for our following screenshot.
+## Create a reusable Power BI Template (PBIT)
 
-    ![Screenshot of a Donut chart with Profit and Category and the table created in the last task.](./Images/power-bi-donut-table-default.png)
+The goal of this next part of the exercise is to demonstrate how **Power BI templates (PBIT files)** can separate report logic from data by using a Power Query parameter—in this case, a **Region** parameter. You will build a small report, define a parameter that controls which region’s data is loaded, and then export the report as a reusable template. When reopening the template, users can simply select a region value, and the report will automatically load the corresponding dataset, showing how templates enable scalable, standardized reporting across multiple variations of the same data model.
 
-1. Notice that there are 4 different colors in the legend.
-1. Navigate to the **View** tab in the ribbon.
-1. Select the arrow next to **Themes** to expand and see all choices.
-1. Select one of the **Accessible themes** to apply to this report.
+### Explore Region Sales Data
 
-    > These themes are specifically created to be more accessible for report viewers.
+1. Open Windows Explorer and navigating to the folder where the region data is stored. This should look like `C:\Users\student\Downloads\16-reusable-assets\data`. Inside this folder, you will find two CSV files:
+   
+   - region-north.csv
+   - region-south.csv
 
-1. Expand the Themes again and select **Customize current theme**.
+1. Take a moment to open each file (you can use Notepad, Excel, or any text editor) and explore the contents. Observe the structure of the data, the columns available, and how the two regional datasets are similar. Notice the region north and south. This familiarity will help you understand what Power BI will load later and how the Region parameter will be used to switch between them.
 
-    ![Screenshot of expanded Themes section.](./Images/power-bi-theme-blade.png)
+### Create the Power BI report and Load data
 
-1. In the Customize theme window, navigate to the **Text** tab. Change the font family to a Segoe UI font for each of the sections.
+1. Open Power BI Desktop, and create a blank report.
+1. From the **Home** ribbon, select **Get Data** and choose **Text/CSV**.
+1. Load the `C:\Users\Student\Downloads\16-reusable-assets\data\region-north.csv` file.
+1. Select **Transform Data**
+1. Rename the query to `sales`
 
-    ![Screenshot of the Text section and font family expanded to highlight Segoe UI Semibold.](./Images/power-bi-customize-theme-fonts.png)
+![Screenshot of query settings.](./images/sales-query.png)
 
-1. **Apply** the changes once completed.
-1. Notice the different colors in the visuals with the new theme applied.
+### Create a Power Query Parameter
 
-    ![Screenshot of the configured report page.](./Images/power-bi-icon-donut-table-custom.png)
+1. In Power Query, from the **Home** ribbon, select **Manage Parameters** and choose **New Parameter**.
+1. Create the paremter with the following values:
+   
+    | Property         | Value                 |
+    | ---------------- | --------------------- |
+    | Name             | `Region`.             |
+    | Type             | Text                  |
+    | Suggested Values | List of values        |
+    | Table            | north, south          |
+    | Default Value    | north                 |
+    | Current Value    | north                 |
 
-1. Select **File > Save as** to create the *.pbit* file.
-1. Change the file type to *.pbit* and save it in the same location as the *.pbip* file.
-1. Enter a description for what users can expect from this template when they use it and select OK.
+    ![Screenshot of the Power BI Desktop Manage Parameters Dialog.](./Images/manage-parameter.png)
 
-    > **Tip**: This description will be shown to users when they open the .pbit file, helping them understand what the template is for and what data sources they'll need to provide.
+### Modify Your Query to Use the Parameter
 
-1. Go back to File explorer and open the *.pbit* file.
+We want Power BI to allow the user to choose the region when they open the template.
 
-    > **Important**: When you open a .pbit file, Power BI will prompt you to provide data source connections because template files do not contain data. You may see dialog boxes asking you to:
-    > - Enter data source credentials
-    > - Specify file paths or server connections
-    > - Configure connection parameters
-    >
-    > This is expected behavior - it ensures that users connect the template to their own data sources rather than using embedded data.
+1. Select the **sales** query again.
+1. From the **View** ribbon, select **Advanced Editor**.
+1. Notice the query is hard-coded to region-north.csv
 
-1. When prompted with data source dialogs, select **Cancel** or **Close** to dismiss them for now, as we're going to remove the data sources in the next steps.
-1. Notice that the report looks the same as the *.pbip* file, with the theme and visuals intact.
+    ```m
+    let
+        Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-north.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+        #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type}})
+    in
+        #"Changed Type"
+    ```
+    
+1. Replace the hard-coded region (north) with the parameter **Region**. 
+    
+    ```m
+    let
+        Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-" & Region & ".csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+        #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type}})
+    in
+        #"Changed Type"
+    ```
+    
+    > **Note**: In Power Query (M language), text values must be enclosed in quotation marks " ", and you combine (concatenate) text pieces using the ampersand & operator.
 
-    > In this exercise, we only want a standard report theme template without a semantic model.
+1. Select **Close & Apply** from the **Home** ribbon.
 
-1. In this same new file, delete the two visuals from the canvas.
-1. Select **Transform data** on the home ribbon.
-1. In Power Query Editor, select the **US population** query and right-click to delete it.
-1. Select Data source settings in the ribbon and delete the **DirectQuery to AS - Power BI Semantic Model** data source and **Close**.
-1. **Close & Apply**
-1. Navigate back to the Themes and see that your modified Accessible theme is still applied to the report.
-1. Also notice the message that *you haven't loaded any data yet* in the Data pane.
-1. **Save as** a *.pbit* file with the same name you previously used to overwrite the file.
+### Create a simple report
 
-    > **Key takeaway**: You've now created a true Power BI template. This .pbit file contains your custom theme and report structure but no data. When others open this template, they'll be prompted to connect to their own data sources, making it perfect for:
-    > - Standardizing report designs across teams
-    > - Sharing report layouts without exposing data
-    > - Creating reusable templates with consistent branding and themes
-    > - Enabling users to apply the same report structure to different datasets
+1. Go back to the report view.
+1. Create:
+   - A Card showing total Revenue
+   - A Column Chart showing Revenue by Product
+   - A Table showing all fields
 
-1. Close the untitled file without saving. You should still have your other *.pbip* file open.
+1. Add a title: `Regional Sales Report Template`
 
-> Now you have a template with a consistent theme without any pre-loaded data.
+The report could look like this. Don't worry about the layout.
 
-### Review final state
+![alt text](./images/report-template-example.png)
 
-In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this state, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
+### Save as a Template (PBIT)
 
-From left to right, the following items are visible:
+1. From the **Home** ribbon, select **File** > **Save as**.
+1. Select a folder location (for example **Downloads**), and enter a file name. For example `regional-sales`.
+1. Choose **PBIT** as the file extension.
 
-- Data sources: 2 text/csv files and a SQL server connection.
-- 16-Starter-Sales Analysis semantic model, which is connected to the data sources.
-- 16-Starter-Sales Analysis report, which is connected to the 16-Starter-Sales Analysis semantic model.
-- My new report semantic model, which is connected to the 16-Starter-Sales Analysis semantic model.
-- My new report report, which is connected to the My new report semantic model.
+    ![Screenshot showing how to save as a PBIT file.](./Images/save-as-pbit.png)
 
-> When semantic models relate to other semantic models, it's known as **chaining**. In this lab, the starter semantic model is chained to the newly created semantic model, enabling its reuse for a specialized purpose.
+1. When asked to provide a template description, enter the following text:
 
-![Screenshot of the lineage view with a database and two text files connecting to a single semantic model from our starter file. That same semantic model connects to the starter file report and has a new semantic model connected to the new report.](./Images/power-bi-lineage-view.png)
+    ```txt
+    Select your region.
+    ```
+    
+    ![Screenshot of the Power BI Desktop export template dialog.](./Images/export-template.png)
 
+### Test the template
+
+1. Close Power BI Desktop. When asked to save your changes, can you choose **Don't save**.
+1. Open the `regional-sales.pbit` file.
+1. Notice you will get a parameter prompt asking you to select your region. 
+
+    ![Dialog showing the region parameter.](.Images/select-region-sales-parameter.png)
+
+1. Choose **south** from the dropdown list.
+1. Load the data and open the report.
+
+Notice how the report opens correctly the south-region values.
+
+![Screenshot of an example report opened.](./images/report-template-opened.png)
+
+You now have a fully reusable, parameterized reporting framework. 
+
+1. Close the report, you don't need to save it.
 
 
 ## Clean up
 
-You've successfully completed this exercise. You created Power BI Project and Template files and specialized semantic models and reports. You can safely delete the workspace and all local assets.
+You've successfully completed this exercise. You created Power BI Project and Template files. You can safely delete the workspace and all local assets.
