@@ -73,15 +73,15 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 ## Add data destination for Dataflow
 
-1. On the toolbar ribbon, select the **Home** tab. Then in the **Default data destination** drop-down menu, select **Add**.
+1. On the toolbar ribbon, select the **Home** tab. Then in the **Query** section, choose **Add data destination**.
 
-   > **Note:** If this option is grayed out, you may already have a data destination set. Check the data destination at the bottom of the Query settings pane on the right side of the Power Query editor. If a destination is already set, you can change it using the gear.
+    ![Screenshot of the Ribbon, highlighting the Add Data destination option.](./Images/add-data-destination.png)
 
 2. Select **Lakehouse**.
 
 3. In the **Connect to default data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
 
- ![Data destination configuration page.](./Images/dataflow-connection.png)
+    ![Data destination configuration page.](./Images/dataflow-connection.png)
 
 4. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **orders**:
 
