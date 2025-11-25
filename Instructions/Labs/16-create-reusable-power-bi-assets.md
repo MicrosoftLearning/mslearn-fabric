@@ -187,7 +187,7 @@ The goal of this next part of the exercise is to demonstrate how **Power BI temp
 1. Select **Transform Data**
 1. Rename the query to `sales`
 
-![Screenshot of query settings.](./images/sales-query.png)
+![Screenshot of query settings.](./Images/sales-query.png)
 
 ### Create a Power Query Parameter
 
@@ -249,7 +249,7 @@ We want Power BI to allow the user to choose the region when they open the templ
 
 The report could look like this. Don't worry about the layout.
 
-![alt text](./images/report-template-example.png)
+![alt text](./Images/report-template-example.png)
 
 ### Save as a Template (PBIT)
 
@@ -280,7 +280,7 @@ The report could look like this. Don't worry about the layout.
 
 Notice how the report opens correctly the south-region values.
 
-![Screenshot of an example report opened.](./images/report-template-opened.png)
+![Screenshot of an example report opened.](./Images/report-template-opened.png)
 
 You now have a fully reusable, parameterized reporting framework. 
 
