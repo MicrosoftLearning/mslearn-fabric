@@ -8,7 +8,7 @@ lab:
 
 Microsoft Fabric permissions and granular SQL permissions work together to govern Warehouse access and user permissions. In this exercise, you'll secure data using granular permissions, column-level security, row-level security, and dynamic data masking.
 
-> **Note**: There are optional steps in this exercise, which require a second user account for result validation: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces). If you don't have access to a second account in the same organization, you can still do the exercise as an Workspace Admin, referring to the exercise's screenshots to see what an Workspace Viewer account has access to.
+> **Note**: There are optional steps in this exercise, which require a second user account for result validation: one user should be assigned the Workspace Admin role, and the other should have the Workspace Viewer role. To assign roles to workspaces see [Give access to your workspace](https://learn.microsoft.com/fabric/get-started/give-access-workspaces). If you don't have access to a second account in the same organization, you can still do the exercise as an Workspace Admin, referring to the exercise's **screenshots** to see what an Workspace Viewer account has access to.
 
 This lab takes approximately **45** minutes to complete.
 
