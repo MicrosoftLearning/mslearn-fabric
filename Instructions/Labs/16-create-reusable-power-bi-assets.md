@@ -40,7 +40,15 @@ In this task, you'll save a report as a Power BI Project file (*.pbip*). Power B
 
 1. Notice at the top of the Power BI Desktop window that your report name has **(Power BI Project)** next to it.
 
-1. **Save** your file again.
+1. **Close** Power BI Desktop and save your changes if prompted.
+
+1. **Reopen** Power BI Desktop and open the **.pbip** file you just saved.
+
+1. If prompted to **Upgrade** the project to use TMDL format, select **Upgrade** to enable the Tabular Model Definition Language format for the semantic model.
+
+    > This upgrade is necessary to store the semantic model using TMDL format, which allows you to see the .tmdl files in the next steps.
+
+1. **Save** your file.
 
 ### Review Power BI Project file details
 
@@ -209,7 +217,7 @@ In this task, you'll create a template file so you can share a reusable template
 
 ### Review final state
 
-In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this stateu, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
+In this task, you review the following screenshot of the final outcome of the tasks performed in thie exercise. To achieve this state, you've created your Power BI Project file and published it to a workspace. You've then navigated to the workspace in the Power BI service and switched to the **Lineage view** to see how your new report depends on other data sources.
 
 From left to right, the following items are visible:
 
