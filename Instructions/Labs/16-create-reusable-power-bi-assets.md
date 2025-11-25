@@ -273,7 +273,7 @@ The report could look like this. Don't worry about the layout.
 1. Open the `regional-sales.pbit` file.
 1. Notice you will get a parameter prompt asking you to select your region. 
 
-    ![Dialog showing the region parameter.](.Images/select-region-sales-parameter.png)
+    ![Dialog showing the region parameter.](./Images/select-region-sales-parameter.png)
 
 1. Choose **south** from the dropdown list.
 1. Load the data and open the report.
