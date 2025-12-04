@@ -2,7 +2,7 @@
 lab:
     title: 'Secure data in a data warehouse'
     module: 'Secure data in a data warehouse'
----
+--- 
 
 # Secure data in a Microsoft Fabric data warehouse
 
