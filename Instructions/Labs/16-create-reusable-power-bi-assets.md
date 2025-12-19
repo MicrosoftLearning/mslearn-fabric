@@ -213,11 +213,11 @@ We want Power BI to allow the user to choose the region when they open the templ
 1. From the **View** ribbon, select **Advanced Editor**.
 1. Notice the query is hard-coded to region-north.csv
 
-    ```m
+    ```powerquery
     let
         Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-north.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
         #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type}})
+        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{ {"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type} })
     in
         #"Changed Type"
     ```
@@ -228,7 +228,7 @@ We want Power BI to allow the user to choose the region when they open the templ
     let
         Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-" & Region & ".csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
         #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type}})
+        #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{ {"Date", type date}, {"Region", type text}, {"Product", type text}, {"Units", Int64.Type}, {"Revenue", Int64.Type} })
     in
         #"Changed Type"
     ```
