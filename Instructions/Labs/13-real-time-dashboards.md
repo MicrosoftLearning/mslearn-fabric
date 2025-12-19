@@ -58,7 +58,7 @@ Currently there are no tables in the database. We'll use an eventstream to load 
 
 1. In the **Add destination** drop-down list, select **Eventhouse**.
 1. In the **Eventhouse** pane, configure the following setup options.
-   - **Data ingestion mode:**: Event processing before ingestion
+   - **Data ingestion mode:** Event processing before ingestion
    - **Destination name:** `bikes-table`
    - **Workspace:** *Select the workspace you created at the beginning of this exercise*
    - **Eventhouse**: *Select your eventhouse*
