@@ -213,6 +213,7 @@ We want Power BI to allow the user to choose the region when they open the templ
 1. From the **View** ribbon, select **Advanced Editor**.
 1. Notice the query is hard-coded to region-north.csv
 
+    {% raw %}
     ```m
     let
         Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-north.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
@@ -221,9 +222,11 @@ We want Power BI to allow the user to choose the region when they open the templ
     in
         #"Changed Type"
     ```
+    {% endraw %}
     
 1. Replace the hard-coded region (north) with the parameter **Region**. 
     
+    {% raw %}
     ```m
     let
         Source = Csv.Document(File.Contents("C:\Users\Student\Downloads\16-reusable-assets\data\region-" & Region & ".csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
@@ -232,6 +235,7 @@ We want Power BI to allow the user to choose the region when they open the templ
     in
         #"Changed Type"
     ```
+    {% endraw %}
     
     > **Note**: In Power Query (M language), text values must be enclosed in quotation marks " ", and you combine (concatenate) text pieces using the ampersand & operator.
 
