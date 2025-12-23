@@ -48,7 +48,7 @@ Now you're ready to find and ingest real-time data from a streaming source. To d
 
 The eventstream ingests the real-time stock data, but doesn't currently do anything with it. Let's create an eventhouse where we can store the captured data in a table.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Real-Time Inteligence* section, select **Eventhouse**. Give it a unique name of your choice.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Real-Time Intelligence* section, select **Eventhouse**. Give it a unique name of your choice.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
