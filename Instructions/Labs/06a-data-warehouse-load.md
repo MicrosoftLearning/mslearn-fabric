@@ -112,7 +112,7 @@ Let's create the fact tables and dimensions for the Sales data. You'll also crea
 
     > **Note**: If you can't see the new schemas, open the **...** menu for **Tables** in the **Explorer** pane, then select **Refresh**.
 
-1. Open a new **New SQL query** editor, then copy and run the following query. Update *<your lakehouse name>* with the lakehouse you created.
+1. Open a new **New SQL query** editor, then copy and run the following query. Update *\<your lakehouse name>* with the lakehouse you created.
 
     ```sql
     CREATE VIEW Sales.Staging_Sales
@@ -254,3 +254,4 @@ If you've finished exploring your data warehouse, you can delete the workspace y
 1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
 1. Select **Workspace settings** and in the **General** section, scroll down and select **Remove this workspace**.
 1. Select **Delete** to delete the workspace.
+
