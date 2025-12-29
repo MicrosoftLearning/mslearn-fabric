@@ -192,7 +192,7 @@ The goal of this next part of the exercise is to demonstrate how **Power BI temp
 ### Create a Power Query Parameter
 
 1. In Power Query, from the **Home** ribbon, select **Manage Parameters** and choose **New Parameter**.
-1. Create the paremter with the following values:
+1. Create the parameter with the following values:
    
     | Property         | Value                 |
     | ---------------- | --------------------- |
