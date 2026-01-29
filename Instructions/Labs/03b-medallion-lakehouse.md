@@ -588,7 +588,7 @@ You now have a curated, modeled **gold** layer that can be used for reporting an
 
 In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the semantic model directly in your workspace to create relationships and measures for reporting.
 
-Note that you can't use the **default semantic model** that is automatically created when you create a lakehouse. You must create a new semantic model that includes the gold tables you created in this exercise, from the Explorer.
+You must create a new semantic model that includes the gold tables you created in this exercise, from the Explorer.
 
 1. In your workspace, navigate to your **Sales** lakehouse.
 1. Select **New semantic model** from the ribbon of the Explorer view.

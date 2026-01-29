@@ -132,7 +132,7 @@ While many data professionals are familiar with SQL, data analysts with Power BI
 
 ## Clean up resources
 
-In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL, and are included in a default semantic model to support data visualizations.
+In this exercise, you have created a lakehouse and imported data into it. You've seen how a lakehouse consists of files and tables stored in a OneLake data store. The managed tables can be queried using SQL.
 
 If you've finished exploring your lakehouse, you can delete the workspace you created for this exercise.
 
