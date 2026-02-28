@@ -6,7 +6,7 @@ lab:
 
 # Create an ontology (preview) with Fabric IQ
 
-In this lab, you'll create a complete Fabric IQ ontology for a fictitious healthcare company by manually building each component—entity types, properties, keys, relationships, and data bindings. The sample data includes facilities, departments, rooms, individuals, and medical equipment.
+In this lab, you'll create a complete Fabric IQ ontology for a fictitious healthcare company by manually building each component—entity types, properties, keys, relationships, and data bindings. The sample data represents hospitals, departments, rooms, patients, vital sign equipment, and vital signs readings.
 
 This lab takes approximately **40** minutes to complete.
 
@@ -29,11 +29,11 @@ Now you'll create a lakehouse and load hospital operations data that will form t
 1. Name the lakehouse `LamnaHealthcareLH` and select **Create**.
 1. When the lakehouse opens, you'll upload CSV files and convert them to tables.
 
-### Upload and load the hospital data files
+### Download and load the hospital data files
 
-You'll download all sample data files, upload five CSV files to the lakehouse containing entity data for hospitals, departments, rooms, patients, and vital sign monitors, then convert each file to a table.
+You'll download sample data files, upload them to the lakehouse, and convert them to tables.
 
-1. Download all sample CSV files from the [sample-data folder](../../Allfiles/Labs/23-24/sample-data/):
+1. Download [sample-data.zip](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/23-24/sample-data.zip) and extract the CSV files to your local computer. The ZIP file contains:
    - **Hospitals.csv** - Healthcare facilities in your network
    - **Departments.csv** - Hospital departments (ICU, Emergency, Surgical)
    - **Rooms.csv** - Individual rooms within departments
@@ -313,9 +313,9 @@ Follow the same process for the remaining four relationships. For each: select t
 
 All relationships now have source data configured. Your ontology understands the complete healthcare data model: hospitals contain departments, departments contain rooms, patients are assigned to rooms, and vital sign equipment monitors patients.
 
-## Verify the ontology
+## Preview the ontology
 
-Your ontology is now complete with entities, relationships, static data, and time-series data—all built manually from the ground up. Let's verify it works.
+Your ontology is now complete with entities, relationships, static data, and time-series data—all built manually from the ground up.
 
 1. Select **Room** from the Entity Types list.
 1. In the ontology ribbon, select **Entity type overview**.
