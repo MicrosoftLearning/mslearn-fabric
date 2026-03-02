@@ -88,7 +88,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
     ```python
    df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
    # df now is a Spark DataFrame containing CSV data from "Files/orders/2019.csv".
-   display(df)
+   display(df.limit(100))
     ```
 
 >[!TIP]
