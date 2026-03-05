@@ -71,16 +71,17 @@ In many scenarios, the data you need to work with in your lakehouse may be store
 The sales data you uploaded is in a file, which data analysts and engineers can work with directly by using Apache Spark code. However, in many scenarios you may want to load the data from the file into a table so that you can query it using SQL.
 
 1. In the **Explorer** pane, select the **Files/data** folder so you can see the **sales.csv** file it contains.
-2. In the **...** menu for the **sales.csv** file, select **Load to Tables** > **New table**.
-3. In **Load to table** dialog box, set the table name to **sales** and confirm the load operation. Then wait for the table to be created and loaded.
+1. In the **...** menu for the **sales.csv** file, select **Load to Tables** > **New table**.
+1. In **Load to table** dialog box, set the table name to `sales` and confirm the load operation. Then wait for the table to be created and loaded.
+1. Select **CSV** for the file type. Then wait for the table to be created and loaded.
 
-    > **Tip**: If the **sales** table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
+    > **Tip**: If the `sales` table does not automatically appear, in the **...** menu for the **Tables** folder, select **Refresh**.
 
-3. In the **Explorer** pane, select the **sales** table that has been created to view the data.
+3. In the **Explorer** pane, select the `sales` table that has been created to view the data.
 
     ![Screenshot of a table preview.](./Images/table-preview.png)
 
-4. In the **...** menu for the **sales** table, select **View files** to see the underlying files for this table
+4. In the **...** menu for the `sales` table, select **View files** to see the underlying files for this table
 
     ![Screenshot of a table preview.](./Images/delta-table-files.png)
 
@@ -111,7 +112,7 @@ When you create a lakehouse and define tables in it, a SQL endpoint is automatic
 While many data professionals are familiar with SQL, data analysts with Power BI experience can apply their Power Query skills to create visual queries.
 
 1. On the toolbar, expand the **New SQL query** option and select **New visual query**.
-2. Drag the **sales** table to the new visual query editor pane that opens to create a Power Query as shown here: 
+2. Drag the `sales` table to the new visual query editor pane that opens to create a Power Query as shown here: 
 
     ![Screenshot of a Visual query.](./Images/visual-query.png)
 
