@@ -35,8 +35,8 @@ Now you're ready to find and ingest real-time data from a streaming source. To d
 
     ![Screenshot of the real-time hub in Fabric.](./Images/real-time-hub.png)
 
-1. In the real-time hub, in the **Connect to** section, select **Data sources**.
-1. Find the **Stock market** sample data source and select **Connect**. Then in the **Connect** wizard, name the source `stock` and edit the default eventstream name to change it to `stock-data`. The default stream associated with this data will automatically be named *stock-data-stream*:
+1. In the real-time hub, select **Add data**.
+1. Find the **Stock market** sample data source and select it. Then in the **Connect** wizard, name the source `stock` and edit the default eventstream name to change it to `stock-data`. The default stream associated with this data will automatically be named *stock-data-stream*:
 
     ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
 
