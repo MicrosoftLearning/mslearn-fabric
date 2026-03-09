@@ -10,39 +10,44 @@ In this lab you will ingest data into the Fabric lakehouse and use PySpark to re
 
 This lab will take approximately 45 minutes to complete.
 
-> [!Note] 
-> You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+>**Note**: You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete the exercise.
 
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace in a tenant with the Fabric capacity enabled.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser and sign in with your Fabric credentials.
+   
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+   
 1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+   
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a lakehouse and upload files
 
-Now that you have a workspace, it's time to create a data lakehouse for your data.
+Now that you have a workspace, it's time to create a lakehouse for your data.
 
-1. On the menu bar on the left, select the three dots (**...**) and then **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
+1. Select **New Item** and then select **Lakehouse** in the _Store data_ section. _It might take more than a minute to create the lakehouse._
 
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+1.  Give the lakehouse a unique name of your choice and **deselect** the _Lakehouse schemas (Public Preview)_ option.
 
-    After a minute or so, a new lakehouse will be created:
-
-    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
+    > **Important**: Make sure the _Lakehouse schemas_ option is **disabled** because you can't change this setting after creating the lakehouse. You will need to create a new lakehouse if this step is missed. 
 
 1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
 
+    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
+
 You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a folder of text files to your local computer (or lab VM if applicable) and then upload them to your lakehouse.
 
-1. Download the datafiles from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
+1. Download the data files from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
+   
 1. Extract the zipped archive and verify that you have a folder named *orders* which contains three CSV files: 2019.csv, 2020.csv, and 2021.csv.
+   
 1. Return to your new lakehouse. In the **Explorer** pane, next to the **Files** folder select the **…** menu, and select **Upload** and **Upload folder**. Navigate to the orders folder on your local computer (or lab VM if applicable) and select **Upload**.
+   
 1. After the files have been uploaded, expand **Files** and select the **orders** folder. Check that the CSV files have been uploaded, as shown here:
 
     ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.png)
