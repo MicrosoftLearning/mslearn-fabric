@@ -44,6 +44,9 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named `Ingest Sales Data`.
 1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
+
+    > **Note**: If the pipeline editor shows a **Copy job** option instead of **Copy Data**, select **Copy job > Use copy assistant**. The copy assistant wizard steps are the same regardless of how the activity is labeled in your version of Fabric.
+
 1. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
@@ -81,7 +84,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Compression type**: None
 1. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
 
-    A new pipeline containing a **Copy Data** activity is created, as shown here:
+    A new pipeline containing a **Copy Data** (or **Copy job**) activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
 
