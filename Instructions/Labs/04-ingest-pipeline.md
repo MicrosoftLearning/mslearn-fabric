@@ -43,43 +43,26 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New data pipeline**, and create a new data pipeline named `Ingest Sales Data`.
-1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data > Use copy assistant** in the pipeline editor page.
-1. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
-
-    ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
-
-1. In the **Connect to data source** pane, enter the following settings for the connection to your data source:
-    - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
-    - **Connection**: Create new connection
-    - **Connection name**: *Specify a unique name*
-    - **Data gateway**: (none)
-    - **Authentication kind**: Anonymous
-1. Select **Next**. Then ensure the following settings are selected:
-    - **Relative URL**: *Leave blank*
-    - **Request method**: GET
-    - **Additional headers**: *Leave blank*
-    - **Binary copy**: <u>Un</u>selected
-    - **Request timeout**: *Leave blank*
-    - **Max concurrent connections**: *Leave blank*
-1. Select **Next**, and wait for the data to be sampled and then ensure that the following settings are selected:
+1. In the pipeline editor, close the **Copy Data** wizard if it opens automatically (the wizard creates a *Copy job* activity rather than a *Copy data* activity). Then, on the **Activities** tab, in the **All activities** list, select **Copy data** to add a **Copy data** activity to the pipeline.
+1. Select the **Copy data** activity on the design canvas. Then in the pane below the canvas, on the **Source** tab, set the following settings:
+    - **Connection**: *Create a new connection with the following settings:*
+        - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
+        - **Connection name**: *Specify a unique name*
+        - **Data gateway**: (none)
+        - **Authentication kind**: Anonymous
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: Selected
-    - **Compression type**: None
-1. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-1. On the **Connect to data destination** page, set the following data destination options, and then select **Next**:
+1. On the **Destination** tab, set the following settings:
+    - **Connection**: *Your lakehouse*
     - **Root folder**: Files
-    - **Folder path name**: new_data
-    - **File name**: sales.csv
-    - **Copy behavior**: None
-1. Set the following file format options and then select **Next**:
+    - **File path**: new_data / sales.csv
     - **File format**: DelimitedText
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **Add header to file**: Selected
-    - **Compression type**: None
-1. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
+1. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run the pipeline.
 
     A new pipeline containing a **Copy Data** activity is created, as shown here:
 
