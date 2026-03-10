@@ -56,7 +56,7 @@ You can now ingest data into the lakehouse. There are several ways to do this, b
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
+1. On the menu bar on the left, **3 dots ...** select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
 
     A new notebook named **Notebook 1** is created and opened.
 
