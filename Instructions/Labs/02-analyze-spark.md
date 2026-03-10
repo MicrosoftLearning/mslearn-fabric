@@ -42,7 +42,7 @@ Now that you have a workspace, it's time to create a lakehouse for your data.
 
 You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a folder of text files to your local computer (or lab VM if applicable) and then upload them to your lakehouse.
 
-1. Download the data files from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
+1. Download the data files from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`
    
 1. Extract the zipped archive and verify that you have a folder named *orders* which contains three CSV files: 2019.csv, 2020.csv, and 2021.csv.
    
