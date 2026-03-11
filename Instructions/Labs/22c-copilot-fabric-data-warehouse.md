@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Use Copilot in Microsoft Fabric data warehouse'
-    module: 'Get started with Copilot in Fabric for Data Warehouse'
+  title: Use Copilot in Microsoft Fabric data warehouse
+  module: Get started with Copilot in Fabric for Data Warehouse
+  description: In this exercise, you have created a data warehouse that contains multiple tables. You used Copilot to generate SQL queries to analyze data in the data warehouse. You've experienced how AI can accelerate the process of writing complex SQL queries, fix errors automatically, and help you explore data more efficiently.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Use Copilot in Microsoft Fabric data warehouse
