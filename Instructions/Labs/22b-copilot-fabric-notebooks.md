@@ -1,7 +1,20 @@
 ---
 lab:
-    title: 'Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks'
-    module: 'Get started with Copilot in Fabric for data engineering'
+  title: Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks
+  module: Get started with Copilot in Fabric for data engineering
+  description: In this lab, we use Copilot for Fabric Data Engineering to load, transform,
+    and save data in a Lakehouse, using a notebook. Notebooks provide an interactive
+    environment that combines code, visualizations, and narrative text in a single
+    document. This format makes it easy to document your workflow, explain your reasoning,
+    and share results with others. By using notebooks, you can iteratively develop
+    and test code, visualize data at each step, and keep a clear record of your analysis
+    process. This approach enhances collaboration, reproducibility, and understanding,
+    making notebooks an ideal tool for data engineering and analytics tasks.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks
