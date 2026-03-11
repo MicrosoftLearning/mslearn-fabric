@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Monitor a data warehouse in Microsoft Fabric'
-    module: 'Monitor a data warehouse in Microsoft Fabric'
+  title: Monitor a data warehouse in Microsoft Fabric
+  module: Monitor a data warehouse in Microsoft Fabric
+  description: In Microsoft Fabric, a data warehouse provides a relational database
+    for large-scale analytics. Data warehouses in Microsoft Fabric include dynamic
+    management views that you can use to monitor activity and queries.
+  duration: 80 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Monitor a data warehouse in Microsoft Fabric
