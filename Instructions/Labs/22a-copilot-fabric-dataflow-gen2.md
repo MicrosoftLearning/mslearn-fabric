@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Work smarter with Copilot in Microsoft Fabric Dataflow Gen2'
-    module: 'Get started with Copilot in Fabric for data engineering'
+  title: Work smarter with Copilot in Microsoft Fabric Dataflow Gen2
+  module: Get started with Copilot in Fabric for data engineering
+  description: If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Work smarter with Copilot in Microsoft Fabric Dataflow Gen2
