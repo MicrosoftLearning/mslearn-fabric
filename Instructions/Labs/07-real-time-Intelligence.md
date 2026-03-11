@@ -1,7 +1,16 @@
 ---
 lab:
-    title: 'Get started with Real-Time Intelligence in Microsoft Fabric'
-    module: 'Get started with Real-Time Intelligence in Microsoft Fabric'
+  title: Get started with Real-Time Intelligence in Microsoft Fabric
+  module: Get started with Real-Time Intelligence in Microsoft Fabric
+  description: Microsoft Fabric provides Real-Time Intelligence, enabling you to create
+    analytical solutions for real-time data streams. In this exercise, you'll use
+    the Real-Time Intelligence capabilities in Microsoft Fabric to ingest, analyze,
+    and visualize a real-time stream of stock market data.
+  duration: 30 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Get started with Real-Time Intelligence in Microsoft Fabric
