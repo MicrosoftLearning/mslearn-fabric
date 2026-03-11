@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks'
-    module: 'Get started with Copilot in Fabric for data engineering'
+  title: Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks
+  module: Get started with Copilot in Fabric for data engineering
+  description: In this exercise, you’ve learned how to use Copilot and Spark to work with data in Microsoft Fabric.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks
