@@ -1,7 +1,18 @@
 ---
 lab:
-    title: 'Chat with your data using Microsoft Fabric data agents'
-    module: 'Implement Fabric Data Agents'
+  title: Chat with your data using Microsoft Fabric data agents
+  module: Implement Fabric Data Agents
+  description: A Microsoft Fabric data agent enables natural interaction with your
+    data by allowing you to ask questions in plain English and receive structured,
+    human-readable responses. By eliminating the need to understand query languages
+    like SQL (Structured Query Language), DAX (Data Analysis Expressions), or KQL
+    (Kusto Query Language), the data agent makes data insights accessible across the
+    organization, regardless of technical skill level.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Chat with your data using Microsoft Fabric data agents
