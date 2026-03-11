@@ -1,7 +1,18 @@
 ---
 lab:
-    title: 'Work smarter with Copilot in Microsoft Fabric Dataflow Gen2'
-    module: 'Get started with Copilot in Fabric for data engineering'
+  title: Work smarter with Copilot in Microsoft Fabric Dataflow Gen2
+  module: Get started with Copilot in Fabric for data engineering
+  description: In Microsoft Fabric, Dataflows (Gen2) connect to various data sources
+    and perform transformations in Power Query Online. They can then be used in Data
+    Pipelines to ingest data into a lakehouse or other analytical store, or to define
+    a dataset for a Power BI report. This lab provides an introduction to Copilot
+    in Dataflows (Gen2) rather than focusing on building a complex enterprise solution.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
+  - Power BI
 ---
 
 # Work smarter with Copilot in Microsoft Fabric Dataflow Gen2
