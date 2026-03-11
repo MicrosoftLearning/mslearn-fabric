@@ -1,7 +1,23 @@
 ---
 lab:
-    title: 'Create a Microsoft Fabric Lakehouse'
-    module: 'Get started with lakehouses in Microsoft Fabric'
+  title: Create a Microsoft Fabric Lakehouse
+  module: Get started with lakehouses in Microsoft Fabric
+  description: Large-scale data analytics solutions have traditionally been built
+    around a *data warehouse*, in which data is stored in relational tables and queried
+    using SQL. The growth in "big data" (characterized by high *volumes*, *variety*,
+    and *velocity* of new data assets) together with the availability of low-cost
+    storage and cloud-scale distributed compute technologies has led to an alternative
+    approach to analytical data storage; the *data lake*. In a data lake, data is
+    stored as files without imposing a fixed schema for storage. Increasingly, data
+    engineers and analysts seek to benefit from the best features of both of these
+    approaches by combining them in a *data lakehouse*; in which data is stored in
+    files in a data lake and a relational schema is applied to them as a metadata
+    layer so that they can be queried using traditional SQL semantics.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Create a Microsoft Fabric Lakehouse
