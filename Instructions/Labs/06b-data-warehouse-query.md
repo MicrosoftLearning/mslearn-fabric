@@ -1,7 +1,18 @@
 ---
 lab:
-    title: 'Query a data warehouse in Microsoft Fabric'
-    module: 'Query a data warehouse in Microsoft Fabric'
+  title: Query a data warehouse in Microsoft Fabric
+  module: Query a data warehouse in Microsoft Fabric
+  description: In Microsoft Fabric, a data warehouse provides a relational database
+    for large-scale analytics. The rich set of experiences built into Microsoft Fabric
+    workspace enables customers to reduce their time to insights by having an easily
+    consumable, always connected semantic model that is integrated with Power BI in
+    DirectLake mode.
+  duration: 80 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
+  - Power BI
 ---
 
 # Query a data warehouse in Microsoft Fabric
