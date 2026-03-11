@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Train and track machine learning models with MLflow in Microsoft Fabric'
-    module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
+  title: Train and track machine learning models with MLflow in Microsoft Fabric
+  module: Train and track machine learning models with MLflow in Microsoft Fabric
+  description: In this exercise, you have created a notebook and trained a machine learning model. You used scikit-learn to train the model and MLflow to track its performance.
+  duration: 120 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Train and track machine learning models with MLflow in Microsoft Fabric
