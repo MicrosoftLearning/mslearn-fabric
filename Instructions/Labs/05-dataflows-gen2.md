@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create and use Dataflows (Gen2) in Microsoft Fabric'
-    module: 'Ingest Data with Dataflows Gen2 in Microsoft Fabric'
+  title: Create and use Dataflows (Gen2) in Microsoft Fabric
+  module: Ingest Data with Dataflows Gen2 in Microsoft Fabric
+  description: If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create and use Dataflows (Gen2) in Microsoft Fabric
