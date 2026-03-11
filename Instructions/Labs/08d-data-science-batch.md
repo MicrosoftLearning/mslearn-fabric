@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Generate batch predictions using a deployed model in Microsoft Fabric'
-    module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
+  title: Generate batch predictions using a deployed model in Microsoft Fabric
+  module: Generate batch predictions using a deployed model in Microsoft Fabric
+  description: In this lab, you'll use a machine learning model to predict a quantitative
+    measure of diabetes.
+  duration: 70 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Generate batch predictions using a deployed model in Microsoft Fabric
