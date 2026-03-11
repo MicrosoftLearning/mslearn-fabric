@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Enforce semantic model security'
-    module: 'Enforce semantic model security'
+  title: Enforce semantic model security
+  module: Enforce semantic model security
+  description: In this exercise, you will create and validate static roles, and then see how you would map security principals to the semantic model roles.
+  duration: 45 minutes
+  level: 300
+  islab: true
 ---
 
 # Enforce semantic model security
