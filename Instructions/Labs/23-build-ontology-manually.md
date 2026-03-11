@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Create an ontology (preview) with Fabric IQ'
-    module: 'Create ontology with Microsoft Fabric IQ'
+  title: Create an ontology (preview) with Fabric IQ
+  module: Create ontology with Microsoft Fabric IQ
+  description: 'You can keep this workspace and ontology to continue exploring Fabric IQ capabilities. If you want to remove the resources you created in this exercise, follow these steps:'
+  duration: 40 minutes
+  level: 100
+  islab: true
 ---
 
 # Create an ontology (preview) with Fabric IQ
