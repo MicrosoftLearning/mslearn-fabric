@@ -1,7 +1,19 @@
 ---
 lab:
-    title: 'Design and implement a dimensional model'
-    module: 'Design dimensional models for analytics in Microsoft Fabric'
+  title: Design and implement a dimensional model
+  module: Design dimensional models for analytics in Microsoft Fabric
+  description: In Microsoft Fabric, a data warehouse provides full T-SQL semantics
+    for creating and managing dimensional models. Dimensional models organize data
+    into fact tables that capture business events and dimension tables that provide
+    the context for analysis. This structure, known as a star schema, is the recommended
+    approach for most analytics workloads and the foundation for Power BI semantic
+    models.
+  duration: 30 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
+  - Power BI
 ---
 
 # Design and implement a dimensional model
