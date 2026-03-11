@@ -1,8 +1,12 @@
 ---
 lab:
-    title: 'Secure data in a data warehouse'
-    module: 'Secure data in a data warehouse'
---- 
+  title: Secure data in a data warehouse
+  module: Secure data in a data warehouse
+  description: Fabric has a permissions model that allows you to control access to data at the workspace level, and at the item level. When you need more granular control of what users can do with securables in a Fabric warehouse, you can use the standard SQL data control language (DCL) commands GRANT,DENY and, REVOKE. In this exercise, you will create objects, secure them using GRANT, and DENY, and then run queries to view the effect of applying granular permissions.
+  duration: 45 minutes
+  level: 200
+  islab: true
+---
 
 # Secure data in a data warehouse
 
