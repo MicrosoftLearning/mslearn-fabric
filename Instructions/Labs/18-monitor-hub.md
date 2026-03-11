@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Monitor Fabric activity in the monitoring hub'
-    module: 'Monitoring Fabric'
+  title: Monitor Fabric activity in the monitoring hub
+  module: Monitoring Fabric
+  description: The *monitoring hub* in Microsoft Fabric provides a central place where
+    you can monitor activity. You can use the monitoring hub to review events related
+    to items you have permission to view.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Monitor Fabric activity in the monitoring hub
