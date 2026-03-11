@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Enforce semantic model security'
-    module: 'Enforce semantic model security'
+  title: Enforce semantic model security
+  module: Enforce semantic model security
+  description: In this exercise, you will update a pre-developed data model to enforce
+    security. Specifically, salespeople at the Adventure Works company should only
+    be able to see sales data related to their assigned sales region.
+  duration: 45 minutes
+  level: 300
+  islab: true
 ---
 
 # Enforce semantic model security
