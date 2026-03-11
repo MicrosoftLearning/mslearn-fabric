@@ -1,7 +1,17 @@
 ---
 lab:
-    title: 'Use Copilot in Microsoft Fabric data warehouse'
-    module: 'Get started with Copilot in Fabric for Data Warehouse'
+  title: Use Copilot in Microsoft Fabric data warehouse
+  module: Get started with Copilot in Fabric for Data Warehouse
+  description: In Microsoft Fabric, a data warehouse provides a relational database
+    for large-scale analytics. Unlike the default read-only SQL endpoint for tables
+    defined in a lakehouse, a data warehouse provides full SQL semantics; including
+    the ability to insert, update, and delete data in the tables. In this lab, we
+    will explore how we can leverage Copilot to create SQL Queries.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Use Copilot in Microsoft Fabric data warehouse
