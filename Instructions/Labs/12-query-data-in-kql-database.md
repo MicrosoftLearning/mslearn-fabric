@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Work with data in a Microsoft Fabric eventhouse'
-    module: 'Work with data in a Microsoft Fabric eventhouse'
+  title: Work with data in a Microsoft Fabric eventhouse
+  module: Work with data in a Microsoft Fabric eventhouse
+  description: In this exercise, you'll create and populate an eventhouse with some sample data related to taxi rides, and then query the data using KQL and SQL.
+  duration: 25 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Work with data in a Microsoft Fabric eventhouse
