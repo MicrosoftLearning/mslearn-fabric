@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Get started with data science in Microsoft Fabric'
-    module: 'Get started with data science in Microsoft Fabric'
+  title: Get started with data science in Microsoft Fabric
+  module: Get started with data science in Microsoft Fabric
+  description: In this lab, you'll ingest data, explore the data in a notebook, process the data with the Data Wrangler, and train two types of models. By performing all these steps, you'll be able to explore the data science features in Microsoft Fabric.
+  duration: 128 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Get started with data science in Microsoft Fabric
