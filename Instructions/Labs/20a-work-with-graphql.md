@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Work with API for GraphQL in Microsoft Fabric'
-    module: 'Get started with GraphQL in Microsoft Fabric'
+  title: Work with API for GraphQL in Microsoft Fabric
+  module: Get started with GraphQL in Microsoft Fabric
+  description: In this exercise, you've created, queried, and exposed data from a SQL database using GraphQL in Microsoft Fabric.
+  duration: 76 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Work with API for GraphQL in Microsoft Fabric
