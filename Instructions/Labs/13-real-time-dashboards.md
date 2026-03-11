@@ -1,7 +1,16 @@
 ---
 lab:
-    title: 'Get started with Real-time Dashboards in Microsoft Fabric'
-    module: 'Get started with Real-Time Dashboards in Microsoft Fabric'
+  title: Get started with Real-time Dashboards in Microsoft Fabric
+  module: Get started with Real-Time Dashboards in Microsoft Fabric
+  description: Real-time dashboards in Microsoft Fabric enable you to visualize and
+    explore streaming data using the Kusto Query Language (KQL).  In this exercise,
+    you'll explore how to create and use a real-time dashboard based on a real-time
+    data source.
+  duration: 25 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Get started with Real-Time Dashboards in Microsoft Fabric
