@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Load data into a warehouse using T-SQL'
-    module: 'Load data into a warehouse in Microsoft Fabric'
+  title: Load data into a warehouse using T-SQL
+  module: Load data into a warehouse in Microsoft Fabric
+  description: In our scenario, since we don't have any available data, we must ingest data to be used for loading the warehouse. You'll create a data lakehouse for the data files you're going to use to load the warehouse.
+  duration: 76 minutes
+  level: 100
+  islab: true
 ---
 
 # Load data into a warehouse using T-SQL
