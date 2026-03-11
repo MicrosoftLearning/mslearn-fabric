@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Discover and connect to data in OneLake'
-    module: 'Discover and connect to data in OneLake'
+  title: Discover and connect to data in OneLake
+  module: Discover and connect to data in OneLake
+  description: In modern analytics organizations, data often exists across multiple
+    workspaces and teams. Data engineers create lakehouses with raw and cleansed data,
+    other teams build warehouses with business metrics, and analysts develop semantic
+    models. As an analytics engineer, you need to find and connect to this data before
+    you can transform it or build analytical solutions.
+  duration: 30 minutes
+  level: 100
+  islab: true
 ---
 
 # Discover and connect to data in OneLake
