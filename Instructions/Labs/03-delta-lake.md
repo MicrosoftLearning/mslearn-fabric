@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Use delta tables in Apache Spark'
-    module: 'Work with Delta Lake tables in Microsoft Fabric'
+  title: Use delta tables in Apache Spark
+  module: Work with Delta Lake tables in Microsoft Fabric
+  description: Delta Lake supports streaming data. Delta tables can be a sink or a source for data streams created using the Spark Structured Streaming API. In this example, you’ll use a Delta table as a sink for some streaming data in a simulated internet of things (IoT) scenario.
+  duration: 45 minutes
+  level: 200
+  islab: true
 ---
 
 # Use Delta Tables in Apache Spark
