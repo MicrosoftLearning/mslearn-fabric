@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Design scalable semantic models'
-    module: 'Design scalable semantic models'
+  title: Design scalable semantic models
+  module: Design scalable semantic models
+  description: In this exercise, you will work with DAX functions to enhance flexibility
+    and efficiency of data models, particularly through features like calculation
+    groups and field parameters. By using these features together, you can make interactive
+    reports without needing multiple visuals or complex DAX expressions, creating
+    highly flexible and scalable semantic models.
+  duration: 30 minutes
+  level: 100
+  islab: true
 ---
 
 # Design scalable semantic models
