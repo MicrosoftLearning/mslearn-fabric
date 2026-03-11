@@ -1,7 +1,16 @@
 ---
 lab:
-    title: 'Secure data access in Microsoft Fabric'
-    module: 'Secure data access in Microsoft Fabric'
+  title: Secure data access in Microsoft Fabric
+  module: Secure data access in Microsoft Fabric
+  description: Microsoft Fabric has a multi-layer security model for managing data
+    access. Security can be set for an entire workspace, for individual items, or
+    through granular permissions in each Fabric engine. In this exercise, you secure
+    data using workspace, and item access controls and OneLake data access roles.
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Secure data access in Microsoft Fabric
