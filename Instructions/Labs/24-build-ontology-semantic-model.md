@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Build an ontology (preview) from a semantic model in Fabric IQ'
-    module: 'Create ontology with Microsoft Fabric IQ'
+  title: Build an ontology (preview) from a semantic model in Fabric IQ
+  module: Create ontology with Microsoft Fabric IQ
+  description: 'You can keep this workspace and ontology to continue exploring Fabric IQ capabilities. If you want to remove the resources you created in this exercise, follow these steps:'
+  duration: 45 minutes
+  level: 200
+  islab: true
 ---
 
 # Build an ontology (preview) from a semantic model in Fabric IQ
