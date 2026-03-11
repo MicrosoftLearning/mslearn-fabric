@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Train and track machine learning models with MLflow in Microsoft Fabric'
-    module: 'Train and track machine learning models with MLflow in Microsoft Fabric'
+  title: Train and track machine learning models with MLflow in Microsoft Fabric
+  module: Train and track machine learning models with MLflow in Microsoft Fabric
+  description: In this lab, you'll train a machine learning model to predict a quantitative
+    measure of diabetes. You'll train a regression model with scikit-learn, and track
+    and compare your models with MLflow.
+  duration: 120 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Train and track machine learning models with MLflow in Microsoft Fabric
