@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Monitor Fabric activity in the monitoring hub'
-    module: 'Monitoring Fabric'
+  title: Monitor Fabric activity in the monitoring hub
+  module: Monitoring Fabric
+  description: In this exercise, you have created a lakehouse, a dataflow, and a Spark notebook; and you've used the monitoring hub to view item activity.
+  duration: 30 minutes
+  level: 200
+  islab: true
 ---
 
 # Monitor Fabric activity in the monitoring hub
