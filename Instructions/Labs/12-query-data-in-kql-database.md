@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Work with data in a Microsoft Fabric eventhouse'
-    module: 'Work with data in a Microsoft Fabric eventhouse'
+  title: Work with data in a Microsoft Fabric eventhouse
+  module: Work with data in a Microsoft Fabric eventhouse
+  description: In Microsoft Fabric, an *eventhouse* is used to store real-time data
+    related to events; often captured from a streaming data source by an *eventstream*.
+  duration: 25 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Work with data in a Microsoft Fabric eventhouse
