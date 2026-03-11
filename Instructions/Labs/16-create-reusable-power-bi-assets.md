@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Create reusable Power BI assets'
-    module: 'Create reusable Power BI assets'
+  title: Create reusable Power BI assets
+  module: Create reusable Power BI assets
+  description: In this exercise, you'll create reusable assets to support semantic
+    model and report development. These assets include Power BI Project and Template
+    files.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Power BI
 ---
 
 # Create reusable Power BI assets
