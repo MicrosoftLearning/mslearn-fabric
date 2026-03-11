@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Discover and connect to data in OneLake'
-    module: 'Discover and connect to data in OneLake'
+  title: Discover and connect to data in OneLake
+  module: Discover and connect to data in OneLake
+  description: In this exercise, you create a sample environment with a lakehouse containing sales data. You then practice discovering this data through the OneLake catalog, creating shortcuts for cross-workspace access, querying data via the SQL analytics endpoint, and exploring semantic models.
+  duration: 30 minutes
+  level: 100
+  islab: true
 ---
 
 # Discover and connect to data in OneLake
