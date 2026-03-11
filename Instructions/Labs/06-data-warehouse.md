@@ -1,7 +1,16 @@
 ---
 lab:
-    title: 'Analyze data in a data warehouse'
-    module: 'Get started with data warehouses in Microsoft Fabric'
+  title: Analyze data in a data warehouse
+  module: Get started with data warehouses in Microsoft Fabric
+  description: In Microsoft Fabric, a data warehouse provides a relational database
+    for large-scale analytics. Unlike the default read-only SQL endpoint for tables
+    defined in a lakehouse, a data warehouse provides full SQL semantics; including
+    the ability to insert, update, and delete data in the tables.
+  duration: 100 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Analyze data in a data warehouse
