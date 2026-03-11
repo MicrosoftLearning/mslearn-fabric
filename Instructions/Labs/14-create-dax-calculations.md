@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create DAX calculations in Power BI Desktop'
-    module: 'Create DAX calculations in Power BI Desktop'
+  title: Create DAX calculations in Power BI Desktop
+  module: Create DAX calculations in Power BI Desktop
+  description: In this lab you'll create calculated tables, calculated columns, and simple measures using Data Analysis Expressions (DAX).
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Power BI
 ---
 
 # Create DAX calculations in Power BI Desktop
