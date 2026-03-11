@@ -1,7 +1,19 @@
 ---
 lab:
-    title: 'Work with API for GraphQL in Microsoft Fabric'
-    module: 'Get started with GraphQL in Microsoft Fabric'
+  title: Work with API for GraphQL in Microsoft Fabric
+  module: Get started with GraphQL in Microsoft Fabric
+  description: Microsoft Fabric API for GraphQL is a data access layer that enables
+    quick and efficient querying of multiple data sources with a widely adopted and
+    familiar API technology. The API allows you to abstract the specifics of backend
+    data sources so you can concentrate on your application's logic, and provide all
+    the data a client needs in a single call. GraphQL uses a simple query language
+    and easily manipulated result sets, which minimizes the time it takes for applications
+    to access your data in Fabric.
+  duration: 76 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
 
 # Work with API for GraphQL in Microsoft Fabric
