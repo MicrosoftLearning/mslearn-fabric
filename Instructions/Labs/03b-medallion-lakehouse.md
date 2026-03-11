@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create a medallion architecture in a Microsoft Fabric lakehouse'
-    module: 'Organize a Fabric lakehouse using medallion architecture design'
+  title: Create a medallion architecture in a Microsoft Fabric lakehouse
+  module: Organize a Fabric lakehouse using medallion architecture design
+  description: In this exercise, you've learned how to create a medallion architecture in a Microsoft Fabric lakehouse.
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
