@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Monitor a data warehouse in Microsoft Fabric'
-    module: 'Monitor a data warehouse in Microsoft Fabric'
+  title: Monitor a data warehouse in Microsoft Fabric
+  module: Monitor a data warehouse in Microsoft Fabric
+  description: After a minute or so, a new warehouse will be created and populated with sample data for a taxi ride analysis scenario.
+  duration: 80 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Monitor a data warehouse in Microsoft Fabric
