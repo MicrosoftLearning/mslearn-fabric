@@ -1,8 +1,17 @@
 ---
 lab:
-    title: 'Secure data in a data warehouse'
-    module: 'Secure data in a data warehouse'
---- 
+  title: Secure data in a data warehouse
+  module: Secure data in a data warehouse
+  description: Microsoft Fabric permissions and granular SQL permissions work together
+    to govern Warehouse access and user permissions. In this exercise, you'll secure
+    data using granular permissions, column-level security, row-level security, and
+    dynamic data masking.
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
+---
 
 # Secure data in a data warehouse
 
