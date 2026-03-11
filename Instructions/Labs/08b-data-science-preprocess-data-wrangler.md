@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Preprocess data with Data Wrangler in Microsoft Fabric'
-    module: 'Preprocess data with Data Wrangler in Microsoft Fabric'
+  title: Preprocess data with Data Wrangler in Microsoft Fabric
+  module: Preprocess data with Data Wrangler in Microsoft Fabric
+  description: In this lab, you'll learn how to use Data Wrangler in Microsoft Fabric to preprocess data, and generate code using a library of common data science operations.
+  duration: 152 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Preprocess data with Data Wrangler in Microsoft Fabric
