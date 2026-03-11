@@ -1,8 +1,17 @@
 ---
 lab:
-    title: 'Use Activator in Microsoft Fabric'
-    module: 'Use Activator in Microsoft Fabric'
+  title: Use Activator in Microsoft Fabric
+  module: Use Activator in Microsoft Fabric
+  description: Activator in Microsoft Fabric takes action based on what's happening
+    in your data. An Activator lets you monitor your data and create triggers to react
+    to your data changes.
+  duration: 30 minutes
+  level: 100
+  islab: true
+  primarytopics:
+  - Microsoft Fabric
 ---
+
 # Use Activator in Fabric
 
 Activator in Microsoft Fabric takes action based on what's happening in your data. An Activator lets you monitor your data and create triggers to react to your data changes.
