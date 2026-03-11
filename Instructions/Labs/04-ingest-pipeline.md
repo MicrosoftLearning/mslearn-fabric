@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Ingest data with a pipeline in Microsoft Fabric'
-    module: 'Use Data Factory pipelines in Microsoft Fabric'
+  title: Ingest data with a pipeline in Microsoft Fabric
+  module: Use Data Factory pipelines in Microsoft Fabric
+  description: In this exercise, you've learned how to implement a pipeline in Microsoft Fabric.
+  duration: 104 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Ingest data with a pipeline in Microsoft Fabric
