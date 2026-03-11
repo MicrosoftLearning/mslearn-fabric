@@ -1,7 +1,16 @@
 ---
 lab:
-    title: 'Build an ontology (preview) from a semantic model in Fabric IQ'
-    module: 'Create ontology with Microsoft Fabric IQ'
+  title: Build an ontology (preview) from a semantic model in Fabric IQ
+  module: Create ontology with Microsoft Fabric IQ
+  description: 'There are two ways to build a Fabric IQ ontology: manually, by creating
+    each entity type and relationship from scratch, or automatically, by generating
+    the structure from a Power BI semantic model. This lab uses the semantic model
+    approach.'
+  duration: 45 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - Power BI
 ---
 
 # Build an ontology (preview) from a semantic model in Fabric IQ
