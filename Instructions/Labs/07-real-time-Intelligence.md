@@ -33,7 +33,7 @@ Now you're ready to find and ingest real-time data from a streaming source. To d
 
     > **Note**: If you don't see the **Real-Time hub**, select the ellipsis **(...)** and then pin the Real-Time hub to the menu bar.
 
-    ![Screenshot of pinning the Real-Time hub to the menu bar.](./Images/real-time-hub.png)
+    ![Screenshot of pinning the Real-Time hub to the menu bar.](./Images/pin-real-time-hub.png)
 
 1. In the **Real-Time hub**, select **Add data**.
 
