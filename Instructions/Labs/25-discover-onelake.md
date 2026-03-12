@@ -12,7 +12,7 @@ Microsoft Fabric provides the OneLake catalog as a centralized discovery experie
 
 In this exercise, you create a sample environment with a lakehouse containing sales data. You then practice discovering this data through the OneLake catalog, creating shortcuts for cross-workspace access, querying data via the SQL analytics endpoint, and exploring semantic models.
 
-This lab takes approximately **30** minutes to complete.
+This lab takes approximately **30** minutes to complete. 
 
 > **Note**: You need access to a Fabric-enabled workspace. If you don't have one, create a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
