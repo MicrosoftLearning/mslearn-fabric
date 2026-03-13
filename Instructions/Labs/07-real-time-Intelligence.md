@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Get started with Real-Time Intelligence in Microsoft Fabric'
-    module: 'Get started with Real-Time Intelligence in Microsoft Fabric'
+  title: Get started with Real-Time Intelligence in Microsoft Fabric
+  module: Get started with Real-Time Intelligence in Microsoft Fabric
+  description: In this lab, you'll learn to work with real-time data streams in Microsoft Fabric by ingesting stock market data using eventstreams, querying it with KQL, and visualizing it on real-time dashboards. You'll also configure alerts using Activator to respond to real-time events.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Get started with Real-Time Intelligence in Microsoft Fabric
@@ -25,22 +31,34 @@ Before working with data in Fabric, you need to create a workspace with the Fabr
 
 ## Create an eventstream
 
-Now you're ready to find and ingest real-time data from a streaming source. To do this, you'll start in the Fabric Real-Time Hub.
+Now you're ready to find and ingest real-time data from a streaming source. To do this, you'll start in the Fabric Real-Time Hub. The real-time hub provides an easy way to find and manage sources of streaming data.
 
-> **Tip**: The first time you use the Real-Time Hub, some *getting started* tips may be displayed. You can close these.
+> **Tip**: The first time you use the Real-Time Hub, some *Getting started* tips may be displayed. You can close these.
 
 1. In the menu bar on the left, select the **Real-Time** hub.
 
-    The real-time hub provides an easy way to find and manage sources of streaming data.
+    > **Note**: If you don't see the **Real-Time hub**, select the ellipsis **(...)** and then pin the Real-Time hub to the menu bar.
 
-    ![Screenshot of the real-time hub in Fabric.](./Images/real-time-hub.png)
+    ![Screenshot of pinning the Real-Time hub to the menu bar.](./Images/pin-real-time-hub.png)
 
-1. In the real-time hub, in the **Connect to** section, select **Data sources**.
-1. Find the **Stock market** sample data source and select **Connect**. Then in the **Connect** wizard, name the source `stock` and edit the default eventstream name to change it to `stock-data`. The default stream associated with this data will automatically be named *stock-data-stream*:
+1. In the **Real-Time hub**, select **Add data**.
+
+    ![Screenshot of the Real-Time hub.](./Images/real-time-hub.png)
+
+2. Select the **Stock market** sample data source.
+
+3. Configure the data source as follows:
+   - **Source name**: `stock`
+   - **Workspace**: Select the workspace you created
+   - **Eventstream name**: `stock-data`
+
+    > _The default stream associated with this data will automatically be named *stock-data-stream*._
 
     ![Screenshot of a new eventstream.](./Images/name-eventstream.png)
 
-1. Select **Next**, then **Connect** and wait for the source and eventstream to be created, then select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
+4. Select **Next**, then **Connect** to create the eventstream. 
+
+5. Select **Open eventstream**. The eventstream will show the **stock** source and the **stock-data-stream** on the design canvas:
 
    ![Screenshot of the eventstream canvas.](./Images/new-stock-stream.png)
 

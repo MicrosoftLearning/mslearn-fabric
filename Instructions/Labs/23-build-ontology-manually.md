@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create an ontology (preview) with Fabric IQ'
-    module: 'Create ontology with Microsoft Fabric IQ'
+  title: Create an ontology (preview) with Fabric IQ
+  module: Create ontology with Microsoft Fabric IQ
+  description: 'In this lab, you'll manually build a complete Fabric IQ ontology by creating entity types with properties and keys, defining relationships, and binding data from lakehouse tables and eventhouse streams. You'll work hands-on with both static and time-series data to model a healthcare scenario including hospitals, departments, patients, and vital sign monitoring equipment.'
+  duration: 40 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create an ontology (preview) with Fabric IQ

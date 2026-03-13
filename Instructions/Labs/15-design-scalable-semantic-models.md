@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Design scalable semantic models'
-    module: 'Design scalable semantic models'
+  title: Design scalable semantic models
+  module: Design scalable semantic models
+  description: In this lab, you'll learn advanced techniques to design flexible and scalable semantic models using DAX. You'll work with inactive relationships, create calculation groups for dynamic time intelligence, and use field parameters to build interactive reports that allow users to switch between different measures and calculations without needing multiple visuals.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Power BI
 ---
 
 # Design scalable semantic models

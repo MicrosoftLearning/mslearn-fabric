@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Ingest data with a pipeline in Microsoft Fabric'
-    module: 'Use Data Factory pipelines in Microsoft Fabric'
+  title: Ingest data with a pipeline in Microsoft Fabric
+  module: Use Data Factory pipelines in Microsoft Fabric
+  description: In this lab, you'll create data pipelines to ingest data from external sources into a lakehouse, and integrate Spark notebooks to transform and load the data into tables. You'll learn how to combine Copy Data activities with custom Spark transformations to build reusable ETL processes in Microsoft Fabric.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Ingest data with a pipeline in Microsoft Fabric

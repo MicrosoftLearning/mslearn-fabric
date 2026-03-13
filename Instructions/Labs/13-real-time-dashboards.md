@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Get started with Real-time Dashboards in Microsoft Fabric'
-    module: 'Get started with Real-Time Dashboards in Microsoft Fabric'
+  title: Get started with Real-time Dashboards in Microsoft Fabric
+  module: Get started with Real-Time Dashboards in Microsoft Fabric
+  description: In this lab, you'll learn to create interactive real-time dashboards in Microsoft Fabric by building visualizations from streaming data using KQL queries. You'll configure data ingestion from an eventstream, create multiple dashboard tiles with charts and maps, implement reusable base queries and parameters for interactivity, and set up auto-refresh capabilities.
+  duration: 25 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Get started with Real-Time Dashboards in Microsoft Fabric

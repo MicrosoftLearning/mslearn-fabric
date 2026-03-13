@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Analyze data with Apache Spark'
-    module: 'Use Apache Spark to work with files in a lakehouse'
+  title: Analyze data with Apache Spark
+  module: Use Apache Spark to work with files in a lakehouse
+  description: In this lab, you'll ingest data into a Fabric lakehouse and use Apache Spark to read and analyze it. You'll work with PySpark to load files, explore data, and perform analysis using Spark notebooks.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Analyze data with Apache Spark in Fabric

@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Use delta tables in Apache Spark'
-    module: 'Work with Delta Lake tables in Microsoft Fabric'
+  title: Use delta tables in Apache Spark
+  module: Work with Delta Lake tables in Microsoft Fabric
+  description: In this lab, you'll create Delta tables in a Microsoft Fabric lakehouse and explore data using SQL queries. You'll work with the Delta Lake format to support relational semantics for both batch and streaming data operations.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Use Delta Tables in Apache Spark

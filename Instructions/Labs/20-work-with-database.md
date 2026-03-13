@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Work with SQL Database in Microsoft Fabric'
-    module: 'Get started with SQL Database in Microsoft Fabric'
+  title: Work with SQL Database in Microsoft Fabric
+  module: Get started with SQL Database in Microsoft Fabric
+  description: In this lab, you'll create and query a SQL database in Microsoft Fabric, integrate external data sources, and secure data using views and role-based access control.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Work with SQL Database in Microsoft Fabric

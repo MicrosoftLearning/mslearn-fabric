@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Implement deployment pipelines in Microsoft Fabric'
-    module: 'Implement CI/CD in Microsoft Fabric'
+  title: Implement deployment pipelines in Microsoft Fabric
+  module: Implement CI/CD in Microsoft Fabric
+  description: In this lab, you'll learn to implement CI/CD practices in Microsoft Fabric using deployment pipelines. You'll configure a multi-stage pipeline and deploy content across development, test, and production environments, gaining hands-on experience automating content promotion in Fabric.
+  duration: 20 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Implement deployment pipelines in Microsoft Fabric
