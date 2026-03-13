@@ -2,7 +2,7 @@
 lab:
   title: Create and use Dataflows (Gen2) in Microsoft Fabric
   module: Ingest Data with Dataflows Gen2 in Microsoft Fabric
-  description: If you've finished exploring dataflows in Microsoft Fabric, you can delete the workspace you created for this exercise.
+  description: In this lab, you will create a Dataflow (Gen2) to extract data from a CSV file, perform transformations in Power Query Online, and load the data into a lakehouse. You will also learn how to orchestrate dataflows by integrating them into a data pipeline.
   duration: 30 minutes
   level: 300
   islab: true

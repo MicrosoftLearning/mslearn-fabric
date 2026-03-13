@@ -2,10 +2,12 @@
 lab:
   title: Design and implement a dimensional model
   module: Design dimensional models for analytics in Microsoft Fabric
-  description: In this exercise, you created a data warehouse with a star schema dimensional model containing a sales fact table and four dimension tables. You loaded sample data, ran queries that join the fact table to dimension tables, and implemented SCD Type 1 and Type 2 change patterns.
+  description: In this lab, you design and implement a star schema dimensional model in a Fabric Warehouse, creating fact and dimension tables with foreign key relationships. You run analytical queries to aggregate sales data across multiple dimensions, and implement slowly changing dimension (SCD) Type 1 and Type 2 patterns to handle data that changes over time.
   duration: 30 minutes
-  level: 100
+  level: 300
   islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Design and implement a dimensional model

@@ -2,9 +2,9 @@
 lab:
   title: Secure data access in Microsoft Fabric
   module: Secure data access in Microsoft Fabric
-  description: In this exercise, you assign an item permission and create a OneLake data access role and experiment with how they work together to restrict access to data in a Lakehouse.
+  description: In this lab, you'll learn how to secure data in Microsoft Fabric using a multi-layer security approach. You'll apply workspace roles to control access to entire workspaces, configure item-level permissions to restrict access to specific Fabric items, and create OneLake data access roles to grant granular permissions on specific folders and tables within a lakehouse.
   duration: 45 minutes
-  level: 200
+  level: 300
   islab: true
   primarytopics:
     - Microsoft Fabric

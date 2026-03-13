@@ -2,10 +2,12 @@
 lab:
   title: Analyze data in a data warehouse
   module: Get started with data warehouses in Microsoft Fabric
-  description: In this exercise, you have created a data warehouse that contains multiple tables. You used SQL to insert data into the tables and queried tables using T-SQL and the visual query tool. Finally, you enhanced the data model for the data warehouse's default dataset for downstream analytics and reporting.
-  duration: 100 minutes
+  description: You'll create tables in a Microsoft Fabric data warehouse, load data using SQL, and query dimensional models with T-SQL joins and aggregations. You'll also use the visual query designer and optionally define relationships in a data model for downstream analytics.
+  duration: 30 minutes
   level: 100
   islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Analyze data in a data warehouse

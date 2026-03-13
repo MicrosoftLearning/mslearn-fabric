@@ -2,9 +2,9 @@
 lab:
   title: Train and track machine learning models with MLflow in Microsoft Fabric
   module: Train and track machine learning models with MLflow in Microsoft Fabric
-  description: In this exercise, you have created a notebook and trained a machine learning model. You used scikit-learn to train the model and MLflow to track its performance.
-  duration: 120 minutes
-  level: 100
+  description: In this lab, you'll train regression models using scikit-learn to predict diabetes measures and use MLflow to track, compare, and evaluate model performance. You'll learn how to search experiments, visualize metrics, and save the best performing model for future use.
+  duration: 25 minutes
+  level: 300
   islab: true
   primarytopics:
     - Microsoft Fabric

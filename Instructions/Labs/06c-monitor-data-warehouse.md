@@ -2,9 +2,9 @@
 lab:
   title: Monitor a data warehouse in Microsoft Fabric
   module: Monitor a data warehouse in Microsoft Fabric
-  description: After a minute or so, a new warehouse will be created and populated with sample data for a taxi ride analysis scenario.
-  duration: 80 minutes
-  level: 100
+  description: In this lab, you will learn how to monitor activity and queries in a Microsoft Fabric data warehouse. You'll use dynamic management views (DMVs) to track connections, sessions, and running requests, and explore query insights to analyze query history and performance.
+  duration: 30 minutes
+  level: 300
   islab: true
   primarytopics:
     - Microsoft Fabric

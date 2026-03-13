@@ -2,9 +2,9 @@
 lab:
   title: Create reusable Power BI assets
   module: Create reusable Power BI assets
-  description: In this exercise, you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files.
+  description: You'll learn to create reusable Power BI assets by building Power BI Project files (.pbip) that enable source control through flat file storage, and parameterized template files (.pbit) that allow dynamic data loading. You'll work with TMDL format to track semantic model changes in source control and build templates that can be reused across different datasets.
   duration: 30 minutes
-  level: 200
+  level: 300
   islab: true
   primarytopics:
     - Power BI

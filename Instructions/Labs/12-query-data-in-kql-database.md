@@ -2,9 +2,9 @@
 lab:
   title: Work with data in a Microsoft Fabric eventhouse
   module: Work with data in a Microsoft Fabric eventhouse
-  description: In this exercise, you'll create and populate an eventhouse with some sample data related to taxi rides, and then query the data using KQL and SQL.
+  description: In this lab, you'll learn to query data in a KQL database using both Kusto Query Language (KQL) and Transact-SQL. You'll practice essential data querying operations including retrieving, filtering, summarizing, and sorting data to gain insights from real-time event data stored in a Microsoft Fabric eventhouse.
   duration: 25 minutes
-  level: 100
+  level: 300
   islab: true
   primarytopics:
     - Microsoft Fabric

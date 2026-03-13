@@ -2,10 +2,12 @@
 lab:
   title: Monitor Fabric activity in the monitoring hub
   module: Monitoring Fabric
-  description: In this exercise, you have created a lakehouse, a dataflow, and a Spark notebook; and you've used the monitoring hub to view item activity.
+  description: You'll learn how to use the monitoring hub in Microsoft Fabric to track and view activity for various items including dataflows and Spark notebooks. You'll explore run histories, apply filters, and customize views to effectively monitor your Fabric workspace activities.
   duration: 30 minutes
-  level: 200
+  level: 300
   islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Monitor Fabric activity in the monitoring hub

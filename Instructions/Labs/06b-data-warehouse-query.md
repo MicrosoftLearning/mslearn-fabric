@@ -2,9 +2,9 @@
 lab:
   title: Query a data warehouse in Microsoft Fabric
   module: Query a data warehouse in Microsoft Fabric
-  description: In this exercise, you have used queries to get insights of the data in a Microsoft Fabric data warehouse.
-  duration: 80 minutes
-  level: 100
+  description: In this lab, you will query a Microsoft Fabric data warehouse using SQL to analyze data, join tables, and aggregate results. You will also verify data consistency by identifying and handling anomalies, and create views to filter data for specific reporting needs.
+  duration: 30 minutes
+  level: 300
   islab: true
   primarytopics:
     - Microsoft Fabric
