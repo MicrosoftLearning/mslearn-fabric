@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Get started with Real-Time Intelligence in Microsoft Fabric'
-    module: 'Get started with Real-Time Intelligence in Microsoft Fabric'
+  title: Get started with Real-Time Intelligence in Microsoft Fabric
+  module: Get started with Real-Time Intelligence in Microsoft Fabric
+  description: In this lab, you'll learn to work with real-time data streams in Microsoft Fabric by ingesting stock market data using eventstreams, querying it with KQL, and visualizing it on real-time dashboards. You'll also configure alerts using Activator to respond to real-time events.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Get started with Real-Time Intelligence in Microsoft Fabric

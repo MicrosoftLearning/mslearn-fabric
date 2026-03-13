@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Generate batch predictions using a deployed model in Microsoft Fabric'
-    module: 'Generate batch predictions using a deployed model in Microsoft Fabric'
+  title: Generate batch predictions using a deployed model in Microsoft Fabric
+  module: Generate batch predictions using a deployed model in Microsoft Fabric
+  description: You train and register a machine learning model, then use it to generate batch predictions on test data stored in a lakehouse. This lab demonstrates applying a deployed model to score new patient data and save the results.
+  duration: 20 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Generate batch predictions using a deployed model in Microsoft Fabric

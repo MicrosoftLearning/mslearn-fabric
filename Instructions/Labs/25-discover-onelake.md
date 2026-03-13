@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Discover and connect to data in OneLake'
-    module: 'Discover and connect to data in OneLake'
+  title: Discover and connect to data in OneLake
+  module: Discover and connect to data in OneLake
+  description: In this lab, you'll discover data assets through the OneLake catalog, create shortcuts to access data across workspaces without copying it, and query lakehouse data using SQL analytics endpoints. You'll also create and explore a semantic model, gaining hands-on experience with Microsoft Fabric's data discovery and connectivity capabilities.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Discover and connect to data in OneLake

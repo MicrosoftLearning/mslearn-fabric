@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Work smarter with Copilot in Microsoft Fabric Dataflow Gen2'
-    module: 'Get started with Copilot in Fabric for data engineering'
+  title: Work smarter with Copilot in Microsoft Fabric Dataflow Gen2
+  module: Get started with Copilot in Fabric for data engineering
+  description: In this lab, you'll learn to use Copilot in Microsoft Fabric Dataflow Gen2 to accelerate data transformation tasks using natural language prompts. You'll clean and transform retail store data by removing unwanted characters, parsing XML content, creating categorical groupings, and setting appropriate data types—all with AI assistance. By the end, you'll understand how to leverage Copilot to streamline common data engineering workflows and improve productivity.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Work smarter with Copilot in Microsoft Fabric Dataflow Gen2

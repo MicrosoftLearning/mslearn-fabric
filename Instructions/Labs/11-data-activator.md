@@ -1,8 +1,15 @@
 ---
 lab:
-    title: 'Use Activator in Microsoft Fabric'
-    module: 'Use Activator in Microsoft Fabric'
+  title: Use Activator in Microsoft Fabric
+  module: Use Activator in Microsoft Fabric
+  description: In this lab, you'll learn how to use Activator in Microsoft Fabric to monitor real-time data streams and create alert rules that trigger actions based on data conditions. You'll work with eventstreams, define objects and properties, set up conditional triggers with filters, and configure automated email notifications when specific thresholds are exceeded.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
+
 # Use Activator in Fabric
 
 Activator in Microsoft Fabric takes action based on what's happening in your data. An Activator lets you monitor your data and create triggers to react to your data changes.
