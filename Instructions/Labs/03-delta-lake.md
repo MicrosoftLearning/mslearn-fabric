@@ -37,7 +37,7 @@ Now that you have a workspace, it's time to create a data lakehouse for your dat
 
 1. From the left menu, **click + New item**. On the New page, under the ***Data Engineering section**, select Lakehouse. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
 
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+    >**Note**: If the ***Create*** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
     After a minute or so, a new lakehouse will be created:
 
