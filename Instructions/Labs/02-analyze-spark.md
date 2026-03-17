@@ -422,7 +422,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
     * Chart type: Bar chart
     * X-axis: Item
     * Y-axis: Quantity
-    * Series Group: leave blank
+    * Series Group: --None--
     * Aggregation: Sum
     * Missing and NULL values: Display as 0
     * Stacked: Unselected
