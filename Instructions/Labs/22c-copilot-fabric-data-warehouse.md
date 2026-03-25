@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Use Copilot in Microsoft Fabric data warehouse'
-    module: 'Get started with Copilot in Fabric for Data Warehouse'
+  title: Use Copilot in Microsoft Fabric data warehouse
+  module: Get started with Copilot in Fabric for Data Warehouse
+  description: You'll learn to use Copilot in Microsoft Fabric to generate, refine, and troubleshoot SQL queries using natural language prompts. Through hands-on practice with a retail sales data warehouse, you'll experience how AI can accelerate writing complex SQL queries, automatically fix syntax errors, and create views for data analysis.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Use Copilot in Microsoft Fabric data warehouse

@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Use delta tables in Apache Spark'
-    module: 'Work with Delta Lake tables in Microsoft Fabric'
+  title: Use delta tables in Apache Spark
+  module: Work with Delta Lake tables in Microsoft Fabric
+  description: In this lab, you'll create Delta tables in a Microsoft Fabric lakehouse and explore data using SQL queries. You'll work with the Delta Lake format to support relational semantics for both batch and streaming data operations.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Use Delta Tables in Apache Spark
@@ -41,7 +47,7 @@ Now that you have a workspace, it's time to create a data lakehouse for your dat
 You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse. 
 
 1. Download the [data file](https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv) from `https://github.com/MicrosoftLearning/dp-data/raw/main/products.csv`, saving it as *products.csv*.
-1. Return to the web browser tab containing your lakehouse, and in the Explorer pane, next to the **Files** folder, select the … menu.  Create a **New subfolder** called *products*.
+1. Return to the web browser tab containing your lakehouse, and in the Explorer pane, next to the **Files** folder, select the … menu.  Create a **New subfolder** called *products*. Naming must be all small letters.
 1. In the … menu for the products folder, **upload** the *products.csv* file from your local computer (or lab VM if applicable).
 1. After the file has been uploaded, select the **products** folder to verify that the file has been uploaded, as shown here:
 

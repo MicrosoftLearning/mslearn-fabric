@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create a Microsoft Fabric Lakehouse'
-    module: 'Get started with lakehouses in Microsoft Fabric'
+  title: Create a Microsoft Fabric Lakehouse
+  module: Get started with lakehouses in Microsoft Fabric
+  description: In this lab, you'll create a Microsoft Fabric lakehouse and import data into it. You'll explore how lakehouses combine file and table storage in OneLake, and learn to query managed delta tables using SQL.
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create a Microsoft Fabric Lakehouse

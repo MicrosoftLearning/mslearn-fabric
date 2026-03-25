@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Explore data for data science with notebooks in Microsoft Fabric'
-    module: 'Explore data for data science with notebooks in Microsoft Fabric'
+  title: Explore data for data science with notebooks in Microsoft Fabric
+  module: Explore data for data science with notebooks in Microsoft Fabric
+  description: In this lab, you'll use notebooks in Microsoft Fabric to perform exploratory data analysis on a dataset. You'll load data into dataframes, check data structure and quality, generate descriptive statistics, create visualizations to understand distributions and relationships, and perform correlation analysis. By the end of this lab, you'll have practical experience using notebooks for interactive data exploration.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Explore data for data science with notebooks in Microsoft Fabric

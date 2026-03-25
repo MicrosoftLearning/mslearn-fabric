@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Enforce semantic model security'
-    module: 'Enforce semantic model security'
+  title: Enforce semantic model security
+  module: Enforce semantic model security
+  description: You'll learn how to implement row-level security in Power BI semantic models by creating both static and dynamic roles that restrict data access based on sales regions. You'll use DAX expressions to create dynamic roles that automatically filter data based on authenticated users, and then map security principals to roles to ensure users only see the data they're authorized to access.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Power BI
 ---
 
 # Enforce semantic model security

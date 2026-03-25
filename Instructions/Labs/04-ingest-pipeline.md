@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Ingest data with a pipeline in Microsoft Fabric'
-    module: 'Use Data Factory pipelines in Microsoft Fabric'
+  title: Ingest data with a pipeline in Microsoft Fabric
+  module: Use Data Factory pipelines in Microsoft Fabric
+  description: In this lab, you'll create data pipelines to ingest data from external sources into a lakehouse, and integrate Spark notebooks to transform and load the data into tables. You'll learn how to combine Copy Data activities with custom Spark transformations to build reusable ETL processes in Microsoft Fabric.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Ingest data with a pipeline in Microsoft Fabric
@@ -43,8 +49,13 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New copy job**, and create a new data pipeline named `Ingest Sales Data`.
+<<<<<<< copilot/fix-copy-job-activity-error
 1. If the **Copy Job** wizard doesn't open automatically, select **From any source to any destination** in the pipeline editor page.
 1. In the **Copy Job** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
+=======
+1. If the **Copy Data** wizard doesn't open automatically, select **Copy Data assistant** in the pipeline editor page.
+1. In the **Copy Data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
+>>>>>>> main
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 

@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Chat with your data using Microsoft Fabric data agents'
-    module: 'Implement Fabric Data Agents'
+  title: Chat with your data using Microsoft Fabric data agents
+  module: Implement Fabric Data Agents
+  description: In this lab, you'll create and configure a Microsoft Fabric data agent, then interact with it using plain English questions to retrieve insights from a sales warehouse. You'll learn how data agents translate natural language into SQL queries, making data analysis accessible without requiring SQL expertise. This hands-on experience demonstrates the power of AI-assisted analytics to democratize data access.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Chat with your data using Microsoft Fabric data agents

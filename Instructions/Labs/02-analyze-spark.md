@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Analyze data with Apache Spark'
-    module: 'Use Apache Spark to work with files in a lakehouse'
+  title: Analyze data with Apache Spark
+  module: Use Apache Spark to work with files in a lakehouse
+  description: In this lab, you'll ingest data into a Fabric lakehouse and use Apache Spark to read and analyze it. You'll work with PySpark to load files, explore data, and perform analysis using Spark notebooks.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Analyze data with Apache Spark in Fabric
@@ -108,7 +114,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
  
     ![Screen picture showing auto generated code and data.](Images/auto-generated-load.png)
 
-1. The output shows data from the 2019.csv file displayed in columns and rows.  Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the code as follows:
+1. The output shows data from the 2019.csv file displayed in columns and rows. Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the ***existing code*** as follows:
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
@@ -416,7 +422,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
     * Chart type: Bar chart
     * X-axis: Item
     * Y-axis: Quantity
-    * Series Group: leave blank
+    * Series Group: --None--
     * Aggregation: Sum
     * Missing and NULL values: Display as 0
     * Stacked: Unselected
@@ -552,9 +558,13 @@ While *matplotlib* enables you to create different chart types, it can require s
 
     ```python
    import seaborn as sns
+   import warnings
 
    # Clear the plot area
    plt.clf()
+
+   # Suppress FutureWarning from seaborn
+   warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarning)
 
    # Create a bar chart
    ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)

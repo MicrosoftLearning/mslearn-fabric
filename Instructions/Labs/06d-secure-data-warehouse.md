@@ -1,8 +1,12 @@
 ---
 lab:
-    title: 'Secure data in a data warehouse'
-    module: 'Secure data in a data warehouse'
---- 
+  title: Secure data in a data warehouse
+  module: Secure data in a data warehouse
+  description: In this lab, you'll learn to secure sensitive data in a Fabric data warehouse using multiple security techniques. You'll apply dynamic data masking to obscure confidential information, implement row-level and column-level security to restrict data access, and use SQL DCL commands (GRANT, DENY, REVOKE) to control granular permissions on database objects.
+  duration: 45 minutes
+  level: 300
+  islab: true
+---
 
 # Secure data in a data warehouse
 

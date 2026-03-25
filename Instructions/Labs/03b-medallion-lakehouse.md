@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create a medallion architecture in a Microsoft Fabric lakehouse'
-    module: 'Organize a Fabric lakehouse using medallion architecture design'
+  title: Create a medallion architecture in a Microsoft Fabric lakehouse
+  module: Organize a Fabric lakehouse using medallion architecture design
+  description: You'll implement a medallion architecture by transforming raw data through bronze, silver, and gold layers using PySpark and Delta Lake. You'll create a star schema with dimensions and fact tables, then explore and model the data for analytics and reporting.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
