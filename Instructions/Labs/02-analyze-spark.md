@@ -577,13 +577,9 @@ While *matplotlib* enables you to create different chart types, it can require s
 
     ```python
    import seaborn as sns
-   import warnings
 
    # Clear the plot area
    plt.clf()
-
-   # Suppress FutureWarning from seaborn
-   warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarning)
 
    # Set the visual theme for seaborn
    sns.set_theme(style="whitegrid")
@@ -599,13 +595,9 @@ While *matplotlib* enables you to create different chart types, it can require s
 
     ```python
     import seaborn as sns
-    import warnings
 
     # Clear the plot area
     plt.clf()
-
-    # Suppress FutureWarning from seaborn
-    warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarning)
 
     # Create a line chart
     ax = sns.lineplot(x="OrderYear", y="GrossRevenue", data=df_sales)
