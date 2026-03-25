@@ -114,11 +114,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
  
     ![Screen picture showing auto generated code and data.](Images/auto-generated-load.png)
 
-<<<<<<< Updated upstream
-1. The output shows data from the 2019.csv file displayed in columns and rows.  Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the code as follows:
-=======
 1. The output shows data from the 2019.csv file displayed in columns and rows. Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the ***existing code*** as follows:
->>>>>>> Stashed changes
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
