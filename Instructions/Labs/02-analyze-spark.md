@@ -558,9 +558,13 @@ While *matplotlib* enables you to create different chart types, it can require s
 
     ```python
    import seaborn as sns
+   import warnings
 
    # Clear the plot area
    plt.clf()
+
+   # Suppress FutureWarning from seaborn
+   warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarning)
 
    # Create a bar chart
    ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)
