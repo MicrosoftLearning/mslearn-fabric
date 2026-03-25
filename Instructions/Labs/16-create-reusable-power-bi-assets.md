@@ -275,14 +275,17 @@ The report could look like this. Don't worry about the layout.
 
 ### Test the template
 
-1. Close Power BI Desktop. When asked to save your changes, can you choose **Don't save**.
+1. Close Power BI Desktop. When asked to save your changes, choose **Don't save**.
 1. Open the `regional-sales.pbit` file.
+
+    > **Note**: If prompted to sign in, use your Microsoft organizational account credentials. If you see a privacy levels dialog, select **Ignore Privacy Levels checks for this file** and select **Save**.
+
 1. Notice you will get a parameter prompt asking you to select your region. 
 
     ![Dialog showing the region parameter.](./Images/select-region-sales-parameter.png)
 
 1. Choose **south** from the dropdown list.
-1. Load the data and open the report.
+1. Select **Load** to load the data and open the report.
 
 Notice how the report opens correctly the south-region values.
 
