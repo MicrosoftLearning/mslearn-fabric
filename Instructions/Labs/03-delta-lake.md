@@ -121,13 +121,7 @@ The data files are created in the **Tables** folder.
 
 1. To create a managed Delta table, add a new cell, enter the following code and then run the cell:
 
-1. df = spark.read.format("csv") \
-    .option("header", "true") \
-    .load("Files/products/products.csv")
 
-    ```python
-   df.write.format("delta").saveAsTable("managed_products")
-    ```
 
 1. In the Explorer pane, **Refresh** the Tables folder and expand the Tables node to verify that the **managed_products** table has been created.
 
