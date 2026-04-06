@@ -46,7 +46,7 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 ## Create a pipeline
 
-A simple way to ingest data is to use a **Copy Data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
+A simple way to ingest data is to use a **Copy Job** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New copy job**, and create a new data pipeline named `Ingest Sales Data`.
 1. If the **Copy Job** wizard doesn't open automatically, select **From any source to any destination** in the pipeline editor page.
@@ -74,22 +74,39 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **First row as header**: Selected
     - **Compression type**: None
 1. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-1. On the **Connect to data destination** page, set the following data destination options, and then select **Next**:
-    - **Root folder**: Files
-    - **Folder path name**: new_data
-    - **File name**: sales.csv
-    - **Copy behavior**: None
-1. Set the following file format options and then select **Next**:
-    - **File format**: DelimitedText
-    - **Column delimiter**: Comma (,)
-    - **Row delimiter**: Line feed (\n)
-    - **Add header to file**: Selected
-    - **Compression type**: None
-1. On the **Copy summary** page, review the details of your copy operation and then select **Save + Run**.
+1. On the Settings Read method the default option will be as **Full Copy**, copy all data at once. Select Destination root folder as Files and then Select Next. 
 
-    A new pipeline containing a **Copy Data** activity is created, as shown here:
+    ![Screenshot of a pipeline with a Copy Data activity.](./Images/Copy-job-settings.png)
+1. On Map Destination select Browse and then select on Root folder new_data and filename as *Sales.csv*. 
+Expand the File format settings to set the file format options. then select **Next**
+     - **File format:** DelimitedText
+     - **Column delimiter:** Comma (,)
+     - **Row delimiter:** Line feed (\n)
+     - **Add header to file:** Selected
+    - **Compression type**: None
+
+1. On the **Copy summary** page, review+save. Select Start data transfer immediately and then select **Save + Run**.
+
+1. On the **Home tab**. Select **Add to pipeline** and then select **Create**
+
+     ![Screenshot of a pipeline with a Copy Data activity.](./Images/Add-pipe-line-steps.png)
+ A new pipeline containing a **Copy Job** activity is created, as shown here:
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
+
+1. Select on **Copy job** and then select on **Settings** Connection : **Browse all** and select on **new sources as copy job**.
+     ![Screenshot of a pipeline with a Copy Data activity.](./Images/newsourcesettings.png)
+1. **On Get data** Select on **New sources as copy job**
+    Connection Credentials 
+
+    - **Connection**   : Create a new connection
+    - **Connection** name : Specify any name 
+    - **Date gateway** : none
+    - **Authentication kind** : Organizational account
+    Select **Sign in** followed with your fabric account credentials then select Connect 
+
+1. On Home tab select **Validate**, **Run and then Save and Run**
+   *Note* : It will continue to refresh for 5 minutes while the pipeline is running. Click 'Turn off auto-refresh' to stop the list from automatically refreshing.
 
 1. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
 1. In the menu bar on the left, select your lakehouse.
@@ -115,7 +132,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
    from pyspark.sql.functions import *
 
    # Read the new sales data
-   df = spark.read.format("csv").option("header","true").load("Files/new_data/*.csv")
+   df = spark.read.format("csv").option("header","true").load("Files/sales.csv")
 
    ## Add month and year columns
    df = df.withColumn("Year", year(col("OrderDate"))).withColumn("Month", month(col("OrderDate")))
@@ -130,7 +147,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
    df.write.format("delta").mode("append").saveAsTable(table_name)
     ```
 
-    This code loads the data from the sales.csv file that was ingested by the **Copy Data** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
+    This code loads the data from the sales.csv file that was ingested by the **Copy Job** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
 
 5. Verify that your notebooks looks similar to this, and then use the **&#9655; Run all** button on the toolbar to run all of the cells it contains.
 
@@ -148,7 +165,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 Now that you've implemented a notebook to transform data and load it into a table, you can incorporate the notebook into a pipeline to create a reusable ETL process.
 
 1. In the hub menu bar on the left select the **Ingest Sales Data** pipeline you created previously.
-2. On the **Activities** tab, in the **All activities** list, select **Delete data**. Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
+2. On the **Activities** tab, **...** [3 dots]  in the **All activities** list, select **Delete data**. Then position the new **Delete data**  activity to the left of the **Copy job** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
 
     ![Screenshot of a pipeline with Delete data and Copy data activities.](./Images/delete-data-activity.png)
 
@@ -156,7 +173,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     - **General**:
         - **Name**: `Delete old files`
     - **Source**
-        - **Connection**: *Your lakehouse*
+        - **Connection**: *Your lakehouse* [Browse on lakehouse]
         - **File path type**: Wildcard file path
         - **Folder path**: Files / **new_data**
         - **Wildcard file name**: `*.csv`        
@@ -167,7 +184,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     These settings will ensure that any existing .csv files are deleted before copying the **sales.csv** file.
 
 4. In the pipeline designer, on the **Activities** tab, select **Notebook** to add a **Notebook** activity to the pipeline.
-5. Select the **Copy data** activity and then connect its **On Completion** output to the **Notebook** activity as shown here:
+5. Select the **Copy job** activity and then connect its **On Completion** output to the **Notebook** activity as shown here:
 
     ![Screenshot of a pipeline with Copy Data and Notebook activities.](./Images/pipeline.png)
 
@@ -189,6 +206,8 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     ![Screenshot of a pipeline with a Dataflow activity.](./Images/pipeline-run.png)
 
 > Note: In case you receive the error message *Spark SQL queries are only possible in the context of a lakehouse. Please attach a lakehouse to proceed*: Open your notebook, select the lakehouse you created on the left pane, select **Remove all Lakehouses** and then add it again. Go back to the pipeline designer and select **&#9655; Run**.
+
+   *Note:* It will continue to refresh for 5 minutes while the pipeline is running. Click 'Turn off auto-refresh' to stop the list from automatically refreshing.
 
 8. In the hub menu bar on the left edge of the portal, select your lakehouse.
 9. In the **Explorer** pane, expand **Tables** and select the **new_sales** table to see a preview of the data it contains. This table was created by the notebook when it was run by the pipeline.
