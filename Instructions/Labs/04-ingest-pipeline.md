@@ -87,12 +87,7 @@ Expand the File format settings to set the file format options. then select **Ne
 
 1. On the **Copy summary** page, review+save. Select Start data transfer immediately and then select **Save + Run**.
 
-1. On the **Home tab**. Select **Add to pipeline** and then select **Create**
-
-     ![Screenshot of a pipeline with a Copy Data activity.](./Images/Add-pipe-line-steps.png)
- A new pipeline containing a **Copy Job** activity is created, as shown here:
-
-    ![Screenshot of a pipeline with a Copy Data activity.](./Images/copy-data-pipeline.png)
+1. On the **Home tab**. Select **Add to pipeline** and then select **Create**.
 
 1. Select on **Copy job** and then select on **Settings** Connection : **Browse all** and select on **new sources as copy job**.
      ![Screenshot of a pipeline with a Copy Data activity.](./Images/newsourcesettings.png)
