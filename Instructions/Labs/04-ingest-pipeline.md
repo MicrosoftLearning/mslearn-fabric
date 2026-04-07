@@ -73,34 +73,36 @@ A simple way to ingest data is to use a **Copy Job** activity in a pipeline to e
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: Selected
     - **Compression type**: None
-1. Select **Preview data** to see a sample of the data that will be ingested. Then close the data preview and select **Next**.
-1. On the Settings Read method the default option will be as **Full Copy**, copy all data at once. Select Destination root folder as Files and then Select Next. 
+1. Select **Preview data** to see a sample of the data that will be ingested. Close the preview, and then select **Next**.
+1. On the **Settings** page, verify that **Read method** is set to **Full Copy**. For **Destination root folder**, select **Files**, and then select **Next**.
 
     ![Screenshot of a pipeline with a Copy Data activity.](./Images/Copy-job-settings.png)
-1. On Map Destination select Browse and then select on Root folder new_data and filename as *Sales.csv*. 
+1. On the **Map Destination** select Browse and then select on Root folder new_data and filename as *Sales.csv*. 
 Expand the File format settings to set the file format options. then select **Next**
      - **File format:** DelimitedText
      - **Column delimiter:** Comma (,)
      - **Row delimiter:** Line feed (\n)
      - **Add header to file:** Selected
-    - **Compression type**: None
+     - **Compression type**: No compression
+1. On the **Review+save.** Select in Start data transfer immediately and then select **Save + Run**.
 
-1. On the **Copy summary** page, review+save. Select Start data transfer immediately and then select **Save + Run**.
+1. On the **Home** tab, select **Add to pipeline**, and then select **Create**.
 
-1. On the **Home tab**. Select **Add to pipeline** and then select **Create**.
-
-1. Select on **Copy job** and then select on **Settings** Connection : **Browse all** and select on **new sources as copy job**.
+1. Select on **Copy job** and then select on **Settings**  
+    - Connection : **Browse all** and select on **new sources as copy job**.
+    
      ![Screenshot of a pipeline with a Copy Data activity.](./Images/newsourcesettings.png)
 1. **On Get data** Select on **New sources as copy job**
     Connection Credentials 
 
     - **Connection**   : Create a new connection
     - **Connection** name : Specify any name 
-    - **Date gateway** : none
+    - **Data gateway** : none
     - **Authentication kind** : Organizational account
-    Select **Sign in** followed with your fabric account credentials then select Connect 
+    - **Sign in** with your fabric account credentials then select **Connect** 
 
 1. On Home tab select **Validate**, **Run and then Save and Run**
+   
    *Note* : It will continue to refresh for 5 minutes while the pipeline is running. Click 'Turn off auto-refresh' to stop the list from automatically refreshing.
 
 1. When the pipeline starts to run, you can monitor its status in the **Output** pane under the pipeline designer. Use the **&#8635;** (*Refresh*) icon to refresh the status, and wait until it has succeeeded.
@@ -127,7 +129,7 @@ Expand the File format settings to set the file format options. then select **Ne
    from pyspark.sql.functions import *
 
    # Read the new sales data
-   df = spark.read.format("csv").option("header","true").load("Files/sales.csv")
+   df = spark.read.format("csv").option("header","true").load("Files/new_data/*.csv")
 
    ## Add month and year columns
    df = df.withColumn("Year", year(col("OrderDate"))).withColumn("Month", month(col("OrderDate")))
@@ -160,7 +162,8 @@ Expand the File format settings to set the file format options. then select **Ne
 Now that you've implemented a notebook to transform data and load it into a table, you can incorporate the notebook into a pipeline to create a reusable ETL process.
 
 1. In the hub menu bar on the left select the **Ingest Sales Data** pipeline you created previously.
-2. On the **Activities** tab, **...** [3 dots]  in the **All activities** list, select **Delete data**. Then position the new **Delete data**  activity to the left of the **Copy job** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
+2. On the **Activities** tab, in **...** then select on **All activities** list, select **Delete data**. 
+   - Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy job** activity, as shown here:
 
     ![Screenshot of a pipeline with Delete data and Copy data activities.](./Images/delete-data-activity.png)
 
