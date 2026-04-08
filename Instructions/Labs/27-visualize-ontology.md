@@ -2,7 +2,7 @@
 lab:
   title: Visualize ontology data with Microsoft Fabric IQ
   module: Visualize ontology data with Microsoft Fabric IQ
-  description: 'In this lab, you'll visualize entity instances and relationships using the ontology preview experience. You'll work with the Lamna Healthcare ontology to see how your data comes to life through interactive graphs, charts, and relationship visualizations.'
+  description: In this lab, you visualize entity instances and relationships using the ontology preview experience. You work with the Lamna Healthcare ontology to see how your data comes to life through interactive graphs, charts, and relationship visualizations.
   duration: 30 minutes
   level: 100
   islab: true
