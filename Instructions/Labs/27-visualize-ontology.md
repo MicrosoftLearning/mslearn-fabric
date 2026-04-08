@@ -3,7 +3,7 @@ lab:
   title: Visualize ontology data with Microsoft Fabric IQ
   module: Visualize ontology data with Microsoft Fabric IQ
   description: 'In this lab, you'll visualize entity instances and relationships using the ontology preview experience. You'll work with the Lamna Healthcare ontology to see how your data comes to life through interactive graphs, charts, and relationship visualizations.'
-  duration: 60 minutes
+  duration: 30 minutes
   level: 100
   islab: true
   primarytopics:
@@ -14,7 +14,7 @@ lab:
 
 In this lab, you'll create an ontology from a notebook for a fictitious company called Lamna Healthcare. You'll visualize entity instances, explore entity relationships through interactive graphs, and see your data through property charts and time-series visualizations.
 
-This lab takes approximately **60** minutes to complete.
+This lab takes approximately **30** minutes to complete.
 
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise. You'll also need to enable the following [tenant settings](https://learn.microsoft.com/fabric/iq/ontology/overview-tenant-settings): **Enable Ontology item (preview)** and **User can create Graph (preview)**.
 
@@ -33,7 +33,7 @@ This lab focuses on visualizing an ontology using the preview experience—exami
 
 The Lamna Healthcare ontology includes sample data representing hospitals, departments, rooms, patients, vital sign equipment, and vital signs readings.
 
-> **Note**: If you want to learn how to build ontologies step-by-step, see the labs on [creating an ontology manually](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/23-build-ontology-manually.html) or [generating an ontology from a semantic model](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/24-build-ontology-semantic-model.html).
+> **Note**: If you want to learn how to build ontologies step-by-step, see the exercises on [creating an ontology manually](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/23-build-ontology-manually.html) or [generating an ontology from a semantic model](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/24-build-ontology-semantic-model.html).
 
 1. Download the notebook file [**setup-ontology.ipynb**](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/27-28/setup-ontology.ipynb) to your local computer.
 
@@ -54,7 +54,7 @@ The Lamna Healthcare ontology includes sample data representing hospitals, depar
 
 1. In the notebook, locate the first Python code cell under **Step 0: Get or Create Infrastructure**. To the left of the cell, select **Run this cell and all below**.
 
-   ![Screenshot showing the Run this cell and all below button in the notebook](./Images/27-run-cell.png)
+   ![Screenshot showing the Run this cell and all below button in the notebook](./Images/27-run-notebook-cell.png)
 
 ### What to expect when the notebook runs
 
@@ -75,7 +75,7 @@ As the notebook executes, watch for these success indicators in the cell outputs
    - **LamnaHealthcareOntology** (ontology)
    - **LamnaHealthcareOntology** (graph) — automatically created with the same name as the ontology
 
-   > **Important**: After the notebook completes, Fabric processes the data bindings and builds the graph model in the background. **This processing typically completes in 2-20 minutes**, depending on capacity load and complexity. This is a one-time setup process—once complete, the ontology remains responsive. To check if data is ready, open the **LamnaHealthcareOntology** item, select an entity type (e.g., **Departments**), and select **Entity type overview**. If you see "Setting up your ontology" or "Updating your ontology", wait on the page—it will automatically update when the preview experience finishes loading. Once entity instances appear, you can continue to the next section.
+   > **Important**: After the notebook completes, Fabric processes the data bindings and builds the graph model in the background. **This processing typically completes in a few minutes**, depending on capacity load and complexity. This is a one-time setup process—once complete, the ontology remains responsive. To check if data is ready, open the **LamnaHealthcareOntology** item, select an entity type (e.g., **Departments**), and select **Entity type overview**. If you see "Setting up your ontology" or "Updating your ontology", wait on the page—it will automatically update when the preview experience finishes loading. Once entity instances appear, you can continue to the next section.
 
    ![Screenshot showing the loaded preview experience with entity instances](./Images/27-preview-loaded.png)
 
@@ -98,7 +98,7 @@ You may already have the **Departments** entity type overview open from checking
 Once in the entity type overview:
 
 1. The overview page shows several tiles:
-   - A **relationship graph** tile (on the left) showing how Departments connects to other entity types
+   - A **relationship graph** tile showing how Departments connects to other entity types
    - **Property chart tiles** visualizing the distribution of property values across the department records:
      - **DepartmentName**: Shows the three department names in your data
      - **HospitalId**: Shows which hospital the departments belong to (all departments belong to HospitalId 1)
@@ -111,8 +111,8 @@ Once in the entity type overview:
 
 1. Select any row in the Entity instances table (for example, *Intensive Care Unit*).
 1. The **Instance view** opens, showing:
-   - All property values for the selected department instance (top section)
-   - A **relationship graph** (left section) that shows the entity type connections for Departments (Rooms, Hospitals, etc.)
+   - All property values for the selected department instance
+   - A **relationship graph** that shows the entity type connections for Departments (Rooms, and Hospitals)
 
 1. Select the **X** next to the Instance tab to return to the Departments entity type overview.
 
@@ -122,7 +122,7 @@ The VitalSignEquipment entity is bound to your eventhouse for time-series data. 
 
 Here's how static and time-series data connect in this ontology:
 - **VitalSignEquipment** (static): Each equipment record in the lakehouse has properties like EquipmentId, PatientId, and MonitoringStartDate that rarely change
-- **VitalSignsReadings** (time-series): The measurements from that equipment—heart rate, oxygen saturation, respiratory rate—are captured at regular intervals in the eventhouse and associated with the equipment record
+- **VitalSignsReadings** (time-series): The measurements from that equipment—heart rate, oxygen saturation, respiratory rate—are captured at regular intervals in the eventhouse and associated with an equipment record
 
 This combination lets you see both the equipment details and its real-time readings in one unified view. The entity type overview displays time-series charts showing how these measurements change over time.
 
@@ -132,7 +132,7 @@ This combination lets you see both the equipment details and its real-time readi
    - **Time-series charts** show measurements over time (HeartRate, OxygenSaturation, RespiratoryRate) in addition to the standard property distribution charts (PatientId, EquipmentType)
    - The time range selector at the top controls what time period is displayed in the time-series charts
 
-1. The sample data for this lab is timestamped for April 1, 2026. If you're running this lab later, the default "Last 30 days" filter won't show this historical data. You'll need to set a custom date range to display the vital signs readings.
+1. The sample data for this exercise is timestamped for April 1, 2026. If you're running this lab later, the default "Last 30 days" filter won't show this historical data. You'll need to set a custom date range to display the vital signs readings.
 
 1. In the time range selector, set a custom date range:
    - Select **Custom**
@@ -147,9 +147,7 @@ This combination lets you see both the equipment details and its real-time readi
 
 3. In the **Entity instances** tile, select an equipment ID (for example, **VS-1004**) to view the specific readings in the **HeartRate**, **OxygenSaturation**, and **RespiratoryRate** tiles.
 
-   ![Screenshot showing a selected data point in the time-series chart](./Images/27-timeseries-datapoint.png)
-
-4. Return to the ontology canvas when finished exploring.
+4. Return to the ontology canvas when you are finished exploring.
 
 ## Visualize the relationship graph
 
@@ -161,22 +159,22 @@ The ontology relationship graph lets you see how entity types connect to each ot
 1. Select **Entity type overview** from the ribbon.
 1. In the **relationship graph** tile, select **Expand**.
 1. The graph view opens, showing entity type nodes (not actual data instances yet).
-1. In the **Query builder** ribbon, select **Run query**.
-1. The graph now loads actual entity instances from your bound data:
+1. Select **Run query** from the ribbon.
+1. The graph at the bottom of the screen now loads actual entity instances from your bound data:
    - Entity type nodes expand into clusters of individual instances
-   - Edges show labeled relationship connections between instances (inHospital, inDepartment, admittedTo, assignedToPatient)
+   - Edges show labeled relationship connections between instances (inHospital, inDepartment).
+   - You can add additional nodes and edges to the canvas by selecting them in the **Components** pane.
 
-1. Select a **Departments** node (for example, *Intensive Care Unit*) to view its properties in the side panel.
-1. Follow the relationship edges to see how Departments connects to Rooms:
-   - From the Intensive Care Unit department, trace the **inDepartment** edge to connected Rooms instances
-   - From a Rooms instance, trace the **admittedTo** edge to connected Patients instances
-   - From a Patients instance, trace the **assignedToPatient** edge to connected VitalSignEquipment instances
+   ![Screenshot showing the graph view with relationship connections](./Images/27-graph-view.png)
 
-1. This multi-hop navigation demonstrates how the ontology models real-world relationships: departments contain rooms, rooms have admitted patients, and patients have monitoring equipment assigned.
-
+2. Select the **Hospitals** node (labeled **Seattle**) to view its properties in the side panel.
+3. Follow the relationship edges to see how the entities connect:
+   - Departments connect to hospitals via **inHospital** edges
+   - Rooms connect to departments via **inDepartment** edges
+   
    > **Note**: You can zoom and pan in the graph view using your mouse or the controls in the bottom-right corner. Double-click a node to center and zoom on it.
 
-2. When finished exploring, close the graph view.
+4. When finished exploring, close the graph view.
 
 ## Filter data with the Query builder
 
@@ -197,7 +195,7 @@ The Query builder lets you filter and shape the data you retrieve from the ontol
    - **Relationships**: inDepartment, admittedTo
    - Uncheck all other entity types and relationships
 
-   ![Screenshot showing the Components pane](./Images/27-components-pane.png)
+   ![Screenshot showing the Components pane](./Images/27-components-panel.png)
 
 3. Select **Run query**.
 4. The graph now shows only:
@@ -210,9 +208,11 @@ The Query builder lets you filter and shape the data you retrieve from the ontol
    - **Card**: Property values displayed as cards for each instance
    - **Table**: Tabular rows and columns format
 
-6. Switch to **Card** view to see patient details more easily.
+6. Switch to **Card** view to see each patient's details displayed in individual cards.
    - In Card view, notice the **Index by** dropdown at the top. This lets you organize the cards by different entity types in your query results.
    - Try selecting **Departments** or **Rooms** from the dropdown to see how the data reorganizes around that entity type.
+
+   ![Screenshot showing Card view with patient details](./Images/27-card-view.png)
    
 7. Switch to **Table** view to see a spreadsheet-like format of your query results.
 8. Return to **Diagram** view.
