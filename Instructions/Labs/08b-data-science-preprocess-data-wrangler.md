@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Preprocess data with Data Wrangler in Microsoft Fabric'
-    module: 'Preprocess data with Data Wrangler in Microsoft Fabric'
+  title: Preprocess data with Data Wrangler in Microsoft Fabric
+  module: Preprocess data with Data Wrangler in Microsoft Fabric
+  description: You'll use Data Wrangler to perform common data preprocessing tasks like formatting text, filtering, sorting, and aggregating data, while automatically generating reusable Python code. This hands-on experience will help you prepare data for machine learning models efficiently without writing code from scratch.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Preprocess data with Data Wrangler in Microsoft Fabric

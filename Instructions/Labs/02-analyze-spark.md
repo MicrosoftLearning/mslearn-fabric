@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Analyze data with Apache Spark'
-    module: 'Use Apache Spark to work with files in a lakehouse'
+  title: Analyze data with Apache Spark
+  module: Use Apache Spark to work with files in a lakehouse
+  description: In this lab, you'll ingest data into a Fabric lakehouse and use Apache Spark to read and analyze it. You'll work with PySpark to load files, explore data, and perform analysis using Spark notebooks.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Analyze data with Apache Spark in Fabric
@@ -10,39 +16,44 @@ In this lab you will ingest data into the Fabric lakehouse and use PySpark to re
 
 This lab will take approximately 45 minutes to complete.
 
-> [!Note] 
-> You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+>**Note**: You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete the exercise.
 
 ## Create a workspace
 
 Before working with data in Fabric, create a workspace in a tenant with the Fabric capacity enabled.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser and sign in with your Fabric credentials.
+   
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+   
 1. Create a new workspace with a name of your choice, selecting a licensing mode in the **Advanced** section that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+   
 1. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 
 ## Create a lakehouse and upload files
 
-Now that you have a workspace, it's time to create a data lakehouse for your data.
+Now that you have a workspace, it's time to create a lakehouse for your data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
+1. Select **New Item** and then select **Lakehouse** in the _Store data_ section. _It might take more than a minute to create the lakehouse._
 
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+1.  Give the lakehouse a unique name of your choice and **deselect** the _Lakehouse schemas (Public Preview)_ option.
 
-    After a minute or so, a new lakehouse will be created:
-
-    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
+    > **Important**: Make sure the _Lakehouse schemas_ option is **disabled** because you can't change this setting after creating the lakehouse. You will need to create a new lakehouse if this step is missed. 
 
 1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
 
-You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a folder of text files to your local computer (or lab VM if applicable) and then upload them to your lakehouse.
+    ![Screenshot of a new lakehouse.](./Images/new-lakehouse.png)
 
-1. Download the datafiles from `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`.
+    You can now ingest data into the lakehouse. There are several ways to do this, but for now you’ll download a folder of text files to your local computer (or lab VM if applicable) and then upload them to your lakehouse.
+
+1. Download the data files from: `https://github.com/MicrosoftLearning/dp-data/raw/main/orders.zip`
+   
 1. Extract the zipped archive and verify that you have a folder named *orders* which contains three CSV files: 2019.csv, 2020.csv, and 2021.csv.
+   
 1. Return to your new lakehouse. In the **Explorer** pane, next to the **Files** folder select the **…** menu, and select **Upload** and **Upload folder**. Navigate to the orders folder on your local computer (or lab VM if applicable) and select **Upload**.
+   
 1. After the files have been uploaded, expand **Files** and select the **orders** folder. Check that the CSV files have been uploaded, as shown here:
 
     ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.png)
@@ -51,7 +62,7 @@ You can now ingest data into the lakehouse. There are several ways to do this, b
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
+1. On the menu bar on the left, **3 dots ...** select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
 
     A new notebook named **Notebook 1** is created and opened.
 
@@ -88,7 +99,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
     ```python
    df = spark.read.format("csv").option("header","true").load("Files/orders/2019.csv")
    # df now is a Spark DataFrame containing CSV data from "Files/orders/2019.csv".
-   display(df)
+   display(df.limit(100))
     ```
 
 >[!TIP]
@@ -103,7 +114,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
  
     ![Screen picture showing auto generated code and data.](Images/auto-generated-load.png)
 
-1. The output shows data from the 2019.csv file displayed in columns and rows.  Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the code as follows:
+1. The output shows data from the 2019.csv file displayed in columns and rows. Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the ***existing code*** as follows:
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
@@ -411,7 +422,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
     * Chart type: Bar chart
     * X-axis: Item
     * Y-axis: Quantity
-    * Series Group: leave blank
+    * Series Group: --None--
     * Aggregation: Sum
     * Missing and NULL values: Display as 0
     * Stacked: Unselected
@@ -547,9 +558,13 @@ While *matplotlib* enables you to create different chart types, it can require s
 
     ```python
    import seaborn as sns
+   import warnings
 
    # Clear the plot area
    plt.clf()
+
+   # Suppress FutureWarning from seaborn
+   warnings.filterwarnings('ignore', message='use_inf_as_na', category=FutureWarning)
 
    # Create a bar chart
    ax = sns.barplot(x="OrderYear", y="GrossRevenue", data=df_sales)

@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Get started with data science in Microsoft Fabric'
-    module: 'Get started with data science in Microsoft Fabric'
+  title: Get started with data science in Microsoft Fabric
+  module: Get started with data science in Microsoft Fabric
+  description: In this lab, you'll learn how to work with notebooks and Data Wrangler to explore and transform data, then train and compare both regression and classification machine learning models. You'll use MLflow to track your experiments and save the best performing model, gaining practical skills in the core data science capabilities of Microsoft Fabric.
+  duration: 20 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Get started with data science in Microsoft Fabric

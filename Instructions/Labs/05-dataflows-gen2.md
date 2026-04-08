@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create and use Dataflows (Gen2) in Microsoft Fabric'
-    module: 'Ingest Data with Dataflows Gen2 in Microsoft Fabric'
+  title: Create and use Dataflows (Gen2) in Microsoft Fabric
+  module: Ingest Data with Dataflows Gen2 in Microsoft Fabric
+  description: In this lab, you will create a Dataflow (Gen2) to extract data from a CSV file, perform transformations in Power Query Online, and load the data into a lakehouse. You will also learn how to orchestrate dataflows by integrating them into a data pipeline.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create and use Dataflows (Gen2) in Microsoft Fabric
@@ -77,6 +83,8 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
     ![Screenshot of the Ribbon, highlighting the Add Data destination option.](./Images/add-data-destination.png)
 
+    > **Note**: If the **Add data destination** option is grayed out or a lakehouse destination is already shown in the query, your lakehouse has been automatically attached as the default destination because you created the dataflow from within the lakehouse. Select the existing lakehouse destination icon in the query to open the destination settings, and then continue from step 5.
+
 2. Select **Lakehouse**.
 
 3. In the **Connect to default data destination** dialog box, edit the connection and sign in using your Power BI organizational account to set the identity that the dataflow uses to access the lakehouse.
@@ -100,7 +108,7 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
 ## Add a dataflow to a pipeline
 
-You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created in a few different experiences, including Data Factory experience.
+You can include a dataflow as an activity in a pipeline. Pipelines are used to orchestrate data ingestion and processing activities, enabling you to combine dataflows with other kinds of operation in a single, scheduled process. Pipelines can be created from your workspace by selecting **+ New item** > **Data pipeline**.
 
 1. From your Fabric-enabled workspace, select **+ New item** > **Data pipeline**, then when prompted, create a new pipeline named **Load data**.
 

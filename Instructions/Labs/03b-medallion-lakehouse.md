@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Create a medallion architecture in a Microsoft Fabric lakehouse'
-    module: 'Organize a Fabric lakehouse using medallion architecture design'
+  title: Create a medallion architecture in a Microsoft Fabric lakehouse
+  module: Organize a Fabric lakehouse using medallion architecture design
+  description: You'll implement a medallion architecture by transforming raw data through bronze, silver, and gold layers using PySpark and Delta Lake. You'll create a star schema with dimensions and fact tables, then explore and model the data for analytics and reporting.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
@@ -578,17 +584,15 @@ You could have done all of this in a single notebook, but for this exercise you'
      .execute()
     ```
 
-    Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
+Here you're using Delta Lake's merge operation to synchronize and update the factsales_gold table with new sales data (dffactSales_gold). The operation compares the order date, customer ID, and item ID between the existing data (silver table) and the new data (updates DataFrame), updating matching records and inserting new records as needed.
 
 You now have a curated, modeled **gold** layer that can be used for reporting and analysis.
 
 ## (OPTIONAL) Create a semantic model
 
-**Note**: While this task is entirely optional, you need a Power BI license or Fabric F64 SKU to create and edit semantic models.
+You can now use the gold layer to create a report and analyze the data. First, you must create a semantic model to define relationships and measures for reporting.
 
-In your workspace, you can now use the gold layer to create a report and analyze the data. You can access the semantic model directly in your workspace to create relationships and measures for reporting.
-
-Note that you can't use the **default semantic model** that is automatically created when you create a lakehouse. You must create a new semantic model that includes the gold tables you created in this exercise, from the Explorer.
+> **Note**: In order to complete this task, you need a Power BI license _in addition to_ the Fabric trial or Fabric F64 SKU to create Power BI items.
 
 1. In your workspace, navigate to your **Sales** lakehouse.
 1. Select **New semantic model** from the ribbon of the Explorer view.
@@ -599,7 +603,7 @@ Note that you can't use the **default semantic model** that is automatically cre
    - dimproduct_gold
    - factsales_gold
 
-    This will open the semantic model in Fabric where you can create relationships and measures, as shown here:
+This will open the semantic model in Fabric where you can create relationships and measures, as shown here:
 
     ![Screenshot of a semantic model in Fabric.](./Images/dataset-relationships.png)
 

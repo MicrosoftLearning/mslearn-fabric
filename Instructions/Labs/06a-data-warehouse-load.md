@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Load data into a warehouse using T-SQL'
-    module: 'Load data into a warehouse in Microsoft Fabric'
+  title: Load data into a warehouse using T-SQL
+  module: Load data into a warehouse in Microsoft Fabric
+  description: In this lab, you'll learn how to load data into a Microsoft Fabric data warehouse using T-SQL. You'll create fact and dimension tables, build a stored procedure that uses cross-database queries to load data from a lakehouse into your warehouse, and run analytical queries to validate the data.
+  duration: 30 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Microsoft Fabric
 ---
 
 # Load data into a warehouse using T-SQL
