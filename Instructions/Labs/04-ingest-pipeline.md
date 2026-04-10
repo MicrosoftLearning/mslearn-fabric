@@ -2,7 +2,7 @@
 lab:
   title: Ingest data with a pipeline in Microsoft Fabric
   module: Use Data Factory pipelines in Microsoft Fabric
-  description: In this lab, you'll create data pipelines to ingest data from external sources into a lakehouse, and integrate Spark notebooks to transform and load the data into tables. You'll learn how to combine Copy Data activities with custom Spark transformations to build reusable ETL processes in Microsoft Fabric.
+  description: In this lab, you'll create data pipelines to ingest data from external sources into a lakehouse, and integrate Spark notebooks to transform and load the data into tables. You'll learn how to combine Copy data activities with custom Spark transformations to build reusable ETL processes in Microsoft Fabric.
   duration: 45 minutes
   level: 300
   islab: true
@@ -46,11 +46,11 @@ Now that you have a workspace, it's time to create a data lakehouse into which y
 
 ## Create a pipeline
 
-A simple way to ingest data is to use a **Copy Job** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
+A simple way to ingest data is to use a **Copy data** activity in a pipeline to extract the data from a source and copy it to a file in the lakehouse.
 
 1. On the **Home** page for your lakehouse, select **Get data** and then select **New copy job**, and create a new data pipeline named `Ingest Sales Data`.
-1. If the **Copy Job** wizard doesn't open automatically, select **From any source to any destination** in the pipeline editor page.
-1. In the **Copy Job** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
+1. If the **Copy data** wizard doesn't open automatically, select **From any source to any destination** in the pipeline editor page.
+1. In the **Copy data** wizard, on the **Choose data source** page, type HTTP in the search bar and then select **HTTP** in the **New sources** section.
 
     ![Screenshot of the Choose data source page.](./Images/choose-data-source.png)
 
@@ -76,7 +76,7 @@ A simple way to ingest data is to use a **Copy Job** activity in a pipeline to e
 1. Select **Preview data** to see a sample of the data that will be ingested. Close the preview, and then select **Next**.
 1. On the **Settings** page, verify that **Read method** is set to **Full Copy**. For **Destination root folder**, select **Files**, and then select **Next**.
 
-    ![Screenshot of a pipeline with a Copy Data activity.](./Images/Copy-job-settings.png)
+    ![Screenshot of a pipeline with a Copy data activity.](./Images/Copy-job-settings.png)
 1. On the **Map Destination** select Browse and then select on Root folder new_data and filename as *Sales.csv*. 
 Expand the File format settings to set the file format options. then select **Next**
      - **File format:** DelimitedText
@@ -88,18 +88,16 @@ Expand the File format settings to set the file format options. then select **Ne
 
 1. On the **Home** tab, select **Add to pipeline**, and then select **Create**.
 
-1. Select on **Copy job** and then select on **Settings**  
-    - Connection : **Browse all** and select on **new sources as copy job**.
+1. Select the **Copy data** activity, and then select **Settings**.
+    - **Connection**: Select **Browse all** and choose the connection you created in the **Copy Job** wizard.
     
-     ![Screenshot of a pipeline with a Copy Data activity.](./Images/newsourcesettings.png)
-1. **On Get data** Select on **New sources as copy job**
-    Connection Credentials 
-
-    - **Connection**   : Create a new connection
-    - **Connection** name : Specify any name 
-    - **Data gateway** : none
-    - **Authentication kind** : Organizational account
-    - **Sign in** with your fabric account credentials then select **Connect** 
+     ![Screenshot of a pipeline with a Copy data activity.](./Images/newsourcesettings.png)
+1. If you're prompted to create a new connection, use the following credentials:
+    - **Connection**: Create a new connection
+    - **Connection name**: Specify any name
+    - **Data gateway**: none
+    - **Authentication kind**: Organizational account
+    - **Sign in** with your Fabric account credentials, and then select **Connect**.
 
 1. On Home tab select **Validate**, **Run and then Save and Run**
    
@@ -144,7 +142,7 @@ Expand the File format settings to set the file format options. then select **Ne
    df.write.format("delta").mode("append").saveAsTable(table_name)
     ```
 
-    This code loads the data from the sales.csv file that was ingested by the **Copy Job** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
+    This code loads the data from the sales.csv file that was ingested by the **Copy data** activity, applies some transformation logic, and saves the transformed data as a table - appending the data if the table already exists.
 
 5. Verify that your notebooks looks similar to this, and then use the **&#9655; Run all** button on the toolbar to run all of the cells it contains.
 
@@ -163,7 +161,7 @@ Now that you've implemented a notebook to transform data and load it into a tabl
 
 1. In the hub menu bar on the left select the **Ingest Sales Data** pipeline you created previously.
 2. On the **Activities** tab, in **...** then select on **All activities** list, select **Delete data**. 
-   - Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy job** activity, as shown here:
+   - Then position the new **Delete data**  activity to the left of the **Copy data** activity and connect its **On completion** output to the **Copy data** activity, as shown here:
 
     ![Screenshot of a pipeline with Delete data and Copy data activities.](./Images/delete-data-activity.png)
 
@@ -182,9 +180,9 @@ Now that you've implemented a notebook to transform data and load it into a tabl
     These settings will ensure that any existing .csv files are deleted before copying the **sales.csv** file.
 
 4. In the pipeline designer, on the **Activities** tab, select **Notebook** to add a **Notebook** activity to the pipeline.
-5. Select the **Copy job** activity and then connect its **On Completion** output to the **Notebook** activity as shown here:
+5. Select the **Copy data** activity and then connect its **On Completion** output to the **Notebook** activity as shown here:
 
-    ![Screenshot of a pipeline with Copy Data and Notebook activities.](./Images/pipeline.png)
+    ![Screenshot of a pipeline with Copy data and Notebook activities.](./Images/pipeline.png)
 
 6. Select the **Notebook** activity, and then in the pane below the design canvas, set the following properties:
     - **General**:
