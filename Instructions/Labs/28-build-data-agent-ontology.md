@@ -18,13 +18,13 @@ This lab takes approximately **30** minutes to complete.
 
 ## Before you start
 
-You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+You need a Microsoft Fabric Capacity (F2 or higher) to complete this exercise. 
 
-You'll also need the following [tenant settings](https://learn.microsoft.com/fabric/data-science/data-agent-tenant-settings) enabled by your Fabric administrator:
+You also need the following [tenant settings](https://learn.microsoft.com/fabric/data-science/data-agent-tenant-settings) enabled by your Fabric Administrator:
 
-- **Users can use Copilot and other features powered by Azure OpenAI**
 - **Capacities can be designated as Fabric Copilot capacities**
-- **Cross-geo processing and storing for AI** — required only if your Fabric capacity is outside the EU or US ([learn why](https://learn.microsoft.com/fabric/admin/service-admin-portal-copilot#cross-geo-processing))
+- **Data sent to Azure OpenAI can be processed outside your capacity's geographic region, compliance boundary, or national cloud instance** — required only if your Fabric capacity is outside the EU or US
+- **Data sent to Azure OpenAI can be stored outside your capacity's geographic region, compliance boundary, or national cloud instance** — required only if your Fabric capacity is outside the EU or US
 
 ## Create a workspace
 
