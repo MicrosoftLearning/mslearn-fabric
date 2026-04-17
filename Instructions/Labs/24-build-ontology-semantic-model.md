@@ -4,7 +4,7 @@ lab:
   module: Create ontology with Microsoft Fabric IQ
   description: 'In this lab, you generate a Fabric IQ ontology from a Power BI semantic model using healthcare data, configure entity types and relationships with data bindings, and combine static data from a lakehouse with time-series data from an eventhouse.'
   duration: 45 minutes
-  level: 300
+  level: 200
   islab: true
   primarytopics:
     - Microsoft Fabric
