@@ -1,7 +1,7 @@
 ---
 lab:
-  title: Build an ontology-grounded Fabric data agent
-  module: Build an ontology-grounded Fabric data agent
+  title: Build a Fabric data agent with an ontology
+  module: Build a Fabric data agent with an ontology
   description: In this lab, you create a Fabric data agent that uses a Lamna Healthcare ontology as its data source. You configure agent instructions, test natural language queries, and publish the agent for colleagues to use.
   duration: 30 minutes
   level: 200
@@ -10,9 +10,12 @@ lab:
     - Microsoft Fabric
 ---
 
-# Build an ontology-grounded Fabric data agent
+# Build a Fabric data agent with an ontology
 
 In this lab, you'll create a Fabric data agent for a fictitious company called Lamna Healthcare. You'll connect the agent to an ontology as its data source, configure instructions to improve query accuracy, test natural language questions, and publish the agent so clinical staff can get answers to questions like "How many ICU beds are occupied?"
+
+> [!IMPORTANT]
+> Ontology in Microsoft Fabric is currently in [preview](https://learn.microsoft.com/fabric/fundamentals/preview).
 
 This lab takes approximately **30** minutes to complete.
 
