@@ -1,6 +1,6 @@
 ---
 lab:
-  title: Build an ontology (preview) from a semantic model in Fabric IQ
+  title: Build an ontology from a semantic model in Fabric IQ
   module: Create ontology with Microsoft Fabric IQ
   description: 'In this lab, you generate a Fabric IQ ontology from a Power BI semantic model using healthcare data, configure entity types and relationships with data bindings, and combine static data from a lakehouse with time-series data from an eventhouse.'
   duration: 45 minutes
@@ -10,11 +10,14 @@ lab:
     - Microsoft Fabric
 ---
 
-# Build an ontology (preview) from a semantic model in Fabric IQ
+# Build an ontology from a semantic model in Fabric IQ
 
 There are two ways to build a Fabric IQ ontology: manually, by creating each entity type and relationship from scratch, or automatically, by generating the structure from a Power BI semantic model. This lab uses the semantic model approach.
 
 In this lab, you'll load sample data for a fictitious healthcare company into a lakehouse and eventhouse, build a semantic model on top of it, and then generate an ontology from that model. The sample data represents hospitals, departments, rooms, patients, vital sign equipment, and vital signs readings. Each table in the semantic model becomes an entity type, and each relationship between tables becomes a relationship type in the ontology.
+
+> [!IMPORTANT]
+> Ontology in Microsoft Fabric is currently in [preview](https://learn.microsoft.com/fabric/fundamentals/preview).
 
 This lab takes approximately **45** minutes to complete.
 
