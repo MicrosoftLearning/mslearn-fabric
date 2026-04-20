@@ -46,7 +46,7 @@ The Lamna Healthcare ontology includes sample data representing hospitals, depar
 
 > **Note**: If you want to learn how to build ontologies step-by-step, see the exercises on [creating an ontology manually](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/23-build-ontology-manually.html) or [generating an ontology from a semantic model](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/24-build-ontology-semantic-model.html).
 
-1. Download the notebook file [**setup-ontology.ipynb**](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/27-28/setup-ontology.ipynb) to your local computer. If your browser saves it as `setup-ontology.ipynb.txt`, rename the file to remove the `.txt` extension.
+1. Select [**setup-ontology.ipynb**](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/27-28/setup-ontology.ipynb) to open the notebook file in your browser, then right-click and save it to your local computer. If your browser saves it as `setup-ontology.ipynb.txt`, rename the file to remove the `.txt` extension.
 
 1. In your workspace, select **Import** from the ribbon.
 
