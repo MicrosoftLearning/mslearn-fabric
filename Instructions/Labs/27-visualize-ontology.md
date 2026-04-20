@@ -139,8 +139,6 @@ This combination lets you see both the equipment details and its real-time readi
    - **Time range**: Select **Last 3 days**
    - **Time granularity**: Select **5 minutes** 
    - **Aggregation**: Select **Average**
-   
-   This displays the vital sign readings with 5-minute intervals regardless of when you ran the setup.
 
 1. Observe the time-series charts showing vital sign readings (heart rate, oxygen saturation, respiratory rate) with data points at 5-minute intervals.
 
