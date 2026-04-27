@@ -1,0 +1,34 @@
+== Slow measure (starter file) ==
+
+Sales YoY Growth =
+DIVIDE(
+    [Total Sales] - CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date])),
+    CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))
+)
+
+
+== Optimized measure ==
+
+Sales YoY Growth =
+VAR SalesPriorYear =
+    CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))
+RETURN
+    DIVIDE([Total Sales] - SalesPriorYear, SalesPriorYear)
+
+
+== Column cardinality query ==
+
+DEFINE
+    VAR _stats = COLUMNSTATISTICS()
+EVALUATE
+    FILTER(_stats, NOT CONTAINSSTRING([Column Name], "RowNumber-"))
+ORDER BY [Cardinality] DESC
+
+
+== Test measure in DAX query view ==
+
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Date'[Year],
+    "YoY Growth", [Sales YoY Growth]
+)
