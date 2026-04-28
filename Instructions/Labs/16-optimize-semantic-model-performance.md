@@ -29,11 +29,11 @@ This lab takes approximately **30** minutes to complete.
 
 You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements may vary slightly depending on your version.*
 
-Before you can start this exercise, you need to open a web browser and enter the following URL to download the [starter zip folder](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16/16-optimize-performance.zip):
+1. Open a web browser and enter the following URL to download the [16-optimize-performance zip folder](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16/16-optimize-performance.zip):
 
-`https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16/16-optimize-performance.zip`
+    `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16/16-optimize-performance.zip`
 
-Extract the zip file to the **C:\Users\Student\Downloads\16-optimize-performance** folder.
+1. Save the file in D**Downloads** and extract the zip file to the **16-optimize-performance** folder.
 
 1. Open the **16-Starter-Sales Analysis.pbix** file from the folder you extracted.
 
