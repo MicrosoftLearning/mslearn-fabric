@@ -21,11 +21,9 @@ In this exercise, you design a semantic model for scale in the Microsoft Fabric 
 
 This lab takes approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
-
 ## Set up the environment
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
@@ -194,7 +192,7 @@ You need a lakehouse with data to model. Create a lakehouse and load sample sale
 
 ## Create a semantic model
 
-In this task, you create a semantic model designed for scale. The model uses Direct Lake to query data directly from lakehouse Delta tables without importing a copy, eliminating refresh bottlenecks and memory limits that constrain large datasets. You then structure the model with star schema relationships, explicit measures, calculation groups, and role-playing dimensions — patterns that keep the model performant and maintainable as the number of tables, measures, and users grows.
+In this section, you create a semantic model designed for scale. The model uses Direct Lake to query data directly from lakehouse Delta tables without importing a copy, eliminating refresh bottlenecks and memory limits that constrain large datasets. You then structure the model with star schema relationships, explicit measures, calculation groups, and role-playing dimensions — patterns that keep the model performant and maintainable as the number of tables, measures, and users grows.
 
 1. In the **Lakehouse explorer** menu bar, select **New semantic model**.
 
@@ -438,7 +436,7 @@ In this task, you configure workspace-level settings that prepare the model for 
 
 ## Validate the model with a report
 
-In this task, you create a report to verify that relationships, measures, and the calculation group work correctly.
+In this section, you create a report to verify that relationships, measures, and the calculation group work correctly.
 
 1. Navigate back to your workspace and find **Sales Model** in the workspace item list. Select the **...** (ellipsis) menu next to it and select **Create report**.
 
@@ -469,6 +467,8 @@ In this task, you create a report to verify that relationships, measures, and th
 ![Screenshot of the report page as designed to show the calculation group and active and inactive relationships being used.](./Images/15-report-final.png)
 
 ## Try it with Copilot (optional)
+
+Copilot works best with well-structured semantic models. In this section, you test whether Copilot can answer questions accurately against the star schema you built.
 
 If your workspace supports Copilot, try asking it questions about the model data.
 
