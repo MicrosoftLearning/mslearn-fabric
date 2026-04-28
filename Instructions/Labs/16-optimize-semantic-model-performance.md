@@ -33,7 +33,7 @@ You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=5
 
     `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16/16-optimize-performance.zip`
 
-1. Save the file in D**Downloads** and extract the zip file to the **16-optimize-performance** folder.
+1. Save the file in **Downloads** and extract the zip file to the **16-optimize-performance** folder.
 
 1. Open the **16-Starter-Sales Analysis.pbix** file from the folder you extracted.
 
