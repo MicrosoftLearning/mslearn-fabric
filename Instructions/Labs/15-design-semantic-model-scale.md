@@ -30,155 +30,21 @@ You need a Fabric-enabled workspace to complete this exercise. For more informat
 1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
 1. When your new workspace opens, it should be empty.
 
-You need a lakehouse with data to model. Create a lakehouse and load sample sales data using a notebook.
+You need a lakehouse with data to model. Import a notebook that creates sample sales data, create a lakehouse, and then run the notebook against it.
 
-> **Tip**: If you are in a lab VM and have any problems entering the code, you can download the [Create-Sales-Data.ipynb](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Create-Sales-Data.ipynb) notebook from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Create-Sales-Data.ipynb`, saving it on the VM. You must import the notebook from the workspace.
+1. Download the [Create-Sales-Data.ipynb](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Create-Sales-Data.ipynb) notebook from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Create-Sales-Data.ipynb` and save it.
 
-1. In the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it the name **SalesLakehouse**.
+1. In your workspace, select **Import** > **Notebook** and upload the **Create-Sales-Data.ipynb** file you downloaded. The notebook appears in the workspace after import.
 
-    > **Note**: If the **Create** option is not pinned to the sidebar, select the ellipsis (**...**) option first.
+1. In the workspace, select **+ New item** and create a **Lakehouse**. Name it **SalesLakehouse**.
 
     After a minute or so, a new lakehouse is created.
 
-1. On the **Home** menu tab, select **Open notebook** > **New notebook** to create a new notebook attached to the lakehouse.
+1. In the lakehouse, on the **Home** menu tab, select **Open notebook** > **Existing notebook** and select **Create-Sales-Data**.
 
-1. In the first cell of the notebook, paste the following code to create and populate the dimension tables, and then use the **&#9655;** button to run the cell:
+1. The notebook opens with the lakehouse attached. It contains two code cells with comments that explain what each block does: the first cell creates three dimension tables (`DimDate`, `DimProduct`, `DimCustomer`) and the second cell generates 5,000 fact table rows (`FactSales`).
 
-    ```python
-    from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType, DecimalType
-    from datetime import date, timedelta
-    from decimal import Decimal
-
-    # --- DimDate ---
-    start = date(2022, 1, 1)
-    end = date(2024, 12, 31)
-    date_rows = []
-    d = start
-    while d <= end:
-        date_rows.append((
-            int(d.strftime("%Y%m%d")),
-            d,
-            d.year,
-            (d.month - 1) // 3 + 1,
-            d.month,
-            d.strftime("%B"),
-            d.day
-        ))
-        d += timedelta(days=1)
-
-    date_schema = StructType([
-        StructField("DateKey", IntegerType()),
-        StructField("FullDate", DateType()),
-        StructField("Year", IntegerType()),
-        StructField("Quarter", IntegerType()),
-        StructField("Month", IntegerType()),
-        StructField("MonthName", StringType()),
-        StructField("Day", IntegerType())
-    ])
-
-    spark.createDataFrame(date_rows, date_schema).write.mode("overwrite").format("delta").saveAsTable("DimDate")
-
-    # --- DimProduct ---
-    products = [
-        (1, "Mountain Bike Pro", "Bikes", "Mountain Bikes", Decimal("2499.99")),
-        (2, "Road Bike Elite", "Bikes", "Road Bikes", Decimal("1899.99")),
-        (3, "Touring Bike", "Bikes", "Touring Bikes", Decimal("1299.99")),
-        (4, "Bike Helmet", "Accessories", "Helmets", Decimal("49.99")),
-        (5, "Water Bottle", "Accessories", "Bottles and Cages", Decimal("12.99")),
-        (6, "Bike Lock", "Accessories", "Locks", Decimal("29.99")),
-        (7, "Cycling Jersey", "Clothing", "Jerseys", Decimal("79.99")),
-        (8, "Cycling Shorts", "Clothing", "Shorts", Decimal("59.99")),
-        (9, "Mountain Tire", "Components", "Tires and Tubes", Decimal("35.99")),
-        (10, "Road Tire", "Components", "Tires and Tubes", Decimal("32.99"))
-    ]
-
-    product_schema = StructType([
-        StructField("ProductKey", IntegerType()),
-        StructField("ProductName", StringType()),
-        StructField("Category", StringType()),
-        StructField("Subcategory", StringType()),
-        StructField("ListPrice", DecimalType(10, 2))
-    ])
-
-    spark.createDataFrame(products, product_schema).write.mode("overwrite").format("delta").saveAsTable("DimProduct")
-
-    # --- DimCustomer ---
-    customers = [
-        (1, "Seattle", "West", "United States"),
-        (2, "Portland", "West", "United States"),
-        (3, "Chicago", "Midwest", "United States"),
-        (4, "New York", "East", "United States"),
-        (5, "Denver", "West", "United States"),
-        (6, "Atlanta", "South", "United States"),
-        (7, "San Francisco", "West", "United States"),
-        (8, "Minneapolis", "Midwest", "United States")
-    ]
-
-    customer_schema = StructType([
-        StructField("CustomerKey", IntegerType()),
-        StructField("City", StringType()),
-        StructField("Region", StringType()),
-        StructField("Country", StringType())
-    ])
-
-    spark.createDataFrame(customers, customer_schema).write.mode("overwrite").format("delta").saveAsTable("DimCustomer")
-
-    print("Dimension tables created.")
-    ```
-
-1. Create a new code cell with the **+ Code** button. Paste the following code and run the cell to populate the fact table with 5,000 sales order rows:
-
-    ```python
-    import random
-    from datetime import date, timedelta
-    from decimal import Decimal
-
-    # Load product prices for lookup
-    product_prices = {row.ProductKey: row.ListPrice for row in spark.table("DimProduct").collect()}
-
-    rows = []
-    start_date = date(2022, 1, 1)
-
-    for i in range(1, 5001):
-        order_date = start_date + timedelta(days=random.randint(0, 1094))
-        ship_date = order_date + timedelta(days=random.randint(14, 60))
-        customer_key = random.randint(1, 8)
-        product_key = random.randint(1, 10)
-        quantity = random.randint(1, 10)
-        unit_price = product_prices[product_key]
-        sales_amount = Decimal(quantity) * unit_price
-        total_cost = sales_amount * Decimal(str(round(0.4 + random.randint(0, 29) / 100.0, 2)))
-
-        rows.append((
-            f"SO-{i:05d}",
-            1,
-            int(order_date.strftime("%Y%m%d")),
-            int(ship_date.strftime("%Y%m%d")),
-            customer_key,
-            product_key,
-            quantity,
-            unit_price,
-            sales_amount,
-            total_cost
-        ))
-
-    fact_schema = StructType([
-        StructField("SalesOrderNumber", StringType()),
-        StructField("SalesOrderLineNumber", IntegerType()),
-        StructField("OrderDateKey", IntegerType()),
-        StructField("ShipDateKey", IntegerType()),
-        StructField("CustomerKey", IntegerType()),
-        StructField("ProductKey", IntegerType()),
-        StructField("Quantity", IntegerType()),
-        StructField("UnitPrice", DecimalType(10, 2)),
-        StructField("SalesAmount", DecimalType(10, 2)),
-        StructField("TotalCost", DecimalType(10, 2))
-    ])
-
-    spark.createDataFrame(rows, fact_schema).write.mode("overwrite").format("delta").saveAsTable("FactSales")
-
-    print("FactSales table created with 5,000 rows.")
-    ```
+1. Select **Run all** in the toolbar to run both cells. Wait for both cells to complete.
 
 1. Once both cells complete, use the lakehouse explorer on the left to verify that the following tables appear under **Tables**:
     - `DimCustomer`
@@ -284,7 +150,7 @@ The `FactSales` table already contains columns like `SalesAmount` and `TotalCost
 
 1. In the **Data** pane, right-click the `FactSales` table and select **New measure**.
 
-> **Tip**: The DAX formulas for all measures, calculation groups, and the USERELATIONSHIP measure can be copied from the [Create-Sales-Data.ipynb](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/Create-Sales-Data.ipynb) notebook if you downloaded it earlier.
+> **Tip**: The DAX formulas for all measures, calculation groups, and the USERELATIONSHIP measure can be copied from the **Create-Sales-Data** notebook you imported earlier. Open the notebook from the workspace to find the formulas in the markdown cells.
 
 1. In the formula bar, enter the following and press **Enter**:
 
@@ -441,6 +307,7 @@ In this section, you create a report to verify that relationships, measures, and
 1. Navigate back to your workspace and find **Sales Model** in the workspace item list. Select the **...** (ellipsis) menu next to it and select **Create report**.
 
 1. In the report canvas, create a **Clustered bar chart** visual. Add the following fields:
+
     - `DimProduct` > `Category` on the Y-axis
     - `Total Sales` on the X-axis
 
