@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Prepare the semantic layer for AI in Microsoft Fabric'
+    title: 'Prepare a semantic model for AI in Microsoft Fabric'
     module: 'Prepare the semantic layer for AI in Microsoft Fabric'
     description: 'Configure Prep for AI features in Power BI Desktop, add synonyms via linguistic modeling, publish to a Fabric workspace, test with Copilot and HCAAT diagnostics, and mark the model as Approved for Copilot.'
     duration: 30 minutes
@@ -34,7 +34,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Set up the environment
 
-You need a paid Fabric capacity (F2 or higher) to complete this exercise. Copilot isn't supported on trial capacities. For more information, see [Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
+You need a paid Fabric capacity (F2 or higher) to complete this exercise because Copilot isn't supported on trial capacities. For more information, see [Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
 
 You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements may vary slightly depending on your version.*
 
@@ -70,18 +70,20 @@ Hiding technical fields helps Copilot focus on business-relevant data and produc
 
 1. In the dialog that opens, select **Simplify the data schema** from the left navigation or by selecting the card.
 
-1. Review the list of tables and their fields. By default, all fields are visible to AI. Deselect fields that aren't relevant for business users:
+1. Expand each table and deselect fields that aren't relevant for business users. By default, all fields are visible to AI. For each table, **only keep the following fields**:
 
-    - From the **Date** table, deselect **Day (Sort Order)** and **Month (Sort Order)**. These are internal sort helper columns.
-    - From the **Product** table, deselect **ProductKey**. This is a surrogate key used for relationships.
-    - From the **Customer** table, deselect **CustomerKey**. This is a surrogate key used for relationships.
-    - From the **Sales** table, deselect **LoadDate** and **SourceSystem**. These are ETL metadata columns. Also deselect **SalesOrderLineNumber**, which is an internal identifier.
-
-1. Confirm that business-relevant fields remain selected: ProductName, Category, CustomerName, City, Year, Month, Total Sales, Profit, and Profit Margin.
+   - **`Customer`**: `City`, `CustomerName`
+   - **`Date`**: `Date`, `Day`, `Month`, `Year`
+   - **`Product`**: `Category`, `ListPrice`, `ProductName`, `StandardCost`, `Subcategory`
+   - **`Sales`**: `LineTotal`, `OrderDate`, `OrderQty`, `Profit`, `Profit Margin`, `SalesOrderID`, `Total Sales`, `TotalCost`, `UnitPrice`
 
 1. Select **Apply**.
 
-**Verify**: The Simplify data schema tab shows deselected fields for surrogate keys, sort columns, and ETL metadata. All business-relevant fields remain selected.
+   Deselected fields include surrogate keys (`CustomerKey`, `ProductKey`), sort helper columns (`Day (Sort Order)`, `Month (Sort Order)`), ETL metadata (`LoadDate`, `SourceSystem`), and internal identifiers (`SalesOrderLineNumber`). Deselecting `LoadDate` also removes its auto-generated Date Hierarchy, which is expected — the dedicated `Date` table handles time-based analysis.
+
+1. In the Prep for AI dialog, select **Settings** from the left navigation.
+
+1. Turn on **Share DAX expressions with Copilot**. This allows Copilot to read the underlying DAX logic in your measures, improving its ability to choose the correct measure and explain calculations.
 
 ## Add AI instructions
 
@@ -106,43 +108,33 @@ Table names and field descriptions don't always capture your organization's busi
     Data scope: This model covers retail sales from January 2024 through December 2025.
     ```
 
-1. Select **Apply**.
-
-1. Select **Close** to close the Prep for AI dialog and return to the **Report** view.
-
-**Verify**: The AI instructions tab contains business context that clarifies terminology, analysis preferences, and data scope.
+1. Select **Apply** and then **Close** to return to the **Report** view.
 
 ## Create verified answers
 
 Predefined responses ensure that common business questions always return the same accurate visual. In this section, you create verified answers for two report visuals and assign trigger phrases that map to frequently asked questions.
 
-1. Navigate to the **Sales Overview** report page.
-
-1. Select the card visual that shows **Total Sales**.
+1. From the **Sales Overview** report page, select the card visual that shows `Total Sales`.
 
 1. Select the **...** menu on the visual, then select **Set verified answer**.
 
-1. In the verified answer dialog, add the following trigger phrases. Press **Enter** after each one:
+1. In the verified answer dialog, add the following trigger phrases:
 
-    - What were total sales?
-    - Show me total revenue
-    - How much did we sell?
-
-1. Select **Apply**.
-
-1. Next, select the bar chart visual that shows **Sales by Category**.
-
-1. Select the **...** menu, then select **Set verified answer**.
-
-1. Add the following trigger phrases:
-
-    - Show me sales by category
-    - Which product categories have the most sales?
-    - Break down revenue by product category
+   - `What were total sales?`
+   - `Show me total revenue`
+   - `How much did we sell?`
 
 1. Select **Apply**.
 
-**Verify**: You created verified answers for two visuals with trigger phrases that describe common business questions.
+1. Select the bar chart visual that shows `Sales by Category` and repeat the action to set a verified answer:
+
+   - `Show me sales by category`
+   - `Which product categories have the most sales?`
+   - `Break down revenue by product category`
+
+1. Select **Apply** and **Close**.
+
+You've created verified answers for two visuals with trigger phrases that describe common business questions.
 
 ## Add synonyms with linguistic modeling
 
@@ -152,47 +144,44 @@ Synonyms help Copilot and Q&A interpret natural language variations for field an
 
 1. In the Q&A setup dialog, select the **Synonyms** tab.
 
-1. Locate the **Total Sales** measure. Add the following synonyms, pressing **Enter** after each one:
+1. From the `Customer` table, locate `CustomerName`. Add the following synonyms, pressing **Enter** after each one:
 
-    - revenue
-    - income
-    - total revenue
+   - buyer
+   - client
 
-1. Locate the **Profit Margin** measure. Add the following synonyms:
+1. From the `Product` table, locate `Category`. Add the following synonym:
 
-    - margin
-    - profitability
-    - profit percentage
+   - product category
 
-1. Locate **CustomerName** in the **Customer** table. Add the following synonyms:
+   Notice the **Suggestions** and add `item`.
 
-    - customer
-    - buyer
-    - client
+   > When you add the suggested synonym, you are prompted to share approved synonyms with your entire org. This choice helps provide consistency across your organization and support an enterprise ontology. Select **OK** to share the synonym.
 
-1. Locate **Category** in the **Product** table. Add the following synonym:
+1. From the `Sales` table, locate the `Profit Margin` measure. Add the following synonyms:
 
-    - product category
+   - margin
+   - profit percentage
+   - profitability
 
-1. Select **Close** to close the Q&A setup dialog.
+1. Locate the `Total Sales` measure. Add the following synonyms:
 
-**Verify**: The Synonyms tab shows the synonyms you added for Total Sales, Profit Margin, CustomerName, and Category.
+   - income
+   - revenue
+   - total revenue
 
-## Publish to the Fabric workspace
+1. Close the Q&A setup dialog.
 
-Publishing the report makes the semantic model available in the Power BI service, where you can test with Copilot and mark the model as approved. In this section, you publish the report to the Fabric workspace you created during setup.
+### Publish and validate changes
 
-1. In Power BI Desktop, select **File** > **Save** to save your changes.
+Publishing the report makes the semantic model available in the Power BI service, where you can test with Copilot and mark the model as approved.
 
-1. On the **Home** ribbon, select **Publish**.
+1. **Save** the report and select **Publish** from the **Home** ribbon.
 
-1. In the **Publish to Power BI** dialog, select the workspace you created earlier (for example, **dp_fabric**), and then select **Select**.
+1. In the **Publish to Power BI** dialog, select the workspace you created earlier. Wait for publishing to complete.
 
-1. Wait for publishing to complete. When the success message appears, select the link to open the report in the Power BI service, or navigate to your workspace in a browser.
+1. When the success message appears, select the link to **Open** the report in the Power BI service, or navigate to your workspace in a browser.
 
-**Verify**: The report and semantic model appear in your Fabric workspace.
-
-## Test with Copilot
+### Test with Copilot
 
 Validating your AI preparation confirms that Copilot uses the correct fields, measures, and verified answers. In this section, you test the published model with Copilot in the Power BI service, use HCAAT diagnostics to inspect Copilot's reasoning, and mark the model as Approved for Copilot.
 
@@ -200,55 +189,56 @@ Validating your AI preparation confirms that Copilot uses the correct fields, me
 
 1. On the report toolbar, select the **Copilot** button to open the Copilot pane.
 
-1. In the Copilot pane, select the **skill picker** (the icon at the bottom of the pane). Select **Answer questions about the data** to focus Copilot on data queries.
+1. In the Copilot pane, enter your question in **Ask a question about this report**. If the **Understand the data** option is available, select it before entering your question.
 
 1. Ask a question that matches one of your verified answers:
 
-    > What were total sales?
+   - `What were total sales?`
 
-    Copilot should return the predefined card visual showing total sales, rather than generating a new response.
+   Copilot should return the predefined card visual showing total sales, rather than generating a new response.
 
 1. Ask the second verified-answer question:
 
-    > Show me sales by category
+   - `Show me sales by category`
 
-    Copilot should return the bar chart visual you configured.
+   Copilot should return the bar chart visual you created the verified answer for.
 
 1. Ask a question that tests your synonyms and AI instructions:
 
-    > Show me the top products by profitability
+   - `Show me the top products by profitability`
 
-    Based on your AI instructions, Copilot should use the **Profit Margin** measure rather than the **Profit** measure. The synonym "profitability" should map correctly to **Profit Margin**.
+   Based on your AI instructions, Copilot should use the `Profit Margin` measure rather than the `Profit` measure. The synonym "profitability" should map correctly to `Profit Margin`.
 
 1. Select the **How Copilot arrived at this answer** (HCAAT) link below the response. Review which fields, filters, and measures Copilot used. Confirm that Copilot selected the expected measure and didn't use any hidden fields.
 
 1. Ask an open-ended question that doesn't have a verified answer:
 
-    > Which city had the highest sales?
+   - `Which city had the highest sales?`
 
-    Select the HCAAT link again and verify that Copilot uses **City** and **Total Sales** without referencing any surrogate keys or ETL columns.
+   Select the HCAAT link again and verify that Copilot uses `City` and `Total Sales` without referencing any surrogate keys or ETL columns.
 
 1. If any response is inaccurate, note the question. You can improve accuracy by adjusting AI instructions, adding a verified answer, or refining synonyms.
 
-**Verify**: Verified answers return predefined visuals. Open-ended questions use the correct measures and fields. HCAAT diagnostics confirm Copilot's reasoning matches your AI preparation.
-
 ### Mark the model as Approved for Copilot
 
-Approving a semantic model signals to your organization that it's been validated and is ready for AI consumption. In this task, you mark the published semantic model as Approved for Copilot.
+Approving a semantic model tells your organization that it's been validated and is ready for AI consumption. In this task, you mark the published semantic model as Approved for Copilot.
 
-1. In your workspace, select the semantic model (not the report) to open the model details page.
+1. Navigate back to your workspace.
 
-1. On the model details page, select **Endorsement**.
+   > **Note**: You might need to refresh the browser tab to see the semantic model.
 
-1. In the Endorsement dialog, under **Copilot**, select **Approved**.
+1. Select the ellipsis (**...**) for the semantic model item and select **Settings**.
 
-1. Select **Apply**.
+1. On the model details page, expand the **Approved for Copilot** section.
 
-**Verify**: The semantic model shows the **Approved** endorsement badge in the workspace list.
+1. Check the **Approved for Copilot** option and select **Apply**.
+
+Your semantic model will have improved visibility in search results. It also removes the warning in standalone Copilot in Power BI that your organization hasn't approved the data.
 
 ## Clean up resources
 
 In this exercise, you configured Prep for AI features in Power BI Desktop, added synonyms, published the model to a Fabric workspace, tested with Copilot and HCAAT diagnostics, and marked the model as Approved for Copilot.
 
 1. Navigate to your workspace in the Power BI service.
+
 1. In the workspace settings, select **Other** and then select **Remove this workspace**.

@@ -1,0 +1,31 @@
+﻿ProductKey,ProductName,Category,Subcategory,ListPrice,StandardCost
+771,"Mountain-100 Silver, 38",Bikes,Mountain Bikes,3399.99,1869.99
+775,"Mountain-100 Black, 38",Bikes,Mountain Bikes,3374.99,1856.24
+779,"Mountain-200 Silver, 38",Bikes,Mountain Bikes,2319.99,1275.99
+782,"Mountain-200 Black, 38",Bikes,Mountain Bikes,2294.99,1262.24
+789,"Road-250 Red, 44",Bikes,Road Bikes,2443.35,1343.84
+793,"Road-250 Black, 44",Bikes,Road Bikes,2443.35,1343.84
+797,"Road-550-W Yellow, 38",Bikes,Road Bikes,1120.49,616.27
+749,"Road-150 Red, 62",Bikes,Road Bikes,3578.27,1968.05
+953,"Touring-2000 Blue, 60",Bikes,Touring Bikes,1214.85,668.17
+954,"Touring-1000 Yellow, 46",Bikes,Touring Bikes,2384.07,1311.24
+808,"LL Mountain Handlebars",Components,Handlebars,44.54,26.72
+810,"HL Mountain Handlebars",Components,Handlebars,120.27,72.16
+994,"LL Bottom Bracket",Components,Bottom Brackets,53.99,32.39
+948,"Front Brakes",Components,Brakes,106.5,63.9
+907,"Rear Brakes",Components,Brakes,106.5,63.9
+739,"HL Mountain Frame - Silver, 42",Components,Mountain Frames,1364.5,818.7
+838,"HL Road Frame - Black, 44",Components,Road Frames,1431.5,858.9
+722,"LL Road Frame - Black, 58",Components,Road Frames,337.22,202.33
+935,"LL Mountain Pedal",Components,Pedals,40.49,24.29
+937,"HL Mountain Pedal",Components,Pedals,80.99,48.59
+712,"AWC Logo Cap",Clothing,Caps,8.99,4.05
+714,"Long-Sleeve Logo Jersey, M",Clothing,Jerseys,49.99,22.5
+715,"Long-Sleeve Logo Jersey, L",Clothing,Jerseys,49.99,22.5
+881,"Short-Sleeve Classic Jersey, S",Clothing,Jerseys,53.99,24.3
+867,"Women's Mountain Shorts, S",Clothing,Shorts,69.99,31.5
+864,"Classic Vest, S",Clothing,Vests,63.5,28.58
+876,"Hitch Rack - 4-Bike",Accessories,Bike Racks,120,60
+880,"Hydration Pack - 70 oz.",Accessories,Hydration Packs,54.99,27.5
+707,"Sport-100 Helmet, Red",Accessories,Helmets,34.99,17.5
+711,"Sport-100 Helmet, Blue",Accessories,Helmets,34.99,17.5
