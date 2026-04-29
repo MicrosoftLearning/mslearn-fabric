@@ -1,0 +1,86 @@
+-- ================================================
+-- 30-prepare-data-ai: Snippets
+-- ================================================
+-- Use these snippets when copy/paste is limited
+-- in hosted VM lab environments.
+-- ================================================
+
+
+-- ================================================
+-- AI instructions
+-- ================================================
+
+This model contains retail sales data for an outdoor recreation products company.
+
+Key business terminology:
+- "Revenue" and "sales" refer to the Total Sales measure.
+- Products are organized by Category and Subcategory.
+
+Analysis guidance:
+- When users ask about "top products," rank by Total Sales descending.
+- When users ask about profitability, use the Profit Margin measure (percentage), not the Profit measure (absolute amount).
+- Customers are identified by CustomerName, not CustomerKey.
+
+Data scope: This model covers retail sales from January 2024 through December 2025.
+
+
+-- ================================================
+-- Verified answer trigger phrases: Total Sales card
+-- ================================================
+
+What were total sales?
+Show me total revenue
+How much did we sell?
+
+
+-- ================================================
+-- Verified answer trigger phrases: Sales by Category
+-- ================================================
+
+Show me sales by category
+Which product categories have the most sales?
+Break down revenue by product category
+
+
+-- ================================================
+-- Copilot test questions
+-- ================================================
+
+What were total sales?
+Show me sales by category
+Show me the top products by profitability
+Which city had the highest sales?
+
+
+-- ================================================
+-- Synonyms: Total Sales
+-- ================================================
+
+revenue
+income
+total revenue
+
+
+-- ================================================
+-- Synonyms: Profit Margin
+-- ================================================
+
+margin
+profitability
+profit percentage
+
+
+-- ================================================
+-- Synonyms: CustomerName
+-- ================================================
+
+customer
+buyer
+client
+
+
+-- ================================================
+-- Synonyms: Category
+-- ================================================
+
+product category
