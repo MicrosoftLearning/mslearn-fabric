@@ -1,5 +1,5 @@
 -- ================================================
--- 30-prepare-data-ai: Snippets
+-- 30-prepare-model-ai: Snippets
 -- ================================================
 -- Use these snippets when copy/paste is limited
 -- in hosted VM lab environments.

@@ -17,7 +17,7 @@ lab:
         - DP-600
 ---
 
-# Prepare the semantic layer for AI
+# Prepare a semantic model for AI
 
 Copilot in Power BI relies on semantic model metadata to generate accurate responses. Without preparation, Copilot might misinterpret business terminology, use the wrong measures, or return inconsistent answers. Preparing the semantic layer ensures that Copilot understands your data the way your business users do.
 
@@ -44,11 +44,11 @@ You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=5
 
 1. Name the new workspace, such as **dp_fabric**, select a licensing mode that includes Fabric capacity (paid F2 or higher), and select **Apply**.
 
-1. Open a web browser and enter the following URL to download the [30-prepare-data-ai zip folder](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-prepare-data-ai.zip):
+1. Open a web browser and enter the following URL to download the [30-prepare-model-ai zip folder](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-prepare-model-ai.zip):
 
-    `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-prepare-data-ai.zip`
+    `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-prepare-model-ai.zip`
 
-1. Save the file in **Downloads** and extract the zip file to the **30-prepare-data-ai** folder.
+1. Save the file in **Downloads** and extract the zip file to the **30-prepare-model-ai** folder.
 
 1. Open the **30-Starter-Sales Analysis.pbix** file from the folder you extracted.
 
