@@ -19,11 +19,9 @@ Microsoft Fabric API for GraphQL is a data access layer that enables quick and e
 
 This lab will take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
-
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **New workspace**.

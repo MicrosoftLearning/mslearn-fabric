@@ -32,6 +32,8 @@ In this lab you learn how to:
 
 ## Get started
 
+> **Note**: You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise.
+
 To complete this exercise, first open a web browser and enter the following URL to download the zip folder:
 
 `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/14/14-create-dax.zip`
@@ -40,7 +42,7 @@ Extract the folder to the **C:\Users\Student\Downloads\14-create-dax** folder.
 
 Open the **14-Starter-Sales Analysis.pbix** file.
 
-> ***Note**: You can dismiss the sign-in by selecting **Cancel**. Close any other informational windows. Select **Apply Later**, if prompted to apply changes.*
+> ***Note**: You can dismiss the sign-in by selecting **Cancel**. Close any other informational windows. Select **Apply Later**, if prompted to apply changes.
 
 ## Create the Salesperson calculated table
 

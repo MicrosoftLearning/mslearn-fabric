@@ -24,6 +24,8 @@ This lab takes approximately **30** minutes to complete.
 
 ## Before you start
 
+> **Note**: You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise.
+
 1. Download the [Sales Analysis starter file](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/15-scalable-semantic-models.zip) from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/15/15-scalable-semantic-models.zip` and save it locally.
 
 2. Extract the folder to the **C:\Users\Student\Downloads\15-scalable-semantic-models** folder.

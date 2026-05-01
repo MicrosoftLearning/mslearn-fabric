@@ -33,7 +33,7 @@ By completing this lab, you will:
 
 ## Before you start
 
-You need a [Microsoft Fabric Capacity (F2 or higher)](https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric) with Copilot enabled to complete this exercise.
+> **Note**: You need a paid Fabric capacity to complete this exercise. A Fabric trial doesn't support Copilot capabilities. For information about Fabric licenses, see [Microsoft Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
 
 ## Exercise scenario
 
@@ -41,15 +41,11 @@ In this exercise, we will create a sales data warehouse, load some data into it 
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with Fabric enabled. A workspace in Microsoft Fabric serves as a collaborative environment where you can organize and manage all your data engineering artifacts including lakehouses, notebooks, and datasets. Think of it as a project folder that contains all the resources needed for your data analysis.
-
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*). Note that *Trial* is not supported.
-   
-    > **Why this matters**: Copilot requires a paid Fabric capacity to function. This ensures you have access to the AI-powered features that will help generate code throughout this lab.
+1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Premium*, or *Fabric*).
 
 1. When your new workspace opens, it should be empty.
 

@@ -36,7 +36,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Set up the environment
 
-You need a paid Fabric capacity (F2 or higher) to complete this exercise because Copilot isn't supported on trial capacities. For more information, see [Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
+> **Note**: You need a paid Fabric capacity to complete this exercise. A Fabric trial doesn't support Copilot capabilities. For information about Fabric licenses, see [Microsoft Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
 
 You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements may vary slightly depending on your version.*
 

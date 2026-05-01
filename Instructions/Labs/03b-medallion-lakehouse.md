@@ -21,12 +21,9 @@ In this exercise you will build out a medallion architecture in a Fabric lakehou
 
 This exercise should take approximately **45** minutes to complete
 
-> [!Note] 
-> You need access to a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
-
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric-developer) at `https://app.fabric.microsoft.com/home?experience=fabric-developer` in a browser and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
@@ -597,7 +594,7 @@ You now have a curated, modeled **gold** layer that can be used for reporting an
 
 You can now use the gold layer to create a report and analyze the data. First, you must create a semantic model to define relationships and measures for reporting.
 
-> **Note**: In order to complete this task, you need a Power BI license _in addition to_ the Fabric trial or Fabric F64 SKU to create Power BI items.
+> **Note**: To complete this optional task, your paid capacity must include Power BI capabilities, or you need a separate Power BI Pro or Premium Per User license.
 
 1. In your workspace, navigate to your **Sales** lakehouse.
 1. Select **New semantic model** from the ribbon of the Explorer view.

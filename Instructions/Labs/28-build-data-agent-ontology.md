@@ -24,7 +24,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Before you start
 
-You need a Microsoft Fabric Capacity (F2 or higher) to complete this exercise. 
+> **Note**: You need a paid Fabric capacity to complete this exercise. A Fabric trial doesn't support Copilot capabilities. For information about Fabric licenses, see [Microsoft Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).
 
 You also need the following [tenant settings](https://learn.microsoft.com/fabric/data-science/data-agent-tenant-settings) enabled by your Fabric Administrator:
 
@@ -33,8 +33,6 @@ You also need the following [tenant settings](https://learn.microsoft.com/fabric
 - **Data sent to Azure OpenAI can be stored outside your capacity's geographic region, compliance boundary, or national cloud instance** — required only if your Fabric capacity is outside the EU or US
 
 ## Create a workspace
-
-Before working with Fabric data agents, you need a workspace with a Fabric capacity.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) in a browser, and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
