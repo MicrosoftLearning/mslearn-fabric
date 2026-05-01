@@ -21,6 +21,32 @@ These interactive exercises give you practical experience with Fabric's core cap
   .tab-bar { margin-top: 16px; }
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.substring(1);
+  if (hash) {
+    var target = document.getElementById(hash);
+    if (target && target.closest('.panel-course')) {
+      document.getElementById('tab-course').checked = true;
+      target.open = true;
+      target.scrollIntoView();
+    } else if (target && target.closest('.panel-topic')) {
+      document.getElementById('tab-topic').checked = true;
+      target.open = true;
+      target.scrollIntoView();
+    }
+  }
+  document.querySelectorAll('details[id] summary').forEach(function(summary) {
+    summary.addEventListener('click', function() {
+      var details = summary.parentElement;
+      if (!details.open) {
+        history.replaceState(null, '', '#' + details.id);
+      }
+    });
+  });
+});
+</script>
+
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions/Labs'" %}
 {% assign defined_categories = site.data.lab-metadata.categories %}
 {% assign defined_courses = site.data.lab-metadata.courses %}
@@ -59,7 +85,7 @@ These interactive exercises give you practical experience with Fabric's core cap
 {% assign count = 0 %}
 {% for activity in labs %}{% if activity.lab.courses contains course.id %}{% assign count = count | plus: 1 %}{% endif %}{% endfor %}
 {% if count > 0 %}
-<details>
+<details id="{{ course.id }}">
 <summary><strong>{{ course.id }}: {{ course.name }}</strong> ({{ count }} exercises)</summary>
 
 {% if course.order %}
