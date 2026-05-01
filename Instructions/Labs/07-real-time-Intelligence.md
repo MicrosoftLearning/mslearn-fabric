@@ -27,7 +27,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Create a workspace
 
-Before working with data in Fabric, you need to create a workspace with the Fabric capacity enabled.
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 
 > **Note**: You need a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 

@@ -14,13 +14,13 @@ lab:
 
 In this exercise, you'll create reusable assets to support semantic model and report development. These assets include Power BI Project and Template files.
 
-   > Note: this exercise doesn't require a Fabric license and can be completed in a Power BI, or Microsoft Fabric environment with a Power BI license.
-
 This exercise should take approximately **30** minutes to complete.
 
 ## Before you start
 
-Before you can start this exercise, you need to open a web browser and enter the following URL to download the zip folder:
+> **Note**: You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise.
+
+Open a web browser and enter the following URL to download the zip folder:
 
 `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/16b/16-reusable-assets.zip`
 

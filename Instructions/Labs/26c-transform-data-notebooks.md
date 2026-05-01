@@ -26,7 +26,7 @@ This exercise takes approximately **30** minutes to complete.
 
 ## Set up the environment
 
-You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 
 ### Create a workspace
 

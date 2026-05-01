@@ -26,19 +26,16 @@ This lab takes approximately **30** minutes to complete.
 
 > **Tip:** For related training content, see [Design dimensional models for analytics in Microsoft Fabric](https://learn.microsoft.com/training/modules/design-dimensional-models-fabric/).
 
-> **Note**: You need access to a Fabric-enabled workspace. If you don't have one, create a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
-
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
-
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 
-1. Choose a **Fabric and Power BI workspace type** in the _Advanced_ section. The choices might be: _Fabric, Fabric trial, Power BI Premium_.
+3. Choose a **Fabric and Power BI workspace type** in the _Advanced_ section. The choices might be: _Fabric, Fabric trial, Power BI Premium_.
 
-1. When your new workspace opens, it should be empty.
+4. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 

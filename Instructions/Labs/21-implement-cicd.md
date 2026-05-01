@@ -24,7 +24,7 @@ This lab takes approximately **20** minutes to complete.
 
 ## Create workspaces
 
-Create three workspaces with the Fabric trial enabled.
+> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial).
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser and sign in with your Fabric credentials.
 2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
