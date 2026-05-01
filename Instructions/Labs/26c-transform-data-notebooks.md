@@ -22,6 +22,8 @@ In this exercise, you work with sales, customer, and product data for a retail a
 
 This exercise takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Transform data using notebooks in Microsoft Fabric](https://learn.microsoft.com/training/modules/fabric-transform-data-notebooks/).
+
 ## Set up the environment
 
 You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).

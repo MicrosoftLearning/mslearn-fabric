@@ -25,6 +25,8 @@ In this lab, you'll load sample data for a fictitious healthcare company into a 
 
 This lab takes approximately **45** minutes to complete.
 
+> **Tip:** For related training content, see [Create an ontology in Microsoft Fabric](https://learn.microsoft.com/training/modules/create-ontology-with-fabric-iq/).
+
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise. You'll also need to enable the following [tenant settings](https://learn.microsoft.com/fabric/iq/ontology/overview-tenant-settings): **Enable Ontology item (preview)** and **User can create Graph (preview)**.
 
 ## Create a workspace

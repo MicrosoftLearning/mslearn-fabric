@@ -32,6 +32,8 @@ You learn how to:
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Prepare the semantic layer for AI in Microsoft Fabric](https://learn.microsoft.com/training/modules/fabric-prepare-semantic-layer/).
+
 ## Set up the environment
 
 You need a paid Fabric capacity (F2 or higher) to complete this exercise because Copilot isn't supported on trial capacities. For more information, see [Fabric licenses](https://learn.microsoft.com/fabric/enterprise/licenses).

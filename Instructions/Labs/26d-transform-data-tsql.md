@@ -24,6 +24,8 @@ In this exercise, you work with staging sales, customer, and product data in a F
 
 This exercise takes approximately **45** minutes to complete.
 
+> **Tip:** For related training content, see [Transform data using T-SQL in Microsoft Fabric](https://learn.microsoft.com/training/modules/fabric-transform-data-tsql/).
+
 > **Note**: This exercise includes optional prompts to explore Copilot capabilities.
 
 ## Set up the environment

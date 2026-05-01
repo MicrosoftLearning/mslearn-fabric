@@ -25,6 +25,8 @@ In this exercise, you create a sample environment with a lakehouse containing sa
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Discover and connect to data in OneLake](https://learn.microsoft.com/training/modules/discover-data-onelake/).
+
 > **Note**: You need access to a Fabric-enabled workspace. If you don't have one, create a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace

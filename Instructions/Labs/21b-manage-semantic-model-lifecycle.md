@@ -25,6 +25,8 @@ In this exercise, you create a lakehouse with sample data, then use SemPy in a F
 
 This lab takes approximately **45** minutes to complete.
 
+> **Tip:** For related training content, see [Manage the semantic model development lifecycle](https://learn.microsoft.com/training/modules/manage-semantic-model-lifecycle/).
+
 ## Set up the environment
 
 You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).

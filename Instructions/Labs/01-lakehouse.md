@@ -24,6 +24,8 @@ In Microsoft Fabric, a lakehouse provides highly scalable file storage in a *One
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Get started with lakehouses in Microsoft Fabric](https://learn.microsoft.com/training/modules/get-started-lakehouses/).
+
 > **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace

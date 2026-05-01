@@ -22,6 +22,8 @@ In this exercise, you create a Dataflow Gen2 to connect to sample sales data, ap
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Transform using dataflows in Microsoft Fabric](https://learn.microsoft.com/training/modules/fabric-transform-data-dataflows/).
+
 ## Set up your environment
 
 You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).
