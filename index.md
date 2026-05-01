@@ -62,9 +62,18 @@ These interactive exercises give you practical experience with Fabric's core cap
 <details>
 <summary><strong>{{ course.id }}: {{ course.name }}</strong> ({{ count }} exercises)</summary>
 
+{% if course.order %}
+{% for filename in course.order %}
+{% assign activity = labs | where_exp:"page", "page.path contains filename" | first %}
+{% if activity %}
+<p><a href="{{ site.github.url }}{{ activity.url }}">{{ activity.lab.title }}</a> ({{ activity.lab.duration }})<br>{{ activity.lab.description }}</p>
+{% endif %}
+{% endfor %}
+{% else %}
 {% for activity in labs %}{% if activity.lab.courses contains course.id %}
 <p><a href="{{ site.github.url }}{{ activity.url }}">{{ activity.lab.title }}</a> ({{ activity.lab.duration }})<br>{{ activity.lab.description }}</p>
 {% endif %}{% endfor %}
+{% endif %}
 
 </details>
 {% endif %}

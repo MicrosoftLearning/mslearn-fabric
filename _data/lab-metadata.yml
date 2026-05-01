@@ -20,6 +20,24 @@ courses:
     name: Implement data engineering solutions using Microsoft Fabric
   - id: DP-600
     name: Implement analytics solutions using Microsoft Fabric
+    order:
+      - 25-discover-onelake.md
+      - 01-lakehouse.md
+      - 06-data-warehouse.md
+      - 07-real-time-Intelligence.md
+      - 26-design-dimensional-models.md
+      - 26b-transform-data-dataflows.md
+      - 26c-transform-data-notebooks.md
+      - 26d-transform-data-tsql.md
+      - 14-create-dax-calculations.md
+      - 15-design-semantic-model-scale.md
+      - 16-optimize-semantic-model-performance.md
+      - 17-enforce-model-security.md
+      - 21b-manage-semantic-model-lifecycle.md
+      - 30-prepare-model-ai.md
+      - 24-build-ontology-semantic-model.md
+      - 19-secure-data-access.md
+      - 19b-govern-analytics-data.md
   - id: DP-601
     name: Implement a Lakehouse with Microsoft Fabric
   - id: DP-602
