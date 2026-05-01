@@ -30,10 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('tab-course').checked = true;
       target.open = true;
       target.scrollIntoView();
+      var title = target.querySelector('summary strong');
+      if (title) document.title = title.textContent;
     } else if (target && target.closest('.panel-topic')) {
       document.getElementById('tab-topic').checked = true;
       target.open = true;
       target.scrollIntoView();
+      var title = target.querySelector('summary strong');
+      if (title) document.title = title.textContent;
     }
   }
   document.querySelectorAll('details[id] summary').forEach(function(summary) {
@@ -64,9 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
 {% for activity in labs %}{% if activity.lab.categories contains cat %}{% assign count = count | plus: 1 %}{% endif %}{% endfor %}
 {% if count > 0 %}
 {% if forloop.first %}
-<details open>
+{% assign cat_id = cat | slugify %}
+<details open id="{{ cat_id }}">
 {% else %}
-<details>
+{% assign cat_id = cat | slugify %}
+<details id="{{ cat_id }}">
 {% endif %}
 <summary><strong>{{ cat }}</strong> ({{ count }} exercises)</summary>
 
