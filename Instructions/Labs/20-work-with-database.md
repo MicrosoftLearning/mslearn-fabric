@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Fabric SQL database
+    - Get started with Fabric
+  courses:
 ---
 
 # Work with SQL Database in Microsoft Fabric

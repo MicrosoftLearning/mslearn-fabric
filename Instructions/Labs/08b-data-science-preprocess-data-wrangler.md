@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data science
+  courses:
+    - DP-604
 ---
 
 # Preprocess data with Data Wrangler in Microsoft Fabric

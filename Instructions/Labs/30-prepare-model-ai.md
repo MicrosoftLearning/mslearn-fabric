@@ -12,7 +12,7 @@ lab:
         - Copilot
         - Prep for AI
     categories:
-        - Semantic modeling
+        - Semantic models
     courses:
         - DP-600
 ---

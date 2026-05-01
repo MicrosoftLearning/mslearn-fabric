@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Operations and lifecycle management
+  courses:
+    - DP-700
 ---
 
 # Implement deployment pipelines in Microsoft Fabric

@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data science
+  courses:
+    - DP-604
 ---
 
 # Train and track machine learning models with MLflow in Microsoft Fabric

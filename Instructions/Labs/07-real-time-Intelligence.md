@@ -8,6 +8,13 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Real-Time Intelligence
+    - Get started with Fabric
+  courses:
+    - DP-700
+    - DP-600
+    - DP-603
 ---
 
 # Get started with Real-Time Intelligence in Microsoft Fabric

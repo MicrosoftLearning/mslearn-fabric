@@ -8,6 +8,9 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Fabric IQ
+  courses:
 ---
 
 # Build a Fabric data agent with an ontology

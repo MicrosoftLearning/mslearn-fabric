@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Copilot in Fabric
+    - Data engineering
+  courses:
+    - DP-3029
 ---
 
 # Analyze data with Apache Spark and Copilot in Microsoft Fabric notebooks

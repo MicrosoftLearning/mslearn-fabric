@@ -11,6 +11,10 @@ lab:
         - Power BI
         - Semantic Link
         - Deployment pipelines
+    categories:
+        - Operations and lifecycle management
+    courses:
+        - DP-600
 ---
 
 # Manage the semantic model lifecycle

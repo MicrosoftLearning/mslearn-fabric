@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Get started with Fabric
+    - Fabric IQ
+  courses:
 ---
 
 # Create an ontology with Fabric IQ

@@ -8,6 +8,9 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Fabric IQ
+  courses:
 ---
 
 # Visualize ontology data with Microsoft Fabric IQ

@@ -11,7 +11,7 @@ lab:
         - T-SQL
         - Data warehouse
     categories:
-        - Ingestion and transformation
+        - Data warehouse
     courses:
         - DP-600
 ---

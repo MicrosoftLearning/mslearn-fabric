@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Semantic models
+  courses:
+    - DP-600
 ---
 
 # Design and implement a dimensional model

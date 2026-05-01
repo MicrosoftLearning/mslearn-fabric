@@ -1,0 +1,32 @@
+# Valid categories and courses for lab exercises.
+# The landing page (index.md) reads from this file via site.data.lab-metadata.
+# Lab files reference these values in their frontmatter categories/courses fields.
+
+categories:
+  - Get started with Fabric
+  - Fabric IQ
+  - Data engineering
+  - Data warehouse
+  - Real-Time Intelligence
+  - Data science
+  - Semantic models
+  - Fabric SQL database
+  - Security and governance
+  - Operations and lifecycle management
+  - Copilot in Fabric
+
+courses:
+  - id: DP-700
+    name: Implement data engineering solutions using Microsoft Fabric
+  - id: DP-600
+    name: Implement analytics solutions using Microsoft Fabric
+  - id: DP-601
+    name: Implement a Lakehouse with Microsoft Fabric
+  - id: DP-602
+    name: Implement a data warehouse with Microsoft Fabric
+  - id: DP-603
+    name: Implement Real-Time Intelligence with Microsoft Fabric
+  - id: DP-604
+    name: Implement a data science and machine learning solution for AI with Microsoft Fabric
+  - id: DP-3029
+    name: Work smarter with Copilot in Microsoft Fabric

@@ -11,6 +11,10 @@ lab:
         - Semantic models
         - DAX optimization
         - Performance analyzer
+    categories:
+        - Semantic models
+    courses:
+        - DP-600
 ---
 
 # Optimize semantic model performance

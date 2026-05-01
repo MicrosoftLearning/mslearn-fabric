@@ -10,6 +10,10 @@ lab:
         - Microsoft Fabric
         - Data governance
         - OneLake catalog
+    categories:
+        - Security and governance
+    courses:
+        - DP-600
 ---
 
 # Govern analytics data in Microsoft Fabric

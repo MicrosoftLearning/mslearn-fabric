@@ -6,6 +6,12 @@ lab:
   duration: 45 minutes
   level: 300
   islab: true
+  categories:
+    - Data warehouse
+    - Security and governance
+  courses:
+    - DP-700
+    - DP-602
 ---
 
 # Secure data in a data warehouse

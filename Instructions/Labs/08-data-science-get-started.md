@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data science
+    - Get started with Fabric
+  courses:
+    - DP-604
 ---
 
 # Get started with data science in Microsoft Fabric

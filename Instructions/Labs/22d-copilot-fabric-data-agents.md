@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Copilot in Fabric
+  courses:
+    - DP-3029
 ---
 
 # Chat with your data using Microsoft Fabric data agents

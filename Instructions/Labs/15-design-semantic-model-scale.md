@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Semantic models
+    - Get started with Fabric
+  courses:
+    - DP-600
 ---
 
 # Design a semantic model for scale

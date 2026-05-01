@@ -8,6 +8,12 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Get started with Fabric
+  courses:
+    - DP-600
+    - DP-700
+    - DP-601
 ---
 
 # Create a Microsoft Fabric Lakehouse

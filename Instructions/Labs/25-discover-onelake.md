@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Get started with Fabric
+    - Data engineering
+  courses:
+    - DP-600
 ---
 
 # Discover and connect to data in OneLake

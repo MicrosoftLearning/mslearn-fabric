@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data engineering
+  courses:
+    - DP-700
+    - DP-601
 ---
 
 # Create a medallion architecture in a Microsoft Fabric lakehouse
