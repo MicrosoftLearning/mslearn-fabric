@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Real-Time Intelligence
+  courses:
+    - DP-700
+    - DP-603
 ---
 
 # Ingest real-time data with Eventstream in Microsoft Fabric

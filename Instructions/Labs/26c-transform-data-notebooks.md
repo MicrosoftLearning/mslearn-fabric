@@ -8,6 +8,10 @@ lab:
     islab: true
     primarytopics:
         - Microsoft Fabric
+    categories:
+        - Data engineering
+    courses:
+        - DP-600
 ---
 
 # Transform data with notebooks in Microsoft Fabric

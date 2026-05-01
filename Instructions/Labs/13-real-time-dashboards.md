@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Real-Time Intelligence
+  courses:
+    - DP-603
 ---
 
 # Get started with Real-Time Dashboards in Microsoft Fabric

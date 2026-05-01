@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Real-Time Intelligence
+  courses:
+    - DP-603
 ---
 
 # Work with data in a Microsoft Fabric eventhouse

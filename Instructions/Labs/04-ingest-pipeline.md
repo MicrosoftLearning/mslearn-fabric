@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Operations and lifecycle management
+  courses:
+    - DP-700
+    - DP-601
 ---
 
 # Ingest data with a pipeline in Microsoft Fabric

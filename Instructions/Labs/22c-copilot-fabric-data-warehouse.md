@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Copilot in Fabric
+    - Data warehouse
+  courses:
+    - DP-3029
 ---
 
 # Use Copilot in Microsoft Fabric data warehouse

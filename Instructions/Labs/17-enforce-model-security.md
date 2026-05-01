@@ -9,6 +9,11 @@ lab:
   primarytopics:
     - Power BI
     - Row-level security
+  categories:
+    - Semantic models
+    - Security and governance
+  courses:
+    - DP-600
 ---
 
 # Enforce semantic model security

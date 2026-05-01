@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Fabric IQ
+  courses:
+    - DP-600
 ---
 
 # Build an ontology from a semantic model in Fabric IQ

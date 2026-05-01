@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data warehouse
+  courses:
+    - DP-700
+    - DP-602
 ---
 
 # Query a data warehouse in Microsoft Fabric

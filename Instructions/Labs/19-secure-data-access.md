@@ -8,6 +8,11 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Security and governance
+  courses:
+    - DP-700
+    - DP-600
 ---
 
 # Secure data access in Microsoft Fabric

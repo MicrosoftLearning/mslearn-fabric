@@ -8,6 +8,12 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data warehouse
+    - Operations and lifecycle management
+  courses:
+    - DP-700
+    - DP-602
 ---
 
 # Monitor a data warehouse in Microsoft Fabric

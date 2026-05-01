@@ -8,6 +8,9 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Fabric SQL database
+  courses:
 ---
 
 # Work with API for GraphQL in Microsoft Fabric

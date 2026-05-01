@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data science
+  courses:
+    - DP-604
 ---
 
 # Explore data for data science with notebooks in Microsoft Fabric

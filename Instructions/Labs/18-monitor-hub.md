@@ -8,6 +8,9 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Operations and lifecycle management
+  courses:
 ---
 
 # Monitor Fabric activity in the monitoring hub

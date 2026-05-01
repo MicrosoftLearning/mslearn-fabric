@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data science
+  courses:
+    - DP-604
 ---
 
 # Generate batch predictions using a deployed model in Microsoft Fabric

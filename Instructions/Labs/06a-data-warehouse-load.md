@@ -8,6 +8,12 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data warehouse
+    - Data engineering
+  courses:
+    - DP-700
+    - DP-602
 ---
 
 # Load data into a warehouse using T-SQL

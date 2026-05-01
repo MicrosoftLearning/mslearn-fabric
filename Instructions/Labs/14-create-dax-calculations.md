@@ -8,6 +8,10 @@ lab:
   islab: true
   primarytopics:
     - Power BI
+  categories:
+    - Semantic models
+  courses:
+    - DP-600
 ---
 
 # Create DAX calculations in semantic models

@@ -8,6 +8,12 @@ lab:
   islab: true
   primarytopics:
     - Microsoft Fabric
+  categories:
+    - Data warehouse
+    - Get started with Fabric
+  courses:
+    - DP-700
+    - DP-602
 ---
 
 # Analyze data in a data warehouse
