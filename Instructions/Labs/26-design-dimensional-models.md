@@ -24,6 +24,8 @@ You also implement slowly changing dimension (SCD) patterns to handle data that 
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Design dimensional models for analytics in Microsoft Fabric](https://learn.microsoft.com/training/modules/design-dimensional-models-fabric/).
+
 > **Note**: You need access to a Fabric-enabled workspace. If you don't have one, create a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 ## Create a workspace

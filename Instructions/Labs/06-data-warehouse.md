@@ -13,6 +13,7 @@ lab:
     - Get started with Fabric
   courses:
     - DP-700
+    - DP-600
     - DP-602
 ---
 
@@ -22,16 +23,18 @@ In Microsoft Fabric, a data warehouse provides a relational database for large-s
 
 This lab will take approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> **Tip:** For related training content, see [Get started with data warehouses in Microsoft Fabric](https://learn.microsoft.com/training/modules/get-started-data-warehouse/).
 
 ## Create a workspace
 
-Before working with data in Fabric, create a workspace with the Fabric trial enabled.
+Create a workspace to store your data warehouse.
+
+> **Note**: You need a [Microsoft Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
+2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+4. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 

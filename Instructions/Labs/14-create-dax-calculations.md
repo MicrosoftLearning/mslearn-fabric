@@ -28,6 +28,8 @@ In this lab you learn how to:
 
 **This lab should take approximately 45 minutes.**
 
+> **Tip:** For related training content, see [Create DAX calculations in semantic models](https://learn.microsoft.com/training/modules/dax-power-bi-create-calculations/).
+
 ## Get started
 
 To complete this exercise, first open a web browser and enter the following URL to download the zip folder:

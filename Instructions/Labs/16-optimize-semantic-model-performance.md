@@ -29,6 +29,8 @@ In this exercise, you open a Power BI Desktop report built on AdventureWorks sal
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Optimize semantic model performance](https://learn.microsoft.com/training/modules/optimize-semantic-model-performance/).
+
 ## Before you start
 
 You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements may vary slightly depending on your version.*

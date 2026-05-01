@@ -26,6 +26,8 @@ In this exercise, you design a semantic model for scale in the Microsoft Fabric 
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Design semantic models for scale in Microsoft Fabric](https://learn.microsoft.com/training/modules/design-semantic-models-scale/).
+
 ## Set up the environment
 
 You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).

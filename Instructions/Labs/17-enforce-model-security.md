@@ -29,6 +29,8 @@ In this exercise, you learn how to:
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Enforce semantic model security](https://learn.microsoft.com/training/modules/enforce-semantic-model-security/).
+
 ## Set up the environment
 
 You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements might vary slightly depending on your version.*

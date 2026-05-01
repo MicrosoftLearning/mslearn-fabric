@@ -23,16 +23,18 @@ Microsoft Fabric provides Real-Time Intelligence, enabling you to create analyti
 
 This lab takes approximately **30** minutes to complete.
 
-> **Note**: You need a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+> **Tip:** For related training content, see [Get started with Real-Time Intelligence in Microsoft Fabric](https://learn.microsoft.com/training/modules/get-started-kusto-fabric/).
 
 ## Create a workspace
 
 Before working with data in Fabric, you need to create a workspace with the Fabric capacity enabled.
 
+> **Note**: You need a [Microsoft Fabric tenant](https://learn.microsoft.com/fabric/get-started/fabric-trial) to complete this exercise.
+
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
-1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
-1. When your new workspace opens, it should be empty.
+2. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
+3. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Trial*, *Premium*, or *Fabric*).
+4. When your new workspace opens, it should be empty.
 
     ![Screenshot of an empty workspace in Fabric.](./Images/new-workspace.png)
 

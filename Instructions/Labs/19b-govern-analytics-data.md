@@ -26,6 +26,8 @@ In this exercise, you create a lakehouse and semantic model, then apply governan
 
 This lab takes approximately **30** minutes to complete.
 
+> **Tip:** For related training content, see [Govern analytics data in Microsoft Fabric](https://learn.microsoft.com/training/modules/fabric-govern-analytics-data/).
+
 ## Set up the environment
 
 You need a Fabric-enabled workspace to complete this exercise. For more information about a Fabric trial, see [Getting started with Fabric](https://learn.microsoft.com/fabric/get-started/fabric-trial).
