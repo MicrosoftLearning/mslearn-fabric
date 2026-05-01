@@ -2,467 +2,222 @@
 lab:
   title: Enforce semantic model security
   module: Enforce semantic model security
-  description: You'll learn how to implement row-level security in Power BI semantic models by creating both static and dynamic roles that restrict data access based on sales regions. You'll use DAX expressions to create dynamic roles that automatically filter data based on authenticated users, and then map security principals to roles to ensure users only see the data they're authorized to access.
-  duration: 45 minutes
+  description: Import a security mapping table, configure relationship filter propagation, and implement static and dynamic row-level security in a Power BI semantic model.
+  duration: 30 minutes
   level: 300
   islab: true
   primarytopics:
     - Power BI
+    - Row-level security
 ---
 
 # Enforce semantic model security
 
-In this exercise, you will update a pre-developed data model to enforce security. Specifically, salespeople at the Adventure Works company should only be able to see sales data related to their assigned sales region.
+In this exercise, you implement row-level security (RLS) on a Power BI semantic model. You start by reviewing the model and creating static roles, then import a salesperson mapping table and configure a dynamic role that filters data based on user identity.
 
 In this exercise, you learn how to:
 
-- Create static roles.
-- Create dynamic roles.
-- Validate roles.
-- Map security principals to semantic model roles.
+- Import and prepare a security mapping table using Power Query.
+- Configure a bi-directional relationship with security filter propagation.
+- Create static and dynamic roles using DAX.
+- Validate role behavior by testing with different user identities.
 
-This lab takes approximately **45** minutes to complete.
+This lab takes approximately **30** minutes to complete.
 
-> **Note**: You need access to a Power BI environment to complete this exercise.
+## Set up the environment
 
-## Before you start
+You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=58494) (November 2025 or newer) installed to complete this exercise. *Note: UI elements might vary slightly depending on your version.*
 
-Make sure you have the following installed in your environment:
+1. Open a web browser and enter the following URL to download the [17-enforce-security zip folder](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/17/17-enforce-security.zip):
 
-* Power BI Desktop
-* SQL Server
-* SQL Server Management Studio (SSMS)
-* [AdventureWorksDW2022](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/00-Setup/DatabaseBackup/AdventureWorksDW2022.bak) database backup restored through SSMS
+    `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/17/17-enforce-security.zip`
 
->**Note**: You can find more information on how to restore a database backup using SSMS [here](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/restore-a-database-backup-using-ssms?view=sql-server-ver16).
- 
-## Get started
+1. Save the file in **Downloads** and extract the zip file to the **17-enforce-security** folder.
 
-In this exercise, you will prepare your environment.
+1. Open **17-Starter-Sales Analysis.pbix** from the extracted folder.
 
-### Download the Power BI starter file
+    > **Note**: If a security warning asks you to apply changes, select **Ignore** or **Close**. Don't select **Discard changes**. If prompted about a data source connection, dismiss the warning — you won't need to refresh data in this lab.
 
-1. Download the [Sales Analysis starter file](https://aka.ms/fabric-security-starter) from `https://aka.ms/fabric-security-starter` and save it on your local computer (in any folder).
+## Review the data model
 
-1. Navigate to the downloaded file and open it in Power BI Desktop.
-
-1. When prompted, sign in with a work or school account.
-
-### Sign in to the Power BI service
-
-In this task, you will sign in to the Power BI service, start a trial license, and access "My workspace."
-
-1. In a web browser, go to `https://app.powerbi.com/`.
-
-2. Complete the sign in process with the same account used in Power BI Desktop.
-
-    *Important: You must use the same credentials used to sign in from Power BI Desktop.*
-
-    *Tip: The Power BI web browser experience is known as the **Power BI service**.*
-
-## Create static roles
-
-In this exercise, you will create and validate static roles, and then see how you would map security principals to the semantic model roles.
-
-### Review the data model
-
-In this task, you will review the data model.
+In this task, you review the semantic model structure to understand how the tables relate and where security filters must be applied.
 
 1. In Power BI Desktop, at the left, switch to **Model** view.
 
-    ![](Images/enforce-model-security-image8.png)
+    ![Screenshot of the Model view icon selected in the Power BI Desktop navigation pane.](Images/model-view-pbid.png)
 
-2. Use the model diagram to review the model design.
+1. Review the model diagram to see the table relationships.
 
-    ![](Images/enforce-model-security-image9.png)
+   > The model comprises six dimension tables and one fact table in a star schema. The `Sales` fact table stores sales order details.
 
-    *The model comprises six dimension tables and one fact table. The **Sales** fact table stores sales order details. It's a classic star schema design.*
+    ![Screenshot of the model diagram showing six dimension tables and one fact table in a star schema.](Images/enforce-model-security-image10.png)
 
-3. Expand open the **Sales Territory** table.
+1. Expand the `Sales Territory` table to view its columns.
 
-    ![](Images/enforce-model-security-image10.png)
+1. Locate the `Region` column in the table. The `Region` column stores the Adventure Works sales regions.
 
-4. Notice that the table includes a **Region** column.
+At this organization, salespeople are only allowed to see data related to their assigned sales region.
 
-    *The **Region** column stores the Adventure Works sales regions. At this organization, salespeople are only allowed to see data related to their assigned sales region. In this lab, you will implement two different row-level security techniques to enforce data permissions.*
+## Create static roles
 
-### Create static roles
+The simplest form of RLS is a static role, where a DAX filter hardcodes a field value. Static roles are useful for understanding the RLS mechanics before moving to a data-driven approach. In this section, you create two static roles—one per region—and validate that each one filters correctly.
 
-In this task, you will create two static roles.
+In this task, you define a static filter on the `Sales Territory` table for two regions.
 
 1. Switch to **Report** view.
 
-    ![](Images/enforce-model-security-image11.png)
+1. Notice the stacked column chart shows data for all regions. That changes once RLS is applied.
 
-2. In the stacked column chart visual, in the legend, notice (for now) that it's possible to see many regions.
+    ![Screenshot of a stacked column chart displaying sales data for multiple regions.](Images/enforce-model-security-image12.png)
 
-    ![](Images/enforce-model-security-image12.png)
+1. On the **Modeling** ribbon, in the **Security** group, select **Manage roles**.
 
-    *For now, the chart looks overly busy. That's because all regions are visible. When the solution enforces row-level security, the report consumer will see only one region.*
+    ![Screenshot of the Modeling ribbon with the Manage roles option in the Security group.](Images/enforce-model-security-image13.png)
 
-3. To add a security role, on the **Modeling** ribbon tab, from inside the **Security** group, select **Manage roles**.
+1. Select **+ New**, name the role `Australia`, and select the `Sales Territory` table.
 
-    ![](Images/enforce-model-security-image13.png)
+1. In the **Rules** section, select **+ New** and configure the filter:
 
-4. In the **Manage roles** window, select **+ New**.
+    - **Column** = `Region`
+    - **Condition** = Equals
+    - **Value** = `Australia`
 
-5. To name the role, replace the selected *Untitled* text with **Australia**, and then press **Enter**.
+    ![Screenshot of the Rules section showing the filter configuration for the Australia region.](Images/enforce-model-security-image16.png)
 
-6. In the **Select tables** list, select **Sales Territory**, and then in the **Rules** section, select **+ New**.
-  
-7. In the new rule row, set the following settings:
-	* **Column**: Region
- 	* **Condition**: Equals
-  	* **Value**: Australia
-
-    ![](Images/enforce-model-security-image16.png)
-
-    *This rule filters the **Region** column by the value **Australia**.*
-
-10. To create another role, press **+ New** in the **Roles** section.
-
-11. Repeat the steps in this task to create a role named **Canada** that filters the **Region** column by **Canada**.
-
-    ![](Images/enforce-model-security-image19.png)
-
-    *In this lab, you'll create just the two roles. Consider, however, that in a real-world solution, a role must be created for each of the 11 Adventure Works regions.*
-
-12. Select **Save**.
+1. Select **+ New** again in the **Roles** section to add a second role named `Canada`, applying the same filter for `Canada` and **Save**.
 
 ### Validate the static roles
 
-In this task, you will validate one of the static roles.
+In this task, you confirm that each role restricts the report to its assigned region.
 
-1. On the **Modeling** ribbon tab, from inside the **Security** group, select **View as**.
+1. On the **Modeling** ribbon, select **View as**, select the `Australia` role, and select **OK**.
 
-    ![](Images/enforce-model-security-image21.png)
+1. Verify the chart shows only Australia data, then select **Stop viewing**.
 
-2. In the **View as roles** window, select the **Australia** role.
+1. Repeat for the `Canada` role and confirm it shows only Canada data, then select **Stop viewing**.
 
-    ![](Images/enforce-model-security-image22.png)
+Static roles work, but they don't scale. Every new region requires a new role definition, and any change means updating and republishing the semantic model. For 11 Adventure Works regions, that's 11 roles to create and maintain—and the number grows with the business.
 
-3. Select **OK**.
+## Add the Salesperson table
 
-    ![](Images/enforce-model-security-image23.png)
+Dynamic RLS requires a mapping table that links each user identity to a sales territory. In this section, you import the `Salesperson` table from a CSV file, prepare it in Power Query, and configure the relationship so security filters propagate correctly.
 
-4. On the report page, notice that the stacked column chart visual shows only data for Australia.
+### Import the CSV
 
-    ![](Images/enforce-model-security-image24.png)
+In this task, you use Power Query to import `Salesperson` data from the CSV file included in the extracted zip folder.
 
-5. Across the top of the report, notice the red banner that confirms the enforced role.
+1. On the **Home** ribbon, select **Get data** > **Text/CSV**.
 
-    ![](Images/enforce-model-security-image25.png)
+1. Navigate to the extracted **17-enforce-security** folder and select **Salesperson.csv**, then select **Open**.
 
-6. To stop viewing by using the role, at the right of the red banner, select **Stop viewing**.
+1. In the preview window, verify you see three columns: `EmployeeKey`, `SalesTerritoryKey`, and `EmailAddress`.
 
-	![](Images/enforce-model-security-image26.png)
+1. Select **Transform Data** to open Power Query Editor.
 
-### Publish the report
+    > **Note**: Selecting **Transform Data** instead of **Load** lets you rename the column before loading it into the model.
 
-In this task, you will publish the report.
+### Rename the column
 
-1. Save the Power BI Desktop file. When asked to apply pending changes, select **Apply later**.
+In this task, you rename the `EmailAddress` column to `UPN` (User Principal Name) to clarify its purpose as the identity field for dynamic RLS.
 
-	![](Images/enforce-model-security-image27.png)
+1. In Power Query Editor, right-click the `EmailAddress` column header and select **Rename**.
 
-2. To publish the report, on the **Home** ribbon tab, select **Publish**.
+1. Replace the text with `UPN` and press **Enter**.
 
-    ![](Images/enforce-model-security-image28.png)
+    *UPN stands for User Principal Name. The values in this column match Microsoft Entra account names, which is what the USERPRINCIPALNAME() DAX function returns.*
 
-3. In the **Publish to Power BI** window, select **"My workspace"** and then **Select**.
+1. On the **Home** ribbon, select **Close & Apply** to load the table into the model.
 
-    ![](Images/enforce-model-security-image29.png)
+### Create and configure the relationship
 
-4. When the publishing succeeds, select **Got it**.
-
-    ![](Images/enforce-model-security-image30.png)
-
-#### Configure row-level security (optional)
-
-In this task, you will see how to configure row-level security in the Power BI service.
-
-> Note: This task relies on the existence of a **Salespeople_Australia** security group in the tenant you are working in. This security group does NOT automatically exist in the tenant. If you have permissions on your tenant, you can follow the steps below. If you are using a tenant provided to you in training, you will not have the appropriate permissions to create security groups. Please read through the tasks, but note that you will not be able to complete them in the absence of the existence of the security group. **After reading through, proceed to the Clean Up task.**
-
-1. Switch to the Power BI service (web browser).
-
-2. In the workspace landing page, notice the **Sales Analysis - Enforce model security** semantic model.
-
-    ![](Images/enforce-model-security-image31.png)
-
-3. Hover the cursor over the semantic model, and when the ellipsis appears, select the ellipsis, and then select **Security**.
-
-    ![](Images/enforce-model-security-image32.png)
-
-    *The **Security** option supports mapping Microsoft Entra security principals, which includes security groups and users.*
-
-4. At the left, notice the list of roles, and that **Australia** is selected.
-
-    ![](Images/enforce-model-security-image33.png)
-
-5. In the **Members** box, commence entering **Salespeople_Australia**.
-
-    *Steps 5 through 8 are for demonstration purposes only, as they rely on the creation or existence of a Salespeople_Australia security group. If you have permissions and the knowledge to create security groups, please feel free to proceed. Otherwise, continue to the Clean Up task.*
-
-    ![](Images/enforce-model-security-image34.png)
-
-6. Select **Add**.
-
-    ![](Images/enforce-model-security-image35.png)
-
-7. To complete the role mapping, select **Save**.
-
-    ![](Images/enforce-model-security-image36.png)
-
-    *Now all members of the **Salespeople_Australia** security group are mapped to the **Australia** role, which restricts data access to view only Australian sales.*
-
-    *In a real-world solution, each role should be mapped to a security group.*
-
-    *This design approach is simple and effective when security groups exist for each region. However, there are disadvantages: it requires more effort to create and set up. It also requires updating and republishing the semantic model when new regions are onboarded.*
-
-    *In the next exercise, you will create a dynamic role that is data-driven. This design approach can help address these disadvantages.*
-
-8. To return to the workspace landing page, in the **Navigation** pane, select your workspace.
-
-### Clean up the solution
-
-In this task, you will clean up the solution by removing the semantic model and the model roles.
-
-1. To remove the semantic model, hover the cursor over the semantic model, and when the ellipsis appears, select the ellipsis, and then select **Delete**.
-
-    ![](Images/enforce-model-security-image37.png)
-
-    *You will republish a revised semantic model in the next exercise.*
-
-2. When prompted to confirm the deletion, select **Delete**.
-
-    ![](Images/enforce-model-security-image38.png)
-
-3. Switch to Power BI Desktop.
-
-4. To remove the security roles, on the **Modeling** ribbon tab, from inside the **Security** group, select **Manage roles**.
-
-    ![](Images/enforce-model-security-image39.png)
-
-5. In the **Manage roles** window, to remove the first role, select the ellipsis next to it and then select **Delete**.
-
-    ![](Images/enforce-model-security-image40.png)
-
-6. Also remove the second role.
-
-7. Select **Save**.
-
-## Create a dynamic role
-
-In this exercise, you will add a table to the model, create and validate a dynamic role, and then map a security principal to the semantic model role.
-
-### Add the Salesperson table
-
-In this task, you will add the **Salesperson** table to the model.
+In this task, you create a relationship between the `Salesperson` table and the `Sales Territory` table, then configure it so security filters propagate in both directions.
 
 1. Switch to **Model** view.
 
-    ![](Images/enforce-model-security-image43.png)
+1. Drag the `SalesTerritoryKey` field from the `Salesperson` table to the `SalesTerritoryKey` field on the `Sales Territory` table to create a relationship.
 
-2. On the **Home** ribbon tab, from inside the **Queries** group, select the **Transform data** icon.
+    > **Note**: If the relationship was created automatically when you loaded the table, you can skip the drag step and proceed to configuring its properties.
 
-    ![](Images/enforce-model-security-image44.png)
+1. Right-click the relationship line between `Salesperson` and `Sales Territory`, then select **Properties**.
 
-    *If you are prompted to specify how to connect, **Edit Credentials** and specify how to sign-in.*
+1. In the **Edit relationship** window, set **Cross filter direction** to **Both**.
 
-    ![](Images/work-with-model-relationships-image52.png)
+1. Check the **Apply security filter in both directions** checkbox and **OK**.
 
-    *Select **Connect***
+    ![Screenshot of the Edit relationship window with Cross filter direction set to Both and Apply security filter checked.](Images/enforce-model-security-image58.png)
 
-     ![](Images/work-with-model-relationships-image53.png)
+The `Sales Territory` table has a one-to-many relationship to the `Salesperson` table. By default, filters only flow from the "one" side (`Sales Territory`) to the "many" side (`Salesperson`).
 
-    *In the **Encryption Support** page, select **OK**.*
+To make a security filter on `Salesperson` propagate back to `Sales Territory` — and then down to `Sales` — you must enable bi-directional cross-filtering with the security filter option.
 
-3. In the **Power Query Editor** window, in the **Queries** pane (located at the left), right-click the **Customer** query, and then select **Duplicate**.
+### Hide the Salesperson table
 
-    ![](Images/enforce-model-security-image45.png)
+In this task, you hide the `Salesperson` table so it doesn't appear in report authoring tools or Q&A.
 
-    *Because the **Customer** query already includes steps to connect the data warehouse, duplicating it is an efficient way to commence the development of a new query.*
+1. In Model view, select the `Salesperson` table header.
 
-4. In the **Query Settings** pane (located at the right), in the **Name** box, replace the text with **Salesperson**.
+1. Right-click and select **Hide in report view** (or select the eye icon at the top-right of the table).
 
-    ![](Images/enforce-model-security-image46.png)
+    *The `Salesperson` table exists solely to enforce data permissions. Hiding it prevents report authors from accidentally using it in visuals or exposing `UPN` data.*
 
-5. In the **Applied Steps** list, right-click the **Removed Other Columns** step (third step), and then select **Delete Until End**.
+## Create the dynamic role
 
-    ![](Images/enforce-model-security-image47.png)
+Dynamic RLS avoids creating and maintaining one role per region. A single role can serve all users by filtering rows to the signed-in identity.
 
-6. When prompted to confirm deletion of the step, select **Delete**.
+In this section, you create one dynamic role that filters the `Salesperson` table by user principal name.
 
-    ![](Images/enforce-model-security-image48.png)
+1. On the **Modeling** ribbon, in the **Security** group, select **Manage roles**.
 
-7. To source data from a different data warehouse table, in the **Applied Steps** list, in the **Navigation** step (second step), select the gear icon (located at the right).
+    ![Screenshot of the Modeling ribbon with the Manage roles option highlighted in the Security group.](Images/enforce-model-security-image39.png)
 
-    ![](Images/enforce-model-security-image49.png)
+1. Select **+ New**, name the role `Salespeople`, select the `Salesperson` table, and then select **Switch to DAX editor**.
 
-8. In the **Navigation** window, select the **DimEmployee** table.
+    ![Screenshot of the role creation dialog with the DAX editor option.](Images/enforce-model-security-image65.png)
 
-    ![](Images/enforce-model-security-image50.png)
-
-9. Select **OK**.
-
-    ![](Images/enforce-model-security-image51.png)
-
-10. To remove unnecessary columns, on the **Home** ribbon tab, from inside the **Manage Columns** group, select the **Choose Columns** icon.
-
-    ![](Images/enforce-model-security-image52.png)
-
-11. In the **Choose Columns** window, uncheck the **(Select All Columns)** item.
-
-    ![](Images/enforce-model-security-image53.png)
-
-12. Check the following three columns:
-
-    - EmployeeKey
-
-    - SalesTerritoryKey
-
-    - EmailAddress
-
-13. Select **OK**.
-
-    ![](Images/enforce-model-security-image54.png)
-
-14. To rename the **EmailAddress** column, double-click the **EmailAddress** column header.
-
-15. Replace the text with **UPN**, and then press **Enter**.
-
-    *UPN is an acronym for User Principal Name. The values in this column match the Azure AD account names.*
-
-    ![](Images/enforce-model-security-image55.png)
-
-16. To load the table to the model, on the **Home** ribbon tab, select the **Close &amp; Apply** icon.
-
-    ![](Images/enforce-model-security-image56.png)
-
-17. When the table has added to the model, notice that a relationship to the **Sales Territory** table was automatically created.
-
-### Configure the relationship
-
-In this task, you will configure properties of the new relationship.
-
-1. Right-click the relationship between the **Salesperson** and **Sales Territory** tables, and then select **Properties**.
-
-    ![](Images/enforce-model-security-image57.png)
-
-2. In the **Edit relationship** window, in the **Cross filter direction** dropdown list, select **Both**.
-
-3. Check the **Apply security filter in both directions** checkbox.
-
-    ![](Images/enforce-model-security-image58.png)
-
-    *Because there' a one-to-many relationship from the **Sales Territory** table to the **Salesperson** table, filters propagate only from the **Sales Territory** table to the **Salesperson** table. To force propagation in the other direction, the cross filter direction must be set to both.*
-
-4. Select **OK**.
-
-    ![](Images/enforce-model-security-image59.png)
-
-5. To hide the table, at the top-right of the **Salesperson** table, select the eye icon.
-
-    ![](Images/enforce-model-security-image60.png)
-
-    *The purpose of the **Salesperson** table is to enforce data permissions. When hidden, report authors and the Q&A experience won't see the table or its fields.*
-
-### Create a dynamic role
-
-In this task, you will create a dynamic role, which enforces permissions based on data in the model.
-
-1. Switch to **Report** view.
-
-    ![](Images/enforce-model-security-image61.png)
-
-2. To add a security role, on the **Modeling** ribbon tab, from inside the **Security** group, select **Manage roles**.
-
-    ![](Images/enforce-model-security-image62.png)
-
-3. In the **Manage roles** window, select **+ New**.
-
-    ![](Images/enforce-model-security-image63.png)
-
-4. To name the role, replace the selected text with **Salespeople**.
-
-    ![](Images/enforce-model-security-image64.png)
-
-    *This time, only one role needs to be created.*
-
-5. select the **Salesperson** table and in the **Rules** tab, select **Switch to DAX editor**.
-
-    ![](Images/enforce-model-security-image65.png)
-
-6. In the **DAX editor** box, enter the following expression:
+1. Enter the following expression:
 
     ```DAX
-   [UPN] = USERPRINCIPALNAME()
+    [UPN] = USERPRINCIPALNAME()
     ```
 
-    ![](Images/enforce-model-security-image66.png)
+1. Select **Save**.
 
-    *This expression filters the **UPN** column by the USERPRINCIPALNAME function, which returns the user principal name (UPN) of the authenticated user.*
+This expression keeps only rows where the `UPN` value matches the authenticated user's identity. Because of the bi-directional security filter you configured earlier, this filter propagates from `Salesperson` -> `Sales Territory` -> `Sales`, restricting the user to only their assigned region's data.
 
-    *When the UPN filters the **Salesperson** table, it filters the **Sales Territory** table, which in turn filters the **Sales** table. This way, the authenticated user will only see sales data for their assigned region.*
+## Validate the dynamic role
 
-7. Select **Save**.
+In this section, you test the dynamic role for a mapped user and an unmapped user to demonstrate how a single role returns different results based on user identity.
 
-    ![](Images/enforce-model-security-image67.png)
+### Test the role as another model user
 
-### Validate the dynamic role
+In this task, you confirm that the same role returns a different filtered result when evaluated for another identity.
 
-In this task, you will validate the dynamic role.
+1. On the **Modeling** ribbon, select **View as**.
 
-1. On the **Modeling** ribbon tab, from inside the **Security** group, select **View as**.
+1. Select **Other user** and enter `michael9@adventure-works.com`.
 
-    ![](Images/enforce-model-security-image68.png)
+1. Check the `Salespeople` role, then select **OK**.
 
-2. In the **View as roles** window, check **Other user**, and then in the corresponding box, enter: `michael9@adventure-works.com`.
+    ![Screenshot of the View as Other user dialog with email and role selection.](Images/enforce-model-security-image70.png)
 
-    ![](Images/enforce-model-security-image69.png)
+1. Verify the report now shows data for only the `Northeast` region (michael9's assigned territory).
 
-    *For testing purposes, **Other user** is the value that will be returned by the USERPRINCIPALNAME function. Note that this salesperson is assigned to the **Northeast** region.*
+1. Select **Stop viewing**.
 
-3. Check the **Salespeople** role.
+### Test as an unmapped user
 
-    ![](Images/enforce-model-security-image70.png)
+In this task, you confirm that dynamic RLS denies data when no matching UPN row exists.
 
-4. Select **OK**.
+1. Select **View as** > **Other user**.
 
-    ![](Images/enforce-model-security-image71.png)
+1. Enter `nomatch@adventure-works.com`, check `Salespeople`, and select **OK**.
 
-5. On the report page, notice that the stacked column chart visual shows only data for Northeast.
+1. Verify the report shows no data.
 
-    ![](Images/enforce-model-security-image72.png)
+    ![Screenshot of the report canvas for an unmapped user showing no data.](Images/enforce-model-security-no-match.png)
 
-6. Across the top of the report, notice the red banner that confirms the enforced role.
+1. Select **Stop viewing**.
 
-    ![](Images/enforce-model-security-image73.png)
+## Clean up resources
 
-7. To stop viewing by using the role, at the right of the red banner, select **Stop viewing**.
-
-    ![](Images/enforce-model-security-image74.png)
-
-### Finalize the design
-
-In this task, you will finalize the design by publishing the report and mapping a security group to the role.
-
-*The steps in this task are deliberately brief. For full step details, refer to the task steps of the earlier exercise.*
-
-1. Save the Power BI Desktop file.
-
-2. Publish the report to **"My workspace."**
-
-3. Close Power BI Desktop.
-
-4. Switch to the Power BI service (web browser).
-
-5. Go to the security settings for the **Sales Analysis - Enforce model security** semantic model.
-
-6. Map the **Salespeople** security group the **Salespeople** role.
-
-    ![](Images/enforce-model-security-image76.png)
-
-    *Now all members of the **Salespeople** security group are mapped to the **Salespeople** role. Providing the authenticated user is represented by a row in the **Salesperson** table, the assigned sales territory will be used to filter the sales table.*
-
-    *This design approach is simple and effective when the data model stores the user principal name values. When salespeople are added or removed, or are assigned to different sales territories, this design approach will simply work.*
+1. Close Power BI Desktop without saving.
