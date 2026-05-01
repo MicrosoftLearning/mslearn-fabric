@@ -1,8 +1,8 @@
 ---
 lab:
-  title: Create DAX calculations in Power BI Desktop
-  module: Create DAX calculations in Power BI Desktop
-  description: You'll learn to enhance Power BI data models by creating calculated tables, calculated columns, and measures using DAX. Through hands-on practice, you'll build a date table, control sorting behavior, organize measures into display folders, and create calculations that aggregate and compare data effectively.
+  title: Create DAX calculations in semantic models
+  module: Create DAX calculations in semantic models
+  description: You'll learn to enhance semantic models by creating calculated tables, calculated columns, and measures using DAX. Through hands-on practice, you'll build a date table, control sorting behavior, organize measures into display folders, and create calculations that aggregate and compare data effectively.
   duration: 45 minutes
   level: 300
   islab: true
@@ -10,7 +10,7 @@ lab:
     - Power BI
 ---
 
-# Create DAX calculations in Power BI Desktop
+# Create DAX calculations in semantic models
 
 ## **Lab story**
 
