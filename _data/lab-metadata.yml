@@ -91,3 +91,8 @@ courses:
       - 08d-data-science-batch.md
   - id: DP-3029
     name: Work smarter with Copilot in Microsoft Fabric
+    order:
+      - 22a-copilot-fabric-dataflow-gen2.md
+      - 22b-copilot-fabric-notebooks.md
+      - 22c-copilot-fabric-data-warehouse.md
+      - 22d-copilot-fabric-data-agents.md
