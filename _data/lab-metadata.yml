@@ -64,5 +64,16 @@ courses:
       - 11-data-activator.md
   - id: DP-604
     name: Implement a data science and machine learning solution for AI with Microsoft Fabric
+    order:
+      - 08-data-science-get-started.md
+      - 08a-data-science-explore-data.md
+      - 08b-data-science-preprocess-data-wrangler.md
+      - 08c-data-science-train.md
+      - 08d-data-science-batch.md
   - id: DP-3029
     name: Work smarter with Copilot in Microsoft Fabric
+    order:
+      - 22a-copilot-fabric-dataflow-gen2.md
+      - 22b-copilot-fabric-notebooks.md
+      - 22c-copilot-fabric-data-warehouse.md
+      - 22d-copilot-fabric-data-agents.md
