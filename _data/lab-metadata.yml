@@ -18,6 +18,25 @@ categories:
 courses:
   - id: DP-700
     name: Implement data engineering solutions using Microsoft Fabric
+    order:
+      - 01-lakehouse.md
+      - 02-analyze-spark.md
+      - 03-delta-lake.md
+      - 05-dataflows-gen2.md
+      - 04-ingest-pipeline.md
+      - 03b-medallion-lakehouse.md
+      - 07-real-time-Intelligence.md
+      - 09-real-time-analytics-eventstream.md
+      - 12-query-data-in-kql-database.md
+      - 13-real-time-dashboards.md
+      - 11-data-activator.md
+      - 06-data-warehouse.md
+      - 06a-data-warehouse-load.md
+      - 06c-monitor-data-warehouse.md
+      - 06d-secure-data-warehouse.md
+      - 21-implement-cicd.md
+      - 18-monitor-hub.md
+      - 19-secure-data-access.md
   - id: DP-600
     name: Implement analytics solutions using Microsoft Fabric
     order:
