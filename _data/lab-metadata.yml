@@ -59,10 +59,28 @@ courses:
       - 19b-govern-analytics-data.md
   - id: DP-601
     name: Implement a Lakehouse with Microsoft Fabric
+    order:
+      - 01-lakehouse.md
+      - 02-analyze-spark.md
+      - 03-delta-lake.md
+      - 05-dataflows-gen2.md
+      - 04-ingest-pipeline.md
   - id: DP-602
     name: Implement a data warehouse with Microsoft Fabric
+    order:
+      - 06-data-warehouse.md
+      - 06a-data-warehouse-load.md
+      - 06b-data-warehouse-query.md
+      - 06c-monitor-data-warehouse.md
+      - 06d-secure-data-warehouse.md
   - id: DP-603
     name: Implement Real-Time Intelligence with Microsoft Fabric
+    order:
+      - 07-real-time-Intelligence.md
+      - 09-real-time-analytics-eventstream.md
+      - 12-query-data-in-kql-database.md
+      - 13-real-time-dashboards.md
+      - 11-data-activator.md
   - id: DP-604
     name: Implement a data science and machine learning solution for AI with Microsoft Fabric
   - id: DP-3029
