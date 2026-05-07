@@ -42,7 +42,7 @@ Now that you have a workspace, it's time to create a data warehouse.
 
     After a minute or so, a new warehouse will be created and populated with sample data for a taxi ride analysis scenario.
 
-    ![Screenshot of a new warehouse.](./Images/sample-data-warehouse.png)
+    ![Screenshot of a new warehouse.](./Images/06b-sample-data-warehouse.png)
 
 ## Query the data warehouse
 
@@ -99,9 +99,11 @@ The SQL query editor provides support for IntelliSense, code completion, syntax 
 
 ## Verify data consistency
 
-Verifying data consistency is important to ensure that the data is accurate and reliable for analysis and decision-making. Inconsistent data can lead to incorrect analysis and misleading results. 
+Verifying data consistency is important to ensure that the data is accurate and reliable for analysis and decision-making. Inconsistent data can lead to incorrect analysis and misleading results.
 
-Let's query your data warehouse to check for consistency.
+In production environments, data can arrive with anomalies such as out-of-range values or logical errors. Running consistency checks before analysis is a good practice — even when the data is clean, confirming that is a useful result.
+
+Let's run some consistency checks on the sample data warehouse.
 
 1. In the **New SQL query** drop-down list, select **New SQL query**.
 
@@ -112,7 +114,7 @@ Let's query your data warehouse to check for consistency.
     SELECT COUNT(*) FROM dbo.Trip WHERE TripDurationSeconds > 86400; -- 24 hours
     ```
 
-1. Run the modified query and view the results, which show details of all trips with unusually long duration.
+1. Run the query. A result of **0** confirms there are no trips with an unusually long duration in this dataset — the data passes this check.
 
 1. In the **New SQL query** drop-down list, select **New SQL query** to add a second query tab. Then in the new empty query tab, run the following code:
 
@@ -121,7 +123,7 @@ Let's query your data warehouse to check for consistency.
     SELECT COUNT(*) FROM dbo.Trip WHERE TripDurationSeconds < 0;
     ```
 
-1. In the new blank query pane, enter and run the following Transact-SQL code:
+1. A result of **0** confirms there are no trips with a negative duration. If any were found, you could remove them with a statement like the following:
 
     ```sql
     -- Remove trips with negative trip duration
@@ -153,7 +155,7 @@ Let's create a view based on the query we used earlier, and add a filter to it.
     GROUP BY D.DayName;
     ```
 
-1. Modify the query to add `WHERE D.Month = 1`. This will filter the data to include only records from the month of January. The final query should look like this:
+1. Modify the query to add `WHERE D.Month = '01'`. This will filter the data to include only records from the month of January. The final query should look like this:
 
     ```sql
     SELECT 
@@ -163,15 +165,15 @@ Let's create a view based on the query we used earlier, and add a filter to it.
     FROM dbo.Trip AS T
     JOIN dbo.[Date] AS D
         ON T.[DateID]=D.[DateID]
-    WHERE D.Month = 1
+    WHERE D.Month = '01'
     GROUP BY D.DayName
     ```
 
 1. Select the text of the SELECT statement in your query. Then next to the **&#9655; Run** button, select **Save as view**.
 
-1. Create a new view named **vw_JanTrip**.
+1. Create a new view named **JanTrip**.
 
-1. In the **Explorer**, navigate to **Schemas >> dbo >> Views**. Note the *vw_JanTrip* view you just created.
+1. In the **Explorer**, navigate to **Schemas >> dbo >> Views**. Note the *JanTrip* view you just created.
 
 1. Close all query tabs.
 
