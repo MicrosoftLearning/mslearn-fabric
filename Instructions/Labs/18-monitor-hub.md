@@ -34,7 +34,7 @@ This lab takes approximately **30** minutes to complete.
 
 Now that you have a workspace, it's time to create a data lakehouse for your data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
@@ -114,8 +114,8 @@ Some items in a workspace might be run multiple times. You can use the monitorin
 In this exercise you've only run a few activities, so it should be fairly easy to find events in the monitoring hub. However, in a real environment you may need to search through a large number of events. Using filters and other view customizations can make this easier.
 
 1. In the monitoring hub, use the **Filter** button to apply the following filter:
-    - **Status**: Succeeeded
-    - **Item type**: Dataflow Gen2
+    - **Status**: Succeeded
+    - **Item type**: Dataflow Gen2 CI/CD
 
     With the filter applied, only successful runs of dataflows are listed.
 
