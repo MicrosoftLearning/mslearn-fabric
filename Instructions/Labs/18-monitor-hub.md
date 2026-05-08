@@ -59,7 +59,7 @@ In Microsoft Fabric, you can use a Dataflow (Gen2) to ingest data from a wide ra
 
     ![Screenshot of a dataflow query.](./Images/data-flow-query.png)
 
-1. Publish the dataflow.
+1. Use the **Save and run** option to save and run the dataflow, then close it.
 1. In the navigation bar on the left, select **Monitor** to view the monitoring hub and observe that your dataflow is in-progress (if not, refresh the view until you see it).
 
     ![Screenshot of the monitoring hub with a dataflow in-progress.](./Images/monitor-dataflow.png)
