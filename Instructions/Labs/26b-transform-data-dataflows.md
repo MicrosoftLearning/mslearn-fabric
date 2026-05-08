@@ -186,7 +186,7 @@ Publishing makes the dataflow available for scheduled refreshes and team collabo
 
 1. Select **Save and run** to publish the updated dataflow. Wait for the refresh to complete, then navigate back to your lakehouse and verify the `Unit Price` column now shows consistent two-decimal formatting.
 
-![Screenshot of the transformed orders table.](./images/dataflow-transformed-table.png)
+![Screenshot of the transformed orders table.](./Images/dataflow-transformed-table.png)
 
 ## Try it with Copilot (Optional)
 
