@@ -75,7 +75,7 @@ Now that you have a workspace, you can start creating the Fabric items you'll ne
    - **Workspace:** *Select the workspace you created at the beginning of this exercise*
    - **Eventhouse**: *Select your eventhouse*
    - **KQL database:** *Select your KQL database*
-   - **Destination table:** Create a new table named `bikes`
+   - **KQL Destination table:** Under the text box, select **Create new** (do *not* type directly into the text box — if you do, the **Save** button will remain greyed out). In the **Create new table** box that appears, enter the table name `bikes` and select **Done**.
    - **Input data format:** JSON
 
    ![Eventstream destination settings.](./Images/kql-database-event-processing-before-ingestion.png)
