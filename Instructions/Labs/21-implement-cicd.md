@@ -60,16 +60,15 @@ Fabric items haven't been created in your workspaces yet. Next, create a lakehou
 1. In the menu bar on the left, select **Workspaces**.
 2. Select the **Development** workspace.
 3. Select **New Item**.
-4. In the window that appears, select **Lakehouse** and in the **New lakehouse window**, name the lakehouse, **LabLakehouse**. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
+4. In the window that appears, select **Lakehouse** and in the **New lakehouse window**, name the lakehouse **LabLakehouse**. Leave the **Lakehouse schemas** checkbox selected.
 5. Select **Create**.
 6. In the Lakehouse Explorer window, select **Start with sample data** to populate the new lakehouse with data.
 
   ![Screenshot of Lakehouse Explorer.](./Images/lakehouse-explorer.png)
 
-7. Select the sample **NYCTaxi**.
-8. In the menu bar on the left, select the pipeline you created.
-9. Select the **Development** stage, and under the deployment pipeline canvas you can see the lakehouse you created as a stage item. In the left edge of the **Test** stage, there's an **X** within a circle. The **X** indicates that the Development and Test stages aren't synchronized.
-10. Select the **Test** stage and under the deployment pipeline canvas you can see that the lakehouse you created is only a stage item in the source, which in this case refers to the **Development** stage.  
+7. In the menu bar on the left, select the pipeline you created.
+8. Select the **Development** stage, and under the deployment pipeline canvas you can see the lakehouse you created as a stage item. In the left edge of the **Test** stage, there's an **X** within a circle. The **X** indicates that the Development and Test stages aren't synchronized.
+9. Select the **Test** stage and under the deployment pipeline canvas you can see that the lakehouse you created is only a stage item in the source, which in this case refers to the **Development** stage.  
 
   ![Screenshot the deployment pipeline showing content mismatches between stages.](./Images/lab-pipeline-compare.png)
 
