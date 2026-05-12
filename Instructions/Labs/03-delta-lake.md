@@ -36,7 +36,7 @@ This exercise should take approximately **45** minutes to complete
 
 Now that you have a workspace, it's time to create a data lakehouse for your data.
 
-1. In the workspace, select **+ New item** and create a new **Lakehouse** with a unique name of your choice.
+1. In the workspace, select **+ New item** and create a new **Lakehouse** with a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
     After a minute or so, a new lakehouse will be created:
 
