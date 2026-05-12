@@ -36,7 +36,7 @@ This exercise should take approximately **45** minutes to complete
 
 Now that you have a workspace, it's time to create a data lakehouse for your data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas (Public Preview)" option is disabled.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
@@ -124,7 +124,7 @@ The data files are created in the **Tables** folder.
 1. To create a managed Delta table, add a new cell, enter the following code and then run the cell:
 
     ```python
-   df.write.format("delta").saveAsTable("managed_products")
+   df.write.format("delta").saveAsTable("dbo.managed_products")
     ```
 
 1. In the Explorer pane, **Refresh** the Tables folder and expand the Tables node to verify that the **managed_products** table has been created.
@@ -132,7 +132,7 @@ The data files are created in the **Tables** folder.
 > [!NOTE]
 > The triangle icon next to the file name indicates a Delta table.
 
-The files for managed tables are stored in the **Tables** folder in the lakehouse. A folder named *managed_products* has been created which stores the Parquet files and delta_log folder for the table.
+The files for managed tables are stored in the **Tables** folder in the lakehouse. A folder named *dbo/managed_products* has been created which stores the Parquet files and delta_log folder for the table.
 
 ### Create an external table
 
@@ -143,7 +143,7 @@ You can also create external tables, which may be stored somewhere other than th
 1. In a new code cell, paste the ABFS path. Add the following code, using cut and paste to insert the abfs_path into the correct place in the code:
 
     ```python
-   df.write.format("delta").saveAsTable("external_products", path="abfs_path/external_products")
+   df.write.format("delta").saveAsTable("dbo.external_products", path="abfs_path/external_products")
     ```
 
 1. The full path should look similar to this:
@@ -166,16 +166,16 @@ Let’s explore the differences between managed and external tables using the %%
 
     ```python
    %%sql
-   DESCRIBE FORMATTED managed_products;
+   DESCRIBE FORMATTED dbo.managed_products;
     ```
 
-1. In the results, view the Location property for the table. Click on the Location value in the Data type column to see the full path. Notice that the OneLake storage location ends with /Tables/managed_products.
+1. In the results, view the Location property for the table. Click on the Location value in the Data type column to see the full path. Notice that the OneLake storage location ends with /Tables/dbo/managed_products.
 
 1. Modify the DESCRIBE command to show the details of the external_products table as shown here:
 
     ```python
    %%sql
-   DESCRIBE FORMATTED external_products;
+   DESCRIBE FORMATTED dbo.external_products;
     ```
 
 1. Run the cell and in the results, view the Location property for the table. Widen the Data type column to see the full path and notice that the OneLake storage locations ends with /Files/external_products.
@@ -184,8 +184,8 @@ Let’s explore the differences between managed and external tables using the %%
 
     ```python
    %%sql
-   DROP TABLE managed_products;
-   DROP TABLE external_products;
+   DROP TABLE dbo.managed_products;
+   DROP TABLE dbo.external_products;
     ```
 
 1. In the Explorer pane, **Refresh** the Tables folder to verify that no tables are listed in the Tables node.
@@ -201,7 +201,7 @@ You will now create a Delta table, using the %%sql magic command.
 
     ```python
    %%sql
-   CREATE TABLE products
+   CREATE TABLE dbo.products
    USING DELTA
    LOCATION 'Files/external_products';
     ```
@@ -211,7 +211,7 @@ You will now create a Delta table, using the %%sql magic command.
 
     ```python
    %%sql
-   SELECT * FROM products;
+   SELECT * FROM dbo.products;
     ```
 
 ## Explore table versioning
@@ -222,7 +222,7 @@ Transaction history for Delta tables is stored in JSON files in the delta_log fo
 
     ```python
    %%sql
-   UPDATE products
+   UPDATE dbo.products
    SET ListPrice = ListPrice * 0.9
    WHERE Category = 'Mountain Bikes';
     ```
@@ -231,7 +231,7 @@ Transaction history for Delta tables is stored in JSON files in the delta_log fo
 
     ```python
    %%sql
-   DESCRIBE HISTORY products;
+   DESCRIBE HISTORY dbo.products;
     ```
 
 The results show the history of transactions recorded for the table.
@@ -263,7 +263,7 @@ Using the SQL magic command you can use SQL syntax instead of Pyspark. Here you 
    CREATE OR REPLACE TEMPORARY VIEW products_view
    AS
        SELECT Category, COUNT(*) AS NumProducts, MIN(ListPrice) AS MinPrice, MAX(ListPrice) AS MaxPrice, AVG(ListPrice) AS AvgPrice
-       FROM products
+       FROM dbo.products
        GROUP BY Category;
 
    SELECT *
@@ -340,7 +340,7 @@ Ensure the message *Source stream created…* is displayed. The code you just ra
 
     ```python
    # Write the stream to a delta table
-   delta_stream_table_path = 'Tables/iotdevicedata'
+   delta_stream_table_path = 'Tables/dbo/iotdevicedata'
    checkpointpath = 'Files/delta/checkpoint'
    deltastream = iotstream.writeStream.format("delta").option("checkpointLocation", checkpointpath).start(delta_stream_table_path)
    print("Streaming to delta sink...")
@@ -352,7 +352,7 @@ This code writes the streaming device data in Delta format to a folder named iot
 
     ```python
    %%sql
-   SELECT * FROM IotDeviceData;
+   SELECT * FROM dbo.IotDeviceData;
     ```
 
 This code queries the IotDeviceData table, which contains the device data from the streaming source.
@@ -378,7 +378,7 @@ This code writes more hypothetical device data to the streaming source.
 
     ```python
    %%sql
-   SELECT * FROM IotDeviceData;
+   SELECT * FROM dbo.IotDeviceData;
     ```
 
 This code queries the IotDeviceData table again, which should now include the additional data that was added to the streaming source.

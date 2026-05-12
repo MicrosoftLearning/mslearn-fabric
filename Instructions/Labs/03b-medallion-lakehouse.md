@@ -37,7 +37,7 @@ This exercise should take approximately **45** minutes to complete
 
 Now that you have a workspace, it's time to create a data lakehouse for the data you're going to analyze.
 
-1. In the workspace you just created, create a new **Lakehouse** named **Sales** by selecting the **+ New item** button. Make sure the "Lakehouse schemas" option is disabled.
+1. In the workspace you just created, create a new **Lakehouse** named **Sales** by selecting the **+ New item** button.
 
     After a minute or so, a new empty lakehouse will be created. Next, you'll ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
@@ -137,7 +137,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
    from delta.tables import *
     
    DeltaTable.createIfNotExists(spark) \
-       .tableName("sales.sales_silver") \
+       .tableName("sales.dbo.sales_silver") \
        .addColumn("SalesOrderNumber", StringType()) \
        .addColumn("SalesOrderLineNumber", IntegerType()) \
        .addColumn("OrderDate", DateType()) \
@@ -167,7 +167,7 @@ Now that you have some data in the bronze layer of your lakehouse, you can use a
 
    from delta.tables import *
     
-   deltaTable = DeltaTable.forPath(spark, 'Tables/sales_silver')
+   deltaTable = DeltaTable.forPath(spark, 'Tables/dbo/sales_silver')
     
    dfUpdates = df
     
@@ -226,7 +226,7 @@ Now that you have data in your silver layer, you can use the SQL analytics endpo
     ```sql
    SELECT YEAR(OrderDate) AS Year
        , CAST (SUM(Quantity * (UnitPrice + Tax)) AS DECIMAL(12, 2)) AS TotalSales
-   FROM sales_silver
+   FROM dbo.sales_silver
    GROUP BY YEAR(OrderDate) 
    ORDER BY YEAR(OrderDate)
     ```
@@ -239,7 +239,7 @@ Now that you have data in your silver layer, you can use the SQL analytics endpo
 
     ```sql
    SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
-   FROM sales_silver
+   FROM dbo.sales_silver
    GROUP BY CustomerName
    ORDER BY TotalQuantity DESC
     ```
@@ -262,7 +262,7 @@ You could have done all of this in a single notebook, but for this exercise you'
 
     ```python
    # Load data to the dataframe as a starting point to create the gold layer
-   df = spark.read.table("Sales.sales_silver")
+   df = spark.read.table("Sales.dbo.sales_silver")
     ```
 
     > **Note**: If you receive a `[TooManyRequestsForCapacity]` error when running the first cell, make sure you stopped the session previously running in the first notebook.
@@ -275,7 +275,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     
    # Define the schema for the dimdate_gold table
    DeltaTable.createIfNotExists(spark) \
-       .tableName("sales.dimdate_gold") \
+       .tableName("sales.dbo.dimdate_gold") \
        .addColumn("OrderDate", DateType()) \
        .addColumn("Day", IntegerType()) \
        .addColumn("Month", IntegerType()) \
@@ -312,7 +312,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from delta.tables import *
     
-   deltaTable = DeltaTable.forPath(spark, 'Tables/dimdate_gold')
+   deltaTable = DeltaTable.forPath(spark, 'Tables/dbo/dimdate_gold')
     
    dfUpdates = dfdimDate_gold
     
@@ -348,7 +348,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     
    # Create customer_gold dimension delta table
    DeltaTable.createIfNotExists(spark) \
-       .tableName("sales.dimcustomer_gold") \
+       .tableName("sales.dbo.dimcustomer_gold") \
        .addColumn("CustomerName", StringType()) \
        .addColumn("Email",  StringType()) \
        .addColumn("First", StringType()) \
@@ -380,7 +380,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from pyspark.sql.functions import monotonically_increasing_id, col, when, coalesce, max, lit
     
-   dfdimCustomer_temp = spark.read.table("Sales.dimCustomer_gold")
+   dfdimCustomer_temp = spark.read.table("Sales.dbo.dimCustomer_gold")
     
    MAXCustomerID = dfdimCustomer_temp.select(coalesce(max(col("CustomerID")),lit(0)).alias("MAXCustomerID")).first()[0]
     
@@ -400,7 +400,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from delta.tables import *
 
-   deltaTable = DeltaTable.forPath(spark, 'Tables/dimcustomer_gold')
+   deltaTable = DeltaTable.forPath(spark, 'Tables/dbo/dimcustomer_gold')
     
    dfUpdates = dfdimCustomer_gold
     
@@ -433,7 +433,7 @@ You could have done all of this in a single notebook, but for this exercise you'
    from delta.tables import *
     
    DeltaTable.createIfNotExists(spark) \
-       .tableName("sales.dimproduct_gold") \
+       .tableName("sales.dbo.dimproduct_gold") \
        .addColumn("ItemName", StringType()) \
        .addColumn("ItemID", LongType()) \
        .addColumn("ItemInfo", StringType()) \
@@ -462,7 +462,7 @@ You could have done all of this in a single notebook, but for this exercise you'
    from pyspark.sql.functions import monotonically_increasing_id, col, lit, max, coalesce
     
    #dfdimProduct_temp = dfdimProduct_silver
-   dfdimProduct_temp = spark.read.table("Sales.dimProduct_gold")
+   dfdimProduct_temp = spark.read.table("Sales.dbo.dimProduct_gold")
     
    MAXProductID = dfdimProduct_temp.select(coalesce(max(col("ItemID")),lit(0)).alias("MAXItemID")).first()[0]
     
@@ -482,7 +482,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from delta.tables import *
     
-   deltaTable = DeltaTable.forPath(spark, 'Tables/dimproduct_gold')
+   deltaTable = DeltaTable.forPath(spark, 'Tables/dbo/dimproduct_gold')
             
    dfUpdates = dfdimProduct_gold
             
@@ -515,7 +515,7 @@ You could have done all of this in a single notebook, but for this exercise you'
    from delta.tables import *
     
    DeltaTable.createIfNotExists(spark) \
-       .tableName("sales.factsales_gold") \
+       .tableName("sales.dbo.factsales_gold") \
        .addColumn("CustomerID", LongType()) \
        .addColumn("ItemID", LongType()) \
        .addColumn("OrderDate", DateType()) \
@@ -530,8 +530,8 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from pyspark.sql.functions import col
     
-   dfdimCustomer_temp = spark.read.table("Sales.dimCustomer_gold")
-   dfdimProduct_temp = spark.read.table("Sales.dimProduct_gold")
+   dfdimCustomer_temp = spark.read.table("Sales.dbo.dimCustomer_gold")
+   dfdimProduct_temp = spark.read.table("Sales.dbo.dimProduct_gold")
     
    df = df.withColumn("ItemName",split(col("Item"), ", ").getItem(0)) \
        .withColumn("ItemInfo",when((split(col("Item"), ", ").getItem(1).isNull() | (split(col("Item"), ", ").getItem(1)=="")),lit("")).otherwise(split(col("Item"), ", ").getItem(1))) \
@@ -559,7 +559,7 @@ You could have done all of this in a single notebook, but for this exercise you'
     ```python
    from delta.tables import *
     
-   deltaTable = DeltaTable.forPath(spark, 'Tables/factsales_gold')
+   deltaTable = DeltaTable.forPath(spark, 'Tables/dbo/factsales_gold')
     
    dfUpdates = dffactSales_gold
     
