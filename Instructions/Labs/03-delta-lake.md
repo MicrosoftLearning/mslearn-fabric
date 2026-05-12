@@ -36,9 +36,7 @@ This exercise should take approximately **45** minutes to complete
 
 Now that you have a workspace, it's time to create a data lakehouse for your data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
-
-    >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+1. In the workspace, select **+ New item** and create a new **Lakehouse** with a unique name of your choice.
 
     After a minute or so, a new lakehouse will be created:
 
