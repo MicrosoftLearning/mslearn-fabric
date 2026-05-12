@@ -69,6 +69,8 @@ Now that you have a workspace, it's time to create a lakehouse into which you'll
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
+    >**Note**: Lakehouse schemas are disabled in this lab because Copilot generates the PySpark code, and AI-generated code may not include the `dbo.` schema prefix required when schemas are enabled. Leaving schemas disabled ensures the lab works regardless of what code Copilot produces.
+
 ![Screenshot of the create button in Fabric.](./Images/copilot-fabric-notebook-create.png)
 
 After a minute or so, a new empty lakehouse will be created.
