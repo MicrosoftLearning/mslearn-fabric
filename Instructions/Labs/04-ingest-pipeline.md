@@ -38,7 +38,7 @@ This lab will take approximately **45** minutes to complete.
 
 Now that you have a workspace, it's time to create a data lakehouse into which you will ingest data.
 
-1. On the navigation pane on the left, select **Create**, and choose **Lakehouse**. Give it a unique name of your choice.
+1. On the navigation pane on the left, select **Create**, and choose **Lakehouse**. Give it a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 

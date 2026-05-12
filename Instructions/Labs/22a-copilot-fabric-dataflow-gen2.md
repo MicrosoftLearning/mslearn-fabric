@@ -57,7 +57,7 @@ Contoso, a global retail company, is modernizing its data infrastructure using M
 
 Now that you have a workspace, it's time to create a data lakehouse into which you'll ingest data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 

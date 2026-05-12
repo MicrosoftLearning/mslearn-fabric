@@ -37,7 +37,7 @@ This exercise should take approximately **45** minutes to complete
 
 Now that you have a workspace, it's time to create a data lakehouse for the data you're going to analyze.
 
-1. In the workspace you just created, create a new **Lakehouse** named **Sales** by selecting the **+ New item** button.
+1. In the workspace you just created, create a new **Lakehouse** named **Sales** by selecting the **+ New item** button. Leave the **Lakehouse schemas** checkbox selected.
 
     After a minute or so, a new empty lakehouse will be created. Next, you'll ingest some data into the data lakehouse for analysis. There are multiple ways to do this, but in this exercise you'll simply download a text file to your local computer (or lab VM if applicable) and then upload it to your lakehouse.
 
