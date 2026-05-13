@@ -51,15 +51,15 @@ You can now ingest data into the lakehouse. There are several ways to do this, b
 1. In the … menu for the products folder, **upload** the *products.csv* file from your local computer (or lab VM if applicable).
 1. After the file has been uploaded, select the **products** folder to verify that the file has been uploaded, as shown here:
 
-    ![Screen picture of products.csv uploaded to the lakehouse.](Images/upload-products.png)
+    ![Screen picture of products.csv uploaded to the lakehouse.](Images/03-upload-products.png)
   
 ## Explore data in a DataFrame
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
+1. In the lakehouse, select **Open notebook** > **New notebook**.
 
-    A new notebook named **Notebook 1** is created and opened.
+    A new notebook named **Notebook 1** is created and opened with the internal name **Notebook_1**.
 
     ![Screenshot of a new notebook.](./Images/new-notebook.png)
 
