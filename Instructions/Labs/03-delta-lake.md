@@ -59,9 +59,9 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 
 1. In the lakehouse, select **Open notebook** > **New notebook**.
 
-    A new notebook named **Notebook 1** is created and opened with the internal name **Notebook_1**.
+    A new notebook named **Notebook 1** is created and opened.
 
-    ![Screenshot of a new notebook.](./Images/new-notebook.png)
+    ![Screenshot of a new notebook.](./Images/03-new-notebook.png)
 
 1. Fabric assigns a name to each notebook you create, such as Notebook 1, Notebook 2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
 1. Select the first cell (which is currently a code cell), and then in the top-right tool bar, use the **M↓** button to convert it to a markdown cell. The text contained in the cell will then be displayed as formatted text.
@@ -73,8 +73,10 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
     ```
 
 1. Click anywhere in the notebook outside of the cell to stop editing it.
-1. In the **Explorer** pane, select **Add data items**, and then select **OneLake catalog**. Connect to the lakehouse you created previously.
 1. Add a new code cell, and add the following code to read the products data into a DataFrame using a defined schema:
+
+    > [!TIP]
+    > To add a code cell, select **+ Code** which appears when you hover the mouse above or below the current cell or its output. Alternatively, from the ribbon menu select **Edit** and **+ Add code cell below**.
 
     ```python
    from pyspark.sql.types import StructType, IntegerType, StringType, DoubleType
@@ -101,25 +103,17 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 
 1. When the cell code has completed, review the output below the cell, which should look similar to this:
 
-    ![Screen picture of products.csv data.](Images/products-schema.png)
+    ![Screen picture of products.csv data.](Images/03-products-schema.png)
  
 ## Create Delta tables
 
-You can save the DataFrame as a Delta table by using the *saveAsTable* method. Delta Lake supports the creation of both managed and external tables:
-
-   * **Managed** Delta tables benefit from higher performance, as Fabric manages both the schema metadata and the data files.
-   * **External** tables allow you to store data externally, with the metadata managed by Fabric.
+You can save a DataFrame as a managed Delta table by using the *saveAsTable* method. When you create a managed table, Fabric manages both the schema metadata and the data files.
 
 ### Create a managed table
 
 The data files are created in the **Tables** folder.
 
-1. Under the results returned by the first code cell, use the + Code icon to add a new code cell.
-
-> [!TIP]
-> To see the + Code icon, move the mouse to just below and to the left of the output from the current cell. Alternatively, in the menu bar, on the Edit tab, select **+ Add code cell**.
-
-1. To create a managed Delta table, add a new cell, enter the following code and then run the cell:
+1. To create a managed Delta table, add a new code cell, enter the following code and then run the cell:
 
     ```python
    df.write.format("delta").saveAsTable("dbo.managed_products")
@@ -132,76 +126,25 @@ The data files are created in the **Tables** folder.
 
 The files for managed tables are stored in the **Tables** folder in the lakehouse. A folder named *dbo/managed_products* has been created which stores the Parquet files and delta_log folder for the table.
 
-### Create an external table
-
-You can also create external tables, which may be stored somewhere other than the lakehouse, with the schema metadata stored in the lakehouse.
-
-1. In the Explorer pane, in the … menu for the **Files** folder, select **Copy ABFS path**. The ABFS path is the fully qualified path to the lakehouse Files folder.
-
-1. In a new code cell, paste the ABFS path. Add the following code, using cut and paste to insert the abfs_path into the correct place in the code:
-
-    ```python
-   df.write.format("delta").saveAsTable("dbo.external_products", path="abfs_path/external_products")
-    ```
-
-1. The full path should look similar to this:
-
-    ```python
-   abfss://workspace@tenant-onelake.dfs.fabric.microsoft.com/lakehousename.Lakehouse/Files/external_products
-    ```
-
-1. **Run** the cell to save the DataFrame as an external table in the Files/external_products folder.
-
-1. In the Explorer pane, **Refresh** the Tables folder and expand the Tables node and verify that the external_products table has been created containing the schema metadata.
-
-1. In the Explorer pane, in the … menu for the Files folder, select **Refresh**. Then expand the Files node and verify that the external_products folder has been created for the table’s data files.
-
-### Compare managed and external tables
-
-Let’s explore the differences between managed and external tables using the %%sql magic command.
-
-1. In a new code cell and run the following code:
-
-    ```python
-   %%sql
-   DESCRIBE FORMATTED dbo.managed_products;
-    ```
-
-1. In the results, view the Location property for the table. Click on the Location value in the Data type column to see the full path. Notice that the OneLake storage location ends with /Tables/dbo/managed_products.
-
-1. Modify the DESCRIBE command to show the details of the external_products table as shown here:
-
-    ```python
-   %%sql
-   DESCRIBE FORMATTED dbo.external_products;
-    ```
-
-1. Run the cell and in the results, view the Location property for the table. Widen the Data type column to see the full path and notice that the OneLake storage locations ends with /Files/external_products.
-
-1. In a new code cell and run the following code:
-
-    ```python
-   %%sql
-   DROP TABLE dbo.managed_products;
-   DROP TABLE dbo.external_products;
-    ```
-
-1. In the Explorer pane, **Refresh** the Tables folder to verify that no tables are listed in the Tables node.
-1. In the Explorer pane, **Refresh** the Files folder and verify that the external_products file has *not* been deleted. Select this folder to view the Parquet data files and _delta_log folder. 
-
-The metadata for the external table was deleted, but not the data file.
-
 ## Use SQL to create a Delta table
 
-You will now create a Delta table, using the %%sql magic command. 
+You can also use the SQL `CREATE TABLE` statement to define a table based on files in Delta format.
 
-1. Add another code cell and run the following code:
+1. Add a new code cell and run the following code to save the products data as Delta files in the **Files** folder of the lakehouse:
+
+    ```python
+   df.write.format("delta").save("Files/products")
+    ```
+
+1. In the Explorer pane, in the … menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that a folder named *products* has been created.
+
+1. Add a new code cell and run the following code to create a table from the Delta files:
 
     ```python
    %%sql
    CREATE TABLE dbo.products
    USING DELTA
-   LOCATION 'Files/external_products';
+   LOCATION 'Files/products';
     ```
 
 1. In the Explorer pane, in the … menu for the **Tables** folder, select **Refresh**. Then expand the Tables node and verify that a new table named *products* is listed. Then expand the table to view the schema.
@@ -237,7 +180,7 @@ The results show the history of transactions recorded for the table.
 1. Add another code cell and run the following code:
 
     ```python
-   delta_table_path = 'Files/external_products'
+   delta_table_path = 'Files/products'
    # Get the current data
    current_data = spark.read.format("delta").load(delta_table_path)
    display(current_data)
