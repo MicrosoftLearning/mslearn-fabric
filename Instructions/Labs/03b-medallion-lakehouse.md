@@ -238,10 +238,11 @@ Now that you have data in your silver layer, you can use the SQL analytics endpo
 1. Next you'll review which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
 
     ```sql
-   SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+   SELECT CustomerName, SUM(Quantity) AS TotalQuantity
    FROM dbo.sales_silver
    GROUP BY CustomerName
    ORDER BY TotalQuantity DESC
+   LIMIT 10
     ```
 
     This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
