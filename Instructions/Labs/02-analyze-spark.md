@@ -17,7 +17,7 @@ lab:
 
 # Analyze data with Apache Spark in Fabric
 
-In this lab you will ingest data into the Fabric lakehouse and use PySpark to read and analyze the data.
+In this lab you will ingest data into a Fabric lakehouse and use PySpark to read and analyze the data.
 
 This lab will take approximately 45 minutes to complete.
 
@@ -41,7 +41,7 @@ Now that you have a workspace, it's time to create a lakehouse for your data.
 
 1. Select **New Item** and then select **Lakehouse** in the *Store data* section. *It might take more than a minute to create the lakehouse.*
 
-1. Give the lakehouse a unique name of your choice.
+1. Give the lakehouse a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
 1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
 
@@ -63,13 +63,13 @@ Now that you have a workspace, it's time to create a lakehouse for your data.
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. On the menu bar on the left, select **Create** (or select the ellipsis (**...**) if Create is not pinned). In the *New* page, select **See all** if the full list is not shown, then under the *Data Engineering* section, select **Notebook**. In the dialog that appears, select **Create** to create the notebook.
+1. In the lakehouse, select **Open notebook** > **New notebook**.
 
     A new notebook named **Notebook 1** is created and opened.
 
     ![Screenshot of a new notebook.](./Images/new-notebook.png)
 
-1. Fabric assigns a name to each notebook you create, such as Notebook_1, Notebook_2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
+1. Fabric assigns a name to each notebook you create, such as Notebook 1, Notebook 2, etc. Click the name panel above the **Home** tab on the menu to change the name to something more descriptive.
 1. Select the first cell (which is currently a code cell), and then in the top-right tool bar, use the **M↓** button to convert it to a markdown cell. The text contained in the cell will then be displayed as formatted text.
 1. Use the 🖉 (Edit) button to switch the cell to editing mode, then modify the markdown as shown below.
 
@@ -89,9 +89,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 >[!NOTE]
 > Fabric notebooks support multiple programming languages including Scala, R, and Spark SQL.
 
-1. Select your new workspace from the left bar. You will see a list of items contained in the workspace including your lakehouse and notebook.
-1. Select the lakehouse to display the Explorer pane, including the **orders** folder.
-1. From the top menu, select **Open notebook**, **Existing notebook**, and then open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, expand the Files list, and select the orders folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
+1. In the **Explorer** pane, expand **Files** and select the **orders** folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
 
     ![Screen picture of csv files in Explorer view.](Images/02-explorer-notebook-view.png)
 
@@ -342,13 +340,13 @@ When dealing with large volumes of data, partitioning can significantly improve 
 
 ## Work with tables and SQL
 
-You’ve now seen how the native methods of the DataFrame object enable you to query and analyze data from a file. However, you may be more comfortable working with tables using SQL syntax. Spark provides a metastore in which you can define relational tables.
+You've now seen how the native methods of the DataFrame object enable you to query and analyze data from a file. However, you may be more comfortable working with tables using SQL syntax. Fabric lakehouses support Delta tables, which are stored in OneLake and can be queried using Spark SQL.
 
-The Spark SQL library supports the use of SQL statements to query tables in the metastore. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse - hence the term “data lakehouse”.
+The Spark SQL library supports the use of SQL statements to query Delta tables in the lakehouse. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse — hence the term "data lakehouse".
 
 ### Create a table
 
-Tables in a Spark metastore are relational abstractions over files in the data lake. Tables can be *managed* by the metastore, or *external* and managed independently of the metastore.
+Delta tables in a Fabric lakehouse are relational abstractions over files stored in OneLake.
 
 1. Add a code cell to the notebook and enter the following code, which saves the DataFrame of sales order data as a table named *salesorders*:
 
@@ -361,7 +359,7 @@ Tables in a Spark metastore are relational abstractions over files in the data l
     ```
 
 >[!NOTE]
-> In this example, no explicit path is provided, so the files for the table will be managed by the metastore. Also, the table is saved in delta format which adds relational database capabilities to tables. This includes support for transactions, row versioning, and other useful features. Creating tables in delta format is preferred for data lakehouses in Fabric.
+> The table is saved in Delta format, which adds relational database capabilities including support for transactions, row versioning, and other useful features. The table files are stored in the lakehouse's **Tables** folder in OneLake and managed by the Fabric lakehouse.
 
 1. Run the code cell and review the output, which describes the definition of the new table.
 
@@ -416,7 +414,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
    SELECT * FROM salesorders
     ```
 
-1. Run the code to display data from the salesorders view you created previously. In the results section beneath the cell, select **+ New chart**.
+1. Run the code to display data from the salesorders table you created previously. In the results section beneath the cell, select **+ New chart**.
 
 1. Use the **Build my own** button at the bottom-right of the results section and set the chart settings:
 
