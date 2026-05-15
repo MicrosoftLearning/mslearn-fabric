@@ -105,38 +105,43 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
 
     ![Screen picture of products.csv data.](Images/03-products-schema.png)
  
-## Create Delta tables
+## Create a managed Delta table
 
-You can save a DataFrame as a managed Delta table by using the *saveAsTable* method. When you create a managed table, Fabric manages both the schema metadata and the data files.
+The quickest way to create a Delta table from a DataFrame is to use the `saveAsTable` method. This creates a *managed* table — Fabric controls both the table metadata and the underlying data files, so dropping the table also deletes the data. This is the recommended approach in Fabric Lakehouse when you want full lifecycle management of your table.
 
-### Create a managed table
-
-The data files are created in the **Tables** folder.
-
-1. To create a managed Delta table, add a new code cell, enter the following code and then run the cell:
+1. Add a new code cell, enter the following code and then run the cell:
 
     ```python
    df.write.format("delta").saveAsTable("dbo.managed_products")
     ```
 
-1. In the Explorer pane, **Refresh** the Tables folder and expand the Tables node to verify that the **managed_products** table has been created.
+1. In the Explorer pane, **Refresh** the **Tables** folder and expand the Tables node to verify that the **managed_products** table has been created.
 
 > [!NOTE]
 > The triangle icon next to the file name indicates a Delta table.
 
-The files for managed tables are stored in the **Tables** folder in the lakehouse. A folder named *dbo/managed_products* has been created which stores the Parquet files and delta_log folder for the table.
+The data files are stored in the **Tables** folder in the lakehouse under *dbo/managed_products*.
+
+1. Add a new code cell, enter the following code and then run the cell:
+
+    ```python
+   %%sql
+   DROP TABLE dbo.managed_products;
+    ```
+
+1. In the Explorer pane, **Refresh** the **Tables** folder to confirm the table has been removed. Refresh the **Files** folder and note that there is no *managed_products* folder — the data files were deleted along with the table.
 
 ## Use SQL to create a Delta table
 
-You can also use the SQL `CREATE TABLE` statement to define a table based on files in Delta format.
+You can also create a Delta table using a SQL `CREATE TABLE` statement. This is useful when data files have already been saved in Delta format — for example, landed by a pipeline — and you want to register them as a queryable table without rewriting the data.
 
 1. Add a new code cell and run the following code to save the products data as Delta files in the **Files** folder of the lakehouse:
 
     ```python
-   df.write.format("delta").save("Files/products")
+   df.write.format("delta").save("Files/products_data")
     ```
 
-1. In the Explorer pane, in the … menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that a folder named *products* has been created.
+1. In the Explorer pane, in the … menu for the **Files** folder, select **Refresh**. Then expand the **Files** node and verify that a folder named *products_data* has been created.
 
 1. Add a new code cell and run the following code to create a table from the Delta files:
 
@@ -144,7 +149,7 @@ You can also use the SQL `CREATE TABLE` statement to define a table based on fil
    %%sql
    CREATE TABLE dbo.products
    USING DELTA
-   LOCATION 'Files/products';
+   LOCATION 'Files/products_data';
     ```
 
 1. In the Explorer pane, in the … menu for the **Tables** folder, select **Refresh**. Then expand the Tables node and verify that a new table named *products* is listed. Then expand the table to view the schema.
@@ -180,7 +185,7 @@ The results show the history of transactions recorded for the table.
 1. Add another code cell and run the following code:
 
     ```python
-   delta_table_path = 'Files/products'
+   delta_table_path = 'Files/products_data'
    # Get the current data
    current_data = spark.read.format("delta").load(delta_table_path)
    display(current_data)
