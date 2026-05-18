@@ -17,7 +17,7 @@ lab:
 
 # Analyze data with Apache Spark in Fabric
 
-In this lab you will ingest data into the Fabric lakehouse and use PySpark to read and analyze the data.
+In this lab you will ingest data into a Fabric lakehouse and use PySpark to read and analyze the data.
 
 This lab will take approximately 45 minutes to complete.
 
@@ -41,9 +41,7 @@ Now that you have a workspace, it's time to create a lakehouse for your data.
 
 1. Select **New Item** and then select **Lakehouse** in the *Store data* section. *It might take more than a minute to create the lakehouse.*
 
-1. Give the lakehouse a unique name of your choice and **deselect** the *Lakehouse schemas (Public Preview)* option.
-
-    > **Important**: Make sure the *Lakehouse schemas* option is **disabled** because you can't change this setting after creating the lakehouse. You will need to create a new lakehouse if this step is missed.
+1. Give the lakehouse a unique name of your choice. Leave the **Lakehouse schemas** checkbox selected.
 
 1. View the new lakehouse, and note that the **Lakehouse explorer** pane on the left enables you to browse tables and files in the lakehouse:
 
@@ -59,13 +57,13 @@ Now that you have a workspace, it's time to create a lakehouse for your data.
 
 1. After the files have been uploaded, expand **Files** and select the **orders** folder. Check that the CSV files have been uploaded, as shown here:
 
-    ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/uploaded-files.png)
+    ![Screen picture of CSV files uploaded to a new Fabric workspace.](Images/02-uploaded-files.png)
 
 ## Create a notebook
 
 You can now create a Fabric notebook to work with your data. Notebooks provide an interactive environment where you can write and run code.
 
-1. On the menu bar on the left, **3 dots ...** select **Create**. In the *New* page, under the *Data Engineering* section, select **Notebook**.
+1. In the lakehouse, select **Open notebook** > **New notebook**.
 
     A new notebook named **Notebook 1** is created and opened.
 
@@ -80,7 +78,7 @@ You can now create a Fabric notebook to work with your data. Notebooks provide a
    Use this notebook to explore sales order data
     ```
 
-    ![Screen picture of a Fabric notebook with a markdown cell.](Images/name-notebook-markdown.png)
+    ![Screen picture of a Fabric notebook with a markdown cell.](Images/02-name-notebook-markdown.png)
 
 When you have finished, click anywhere in the notebook outside of the cell to stop editing it.
 
@@ -91,11 +89,9 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 >[!NOTE]
 > Fabric notebooks support multiple programming languages including Scala, R, and Spark SQL.
 
-1. Select your new workspace from the left bar. You will see a list of items contained in the workspace including your lakehouse and notebook.
-1. Select the lakehouse to display the Explorer pane, including the **orders** folder.
-1. From the top menu, select **Open notebook**, **Existing notebook**, and then open the notebook you created earlier. The notebook should now be open next to the Explorer pane. Expand Lakehouses, expand the Files list, and select the orders folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
+1. In the **Explorer** pane, expand **Files** and select the **orders** folder. The CSV files that you uploaded are listed next to the notebook editor, like this:
 
-    ![Screen picture of csv files in Explorer view.](Images/explorer-notebook-view.png)
+    ![Screen picture of csv files in Explorer view.](Images/02-explorer-notebook-view.png)
 
 1. From the … menu for 2019.csv, select **Load data** > **Spark**. The following code is automatically generated in a new code cell:
 
@@ -149,7 +145,7 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 
 1. Run the cell and review the output:
 
-    ![Screen picture of code with schema defined and data.](Images/define-schema.png)
+    ![Screen picture of code with schema defined and data.](Images/02-define-schema.png)
 
 1. This DataFrame includes only the data from the 2019.csv file. Modify the code so that the file path uses a * wildcard to read all the files in the orders folder:
 
@@ -250,7 +246,7 @@ The DataFrame object provides additional functionality such as the ability to fi
     * The *groupBy* method groups the data by the derived Year column.
     * The count of rows in each group is calculated before the *orderBy* method is used to sort the resulting DataFrame.
 
-    ![Screen picture showing the results of aggregating and grouping data in a DataFrame.](Images/spark-sql-dataframe.png)
+    ![Screen picture showing the results of aggregating and grouping data in a DataFrame.](Images/02-spark-sql-dataframe.png)
 
 ## Use Spark to transform data files
 
@@ -314,7 +310,7 @@ At this point you might want to save the transformed data so that it can be used
 
 1. Run the cell.  A new DataFrame is created from the parquet files in the *transformed_data/orders* folder. Verify that the results show the order data that has been loaded from the parquet files.
 
-    ![Screen picture showing Parquet files.](Images/parquet-files.png)
+    ![Screen picture showing Parquet files.](Images/02-parquet-files.png)
 
 ### Save data in partitioned files
 
@@ -330,7 +326,7 @@ When dealing with large volumes of data, partitioning can significantly improve 
 
 1. Run the cell and wait for the message that the data has been saved. Then, in the Lakehouses pane on the left, in the … menu for the Files node, select **Refresh** and expand the partitioned_data folder to verify that it contains a hierarchy of folders named *Year=xxxx*, each containing folders named *Month=xxxx*. Each month folder contains a parquet file with the orders for that month.
 
-    ![Screen picture showing data partitioned by Year and Month.](Images/partitioned-data.png)
+    ![Screen picture showing data partitioned by Year and Month.](Images/02-partitioned-data.png)
 
 1. Add a new cell with the following code to load a new DataFrame from the orders.parquet file:
 
@@ -344,13 +340,13 @@ When dealing with large volumes of data, partitioning can significantly improve 
 
 ## Work with tables and SQL
 
-You’ve now seen how the native methods of the DataFrame object enable you to query and analyze data from a file. However, you may be more comfortable working with tables using SQL syntax. Spark provides a metastore in which you can define relational tables.
+You've now seen how the native methods of the DataFrame object enable you to query and analyze data from a file. However, you may be more comfortable working with tables using SQL syntax. Fabric lakehouses support Delta tables, which are stored in OneLake and can be queried using Spark SQL.
 
-The Spark SQL library supports the use of SQL statements to query tables in the metastore. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse - hence the term “data lakehouse”.
+The Spark SQL library supports the use of SQL statements to query Delta tables in the lakehouse. This provides the flexibility of a data lake with the structured data schema and SQL-based queries of a relational data warehouse — hence the term "data lakehouse".
 
 ### Create a table
 
-Tables in a Spark metastore are relational abstractions over files in the data lake. Tables can be *managed* by the metastore, or *external* and managed independently of the metastore.
+Delta tables in a Fabric lakehouse are relational abstractions over files stored in OneLake.
 
 1. Add a code cell to the notebook and enter the following code, which saves the DataFrame of sales order data as a table named *salesorders*:
 
@@ -363,18 +359,18 @@ Tables in a Spark metastore are relational abstractions over files in the data l
     ```
 
 >[!NOTE]
-> In this example, no explicit path is provided, so the files for the table will be managed by the metastore. Also, the table is saved in delta format which adds relational database capabilities to tables. This includes support for transactions, row versioning, and other useful features. Creating tables in delta format is preferred for data lakehouses in Fabric.
+> The table is saved in Delta format, which adds relational database capabilities including support for transactions, row versioning, and other useful features. The table files are stored in the lakehouse's **Tables** folder in OneLake and managed by the Fabric lakehouse.
 
 1. Run the code cell and review the output, which describes the definition of the new table.
 
 1. In the **Explorer** pane, in the … menu for the Tables folder, select **Refresh**. Then expand the **Tables** node and verify that the **salesorders** table has been created.
 
-    ![Screen picture showing that the salesorders table has been created.](Images/salesorder-table.png)
+    ![Screen picture showing that the salesorders table has been created.](Images/02-salesorder-table.png)
 
 1. In the … menu for the salesorders table, select **Load data** > **Spark**. A new code cell is added containing code similar to the following:
 
     ```pyspark
-   df = spark.sql("SELECT * FROM [your_lakehouse].salesorders LIMIT 1000")
+   df = spark.sql("SELECT * FROM [your_lakehouse].dbo.salesorders LIMIT 1000")
 
    display(df)
     ```
@@ -418,7 +414,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
    SELECT * FROM salesorders
     ```
 
-1. Run the code to display data from the salesorders view you created previously. In the results section beneath the cell, select **+ New chart**.
+1. Run the code to display data from the salesorders table you created previously. In the results section beneath the cell, select **+ New chart**.
 
 1. Use the **Build my own** button at the bottom-right of the results section and set the chart settings:
 
@@ -432,7 +428,7 @@ Charts help you to see patterns and trends faster than would be possible by scan
 
 1. Your chart should look similar to this:
 
-    ![Screen picture of Fabric notebook chart view.](Images/built-in-chart.png)
+    ![Screen picture of Fabric notebook chart view.](Images/02-built-in-chart.png)
 
 ### Get started with matplotlib
 
