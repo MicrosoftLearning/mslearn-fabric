@@ -57,7 +57,7 @@ Contoso, a global retail company, is modernizing its data infrastructure using M
 
 Now that you have a workspace, it's time to create a data lakehouse into which you'll ingest data.
 
-1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas" option is disabled.
+1. On the menu bar on the left, select **Create**. In the *New* page, under the *Data Engineering* section, select **Lakehouse**. Give it a unique name of your choice. Make sure the "Lakehouse schemas" option is enabled.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
 
@@ -256,15 +256,13 @@ Now that you have a lakehouse, you need to ingest some data into it. One way to 
 
     ![Data destination configuration page.](./Images/dataflow-connection.png)
 
-1. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then specify a new table named **Store**:
+1. Select **Next** and in the list of available workspaces, find your workspace and select the lakehouse you created in it at the start of this exercise. Then choose the **dbo** schema. 
 
-    ![Data destination configuration page.](./Images/copilot-fabric-dataflow-choose-destination.png)
+    ![Data destination configuration page.](./Images/copilot-fabric-dataflow-choose-destination-2.png)
 
-1. Select **Next** and on the **Choose destination settings** page, disable the **Use automatic settings** option, select **Append** and then **Save settings**.
+1. Select **Choose** and then select a table named **Store**. Select **Bind selected queries**.
 
-    > **Note:** We suggest using the *Power query* editor for updating data types, but you can also do so from this page, if you prefer.
-
-    ![Data destination settings page.](./Images/copilot-fabric-dataflow-destination-column-mapping.png)
+    ![Bind to default data destination](./Images/copilot-fabric-dataflow-bind-default-data-destination.png)
 
 1. Select **Save & run** to publish the dataflow. Then wait for the **Dataflow 1** dataflow to be created in your workspace.
 
