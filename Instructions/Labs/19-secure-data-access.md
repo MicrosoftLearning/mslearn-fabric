@@ -122,7 +122,7 @@ Item permissions control access to individual Fabric items within a workspace, l
 
 12. On the screen that appears, next to **All items**, select **Type: Data items**, then select **All types**.
 
-    ![Screenshot of OneLake catalog.](./Images/onelake-catalog.png)
+    ![Screenshot of OneLake catalog.](./Images/19-onelake-catalog.png)
 
 13. Select the warehouse, then select **Open**.
 14. Select the **Date** table to view table data. The rows are viewable because the user has **ReadData** permission on the warehouse, which was granted through item-level permissions.
@@ -150,7 +150,7 @@ In this exercise, you grant an item permission and create an OneLake security ro
 9. Return to the browser where you're logged in as the second user. Refresh the browser.
 10. Select **OneLake catalog** in the left navigation pane.
 11. Select the ellipsis (...) next to the lakehouse name and select **Open**.
-12. Select the **publicholidays** table. You'll see the lakehouse but won't be able to view data in publicholidays table.
+12. Try to expand **Tables** to see the **publicholidays** table. You'll see the lakehouse but won't be able to view data in publicholidays table.
 
     ![Screenshot of lakehouse unable to load data.](./Images/19-lakehouse-metadata-only-access.png)
 
