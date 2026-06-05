@@ -85,9 +85,9 @@ Now that you have data in your lakehouse, you can explore how to discover it thr
 
 1. At the top of the page, select the Fabric icon to return to the Fabric home page.
 
-1. In the left navigation pane, select the **OneLake catalog** icon.
+1. In the left navigation pane, select the **OneLake catalog** icon. In the catalog, select the **Explore** tab and filter by **Data items** if it isn't already selected.
 
-    ![Screenshot showing the OneLake catalog with various data assets listed.](./Images/onelake-catalog.png)
+    ![Screenshot showing the OneLake catalog with various data assets listed.](./Images/onelake-catalog-explore.png)
 
 1. In the catalog, you see various item types including lakehouses, warehouses, semantic models, and reports. Browse the list to find your **salesdata** lakehouse (or whatever name you chose).
 
