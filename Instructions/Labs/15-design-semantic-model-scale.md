@@ -22,7 +22,7 @@ In this exercise, you design a semantic model for scale in the Microsoft Fabric 
 - Create a semantic model that connects to lakehouse data through Direct Lake.
 - Design star schema relationships with appropriate filter direction and referential integrity.
 - Create a calculation group for time intelligence across multiple measures.
-- Configure settings for scale, including query scale-out and OneLake integration.
+- Configure settings for scale, including query scale-out.
 
 This lab takes approximately **30** minutes to complete.
 
@@ -303,9 +303,6 @@ In this task, you configure workspace-level settings that prepare the model for 
 
     > With query scale-out enabled, Fabric can create read-only replicas of your model so that multiple users running reports simultaneously don't compete for the same resources. This is critical when dashboards are shared across large teams. Direct Lake models already have large semantic model storage format enabled (a prerequisite), so this setting is ready to use immediately.
 
-1. Expand the **OneLake integration** section. Toggle **OneLake integration** to **On**.
-
-    > With OneLake integration, the data in your semantic model becomes accessible as Delta tables in OneLake. This means data engineers can consume the same curated data in notebooks, pipelines, or other Fabric items without duplicating it, keeping the model as the single source of truth.
 
 ## Validate the model with a report
 
