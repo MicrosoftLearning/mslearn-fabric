@@ -51,7 +51,7 @@ Now that you have a workspace, it's time to create a lakehouse and populate it w
 
     > **Note**: To download the file, open a new tab in the browser and paste in the URL. Right-click anywhere on the page and select **Save as** to save it as a CSV file.
 
-1. In your workspace, select **+ New item**, and then select **Lakehouse**. Give it a name of your choice (for example, _sales-data_).
+1. In your workspace, select **+ New item**, and then select **Lakehouse**. Give it a name of your choice (for example, _salesdata_).
 
     After a minute or so, a new lakehouse with empty **Tables** and **Files** folders will be created.
 
@@ -85,11 +85,11 @@ Now that you have data in your lakehouse, you can explore how to discover it thr
 
 1. At the top of the page, select the Fabric icon to return to the Fabric home page.
 
-1. In the left navigation pane, select the **OneLake catalog** icon.
+1. In the left navigation pane, select the **OneLake catalog** icon. In the catalog, select the **Explore** tab and filter by **Data items** if it isn't already selected.
 
-    ![Screenshot showing the OneLake catalog with various data assets listed.](./Images/onelake-catalog.png)
+    ![Screenshot showing the OneLake catalog with various data assets listed.](./Images/onelake-catalog-explore.png)
 
-1. In the catalog, you see various item types including lakehouses, warehouses, semantic models, and reports. Browse the list to find your **sales_data** lakehouse (or whatever name you chose).
+1. In the catalog, you see various item types including lakehouses, warehouses, semantic models, and reports. Browse the list to find your **salesdata** lakehouse (or whatever name you chose).
 
     > **Note**: Depending on what else is in your trial environment, you may see other items in the catalog. The catalog respects access permissions, so you only see items you have permission to access.
 
@@ -107,7 +107,7 @@ Now that you have data in your lakehouse, you can explore how to discover it thr
 
 After discovering a data asset in the catalog, the next step is to explore its structure. Understanding the tables, columns, and data types helps you determine whether the data meets your needs.
 
-1. From the catalog, select your **sales_data** lakehouse to open it.
+1. From the catalog, select your **salesdata** lakehouse to open it.
 
 1. In the **Explorer** pane on the left, expand the **Tables** folder to see the **sales** table you created earlier.
 
@@ -141,9 +141,9 @@ Shortcuts let you reference data from other workspaces without copying it, provi
 
     ![Screenshot showing shortcut creation dialog with OneLake selected.](./Images/onelake-shortcut-options.png)
 
-1. In the workspace list, select the workspace containing your original **sales_data** lakehouse (for example, _Data-Engineering_).
+1. In the workspace list, select the workspace containing your original **salesdata** lakehouse (for example, _Data-Engineering_).
 
-1. Select the **sales_data** lakehouse, then select the **Tables** folder.
+1. Select the **salesdata** lakehouse, then select the **Tables** folder.
 
 1. Select the **sales** table, and then select **Next**.
 
