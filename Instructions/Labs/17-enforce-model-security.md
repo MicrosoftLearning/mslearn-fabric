@@ -105,6 +105,10 @@ In this task, you confirm that each role restricts the report to its assigned re
 
 Static roles work, but they don't scale. Every new region requires a new role definition, and any change means updating and republishing the semantic model. For 11 Adventure Works regions, that's 11 roles to create and maintain—and the number grows with the business.
 
+## Clean up resources
+
+Delete the static roles `Australia` and `Canada` created in this lab before proceeding to the next step.
+
 ## Add the Salesperson table
 
 Dynamic RLS requires a mapping table that links each user identity to a sales territory. In this section, you import the `Salesperson` table from a CSV file, prepare it in Power Query, and configure the relationship so security filters propagate correctly.
