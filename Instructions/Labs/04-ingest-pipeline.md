@@ -59,7 +59,7 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 ### Configure the Source
 
 1. Select the **Copy Data** activity on the canvas, and then in the pane below the canvas select the **Source** tab.
-1. In the **Connection** drop-down, select **Browse all**. A **Create a connection** form opens. Configure the following settings and then select **Connect**:
+1. In the **Connection** drop-down, select **Browse all**. In the connector list, select **HTTP**. A **Create a connection** form opens. Configure the following settings and then select **Connect**:
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
     - **Connection name**: *Specify a unique name*
     - **Data gateway**: (none)
