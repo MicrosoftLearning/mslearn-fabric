@@ -59,19 +59,20 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 ### Configure the Source
 
 1. Select the **Copy Data** activity on the canvas, and then in the pane below the canvas select the **Source** tab.
-1. In the **Connection** drop-down, select **Browse all**. A **Create a connection** form opens. Configure the following settings and then select **Connect**:
+1. In the **Connection** drop-down, select **Browse all**. A connector selection page opens — select **HTTP**. A **Create a connection** form opens. Configure the following settings and then select **Connect**:
     - **URL**: `https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv`
     - **Connection name**: *Specify a unique name*
     - **Data gateway**: (none)
     - **Authentication kind**: Anonymous
     - **Privacy level**: None
-1. Back on the **Source tab**, configure the following source settings:
+1. Select **Connect**
+2. Back on the **Source tab**, configure the following source settings:
     - **Relative URL**: *Leave blank*
     - **File format**: Select **DelimitedText** from the drop-down
 
     ![Screenshot of the Source tab showing the HTTP connection and file format settings.](./Images/copy-data-source-tab.png)
 
-1. Select the **Settings** button next to the **File format** drop-down. In the **File format settings** dialog, ensure the following settings are configured and then select **OK**:
+3. Select the **Settings** button next to the **File format** drop-down. In the **File format settings** dialog, ensure the following settings are configured and then select **OK**:
     - **Compression type**: No compression
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
@@ -79,8 +80,8 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
     ![Screenshot of the File format settings dialog.](./Images/file-format-settings.png)
 
-1. Select **Test connection** to verify the connection works.
-2. *Optional*: Select **Preview data** to confirm the data looks correct.
+4. Select **Test connection** to verify the connection works.
+5. *Optional*: Select **Preview data** to confirm the data looks correct.
 
 ### Configure the Destination
 
