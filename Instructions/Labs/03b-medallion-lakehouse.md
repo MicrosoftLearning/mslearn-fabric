@@ -238,14 +238,24 @@ Now that you have data in your silver layer, you can use the SQL analytics endpo
 1. Next you'll review which customers are purchasing the most (in terms of quantity). Paste the following query into the query editor and select **Run**:
 
     ```sql
-   SELECT CustomerName, SUM(Quantity) AS TotalQuantity
-   FROM dbo.sales_silver
-   GROUP BY CustomerName
-   ORDER BY TotalQuantity DESC
-   LIMIT 10
+    SELECT CustomerName, SUM(Quantity) AS TotalQuantity
+    FROM dbo.sales_silver
+    GROUP BY CustomerName
+    ORDER BY TotalQuantity DESC
+    LIMIT 10
     ```
 
     This query calculates the total quantity of items purchased by each customer in the sales_silver table, and then returns the top 10 customers in terms of quantity.
+
+    > [!TIP]
+    > If the query returns **"Incorrect syntax near 'LIMIT'"**, the SQL analytics endpoint is using T-SQL syntax, which does not support the `LIMIT` clause. Run the following query instead:
+    >
+    > ```sql
+    > SELECT TOP (10) CustomerName, SUM(Quantity) AS TotalQuantity
+    > FROM dbo.sales_silver
+    > GROUP BY CustomerName
+    > ORDER BY TotalQuantity DESC
+    > ```
 
     Data exploration at the silver layer is useful for basic analysis, but you'll need to transform the data further and model it into a star schema to enable more advanced analysis and reporting. You'll do that in the next section.
 
