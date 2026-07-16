@@ -109,11 +109,13 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 ## Create a notebook
 
-1. On the **Home** page for your lakehouse, in the **Open notebook** menu, select **New notebook**.
+1. Navigate to your **workspace**, select **+ New item**, and search for **Notebook** to create a new notebook.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
-1. Select the existing cell in the notebook, which contains some simple code, and then replace the default code with the following variable declaration.
+1. In the **Explorer** pane on the left, select **Add data items > OneLake catalog** and then add your lakehouse.
+
+1. From the notebook, select the existing cell in the notebook and then replace the default code with the following variable declaration.
 
     ```python
    table_name = "dbo.sales"
