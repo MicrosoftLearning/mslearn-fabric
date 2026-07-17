@@ -148,16 +148,18 @@ You now have five entity types with properties and keys defined.  Verify that th
 
 ## Create relationship types
 
-Now, you'll create relationship types that model the healthcare entity relationships and vital sign monitoring: Hospital → Department → Room → Patient, with VitalSignEquipment monitoring Patient. Follow the detailed steps for the first relationship, then use the reference table to create the remaining three.
+Now, you'll create relationship types that model the healthcare entity relationships and vital sign monitoring: Hospital → Department → Room → Patient, with VitalSignEquipment monitoring Patient and located in Room. Follow the detailed steps for the first relationship, then use the reference table to create the remaining four.
 
 ### Create Hospital-Department relationship
 
 1. In the ribbon, select **Add relationship**.
 1. In the **Add relationship type to ontology** dialog, configure:
    - **Relationship type name**: `contains`
-   - **Source entity type**: `Hospital`
+   - **Origin entity type**: `Hospital`
    - **Target entity type**: `Department`
 1. Select **Add relationship type**.
+
+   ![Screenshot showing Add new relationship dialog with contains, Hospital as origin, and Department as target](Images/23-add-new-relationship-dialog.png)
 
 The Contains relationship line appears on the canvas connecting Hospital to Department. You'll configure the data source later.
 
@@ -165,11 +167,12 @@ The Contains relationship line appears on the canvas connecting Hospital to Depa
 
 Follow the same process to create these four additional relationships:
 
-| Relationship Name | Source Entity Type | Target Entity Type | Meaning |
+| Relationship Name | Origin Entity Type | Target Entity Type | Meaning |
 |-------------------|-------------------|-------------------|---------|
 | **has** | Department | Room | Departments have rooms |
 | **assignedTo** | Patient | Room | Patients are assigned to rooms |
 | **monitors** | VitalSignEquipment | Patient | Vital sign equipment monitors patients |
+| **locatedIn** | VitalSignEquipment | Room | Vital sign equipment is located in rooms |
 
    Your ontology canvas should look similar to the image below. Depending on canvas layout and which entities are selected, you may need to pan or zoom to view all entity types and relationship lines.
 
@@ -321,6 +324,7 @@ Follow the same process for the remaining four relationships. For each: select t
 | **has** (Department → Room) | LamnaHealthcareLH > dbo > rooms | Department: DepartmentId | Room: RoomId |
 | **assignedTo** (Patient → Room) | LamnaHealthcareLH > dbo > patients | Patient: PatientId | Room: CurrentRoomId |
 | **monitors** (VitalSignEquipment → Patient) | LamnaHealthcareLH > dbo > vitalsignequipment | VitalSignEquipment: EquipmentId | Patient: PatientId |
+| **locatedIn** (VitalSignEquipment → Room) | LamnaHealthcareLH > dbo > patients | VitalSignEquipment: PatientId | Room: CurrentRoomId |
 
 All relationships now have source data configured. Your ontology understands the complete healthcare data model: hospitals contain departments, departments contain rooms, patients are assigned to rooms, and vital sign equipment monitors patients.
 
