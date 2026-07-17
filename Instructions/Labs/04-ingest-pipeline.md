@@ -54,8 +54,6 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 1. In the workspace, select **New item**, search for **Pipeline**, and create a new pipeline named `Ingest Sales Data`.
 1. In the pipeline editor, on the toolbar select **Copy data** > **Add copy data activity**. A **Copy Data** activity is added to the pipeline canvas.
 
-    ![Screenshot of a pipeline with a Copy Data activity.](./Images/04-copy-data-pipeline.png)
-
 ### Configure the Source
 
 1. Select the **Copy Data** activity on the canvas, and then in the pane below the canvas select the **Source** tab.
@@ -70,15 +68,11 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Relative URL**: *Leave blank*
     - **File format**: Select **DelimitedText** from the drop-down
 
-    ![Screenshot of the Source tab showing the HTTP connection and file format settings.](./Images/copy-data-source-tab.png)
-
 3. Select the **Settings** button next to the **File format** drop-down. In the **File format settings** dialog, ensure the following settings are configured and then select **OK**:
     - **Compression type**: No compression
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: *Selected*
-
-    ![Screenshot of the File format settings dialog.](./Images/file-format-settings.png)
 
 4. Select **Test connection** to verify the connection works.
 5. *Optional*: Select **Preview data** to confirm the data looks correct.
@@ -94,8 +88,6 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **File path**: *Directory*: new_data / *File name*: sales.csv
 1. No other changes are necessary.
 
-![Screenshot of the copy data activity destination settings.](./Images/copy-data-destination.png)
-
 ### Run the pipeline
 
 1. On the **Home** tab, use the **&#128427;** (*Save*) icon to save the pipeline. Then use the **&#9655; Run** button to run the pipeline.
@@ -109,11 +101,13 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 
 ## Create a notebook
 
-1. On the **Home** page for your lakehouse, in the **Open notebook** menu, select **New notebook**.
+1. Navigate to your **workspace**, select **+ New item**, and search for **Notebook** to create a new notebook.
 
     After a few seconds, a new notebook containing a single *cell* will open. Notebooks are made up of one or more cells that can contain *code* or *markdown* (formatted text).
 
-1. Select the existing cell in the notebook, which contains some simple code, and then replace the default code with the following variable declaration.
+1. In the **Explorer** pane on the left, select **Add data items > OneLake catalog** and then add your lakehouse.
+
+1. From the notebook, select the existing cell in the notebook and then replace the default code with the following variable declaration.
 
     ```python
    table_name = "dbo.sales"
