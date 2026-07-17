@@ -54,8 +54,6 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
 1. In the workspace, select **New item**, search for **Pipeline**, and create a new pipeline named `Ingest Sales Data`.
 1. In the pipeline editor, on the toolbar select **Copy data** > **Add copy data activity**. A **Copy Data** activity is added to the pipeline canvas.
 
-    ![Screenshot of a pipeline with a Copy Data activity.](./Images/04-copy-data-pipeline.png)
-
 ### Configure the Source
 
 1. Select the **Copy Data** activity on the canvas, and then in the pane below the canvas select the **Source** tab.
@@ -70,15 +68,11 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Relative URL**: *Leave blank*
     - **File format**: Select **DelimitedText** from the drop-down
 
-    ![Screenshot of the Source tab showing the HTTP connection and file format settings.](./Images/copy-data-source-tab.png)
-
 3. Select the **Settings** button next to the **File format** drop-down. In the **File format settings** dialog, ensure the following settings are configured and then select **OK**:
     - **Compression type**: No compression
     - **Column delimiter**: Comma (,)
     - **Row delimiter**: Line feed (\n)
     - **First row as header**: *Selected*
-
-    ![Screenshot of the File format settings dialog.](./Images/file-format-settings.png)
 
 4. Select **Test connection** to verify the connection works.
 5. *Optional*: Select **Preview data** to confirm the data looks correct.
@@ -93,8 +87,6 @@ A simple way to ingest data is to use a **Copy Data** activity in a pipeline to 
     - **Root folder**: Files
     - **File path**: *Directory*: new_data / *File name*: sales.csv
 1. No other changes are necessary.
-
-![Screenshot of the copy data activity destination settings.](./Images/copy-data-destination.png)
 
 ### Run the pipeline
 
