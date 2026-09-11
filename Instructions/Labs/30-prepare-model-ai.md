@@ -83,10 +83,6 @@ Hiding technical fields helps Copilot focus on business-relevant data and produc
 
    Deselected fields include surrogate keys (`CustomerKey`, `ProductKey`), sort helper columns (`Day (Sort Order)`, `Month (Sort Order)`), ETL metadata (`LoadDate`, `SourceSystem`), and internal identifiers (`SalesOrderLineNumber`). Deselecting `LoadDate` also removes its auto-generated Date Hierarchy, which is expected — the dedicated `Date` table handles time-based analysis.
 
-1. In the Prep for AI dialog, select **Settings** from the left navigation.
-
-1. Turn on **Share DAX expressions with Copilot**. This allows Copilot to read the underlying DAX logic in your measures, improving its ability to choose the correct measure and explain calculations.
-
 ## Add AI instructions
 
 Table names and field descriptions don't always capture your organization's business rules and terminology. In this section, you write AI instructions that provide Copilot with business context, including key terminology, analysis preferences, and data scope.
