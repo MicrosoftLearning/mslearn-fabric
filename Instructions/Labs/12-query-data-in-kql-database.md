@@ -40,7 +40,7 @@ This exercise takes approximately **25** minutes to complete.
 Now that you have a workspace with support for a Fabric capacity, you can create an eventhouse in it.
 
 1. In the menu bar on the left, select **Workloads**. Then, select the **Real-Time Intelligence** tile.
-1. On the **Real-Time Intelligence** home page, select the **Explore Real-Time Intelligence Sample** tile. It will automatically create an eventhouse called **RTISample**:
+1. On the **Real-Time Intelligence** page, select the **Real-Time Intelligence Sample** tile, then select **Bike Rental Data**. It will automatically create an eventhouse called **Bike_Database**:
 
    ![Screenshot of a new eventhouse with sample data.](./Images/create-eventhouse-sample.png)
 

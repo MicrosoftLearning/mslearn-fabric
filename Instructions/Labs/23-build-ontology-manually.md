@@ -53,7 +53,7 @@ You'll download sample data files, upload them to the lakehouse, and convert the
    - **VitalSignsReadings.csv** - Actual patient vital sign measurements (heart rate, oxygen levels) collected over time from the monitors
 
 1. Upload the five lakehouse files:
-   - In the lakehouse, select **Upload files** from the main view
+   - In the lakehouse, select **Get data** and click on **Upload files**.
    - Browse to and select these five files: **Hospitals.csv**, **Departments.csv**, **Rooms.csv**, **Patients.csv**, **VitalSignEquipment.csv**
    - Select **Open**
    - Select **Upload** to upload all five files at once
@@ -114,33 +114,35 @@ You'll create five entity types representing the healthcare domain. Follow the d
 1. In the ontology ribbon, select **Add entity type**.
 1. Enter **Hospital** as the entity type name and select **Add Entity Type**.
 1. The Hospital entity type appears on the canvas.
-1. With the Hospital entity type selected, go to the **Entity type configuration** pane on the right.
-1. Select the **Properties** tab, then select **Add properties**.
+1. With the Hospital entity type selected, select **View entity type details** in the ribbon to open the entity type's **Configure** page.
+1. In the **Properties** section, find and expand **Manage porperty bindings** and select **Add properties**.
 1. Add each property by entering the details below and selecting **+ Add** after each one:
 
-   | Property Name | Data Type | Property Type |
-   |---------------|-----------|---------------|
-   | HospitalId | Integer | Static |
-   | HospitalName | String | Static |
-   | City | String | Static |
-   | State | String | Static |
+   | Property Name | Property Type |
+   |---------------|-----------|
+   | HospitalId | Integer  |
+   | HospitalName | String |
+   | City | String |
+   | State | String |
 
 1. After adding all properties, select **Save**.
 
 1. Now you need to define an entity key. An entity key is a property that uniquely identifies each instance of the entity type. For hospitals, each hospital has a unique HospitalId, so this will be the key.
    
-   Select **Key: Add entity type key** and choose **HospitalId** as the key, select **Save**.
+   Select **Define entity type key** and choose **HospitalId** as the key, select **Save**.
+
+1. Select **Home** to return to the ontology canvas.
 
 ### Create remaining entity types
 
 Follow the same process to create these four additional entity types with their properties and keys:
 
-| Entity Type | Property Name | Data Type | Property Type | Entity Type Key |
-|-------------|---------------|-----------|---------------|-----------------|
-| **Department** | `DepartmentId`<br>`DepartmentName`<br>`HospitalId`<br>`Floor` | Integer<br>String<br>Integer<br>Integer | Static<br>Static<br>Static<br>Static | DepartmentId |
-| **Room** | `RoomId`<br>`RoomNumber`<br>`DepartmentId`<br>`RoomType` | Integer<br>String<br>Integer<br>String | Static<br>Static<br>Static<br>Static | RoomId |
-| **Patient** | `PatientId`<br>`FirstName`<br>`LastName`<br>`DateOfBirth`<br>`AdmissionDate`<br>`CurrentRoomId` | Integer<br>String<br>String<br>DateTime<br>DateTime<br>Integer | Static<br>Static<br>Static<br>Static<br>Static<br>Static | PatientId |
-| **VitalSignEquipment** | `EquipmentId`<br>`PatientId`<br>`EquipmentType`<br>`MonitoringStartDate` | String<br>Integer<br>String<br>DateTime | Static<br>Static<br>Static<br>Static | EquipmentId |
+| Entity Type | Property Name | Property Type | Entity Type Key |
+|-------------|---------------|-----------|-----------------|
+| **Department** | `DepartmentId`<br>`DepartmentName`<br>`HospitalId`<br>`Floor` | Integer<br>String<br>Integer<br>Integer | DepartmentId |
+| **Room** | `RoomId`<br>`RoomNumber`<br>`DepartmentId`<br>`RoomType` | Integer<br>String<br>Integer<br>String |  RoomId |
+| **Patient** | `PatientId`<br>`FirstName`<br>`LastName`<br>`DateOfBirth`<br>`AdmissionDate`<br>`CurrentRoomId` | Integer<br>String<br>String<br>DateTime<br>DateTime<br>Integer |  PatientId |
+| **VitalSignEquipment** | `EquipmentId`<br>`PatientId`<br>`EquipmentType`<br>`MonitoringStartDate` | String<br>Integer<br>String<br>DateTime | EquipmentId |
 
 You now have five entity types with properties and keys defined.  Verify that the Entity Types pane shows all five entity types, and that properties and entity type key have been defined for each entity:
 
@@ -155,9 +157,9 @@ Now, you'll create relationship types that model the healthcare entity relations
 1. In the ribbon, select **Add relationship**.
 1. In the **Add relationship type to ontology** dialog, configure:
    - **Relationship type name**: `contains`
-   - **Source entity type**: `Hospital`
+   - **Origin entity type**: `Hospital`
    - **Target entity type**: `Department`
-1. Select **Add relationship type**.
+1. Select **Create**.
 
 The Contains relationship line appears on the canvas connecting Hospital to Department. You'll configure the data source later.
 
@@ -165,7 +167,7 @@ The Contains relationship line appears on the canvas connecting Hospital to Depa
 
 Follow the same process to create these four additional relationships:
 
-| Relationship Name | Source Entity Type | Target Entity Type | Meaning |
+| Relationship Name | Origin Entity Type | Target Entity Type | Meaning |
 |-------------------|-------------------|-------------------|---------|
 | **has** | Department | Room | Departments have rooms |
 | **assignedTo** | Patient | Room | Patients are assigned to rooms |
@@ -185,22 +187,23 @@ You'll bind static data from lakehouse tables to four entities, then add both st
 
 ### Bind Hospital entity
 
-1. Select the **Hospital** entity type on the canvas.
-1. In the **Entity type configuration** pane, go to the **Bindings** tab.
-1. Select **Add data to entity type**.
-1. In the **OneLake catalog**, select **LamnaHealthcareLH** (lakehouse) from your workspace.
-1. Select **Connect**.
-1. Select the **hospitals** table and select **Next**.
+1. Select the **Hospital** entity type on the canvas, select the **ellipsis (...)** next to its name, and select **Bind data**.
+1. Select **Add data binding** > **Lakehouse table**.
+1. Select **LamnaHealthcareLH** (lakehouse) from your workspace and select **Next**.
+1. Select the **hospitals** table and select **Select**.
 1. For **Binding type**, keep **Static**.
-1. Under **Bind your properties**, map each property to its corresponding column:
-   - HospitalId → HospitalId
-   - HospitalName → HospitalName
-   - City → City
-   - State → State
+1. Under **Properties**, ensure the automated map matches the corresponding column:
+   - Entity type key mapping:
+      - HospitalId → HospitalId
+   - Properties
+      - HospitalName → HospitalName
+      - City → City
+      - State → State
 
    The system usually auto-maps when names match.
 
-1. Select **Save**.
+1. Select **Save**, confirm the entity type updated successfully, then select **Cancel** to close the configuration options.
+1. Select **Home** to return to the ontology canvas.
 
 ### Bind Department, Room, and Patient entities
 
@@ -235,39 +238,38 @@ Notice the time-series data only has measurements and EquipmentId—not patient 
 
 #### Bind static monitor reference data
 
-1. Select the **VitalSignEquipment** entity type.
-1. In the **Bindings** tab, select **Add data to entity type**.
-1. In the **OneLake catalog**, select **LamnaHealthcareLH** (lakehouse) from your workspace.
-1. Select **Connect**.
-1. Select the **vitalsignequipment** table and select **Next**.
+1. Select the **VitalSignEquipment** entity type, select the **ellipsis (...)** next to its name, and select **Bind data**.
+1. Select **Add data binding** > **Lakehouse table**.
+1. Select **LamnaHealthcareLH** (lakehouse) from your workspace and select **Next**.
+1. Select the **vitalsignequipment** table and select **Select**.
 1. Keep **Static** binding type.
 1. Map the properties to columns (should auto-map):
    - EquipmentId → EquipmentId
    - PatientId → PatientId
    - EquipmentType → EquipmentType
    - MonitoringStartDate → MonitoringStartDate
-1. Select **Save**.
+   - RoomId → RoomId
+1. Select **Save**, confirm the entity type updated successfully, then select **Cancel** to close the configuration options.
 
 #### Bind time-series vital signs data
 
 Now you'll add real-time vital signs readings as time-series properties.
 
-1. With VitalSignEquipment still selected, in the **Bindings** tab, select **Add data to entity type** again.
-1. In the **OneLake catalog**, select **LamnaHealthcareEH** (eventhouse) from your workspace.
-1. Select **Connect**.
-1. Select the **VitalSignsReadings** table and select **Next**.
-1. For **Binding type**, select **Time series**.
-2. For **Source data timestamp column** select `Timestamp`
+1. With VitalSignEquipment still opened. (if not, select the **ellipsis (...)** next to its name and select **Bind data**).
+1. Select **Add data binding** > **Eventhouse table**.
+1. Select **LamnaHealthcareEH** (eventhouse) from your workspace and select **Next**.
+1. Select the **VitalSignsReadings** table and select **Add**.
+2. Under the Timeseries data, select `Timestamp`
 
    > [!IMPORTANT]
    > Time-series bindings require a matching key from static data. You must have the static binding configured first (which you just did).
 
 3. Configure the time-series binding:
-   - **Static section** - Maps the key to link streaming data to entities:
-     - Select **EquipmentId** as the column that connects streaming readings to equipment entities
+   - **Properties** - Maps the key to link streaming data to entities:
+     - Note that **EquipmentId** is auto-selected under the **Entity type key mapping** section.
      - This matches the EquipmentId column from your static binding
    
-   - **Time series section** - Map the properties to columns (should auto-map):
+   - **Properties** - Map the properties to columns (should auto-map, if not select **Add entity type property** and select **Add all source columns as properties**):
      - ReadingId → ReadingId
      - Timestamp → Timestamp
      - HeartRate → HeartRate
@@ -278,7 +280,8 @@ Now you'll add real-time vital signs readings as time-series properties.
 
    ![Screenshot showing time-series binding configuration with static key and time-series properties](Images/23-timeseries-binding-vitalsigns.png)
 
-4. Select **Save** to save the time-series binding.
+4. Select **Save** to save the time-series binding, confirm the entity type updated successfully.
+1. Select **Home** to return to the ontology canvas.
 
 Your VitalSignEquipment entity now has both static reference data (which monitors are where) and time-series data (actual vital sign readings over time).
 
@@ -291,32 +294,26 @@ Now you'll configure each relationship type by specifying which table links the 
 ### Configure Hospital-Department relationship
 
 1. On the ontology canvas, select the **Hospital** entity, then select  **contains** in the relationship line between Hospital and Department.
-1. In the **Relationship configuration** pane on the right, configure the source data location:
-   - **Workspace**: Select your workspace
-   - **Lakehouse**: Select **LamnaHealthcareLH**
-   - **Schema**: Select **dbo**
-   - **Table**: Select **departments**
-   
-   > **Note**: The departments table works as the relationship source because it contains keys for both Hospital (HospitalId) and Department (DepartmentId). The hospitals table wouldn't work here because it only contains HospitalId.
 
 1. Configure the entity type mappings by selecting columns that match the key properties defined on each entity:
    
-   - Under **1. Source entity type**: Select **Hospital** (change from default if needed)
-     - **Source column**: Select **HospitalId** (matches the HospitalId key defined on the Hospital entity)
-   - Under **2. Target entity type**: Select **Department** (change from default if needed)
-     - **Source column**: Select **DepartmentId** (matches the DepartmentId key defined on the Department entity)
+   - Under **Origin entity type**: Confirm **Hospital** is selected
+     - **Matched Hospital**: Select **HospitalId** (matches the HospitalId key defined on the Hospital entity)
+   - Under **Target entity type**: Confirm **Department** is selected
+     - **Matched Department**: Select **DepartmentId** (matches the DepartmentId key defined on the Department entity)
 
-   Your relationship configuration should look like this:
+   Your **contains** configuration should look like this:
 
    ![Screenshot showing relationship configuration pane with workspace, lakehouse, and column mappings](Images/23-relationship-binding.png)
 
-2. Select **Create**
+2. Select **Save**, confirm that the relationship type updated successfully, then select **Cancel** to close the configuration options.
+1. Select **Home** to return to the ontology canvas.
 
 ### Configure remaining relationships
 
-Follow the same process for the remaining four relationships. For each: select the relationship line on the canvas, configure the source data and column mappings in the Relationship configuration pane, and select **Create**.
+Follow the same process for the remaining four relationships. For each: select the relationship line on the canvas, configure the mapping table and column mappings on the relationship's configuration page, and select **Save**.
 
-| Relationship | Source Data | Source Entity Column | Target Entity Column |
+| Relationship | Source Data | Origin Entity Column | Target Entity Column |
 |--------------|-------------|---------------------|---------------------|
 | **has** (Department → Room) | LamnaHealthcareLH > dbo > rooms | Department: DepartmentId | Room: RoomId |
 | **assignedTo** (Patient → Room) | LamnaHealthcareLH > dbo > patients | Patient: PatientId | Room: CurrentRoomId |

@@ -133,19 +133,22 @@ Shortcuts let you reference data from other workspaces without copying it, provi
 
     This lakehouse represents your analytics workspace where you'll transform data and build semantic models.
 
-1. When the new lakehouse opens, in the **Explorer** pane, select the **...** menu for the **Tables** folder and select **New shortcut**.
+1. When the new lakehouse opens, in the **Explorer** pane, 
+expand **Tables** and select the **...** menu for the **dbo** folder and select **New table shortcut**.
 
     ![Screenshot showing new shortcut option.](./Images/create-onelake-shortcut.png)
 
-1. In the **New shortcut** dialog, select **OneLake** as the shortcut source.
+1. In the **New table shortcut** dialog, select **OneLake** as the shortcut source.
 
     ![Screenshot showing shortcut creation dialog with OneLake selected.](./Images/onelake-shortcut-options.png)
 
 1. In the workspace list, select the workspace containing your original **salesdata** lakehouse (for example, _Data-Engineering_).
 
-1. Select the **salesdata** lakehouse, then select the **Tables** folder.
+1. Select the **salesdata** lakehouse.
 
-1. Select the **sales** table, and then select **Next**.
+1. Select **Passthrough identity** in the Connection method dialog.
+
+1. Select **Tables** table, and then select **Next**.
 
 1. Review the shortcut details before selecting **Create**.
 

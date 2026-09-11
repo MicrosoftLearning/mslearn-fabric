@@ -70,13 +70,13 @@ You'll download sample CSV files, upload them to the lakehouse, and convert them
    - For each file, select the **ellipsis (...)** to the right of the file name
    - Select **Load to Tables** > **New table**
    - Configure the table:
-     - **Table name**: Fabric pre-fills this from the filename with a lowercase first letter (e.g., `hospitals`, `departments`, `rooms`, `patients`, `vitalSignEquipment`). 
+     - **Table name**: Fabric pre-fills this from the filename with lowercase letters (e.g., `hospitals`, `departments`, `rooms`, `patients`, `vitalsignequipment`). 
      - **Column header**: Check **Use header for column names**
      - **Separator**: Leave as comma (`,`)
    - Select **Load**
    - Repeat this process for all five files
 
-1. Verify you have five tables in the **Tables** section: `hospitals`, `departments`, `rooms`, `patients`, and `vitalSignEquipment`.
+1. Verify you have five tables in the **Tables** section: `hospitals`, `departments`, `rooms`, `patients`, and `vitalsignequipment`.
 
 ## Create an eventhouse with streaming data
 
@@ -105,7 +105,7 @@ Now you'll create a Power BI semantic model from your lakehouse. As you define e
 
 1. In the **New semantic model** dialog, as shown below:
    - In the **Direct Lake semantic model name** field, enter `LamnaHealthcareModel`.
-   - Select all five tables: **hospitals**, **departments**, **rooms**, **patients**, **vitalSignEquipment**.
+   - Select all five tables: **hospitals**, **departments**, **rooms**, **patients**, **vitalsignequipment**.
    - Select **Confirm**.
    
    > **Note**: If the tables don't appear in the list, refresh your browser and try again.

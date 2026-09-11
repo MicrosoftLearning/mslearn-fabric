@@ -151,7 +151,7 @@ Deployment pipelines promote validated content from development to production th
 
 1. In the workspace toolbar, select **Create deployment pipeline**.
 
-1. In the **Add a new deployment pipeline** dialog, enter a name for the pipeline (for example, `SalesData Deployment Pipeline`) and select **Next**.
+1. In the **Create new deployment pipeline** dialog, enter a name for the pipeline (for example, `SalesData Deployment Pipeline`) and select **Next**.
 
 1. In the pipeline structure step, you see three default stages: `Development`, `Test`, and `Production`. Delete the `Test` stage by selecting its delete icon so that only `Development` and `Production` remain. Select **Create and continue**.
 

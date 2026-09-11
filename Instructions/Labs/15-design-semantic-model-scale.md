@@ -63,6 +63,8 @@ You need a lakehouse with data to model. Import a notebook that creates sample s
 
 ![Screenshot of new tables in the lakehouse.](./Images/15-lakehouse-tables.png)
 
+> **Note**: There can be a short delay between the tables appearing in the lakehouse explorer and them being fully available to other Fabric items, such as a new semantic model. Before you continue to the next section, wait a minute or two after all four tables appear.
+
 ## Create a semantic model
 
 In this section, you create a semantic model designed for scale. The model uses Direct Lake to query data directly from lakehouse Delta tables without importing a copy, eliminating refresh bottlenecks and memory limits that constrain large datasets. You then structure the model with star schema relationships, explicit measures, calculation groups, and role-playing dimensions — patterns that keep the model performant and maintainable as the number of tables, measures, and users grows.
@@ -78,6 +80,8 @@ In this section, you create a semantic model designed for scale. The model uses 
 1. Select **Confirm** to create the semantic model. You might need to wait for a minute before the model opens in the web modeling experience.
 
     > The semantic model uses Direct Lake mode by default because it connects to lakehouse Delta tables. No data import or refresh schedule is needed.
+
+    > **Note**: If you see an error stating that the semantic model "cannot refresh...because one or multiple source tables either do not exist or access was denied", the lakehouse tables likely haven't finished syncing yet. Wait a few minutes, then delete the semantic model and repeat this task.
 
 ![Screenshot of the new semantic model interface.](./Images/15-create-semantic-model.png)
 
