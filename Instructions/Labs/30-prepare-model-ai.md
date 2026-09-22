@@ -227,9 +227,9 @@ Approving a semantic model tells your organization that it's been validated and 
 
 1. Select the ellipsis (**...**) for the semantic model item and select **Settings**.
 
-1. On the model details page, expand the **Approved for Copilot** section.
+1. On the model details page, select **Copilot**.
 
-1. Check the **Approved for Copilot** option and select **Apply**.
+1. Turn on the **Approved for Copilot** setting.
 
 Your semantic model will have improved visibility in search results. It also removes the warning in standalone Copilot in Power BI that your organization hasn't approved the data.
 
