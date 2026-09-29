@@ -1,0 +1,136 @@
+table Sales
+	lineageTag: e0010001-0001-0001-0001-000000000001
+
+	measure 'Total Sales' = SUM(Sales[LineTotal])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e0100001-0001-0001-0001-000000000001
+
+	measure Profit = SUM(Sales[LineTotal]) - SUM(Sales[TotalCost])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e0110001-0001-0001-0001-000000000001
+
+	measure 'Profit Margin' = DIVIDE([Profit], [Total Sales])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e0120001-0001-0001-0001-000000000001
+
+	column SalesOrderID
+		dataType: int64
+		formatString: 0
+		lineageTag: e0020001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: SalesOrderID
+
+		annotation SummarizationSetBy = User
+
+	column SalesOrderLineNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: e0030001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = User
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e0040001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e0050001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = User
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e0060001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = User
+
+	column OrderQty
+		dataType: int64
+		formatString: 0
+		lineageTag: e0070001-0001-0001-0001-000000000001
+		summarizeBy: sum
+		sourceColumn: OrderQty
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e0080001-0001-0001-0001-000000000001
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalCost
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e0081001-0001-0001-0001-000000000001
+		summarizeBy: sum
+		sourceColumn: TotalCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineTotal
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e0090001-0001-0001-0001-000000000001
+		summarizeBy: sum
+		sourceColumn: LineTotal
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoadDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e0091001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: LoadDate
+
+		variation Variation
+			isDefault
+			relationship: 51512db6-4de0-4746-970c-1d8ec069b22d
+			defaultHierarchy: LocalDateTable_8321e577-7018-469f-a658-13f923abab31.'Date Hierarchy'
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SourceSystem
+		dataType: string
+		lineageTag: e0092001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: SourceSystem
+
+		annotation SummarizationSetBy = User
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\Sales.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SalesOrderID", Int64.Type}, {"SalesOrderLineNumber", Int64.Type}, {"OrderDate", type date}, {"CustomerKey", Int64.Type}, {"ProductKey", Int64.Type}, {"OrderQty", Int64.Type}, {"UnitPrice", type number}, {"TotalCost", type number}, {"LineTotal", type number}, {"LoadDate", type date}, {"SourceSystem", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

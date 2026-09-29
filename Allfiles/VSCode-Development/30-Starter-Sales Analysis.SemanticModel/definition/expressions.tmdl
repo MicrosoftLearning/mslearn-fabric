@@ -1,0 +1,7 @@
+expression DataFolder = "C:\Users\anrudduc\Content Development\MSLearning Labs\mslearn-fabric\Allfiles\Labs\30" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a1b20001-0001-0001-0001-000000000001
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
