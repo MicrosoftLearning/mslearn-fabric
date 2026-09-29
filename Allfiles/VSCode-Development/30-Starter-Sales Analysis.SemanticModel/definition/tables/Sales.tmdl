@@ -124,7 +124,7 @@ table Sales
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents(DataFolder & "\Sales.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(Web.Contents(DataFolder & "/Sales.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SalesOrderID", Int64.Type}, {"SalesOrderLineNumber", Int64.Type}, {"OrderDate", type date}, {"CustomerKey", Int64.Type}, {"ProductKey", Int64.Type}, {"OrderQty", Int64.Type}, {"UnitPrice", type number}, {"TotalCost", type number}, {"LineTotal", type number}, {"LoadDate", type date}, {"SourceSystem", type text}})
 				in

@@ -56,7 +56,7 @@ table Product
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents(DataFolder & "\Product.csv"), [Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(Web.Contents(DataFolder & "/Product.csv"), [Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ProductKey", Int64.Type}, {"ProductName", type text}, {"Category", type text}, {"Subcategory", type text}, {"ListPrice", type number}, {"StandardCost", type number}})
 				in

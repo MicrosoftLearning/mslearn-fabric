@@ -30,7 +30,7 @@ table Customer
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents(DataFolder & "\Customer.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(Web.Contents(DataFolder & "/Customer.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CustomerKey", Int64.Type}, {"CustomerName", type text}, {"City", type text}})
 				in
