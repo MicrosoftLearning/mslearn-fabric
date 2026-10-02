@@ -66,19 +66,15 @@ In this task, you download the lab notebook that contains all the Python code fo
 
 In this task, you create a lakehouse and generate the sample data.
 
-1. From the workspace toolbar, select **+ New item** and select **Lakehouse**.
+1. In your workspace, select the `21b-manage-semantic-model-lifecycle` to open it.
 
-1. Name the lakehouse `SalesLakehouse`. It may take a minute for the lakehouse to create.
+1. In the Explorer pane, select ***Add data items > New Lakehouse**. Name the lakehouse **SalesLakehouse**.
 
-1. Once the lakehouse opens, select **Open notebook > Existing notebook** from the toolbar.
-
-1. Select the notebook you just uploaded — `21b-manage-semantic-model-lifecycle` — and select **Open**.
-
-1. Once in the notebook, run the first code cell under the `Generate sample data` heading.
+1. Once the lakehouse has been created, run the first code cell under the `Generate sample data` heading.
 
     > Do **not** run any cells below the `Generate sample data` section yet. You need to create the semantic model first.
 
-1. In the lakehouse explorer on the left, select the ellipsis **...** next to **Tables** and **Refresh** to confirm that `products`, `customers`, and `sales` tables appear.
+1. In the explorer pane, select the ellipsis **...** next to **Tables** and **Refresh** to confirm that `products`, `customers`, and `sales` tables appear.
 
 ![Screenshot of the code completed and the lakehouse showing the created tables.](./Images/21b-loaded-tables.png)
 

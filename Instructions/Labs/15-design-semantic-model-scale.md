@@ -43,13 +43,11 @@ You need a lakehouse with data to model. Import a notebook that creates sample s
 
 1. In your workspace, select **Import** > **Notebook** and upload the **Create-Sales-Data.ipynb** file you downloaded. The notebook appears in the workspace after import.
 
-1. In the workspace, select **+ New item** and create a **Lakehouse**. Name it **SalesLakehouse**.
+1. From the workspace, open the notebook you just uploaded.
 
-    After a minute or so, a new lakehouse is created.
+1. In the Explorer pane, select ***Add data items > New Lakehouse**. Name the lakehouse **SalesLakehouse**.
 
-1. In the lakehouse, on the **Home** menu tab, select **Open notebook** > **Existing notebook** and select **Create-Sales-Data**.
-
-1. The notebook opens with the lakehouse attached. It contains two code cells with comments that explain what each block does: the first cell creates three dimension tables (`DimDate`, `DimProduct`, `DimCustomer`) and the second cell generates 5,000 fact table rows (`FactSales`).
+1. The notebook is now attached to the lakehouse. The notebook contains two code cells with comments that explain what each block does: the first cell creates three dimension tables (`DimDate`, `DimProduct`, `DimCustomer`) and the second cell generates 5,000 fact table rows (`FactSales`).
 
 1. Select **Run all** in the toolbar to run both cells. Wait for both cells to complete.
 
