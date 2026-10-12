@@ -62,6 +62,8 @@ You need [Power BI Desktop](https://www.microsoft.com/download/details.aspx?id=5
 
     > **Note**: *Prep for AI is a preview feature. If the tabs in the Prep for AI dialog appear disabled, navigate to **Modeling** > **Q&A setup** and enable Q&A for the model. Close the dialog and try again.*
 
+    > **Important**: If you see a **You do not have access to Copilot** message, sign in to [Power BI](https://app.powerbi.com), and then close and reopen Power BI Desktop.
+
 > **Tip**: If you are in a lab VM and have any problems entering the text, you can download the [30-snippets.txt](https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-snippets.txt) file from `https://github.com/MicrosoftLearning/mslearn-fabric/raw/refs/heads/main/Allfiles/Labs/30/30-snippets.txt`, saving it on the VM. The file contains all the text snippets and trigger phrases used in this lab.
 
 ## Simplify the data schema
@@ -227,9 +229,7 @@ Approving a semantic model tells your organization that it's been validated and 
 
 1. Select the ellipsis (**...**) for the semantic model item and select **Settings**.
 
-1. On the model details page, expand the **Approved for Copilot** section.
-
-1. Check the **Approved for Copilot** option and select **Apply**.
+1. In the side pane, select **Copilot**, and then turn on **Approved for Copilot**.
 
 Your semantic model will have improved visibility in search results. It also removes the warning in standalone Copilot in Power BI that your organization hasn't approved the data.
 
