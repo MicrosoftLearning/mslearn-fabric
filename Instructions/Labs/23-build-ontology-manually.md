@@ -339,4 +339,5 @@ You can keep this workspace and ontology to continue exploring Fabric IQ capabil
 
 1. In the bar on the left, select your workspace, then select its name in the object explorer to open the workspace page.
 1. Select **Workspace settings**.
-1. In the **General** section, select **Remove this workspace**. Confirm that the dialog names the workspace you created for this exercise, then confirm its removal. This removes the lakehouse, eventhouse, ontology, and any items created automatically for the ontology. Don't remove a shared workspace.
+1. In the **General** section, verify that **Name** identifies the workspace you created for this exercise. Don't remove a shared workspace.
+1. Select **Remove this workspace**, then select **Delete** in the **Delete workspace?** dialog. This removes the lakehouse, eventhouse, ontology, and any items created automatically for the ontology.
