@@ -1,0 +1,75 @@
+table Date
+	lineageTag: d0010001-0001-0001-0001-000000000001
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: d0020001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: c1a1c459-2ba7-4192-b73c-d31afaffdf21
+			defaultHierarchy: LocalDateTable_9cafb435-56e8-4393-9ffe-3ba83b033fa4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = User
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: d0030001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = User
+
+	column Month
+		dataType: string
+		lineageTag: d0040001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Month]
+		sortByColumn: 'Month (Sort Order)'
+
+		annotation SummarizationSetBy = User
+
+	column 'Month (Sort Order)'
+		dataType: int64
+		formatString: 0
+		lineageTag: d0050001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Month (Sort Order)]
+
+		annotation SummarizationSetBy = User
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: d0060001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = User
+
+	column 'Day (Sort Order)'
+		dataType: int64
+		formatString: 0
+		lineageTag: d0070001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: [Day (Sort Order)]
+
+		annotation SummarizationSetBy = User
+
+	partition Date = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(
+				    CALENDAR(DATE(2024, 1, 1), DATE(2025, 12, 31)),
+				    "Year", YEAR([Date]),
+				    "Month", FORMAT([Date], "MMMM"),
+				    "Month (Sort Order)", MONTH([Date]),
+				    "Day", DAY([Date]),
+				    "Day (Sort Order)", WEEKDAY([Date])
+				)
+

@@ -2,7 +2,7 @@
 lab:
   title: Create an ontology with Fabric IQ
   module: Create ontology with Microsoft Fabric IQ
-  description: "In this lab, you'll manually build a complete Fabric IQ ontology by creating entity types with properties and keys, defining relationships, and binding data from lakehouse tables and eventhouse streams. You'll work hands-on with both static and time-series data to model a healthcare scenario including hospitals, departments, patients, and vital sign monitoring equipment."
+  description: "In this lab, you'll manually build a Fabric IQ ontology by creating entity types with properties and keys, defining relationships, and binding data from lakehouse and eventhouse tables. You'll work with static and time-series sample data to model hospitals, departments, patients, and vital sign monitoring equipment."
   duration: 40 minutes
   level: 200
   islab: true
@@ -23,13 +23,13 @@ In this lab, you'll create a complete Fabric IQ ontology for a fictitious health
 
 This lab takes approximately **40** minutes to complete.
 
-> **Note**: You need access to a Fabric paid or trial capacity to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial). You'll also need to enable the following [tenant settings](https://learn.microsoft.com/fabric/iq/ontology/overview-tenant-settings): **Enable Ontology item (preview)** and **User can create Graph (preview)**.
+> **Note**: You need access to a Fabric paid or trial capacity and permission to create items in a workspace to complete this exercise. For information about the free Fabric trial, see [Fabric trial](https://aka.ms/fabrictrial). Ask your Fabric administrator to enable the required [tenant settings](https://learn.microsoft.com/fabric/iq/ontology/overview-tenant-settings): **Users can create ontology (preview) items** and **Users can create Fabric items**. This exercise uses the new ontology experience. It doesn't require you to materialize a graph.
 
 ## Create a workspace
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) at `https://app.fabric.microsoft.com/home?experience=fabric` in a browser, and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode in one of the following workspace types: *Fabric*, *Fabric Trial*, or *Power BI Premium*.
+1. Create a new workspace with a name of your choice. Under **Advanced**, select **Fabric** and a capacity you can use, or select **Fabric Trial** if a trial capacity is available. Select **Apply**.
 1. When your new workspace opens, it should be empty.
 
 ## Create a lakehouse with sample data
@@ -37,7 +37,7 @@ This lab takes approximately **40** minutes to complete.
 Now you'll create a lakehouse and load hospital operations data that will form the basis of your ontology.
 
 1. In your workspace, select **+ New item** > **Lakehouse**.
-1. Name the lakehouse `LamnaHealthcareLH` and select **Create**.
+1. Name the lakehouse `LamnaHealthcareLH`, leave **Lakehouse schemas** selected, and select **Create**.
 1. When the lakehouse opens, you'll upload CSV files and convert them to tables.
 
 ### Download and load the hospital data files
@@ -53,11 +53,11 @@ You'll download sample data files, upload them to the lakehouse, and convert the
    - **VitalSignsReadings.csv** - Actual patient vital sign measurements (heart rate, oxygen levels) collected over time from the monitors
 
 1. Upload the five lakehouse files:
-   - In the lakehouse, select **Get data** and click on **Upload files**.
+   - In the lakehouse, select **Get data** > **Upload files**.
    - Browse to and select these five files: **Hospitals.csv**, **Departments.csv**, **Rooms.csv**, **Patients.csv**, **VitalSignEquipment.csv**
-   - Select **Open**
-   - Select **Upload** to upload all five files at once
-   - Wait for the upload to complete
+   - Select **Open**.
+   - Select **Upload** to upload all five files at once.
+   - Wait until each file shows that the upload is complete, then close the upload dialog.
    
    > **Note**: You'll upload VitalSignsReadings.csv to an eventhouse later, not to the lakehouse.
 
@@ -66,19 +66,21 @@ You'll download sample data files, upload them to the lakehouse, and convert the
    - For each file, select the **ellipsis (...)** to the right of the file name
    - Select **Load to Tables** > **New table**
    - Configure the table:
-     - **Table name**: Use the file name without extension in lowercase (e.g., `hospitals`, `departments`, `rooms`, `patients`, `vitalsignequipment`)
+     - **New table name**: Use the file name without extension in lowercase (for example, `hospitals`, `departments`, `rooms`, `patients`, `vitalsignequipment`)
      - **Column header**: Check **Use header for column names**
      - **Separator**: Leave as comma (`,`)
-   - Select **Load**
-   - Repeat this process for all five files
+   - Select **Load** and wait for the success notification before you load the next file. **Load to Tables** is unavailable while another load is running.
+   - Repeat this process for all five files.
 
-1. Verify you have five tables in the **Tables** section: `hospitals`, `departments`, `rooms`, `patients`, and `vitalsignequipment` as shown in the image below.
+1. Expand **Tables** > **dbo** and verify you have five tables: `hospitals`, `departments`, `rooms`, `patients`, and `vitalsignequipment`, as shown in the image below.
 
-     ![Screenshot showing lakehouse Tables section with five tables: hospitals, departments, rooms, patients, and vitalsignequipment](Images/23-lakehouse-tables-complete.png)
+     ![Screenshot showing the five healthcare tables under the lakehouse dbo schema.](Images/23-lakehouse-tables-complete.png)
 
 ## Create an eventhouse with streaming data
 
-Next, you'll create an eventhouse to store real-time vital signs data that you'll bind to the ontology later.
+Next, you'll create an eventhouse to store timestamped vital signs data that you'll bind to the ontology later. You ingest a fixed sample file in this exercise, not a live stream.
+
+> **Note**: To return to your workspace from an open item, select the workspace in the left navigation, then select its name in the object explorer. Dismiss any first-use welcome dialogs or tours to access the item controls.
 
 1. In your workspace, select **+ New item** > **Eventhouse**.
 1. Name the eventhouse `LamnaHealthcareEH` and select **Create**.
@@ -87,15 +89,15 @@ Next, you'll create an eventhouse to store real-time vital signs data that you'l
 ### Ingest vital signs data
 
 1. In the KQL database, select **Get data** > **Local file**.
-1. In the **Select or create a destination table** section, select **+ New table** and enter `VitalSignsReadings` as the table name.
+1. In the **Select or create a destination table** section, select **New table**, enter `VitalSignsReadings`, and select the check mark to submit the name.
 1. Under **Add up to 1,000 files**, select **Browse for files** and upload the VitalSignsReadings.csv file you downloaded earlier.
-1. Select **Next**, then continue through the ingestion wizard, keeping the default settings.
-1. Select **Finish** to complete the ingestion.
-1. Verify the **VitalSignsReadings** table appears in the KQL database.
+1. Select **Next**. On the inspection page, verify that **First row header** is selected and that the preview shows six named columns, including **EquipmentId** and **Timestamp**.
+1. Select **Finish**. Wait for the summary to show **Successfully ingested**, then select **Close**.
+1. Verify the **VitalSignsReadings** table appears in the KQL database and that the ingestion summary reports **20 rows**.
 
    Your KQL database should now show the VitalSignsReadings table:
 
-   ![Screenshot showing KQL database with VitalSignsReadings table](Images/23-eventhouse-vitalsigns-table.png)
+   ![Screenshot showing the VitalSignsReadings table and 20 ingested rows in the KQL database.](Images/23-eventhouse-vitalsigns-table.png)
 
 ## Create an ontology
 
@@ -115,8 +117,8 @@ You'll create five entity types representing the healthcare domain. Follow the d
 1. Enter **Hospital** as the entity type name and select **Add Entity Type**.
 1. The Hospital entity type appears on the canvas.
 1. With the Hospital entity type selected, select **View entity type details** in the ribbon to open the entity type's **Configure** page.
-1. In the **Properties** section, find and expand **Manage porperty bindings** and select **Add properties**.
-1. Add each property by entering the details below and selecting **+ Add** after each one:
+1. In the **Properties** section, expand **Manage property bindings** and select **Add properties**.
+1. Enter the first property name and data type below. Select **+ Add** to add a row for each remaining property:
 
    | Property Name | Property Type |
    |---------------|-----------|
@@ -142,11 +144,11 @@ Follow the same process to create these four additional entity types with their 
 | **Department** | `DepartmentId`<br>`DepartmentName`<br>`HospitalId`<br>`Floor` | Integer<br>String<br>Integer<br>Integer | DepartmentId |
 | **Room** | `RoomId`<br>`RoomNumber`<br>`DepartmentId`<br>`RoomType` | Integer<br>String<br>Integer<br>String |  RoomId |
 | **Patient** | `PatientId`<br>`FirstName`<br>`LastName`<br>`DateOfBirth`<br>`AdmissionDate`<br>`CurrentRoomId` | Integer<br>String<br>String<br>DateTime<br>DateTime<br>Integer |  PatientId |
-| **VitalSignEquipment** | `EquipmentId`<br>`PatientId`<br>`EquipmentType`<br>`MonitoringStartDate` | String<br>Integer<br>String<br>DateTime | EquipmentId |
+| **VitalSignEquipment** | `EquipmentId`<br>`PatientId`<br>`RoomId`<br>`EquipmentType`<br>`MonitoringStartDate` | String<br>Integer<br>Integer<br>String<br>DateTime | EquipmentId |
 
 You now have five entity types with properties and keys defined.  Verify that the Entity Types pane shows all five entity types, and that properties and entity type key have been defined for each entity:
 
-   ![Screenshot showing Entity Types pane on left with five entity types listed: Hospital, Department, Room, Patient, VitalSignEquipment](Images/23-entity-types-complete.png)
+   ![Screenshot showing Hospital, Department, Room, Patient, and VitalSignEquipment in the ontology Explorer.](Images/23-entity-types-complete.png)
 
 ## Create relationship types
 
@@ -155,13 +157,13 @@ Now, you'll create relationship types that model the healthcare entity relations
 ### Create Hospital-Department relationship
 
 1. In the ribbon, select **Add relationship**.
-1. In the **Add relationship type to ontology** dialog, configure:
+1. In the **Add new relationship** dialog, configure:
    - **Relationship type name**: `contains`
    - **Origin entity type**: `Hospital`
    - **Target entity type**: `Department`
 1. Select **Create**.
 
-   ![Screenshot showing Add new relationship dialog with contains, Hospital as origin, and Department as target](Images/23-add-new-relationship-dialog.png)
+   ![Screenshot showing the contains relationship with Hospital as origin and Department as target.](Images/23-add-new-relationship-dialog.png)
 
 The Contains relationship line appears on the canvas connecting Hospital to Department. You'll configure the data source later.
 
@@ -178,7 +180,7 @@ Follow the same process to create these four additional relationships:
 
    Your ontology canvas should look similar to the image below. Depending on canvas layout and which entities are selected, you may need to pan or zoom to view all entity types and relationship lines.
 
-   ![Screenshot showing ontology canvas with entity types and relationship connections](Images/23-manual-ontology-structure.png)
+   ![Screenshot showing five entity types and their relationship connections on the ontology canvas.](Images/23-manual-ontology-structure.png)
 
 Your ontology structure is complete. Now you need to bind entity properties to actual data sources.
 
@@ -190,27 +192,27 @@ You'll bind static data from lakehouse tables to four entities, then add both st
 
 ### Bind Hospital entity
 
-1. Select the **Hospital** entity type on the canvas, select the **ellipsis (...)** next to its name, and select **Bind data**.
-1. Select **Add data binding** > **Lakehouse table**.
-1. Select **LamnaHealthcareLH** (lakehouse) from your workspace and select **Next**.
-1. Select the **hospitals** table and select **Select**.
-1. For **Binding type**, keep **Static**.
-1. Under **Properties**, ensure the automated map matches the corresponding column:
-   - Entity type key mapping:
-      - HospitalId → HospitalId
-   - Properties
-      - HospitalName → HospitalName
-      - City → City
-      - State → State
+1. Select **Hospital** in **Explorer**, then select **View Entity Type details**.
+1. On the **Configure** page, select **Manage property bindings** > **Add binding and properties**.
+1. On the **Property binding** page, select **Add** next to **Sources** to open the OneLake catalog.
+1. Find **LamnaHealthcareLH** in your workspace. Expand the lakehouse, expand **dbo**, select **hospitals**, and select **Select table**.
+1. Select **Entity type properties** and wait for the source columns to populate. Verify these mappings to the existing properties:
 
-   The system usually auto-maps when names match.
+   | Property | Source column | Property type |
+   |----------|---------------|---------------|
+   | HospitalId | hospitals.HospitalId | Integer |
+   | HospitalName | hospitals.HospitalName | String |
+   | City | hospitals.City | String |
+   | State | hospitals.State | String |
 
-1. Select **Save**, confirm the entity type updated successfully, then select **Cancel** to close the configuration options.
+   If a mapping isn't populated, select the existing property name and its matching source column. Don't create duplicate properties or add an empty property row.
+
+1. Select **Create**, wait for **Entity type updated successfully**, then select **Cancel** to close the binding page. On **Configure**, verify that the properties show their source columns rather than **Unbound**.
 1. Select **Home** to return to the ontology canvas.
 
 ### Bind Department, Room, and Patient entities
 
-Follow the same binding process for these three entities, which only require static data bindings. The system automatically maps columns to properties when names match—just verify the mappings are correct.
+Follow the same binding process for these three entities, which only require static data bindings. Select each table under **LamnaHealthcareLH** > **dbo**. Verify that each property maps to the source column of the same name and retains the data type you defined earlier.
 
 | Entity Type | Table Name | Source Columns |
 |-------------|------------|----------------|
@@ -220,17 +222,17 @@ Follow the same binding process for these three entities, which only require sta
 
 ### Bind VitalSignEquipment entity
 
-The VitalSignEquipment entity requires two data bindings: one for static equipment attributes and one for time-series measurements. Time-series bindings require static bindings first. Here's why—look at what each data source contains:
+The VitalSignEquipment entity uses two data sources: a primary source for static equipment attributes and a secondary source for time-series measurements. Bind the static source first, then link the readings by EquipmentId:
 
 **VitalSignEquipment.csv** (Lakehouse - Static attributes):
-```
-EquipmentId | PatientId | EquipmentType           | MonitoringStartDate
-VS-1001     | 1001      | Continuous Monitoring   | 2026-02-01
-VS-1002     | 1002      | Continuous Monitoring   | 2026-02-01
+```text
+EquipmentId | PatientId | RoomId | EquipmentType         | MonitoringStartDate
+VS-1001     | 1001      | 1      | Continuous Monitoring | 2026-02-01
+VS-1002     | 1002      | 2      | Continuous Monitoring | 2026-02-01
 ```
 
 **VitalSignsReadings.csv** (Eventhouse - Time-series measurements):
-```
+```text
 ReadingId | EquipmentId | Timestamp            | HeartRate | OxygenSaturation | RespiratoryRate
 1         | VS-1001     | 2026-02-02T08:00:00Z | 78        | 98               | 16
 2         | VS-1001     | 2026-02-02T08:05:00Z | 82        | 97               | 18
@@ -241,114 +243,101 @@ Notice the time-series data only has measurements and EquipmentId—not patient 
 
 #### Bind static monitor reference data
 
-1. Select the **VitalSignEquipment** entity type, select the **ellipsis (...)** next to its name, and select **Bind data**.
-1. Select **Add data binding** > **Lakehouse table**.
-1. Select **LamnaHealthcareLH** (lakehouse) from your workspace and select **Next**.
-1. Select the **vitalsignequipment** table and select **Select**.
-1. Keep **Static** binding type.
-1. Map the properties to columns (should auto-map):
+1. Select **VitalSignEquipment** in **Explorer**, then select **View Entity Type details**.
+1. Select **Manage property bindings** > **Add binding and properties**, then select **Add** next to **Sources**.
+1. Expand **LamnaHealthcareLH** > **dbo**, select **vitalsignequipment**, and select **Select table**.
+1. Select **Entity type properties**, wait for the columns to populate, and verify the mappings:
    - EquipmentId → EquipmentId
    - PatientId → PatientId
    - EquipmentType → EquipmentType
    - MonitoringStartDate → MonitoringStartDate
    - RoomId → RoomId
-1. Select **Save**, confirm the entity type updated successfully, then select **Cancel** to close the configuration options.
+1. Select **Create**, wait for **Entity type updated successfully**, and select **Cancel** to return to **Configure**.
 
 #### Bind time-series vital signs data
 
-Now you'll add real-time vital signs readings as time-series properties.
+Now you'll add the timestamped readings as time-series properties.
 
-1. With VitalSignEquipment still opened. (if not, select the **ellipsis (...)** next to its name and select **Bind data**).
-1. Select **Add data binding** > **Eventhouse table**.
-1. Select **LamnaHealthcareEH** (eventhouse) from your workspace and select **Next**.
-1. Select the **VitalSignsReadings** table and select **Add**.
-2. Under the Timeseries data, select `Timestamp`
+1. On the **VitalSignEquipment** **Configure** page, select **Manage property bindings** > **Add binding and properties**.
+1. Select **Add** next to **Sources**. In the OneLake catalog, expand **LamnaHealthcareEH**, expand its **LamnaHealthcareEH** KQL database, select **VitalSignsReadings**, and select **Select table**. Use the keyword filter if needed to find the eventhouse.
+1. Under **Relationship with primary data source**, select **EquipmentId** in both the **vitalsignequipment column** and **VitalSignsReadings column** lists. Select **Save**.
+1. Select **Entity type properties**. Keep the five existing static properties bound to **vitalsignequipment**, including the **EquipmentId** key.
+1. Verify the new properties and their time-series configuration:
 
-   > [!IMPORTANT]
-   > Time-series bindings require a matching key from static data. You must have the static binding configured first (which you just did).
+   | Property | Source column | Property type | Timestamp column |
+   |----------|---------------|---------------|------------------|
+   | ReadingId | VitalSignsReadings.ReadingId | Timeseries&lt;String&gt; | Timestamp |
+   | HeartRate | VitalSignsReadings.HeartRate | Timeseries&lt;Integer&gt; | Timestamp |
+   | OxygenSaturation | VitalSignsReadings.OxygenSaturation | Timeseries&lt;Integer&gt; | Timestamp |
+   | RespiratoryRate | VitalSignsReadings.RespiratoryRate | Timeseries&lt;Integer&gt; | Timestamp |
 
-3. Configure the time-series binding:
-   - **Properties** - Maps the key to link streaming data to entities:
-     - Note that **EquipmentId** is auto-selected under the **Entity type key mapping** section.
-     - This matches the EquipmentId column from your static binding
-   
-   - **Properties** - Map the properties to columns (should auto-map, if not select **Add entity type property** and select **Add all source columns as properties**):
-     - ReadingId → ReadingId
-     - Timestamp → Timestamp
-     - HeartRate → HeartRate
-     - OxygenSaturation → OxygenSaturation
-     - RespiratoryRate → RespiratoryRate
+   Keep the inferred **String** value type for **ReadingId**. **Timestamp** orders each time-series property rather than becoming a separate static property. If duplicate key columns are proposed, keep the original **EquipmentId** property bound to the primary source instead of adding another equipment key.
 
    Your time-series binding configuration should look like this:
 
-   ![Screenshot showing time-series binding configuration with static key and time-series properties](Images/23-timeseries-binding-vitalsigns.png)
+   ![Screenshot showing vital-sign time-series properties with Timestamp selected as their ordering column.](Images/23-timeseries-binding-vitalsigns.png)
 
-4. Select **Save** to save the time-series binding, confirm the entity type updated successfully.
+1. Select **Save**, wait for **Entity type updated successfully**, and select **Cancel**. On **Configure**, verify that the new properties show **Timeseries** and the **VitalSignsReadings** source.
 1. Select **Home** to return to the ontology canvas.
 
-Your VitalSignEquipment entity now has both static reference data (which monitors are where) and time-series data (actual vital sign readings over time).
+Your VitalSignEquipment entity now has both static reference data (which monitors are where) and time-series data (sample vital sign readings over time).
 
 All five entity types now have data bindings connecting their properties to data sources.
 
 ## Configure relationships
 
-Now you'll configure each relationship type by specifying which table links the entity instances together. First you'll configure one relationship using the details below, then use the reference table for the remaining four.
+Now you'll configure each relationship type by matching properties in the two bound entity types. The sample tables already contain the properties needed for these joins, so you don't need a separate mapping table.
 
 ### Configure Hospital-Department relationship
 
-1. On the ontology canvas, select the **Hospital** entity, then select  **contains** in the relationship line between Hospital and Department.
+1. In **Explorer**, under **Relationship Types**, select **contains** to open its configuration page.
+1. Leave **Use mapping table?** set to **Off**.
+1. Under **Origin entity type**, confirm **Hospital** is selected and set **Property 1** to **HospitalId**.
+1. Under **Target entity type**, confirm **Department** is selected and set **Property 1** to **HospitalId**.
 
-1. Configure the entity type mappings by selecting columns that match the key properties defined on each entity:
-   
-   - Under **Origin entity type**: Confirm **Hospital** is selected
-     - **Matched Hospital**: Select **HospitalId** (matches the HospitalId key defined on the Hospital entity)
-   - Under **Target entity type**: Confirm **Department** is selected
-     - **Matched Department**: Select **DepartmentId** (matches the DepartmentId key defined on the Department entity)
+   These selections match `Hospital.HospitalId` to `Department.HospitalId`. Don't match HospitalId to DepartmentId: the department's HospitalId identifies its parent hospital.
 
    Your **contains** configuration should look like this:
 
-   ![Screenshot showing relationship configuration pane with workspace, lakehouse, and column mappings](Images/23-relationship-binding.png)
+   ![Screenshot showing the contains relationship joining the HospitalId properties without a mapping table.](Images/23-relationship-binding.png)
 
-2. Select **Save**, confirm that the relationship type updated successfully, then select **Cancel** to close the configuration options.
+1. Select **Save** and wait for **Successfully updated the relationship type**.
 1. Select **Home** to return to the ontology canvas.
 
 ### Configure remaining relationships
 
-Follow the same process for the remaining four relationships. For each: select the relationship line on the canvas, configure the mapping table and column mappings on the relationship's configuration page, and select **Save**.
+Follow the same process for the remaining four relationships. Select each relationship under **Relationship Types**, leave **Use mapping table?** set to **Off**, select the properties below, and select **Save**. Wait for the success message before you return **Home**.
 
-| Relationship | Source Data | Origin Entity Column | Target Entity Column |
-|--------------|-------------|---------------------|---------------------|
-| **has** (Department → Room) | LamnaHealthcareLH > dbo > rooms | Department: DepartmentId | Room: RoomId |
-| **assignedTo** (Patient → Room) | LamnaHealthcareLH > dbo > patients | Patient: PatientId | Room: CurrentRoomId |
-| **monitors** (VitalSignEquipment → Patient) | LamnaHealthcareLH > dbo > vitalsignequipment | VitalSignEquipment: EquipmentId | Patient: PatientId |
-| **locatedIn** (VitalSignEquipment → Room) | LamnaHealthcareLH > dbo > patients | VitalSignEquipment: PatientId | Room: CurrentRoomId |
+| Relationship | Origin entity property | Target entity property |
+|--------------|------------------------|------------------------|
+| **has** (Department → Room) | Department.DepartmentId | Room.DepartmentId |
+| **assignedTo** (Patient → Room) | Patient.CurrentRoomId | Room.RoomId |
+| **monitors** (VitalSignEquipment → Patient) | VitalSignEquipment.PatientId | Patient.PatientId |
+| **locatedIn** (VitalSignEquipment → Room) | VitalSignEquipment.RoomId | Room.RoomId |
 
-All relationships now have source data configured. Your ontology understands the complete healthcare data model: hospitals contain departments, departments contain rooms, patients are assigned to rooms, and vital sign equipment monitors patients.
+The equipment-to-room relationship uses the equipment table's RoomId directly. PatientId identifies a patient, not a piece of equipment, and isn't the equipment entity key.
 
 ## Preview the ontology
 
-Your ontology is now complete with entities, relationships, static data, and time-series data—all built manually from the ground up.
+Your ontology now has entities, relationships, static data, and time-series properties.
 
-1. Select **Room** from the Entity Types list.
-1. In the ontology ribbon, select **Entity type overview**.
-1. You'll see an "Updating your ontology" message while the system processes your data in the background. After 1-2 minutes, refresh your browser to display the entity type overview.
+1. Select **Room** under **Entity Types**, then select **View Entity Type details**.
+1. Select the **Instances** tab and wait for the data to load. Verify that the table contains 10 rooms.
+1. Find **ICU-302**. Verify that its **RoomId** is **2**, **DepartmentId** is **1**, and **RoomType** is **Critical Care**.
 
-   You'll see tiles showing:
-   - **Relationship graph**: Visual representation of how this entity type connects to other entity types
-   - **Property charts**: Bar charts showing the distribution of property values (like RoomType, RoomNumber, or DepartmentId)
-   - **Entity instances table**: List of all individual room instances with their properties
+   ![Screenshot showing 10 room instances and their RoomId, RoomNumber, DepartmentId, and RoomType properties.](Images/23-entity-type-overview.png)
 
-   ![Screenshot showing Room entity type overview with relationship graph, property charts, and entity instances table](Images/23-entity-type-overview.png)
+1. Return **Home** and use the same process to inspect the other entity types. The sample contains one hospital, three departments, five patients, and five pieces of vital sign equipment.
+1. Open **VitalSignEquipment** > **Configure**. Verify that **EquipmentId** remains the entity key, **RoomId** is bound to **vitalsignequipment.RoomId**, and **ReadingId**, **HeartRate**, **OxygenSaturation**, and **RespiratoryRate** show **Timeseries** bindings to **VitalSignsReadings**. The **Instances** table displays the static equipment properties, not the time-series readings.
+1. Return **Home** and verify that all five relationship types are listed. Reopen each relationship to check the saved property pairs against the preceding table.
 
-1. In the **Entity instances** table, select any room instance (for example, **ICU-302**).
-1. The instance view opens, showing the properties for this specific room and its connections to other entities.
-
-You've successfully built a complete ontology from the ground up—defining entity types, configuring relationships, binding data from both lakehouse tables and eventhouse streams, and creating a unified semantic layer. Your ontology now represents the healthcare domain with business vocabulary and connects operational data with real-time vital signs monitoring. This ontology is ready to power graph queries and AI agents.
+You've manually defined a healthcare ontology and connected its business concepts to sample operational data. The new experience uses **Configure** and **Instances** rather than the old **Entity type overview** tiles. Exploring a materialized graph or creating an AI agent is outside this exercise. For an optional next step, see [Materialize a graph from an ontology](https://learn.microsoft.com/fabric/iq/ontology/how-to-use-ontology-graph).
 
 ## Clean up resources (optional)
 
 You can keep this workspace and ontology to continue exploring Fabric IQ capabilities. If you want to remove the resources you created in this exercise, follow these steps:
 
-1. In the bar on the left, select the icon for your workspace to view all of the items it contains.
+1. In the bar on the left, select your workspace, then select its name in the object explorer to open the workspace page.
 1. Select **Workspace settings**.
-1. In the **General** section, select **Remove this workspace**.
+1. In the **General** section, verify that **Name** identifies the workspace you created for this exercise. Don't remove a shared workspace.
+1. Select **Remove this workspace**, then select **Delete** in the **Delete workspace?** dialog. This removes the lakehouse, eventhouse, ontology, and any items created automatically for the ontology.

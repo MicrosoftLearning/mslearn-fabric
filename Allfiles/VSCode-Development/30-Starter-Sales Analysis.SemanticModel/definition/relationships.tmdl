@@ -1,0 +1,22 @@
+relationship a1000001-0001-0001-0001-000000000001
+	fromColumn: Sales.OrderDate
+	toColumn: Date.Date
+
+relationship a2000001-0001-0001-0001-000000000001
+	fromColumn: Sales.CustomerKey
+	toColumn: Customer.CustomerKey
+
+relationship a3000001-0001-0001-0001-000000000001
+	fromColumn: Sales.ProductKey
+	toColumn: Product.ProductKey
+
+relationship 51512db6-4de0-4746-970c-1d8ec069b22d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.LoadDate
+	toColumn: LocalDateTable_8321e577-7018-469f-a658-13f923abab31.Date
+
+relationship c1a1c459-2ba7-4192-b73c-d31afaffdf21
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_9cafb435-56e8-4393-9ffe-3ba83b033fa4.Date
+

@@ -18,7 +18,7 @@ lab:
 In this lab, you'll create a Fabric data agent for a fictitious company called Lamna Healthcare. You'll connect the agent to an ontology as its data source, configure instructions to improve query accuracy, test natural language questions, and publish the agent so clinical staff can get answers to questions like "How many ICU beds are occupied?"
 
 > [!IMPORTANT]
-> Ontology in Microsoft Fabric is currently in [preview](https://learn.microsoft.com/fabric/fundamentals/preview).
+> Ontology in Microsoft Fabric is currently in [preview](https://learn.microsoft.com/fabric/fundamentals/preview). The ontology experience used in this lab is scheduled to retire on January 31, 2027, so you might see banners in Fabric that suggest creating a copy in the newer experience. You can ignore these banners for this exercise.
 
 This lab takes approximately **30** minutes to complete.
 
@@ -36,7 +36,7 @@ You also need the following [tenant settings](https://learn.microsoft.com/fabric
 
 1. Navigate to the [Microsoft Fabric home page](https://app.fabric.microsoft.com/home?experience=fabric) in a browser, and sign in with your Fabric credentials.
 1. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
-1. Create a new workspace with a name of your choice, selecting a licensing mode that includes Fabric capacity (*Fabric* or *Power BI Premium*).
+1. Create a new workspace with a name of your choice, selecting the *Fabric* license mode and a paid Fabric capacity.
 1. When your new workspace opens, it should be empty.
 
 ## Create the ontology from a notebook
@@ -49,13 +49,13 @@ The Lamna Healthcare ontology includes sample data representing hospitals, depar
 
 1. Select [**setup-ontology.ipynb**](https://github.com/MicrosoftLearning/mslearn-fabric/raw/main/Allfiles/Labs/27-28/setup-ontology.ipynb) to open the notebook file in your browser, then right-click and save it to your local computer. If your browser saves it as `setup-ontology.ipynb.txt`, rename the file to remove the `.txt` extension.
 
-1. In your workspace, select **Import** from the ribbon.
+1. In your workspace, select **Import** from the ribbon, then select **Notebook** > **From this computer**.
 
-1. In the **Import** dialog:
+1. In the **Import status** pane:
    - Select **Upload** and browse to the **setup-ontology.ipynb** file you downloaded
    - Select **Open**
 
-1. Wait for the import to complete. The notebook appears in your workspace item list.
+1. Wait for the **Imported successfully** notification. The notebook appears in your workspace item list.
 
 1. Select the **setup-ontology** notebook to open it.
 
@@ -64,7 +64,7 @@ The Lamna Healthcare ontology includes sample data representing hospitals, depar
    - Create an eventhouse named **LamnaHealthcareEH** with time-series vital signs readings
    - Build the **LamnaHealthcareOntology** with 5 entity types, data bindings, and relationship types via the Fabric REST API
 
-1. In the notebook, locate the first Python code cell under **Step 0: Get or Create Infrastructure**. To the left of the cell, select **Run this cell and all below**.
+1. In the notebook, locate the first Python code cell under **Step 0: Get or Create Infrastructure**. To the left of the cell, select the drop-down arrow next to the **Run cell** button, and then select **Run this cell and all below**.
 
    ![Screenshot showing the Run this cell and all below button in the notebook](./Images/27-run-notebook-cell.png)
 
@@ -86,7 +86,9 @@ As the notebook executes, watch for these success indicators in the cell outputs
    - **LamnaHealthcareEH** (eventhouse)
    - **LamnaHealthcareOntology** (ontology)
 
-   > **Important**: After the notebook completes, Fabric processes the data bindings and builds the graph model in the background. This processing typically completes in a few minutes, depending on capacity load and complexity. This is a one-time setup process. Once complete, the ontology remains responsive. To check if data is ready, open the LamnaHealthcareOntology item, select an entity type (for example, Departments), and select **Entity type overview**. If you see "Setting up your ontology" or "Updating your ontology", wait on the page — it will automatically update when the preview experience finishes loading. Once entity instances appear, you can continue to the next section.
+   > **Note**: Your workspace also contains items that Fabric creates automatically for the ontology, such as a graph model and a lakehouse named **LamnaHealthcareOntology_graph_...** and **LamnaHealthcareOntology_lh_...**. You don't need to modify these items.
+
+   > **Important**: After the notebook completes, Fabric processes the data bindings and builds the graph model in the background. This processing typically completes in a few minutes, depending on capacity load and complexity. This is a one-time setup process. To check if data is ready, open the **LamnaHealthcareOntology** item, select an entity type (for example, **Departments**), and then select **View Entity Type details** in the ribbon. On the **Overview** tab, you might see "Setting up Graph child artifact" while the graph is being built. You don't need to wait for it. Select the **Instances** tab. Once entity instances appear (for example, three departments), you can continue to the next section.
 
 ## Create a Fabric data agent
 
@@ -96,28 +98,30 @@ Now that the ontology is ready, you can create a Fabric data agent that uses it 
 1. In the search box, type `data agent` and select **Data agent** from the results.
 1. In the **Name** field, enter `LamnaHealthcareAgent`, then select **Create**.
 
-   The data agent opens in the configuration view, with an Explorer pane on the left and a chat pane on the right.
+   The data agent opens in the configuration view, with an Explorer pane on the left.
 
 ## Add the ontology as a data source
 
 Connect the data agent to the Lamna Healthcare ontology. The agent will use the ontology's entity types, properties, and relationships to interpret natural language questions.
 
-1. In the data agent configuration view, select **Add a data source**.
-1. In the search box, type `LamnaHealthcareOntology`.
-1. Select **LamnaHealthcareOntology** from the search results, then select **Add**.
-1. In the **Explorer** pane on the left, verify that all five entity types appear:
-   - Hospitals
+1. In the data agent configuration view, select the **Add an ontology** card (or select **Add sources** > **Add an ontology** in the toolbar).
+1. In the **Add an ontology** dialog, select **LamnaHealthcareOntology**, then select **Add**.
+1. Wait for the **LamnaHealthcareOntology added to data agent** notification.
+1. In the **Explorer** pane on the left, on the **Sources** tab, expand **Ontology** > **LamnaHealthcareOntology** > **Entity types** and verify that all five entity types appear:
    - Departments
-   - Rooms
+   - Hospitals
    - Patients
+   - Rooms
    - VitalSignEquipment
+
+   > **Note**: A banner might indicate that a newer version of the ontology is available. You can ignore it for this exercise.
 
 ## Configure agent instructions
 
 Agent instructions are plain-text guidance that help the data agent interpret your specific terminology and understand what questions it should answer. For ontology data sources, instructions are the only tuning mechanism — example queries are not supported.
 
-1. In the data agent toolbar, select **Agent instructions**.
-1. In the instructions pane, enter the following text:
+1. In the data agent toolbar, select **Agent instructions**. The instructions open in a tab next to the chat pane.
+1. Select the instructions editor, replace any existing text with the following text, and then select the preview area below the editor to save your changes:
 
    ```
    This ontology defines hospital operations for Lamna Healthcare, including departments, rooms, patients, and vital sign monitoring equipment.
@@ -136,11 +140,13 @@ Agent instructions are plain-text guidance that help the data agent interpret yo
    Support group by in GQL
    ```
 
-1. Close the instructions pane.
+1. Optionally, close the **Agent instructions** tab by selecting **Manage tabs** > **Close all**. Your instructions are saved.
 
 ## Test with natural language questions
 
-Use the chat pane to ask natural language questions. For each response, expand the steps to see how the agent interpreted the question and what query it generated.
+Use the **Test the agent's responses** chat pane to ask natural language questions. For each response, expand **1 step completed** to see how the agent interpreted the question, and select the **Analyzed ...** step to see the query it generated.
+
+> **Note**: Responses are generated by AI, so wording and generated queries can vary slightly from run to run.
 
 1. In the chat pane, type the following question and press **Enter**:
 
@@ -148,14 +154,14 @@ Use the chat pane to ask natural language questions. For each response, expand t
    How many ICU beds are occupied right now?
    ```
 
-1. Review the response. Select the **steps** dropdown below the answer to see:
-   - Which entity types and relationships the agent identified
-   - The generated GQL query
-   - Intermediate reasoning steps
+1. Review the response. The agent should report that 3 ICU beds are occupied. Select **1 step completed** below the answer, and then select the **Analyzed LamnaHealthcareLH Lakehouse for...** step to see:
+   - The data source the agent chose (the lakehouse that the ontology is bound to)
+   - The generated SQL query under **Execution and output**
+   - The query output
 
-   ![Screenshot showing a chat response with the steps dropdown expanded, revealing the generated GQL query](./Images/28-GQL-generated.png)
+   ![Screenshot showing a chat response with the step expanded, revealing the generated SQL query and its output](./Images/28-sql-generated.png)
 
-1. Verify the agent correctly identified the Room entity filtered by Department (ICU) and checked occupancy.
+1. Verify the generated query joins the rooms and patients tables and filters rooms by `RoomType = 'Critical Care'`.
 
 1. Ask a second question:
 
@@ -171,7 +177,7 @@ Use the chat pane to ask natural language questions. For each response, expand t
    Which patient is in room ICU-301?
    ```
 
-1. Expand the steps to verify the agent traversed the `admittedTo` relationship from the Room entity to return the correct patient.
+1. Expand the steps to verify the agent returned **Kerry Allen** by joining the patients and rooms tables on the patient's current room (`CurrentRoomId`) and filtering on room number `ICU-301`.
 
 1. Ask a fourth question:
 
@@ -179,7 +185,7 @@ Use the chat pane to ask natural language questions. For each response, expand t
    How many rooms in the Surgical Services department are currently occupied?
    ```
 
-1. Expand the steps to verify the agent generated a query that counts rooms by department.
+1. Expand the steps to verify the agent generated a query that counts rooms by department. The agent should report that 2 rooms are occupied.
 
 1. Ask a fifth question:
 
@@ -193,7 +199,7 @@ Use the chat pane to ask natural language questions. For each response, expand t
    Where is the vital sign equipment located?
    ```
 
-1. Review the results to see which departments have equipment assigned. This is a key skill when working with data agents: start with a broad question to understand the shape of the data, then refine your question based on what you find.
+1. Review the results to see which departments have equipment assigned (Intensive Care Unit and Surgical Services). This is a key skill when working with data agents: start with a broad question to understand the shape of the data, then refine your question based on what you find.
 
 1. Ask a sixth question:
 
@@ -201,7 +207,7 @@ Use the chat pane to ask natural language questions. For each response, expand t
    Which department has the most patients now?
    ```
 
-1. Verify the agent returns a ranked result. This question tests aggregation across the ontology.
+1. Verify the agent returns the department with the most patients (**Intensive Care Unit**, with 3 patients). Expand the steps to see that the generated query groups patients by department and counts them. This question tests aggregation across the ontology.
 
    > **Tip**: Agent instructions are how you tune the agent's behavior over time. When you added terminology like `"ICU" refers to the Intensive Care Unit department`, you were helping the agent map everyday language to ontology values. Any time the agent misinterprets a term or returns unexpected results, return to **Agent instructions** and add a clarifying definition.
 
@@ -218,7 +224,7 @@ Publish the data agent to create a stable version that colleagues can query.
    Queries the Lamna Healthcare ontology to answer questions about patient room assignments, department occupancy, and vital sign equipment allocation.
    ```
 
-1. Leave the **Also publish to the Agent Store in Microsoft 365 Copilot** toggle set to **Off** for this exercise.
+1. Leave the **Also publish to Microsoft Copilot** toggle set to **Off** for this exercise.
 
    > **Note**: Turning this on would make the data agent available directly inside Microsoft 365 Copilot (Teams, Outlook, and other Microsoft 365 apps), so users could query it without opening Fabric. For this exercise, keep it off.
 
