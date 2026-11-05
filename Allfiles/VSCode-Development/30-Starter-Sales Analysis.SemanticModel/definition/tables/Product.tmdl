@@ -1,0 +1,68 @@
+table Product
+	lineageTag: f0010001-0001-0001-0001-000000000001
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f0020001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = User
+
+	column ProductName
+		dataType: string
+		lineageTag: f0030001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = User
+
+	column Category
+		dataType: string
+		lineageTag: f0040001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = User
+
+	column Subcategory
+		dataType: string
+		lineageTag: f0050001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = User
+
+	column ListPrice
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f0060001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardCost
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f0070001-0001-0001-0001-000000000001
+		summarizeBy: none
+		sourceColumn: StandardCost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(DataFolder & "/Product.csv"), [Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ProductKey", Int64.Type}, {"ProductName", type text}, {"Category", type text}, {"Subcategory", type text}, {"ListPrice", type number}, {"StandardCost", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
