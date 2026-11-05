@@ -76,7 +76,7 @@ In this exercise, you add a user to a workspace role, apply permissions, and see
 
 4. Next, you'll see what a user without permissions on the workspace can view. In your browser, open an InPrivate window. In the Microsoft Edge browser, select the ellipse at the top right corner and select **New InPrivate Window**.
 5. Enter https://app.fabric.microsoft.com and sign-in as the second user you're using for testing.
-6. On the bottom left corner of your screen, select **Microsoft Fabric** and then select **Data Warehouse**. Next select **Workspaces** (the icon looks similar to &#128455;).
+6. In the menu bar on the left, select **Workspaces** (the icon looks similar to &#128455;).
 
 > **Note:** The second user doesn't have access to the workspace, so it's not viewable.
 
