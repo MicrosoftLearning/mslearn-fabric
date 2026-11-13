@@ -109,17 +109,15 @@ Now that you have created a workspace, a lakehouse, and a notebook you are ready
 >[!NOTE]
 > The first time you run Spark code, a Spark session is started. This can take a few seconds or longer. Subsequent runs within the same session will be quicker.
 
-1. When the cell code has completed, review the output below the cell, which should look like this:
+1. The cell returns an **AnalysisException [UNRESOLVED_COLUMN.WITH_SUGGESTION]** error stating that `christy12@adventure-works.com` cannot be resolved.
 
-    ![Screen picture showing auto generated code and data.](Images/auto-generated-load.png)
-
-1. The output shows data from the 2019.csv file displayed in columns and rows. Notice that the column headers contain the first line of the data. To correct this, you need to modify the first line of the ***existing code*** as follows:
+1. The file has no header row. To correct the error, change the **header** parameter from **true** to **false** in the first line of the ***existing code***:
 
     ```python
    df = spark.read.format("csv").option("header","false").load("Files/orders/2019.csv")
     ```
 
-1. Run the code again, so that the DataFrame correctly identifies the first row as data. Notice that the column names have now changed to _c0,_c1, etc.
+1. Run the code again. The first order should now appear as data, and the column names should be _c0, _c1, etc.
 
 1. Descriptive column names help you make sense of data. To create meaningful column names, you need to define the schema and data types. You also need to import a standard set of Spark SQL types to define the data types. Replace the existing code with the following:
 
