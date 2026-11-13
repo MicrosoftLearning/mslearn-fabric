@@ -22,7 +22,7 @@ This lab takes approximately **30** minutes to complete.
 
 ## Scenario
 
-In this scenario, you're a data analyst for a shared bicycle service. You're responsible for monitoring bicycle stations across all available streets. Riders need both bicycles to hire and empty docks where they can return bicycles. You want to create an alert that emails the operations team when a station on Arlington Street has no empty docks, so the team can redistribute bicycles. The Activator sample already contains similar rules with email and Teams notifications. You'll explore a sample rule, then create your own object and a street-specific alert. For this lab, you'll send notifications to yourself rather than to an operations team.
+In this scenario, you're a data analyst for a shared bicycle service. You're responsible for monitoring bicycle stations across all available streets. Riders need both bicycles to hire and empty docks where they can return bicycles. You want to create an alert that emails the operations team when a station on Allington Street has no empty docks, so the team can redistribute bicycles. The Activator sample already contains similar rules with email and Teams notifications. You'll explore a sample rule, then create your own object and a street-specific alert. For this lab, you'll send notifications to yourself rather than to an operations team.
 
 ## Create a workspace
 
@@ -102,7 +102,7 @@ In the **Explorer** pane, a new object called **Bicycle stations** has been adde
 
 ## Create a rule
 
-Your rule should send an email when a station on **Arlington Street** has **no empty docks**. You'll monitor the dock count and add a property filter so that readings from other streets don't trigger the alert.
+Your rule should send an email when a station on **Allington Street** has **no empty docks**. You'll monitor the dock count and add a property filter so that readings from other streets don't trigger the alert.
 
 1. Select the **No_Empty_Docks** property within the *Bicycle stations* object and select **New rule** on the ribbon.
 1. In the rule's **Definition** pane, enter the following values:
@@ -114,27 +114,27 @@ Your rule should send an email when a station on **Arlington Street** has **no e
 
     If your interface first displays a **Create rule** pane, enter the condition and email action there, then select **Create** (not **Create and Start**) to open the full definition before starting the rule.
 
-1. Save the rule with **Save** (or **Create**, if shown). Change its name to ***Arlington Street - no empty docks*** by selecting the pencil icon next to the rule's name in the middle pane.
+1. Save the rule with **Save** (or **Create**, if shown). Change its name to ***Allington Street - no empty docks*** by selecting the pencil icon next to the rule's name in the middle pane.
 
     **Is less than** checks each reading's current state. Unlike **Decreases below**, it doesn't require a previous reading above the threshold.
 
 1. In the **Definition** pane, expand **Property filter** and select **Add filter** if needed.
-1. Set **Attribute** to **Street**, **Operation** to **Is equal to**, and **Value** to `Arlington Street`. Use the value shown in the incoming readings.
+1. Set **Attribute** to **Street**, **Operation** to **Is equal to**, and **Value** to `Allington Street`. Use the value shown in the incoming readings.
 
     No additional filter is needed: the street filter identifies the stations to monitor, and the numeric condition detects the lack of empty docks. Both must be satisfied for the rule to activate.
 
 1. In the **Action** section, enter the following values:
     - **Select action**: Send email
     - **To**: Your current user account only.
-    - **Subject**: *Arlington Street bicycle station has no empty docks*
+    - **Subject**: *Allington Street bicycle station has no empty docks*
     - **Headline**: *Redistribute bicycles to free up docks*
-    - **Message**: *A station on Arlington Street has no empty docks for bicycle returns. Please check the station and arrange redistribution.*
+    - **Message**: *A station on Allington Street has no empty docks for bicycle returns. Please check the station and arrange redistribution.*
     - **Context**: Select **Street**, **No_Empty_Docks**, and **No_Bikes**. Include **BikepointID** if it is available in the context list, so the operations team can identify the station.
 
 1. Select **Save**, then **Send me a test action**. Verify that the email arrives and includes your configured content.
 1. Select **Save and start**, or **Start** on the ribbon if the changes are already saved.
 
-    You have now started your rule. It sends an email for each incoming reading that has **No_Empty_Docks** less than `1` and **Street** equal to **Arlington Street**. Repeated qualifying readings can produce repeated emails.
+    You have now started your rule. It sends an email for each incoming reading that has **No_Empty_Docks** less than `1` and **Street** equal to **Allington Street**. Repeated qualifying readings can produce repeated emails.
 
 1. Inspect incoming readings and the rule's **History** tab for live activations. If you receive a live notification, check that its street and empty-dock count match the rule. If no qualifying readings arrive during the lab, the rule might not activate; a successful test email verifies delivery only. Don't remove the filter or change the condition just to force an alert.
 1. When you've finished observing the rule, select **Stop** on the ribbon.
