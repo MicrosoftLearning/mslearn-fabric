@@ -46,8 +46,16 @@ Next, create an Activator in the workspace you created:
 1. On the menu bar on the left, select **Create**. In the *New* page, under the *Real-Time Intelligence* section, select **Activator**.
 
     >**Note**: If the **Create** option is not pinned to the sidebar, you need to select the ellipsis (**...**) option first.
+    
+    ![Screenshot of the Activator home screen.](./Images/activator-home-screen.png)
+
 
 1. Select the dropdown beside the current Activator name in the upper-left corner and change the name to ***Bikes Management Activator***.
+
+
+    ![Screenshot of the renamed Activator.](./Images/activator-reflex-home-screen.png)
+
+
 1. Select **Try sample** and follow the guided prompts to enable the sample data.
 
 Your Activator is now populated with sample objects, properties, and rules. In a production environment, you would connect your own data instead.
@@ -71,6 +79,9 @@ Let's explore the eventstream data this sample is built on.
     | **No_Empty_Docks** | Number of empty docks available for returning bicycles. |
     | **Street** | Street where the station is located. |
 
+    ![Screenshot of bicycle station event details.](./Images/activator-event-details.png)
+
+
 1. In the **Explorer** pane, select the **Station readings** object. Notice that its events are grouped by **BikepointID**. Objects use this identifier to associate incoming readings with the correct station, and expose properties that rules can monitor.
 1. Under **No_Empty_Docks**, select the sample rule **No empty docks (Email)** or the corresponding Teams rule.
 1. In the **Definition** pane, review how the rule works:
@@ -80,6 +91,9 @@ Let's explore the eventstream data this sample is built on.
     - **Action** sends an email or Teams message, depending on the selected rule.
 
     > **Note**: **No_Empty_Docks** less than `1` means there is nowhere to return a bicycle. **No_Bikes** less than `1` means there are no bicycles to hire. These are different operational problems.
+
+    ![Screenshot of the sample no-empty-docks rule.](./Images/activator-temperature-rule.png)
+
 
 1. Select the action type that you prefer, verify that you are the recipient, and then select **Send me a test action**. Check your email or Teams for the notification. The notification might take a minute or two to arrive.
 
@@ -95,6 +109,9 @@ The sample already includes station objects. For this lab, create a separate obj
     - **Object name**: `Bicycle stations`
     - **Unique Identifier**: **BikepointID**
     - **Properties**: **No_Bikes**, **No_Empty_Docks**, **Street**
+
+    ![Screenshot of the Bicycle stations Build object pane.](./Images/activator-build-object.png)
+
 
 1. Select **Create**.
 
@@ -118,10 +135,16 @@ Your rule should send an email when a station on **Allington Street** has **no e
 
     **Is less than** checks each reading's current state. Unlike **Decreases below**, it doesn't require a previous reading above the threshold.
 
+    ![Screenshot of the new no-empty-docks rule.](./Images/activator-new-rule.png)
+
+
 1. In the **Definition** pane, expand **Property filter** and select **Add filter** if needed.
 1. Set **Attribute** to **Street**, **Operation** to **Is equal to**, and **Value** to `Allington Street`. Use the value shown in the incoming readings.
 
     No additional filter is needed: the street filter identifies the stations to monitor, and the numeric condition detects the lack of empty docks. Both must be satisfied for the rule to activate.
+
+    ![Screenshot of the Allington Street rule filter.](./Images/activator-rule-filters.png)
+
 
 1. In the **Action** section, enter the following values:
     - **Select action**: Send email
@@ -130,6 +153,9 @@ Your rule should send an email when a station on **Allington Street** has **no e
     - **Headline**: *Redistribute bicycles to free up docks*
     - **Message**: *A station on Allington Street has no empty docks for bicycle returns. Please check the station and arrange redistribution.*
     - **Context**: Select **Street**, **No_Empty_Docks**, and **No_Bikes**. Include **BikepointID** if it is available in the context list, so the operations team can identify the station.
+
+    ![Screenshot of the bicycle station email action.](./Images/activator-define-action.png)
+
 
 1. Select **Save**, then **Send me a test action**. Verify that the email arrives and includes your configured content.
 1. Select **Save and start**, or **Start** on the ribbon if the changes are already saved.
